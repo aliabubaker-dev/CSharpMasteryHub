@@ -12,60 +12,180 @@
     <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
+            <!-- Brand/Logo -->
             <a class="navbar-brand" href="/">
                 <i class="fas fa-code me-2"></i>C# Mastery Hub
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <!-- Home -->
                     <li class="nav-item">
                         <a class="nav-link" href="/">
                             <i class="fas fa-home me-1"></i>Home
                         </a>
                     </li>
+
+                    <!-- Lessons Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="lessonsDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"
+                           id="lessonsDropdown"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
                             <i class="fas fa-book me-1"></i>Lessons
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/CSharpFundamentals">C# Fundamentals</a></li>
-                            <li><a class="dropdown-item" href="/ConsoleApp">Console Applications</a></li>
-                            <li><a class="dropdown-item" href="/ClassesAndOOP">Classes & OOP</a></li>
-                            <li><a class="dropdown-item" href="/WindowsForms">Windows Forms</a></li>
-                            <li><a class="dropdown-item" href="/RazorPages">ASP.NET Core</a></li>
-                            <li><a class="dropdown-item" href="/SqlServer">SQL Server</a></li>
-                            <li><a class="dropdown-item" href="/VsSqlConnection">VS & SQL Connection</a></li>
-                            <li><a class="dropdown-item" href="/RdlcReports">RDLC Reports</a></li>
-                            <li><a class="dropdown-item" href="/DotNetMaui">.NET MAUI</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="lessonsDropdown">
+                            <!-- Main Topics -->
+                            <li>
+                                <a class="dropdown-item" href="/CSharpFundamentals">
+                                    <i class="fas fa-code me-2"></i>C# Fundamentals
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/ConsoleApp">
+                                    <i class="fas fa-terminal me-2"></i>Console Applications
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/ClassesAndOOP">
+                                    <i class="fas fa-cubes me-2"></i>Classes & OOP
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/WindowsForms">
+                                    <i class="fas fa-window-maximize me-2"></i>Windows Forms
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/RazorPages">
+                                    <i class="fas fa-globe me-2"></i>ASP.NET Core
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/SqlServer">
+                                    <i class="fas fa-database me-2"></i>SQL Server
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/VsSqlConnection">
+                                    <i class="fas fa-plug me-2"></i>VS & SQL Connection
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/RdlcReports">
+                                    <i class="fas fa-file-alt me-2"></i>RDLC Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/DotNetMaui">
+                                    <i class="fas fa-mobile-alt me-2"></i>.NET MAUI
+                                </a>
+                            </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/GettingStarted">Getting Started</a></li>
-                            <li><a class="dropdown-item" href="/Security">Security</a></li>
-                            <li><a class="dropdown-item" href="/Deployment">Deployment</a></li>
+                            <!-- Getting Started -->
+                            <li>
+                                <a class="dropdown-item" href="/GettingStarted">
+                                    <i class="fas fa-rocket me-2"></i>Getting Started
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/WebsiteDevelopment">
+                                    <i class="fas fa-code-branch me-2"></i>Website Development
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/Seo">
+                                    <i class="fas fa-search me-2"></i>SEO Guide
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/Security">
+                                    <i class="fas fa-shield-alt me-2"></i>Security
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/ProjectWorkflow">
+                                    <i class="fas fa-tasks me-2"></i>Project Workflow
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/ExtraTopics">
+                                    <i class="fas fa-plus-circle me-2"></i>Extra Topics
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="/Deployment">
+                                    <i class="fas fa-cloud-upload-alt me-2"></i>Deployment
+                                </a>
+                            </li>
                         </ul>
                     </li>
+
+                    <!-- About -->
                     <li class="nav-item">
                         <a class="nav-link" href="/About">
                             <i class="fas fa-info-circle me-1"></i>About
                         </a>
                     </li>
+
+                    <!-- Contact -->
                     <li class="nav-item">
                         <a class="nav-link" href="/Contact">
                             <i class="fas fa-envelope me-1"></i>Contact
                         </a>
+                    </li>
+
+                    <!-- Search Toggle -->
+                    <li class="nav-item">
+                        <button class="btn btn-link nav-link" id="searchToggle"
+                                type="button" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- ===== SEARCH BAR ===== -->
+    <div class="search-container collapse" id="searchContainer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput"
+                               placeholder="Search lessons..." aria-label="Search">
+                        <button class="btn btn-primary" type="button" id="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
     <main class="main-content">
         @RenderBody()
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer-custom">
         <div class="container">
             <div class="row g-4">

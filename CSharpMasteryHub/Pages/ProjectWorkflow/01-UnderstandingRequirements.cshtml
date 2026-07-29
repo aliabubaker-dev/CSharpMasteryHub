@@ -1,0 +1,139 @@
+﻿@page
+@model UnderstandingRequirementsModel
+@{
+    ViewData["Title"] = "Understanding Requirements";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ProjectWorkflow">Project Workflow</a></li>
+                    <li class="breadcrumb-item active">Understanding Requirements</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Understanding Project Requirements</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 5</span>
+                </div>
+
+                <h2>What Are Requirements?</h2>
+                <p>Requirements define what a project should do. They are the foundation of any successful software project.</p>
+
+                <h2>Types of Requirements</h2>
+
+                <h3>1. Functional Requirements</h3>
+                <p>What the system should do:</p>
+                <ul>
+                    <li>User authentication and authorization</li>
+                    <li>Data input and output</li>
+                    <li>Business logic and calculations</li>
+                    <li>Reporting and analytics</li>
+                </ul>
+
+                <h3>2. Non-Functional Requirements</h3>
+                <p>How the system should perform:</p>
+                <ul>
+                    <li><strong>Performance:</strong> Response time, throughput</li>
+                    <li><strong>Security:</strong> Authentication, encryption, data protection</li>
+                    <li><strong>Scalability:</strong> Handling growth in users and data</li>
+                    <li><strong>Availability:</strong> Uptime, redundancy, disaster recovery</li>
+                    <li><strong>Usability:</strong> User experience, accessibility</li>
+                </ul>
+
+                <h2>Requirements Gathering Process</h2>
+
+                <h3>Step 1 — Identify Stakeholders</h3>
+                <ul>
+                    <li>Clients and customers</li>
+                    <li>End users</li>
+                    <li>Project managers</li>
+                    <li>Development team</li>
+                    <li>QA team</li>
+                </ul>
+
+                <h3>Step 2 — Collect Requirements</h3>
+                <ul>
+                    <li>Interviews with stakeholders</li>
+                    <li>Surveys and questionnaires</li>
+                    <li>Workshops and brainstorming sessions</li>
+                    <li>Document analysis</li>
+                    <li>Observation of current systems</li>
+                </ul>
+
+                <h3>Step 3 — Analyze and Prioritize</h3>
+                <ul>
+                    <li><strong>Must have:</strong> Essential for launch</li>
+                    <li><strong>Should have:</strong> Important but not critical</li>
+                    <li><strong>Could have:</strong> Nice to have</li>
+                    <li><strong>Won't have:</strong> Out of scope</li>
+                </ul>
+
+                <h3>Step 4 — Document Requirements</h3>
+                <pre><code># User Story Example
+As a registered user,
+I want to reset my password,
+So that I can access my account if I forget my password.
+
+# Acceptance Criteria
+- User can enter their email address
+- System sends a password reset link
+- Link expires after 24 hours
+- User can set a new password</code></pre>
+
+                <h3>Step 5 — Review and Validate</h3>
+                <ul>
+                    <li>Review with stakeholders</li>
+                    <li>Validate feasibility</li>
+                    <li>Get sign-off</li>
+                </ul>
+
+                <h2>Common Pitfalls</h2>
+                <ul>
+                    <li><strong>Scope creep:</strong> Adding features without proper evaluation</li>
+                    <li><strong>Vague requirements:</strong> Unclear or ambiguous specifications</li>
+                    <li><strong>Missed stakeholders:</strong> Not including all affected parties</li>
+                    <li><strong>Assumptions:</strong> Assuming things without verification</li>
+                    <li><strong>Technical debt:</strong> Rushing without proper planning</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Clear requirements are the foundation of a successful project. Invest time in gathering and documenting them properly.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Identify stakeholders for a project</li>
+                            <li>Write user stories for a feature</li>
+                            <li>Create acceptance criteria</li>
+                            <li>Prioritize features using MoSCoW</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ProjectWorkflow" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/ProjectWorkflow/02-PlanningAndArchitecture" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

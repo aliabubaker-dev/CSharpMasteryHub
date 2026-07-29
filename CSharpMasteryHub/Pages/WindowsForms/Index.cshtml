@@ -1,0 +1,95 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.IndexModel
+@{
+    ViewData["Title"] = "Windows Forms - Starter to Master";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Windows Forms — Starter to Master</h1>
+            <p class="lead mb-4">
+                Windows Forms (WinForms) is the classic .NET Framework technology for
+                building desktop applications with a drag-and-drop visual designer. This
+                module takes you from creating your first form to building a complete
+                CRUD application connected to SQL Server.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/01-CreatingWinFormsProject">
+                            <h5><span class="card-number">1</span>Creating a WinForms Project</h5>
+                            <p>Create your first Windows Forms project and understand the generated files.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/02-ControlsBasics">
+                            <h5><span class="card-number">2</span>Controls Basics</h5>
+                            <p>Learn essential controls, naming conventions, and reading/setting values.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/03-EventHandling">
+                            <h5><span class="card-number">3</span>Event Handling</h5>
+                            <p>Master WinForms events: Click, Load, TextChanged, and FormClosing.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/04-MenusAndDialogs">
+                            <h5><span class="card-number">4</span>Menus &amp; Dialogs</h5>
+                            <p>Add MenuStrips, MessageBox, OpenFileDialog, and custom modal forms.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/05-DataBinding">
+                            <h5><span class="card-number">5</span>Data Binding</h5>
+                            <p>Bind DataGridView and ComboBox controls to data sources.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/06-MultiFormApps">
+                            <h5><span class="card-number">6</span>Multi-Form Applications</h5>
+                            <p>Navigate between forms and pass data between them cleanly.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WindowsForms/07-CrudProjectWalkthrough">
+                            <h5><span class="card-number">7</span>Full CRUD Project Walkthrough</h5>
+                            <p>Build a complete CRUD application with SQL Server integration.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

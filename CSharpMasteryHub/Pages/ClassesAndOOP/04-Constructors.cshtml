@@ -1,0 +1,305 @@
+﻿@page
+@model ConstructorsModel
+@{
+    ViewData["Title"] = "Constructors in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Constructors</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Constructors in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 11</span>
+                </div>
+
+                <h2>What is a Constructor?</h2>
+                <p>
+                    A constructor is a special method that is automatically called when an object is created.
+                    It initializes the object's state and performs any setup required.
+                </p>
+
+                <h2>Basic Constructor</h2>
+                <pre><code>public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    
+    // Constructor
+    public Person()
+    {
+        Name = "Unknown";
+        Age = 0;
+    }
+}
+
+// Usage
+Person person = new Person(); // Constructor called</code></pre>
+
+                <h2>Parameterized Constructors</h2>
+                <pre><code>public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Email { get; set; }
+    
+    // Constructor with parameters
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+        Email = "default@example.com";
+    }
+    
+    // Constructor with all parameters
+    public Person(string name, int age, string email)
+    {
+        Name = name;
+        Age = age;
+        Email = email;
+    }
+}
+
+// Usage
+Person person1 = new Person("John", 25);
+Person person2 = new Person("Jane", 30, "jane@email.com");</code></pre>
+
+                <h2>Constructor Overloading</h2>
+                <pre><code>public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string Category { get; set; }
+    
+    // Default constructor
+    public Product()
+    {
+        Id = 0;
+        Name = "Unknown";
+        Price = 0;
+        Category = "General";
+    }
+    
+    // Constructor with ID and Name
+    public Product(int id, string name) : this()
+    {
+        Id = id;
+        Name = name;
+    }
+    
+    // Constructor with all parameters
+    public Product(int id, string name, decimal price, string category)
+    {
+        Id = id;
+        Name = name;
+        Price = price;
+        Category = category;
+    }
+}</code></pre>
+
+                <h2>Constructor Chaining</h2>
+                <pre><code>public class Employee
+{
+    public int EmployeeId { get; }
+    public string Name { get; }
+    public string Department { get; }
+    public decimal Salary { get; }
+    
+    // Primary constructor
+    public Employee(int employeeId, string name) 
+        : this(employeeId, name, "General", 30000)
+    {
+    }
+    
+    // Secondary constructor
+    public Employee(int employeeId, string name, string department) 
+        : this(employeeId, name, department, 30000)
+    {
+    }
+    
+    // Main constructor
+    public Employee(int employeeId, string name, string department, decimal salary)
+    {
+        EmployeeId = employeeId;
+        Name = name;
+        Department = department;
+        Salary = salary;
+    }
+}</code></pre>
+
+                <h2>Static Constructors</h2>
+                <pre><code>public class Configuration
+{
+    public static string AppName { get; }
+    public static string Version { get; }
+    
+    // Static constructor - called once before class is used
+    static Configuration()
+    {
+        AppName = "MyApplication";
+        Version = "1.0.0";
+        Console.WriteLine("Configuration initialized");
+    }
+}</code></pre>
+
+                <h2>Private Constructor</h2>
+                <pre><code>public class Singleton
+{
+    private static Singleton instance;
+    
+    // Private constructor
+    private Singleton() { }
+    
+    public static Singleton Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new Singleton();
+            return instance;
+        }
+    }
+}</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+public class BankAccount
+{
+    // Properties
+    public string AccountNumber { get; }
+    public string OwnerName { get; set; }
+    public decimal Balance { get; private set; }
+    public DateTime CreatedDate { get; }
+    private static int lastAccountNumber = 1000;
+    
+    // Primary constructor
+    public BankAccount(string ownerName) 
+        : this(ownerName, 0)
+    {
+    }
+    
+    // Constructor with initial deposit
+    public BankAccount(string ownerName, decimal initialDeposit)
+    {
+        if (string.IsNullOrWhiteSpace(ownerName))
+            throw new ArgumentException("Owner name cannot be empty");
+        
+        if (initialDeposit < 0)
+            throw new ArgumentException("Initial deposit cannot be negative");
+        
+        OwnerName = ownerName;
+        AccountNumber = GenerateAccountNumber();
+        Balance = initialDeposit;
+        CreatedDate = DateTime.Now;
+    }
+    
+    // Static constructor
+    static BankAccount()
+    {
+        Console.WriteLine("BankAccount system initialized");
+    }
+    
+    private string GenerateAccountNumber()
+    {
+        lastAccountNumber++;
+        return "ACC" + lastAccountNumber.ToString("D6");
+    }
+    
+    // Methods
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit amount must be positive");
+        Balance += amount;
+    }
+    
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdrawal amount must be positive");
+        if (amount > Balance)
+            throw new InvalidOperationException("Insufficient balance");
+        Balance -= amount;
+    }
+    
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Account: {AccountNumber}");
+        Console.WriteLine($"Owner: {OwnerName}");
+        Console.WriteLine($"Balance: {Balance:C}");
+        Console.WriteLine($"Created: {CreatedDate:d}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        BankAccount account1 = new BankAccount("John Smith", 1000);
+        account1.DisplayInfo();
+        
+        BankAccount account2 = new BankAccount("Jane Doe");
+        account2.Deposit(500);
+        account2.DisplayInfo();
+    }
+}</code></pre>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practices</h5>
+                        <ul class="mb-0">
+                            <li>Always initialize all fields in constructors</li>
+                            <li>Use constructor chaining to avoid code duplication</li>
+                            <li>Validate parameters in constructors</li>
+                            <li>Use static constructors for one-time initialization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Constructors ensure objects are properly initialized. Using different constructor types helps create flexible and maintainable code.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a class "LibraryItem" with:</p>
+                        <ol>
+                            <li>Properties: ItemId, Title, Author, Year, IsAvailable</li>
+                            <li>Multiple constructors for different initialization scenarios</li>
+                            <li>Static constructor to initialize some default values</li>
+                            <li>Private constructor for special cases</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/03-MethodsDeepDive" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/05-Encapsulation" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@page
+@model SitemapAndRobotsTxtModel
+@{
+    ViewData["Title"] = "Sitemap and Robots.txt";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Seo">SEO Guide</a></li>
+                    <li class="breadcrumb-item active">Sitemap and Robots.txt</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Sitemap and Robots.txt</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 6</span>
+                </div>
+
+                <h2>What is a Sitemap?</h2>
+                <p>A sitemap is an XML file that lists all the pages on your website to help search engines crawl and index them.</p>
+
+                <h3>Sitemap Example</h3>
+                <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+    &lt;url&gt;
+        &lt;loc&gt;https://example.com/&lt;/loc&gt;
+        &lt;lastmod&gt;2024-01-01&lt;/lastmod&gt;
+        &lt;changefreq&gt;daily&lt;/changefreq&gt;
+        &lt;priority&gt;1.0&lt;/priority&gt;
+    &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+
+                <h3>Generating Sitemap in ASP.NET Core</h3>
+                <pre><code>public class SitemapService
+{
+    public async Task&lt;string&gt; GenerateSitemapAsync()
+    {
+        var urls = new List&lt;SitemapUrl&gt;();
+        urls.Add(new SitemapUrl
+        {
+            Url = "https://example.com",
+            LastModified = DateTime.Now,
+            ChangeFrequency = "daily",
+            Priority = 1.0
+        });
+        return GenerateSitemapXml(urls);
+    }
+}</code></pre>
+
+                <h2>What is Robots.txt?</h2>
+                <p>Robots.txt tells search engines which pages to crawl and which to avoid.</p>
+
+                <h3>Robots.txt Example</h3>
+                <pre><code>User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Sitemap: https://example.com/sitemap.xml</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Sitemaps help search engines discover your pages. Robots.txt controls crawling behavior.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Seo/02-MetaTagsTitleDescription" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Seo/04-SemanticHtmlHeadings" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

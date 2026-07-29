@@ -1,0 +1,85 @@
+@page
+@model CSharpMasteryHub.Pages.GettingStarted.InstallingVisualStudioModel
+@{
+    ViewData["Title"] = "Installing Visual Studio";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/GettingStarted">Getting Started</a></li>
+                    <li class="breadcrumb-item active">Installing Visual Studio</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Installing Visual Studio</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 4</span>
+                </div>
+
+                <p>
+                    Visual Studio (not to be confused with Visual Studio <em>Code</em>) is the
+                    full IDE you'll use throughout this course. It's free for individuals and
+                    open-source work via the <strong>Community</strong> edition.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Visual Studio vs VS Code</h5>
+                        <p class="card-text">Visual Studio is a full-featured IDE for C# development. VS Code is a lightweight editor. For this course, we use Visual Studio.</p>
+                    </div>
+                </div>
+
+                <h2>Step 1 — Download the installer</h2>
+                <p>
+                    Go to <code>visualstudio.microsoft.com/downloads</code> and download
+                    <strong>Visual Studio Community 2022</strong>. It's completely free.
+                </p>
+
+                <h2>Step 2 — Run the installer</h2>
+                <p>
+                    The installer first downloads a small bootstrapper, then shows you a
+                    screen of "workloads" — bundles of tools for different types of
+                    development. Don't select anything yet; the next lesson covers exactly
+                    which workloads you need for this course.
+                </p>
+
+                <h2>Step 3 — Sign in (optional but recommended)</h2>
+                <p>
+                    You can sign in with a free Microsoft account to sync settings across
+                    machines, but it's optional — you can also click "Not now, maybe later."
+                </p>
+
+                <h2>Step 4 — Choose your theme and start</h2>
+                <p>
+                    Pick Dark, Light, or Blue — purely cosmetic. Click "Start Visual Studio."
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Visual Studio Community is completely free and includes everything you need for C# development.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/GettingStarted" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/GettingStarted/02-WorkloadsToSelect" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

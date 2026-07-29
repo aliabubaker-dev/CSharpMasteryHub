@@ -1,0 +1,114 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.StringsModel
+@{
+    ViewData["Title"] = "Strings";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Strings</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Strings</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 8 of 13</span>
+                </div>
+
+                <h2>Creating Strings</h2>
+                <pre><code>string name = "John Doe";
+string empty = string.Empty;
+string nullString = null;
+
+// Verbose string (preserves formatting)
+string multiLine = "This is\na multi-line\nstring";
+
+// String interpolation
+int age = 25;
+string message = $"Hello, I'm {age} years old.";</code></pre>
+
+                <h2>String Operations</h2>
+
+                <h3>Concatenation</h3>
+                <pre><code>string first = "Hello";
+string second = "World";
+
+string combined = first + " " + second;     // "Hello World"
+string combined2 = string.Concat(first, " ", second);
+
+// StringBuilder for many concatenations
+var sb = new StringBuilder();
+sb.Append("Hello");
+sb.Append(" ");
+sb.Append("World");
+string result = sb.ToString();</code></pre>
+
+                <h3>Common Methods</h3>
+                <pre><code>string text = "Hello World";
+
+text.Length;                    // 11
+text.ToUpper();                 // "HELLO WORLD"
+text.ToLower();                 // "hello world"
+text.Contains("World");         // true
+text.StartsWith("Hello");       // true
+text.EndsWith("World");         // true
+text.IndexOf("World");          // 6
+
+// Substring
+string sub = text.Substring(6);    // "World"
+string sub2 = text.Substring(0, 5); // "Hello"
+
+// Split
+string data = "apple,banana,orange";
+string[] parts = data.Split(',');  // ["apple", "banana", "orange"]
+
+// Replace
+string replaced = text.Replace("World", "C#"); // "Hello C#"
+
+// Trim
+string messy = "  Hello  ";
+string trimmed = messy.Trim();  // "Hello"</code></pre>
+
+                <h2>String Formatting</h2>
+                <pre><code>decimal price = 19.99m;
+int quantity = 5;
+
+string formatted = string.Format("Total: {0:C}", price * quantity);
+// Output: "Total: $99.95"
+
+// Composite formatting
+string result = string.Format("Name: {0}, Age: {1}", "John", 25);
+
+// String interpolation (C# 6+)
+string result2 = $"Name: {"John"}, Age: {25}";</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Strings are immutable - every operation creates a new string. Use <code>StringBuilder</code> for heavy manipulation.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/07-ArraysAndCollections" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/09-ExceptionHandling" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

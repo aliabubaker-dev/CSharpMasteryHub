@@ -1,0 +1,279 @@
+﻿@page
+@model FreeHostingOptionsModel
+@{
+    ViewData["Title"] = "Free Hosting Options";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Deployment">Deployment</a></li>
+                    <li class="breadcrumb-item active">Free Hosting Options</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Free Hosting Options for ASP.NET Core</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 5</span>
+                </div>
+
+                <h2>Overview of Free Hosting Platforms</h2>
+                <p>
+                    There are several free hosting options available for ASP.NET Core applications.
+                    Each platform has its own features, limitations, and deployment methods.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Consideration</h5>
+                        <p class="card-text">Choose a hosting platform based on your application's requirements, expected traffic, and technical complexity.</p>
+                    </div>
+                </div>
+
+                <h2>1. Microsoft Azure Free Tier</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-cloud text-primary me-2"></i>Azure Free Account</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> 12 months of popular services free</li>
+                            <li><strong>App Service:</strong> 10 web apps, 1GB storage</li>
+                            <li><strong>SQL Database:</strong> 250 MB storage</li>
+                            <li><strong>Limitations:</strong> Shared infrastructure, some features limited</li>
+                            <li><strong>Best For:</strong> Production-ready applications</li>
+                        </ul>
+                        <a href="https://azure.microsoft.com/en-us/free/" target="_blank" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>2. Azure Static Web Apps</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-code text-success me-2"></i>Static Web Apps</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> Unlimited apps</li>
+                            <li><strong>Features:</strong> GitHub integration, CI/CD</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> Static content only, limited API integration</li>
+                            <li><strong>Best For:</strong> Static sites and SPAs</li>
+                        </ul>
+                        <a href="https://azure.microsoft.com/en-us/products/app-service/static/" target="_blank" class="btn btn-outline-success btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>3. Netlify</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-network-wired text-info me-2"></i>Netlify Free Tier</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> 100GB bandwidth/month</li>
+                            <li><strong>Features:</strong> GitHub integration, automatic SSL</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> 500 build minutes/month, static content</li>
+                            <li><strong>Best For:</strong> Static websites and JAMstack</li>
+                        </ul>
+                        <a href="https://www.netlify.com/pricing/" target="_blank" class="btn btn-outline-info btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>4. Vercel</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-bolt text-warning me-2"></i>Vercel Free Tier</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> Unlimited projects</li>
+                            <li><strong>Features:</strong> Serverless functions, automatic SSL</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> 100GB bandwidth/month, 100 serverless function executions/day</li>
+                            <li><strong>Best For:</strong> Next.js and modern web apps</li>
+                        </ul>
+                        <a href="https://vercel.com/pricing" target="_blank" class="btn btn-outline-warning btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>5. GitHub Pages</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fab fa-github text-dark me-2"></i>GitHub Pages</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> Unlimited</li>
+                            <li><strong>Features:</strong> GitHub integration, automatic deployment</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> Static content only, 1GB storage</li>
+                            <li><strong>Best For:</strong> Project documentation and static sites</li>
+                        </ul>
+                        <a href="https://pages.github.com/" target="_blank" class="btn btn-outline-secondary btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>6. Render</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-cubes text-danger me-2"></i>Render Free Tier</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> 750 hours/month</li>
+                            <li><strong>Features:</strong> Web services, PostgreSQL, Redis</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> 512MB memory, 2GB SSD</li>
+                            <li><strong>Best For:</strong> Full-stack applications</li>
+                        </ul>
+                        <a href="https://render.com/pricing" target="_blank" class="btn btn-outline-danger btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>7. Heroku</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-rocket text-primary me-2"></i>Heroku Free Tier</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> 550-1000 dyno hours/month</li>
+                            <li><strong>Features:</strong> PostgreSQL, Redis, Add-ons</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> App sleeps after 30 mins inactivity</li>
+                            <li><strong>Best For:</strong> Easy deployment and prototyping</li>
+                        </ul>
+                        <a href="https://www.heroku.com/pricing" target="_blank" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>8. DigitalOcean App Platform</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5><i class="fas fa-server text-success me-2"></i>DigitalOcean App Platform</h5>
+                        <ul>
+                            <li><strong>Free Tier:</strong> 1 app, 1GB RAM</li>
+                            <li><strong>Features:</strong> GitHub integration, SSL</li>
+                            <li><strong>Custom Domains:</strong> Supported</li>
+                            <li><strong>Limitations:</strong> 1 static site</li>
+                            <li><strong>Best For:</strong> Simple applications</li>
+                        </ul>
+                        <a href="https://www.digitalocean.com/products/app-platform/" target="_blank" class="btn btn-outline-success btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <h2>Comparison Table</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Free Tier</th>
+                                <th>Custom Domain</th>
+                                <th>SSL</th>
+                                <th>CI/CD</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Azure Free</td>
+                                <td>12 months</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Production apps</td>
+                            </tr>
+                            <tr>
+                                <td>Azure Static Web Apps</td>
+                                <td>Unlimited</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Static sites</td>
+                            </tr>
+                            <tr>
+                                <td>Netlify</td>
+                                <td>100GB bandwidth</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>JAMstack</td>
+                            </tr>
+                            <tr>
+                                <td>Vercel</td>
+                                <td>Unlimited projects</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Modern web apps</td>
+                            </tr>
+                            <tr>
+                                <td>GitHub Pages</td>
+                                <td>Unlimited</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Documentation</td>
+                            </tr>
+                            <tr>
+                                <td>Render</td>
+                                <td>750 hours/month</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Full-stack</td>
+                            </tr>
+                            <tr>
+                                <td>Heroku</td>
+                                <td>550-1000 hours</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>Prototyping</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">There are many free hosting options available. Choose based on your application type, required features, and technical expertise.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Research and compare:</p>
+                        <ol>
+                            <li>Visit each platform's website</li>
+                            <li>Create accounts on at least 2 platforms</li>
+                            <li>Compare features and limitations</li>
+                            <li>Choose the best platform for your project</li>
+                            <li>Create a comparison table for your specific needs</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Deployment/01-PreparingForDeployment" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Deployment/03-DeployingToAzureFree" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

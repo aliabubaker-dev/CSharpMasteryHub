@@ -1,0 +1,248 @@
+﻿@page
+@model WhatIsMauiModel
+@{
+    ViewData["Title"] = "What Is .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">What Is MAUI</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">What is .NET MAUI?</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 8</span>
+                </div>
+
+                <h2>Introduction to .NET MAUI</h2>
+                <p>
+                    .NET MAUI (.NET Multi-platform App UI) is a cross-platform framework for building mobile and desktop
+                    applications using C# and XAML. It's the evolution of Xamarin.Forms and allows you to create apps
+                    that run on Android, iOS, macOS, and Windows from a single codebase.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">"Write once, run anywhere" - .NET MAUI enables you to share up to 90% of your code across all platforms.</p>
+                    </div>
+                </div>
+
+                <h2>Why Choose .NET MAUI?</h2>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-code fa-3x text-primary mb-3"></i>
+                                <h5>Single Codebase</h5>
+                                <p class="text-muted">One codebase for all platforms using C# and XAML</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bolt fa-3x text-success mb-3"></i>
+                                <h5>Performance</h5>
+                                <p class="text-muted">Native performance with platform-specific optimizations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-paint-brush fa-3x text-info mb-3"></i>
+                                <h5>Modern UI</h5>
+                                <p class="text-muted">Rich, responsive UI with platform-adaptive controls</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-shield-alt fa-3x text-danger mb-3"></i>
+                                <h5>Native Features</h5>
+                                <p class="text-muted">Access to platform-specific APIs and features</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-cloud fa-3x text-warning mb-3"></i>
+                                <h5>Cloud Integration</h5>
+                                <p class="text-muted">Seamless integration with Azure and cloud services</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tools fa-3x text-secondary mb-3"></i>
+                                <h5>Developer Tools</h5>
+                                <p class="text-muted">Rich tooling in Visual Studio with debugging and hot reload</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>MAUI Architecture</h2>
+                <pre><code>// Project Structure
+MyMauiApp/
+├── MyMauiApp.csproj
+├── App.xaml
+├── App.xaml.cs
+├── MainPage.xaml
+├── MainPage.xaml.cs
+├── Platforms/
+│   ├── Android/
+│   │   └── MainActivity.cs
+│   ├── iOS/
+│   │   └── AppDelegate.cs
+│   ├── MacCatalyst/
+│   │   └── AppDelegate.cs
+│   └── Windows/
+│       └── MainWindow.xaml
+├── Models/
+│   └── (Data models)
+├── ViewModels/
+│   └── (View models for MVVM)
+└── Views/
+    └── (Pages and controls)</code></pre>
+
+                <h2>Platforms Supported</h2>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fab fa-android text-success me-2"></i>
+                        <strong>Android</strong> - Supports API level 21+ (Android 5.0+)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fab fa-apple text-secondary me-2"></i>
+                        <strong>iOS</strong> - Supports iOS 13+ and iPadOS 13+
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fab fa-apple text-secondary me-2"></i>
+                        <strong>macOS</strong> - Mac Catalyst (macOS 11+)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fab fa-windows text-primary me-2"></i>
+                        <strong>Windows</strong> - Windows 10+ and Windows 11
+                    </li>
+                </ul>
+
+                <h2>MAUI vs Xamarin.Forms</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Xamarin.Forms</th>
+                                <th>.NET MAUI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Framework</td>
+                                <td>Xamarin</td>
+                                <td>.NET 6+</td>
+                            </tr>
+                            <tr>
+                                <td>Desktop Support</td>
+                                <td>Limited</td>
+                                <td>Full (Windows, macOS)</td>
+                            </tr>
+                            <tr>
+                                <td>Performance</td>
+                                <td>Good</td>
+                                <td>Better</td>
+                            </tr>
+                            <tr>
+                                <td>Hot Reload</td>
+                                <td>Limited</td>
+                                <td>Full support</td>
+                            </tr>
+                            <tr>
+                                <td>Modernization</td>
+                                <td>Legacy</td>
+                                <td>Modern .NET</td>
+                            </tr>
+                            <tr>
+                                <td>Controls</td>
+                                <td>Extensive</td>
+                                <td>More modern</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Getting Started with MAUI</h2>
+                <pre><code>// Create a new MAUI project
+dotnet new maui -n MyMauiApp
+
+// Build and run
+cd MyMauiApp
+dotnet build
+dotnet run
+
+// Or use Visual Studio
+// 1. Create New Project
+// 2. Select ".NET MAUI App"
+// 3. Configure project settings
+// 4. Click Create</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">.NET MAUI is the future of cross-platform development from Microsoft. It combines the best of mobile and desktop development with modern .NET capabilities.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Explore .NET MAUI:</p>
+                        <ol>
+                            <li>Install .NET MAUI workloads</li>
+                            <li>Create a new MAUI project</li>
+                            <li>Explore the project structure</li>
+                            <li>Run the app on different platforms</li>
+                            <li>Make a small modification and see it update</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/DotNetMaui/02-EnvironmentSetup" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,155 @@
+﻿@page
+@model ValidationDataAnnotationsModel
+@{
+    ViewData["Title"] = "Validation and Data Annotations";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">Validation & Data Annotations</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Validation and Data Annotations</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 8</span>
+                </div>
+
+                <h2>What are Data Annotations?</h2>
+                <p>Data Annotations are attributes used to enforce validation rules on model properties.</p>
+
+                <h2>Common Validation Attributes</h2>
+
+                <h3>Required</h3>
+                <pre><code>public class Product
+{
+    [Required(ErrorMessage = "Name is required")]
+    public string Name { get; set; }
+}</code></pre>
+
+                <h3>String Length</h3>
+                <pre><code>[StringLength(100, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters")]
+public string Name { get; set; }</code></pre>
+
+                <h3>Range</h3>
+                <pre><code>[Range(0, 1000, ErrorMessage = "Price must be between 0 and 1000")]
+public decimal Price { get; set; }</code></pre>
+
+                <h3>Email</h3>
+                <pre><code>[EmailAddress(ErrorMessage = "Invalid email address")]
+public string Email { get; set; }</code></pre>
+
+                <h3>Regular Expression</h3>
+                <pre><code>[RegularExpression("^[A-Z]+[a-zA-Z]*$", ErrorMessage = "Name must start with a capital letter")]
+public string Name { get; set; }</code></pre>
+
+                <h3>Compare</h3>
+                <pre><code>public string Password { get; set; }
+
+[Compare("Password", ErrorMessage = "Passwords do not match")]
+public string ConfirmPassword { get; set; }</code></pre>
+
+                <h2>Validation in Razor Pages</h2>
+
+                <h3>Model with Validation</h3>
+                <pre><code>public class Product
+{
+    [Required]
+    [StringLength(100)]
+    public string Name { get; set; }
+    
+    [Required]
+    [Range(0.01, 9999.99)]
+    public decimal Price { get; set; }
+    
+    [Required]
+    public int CategoryId { get; set; }
+}</code></pre>
+
+                <h3>Page Handler</h3>
+                <pre><code>public class CreateModel : PageModel
+{
+    [BindProperty]
+    public Product Product { get; set; }
+    
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+            return Page();
+        
+        // Save product
+        return RedirectToPage("Index");
+    }
+}</code></pre>
+
+                <h3>View with Validation</h3>
+                <pre><code>&lt;div asp-validation-summary="ModelOnly" class="text-danger"&gt;&lt;/div&gt;
+
+&lt;div class="form-group"&gt;
+    &lt;label asp-for="Product.Name"&gt;&lt;/label&gt;
+    &lt;input asp-for="Product.Name" class="form-control" /&gt;
+    &lt;span asp-validation-for="Product.Name" class="text-danger"&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="form-group"&gt;
+    &lt;label asp-for="Product.Price"&gt;&lt;/label&gt;
+    &lt;input asp-for="Product.Price" class="form-control" /&gt;
+    &lt;span asp-validation-for="Product.Price" class="text-danger"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+                <h2>Custom Validation</h2>
+                <pre><code>// Custom Validation Attribute
+public class AgeRangeAttribute : ValidationAttribute
+{
+    private readonly int _minAge;
+    private readonly int _maxAge;
+    
+    public AgeRangeAttribute(int minAge, int maxAge)
+    {
+        _minAge = minAge;
+        _maxAge = maxAge;
+    }
+    
+    protected override ValidationResult IsValid(object value, ValidationContext context)
+    {
+        var age = (int)value;
+        if (age &lt; _minAge || age &gt; _maxAge)
+            return new ValidationResult($"Age must be between {_minAge} and {_maxAge}");
+        return ValidationResult.Success;
+    }
+}
+
+// Usage
+[AgeRange(18, 65, ErrorMessage = "Age must be between 18 and 65")]
+public int Age { get; set; }</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Data Annotations provide a clean, declarative way to implement validation in your application.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/04-FormsAndModelBinding" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/06-PartialsAndLayouts" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

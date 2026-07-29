@@ -1,0 +1,73 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.SelectWhereOrderByModel
+@{
+    ViewData["Title"] = "SELECT, WHERE, ORDER BY";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">SELECT, WHERE, ORDER BY</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">SELECT with WHERE and ORDER BY</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 10</span>
+                </div>
+
+                <h2>SELECT — reading data</h2>
+                <pre><code>SELECT * FROM Students;
+SELECT StudentId, FirstName, LastName FROM Students;</code></pre>
+
+                <h2>WHERE — filtering</h2>
+                <pre><code>SELECT * FROM Students
+WHERE LastName = 'Ahmed';
+
+SELECT * FROM Students
+WHERE YEAR(EnrolledOn) = 2024;
+
+SELECT * FROM Students
+WHERE Email LIKE '%@@%';</code></pre>
+
+                <h2>ORDER BY — sorting</h2>
+                <pre><code>SELECT * FROM Students
+ORDER BY LastName ASC;
+
+SELECT * FROM Students
+ORDER BY EnrolledOn DESC;</code></pre>
+
+                <h2>WHERE + ORDER BY together</h2>
+                <pre><code>SELECT * FROM Students
+WHERE LastName = 'Ahmed'
+ORDER BY FirstName;</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>SELECT retrieves data, WHERE filters it, and ORDER BY sorts it. These are the most used SQL operations.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/05-Joins" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+﻿@page
+@model SettingUpEnvironmentModel
+@{
+    ViewData["Title"] = "Setting Up C# Development Environment";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Setting Up Environment</li>
+                </ol>
+            </nav>
+
+            <h1 class="display-4 mb-3">Setting Up Your C# Development Environment</h1>
+            <div class="d-flex gap-3 mb-4">
+                <span class="badge bg-success">Beginner</span>
+                <span class="badge bg-info text-dark">15 min read</span>
+                <span class="badge bg-primary">Lesson 2 of 13</span>
+            </div>
+
+            <div class="lesson-content">
+                <h2>What You Need</h2>
+                <p>To start developing in C#, you need three main components:</p>
+                <ul>
+                    <li><strong>.NET SDK</strong> - The software development kit</li>
+                    <li><strong>Visual Studio</strong> - The integrated development environment (IDE)</li>
+                    <li><strong>Git</strong> - Version control system (optional but recommended)</li>
+                </ul>
+
+                <h2>Installing Visual Studio</h2>
+                <p>Visual Studio is the recommended IDE for C# development. Here's how to install it:</p>
+
+                <div class="step-by-step">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">1</span>Download Visual Studio</h5>
+                            <p>Visit <a href="https://visualstudio.microsoft.com/downloads/" target="_blank">visualstudio.microsoft.com</a> and download the Community edition (free).</p>
+                            <img src="/images/vs-download.png" alt="Visual Studio Download" class="img-fluid rounded" style="max-height: 200px;">
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">2</span>Run the Installer</h5>
+                            <p>Launch the downloaded installer. You'll see a list of workloads to install.</p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">3</span>Select Workloads</h5>
+                            <p>Select the following workloads:</p>
+                            <ul>
+                                <li><strong>ASP.NET and web development</strong> - For web applications</li>
+                                <li><strong>.NET desktop development</strong> - For Windows Forms and WPF</li>
+                                <li><strong>Mobile development with .NET MAUI</strong> - For cross-platform apps</li>
+                                <li><strong>Data storage and processing</strong> - For SQL Server and databases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">4</span>Install</h5>
+                            <p>Click Install and wait for the installation to complete. This may take 15-30 minutes depending on your internet speed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Installing .NET SDK</h2>
+                <p>If Visual Studio didn't install the .NET SDK, you can download it separately:</p>
+                <ol>
+                    <li>Visit <a href="https://dotnet.microsoft.com/download" target="_blank">dotnet.microsoft.com/download</a></li>
+                    <li>Download the latest .NET SDK for your operating system</li>
+                    <li>Run the installer and follow the instructions</li>
+                </ol>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-check-circle text-success me-2"></i>Verify Installation</h5>
+                        <p class="card-text">Open a terminal or command prompt and type:</p>
+                        <pre><code>dotnet --version</code></pre>
+                        <p>You should see the version number of the .NET SDK installed.</p>
+                    </div>
+                </div>
+
+                <h2>Installing SQL Server</h2>
+                <p>Since you'll be learning SQL Server integration, install SQL Server Express:</p>
+                <ol>
+                    <li>Visit <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads" target="_blank">SQL Server Downloads</a></li>
+                    <li>Download SQL Server Express</li>
+                    <li>Download SQL Server Management Studio (SSMS)</li>
+                    <li>Install both</li>
+                </ol>
+
+                <h2>Installing Git</h2>
+                <p>Git is essential for version control:</p>
+                <ol>
+                    <li>Visit <a href="https://git-scm.com/downloads" target="_blank">git-scm.com</a></li>
+                    <li>Download for your operating system</li>
+                    <li>Install with default settings</li>
+                </ol>
+
+                <h2>Creating Your First Project</h2>
+                <p>Let's verify everything works by creating a simple console app:</p>
+
+                <h3>Using Visual Studio</h3>
+                <ol>
+                    <li>Open Visual Studio</li>
+                    <li>Click "Create a new project"</li>
+                    <li>Select "Console App"</li>
+                    <li>Name it "MyFirstApp"</li>
+                    <li>Click Create</li>
+                </ol>
+
+                <h3>Using Command Line</h3>
+                <pre><code>dotnet new console -n MyFirstApp
+cd MyFirstApp
+dotnet run</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Your development environment is now set up. You have Visual Studio, .NET SDK, SQL Server, and Git installed and ready for development.</p>
+                    </div>
+                </div>
+
+                <h2>Troubleshooting Common Issues</h2>
+                <div class="accordion" id="troubleshooting">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#issue1">
+                                Visual Studio won't install
+                            </button>
+                        </h2>
+                        <div id="issue1" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>Check your internet connection</li>
+                                    <li>Make sure you have enough disk space (at least 20GB)</li>
+                                    <li>Try running the installer as administrator</li>
+                                    <li>Disable antivirus temporarily</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#issue2">
+                                'dotnet' is not recognized
+                            </button>
+                        </h2>
+                        <div id="issue2" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>Restart your terminal/command prompt</li>
+                                    <li>Check if .NET SDK is installed correctly</li>
+                                    <li>Add the .NET SDK path to your system PATH variable</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <a href="/CSharpFundamentals/01-Introduction" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                </a>
+                <a href="/CSharpFundamentals/03-VariablesAndDataTypes" class="btn btn-primary-custom">
+                    Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.IndexModel
+@{
+    ViewData["Title"] = "Extra Topics - Bonus Skills";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Extra Topics — Bonus Skills</h1>
+            <p class="lead mb-4">These topics aren't strictly "core C#," but every professional C# developer ends up using them constantly. Treat this as your bonus round after finishing the main modules.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/01-GitAndGitHub">
+                            <h5><span class="card-number">1</span>Git &amp; GitHub</h5>
+                            <p>Learn Git basics, branching, pull requests, and connecting to GitHub.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/02-UnitTestingXunit">
+                            <h5><span class="card-number">2</span>Unit Testing with xUnit</h5>
+                            <p>Write unit tests using xUnit with Fact, Theory, and Assert patterns.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/03-DesignPatterns">
+                            <h5><span class="card-number">3</span>Design Patterns</h5>
+                            <p>Learn Singleton, Factory, Repository, DI, and Strategy patterns.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/04-AsyncAwaitDeepDive">
+                            <h5><span class="card-number">4</span>Async/Await Deep Dive</h5>
+                            <p>Master asynchronous programming with async/await, Task, and WhenAll.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/05-RestApisWebApi">
+                            <h5><span class="card-number">5</span>REST APIs with Web API</h5>
+                            <p>Build REST APIs with ASP.NET Core Web API and Entity Framework.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ExtraTopics/06-NugetPackages">
+                            <h5><span class="card-number">6</span>NuGet Packages</h5>
+                            <p>Manage NuGet packages using CLI, Package Manager Console, and GUI.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

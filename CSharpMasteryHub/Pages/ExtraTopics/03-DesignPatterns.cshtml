@@ -1,0 +1,139 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.DesignPatternsModel
+@{
+    ViewData["Title"] = "Design Patterns";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">Design Patterns</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Design Patterns</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 6</span>
+                </div>
+
+                <p>Design patterns are proven, reusable solutions to common software design problems. Here are the ones you'll encounter most as a C# developer.</p>
+
+                <h2>Singleton — exactly one instance</h2>
+                <pre><code>public sealed class AppLogger
+{
+    private static readonly Lazy&lt;AppLogger&gt; _instance = new(() => new AppLogger());
+    public static AppLogger Instance => _instance.Value;
+
+    private AppLogger() { }
+
+    public void Log(string message) => Console.WriteLine($"[LOG] {message}");
+}
+
+// Usage:
+AppLogger.Instance.Log("Application started");</code></pre>
+
+                <h2>Factory — centralize object creation</h2>
+                <pre><code>public interface INotification
+{
+    void Send(string message);
+}
+
+public class EmailNotification : INotification
+{
+    public void Send(string message) => Console.WriteLine($"Email: {message}");
+}
+
+public class SmsNotification : INotification
+{
+    public void Send(string message) => Console.WriteLine($"SMS: {message}");
+}
+
+public static class NotificationFactory
+{
+    public static INotification Create(string type) => type switch
+    {
+        "email" => new EmailNotification(),
+        "sms" => new SmsNotification(),
+        _ => throw new ArgumentException("Unknown type")
+    };
+}</code></pre>
+
+                <h2>Repository — separate data access from business logic</h2>
+                <pre><code>public interface IStudentRepository
+{
+    Student? GetById(int id);
+    void Add(Student student);
+}
+
+public class SqlStudentRepository : IStudentRepository
+{
+    // ADO.NET or EF Core implementation here
+    public Student? GetById(int id) { /* ... */ return null; }
+    public void Add(Student student) { /* ... */ }
+}</code></pre>
+                <p>This lets you swap the data source without touching the rest of your app.</p>
+
+                <h2>Dependency Injection — don't build your own dependencies</h2>
+                <pre><code>public class StudentService
+{
+    private readonly IStudentRepository _repository;
+
+    public StudentService(IStudentRepository repository)
+    {
+        _repository = repository;
+    }
+}
+
+// In Program.cs:
+builder.Services.AddScoped&lt;IStudentRepository, SqlStudentRepository&gt;();
+builder.Services.AddScoped&lt;StudentService&gt;();</code></pre>
+
+                <h2>Strategy — swap behavior at runtime</h2>
+                <pre><code>public interface IDiscountStrategy
+{
+    decimal Apply(decimal price);
+}
+
+public class StudentDiscount : IDiscountStrategy
+{
+    public decimal Apply(decimal price) => price * 0.9m;
+}
+
+public class NoDiscount : IDiscountStrategy
+{
+    public decimal Apply(decimal price) => price;
+}
+
+// Usage:
+IDiscountStrategy strategy = isStudent ? new StudentDiscount() : new NoDiscount();
+decimal finalPrice = strategy.Apply(100m);</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Design patterns are reusable solutions that make your code more maintainable and flexible.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics/02-UnitTestingXunit" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ExtraTopics/04-AsyncAwaitDeepDive" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

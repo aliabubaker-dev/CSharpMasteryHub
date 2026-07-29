@@ -1,0 +1,157 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "C# Fundamentals - Complete Guide";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">C# Fundamentals</h1>
+            <p class="lead mb-4">Master the fundamentals of C# programming from the ground up. This section covers everything you need to start your C# journey.</p>
+
+            <div class="progress-section mb-4">
+                <h5><i class="fas fa-tasks me-2 text-primary"></i>Your Progress</h5>
+                <div class="progress" style="height: 25px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" id="fundamentalsProgress">0%</div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/01-Introduction">
+                            <h5><span class="card-number">1</span>Introduction to C#</h5>
+                            <p>Learn what C# is, its history, and why it's one of the most popular programming languages.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">10 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/02-SettingUpEnvironment">
+                            <h5><span class="card-number">2</span>Setting Up Environment</h5>
+                            <p>Install Visual Studio and configure your development environment for C# programming.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/03-VariablesAndDataTypes">
+                            <h5><span class="card-number">3</span>Variables and Data Types</h5>
+                            <p>Understand variables, data types, and how to work with different types of data in C#.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/04-OperatorsAndExpressions">
+                            <h5><span class="card-number">4</span>Operators and Expressions</h5>
+                            <p>Learn about arithmetic, comparison, logical operators and how to build expressions.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/05-ControlFlow">
+                            <h5><span class="card-number">5</span>Control Flow</h5>
+                            <p>Master if statements, switch cases, and conditional logic in C#.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/06-Loops">
+                            <h5><span class="card-number">6</span>Loops</h5>
+                            <p>Learn for, while, do-while, and foreach loops for iteration in C#.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/07-ArraysAndCollections">
+                            <h5><span class="card-number">7</span>Arrays and Collections</h5>
+                            <p>Work with arrays, lists, dictionaries, and other collection types.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/08-Strings">
+                            <h5><span class="card-number">8</span>Strings</h5>
+                            <p>Master string manipulation, formatting, and common string operations.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/09-ExceptionHandling">
+                            <h5><span class="card-number">9</span>Exception Handling</h5>
+                            <p>Learn to handle errors gracefully with try-catch-finally blocks.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/10-MethodsBasics">
+                            <h5><span class="card-number">10</span>Methods Basics</h5>
+                            <p>Create and use methods, parameters, return types, and method overloading.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/11-PatternMatchingAndNullables">
+                            <h5><span class="card-number">11</span>Pattern Matching & Nullables</h5>
+                            <p>Modern C# features: pattern matching, nullable types, and null handling.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/12-LinqIntroduction">
+                            <h5><span class="card-number">12</span>LINQ Introduction</h5>
+                            <p>Learn Language Integrated Query for data manipulation and transformation.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/CSharpFundamentals/13-DelegatesEventsAsync">
+                            <h5><span class="card-number">13</span>Delegates, Events & Async</h5>
+                            <p>Master delegates, events, and asynchronous programming with async/await.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

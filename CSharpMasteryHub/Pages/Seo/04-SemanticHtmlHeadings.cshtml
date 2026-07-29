@@ -1,0 +1,92 @@
+﻿@page
+@model SemanticHtmlHeadingsModel
+@{
+    ViewData["Title"] = "Semantic HTML & Headings";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Seo">SEO Guide</a></li>
+                    <li class="breadcrumb-item active">Semantic HTML & Headings</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Semantic HTML & Headings</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 6</span>
+                </div>
+
+                <h2>What is Semantic HTML?</h2>
+                <p>Semantic HTML uses HTML elements that convey meaning about the content they contain.</p>
+
+                <h2>Importance for SEO</h2>
+                <ul>
+                    <li>Helps search engines understand content structure</li>
+                    <li>Improves accessibility</li>
+                    <li>Enhances user experience</li>
+                    <li>Better for screen readers</li>
+                </ul>
+
+                <h2>Semantic HTML Elements</h2>
+                <pre><code>&lt;!-- Header section --&gt;
+&lt;header&gt;
+    &lt;h1&gt;Website Title&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;!-- Main content --&gt;
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Article Title&lt;/h2&gt;
+        &lt;p&gt;Article content...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;!-- Footer --&gt;
+&lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2024 Company Name&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+
+                <h2>Heading Structure</h2>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li>Use only one H1 per page</li>
+                    <li>Maintain hierarchical order (H1, H2, H3)</li>
+                    <li>Include keywords in headings</li>
+                    <li>Make headings descriptive</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Semantic HTML and proper heading structure improve SEO, accessibility, and user experience.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Seo/03-SitemapAndRobotsTxt" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Seo/05-PageSpeedCoreWebVitals" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,272 @@
+﻿@page
+@model FullReportProjectWithSqlModel
+@{
+    ViewData["Title"] = "Full Report Project with SQL";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RdlcReports">RDLC Reports</a></li>
+                    <li class="breadcrumb-item active">Full Report Project with SQL</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Full Report Project with SQL Server</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 5</span>
+                </div>
+
+                <h2>What We Will Build</h2>
+                <p>
+                    We will build a complete reporting application that can show product reports and order reports.
+                    This will combine everything you learned: SQL Server, datasets, RDLC reports, and Windows Forms.
+                </p>
+
+                <h2>1. Database Schema</h2>
+                <pre><code>-- Products table - stores product information
+CREATE TABLE Products (
+    ProductId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Description NVARCHAR(500),
+    Category NVARCHAR(50),
+    QuantityInStock INT DEFAULT 0,
+    IsActive BIT DEFAULT 1,
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Orders table - stores order header information
+CREATE TABLE Orders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    OrderDate DATETIME DEFAULT GETDATE(),
+    CustomerName NVARCHAR(100),
+    TotalAmount DECIMAL(18,2)
+);
+
+-- OrderItems table - stores each item in an order
+CREATE TABLE OrderItems (
+    OrderItemId INT IDENTITY(1,1) PRIMARY KEY,
+    OrderId INT FOREIGN KEY REFERENCES Orders(OrderId),
+    ProductId INT FOREIGN KEY REFERENCES Products(ProductId),
+    Quantity INT,
+    UnitPrice DECIMAL(18,2),
+    TotalPrice DECIMAL(18,2)
+);</code></pre>
+
+                <h2>2. Dataset Configuration</h2>
+                <pre><code>// ProductDataSet.xsd
+- Products Table
+  - ProductId, Name, Price, Description, Category, QuantityInStock, IsActive
+
+// OrderDataSet.xsd
+- Orders Table
+  - OrderId, OrderDate, CustomerName, TotalAmount
+- OrderItems Table
+  - OrderItemId, OrderId, ProductId, Quantity, UnitPrice, TotalPrice</code></pre>
+
+                <h2>3. Report Design</h2>
+
+                <h3>Product Report Layout</h3>
+                <pre><code>+------------------------------------------+
+| Product Report                            |
+|------------------------------------------|
+| ID  Name      Price   Category    Stock   |
+|------------------------------------------|
+| 1   Laptop    $999.99  Electronics  5     |
+| 2   Mouse     $29.99   Electronics  20    |
+|------------------------------------------|
+| Total Products: 2                        |
++------------------------------------------+</code></pre>
+
+                <h3>Order Summary Report Layout</h3>
+                <pre><code>+------------------------------------------+
+| Order Summary                             |
+|------------------------------------------|
+| Order ID: 1   Date: 2024-01-15           |
+| Customer: John Smith                      |
+|------------------------------------------|
+| Product     Quantity  Unit Price  Total   |
+|------------------------------------------|
+| Laptop      1         $999.99    $999.99 |
+| Mouse       2         $29.99     $59.98  |
+|------------------------------------------|
+| Total: $1,059.97                         |
++------------------------------------------+</code></pre>
+
+                <h2>4. Report Service</h2>
+                <pre><code>public class ReportService
+{
+    private readonly string _connectionString;
+    
+    public ReportService(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+    
+    // Get all active products for the product report
+    public DataSet GetProductsForReport()
+    {
+        DataSet ds = new DataSet();
+        string query = "SELECT * FROM Products WHERE IsActive = 1";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+        {
+            adapter.Fill(ds, "Products");
+        }
+        
+        return ds;
+    }
+    
+    // Get order details for the order report
+    public DataSet GetOrderReport(int orderId)
+    {
+        DataSet ds = new DataSet();
+        
+        string orderQuery = "SELECT * FROM Orders WHERE OrderId = @@OrderId";
+        string itemsQuery = "SELECT * FROM OrderItems WHERE OrderId = @@OrderId";
+        
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            // Get Order header
+            using (SqlDataAdapter adapter = new SqlDataAdapter(orderQuery, conn))
+            {
+                adapter.SelectCommand.Parameters.AddWithValue("@@OrderId", orderId);
+                adapter.Fill(ds, "Orders");
+            }
+            
+            // Get Order items
+            using (SqlDataAdapter adapter = new SqlDataAdapter(itemsQuery, conn))
+            {
+                adapter.SelectCommand.Parameters.AddWithValue("@@OrderId", orderId);
+                adapter.Fill(ds, "OrderItems");
+            }
+        }
+        
+        return ds;
+    }
+}</code></pre>
+
+                <h2>5. Complete Windows Form</h2>
+                <pre><code>public partial class MainForm : Form
+{
+    private ReportService _reportService;
+    
+    public MainForm()
+    {
+        InitializeComponent();
+        _reportService = new ReportService(
+            "Server=localhost;Database=MyApp;Trusted_Connection=True;");
+    }
+    
+    // Show the product report
+    private void btnProductReport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            DataSet data = _reportService.GetProductsForReport();
+            
+            reportViewer.Reset();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.LocalReport.ReportPath = "ProductReport.rdlc";
+            
+            ReportDataSource source = new ReportDataSource("ProductDataSet", data.Tables[0]);
+            reportViewer.LocalReport.DataSources.Clear();
+            reportViewer.LocalReport.DataSources.Add(source);
+            
+            reportViewer.RefreshReport();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}", "Error", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    
+    // Show the order report
+    private void btnOrderReport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int orderId = (int)cmbOrders.SelectedValue;
+            DataSet data = _reportService.GetOrderReport(orderId);
+            
+            reportViewer.Reset();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.LocalReport.ReportPath = "OrderReport.rdlc";
+            
+            reportViewer.LocalReport.DataSources.Add(
+                new ReportDataSource("Orders", data.Tables[0]));
+            reportViewer.LocalReport.DataSources.Add(
+                new ReportDataSource("OrderItems", data.Tables[1]));
+            
+            reportViewer.RefreshReport();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}", "Error", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    
+    // Export the report to PDF
+    private void btnExportPDF_Click(object sender, EventArgs e)
+    {
+        using (SaveFileDialog dialog = new SaveFileDialog())
+        {
+            dialog.Filter = "PDF Files|*.pdf";
+            dialog.DefaultExt = "pdf";
+            
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                byte[] bytes = reportViewer.LocalReport.Render("PDF");
+                File.WriteAllBytes(dialog.FileName, bytes);
+                MessageBox.Show("Report exported successfully!", "Success", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>A complete reporting solution combines SQL Server data, datasets, RDLC reports, and Windows Forms.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Create database tables for products and orders</li>
+                            <li>Create datasets for both tables</li>
+                            <li>Design product and order reports</li>
+                            <li>Build a Windows Form with ReportViewer</li>
+                            <li>Add export to PDF functionality</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RdlcReports/04-BindingReportToForm" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RdlcReports" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

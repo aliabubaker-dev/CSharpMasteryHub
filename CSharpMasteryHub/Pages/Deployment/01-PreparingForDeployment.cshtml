@@ -1,0 +1,295 @@
+﻿@page
+@model PreparingForDeploymentModel
+@{
+    ViewData["Title"] = "Preparing for Deployment";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Deployment">Deployment</a></li>
+                    <li class="breadcrumb-item active">Preparing for Deployment</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Preparing Your Application for Deployment</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 5</span>
+                </div>
+
+                <h2>Why Preparation Matters</h2>
+                <p>
+                    Proper preparation ensures your application runs smoothly in production. Before deploying,
+                    you need to configure your application for the production environment.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">Development and production environments have different requirements. Your application must be configured appropriately for each.</p>
+                    </div>
+                </div>
+
+                <h2>1. Configuration Management</h2>
+
+                <h3>Using appsettings.json for Different Environments</h3>
+                <pre><code>// appsettings.json - Base configuration
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+// appsettings.Development.json - Development overrides
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft.AspNetCore": "Debug"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=MyApp;"
+  }
+}
+
+// appsettings.Production.json - Production overrides
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Error",
+      "Microsoft.AspNetCore": "Error"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=production-server;Database=MyApp;"
+  }
+}</code></pre>
+
+                <h3>Environment Variables</h3>
+                <pre><code>// In Program.cs
+var builder = WebApplication.CreateBuilder(args);
+
+// Load environment-specific configuration
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
+
+// Get connection string from environment
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");</code></pre>
+
+                <h2>2. Database Migration</h2>
+                <pre><code>// Using Entity Framework Core
+// In Program.cs
+using Microsoft.EntityFrameworkCore;
+
+// Apply migrations automatically
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
+
+// Or use command line
+// dotnet ef database update</code></pre>
+
+                <h2>3. Logging Configuration</h2>
+                <pre><code>// Configure logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+// Log to file (using Serilog or similar)
+// Install: dotnet add package Serilog.AspNetCore
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/myapp-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();</code></pre>
+
+                <h2>4. Error Handling</h2>
+                <pre><code>// In Program.cs
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+// Custom error page
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+// Global exception handling middleware
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next();
+    }
+    catch (Exception ex)
+    {
+        // Log the error
+        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An unhandled exception occurred");
+
+// Return a user-friendly error response
+        context.Response.StatusCode = 500;
+        await context.Response.WriteAsync("An error occurred. Please try again later.");
+    }
+});</code></pre>
+
+                <h2>5. Security Configuration</h2>
+                <pre><code>// HTTPS Redirection
+app.UseHttpsRedirection();
+
+// Security Headers
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Add("X-Frame-Options", "DENY");
+    context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+    context.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
+    await next();
+});
+
+// CORS Configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins("https://yourdomain.com")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});</code></pre>
+
+                <h2>6. Performance Optimization</h2>
+                <pre><code>// Enable Response Compression
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+
+// Use in app
+app.UseResponseCompression();
+
+// Cache static files
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=31536000");
+    }
+});
+
+// Bundle and minify CSS/JS
+// Use WebOptimizer or bundling</code></pre>
+
+                <h2>7. Health Checks</h2>
+                <pre><code>// Add health checks
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<ApplicationDbContext>()
+    .AddUrlGroup(new Uri("https://api.example.com"), "API Health")
+    .AddCheck<CustomHealthCheck>("Custom Check");
+
+// In app
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});</code></pre>
+
+                <h2>8. Build Configuration</h2>
+                <pre><code>// In .csproj file
+<PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Optimize for production -->
+    <Optimize>true</Optimize>
+</PropertyGroup>
+
+// Build for production
+// dotnet build -c Release
+// dotnet publish -c Release -o ./publish</code></pre>
+
+                <h2>Complete Deployment Preparation Checklist</h2>
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-check-circle text-success me-2"></i>Pre-Deployment Checklist</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">✅ Configure appsettings for production</li>
+                            <li class="list-group-item">✅ Set up environment variables</li>
+                            <li class="list-group-item">✅ Apply database migrations</li>
+                            <li class="list-group-item">✅ Configure logging for production</li>
+                            <li class="list-group-item">✅ Implement error handling</li>
+                            <li class="list-group-item">✅ Add security headers and HTTPS</li>
+                            <li class="list-group-item">✅ Enable caching and compression</li>
+                            <li class="list-group-item">✅ Add health checks</li>
+                            <li class="list-group-item">✅ Build in Release mode</li>
+                            <li class="list-group-item">✅ Test in production-like environment</li>
+                            <li class="list-group-item">✅ Backup database and files</li>
+                            <li class="list-group-item">✅ Update documentation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Proper preparation is essential for successful deployment. Configure your application for the production environment, implement security measures, and optimize performance.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Prepare your application for deployment:</p>
+                        <ol>
+                            <li>Create appsettings.Production.json</li>
+                            <li>Set up environment variables</li>
+                            <li>Configure logging for production</li>
+                            <li>Add security headers</li>
+                            <li>Enable response compression</li>
+                            <li>Create a deployment checklist</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Deployment" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/Deployment/02-FreeHostingOptions" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

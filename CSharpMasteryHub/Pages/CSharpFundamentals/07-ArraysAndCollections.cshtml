@@ -1,0 +1,115 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.ArraysAndCollectionsModel
+@{
+    ViewData["Title"] = "Arrays and Collections";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Arrays and Collections</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Arrays and Collections</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 13</span>
+                </div>
+
+                <h2>Arrays</h2>
+
+                <h3>Declaring Arrays</h3>
+                <pre><code>// Fixed size array
+int[] numbers = new int[5];  // {0, 0, 0, 0, 0}
+
+// Initialize with values
+string[] names = { "Alice", "Bob", "Charlie" };
+
+// Multidimensional array
+int[,] matrix = new int[2, 3];
+int[,] grid = { { 1, 2 }, { 3, 4 } };</code></pre>
+
+                <h3>Accessing Array Elements</h3>
+                <pre><code>string[] fruits = { "Apple", "Banana", "Orange" };
+
+string first = fruits[0];     // "Apple"
+string last = fruits[2];      // "Orange"
+fruits[1] = "Grape";          // Change value
+
+int length = fruits.Length;   // 3</code></pre>
+
+                <h2>List &lt;T&gt;</h2>
+                <pre><code>// Dynamic size
+List&lt;string&gt; names = new List&lt;string&gt;();
+
+names.Add("Alice");
+names.Add("Bob");
+names.Add("Charlie");
+
+string first = names[0];      // "Alice"
+names.Remove("Bob");          // Remove by value
+names.Insert(1, "Dave");      // Insert at index
+
+int count = names.Count;      // Number of items</code></pre>
+
+                <h2>Dictionary &lt;TKey, TValue&gt;</h2>
+                <pre><code>Dictionary&lt;string, int&gt; ages = new Dictionary&lt;string, int&gt;();
+
+ages["Alice"] = 25;
+ages["Bob"] = 30;
+ages.Add("Charlie", 35);
+
+int age = ages["Alice"];  // 25
+
+if (ages.ContainsKey("Bob"))
+{
+    Console.WriteLine($"Bob is {ages["Bob"]} years old");
+}</code></pre>
+
+                <h2>Other Collections</h2>
+                <pre><code>// HashSet - unique items
+HashSet&lt;string&gt; uniqueNames = new HashSet&lt;string&gt;();
+uniqueNames.Add("Alice");
+uniqueNames.Add("Alice"); // Ignored (duplicate)
+
+// Queue - FIFO
+Queue&lt;string&gt; queue = new Queue&lt;string&gt;();
+queue.Enqueue("First");
+queue.Enqueue("Second");
+string firstItem = queue.Dequeue(); // "First"
+
+// Stack - LIFO
+Stack&lt;string&gt; stack = new Stack&lt;string&gt;();
+stack.Push("First");
+stack.Push("Second");
+string lastItem = stack.Pop(); // "Second"</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Use <code>List&lt;T&gt;</code> for dynamic collections and <code>Dictionary&lt;TKey, TValue&gt;</code> for key-value lookups.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/06-Loops" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/08-Strings" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

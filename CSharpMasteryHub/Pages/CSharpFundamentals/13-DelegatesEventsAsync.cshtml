@@ -1,0 +1,142 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.DelegatesEventsAsyncModel
+@{
+    ViewData["Title"] = "Delegates, Events & Async";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Delegates, Events & Async</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Delegates, Events & Async</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 13 of 13</span>
+                </div>
+
+                <h2>Delegates</h2>
+                <p>A delegate is a type that holds a reference to a method.</p>
+
+                <h3>Declaring and Using Delegates</h3>
+                <pre><code>// Declare delegate
+public delegate int Operation(int a, int b);
+
+// Methods that match the delegate
+public int Add(int a, int b) => a + b;
+public int Multiply(int a, int b) => a * b;
+
+// Using the delegate
+Operation op = Add;
+int result = op(5, 3); // 8
+
+op = Multiply;
+result = op(5, 3); // 15</code></pre>
+
+                <h3>Func and Action (Built-in Delegates)</h3>
+                <pre><code>// Func - returns a value
+Func&lt;int, int, int&gt; add = (a, b) => a + b;
+int sum = add(5, 3);
+
+// Action - no return value
+Action&lt;string&gt; print = (msg) => Console.WriteLine(msg);
+print("Hello");</code></pre>
+
+                <h2>Events</h2>
+
+                <h3>Defining an Event</h3>
+                <pre><code>public class Button
+{
+    // Define event
+    public event EventHandler Clicked;
+    
+    public void Click()
+    {
+        // Raise the event
+        Clicked?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+// Using the event
+Button button = new Button();
+button.Clicked += (sender, e) => Console.WriteLine("Button clicked!");
+button.Click(); // Output: Button clicked!</code></pre>
+
+                <h2>Async/Await</h2>
+
+                <h3>Async Methods</h3>
+                <pre><code>public async Task&lt;string&gt; FetchDataAsync()
+{
+    // Simulate network call
+    await Task.Delay(2000);
+    return "Data loaded!";
+}
+
+// Using async method
+public async Task ProcessAsync()
+{
+    string result = await FetchDataAsync();
+    Console.WriteLine(result);
+}</code></pre>
+
+                <h3>Async with HTTP</h3>
+                <pre><code>using HttpClient client = new HttpClient();
+
+public async Task&lt;string&gt; GetWebContentAsync(string url)
+{
+    try
+    {
+        HttpResponseMessage response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+    catch (HttpRequestException ex)
+    {
+        return $"Error: {ex.Message}";
+    }
+}</code></pre>
+
+                <h3>Parallel Async Operations</h3>
+                <pre><code>public async Task ProcessAllAsync()
+{
+    // Run multiple tasks in parallel
+    Task&lt;string&gt; task1 = FetchData1Async();
+    Task&lt;string&gt; task2 = FetchData2Async();
+    
+    // Wait for all to complete
+    string[] results = await Task.WhenAll(task1, task2);
+    
+    Console.WriteLine($"Result 1: {results[0]}");
+    Console.WriteLine($"Result 2: {results[1]}");
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Delegates enable method references, events enable notifications, and async/await enables non-blocking operations.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/12-LinqIntroduction" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+﻿@page
+@model SeoIndexModel
+@{
+    ViewData["Title"] = "SEO Guide";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">SEO Guide</h1>
+            <p class="lead mb-4">Master SEO fundamentals, meta tags, sitemaps, page speed, and Google Search Console.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/01-SeoFundamentals">
+                            <h5><span class="card-number">1</span>SEO Fundamentals</h5>
+                            <p>Understanding search engine optimization basics.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/02-MetaTagsTitleDescription">
+                            <h5><span class="card-number">2</span>Meta Tags, Title & Description</h5>
+                            <p>Optimize meta tags, titles, and descriptions for search engines.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/03-SitemapAndRobotsTxt">
+                            <h5><span class="card-number">3</span>Sitemap and Robots.txt</h5>
+                            <p>Create sitemaps and robots.txt files for better indexing.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/04-SemanticHtmlHeadings">
+                            <h5><span class="card-number">4</span>Semantic HTML & Headings</h5>
+                            <p>Use semantic HTML and proper heading structure for SEO.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/05-PageSpeedCoreWebVitals">
+                            <h5><span class="card-number">5</span>Page Speed & Core Web Vitals</h5>
+                            <p>Optimize page speed and Core Web Vitals for better rankings.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Seo/06-GoogleSearchConsole">
+                            <h5><span class="card-number">6</span>Google Search Console</h5>
+                            <p>Use Google Search Console to monitor and improve SEO.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

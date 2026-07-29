@@ -1,0 +1,117 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.AsyncAwaitDeepDiveModel
+@{
+    ViewData["Title"] = "Async/Await Deep Dive";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">Async/Await Deep Dive</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Async/Await Deep Dive</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 6</span>
+                </div>
+
+                <p>
+                    <code>async</code>/<code>await</code> lets your code run long operations
+                    (database calls, file I/O, web requests) without blocking the thread
+                    that's running it — crucial for responsive UIs and scalable web servers.
+                </p>
+
+                <h2>A synchronous vs asynchronous method</h2>
+                <pre><code>// Synchronous — blocks the calling thread until it finishes
+public string ReadFileSync(string path)
+{
+    return File.ReadAllText(path);
+}
+
+// Asynchronous — frees the thread while waiting on I/O
+public async Task&lt;string&gt; ReadFileAsync(string path)
+{
+    return await File.ReadAllTextAsync(path);
+}</code></pre>
+
+                <h2>The rules</h2>
+                <ul>
+                    <li>An <code>async</code> method returns <code>Task</code>, <code>Task&lt;T&gt;</code>, or <code>void</code> (only for event handlers).</li>
+                    <li><code>await</code> can only be used inside an <code>async</code> method.</li>
+                    <li>Async "all the way" — once you go async, calling code should await it too.</li>
+                </ul>
+
+                <h2>Async database call</h2>
+                <pre><code>public async Task&lt;List&lt;Student&gt;&gt; GetStudentsAsync()
+{
+    return await _context.Students
+        .Where(s => s.EnrolledOn.Year == 2024)
+        .ToListAsync();
+}
+
+// In a Razor Pages handler:
+public async Task OnGetAsync()
+{
+    Students = await _studentService.GetStudentsAsync();
+}</code></pre>
+
+                <h2>Running tasks in parallel</h2>
+                <pre><code>Task&lt;List&lt;Student&gt;&gt; studentsTask = GetStudentsAsync();
+Task&lt;List&lt;Course&gt;&gt; coursesTask = GetCoursesAsync();
+
+await Task.WhenAll(studentsTask, coursesTask);
+
+var students = studentsTask.Result;
+var courses = coursesTask.Result;</code></pre>
+
+                <h2>Common mistake: blocking on async code</h2>
+                <pre><code>// DON'T DO THIS — can cause deadlocks
+var students = GetStudentsAsync().Result;
+
+// DO THIS instead
+var students = await GetStudentsAsync();</code></pre>
+
+                <h2>Exception handling with async</h2>
+                <pre><code>try
+{
+    var students = await GetStudentsAsync();
+}
+catch (SqlException ex)
+{
+    // handle database-specific failure
+}
+catch (Exception ex)
+{
+    // handle anything else
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Async/await makes your application more responsive and scalable by freeing threads during I/O operations.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics/03-DesignPatterns" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ExtraTopics/05-RestApisWebApi" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

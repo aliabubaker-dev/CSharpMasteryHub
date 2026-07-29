@@ -1,0 +1,86 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.DatabasesAndTablesModel
+@{
+    ViewData["Title"] = "Databases and Tables";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Databases and Tables</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Databases and Tables</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 10</span>
+                </div>
+
+                <p>A database is a container for related tables. A table stores rows of structured data in columns.</p>
+
+                <h2>Creating a database</h2>
+                <pre><code>CREATE DATABASE SchoolDB;
+GO
+USE SchoolDB;
+GO</code></pre>
+
+                <h2>Creating a table</h2>
+                <pre><code>CREATE TABLE Students (
+    StudentId   INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName   NVARCHAR(50)  NOT NULL,
+    LastName    NVARCHAR(50)  NOT NULL,
+    Email       NVARCHAR(100) NOT NULL UNIQUE,
+    EnrolledOn  DATE          NOT NULL DEFAULT GETDATE()
+);</code></pre>
+
+                <p>Breaking this down:</p>
+                <ul>
+                    <li><code>IDENTITY(1,1)</code> — auto-increments starting at 1, by 1 each row.</li>
+                    <li><code>PRIMARY KEY</code> — uniquely identifies each row.</li>
+                    <li><code>NOT NULL</code> — the column is required.</li>
+                    <li><code>UNIQUE</code> — no two rows can share this value.</li>
+                    <li><code>DEFAULT GETDATE()</code> — auto-fills today's date if not supplied.</li>
+                </ul>
+
+                <h2>Viewing table structure</h2>
+                <pre><code>EXEC sp_help 'Students';</code></pre>
+
+                <h2>Dropping a table (careful!)</h2>
+                <pre><code>DROP TABLE Students;</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Tables are the foundation of SQL databases. A well-designed table with proper constraints ensures data integrity.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Try it yourself</h5>
+                        <p>Create a <code>Courses</code> table with <code>CourseId</code>, <code>Title</code>, and <code>Credits</code> columns.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/01-InstallingSqlServerSsms" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

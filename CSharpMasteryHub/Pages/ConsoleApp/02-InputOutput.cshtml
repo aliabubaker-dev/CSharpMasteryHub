@@ -1,0 +1,196 @@
+﻿@page
+@model InputOutputModel
+@{
+    ViewData["Title"] = "Console Input and Output";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ConsoleApp">Console Applications</a></li>
+                    <li class="breadcrumb-item active">Input and Output</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Console Input and Output</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 4</span>
+                </div>
+
+                <h2>Console Output Methods</h2>
+
+                <h3>WriteLine vs Write</h3>
+                <ul>
+                    <li><strong>Console.WriteLine()</strong> - Writes text and moves to next line</li>
+                    <li><strong>Console.Write()</strong> - Writes text without moving to next line</li>
+                </ul>
+
+                <pre><code>Console.WriteLine("This is a line");
+Console.Write("This is ");
+Console.Write("the same line");
+// Output: 
+// This is a line
+// This is the same line</code></pre>
+
+                <h3>String Formatting</h3>
+                <pre><code>string name = "John";
+int age = 25;
+
+// Method 1: Concatenation
+Console.WriteLine("Hello " + name + ", you are " + age + " years old.");
+
+// Method 2: String interpolation (C# 6+)
+Console.WriteLine($"Hello {name}, you are {age} years old.");
+
+// Method 3: Composite formatting
+Console.WriteLine("Hello {0}, you are {1} years old.", name, age);</code></pre>
+
+                <h2>Console Input Methods</h2>
+
+                <h3>ReadLine()</h3>
+                <p>Reads a line of text from the console:</p>
+                <pre><code>Console.Write("Enter your name: ");
+string name = Console.ReadLine();
+Console.WriteLine($"Hello, {name}!");</code></pre>
+
+                <h3>ReadKey()</h3>
+                <p>Reads a single character without requiring Enter:</p>
+                <pre><code>Console.WriteLine("Press any key to continue...");
+Console.ReadKey();
+Console.WriteLine("Key pressed!");</code></pre>
+
+                <h3>Reading Numbers</h3>
+                <pre><code>Console.Write("Enter your age: ");
+int age = Convert.ToInt32(Console.ReadLine());
+// or
+int age = int.Parse(Console.ReadLine());
+// or with error handling
+int age;
+if (int.TryParse(Console.ReadLine(), out age))
+{
+    Console.WriteLine($"You are {age} years old.");
+}
+else
+{
+    Console.WriteLine("Invalid input!");
+}</code></pre>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practice</h5>
+                        <p class="card-text">Always use TryParse when reading user input to handle invalid data gracefully.</p>
+                    </div>
+                </div>
+
+                <h2>Formatting Output</h2>
+
+                <h3>Numeric Formatting</h3>
+                <pre><code>double price = 19.99;
+Console.WriteLine($"Price: {price:C}");        // Currency: $19.99
+Console.WriteLine($"Price: {price:F2}");       // Fixed point: 19.99
+Console.WriteLine($"Percentage: {0.75:P0}");   // Percentage: 75%
+Console.WriteLine($"Number: {12345:N0}");       // Number with commas: 12,345</code></pre>
+
+                <h3>Alignment</h3>
+                <pre><code>Console.WriteLine($"{"Name",-20} {"Age",5}");
+Console.WriteLine($"{"John",-20} {25,5}");
+Console.WriteLine($"{"Jane",-20} {30,5}");
+// Output:
+// Name                 Age
+// John                  25
+// Jane                  30</code></pre>
+
+                <h3>Colors</h3>
+                <pre><code>Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("This is green text!");
+Console.ResetColor();
+
+Console.BackgroundColor = ConsoleColor.DarkBlue;
+Console.ForegroundColor = ConsoleColor.White;
+Console.WriteLine("White text on blue background");
+Console.ResetColor();</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Mastering console input/output is essential for building interactive command-line applications. Practice with different formatting options.</p>
+                    </div>
+                </div>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Title = "User Information";
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("=== USER INFORMATION ===\n");
+        Console.ResetColor();
+
+        // Get user input
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Enter your age: ");
+        int age;
+        while (!int.TryParse(Console.ReadLine(), out age) || age < 0)
+        {
+            Console.Write("Please enter a valid age: ");
+        }
+
+        Console.Write("Enter your salary: ");
+        double salary;
+        while (!double.TryParse(Console.ReadLine(), out salary) || salary < 0)
+        {
+            Console.Write("Please enter a valid salary: ");
+        }
+
+        // Display formatted output
+        Console.Clear();
+        Console.WriteLine("=== USER INFORMATION ===\n");
+        Console.WriteLine($"{"Name:",-15} {name}");
+        Console.WriteLine($"{"Age:",-15} {age} years");
+        Console.WriteLine($"{"Salary:",-15} {salary:C}");
+        Console.WriteLine($"{"Status:",-15} {(age >= 18 ? "Adult" : "Minor")}");
+
+        Console.WriteLine("\nPress any key to exit...");
+        Console.ReadKey();
+    }
+}</code></pre>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a console application that:</p>
+                        <ol>
+                            <li>Asks for first name, last name, and age</li>
+                            <li>Displays the information in a formatted table</li>
+                            <li>Uses colors to highlight important information</li>
+                            <li>Handles invalid input gracefully</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ConsoleApp/01-CreatingConsoleApp" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ConsoleApp/03-CalculatorProject" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

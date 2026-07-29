@@ -1,0 +1,108 @@
+﻿@page
+@model DesigningReportModel
+@{
+    ViewData["Title"] = "Designing Report";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RdlcReports">RDLC Reports</a></li>
+                    <li class="breadcrumb-item active">Designing Report</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Designing RDLC Reports</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 5</span>
+                </div>
+
+                <h2>Creating a Report</h2>
+
+                <h3>Step 1 — Add Report File</h3>
+                <ol>
+                    <li>Right-click your project in Solution Explorer</li>
+                    <li>Select <strong>Add → New Item</strong></li>
+                    <li>Choose <strong>Report</strong> from the Reporting folder</li>
+                    <li>Name it: <code>ProductReport.rdlc</code></li>
+                </ol>
+
+                <h3>Step 2 — Design the Report Layout</h3>
+
+                <h4>Add Data Source</h4>
+                <pre><code>1. Open the report designer
+2. Go to View → Report Data
+3. Click New → Dataset
+4. Select your dataset (ProductDataSet)
+5. Choose the Products DataTable</code></pre>
+
+                <h4>Design the Layout</h4>
+                <pre><code>// Add a Table control
+1. Drag Table from Toolbox to report
+2. Configure columns:
+   - ProductId
+   - Name
+   - Price
+   - Category
+
+// Add Headers
+1. In the table, add header text
+2. Format with font, color, background</code></pre>
+
+                <h3>Step 3 — Add Report Elements</h3>
+                <pre><code>// TextBox for title
+&lt;Textbox&gt;Product Report&lt;/Textbox&gt;
+
+// Table with data
+&lt;Table&gt;
+    &lt;TableRow&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;ID&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;Name&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;Price&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;Category&lt;/Textbox&gt;&lt;/TableCell&gt;
+    &lt;/TableRow&gt;
+    &lt;TableRow&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;=Fields!ProductId.Value&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;=Fields!Name.Value&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;=Format(Fields!Price.Value, "C")&lt;/Textbox&gt;&lt;/TableCell&gt;
+        &lt;TableCell&gt;&lt;Textbox&gt;=Fields!Category.Value&lt;/Textbox&gt;&lt;/TableCell&gt;
+    &lt;/TableRow&gt;
+&lt;/Table&gt;</code></pre>
+
+                <h3>Step 4 — Format the Report</h3>
+                <pre><code>// Formatting options:
+- Font: Arial, 10pt
+- Header background: Dark Blue
+- Header text color: White
+- Cell padding: 5px
+- Border: 1px solid gray
+- Price format: Currency ($#,##0.00)</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>RDLC reports are designed visually in the report designer, making it easy to create professional layouts.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RdlcReports/02-CreatingDataset" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RdlcReports/04-BindingReportToForm" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

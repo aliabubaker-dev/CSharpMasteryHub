@@ -1,0 +1,70 @@
+﻿@page
+@model ProjectWorkflowIndexModel
+@{
+    ViewData["Title"] = "Project Workflow - Professional Development";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Professional Project Workflow</h1>
+            <p class="lead mb-4">Learn how to work professionally from requirements gathering to delivery with Git branching and testing.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ProjectWorkflow/01-UnderstandingRequirements">
+                            <h5><span class="card-number">1</span>Understanding Requirements</h5>
+                            <p>Learn how to gather, analyze, and document project requirements effectively.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ProjectWorkflow/02-PlanningAndArchitecture">
+                            <h5><span class="card-number">2</span>Planning and Architecture</h5>
+                            <p>Design scalable architecture and create a solid project plan.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ProjectWorkflow/03-GitBranchingStrategy">
+                            <h5><span class="card-number">3</span>Git Branching Strategy</h5>
+                            <p>Master Git branching strategies for team collaboration and release management.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ProjectWorkflow/04-CodingStandards">
+                            <h5><span class="card-number">4</span>Coding Standards</h5>
+                            <p>Adopt coding standards and best practices for maintainable code.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ProjectWorkflow/05-TestingAndDelivering">
+                            <h5><span class="card-number">5</span>Testing and Delivering</h5>
+                            <p>Implement testing strategies and deliver projects successfully.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

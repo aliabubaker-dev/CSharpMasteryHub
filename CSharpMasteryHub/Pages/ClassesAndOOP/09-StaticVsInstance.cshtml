@@ -1,0 +1,378 @@
+﻿@page
+@model StaticVsInstanceModel
+@{
+    ViewData["Title"] = "Static vs Instance Members in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Static vs Instance</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Static vs Instance Members in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 9 of 11</span>
+                </div>
+
+                <h2>Understanding Static vs Instance</h2>
+                <p>
+                    In C#, members (fields, properties, methods, etc.) can be either static or instance-based.
+                    Understanding the difference is crucial for proper object-oriented design.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <ul class="mb-0">
+                            <li><strong>Instance members</strong> belong to each object instance</li>
+                            <li><strong>Static members</strong> belong to the class itself, shared by all instances</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Instance Members</h2>
+                <pre><code>public class Person
+{
+    // Instance fields - each object has its own copy
+    public string Name { get; set; }
+    public int Age { get; set; }
+    
+    // Instance method - operates on object state
+    public void Introduce()
+    {
+        Console.WriteLine($"Hi, I'm {Name} and I'm {Age} years old.");
+    }
+}
+
+// Usage - must create instance
+Person person = new Person();
+person.Name = "John";
+person.Age = 25;
+person.Introduce();</code></pre>
+
+                <h2>Static Members</h2>
+                <pre><code>public class MathUtils
+{
+    // Static field - shared across all instances
+    public static double Pi = 3.14159;
+    
+    // Static method - called on class, not instance
+    public static double CalculateCircleArea(double radius)
+    {
+        return Pi * radius * radius;
+    }
+    
+    // Static property
+    public static string Version { get; } = "1.0.0";
+}
+
+// Usage - no instance needed
+double area = MathUtils.CalculateCircleArea(5);
+Console.WriteLine($"Area: {area}");
+Console.WriteLine($"Version: {MathUtils.Version}");</code></pre>
+
+                <h2>Static Constructor</h2>
+                <pre><code>public class DatabaseConfig
+{
+    public static string ConnectionString { get; private set; }
+    public static int Timeout { get; private set; }
+    
+    // Static constructor - called once before class is used
+    static DatabaseConfig()
+    {
+        ConnectionString = "Server=localhost;Database=MyDB;";
+        Timeout = 30;
+        Console.WriteLine("Database configuration initialized");
+    }
+}</code></pre>
+
+                <h2>Static Classes</h2>
+                <pre><code>// Static class - cannot be instantiated
+public static class FileHelper
+{
+    // All members must be static
+    public static void WriteToFile(string path, string content)
+    {
+        File.WriteAllText(path, content);
+    }
+    
+    public static string ReadFromFile(string path)
+    {
+        return File.ReadAllText(path);
+    }
+    
+    public static bool FileExists(string path)
+    {
+        return File.Exists(path);
+    }
+}
+
+// Usage
+FileHelper.WriteToFile("data.txt", "Hello World!");
+string content = FileHelper.ReadFromFile("data.txt");</code></pre>
+
+                <h2>When to Use Static vs Instance</h2>
+                <table class="table table-bordered mb-4">
+                    <thead>
+                        <tr>
+                            <th>Use Static When</th>
+                            <th>Use Instance When</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Utility/helper functions</td>
+                            <td>Data that belongs to each object</td>
+                        </tr>
+                        <tr>
+                            <td>Shared data across instances</td>
+                            <td>Object-specific behavior</td>
+                        </tr>
+                        <tr>
+                            <td>Constants and configuration</td>
+                            <td>State that can vary per object</td>
+                        </tr>
+                        <tr>
+                            <td>Factory methods</td>
+                            <td>Encapsulated object logic</td>
+                        </tr>
+                        <tr>
+                            <td>No need for object state</td>
+                            <td>Need to maintain object state</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Static vs Instance - Complete Example</h2>
+                <pre><code>using System;
+
+public class BankAccount
+{
+    // Static members
+    private static int lastAccountNumber = 1000;
+    private static double interestRate = 0.05;
+    private static int totalAccounts = 0;
+    
+    // Static property
+    public static double InterestRate
+    {
+        get { return interestRate; }
+        set 
+        {
+            if (value < 0)
+                throw new ArgumentException("Interest rate cannot be negative");
+            interestRate = value;
+        }
+    }
+    
+    // Static method
+    public static int GetTotalAccounts()
+    {
+        return totalAccounts;
+    }
+    
+    public static void SetInterestRate(double rate)
+    {
+        InterestRate = rate;
+    }
+    
+    // Instance members
+    public string AccountNumber { get; private set; }
+    public string OwnerName { get; set; }
+    public decimal Balance { get; private set; }
+    public DateTime CreatedDate { get; private set; }
+    
+    // Instance constructor
+    public BankAccount(string ownerName, decimal initialDeposit)
+    {
+        if (string.IsNullOrWhiteSpace(ownerName))
+            throw new ArgumentException("Owner name cannot be empty");
+        
+        if (initialDeposit < 0)
+            throw new ArgumentException("Initial deposit cannot be negative");
+        
+        AccountNumber = GenerateAccountNumber();
+        OwnerName = ownerName;
+        Balance = initialDeposit;
+        CreatedDate = DateTime.Now;
+        totalAccounts++;
+    }
+    
+    // Static method to generate account number
+    private static string GenerateAccountNumber()
+    {
+        lastAccountNumber++;
+        return "ACC" + lastAccountNumber.ToString("D6");
+    }
+    
+    // Instance methods
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit amount must be positive");
+        Balance += amount;
+    }
+    
+    public bool Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdrawal amount must be positive");
+            
+        if (amount > Balance)
+            return false;
+            
+        Balance -= amount;
+        return true;
+    }
+    
+    public void ApplyInterest()
+    {
+        decimal interest = Balance * (decimal)interestRate;
+        Balance += interest;
+        Console.WriteLine($"Interest applied: {interest:C}");
+    }
+    
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Account: {AccountNumber}");
+        Console.WriteLine($"Owner: {OwnerName}");
+        Console.WriteLine($"Balance: {Balance:C}");
+        Console.WriteLine($"Created: {CreatedDate:d}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Using static members
+        Console.WriteLine($"Interest Rate: {BankAccount.InterestRate:P}");
+        BankAccount.SetInterestRate(0.075);
+        Console.WriteLine($"New Interest Rate: {BankAccount.InterestRate:P}");
+        
+        // Creating instances
+        BankAccount account1 = new BankAccount("John Doe", 1000);
+        BankAccount account2 = new BankAccount("Jane Smith", 2000);
+        
+        // Using instance members
+        account1.Deposit(500);
+        account2.Withdraw(500);
+        account1.ApplyInterest();
+        
+        // Display information
+        Console.WriteLine("\n=== ACCOUNT 1 ===");
+        account1.DisplayInfo();
+        
+        Console.WriteLine("\n=== ACCOUNT 2 ===");
+        account2.DisplayInfo();
+        
+        // Static member
+        Console.WriteLine($"\nTotal Accounts: {BankAccount.GetTotalAccounts()}");
+    }
+}</code></pre>
+
+                <h2>Static Methods vs Instance Methods</h2>
+                <pre><code>public class Calculator
+{
+    // Static method - doesn't need instance state
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    // Static method - utility function
+    public static bool IsEven(int number)
+    {
+        return number % 2 == 0;
+    }
+    
+    // Instance method - needs instance state
+    private int result;
+    
+    public void AddToResult(int value)
+    {
+        result += value;
+    }
+    
+    public int GetResult()
+    {
+        return result;
+    }
+}</code></pre>
+
+                <h2>Thread Safety with Static Members</h2>
+                <pre><code>public class Counter
+{
+    private static int count = 0;
+    private static readonly object lockObject = new object();
+    
+    // Thread-safe static method
+    public static int Increment()
+    {
+        lock (lockObject)
+        {
+            count++;
+            return count;
+        }
+    }
+    
+    public static int GetCount()
+    {
+        lock (lockObject)
+        {
+            return count;
+        }
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Static members belong to the class, not instances</li>
+                            <li>Instance members belong to each object</li>
+                            <li>Use static for utility methods and shared data</li>
+                            <li>Use instance for object-specific data and behavior</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a class "ProductManager" with:</p>
+                        <ol>
+                            <li>Static field: totalProducts</li>
+                            <li>Static method: GetTotalProducts()</li>
+                            <li>Static method: ResetInventory()</li>
+                            <li>Instance properties: Id, Name, Price, Quantity</li>
+                            <li>Instance methods: AddStock, RemoveStock</li>
+                            <li>Static constructor to initialize default values</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/10-Generics" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

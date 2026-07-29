@@ -1,0 +1,130 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Classes and Object-Oriented Programming";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Classes and Object-Oriented Programming</h1>
+            <p class="lead mb-4">Master Object-Oriented Programming in C# with classes, methods, inheritance, polymorphism, and SOLID principles.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/01-WhatIsAClass">
+                            <h5><span class="card-number">1</span>What Is A Class</h5>
+                            <p>Understanding classes, objects, and their relationship in C#.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/02-FieldsAndProperties">
+                            <h5><span class="card-number">2</span>Fields and Properties</h5>
+                            <p>Learn about fields, properties, auto-properties, and encapsulation.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/03-MethodsDeepDive">
+                            <h5><span class="card-number">3</span>Methods Deep Dive</h5>
+                            <p>Comprehensive guide to methods, parameters, return types, and overloading.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/04-Constructors">
+                            <h5><span class="card-number">4</span>Constructors</h5>
+                            <p>Understanding constructors, initialization, and object creation.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/05-Encapsulation">
+                            <h5><span class="card-number">5</span>Encapsulation</h5>
+                            <p>Understanding access modifiers and data hiding principles.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/06-Inheritance">
+                            <h5><span class="card-number">6</span>Inheritance</h5>
+                            <p>Learn inheritance, base classes, derived classes, and code reuse.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/07-Polymorphism">
+                            <h5><span class="card-number">7</span>Polymorphism</h5>
+                            <p>Understanding polymorphism, virtual/override, and abstract methods.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/08-AbstractionInterfaces">
+                            <h5><span class="card-number">8</span>Abstraction & Interfaces</h5>
+                            <p>Learn abstract classes, interfaces, and their usage patterns.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/09-StaticVsInstance">
+                            <h5><span class="card-number">9</span>Static vs Instance</h5>
+                            <p>Understanding static members, instance members, and their differences.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/10-Generics">
+                            <h5><span class="card-number">10</span>Generics</h5>
+                            <p>Learn generics, type parameters, and generic classes/methods.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ClassesAndOOP/11-SolidPrinciples">
+                            <h5><span class="card-number">11</span>SOLID Principles</h5>
+                            <p>Master SOLID principles for clean, maintainable code design.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

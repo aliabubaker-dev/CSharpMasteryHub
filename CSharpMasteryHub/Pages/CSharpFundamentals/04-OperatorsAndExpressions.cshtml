@@ -1,0 +1,90 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.OperatorsAndExpressionsModel
+@{
+    ViewData["Title"] = "Operators and Expressions";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Operators and Expressions</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Operators and Expressions</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 13</span>
+                </div>
+
+                <h2>Arithmetic Operators</h2>
+                <pre><code>int a = 10, b = 3;
+
+int sum = a + b;        // 13
+int difference = a - b; // 7
+int product = a * b;    // 30
+int quotient = a / b;   // 3 (integer division)
+int remainder = a % b;  // 1 (modulus)
+double exact = 10.0 / 3; // 3.333...</code></pre>
+
+                <h2>Comparison Operators</h2>
+                <pre><code>int x = 5, y = 10;
+
+bool isEqual = x == y;      // false
+bool isNotEqual = x != y;   // true
+bool isGreater = x > y;     // false
+bool isLess = x &lt; y;        // true
+bool isGreaterOrEqual = x >= y; // false
+bool isLessOrEqual = x <= y;    // true</code></pre>
+
+                <h2>Logical Operators</h2>
+                <pre><code>bool isAdult = age >= 18;
+bool hasLicense = true;
+
+bool canDrive = isAdult && hasLicense;   // AND
+bool canRentCar = isAdult || hasLicense; // OR
+bool isMinor = !isAdult;                 // NOT</code></pre>
+
+                <h2>Assignment Operators</h2>
+                <pre><code>int num = 5;
+num += 3;   // num = 8
+num -= 2;   // num = 6
+num *= 2;   // num = 12
+num /= 3;   // num = 4
+num %= 3;   // num = 1</code></pre>
+
+                <h2>Increment and Decrement</h2>
+                <pre><code>int count = 5;
+count++;    // count = 6 (post-increment)
+++count;    // count = 7 (pre-increment)
+count--;    // count = 6 (post-decrement)
+--count;    // count = 5 (pre-decrement)</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Operators perform operations on data. Be careful with integer division and operator precedence.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/03-VariablesAndDataTypes" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/05-ControlFlow" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

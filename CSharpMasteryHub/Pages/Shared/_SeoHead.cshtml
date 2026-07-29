@@ -1,0 +1,57 @@
+﻿@using CSharpMasteryHub.Services
+@{
+    var seoService = new SeoService();
+    var path = Context.Request.Path.ToString();
+    var seo = seoService.GetSeoForPage(path);
+
+    // Default values if not set
+    if (string.IsNullOrEmpty(seo.Title))
+    {
+        seo.Title = "C# Mastery Hub - Learn C# Step by Step";
+    }
+    if (string.IsNullOrEmpty(seo.Description))
+    {
+        seo.Description = "Complete free guide to learn C# from starter to master.";
+    }
+
+    ViewData["Title"] = seo.Title;
+}
+
+<title>@seo.Title</title>
+<meta name="description" content="@seo.Description" />
+<meta name="keywords" content="@seo.Keywords" />
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="@seo.OgTitle" />
+<meta property="og:description" content="@seo.OgDescription" />
+<meta property="og:image" content="@seo.OgImage" />
+<meta property="og:url" content="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
+<meta property="og:type" content="@seo.OgType" />
+<meta property="og:site_name" content="C# Mastery Hub" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="@seo.OgTitle" />
+<meta name="twitter:description" content="@seo.OgDescription" />
+<meta name="twitter:image" content="@seo.OgImage" />
+
+<!-- Canonical -->
+<link rel="canonical" href="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
+
+<!-- Schema.org markup -->
+<script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "WebSite",
+        "name": "C# Mastery Hub",
+        "description": "@seo.Description",
+        "url": "@($"{Context.Request.Scheme}://{Context.Request.Host}")",
+        "potentialAction": {
+            "@@type": "SearchAction",
+            "target": "@($"{Context.Request.Scheme}://{Context.Request.Host}/search?q={{search_term_string}}")",
+            "query-input": "required name=search_term_string"
+        }
+    }
+</script>

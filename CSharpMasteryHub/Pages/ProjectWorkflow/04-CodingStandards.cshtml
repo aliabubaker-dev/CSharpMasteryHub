@@ -1,0 +1,151 @@
+﻿@page
+@model CodingStandardsModel
+@{
+    ViewData["Title"] = "Coding Standards";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ProjectWorkflow">Project Workflow</a></li>
+                    <li class="breadcrumb-item active">Coding Standards</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Coding Standards and Best Practices</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 5</span>
+                </div>
+
+                <h2>Why Coding Standards Matter</h2>
+                <ul>
+                    <li>Readable and maintainable code</li>
+                    <li>Consistent codebase</li>
+                    <li>Easier code reviews</li>
+                    <li>Reduced bugs</li>
+                    <li>Faster onboarding of new developers</li>
+                </ul>
+
+                <h2>Naming Conventions</h2>
+
+                <h3>C# Naming Rules</h3>
+                <pre><code>// PascalCase for classes and methods
+public class UserService
+{
+    public User GetUserById(int id) { }
+}
+
+// camelCase for parameters and local variables
+public void ProcessUser(User user)
+{
+    string userName = user.Name;
+}
+
+// _camelCase for private fields
+private readonly ILogger _logger;
+
+// UPPER_CASE for constants
+private const int MAX_RETRY_COUNT = 3;
+
+// I + PascalCase for interfaces
+public interface IUserService { }</code></pre>
+
+                <h2>Best Practices</h2>
+
+                <h3>1. Clean Code Principles</h3>
+                <pre><code>// Bad
+public void ProcessData(List<string> data) { ... }
+
+// Good - Descriptive names
+public void ProcessUserOrders(List<Order> orders) { ... }</code></pre>
+
+                <h3>2. SOLID Principles</h3>
+                <ul>
+                    <li><strong>Single Responsibility:</strong> One class, one responsibility</li>
+                    <li><strong>Open/Closed:</strong> Open for extension, closed for modification</li>
+                    <li><strong>Liskov Substitution:</strong> Subtypes must be substitutable</li>
+                    <li><strong>Interface Segregation:</strong> Many specific interfaces</li>
+                    <li><strong>Dependency Inversion:</strong> Depend on abstractions</li>
+                </ul>
+
+                <h3>3. Error Handling</h3>
+                <pre><code>// Good - Specific exceptions
+try
+{
+    var result = await GetDataAsync();
+}
+catch (HttpRequestException ex)
+{
+    logger.LogError(ex, "API call failed");
+    throw new ServiceException("Failed to fetch data", ex);
+}
+
+// Good - Guard clauses
+public void ProcessOrder(Order order)
+{
+    if (order == null)
+        throw new ArgumentNullException(nameof(order));
+        
+    if (order.Items.Count == 0)
+        throw new InvalidOperationException("Order has no items");
+}</code></pre>
+
+                <h3>4. Async/Await</h3>
+                <pre><code>// Good - Async all the way
+public async Task<User> GetUserAsync(int id)
+{
+    return await _userRepository.GetByIdAsync(id);
+}</code></pre>
+
+                <h2>Code Review Guidelines</h2>
+
+                <h3>What to Review</h3>
+                <ul>
+                    <li>Functionality matches requirements</li>
+                    <li>Code follows standards</li>
+                    <li>No security vulnerabilities</li>
+                    <li>Performance considerations</li>
+                    <li>Test coverage</li>
+                    <li>Documentation</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Consistent coding standards and best practices lead to maintainable, high-quality code.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Review a piece of code for standards compliance</li>
+                            <li>Refactor code following best practices</li>
+                            <li>Add XML documentation to methods</li>
+                            <li>Create a code review checklist</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ProjectWorkflow/03-GitBranchingStrategy" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ProjectWorkflow/05-TestingAndDelivering" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

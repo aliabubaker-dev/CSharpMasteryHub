@@ -1,0 +1,164 @@
+﻿@page
+@model TestingAndDeliveringModel
+@{
+    ViewData["Title"] = "Testing and Delivering";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ProjectWorkflow">Project Workflow</a></li>
+                    <li class="breadcrumb-item active">Testing and Delivering</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Testing and Delivering</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 5</span>
+                </div>
+
+                <h2>Why Testing Matters</h2>
+                <p>Testing ensures quality, catches bugs early, and builds confidence in your application.</p>
+
+                <h2>Types of Testing</h2>
+
+                <h3>1. Unit Testing</h3>
+                <p>Testing individual components in isolation.</p>
+                <pre><code>// xUnit Example
+[Fact]
+public void Add_TwoNumbers_ReturnsSum()
+{
+    // Arrange
+    var calculator = new Calculator();
+    
+    // Act
+    var result = calculator.Add(5, 3);
+    
+    // Assert
+    Assert.Equal(8, result);
+}</code></pre>
+
+                <h3>2. Integration Testing</h3>
+                <p>Testing how components work together.</p>
+
+                <h3>3. Functional Testing</h3>
+                <p>Testing the application from a user perspective.</p>
+
+                <h3>4. Performance Testing</h3>
+                <ul>
+                    <li>Load testing</li>
+                    <li>Stress testing</li>
+                    <li>Scalability testing</li>
+                </ul>
+
+                <h3>5. Security Testing</h3>
+                <ul>
+                    <li>Vulnerability scanning</li>
+                    <li>Penetration testing</li>
+                    <li>Security audits</li>
+                </ul>
+
+                <h2>Test-Driven Development (TDD)</h2>
+
+                <h3>The TDD Cycle</h3>
+                <pre><code>1. Write a failing test (Red)
+2. Write the minimum code to make it pass (Green)
+3. Refactor the code (Refactor)
+4. Repeat</code></pre>
+
+                <h2>Continuous Integration (CI)</h2>
+
+                <h3>CI Pipeline Steps</h3>
+                <pre><code># GitHub Actions Example
+name: CI Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release
+      
+      - name: Run tests
+        run: dotnet test --configuration Release --verbosity normal</code></pre>
+
+                <h2>Deployment and Delivery</h2>
+
+                <h3>Deployment Strategies</h3>
+                <ul>
+                    <li><strong>Blue-Green Deployment:</strong> Two identical environments</li>
+                    <li><strong>Canary Deployment:</strong> Gradual rollout to users</li>
+                    <li><strong>Rolling Deployment:</strong> Update instances one by one</li>
+                    <li><strong>Feature Flags:</strong> Toggle features on/off</li>
+                </ul>
+
+                <h3>Deployment Checklist</h3>
+                <pre><code># Pre-Deployment
+- [ ] All tests pass
+- [ ] Code review completed
+- [ ] Version number updated
+- [ ] Database migrations ready
+
+# Deployment
+- [ ] Database backup created
+- [ ] Application deployed
+- [ ] Health check passes
+
+# Post-Deployment
+- [ ] Smoke tests run
+- [ ] Monitoring active
+- [ ] Logs checked</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Comprehensive testing and smooth deployment processes ensure high-quality, reliable software delivery.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Write unit tests for a service class</li>
+                            <li>Create a CI pipeline configuration</li>
+                            <li>Define a deployment strategy</li>
+                            <li>Create a deployment checklist</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ProjectWorkflow/04-CodingStandards" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ProjectWorkflow" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

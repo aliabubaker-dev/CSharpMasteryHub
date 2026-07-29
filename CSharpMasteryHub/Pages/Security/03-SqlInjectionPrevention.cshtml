@@ -1,0 +1,121 @@
+﻿@page
+@model SqlInjectionPreventionModel
+@{
+    ViewData["Title"] = "SQL Injection Prevention";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Security">Security</a></li>
+                    <li class="breadcrumb-item active">SQL Injection Prevention</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">SQL Injection Prevention</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 6</span>
+                </div>
+
+                <h2>What is SQL Injection?</h2>
+                <p>SQL Injection is a code injection technique where malicious SQL statements are inserted into queries.</p>
+
+                <h2>Vulnerable Code (DO NOT USE)</h2>
+                <pre><code>// Vulnerable to SQL injection
+public User GetUser(string username)
+{
+    string query = "SELECT * FROM Users WHERE Username = '" + username + "'";
+    // Attacker could input: ' OR '1'='1
+    // Result: SELECT * FROM Users WHERE Username = '' OR '1'='1'
+}</code></pre>
+
+                <h2>Prevention Techniques</h2>
+
+                <h3>1. Parameterized Queries (ADO.NET)</h3>
+                <pre><code>public User GetUser(string username)
+{
+    string query = "SELECT * FROM Users WHERE Username = @@Username";
+    
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand(query, conn))
+    {
+        cmd.Parameters.AddWithValue("@@Username", username);
+        // Safe from injection
+    }
+}</code></pre>
+
+                <h3>2. Entity Framework Core (Recommended)</h3>
+                <pre><code>public async Task&lt;User&gt; GetUserAsync(string username)
+{
+    // EF Core automatically parameterizes queries
+    return await _context.Users
+        .FirstOrDefaultAsync(u => u.Username == username);
+}</code></pre>
+
+                <h3>3. Dapper</h3>
+                <pre><code>public User GetUser(string username)
+{
+    using (var conn = new SqlConnection(connectionString))
+    {
+        return conn.QueryFirstOrDefault&lt;User&gt;(
+            "SELECT * FROM Users WHERE Username = @@Username",
+            new { Username = username });
+    }
+}</code></pre>
+
+                <h3>4. Stored Procedures</h3>
+                <pre><code>// Use parameterized stored procedures
+public User GetUser(string username)
+{
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    using (SqlCommand cmd = new SqlCommand("sp_GetUser", conn))
+    {
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@@Username", username);
+        // Safe
+    }
+}</code></pre>
+
+                <h2>Input Validation</h2>
+                <pre><code>// Validate and sanitize input
+public bool IsValidUsername(string username)
+{
+    // Check length
+    if (string.IsNullOrWhiteSpace(username) || username.Length > 50)
+        return false;
+    
+    // Check for invalid characters
+    if (!Regex.IsMatch(username, "^[a-zA-Z0-9_]+$"))
+        return false;
+    
+    return true;
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Always use parameterized queries or an ORM to prevent SQL injection. Never concatenate user input into SQL strings.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Security/02-AuthenticationIdentity" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Security/04-XssCsrfProtection" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

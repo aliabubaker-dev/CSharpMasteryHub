@@ -1,0 +1,123 @@
+﻿@page
+@model DependencyInjectionModel
+@{
+    ViewData["Title"] = "Dependency Injection";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">Dependency Injection</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Dependency Injection in Razor Pages</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 8</span>
+                </div>
+
+                <h2>What is Dependency Injection?</h2>
+                <p>Dependency Injection (DI) is a design pattern where objects receive their dependencies from an external source rather than creating them internally.</p>
+
+                <h2>Registering Services</h2>
+
+                <pre><code>// Program.cs
+builder.Services.AddScoped&lt;IProductService, ProductService&gt;();
+builder.Services.AddScoped&lt;ICategoryService, CategoryService&gt;();
+builder.Services.AddTransient&lt;IEmailService, EmailService&gt;();
+builder.Services.AddSingleton&lt;ILogger, Logger&gt;();</code></pre>
+
+                <h2>Service Lifetimes</h2>
+
+                <h3>Transient</h3>
+                <p>New instance every time it's requested</p>
+                <pre><code>builder.Services.AddTransient&lt;IEmailService, EmailService&gt;();</code></pre>
+
+                <h3>Scoped</h3>
+                <p>One instance per request/scope</p>
+                <pre><code>builder.Services.AddScoped&lt;IProductService, ProductService&gt;();</code></pre>
+
+                <h3>Singleton</h3>
+                <p>One instance for the entire application lifetime</p>
+                <pre><code>builder.Services.AddSingleton&lt;IConfiguration, Configuration&gt;();</code></pre>
+
+                <h2>Using DI in PageModel</h2>
+
+                <h3>Constructor Injection</h3>
+                <pre><code>public class IndexModel : PageModel
+{
+    private readonly IProductService _productService;
+    private readonly ILogger&lt;IndexModel&gt; _logger;
+    
+    public IndexModel(IProductService productService, ILogger&lt;IndexModel&gt; logger)
+    {
+        _productService = productService;
+        _logger = logger;
+    }
+    
+    public async Task OnGetAsync()
+    {
+        _logger.LogInformation("Loading products...");
+        Products = await _productService.GetProductsAsync();
+    }
+}</code></pre>
+
+                <h3>Property Injection</h3>
+                <pre><code>[Inject]
+public IProductService ProductService { get; set; }</code></pre>
+
+                <h2>Custom Services Example</h2>
+
+                <pre><code>// Services/Interfaces/IProductService.cs
+public interface IProductService
+{
+    Task&lt;List&lt;Product&gt;&gt; GetProductsAsync();
+    Task&lt;Product&gt; GetProductByIdAsync(int id);
+    Task&lt;Product&gt; CreateProductAsync(Product product);
+}
+
+// Services/Implementations/ProductService.cs
+public class ProductService : IProductService
+{
+    private readonly ApplicationDbContext _context;
+    
+    public ProductService(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+    
+    public async Task&lt;List&lt;Product&gt;&gt; GetProductsAsync()
+    {
+        return await _context.Products.ToListAsync();
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Dependency Injection promotes loose coupling, testability, and maintainable code.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/06-PartialsAndLayouts" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/08-FullCrudProject" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,245 @@
+﻿@page
+@model FileHandlingModel
+@{
+    ViewData["Title"] = "File Handling in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ConsoleApp">Console Applications</a></li>
+                    <li class="breadcrumb-item active">File Handling</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">File Handling in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 4</span>
+                </div>
+
+                <h2>Introduction to File Handling</h2>
+                <p>C# provides powerful file handling capabilities through the System.IO namespace. You can read, write, and manipulate files easily.</p>
+
+                <h2>Basic File Operations</h2>
+
+                <h3>Writing to a File</h3>
+                <pre><code>using System.IO;
+
+// Method 1: Using File.WriteAllText (overwrites file)
+File.WriteAllText("example.txt", "Hello World!");
+
+// Method 2: Using File.AppendAllText (adds to file)
+File.AppendAllText("example.txt", "\nThis is appended text.");
+
+// Method 3: Using StreamWriter
+using (StreamWriter writer = new StreamWriter("example.txt"))
+{
+    writer.WriteLine("Line 1");
+    writer.WriteLine("Line 2");
+    writer.WriteLine("Line 3");
+}</code></pre>
+
+                <h3>Reading from a File</h3>
+                <pre><code>// Method 1: Read all text at once
+string content = File.ReadAllText("example.txt");
+Console.WriteLine(content);
+
+// Method 2: Read all lines into array
+string[] lines = File.ReadAllLines("example.txt");
+foreach (string line in lines)
+    Console.WriteLine(line);
+
+// Method 3: Using StreamReader
+using (StreamReader reader = new StreamReader("example.txt"))
+{
+    string line;
+    while ((line = reader.ReadLine()) != null)
+        Console.WriteLine(line);
+}</code></pre>
+
+                <h2>File Operations Example</h2>
+                <pre><code>using System;
+using System.IO;
+
+class FileManager
+{
+    public static void CreateFile(string path, string content)
+    {
+        File.WriteAllText(path, content);
+        Console.WriteLine($"File created: {path}");
+    }
+    
+    public static void AppendToFile(string path, string content)
+    {
+        File.AppendAllText(path, content + "\n");
+        Console.WriteLine($"Content appended to: {path}");
+    }
+    
+    public static void ReadFile(string path)
+    {
+        if (File.Exists(path))
+        {
+            string content = File.ReadAllText(path);
+            Console.WriteLine($"Content of {path}:");
+            Console.WriteLine(content);
+        }
+        else
+        {
+            Console.WriteLine($"File not found: {path}");
+        }
+    }
+    
+    public static void CopyFile(string source, string destination)
+    {
+        if (File.Exists(source))
+        {
+            File.Copy(source, destination, true);
+            Console.WriteLine($"File copied from {source} to {destination}");
+        }
+        else
+        {
+            Console.WriteLine($"Source file not found: {source}");
+        }
+    }
+    
+    public static void DeleteFile(string path)
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Console.WriteLine($"File deleted: {path}");
+        }
+        else
+        {
+            Console.WriteLine($"File not found: {path}");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        string filePath = "data.txt";
+        
+        // Create file
+        FileManager.CreateFile(filePath, "This is the initial content.");
+        
+        // Append content
+        FileManager.AppendToFile(filePath, "Appended line 1");
+        FileManager.AppendToFile(filePath, "Appended line 2");
+        
+        // Read file
+        FileManager.ReadFile(filePath);
+        
+        // Copy file
+        FileManager.CopyFile(filePath, "backup.txt");
+        
+        // Delete file
+        FileManager.DeleteFile("backup.txt");
+    }
+}</code></pre>
+
+                <h2>Working with Directories</h2>
+                <pre><code>using System.IO;
+
+// Create directory
+Directory.CreateDirectory("MyFolder");
+
+// Get all files in directory
+string[] files = Directory.GetFiles(".");
+foreach (string file in files)
+    Console.WriteLine(file);
+
+// Get all subdirectories
+string[] directories = Directory.GetDirectories(".");
+foreach (string dir in directories)
+    Console.WriteLine(dir);
+
+// Check if directory exists
+if (Directory.Exists("MyFolder"))
+    Console.WriteLine("Folder exists!");
+
+// Delete directory
+Directory.Delete("MyFolder", true); // true for recursive delete</code></pre>
+
+                <h2>File Information</h2>
+                <pre><code>using System.IO;
+
+FileInfo fileInfo = new FileInfo("example.txt");
+Console.WriteLine($"Name: {fileInfo.Name}");
+Console.WriteLine($"Full Name: {fileInfo.FullName}");
+Console.WriteLine($"Size: {fileInfo.Length} bytes");
+Console.WriteLine($"Created: {fileInfo.CreationTime}");
+Console.WriteLine($"Modified: {fileInfo.LastWriteTime}");
+Console.WriteLine($"Read-Only: {fileInfo.IsReadOnly}");
+
+// Change file attributes
+fileInfo.Attributes = FileAttributes.Normal;</code></pre>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practices</h5>
+                        <ul class="mb-0">
+                            <li>Always use try-catch blocks for file operations</li>
+                            <li>Use using statements for StreamReader/Writer</li>
+                            <li>Check if files/directories exist before operations</li>
+                            <li>Handle exceptions gracefully</li>
+                            <li>Use Path.Combine for path operations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Reading CSV Files</h2>
+                <pre><code>using System.IO;
+using System.Linq;
+
+// Read CSV file
+var lines = File.ReadAllLines("data.csv");
+foreach (var line in lines)
+{
+    var values = line.Split(',');
+    Console.WriteLine($"Name: {values[0]}, Age: {values[1]}, City: {values[2]}");
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">File handling is essential for data persistence. Master the System.IO namespace to read, write, and manage files effectively.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a console application that:</p>
+                        <ol>
+                            <li>Reads a CSV file with student data (Name, Score, Grade)</li>
+                            <li>Calculates the average score</li>
+                            <li>Writes the results to a new text file</li>
+                            <li>Handles file not found errors gracefully</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ConsoleApp/03-CalculatorProject" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ConsoleApp" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+﻿@page
+@model CSharpMasteryHub.Pages.ClassesAndOOP.FieldsAndPropertiesModel
+@{
+    ViewData["Title"] = "Fields and Properties in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Fields and Properties</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Fields and Properties</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 11</span>
+                </div>
+
+                <p>
+                    Fields and properties are how a class stores and exposes its data. They
+                    look similar but serve different purposes — understanding the difference
+                    is one of the most important OOP fundamentals in C#.
+                </p>
+
+                <h2>Fields — raw storage</h2>
+                <p>
+                    A field is a variable declared directly inside a class. It holds the
+                    actual data.
+                </p>
+                <pre><code>public class Student
+{
+    private string firstName;
+    private string lastName;
+    private int age;
+}</code></pre>
+                <p>
+                    Notice these are <code>private</code> — this is deliberate. Fields are
+                    almost always kept private so code outside the class can't set them to
+                    invalid values directly (like a negative age). This is called
+                    <strong>encapsulation</strong>, covered in depth in Lesson 5.
+                </p>
+
+                <h2>Properties — controlled access</h2>
+                <p>
+                    A property wraps a field (explicitly or implicitly) and exposes it
+                    through <code>get</code> and <code>set</code> accessors, letting you add
+                    validation or logic around reading/writing the value.
+                </p>
+                <pre><code>public class Student
+{
+    private int age;
+
+    public int Age
+    {
+        get { return age; }
+        set
+        {
+            if (value < 0 || value > 120)
+                throw new ArgumentOutOfRangeException(nameof(value), "Age must be between 0 and 120.");
+            age = value;
+        }
+    }
+}</code></pre>
+                <p>
+                    Now <code>student.Age = -5;</code> throws an exception immediately,
+                    instead of silently corrupting your data.
+                </p>
+
+                <h2>Auto-implemented properties</h2>
+                <p>
+                    When you don't need custom logic, C# lets the compiler generate the
+                    backing field for you automatically:
+                </p>
+                <pre><code>public class Student
+{
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public DateTime EnrolledOn { get; set; }
+}</code></pre>
+                <p>
+                    This is by far the most common style you'll write day-to-day — full
+                    manual properties are reserved for cases that genuinely need validation
+                    or computed logic.
+                </p>
+
+                <h2>Read-only properties</h2>
+                <pre><code>public class Student
+{
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+
+    // Computed from other properties — no setter at all
+    public string FullName => $"{FirstName} {LastName}";
+}</code></pre>
+                <p>
+                    <code>=&gt;</code> here is an <strong>expression-bodied property</strong> —
+                    shorthand for a get-only property that computes its value on every access.
+                </p>
+
+                <h2>Init-only properties (C# 9+)</h2>
+                <p>
+                    Sometimes you want a property that can be set when the object is created,
+                    but never changed afterward:
+                </p>
+                <pre><code>public class Student
+{
+    public int StudentId { get; init; }
+    public string Email { get; init; } = string.Empty;
+}
+
+// Allowed — set during object initialization:
+var student = new Student { StudentId = 1, Email = "ali@example.com" };
+
+// Not allowed — compiler error, Email is init-only:
+// student.Email = "new@example.com";</code></pre>
+
+                <h2>Private setters</h2>
+                <p>
+                    A common pattern: let anyone read a property, but only the class itself
+                    can change it.
+                </p>
+                <pre><code>public class BankAccount
+{
+    public decimal Balance { get; private set; }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0) throw new ArgumentException("Deposit must be positive.");
+        Balance += amount;
+    }
+}</code></pre>
+                <p>
+                    Outside code can read <code>account.Balance</code> freely, but can only
+                    change it by calling <code>Deposit()</code> — which enforces the rules.
+                </p>
+
+                <h2>Fields vs Properties — when to use which</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Use a field when...</th>
+                                <th>Use a property when...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>It's a private implementation detail only the class itself needs</td>
+                                <td>The value needs to be exposed outside the class</td>
+                            </tr>
+                            <tr>
+                                <td>You need a <code>const</code> or <code>readonly</code> value known at compile/construction time</td>
+                                <td>You want validation, computed values, or different read/write access levels</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    <strong>Rule of thumb:</strong> almost every piece of public data on a
+                    class should be a property, not a public field. Public fields break
+                    encapsulation and can't add validation later without a breaking change.
+                </p>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Try it yourself</h5>
+                        <p>Add a <code>GradeLevel</code> property to a <code>Student</code> class that only accepts values 1 through 12, throwing an exception otherwise.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/01-WhatIsAClass" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/03-MethodsDeepDive" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

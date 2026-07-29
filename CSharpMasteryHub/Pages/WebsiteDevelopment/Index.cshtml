@@ -1,0 +1,84 @@
+﻿@page
+@model WebsiteDevelopmentIndexModel
+@{
+    ViewData["Title"] = "Website Development - Complete Guide";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Website Development</h1>
+            <p class="lead mb-4">Learn how to plan, structure, and develop professional websites using best practices, responsive design, and Git workflow.</p>
+
+            <div class="progress-section mb-4">
+                <h5><i class="fas fa-tasks me-2 text-primary"></i>Your Progress</h5>
+                <div class="progress" style="height: 25px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" id="webDevProgress">0%</div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WebsiteDevelopment/01-PlanningAWebsite">
+                            <h5><span class="card-number">1</span>Planning A Website</h5>
+                            <p>Learn how to plan your website project with requirements gathering and architecture design.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WebsiteDevelopment/02-ProjectStructureBestPractices">
+                            <h5><span class="card-number">2</span>Project Structure Best Practices</h5>
+                            <p>Organize your web project with clean architecture and separation of concerns.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WebsiteDevelopment/03-ResponsiveDesignBootstrap">
+                            <h5><span class="card-number">3</span>Responsive Design with Bootstrap</h5>
+                            <p>Build responsive websites using Bootstrap framework and modern CSS techniques.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/WebsiteDevelopment/04-GitWorkflow">
+                            <h5><span class="card-number">4</span>Git Workflow</h5>
+                            <p>Master Git workflow for team collaboration and version control.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+            const totalLessons = document.querySelectorAll('.lesson-card').length;
+            const completedLessons = Object.values(progress).filter(v => v === true).length;
+            const percentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+            const progressBar = document.getElementById('webDevProgress');
+            if (progressBar) {
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = percentage + '%';
+            }
+        });
+    </script>
+}

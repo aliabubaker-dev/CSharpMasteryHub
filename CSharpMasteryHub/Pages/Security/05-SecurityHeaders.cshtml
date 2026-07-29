@@ -1,0 +1,128 @@
+﻿@page
+@model SecurityHeadersModel
+@{
+    ViewData["Title"] = "Security Headers";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Security">Security</a></li>
+                    <li class="breadcrumb-item active">Security Headers</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Security Headers</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 6</span>
+                </div>
+
+                <h2>What are Security Headers?</h2>
+                <p>Security headers are HTTP response headers that instruct browsers on how to behave securely.</p>
+
+                <h2>Essential Security Headers</h2>
+
+                <h3>1. Content Security Policy (CSP)</h3>
+                <pre><code>app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy",
+        "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; " +
+        "img-src 'self' data: https:; " +
+        "font-src 'self' https://cdnjs.cloudflare.com; " +
+        "connect-src 'self' https://api.example.com; " +
+        "frame-ancestors 'none'; " +
+        "base-uri 'self'");
+    await next();
+});</code></pre>
+
+                <h3>2. X-Content-Type-Options</h3>
+                <pre><code>context.Response.Headers.Add("X-Content-Type-Options", "nosniff");</code></pre>
+
+                <h3>3. X-Frame-Options</h3>
+                <pre><code>context.Response.Headers.Add("X-Frame-Options", "DENY");</code></pre>
+
+                <h3>4. X-XSS-Protection</h3>
+                <pre><code>context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");</code></pre>
+
+                <h3>5. Referrer-Policy</h3>
+                <pre><code>context.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");</code></pre>
+
+                <h3>6. Strict-Transport-Security (HSTS)</h3>
+                <pre><code>context.Response.Headers.Add("Strict-Transport-Security", 
+    "max-age=31536000; includeSubDomains; preload");</code></pre>
+
+                <h3>7. Permissions-Policy</h3>
+                <pre><code>context.Response.Headers.Add("Permissions-Policy", 
+    "geolocation=(), microphone=(), camera=()");</code></pre>
+
+                <h2>Complete Security Headers Middleware</h2>
+                <pre><code>public class SecurityHeadersMiddleware
+{
+    private readonly RequestDelegate _next;
+    
+    public SecurityHeadersMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+    
+    public async Task InvokeAsync(HttpContext context)
+    {
+        // Add security headers
+        context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        context.Response.Headers.Add("X-Frame-Options", "DENY");
+        context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+        context.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
+        
+        // Add CSP (only if not development)
+        if (!context.Request.Host.Host.Contains("localhost"))
+        {
+            context.Response.Headers.Add("Content-Security-Policy",
+                "default-src 'self'; " +
+                "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " +
+                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; " +
+                "img-src 'self' data: https:; " +
+                "font-src 'self' https://cdnjs.cloudflare.com; " +
+                "connect-src 'self'");
+        }
+        
+        // Add HSTS
+        context.Response.Headers.Add("Strict-Transport-Security", 
+            "max-age=31536000; includeSubDomains; preload");
+        
+        await _next(context);
+    }
+}
+
+// Register middleware
+app.UseMiddleware&lt;SecurityHeadersMiddleware&gt;();</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Security headers provide an additional layer of protection by instructing browsers on secure behavior.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Security/04-XssCsrfProtection" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Security/06-SecretsManagement" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

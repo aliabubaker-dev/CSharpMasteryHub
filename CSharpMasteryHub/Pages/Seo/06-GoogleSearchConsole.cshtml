@@ -1,0 +1,90 @@
+﻿@page
+@model GoogleSearchConsoleModel
+@{
+    ViewData["Title"] = "Google Search Console";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Seo">SEO Guide</a></li>
+                    <li class="breadcrumb-item active">Google Search Console</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Google Search Console</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 6</span>
+                </div>
+
+                <h2>What is Google Search Console?</h2>
+                <p>Google Search Console is a free tool that helps you monitor and maintain your site's presence in Google search results.</p>
+
+                <h2>Getting Started</h2>
+
+                <h3>1. Add Your Property</h3>
+                <pre><code>// Verify ownership through:
+1. HTML file upload
+2. HTML meta tag
+3. Google Analytics
+4. Google Tag Manager
+5. DNS verification</code></pre>
+
+                <h3>2. Submit Sitemap</h3>
+                <pre><code>1. Go to Sitemaps section
+2. Enter your sitemap URL
+3. Click Submit</code></pre>
+
+                <h2>Key Features</h2>
+
+                <h3>Performance Reports</h3>
+                <ul>
+                    <li><strong>Total clicks</strong> from search results</li>
+                    <li><strong>Impressions</strong> (how often your site appears)</li>
+                    <li><strong>Average CTR</strong> (click-through rate)</li>
+                    <li><strong>Average position</strong> in search results</li>
+                </ul>
+
+                <h3>Coverage Reports</h3>
+                <ul>
+                    <li>Indexed pages</li>
+                    <li>Excluded pages</li>
+                    <li>Pages with errors</li>
+                    <li>Pages with warnings</li>
+                </ul>
+
+                <h3>Core Web Vitals in Search Console</h3>
+                <pre><code>// Check Core Web Vitals report
+1. Go to Experience → Core Web Vitals
+2. See which pages need improvement
+3. Get mobile and desktop data
+4. Use field data and lab data</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Google Search Console is essential for monitoring and improving your search performance.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Seo/05-PageSpeedCoreWebVitals" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Seo" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

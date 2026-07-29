@@ -1,0 +1,227 @@
+﻿@page
+@model FreeCustomDomainOptionsModel
+@{
+    ViewData["Title"] = "Free Custom Domain Options";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Deployment">Deployment</a></li>
+                    <li class="breadcrumb-item active">Free Custom Domain Options</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Free Custom Domain Options</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 5</span>
+                </div>
+
+                <h2>What is a Custom Domain?</h2>
+                <p>
+                    A custom domain is your own unique web address (like www.yourname.com) instead of the
+                    default URL provided by your hosting platform. Having a custom domain makes your website
+                    look more professional and is better for SEO.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Why Use a Custom Domain?</h5>
+                        <ul class="mb-0">
+                            <li>Professional appearance</li>
+                            <li>Better branding</li>
+                            <li>Improved SEO</li>
+                            <li>Easier to remember</li>
+                            <li>More trustworthy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Free Domain Providers</h2>
+
+                <h3>1. Freenom</h3>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5><i class="fas fa-globe text-primary me-2"></i>Freenom</h5>
+                        <ul>
+                            <li><strong>Domains:</strong> .tk, .ml, .ga, .cf, .gq</li>
+                            <li><strong>Cost:</strong> Free (renewable annually)</li>
+                            <li><strong>Features:</strong> DNS management, URL forwarding</li>
+                            <li><strong>Limitations:</strong> Limited TLDs, renewal required</li>
+                        </ul>
+                        <a href="https://www.freenom.com" target="_blank" class="btn btn-outline-primary btn-sm">Visit Freenom</a>
+                    </div>
+                </div>
+
+                <h3>2. Dot.tk</h3>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5><i class="fas fa-globe text-success me-2"></i>Dot.tk</h5>
+                        <ul>
+                            <li><strong>Domains:</strong> .tk</li>
+                            <li><strong>Cost:</strong> Free</li>
+                            <li><strong>Features:</strong> DNS management, email forwarding</li>
+                            <li><strong>Limitations:</strong> Limited features, ads on free plan</li>
+                        </ul>
+                        <a href="https://www.dot.tk" target="_blank" class="btn btn-outline-success btn-sm">Visit Dot.tk</a>
+                    </div>
+                </div>
+
+                <h3>3. InfinityFree</h3>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5><i class="fas fa-infinity text-info me-2"></i>InfinityFree</h5>
+                        <ul>
+                            <li><strong>Domains:</strong> Free subdomains or use your own</li>
+                            <li><strong>Cost:</strong> Free hosting with custom domain support</li>
+                            <li><strong>Features:</strong> Free SSL, PHP, MySQL</li>
+                            <li><strong>Limitations:</strong> Limited resources, ads on free plan</li>
+                        </ul>
+                        <a href="https://www.infinityfree.net" target="_blank" class="btn btn-outline-info btn-sm">Visit InfinityFree</a>
+                    </div>
+                </div>
+
+                <h2>Configuring Your Custom Domain</h2>
+
+                <h3>Step 1: Register Your Domain</h3>
+                <pre><code>// Using Freenom
+1. Go to Freenom.com
+2. Search for available domain
+3. Select .tk, .ml, .ga, .cf, or .gq
+4. Complete registration (free)
+5. Verify your email</code></pre>
+
+                <h3>Step 2: Configure DNS Records</h3>
+                <pre><code>// DNS Records to Configure
+Type    Name    Value
+A       @@      your-server-ip
+A       www     your-server-ip
+CNAME   @@      your-domain.com
+CNAME   www     your-domain.com
+
+// For Azure App Service
+A       @@      20.70.xxx.xxx  (Your App Service IP)
+A       www     20.70.xxx.xxx  (Your App Service IP)
+
+// For Netlify
+CNAME   @@      your-site.netlify.app
+CNAME   www     your-site.netlify.app
+
+// For GitHub Pages
+CNAME   @@      yourusername.github.io
+CNAME   www     yourusername.github.io</code></pre>
+
+                <h3>Step 3: Configure Your Hosting Platform</h3>
+                <pre><code>// Azure App Service
+1. Go to your App Service
+2. Click "Custom domains"
+3. Add domain
+4. Verify domain ownership
+5. Configure SSL
+
+// Netlify
+1. Go to Site settings > Domain management
+2. Add custom domain
+3. Configure DNS settings
+4. Verify domain
+
+// GitHub Pages
+1. Create CNAME file in your repository
+2. Add: yourdomain.com
+3. Configure DNS with your provider
+
+// Vercel
+1. Go to Project settings > Domains
+2. Add domain
+3. Configure DNS with Vercel</code></pre>
+
+                <h2>SSL Certificates (Free)</h2>
+                <pre><code>// Let's Encrypt - Free SSL
+1. Install Certbot or use hosting provider's SSL
+2. Generate certificate
+3. Configure web server
+
+// Azure SSL (Free)
+1. Azure provides free SSL certificates
+2. Enable HTTPS Only in App Service
+3. Configure TLS settings
+
+// Cloudflare SSL (Free)
+1. Sign up for Cloudflare
+2. Add your domain
+3. Configure DNS with Cloudflare
+4. Enable SSL/TLS</code></pre>
+
+                <h2>Complete Custom Domain Setup</h2>
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-list me-2"></i>Step-by-Step Guide</h5>
+                        <ol>
+                            <li>Choose and register a free domain</li>
+                            <li>Get your hosting platform's IP address</li>
+                            <li>Configure DNS records</li>
+                            <li>Wait for DNS propagation (24-48 hours)</li>
+                            <li>Add domain to your hosting platform</li>
+                            <li>Verify domain ownership</li>
+                            <li>Enable SSL certificate</li>
+                            <li>Test domain resolution</li>
+                            <li>Redirect www to non-www or vice versa</li>
+                            <li>Update site links to use new domain</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Custom domains can be obtained for free and configured with most hosting platforms. They enhance professionalism and branding of your website.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Set up a custom domain:</p>
+                        <ol>
+                            <li>Register a free domain</li>
+                            <li>Configure DNS records</li>
+                            <li>Add domain to your hosting platform</li>
+                            <li>Set up SSL certificate</li>
+                            <li>Test the configuration</li>
+                            <li>Set up email forwarding (optional)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Deployment/03-DeployingToAzureFree" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Deployment/05-CiCdGithubActions" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

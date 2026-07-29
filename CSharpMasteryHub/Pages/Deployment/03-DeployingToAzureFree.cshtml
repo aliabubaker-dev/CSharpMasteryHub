@@ -1,0 +1,261 @@
+﻿@page
+@model DeployingToAzureFreeModel
+@{
+    ViewData["Title"] = "Deploying to Azure Free";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Deployment">Deployment</a></li>
+                    <li class="breadcrumb-item active">Deploying to Azure Free</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Deploying to Azure for Free</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 5</span>
+                </div>
+
+                <h2>Why Choose Azure?</h2>
+                <p>
+                    Microsoft Azure offers a comprehensive free tier that allows you to host web applications,
+                    databases, and other services at no cost. It's an excellent choice for learning and prototyping.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Azure Free Account Benefits</h5>
+                        <ul class="mb-0">
+                            <li>12 months of free services</li>
+                            <li>$200 credit for the first 30 days</li>
+                            <li>25+ services always free</li>
+                            <li>No credit card required to start</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Step 1: Create Azure Account</h2>
+                <div class="step-by-step">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">1</span>Visit Azure Portal</h5>
+                            <p>Go to <a href="https://azure.microsoft.com/en-us/free/" target="_blank">azure.microsoft.com/free</a></p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">2</span>Sign Up</h5>
+                            <p>Click "Start free" and create your account using a Microsoft account or email.</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">3</span>Verification</h5>
+                            <p>Verify your identity with a phone number and credit card (for verification only, no charges).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Step 2: Create App Service</h2>
+                <pre><code>// Using Azure Portal
+1. Sign in to Azure Portal
+2. Click "Create a resource"
+3. Search for "Web App"
+4. Click "Create"
+5. Configure your app:
+   - Subscription: Your free subscription
+   - Resource Group: Create new (e.g., "MyAppRG")
+   - Name: Unique app name (e.g., "myapp2024")
+   - Publish: Code
+   - Runtime stack: .NET 10 (or your version)
+   - Operating System: Windows/Linux
+   - Region: Choose closest to users
+   - App Service Plan: Free F1 tier
+6. Click "Review + create"</code></pre>
+
+                <h2>Step 3: Deploy Using Visual Studio</h2>
+                <pre><code>// Method 1: Publish from Visual Studio
+1. Right-click your project in Solution Explorer
+2. Select "Publish"
+3. Choose "Azure" and "Azure App Service"
+4. Select your subscription and app service
+5. Click "Publish"
+
+// Method 2: Using CLI
+// Install Azure CLI
+dotnet tool install -g Microsoft.Azure.WebJobs.Extensions.Functions
+
+// Login to Azure
+az login
+
+// Deploy
+az webapp deploy --resource-group MyAppRG --name myapp2024 --src-path ./publish</code></pre>
+
+                <h2>Step 4: Deploy Using GitHub Actions</h2>
+                <pre><code>// Create .github/workflows/azure-deploy.yml
+name: Deploy to Azure
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: myapp2024
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}</code></pre>
+
+                <h2>Step 5: Configure Database</h2>
+                <pre><code>// Azure SQL Database - Free Tier
+1. Create Azure SQL Database
+2. Choose the free tier (Basic tier)
+3. Create database server and firewall rules
+4. Get connection string
+
+// Connection string in appsettings.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=tcp:yourserver.database.windows.net,1433;Database=mydb;User ID=youruser;Password=yourpassword;"
+  }
+}
+
+// Use Azure Key Vault for production secrets
+// Store connection strings in Azure Key Vault</code></pre>
+
+                <h2>Step 6: Configure Application Settings</h2>
+                <pre><code>// In Azure Portal
+1. Go to your App Service
+2. Click "Configuration"
+3. Add application settings:
+   - ConnectionStrings:DefaultConnection = your production connection string
+   - Environment = Production
+   - Logging:LogLevel:Default = Error
+
+// Access in code
+var connectionString = Configuration.GetConnectionString("DefaultConnection");
+var environment = Configuration["Environment"];</code></pre>
+
+                <h2>Step 7: Enable Logging and Monitoring</h2>
+                <pre><code>// Enable Application Insights
+1. Add Application Insights to your project
+2. Configure in appsettings.json
+3. View logs in Azure Portal
+
+// Configure logging
+builder.Logging.AddAzureWebAppDiagnostics();
+
+// In Program.cs
+if (app.Environment.IsProduction())
+{
+    app.UseApplicationInsights();
+}</code></pre>
+
+                <h2>Step 8: Domain and SSL</h2>
+                <pre><code>// Custom Domain Configuration
+1. Go to your App Service
+2. Click "Custom domains"
+3. Add your custom domain
+4. Verify domain ownership
+
+// SSL Configuration
+1. Azure provides free SSL certificates
+2. Enable HTTPS Only in your app service
+3. Configure TLS/SSL settings</code></pre>
+
+                <h2>Complete Azure Deployment Checklist</h2>
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-check-circle text-success me-2"></i>Azure Deployment Checklist</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">✅ Create Azure free account</li>
+                            <li class="list-group-item">✅ Create App Service with Free tier</li>
+                            <li class="list-group-item">✅ Create Azure SQL Database</li>
+                            <li class="list-group-item">✅ Configure connection strings</li>
+                            <li class="list-group-item">✅ Deploy using Visual Studio or CLI</li>
+                            <li class="list-group-item">✅ Set up GitHub Actions for CI/CD</li>
+                            <li class="list-group-item">✅ Configure application settings</li>
+                            <li class="list-group-item">✅ Enable logging and monitoring</li>
+                            <li class="list-group-item">✅ Set up custom domain</li>
+                            <li class="list-group-item">✅ Enable HTTPS and SSL</li>
+                            <li class="list-group-item">✅ Test application in production</li>
+                            <li class="list-group-item">✅ Monitor performance and errors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Azure provides a robust free tier for hosting ASP.NET Core applications. With proper configuration, you can deploy production-ready applications at no cost.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Deploy your application to Azure:</p>
+                        <ol>
+                            <li>Create Azure free account</li>
+                            <li>Create App Service with Free tier</li>
+                            <li>Deploy your application</li>
+                            <li>Configure database connection</li>
+                            <li>Set up custom domain (optional)</li>
+                            <li>Monitor application performance</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Deployment/02-FreeHostingOptions" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Deployment/04-FreeCustomDomainOptions" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,92 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.StoredProceduresModel
+@{
+    ViewData["Title"] = "Stored Procedures";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Stored Procedures</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Stored Procedures</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 10</span>
+                </div>
+
+                <p>
+                    A stored procedure is precompiled T-SQL saved in the database — you call
+                    it by name instead of sending raw SQL text. This is exactly what you'll
+                    call from C# in the next module.
+                </p>
+
+                <h2>Creating a stored procedure</h2>
+                <pre><code>CREATE PROCEDURE sp_GetStudentsByLastName
+    @@LastName NVARCHAR(50)
+AS
+BEGIN
+    SELECT StudentId, FirstName, LastName, Email
+    FROM Students
+    WHERE LastName = @@LastName;
+END;</code></pre>
+
+                <h2>Executing it</h2>
+                <pre><code>EXEC sp_GetStudentsByLastName @@LastName = 'Ahmed';</code></pre>
+
+                <h2>Insert/Update/Delete procedures</h2>
+                <pre><code>CREATE PROCEDURE sp_AddStudent
+    @@FirstName NVARCHAR(50),
+    @@LastName  NVARCHAR(50),
+    @@Email     NVARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Students (FirstName, LastName, Email)
+    VALUES (@@FirstName, @@LastName, @@Email);
+END;
+GO
+
+CREATE PROCEDURE sp_DeleteStudent
+    @@StudentId INT
+AS
+BEGIN
+    DELETE FROM Students WHERE StudentId = @@StudentId;
+END;</code></pre>
+
+                <h2>Why use stored procedures?</h2>
+                <ul>
+                    <li>They protect against SQL injection automatically (parameters are never concatenated into the query text).</li>
+                    <li>Logic lives in one place in the database, callable from any app.</li>
+                    <li>Can be faster — SQL Server caches the execution plan.</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Stored procedures are reusable, secure, and performant. They're the preferred way to interact with databases from C#.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/06-InsertUpdateDelete" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/08-FunctionsAndViews" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

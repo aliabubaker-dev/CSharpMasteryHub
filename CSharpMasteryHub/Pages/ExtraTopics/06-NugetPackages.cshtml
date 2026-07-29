@@ -1,0 +1,104 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.NugetPackagesModel
+@{
+    ViewData["Title"] = "NuGet Packages";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">NuGet Packages</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">NuGet Packages</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 6</span>
+                </div>
+
+                <p>
+                    NuGet is .NET's package manager — it lets you pull in reusable libraries
+                    instead of writing everything from scratch. You've already used it in
+                    this course for <code>Microsoft.Data.SqlClient</code> and
+                    <code>Microsoft.EntityFrameworkCore.SqlServer</code>.
+                </p>
+
+                <h2>Installing a package — Package Manager Console</h2>
+                <pre><code>Install-Package Newtonsoft.Json</code></pre>
+
+                <h2>Installing a package — .NET CLI</h2>
+                <pre><code>dotnet add package Newtonsoft.Json</code></pre>
+
+                <h2>Installing via the GUI</h2>
+                <p>
+                    Right-click your project in Solution Explorer &rarr;
+                    <strong>Manage NuGet Packages</strong> &rarr; search by name &rarr; Install.
+                </p>
+
+                <h2>Packages you'll actually use across this course</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Microsoft.Data.SqlClient</td><td>ADO.NET SQL Server access</td></tr>
+                            <tr><td>Microsoft.EntityFrameworkCore.SqlServer</td><td>EF Core with SQL Server</td></tr>
+                            <tr><td>Microsoft.EntityFrameworkCore.Tools</td><td>Migrations from Package Manager Console</td></tr>
+                            <tr><td>xunit + xunit.runner.visualstudio</td><td>Unit testing</td></tr>
+                            <tr><td>Newtonsoft.Json</td><td>Advanced JSON serialization</td></tr>
+                            <tr><td>Serilog.AspNetCore</td><td>Structured logging</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Where package versions live</h2>
+                <p>Open your <code>.csproj</code> file — every installed package appears here:</p>
+                <pre><code>&lt;ItemGroup&gt;
+  &lt;PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" /&gt;
+  &lt;PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" /&gt;
+&lt;/ItemGroup&gt;</code></pre>
+
+                <h2>Updating and removing packages</h2>
+                <pre><code>dotnet add package Microsoft.Data.SqlClient --version 5.2.2
+dotnet remove package Newtonsoft.Json</code></pre>
+
+                <h2>A word of caution</h2>
+                <p>
+                    Only install packages from trusted, well-known publishers with high
+                    download counts. A package is code that runs inside your application —
+                    treat adding one with the same care as adding a new team member.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>NuGet packages save time and effort, but always verify the source before installing.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics/05-RestApisWebApi" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ExtraTopics" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+﻿@page
+@model CreatingDatasetModel
+@{
+    ViewData["Title"] = "Creating Dataset";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RdlcReports">RDLC Reports</a></li>
+                    <li class="breadcrumb-item active">Creating Dataset</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Creating Dataset for RDLC Reports</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 5</span>
+                </div>
+
+                <h2>What is a Dataset?</h2>
+                <p>
+                    A dataset is like a container that holds your data for the report.
+                    It defines the structure of your data - what columns you have and what type of data they hold.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Simple Explanation</h5>
+                        <p class="card-text">Think of a dataset as a blueprint for your data. It tells the report: "Here are the columns you can use, like Name, Price, and Category."</p>
+                    </div>
+                </div>
+
+                <h2>Creating a Typed Dataset</h2>
+
+                <h3>Step 1 — Add New DataSet</h3>
+                <ol>
+                    <li>Right-click your project in Solution Explorer</li>
+                    <li>Select <strong>Add → New Item</strong></li>
+                    <li>Choose <strong>DataSet</strong> from the Data folder</li>
+                    <li>Name it: <code>ProductDataSet.xsd</code></li>
+                </ol>
+
+                <h3>Step 2 — Define DataTable</h3>
+                <pre><code>// In the DataSet designer:
+1. Right-click on the design surface
+2. Choose Add → DataTable
+3. Name it: Products
+4. Add these columns:
+   - ProductId (System.Int32)
+   - Name (System.String)
+   - Price (System.Decimal)
+   - Description (System.String)
+   - Category (System.String)</code></pre>
+
+                <h3>Step 3 — Create DataTable in Code</h3>
+                <p>You can also create a DataTable directly in your C# code:</p>
+                <pre><code>// Create DataTable programmatically
+public DataTable GetProductDataTable()
+{
+    // Create a new DataTable called "Products"
+    DataTable table = new DataTable("Products");
+    
+    // Define the columns
+    table.Columns.Add("ProductId", typeof(int));
+    table.Columns.Add("Name", typeof(string));
+    table.Columns.Add("Price", typeof(decimal));
+    table.Columns.Add("Description", typeof(string));
+    table.Columns.Add("Category", typeof(string));
+    
+    // Add some sample data
+    table.Rows.Add(1, "Laptop", 999.99, "High-performance laptop", "Electronics");
+    table.Rows.Add(2, "Mouse", 29.99, "Wireless mouse", "Electronics");
+    
+    return table;
+}</code></pre>
+
+                <h3>Step 4 — Fill Dataset from SQL Server</h3>
+                <pre><code>public DataSet GetProductsFromDatabase()
+{
+    // Create a new DataSet
+    DataSet dataSet = new DataSet();
+    
+    // Connect to your database
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        // Write your SQL query
+        string query = "SELECT ProductId, Name, Price, Description, Category FROM Products";
+        
+        // Create a DataAdapter to fill the DataSet
+        using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+        {
+            // Fill the DataSet with data from the database
+            adapter.Fill(dataSet, "Products");
+        }
+    }
+    
+    return dataSet;
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Datasets define the structure of your report data. You can create them manually or fill them from a database.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RdlcReports/01-WhatIsRdlc" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RdlcReports/03-DesigningReport" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

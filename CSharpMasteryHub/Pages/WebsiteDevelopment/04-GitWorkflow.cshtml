@@ -1,0 +1,342 @@
+﻿@page
+@model GitWorkflowModel
+@{
+    ViewData["Title"] = "Git Workflow";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WebsiteDevelopment">Website Development</a></li>
+                    <li class="breadcrumb-item active">Git Workflow</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Git Workflow for Team Collaboration</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 4</span>
+                </div>
+
+                <h2>Why Use Git?</h2>
+                <p>
+                    Git is a distributed version control system that tracks changes in your code. It enables
+                    collaboration, maintains history, and provides a safety net for your project.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Benefits</h5>
+                        <ul class="mb-0">
+                            <li>Track every change in your codebase</li>
+                            <li>Collaborate with multiple developers</li>
+                            <li>Branch and merge features safely</li>
+                            <li>Revert to previous versions if needed</li>
+                            <li>Maintain a complete history of your project</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Git Fundamentals</h2>
+
+                <h3>Basic Git Commands</h3>
+                <pre><code># Initialize a repository
+git init
+
+# Clone a repository
+git clone https://github.com/username/repo.git
+
+# Check status
+git status
+
+# Stage changes
+git add .                    # Add all changes
+git add filename.cs          # Add specific file
+
+# Commit changes
+git commit -m "Your commit message"
+
+# Push to remote
+git push origin main
+
+# Pull from remote
+git pull origin main
+
+# Create a branch
+git branch feature-name
+
+# Switch to branch
+git checkout feature-name
+# or
+git switch feature-name
+
+# Create and switch branch
+git checkout -b feature-name
+
+# Merge branch
+git merge feature-name
+
+# View branches
+git branch
+git branch -a  # All branches including remote
+
+# Delete branch
+git branch -d feature-name</code></pre>
+
+                <h2>Git Workflow Strategies</h2>
+
+                <h3>1. Git Flow</h3>
+                <pre><code># Git Flow Branches
+main          # Production-ready code
+develop       # Integration branch
+feature/*     # New features
+release/*     # Release preparation
+hotfix/*      # Emergency fixes
+
+# Git Flow Commands
+git flow init
+git flow feature start feature-name
+git flow feature finish feature-name
+git flow release start 1.0.0
+git flow release finish 1.0.0
+git flow hotfix start hotfix-name
+git flow hotfix finish hotfix-name</code></pre>
+
+                <h3>2. GitHub Flow</h3>
+                <pre><code># GitHub Flow (Simpler)
+main          # Production-ready code
+feature/*     # New features (branch from main)
+
+# Workflow Steps
+1. Create a branch from main
+2. Make changes and commit
+3. Push to GitHub
+4. Create Pull Request
+5. Review and merge
+6. Delete the branch</code></pre>
+
+                <h2>Best Practices</h2>
+
+                <h3>Commit Messages</h3>
+                <pre><code># Good Commit Messages
+feat: Add user authentication
+fix: Resolve login bug
+docs: Update API documentation
+style: Format code according to standards
+refactor: Restructure service layer
+test: Add unit tests for payment service
+chore: Update dependencies
+
+# Bad Commit Messages (Avoid)
+Fixed bug
+Updated code
+Changes
+Work in progress</code></pre>
+
+                <h3>Branch Naming Conventions</h3>
+                <pre><code># Feature branches
+feature/user-authentication
+feature/payment-integration
+feature/dark-mode
+
+# Bug fix branches
+bugfix/login-error
+bugfix/display-issue
+
+# Hotfix branches
+hotfix/security-patch
+hotfix/critical-bug
+
+# Release branches
+release/v1.0.0
+release/v2.0.0-beta</code></pre>
+
+                <h3>Pull Request Best Practices</h3>
+                <pre><code># Pull Request Template
+## Description
+Brief description of the changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests added
+- [ ] Integration tests added
+- [ ] Manual testing performed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex code
+- [ ] Documentation updated</code></pre>
+
+                <h2>Common Git Workflows</h2>
+
+                <h3>1. Feature Development</h3>
+                <pre><code># Start a new feature
+git checkout main
+git pull origin main
+git checkout -b feature/new-feature
+
+# Work on the feature
+# ... make changes ...
+git add .
+git commit -m "feat: Add new feature"
+
+# Push the branch
+git push origin feature/new-feature
+
+# Create Pull Request on GitHub
+# After review and approval, merge
+
+# Clean up local branch
+git checkout main
+git pull origin main
+git branch -d feature/new-feature</code></pre>
+
+                <h3>2. Bug Fix</h3>
+                <pre><code># Start a bug fix
+git checkout main
+git pull origin main
+git checkout -b bugfix/issue-123
+
+# Fix the bug
+# ... fix code ...
+git add .
+git commit -m "fix: Resolve issue #123"
+
+# Push and create PR
+git push origin bugfix/issue-123</code></pre>
+
+                <h3>3. Emergency Hotfix</h3>
+                <pre><code># Start from main (or production branch)
+git checkout main
+git pull origin main
+git checkout -b hotfix/critical-bug
+
+# Fix urgently
+# ... fix code ...
+git add .
+git commit -m "hotfix: Critical security patch"
+
+# Merge directly to main
+git checkout main
+git merge hotfix/critical-bug
+git push origin main
+
+# Also merge to develop
+git checkout develop
+git merge hotfix/critical-bug
+git push origin develop</code></pre>
+
+                <h2>Resolving Conflicts</h2>
+                <pre><code># When conflicts occur during merge
+git merge feature/branch
+
+# Resolve conflicts manually in files
+# Then mark as resolved
+git add resolved-file.cs
+
+# Continue merge
+git commit -m "Merge: Resolve conflicts"
+
+# Alternative: Abort merge
+git merge --abort
+
+# View conflicts
+git diff
+git diff --name-only --diff-filter=U</code></pre>
+
+                <h2>Git Hooks</h2>
+                <pre><code># .git/hooks/pre-commit (Example)
+#!/bin/sh
+# Run code formatting before commit
+dotnet format --verify-no-changes
+if [ $? -ne 0 ]; then
+    echo "Code formatting issues found. Run 'dotnet format' to fix."
+    exit 1
+fi
+
+# Run tests before commit
+dotnet test
+if [ $? -ne 0 ]; then
+    echo "Tests failed. Commit aborted."
+    exit 1
+fi</code></pre>
+
+                <h2>Useful Git Aliases</h2>
+                <pre><code># Add to ~/.gitconfig
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    tree = log --graph --oneline --decorate --all
+    uncommit = reset --soft HEAD^
+    amend = commit --amend --no-edit
+    pushf = push --force-with-lease</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Git is essential for team collaboration</li>
+                            <li>Choose a workflow that fits your team</li>
+                            <li>Write clear commit messages</li>
+                            <li>Use pull requests for code review</li>
+                            <li>Resolve conflicts carefully</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Practice Git workflow:</p>
+                        <ol>
+                            <li>Initialize a git repository</li>
+                            <li>Create a feature branch</li>
+                            <li>Make multiple commits with good messages</li>
+                            <li>Create a pull request</li>
+                            <li>Simulate a merge conflict and resolve it</li>
+                            <li>Use git hooks for quality control</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WebsiteDevelopment/03-ResponsiveDesignBootstrap" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WebsiteDevelopment" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

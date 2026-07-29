@@ -1,0 +1,125 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.IndexModel
+@{
+    ViewData["Title"] = "SQL Server Management - Starter to Master";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">SQL Server Management — Starter to Master</h1>
+            <p class="lead mb-4">
+                Almost every real C# application talks to a database. This module takes
+                you from installing SSMS through writing production-quality T-SQL:
+                schema design, queries, joins, stored procedures, indexing, and
+                transactions.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/01-InstallingSqlServerSsms">
+                            <h5><span class="card-number">1</span>SSMS Interface Tour</h5>
+                            <p>A guided tour of SQL Server Management Studio and Object Explorer.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/02-DatabasesAndTables">
+                            <h5><span class="card-number">2</span>Databases and Tables</h5>
+                            <p>Create databases and tables with primary keys and constraints.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/03-DataTypesConstraints">
+                            <h5><span class="card-number">3</span>Data Types &amp; Constraints</h5>
+                            <p>Learn data types and constraints for data integrity.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/04-SelectWhereOrderBy">
+                            <h5><span class="card-number">4</span>SELECT, WHERE, ORDER BY</h5>
+                            <p>Query data with SELECT, filter with WHERE, and sort with ORDER BY.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/05-Joins">
+                            <h5><span class="card-number">5</span>Joins</h5>
+                            <p>Combine data from multiple tables with INNER, LEFT, RIGHT, and FULL joins.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/06-InsertUpdateDelete">
+                            <h5><span class="card-number">6</span>INSERT, UPDATE, DELETE</h5>
+                            <p>Add, modify, and remove data safely.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/07-StoredProcedures">
+                            <h5><span class="card-number">7</span>Stored Procedures</h5>
+                            <p>Create reusable and secure stored procedures.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/08-FunctionsAndViews">
+                            <h5><span class="card-number">8</span>Functions &amp; Views</h5>
+                            <p>Create scalar functions, table-valued functions, and views.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/09-IndexesPerformance">
+                            <h5><span class="card-number">9</span>Indexes &amp; Performance</h5>
+                            <p>Optimize query performance with indexes.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/SqlServer/10-Transactions">
+                            <h5><span class="card-number">10</span>Transactions</h5>
+                            <p>Ensure data integrity with ACID transactions.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

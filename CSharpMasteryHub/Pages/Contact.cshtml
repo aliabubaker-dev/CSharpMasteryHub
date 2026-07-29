@@ -1,0 +1,77 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 mb-4">Contact Us</h1>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p class="lead mb-4">
+                        Have questions or suggestions? We'd love to hear from you!
+                    </p>
+
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contact.Name" class="form-label">Name</label>
+                            <input asp-for="Contact.Name" class="form-control" required />
+                            <span asp-validation-for="Contact.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contact.Email" class="form-label">Email</label>
+                            <input asp-for="Contact.Email" type="email" class="form-control" required />
+                            <span asp-validation-for="Contact.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contact.Subject" class="form-label">Subject</label>
+                            <input asp-for="Contact.Subject" class="form-control" required />
+                            <span asp-validation-for="Contact.Subject" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Contact.Message" class="form-label">Message</label>
+                            <textarea asp-for="Contact.Message" class="form-control" rows="5" required></textarea>
+                            <span asp-validation-for="Contact.Message" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row mt-4 g-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                        <h6>Email</h6>
+                        <p class="text-muted">support@csharpmasteryhub.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fab fa-github fa-2x text-primary mb-2"></i>
+                        <h6>GitHub</h6>
+                        <p class="text-muted">github.com/csharpmasteryhub</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fab fa-youtube fa-2x text-primary mb-2"></i>
+                        <h6>YouTube</h6>
+                        <p class="text-muted">youtube.com/csharpmasteryhub</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

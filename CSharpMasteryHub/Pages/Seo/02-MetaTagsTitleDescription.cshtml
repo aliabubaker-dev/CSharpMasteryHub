@@ -1,0 +1,88 @@
+﻿@page
+@model MetaTagsTitleDescriptionModel
+@{
+    ViewData["Title"] = "Meta Tags, Title & Description";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Seo">SEO Guide</a></li>
+                    <li class="breadcrumb-item active">Meta Tags, Title & Description</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Meta Tags, Title & Description</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 6</span>
+                </div>
+
+                <h2>Title Tags</h2>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li><strong>Length:</strong> 50-60 characters</li>
+                    <li><strong>Include keywords</strong> near the beginning</li>
+                    <li><strong>Be descriptive</strong> and compelling</li>
+                    <li><strong>Unique</strong> for each page</li>
+                    <li><strong>Include brand name</strong> at the end</li>
+                </ul>
+
+                <pre><code>&lt;title&gt;C# Programming Tutorial - Learn C# from Beginner to Master&lt;/title&gt;</code></pre>
+
+                <h2>Meta Descriptions</h2>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li><strong>Length:</strong> 150-160 characters</li>
+                    <li><strong>Include keywords</strong> naturally</li>
+                    <li><strong>Compelling</strong> call to action</li>
+                    <li><strong>Unique</strong> for each page</li>
+                    <li><strong>Accurate</strong> description of page content</li>
+                </ul>
+
+                <pre><code>&lt;meta name="description" content="Master C# programming from beginner to expert. Free tutorials covering .NET, ASP.NET Core, SQL Server, and more." /&gt;</code></pre>
+
+                <h2>Open Graph Tags (Social Sharing)</h2>
+                <pre><code>&lt;meta property="og:title" content="C# Mastery Hub" /&gt;
+&lt;meta property="og:description" content="Learn C# programming for free" /&gt;
+&lt;meta property="og:image" content="https://example.com/og-image.jpg" /&gt;
+&lt;meta property="og:url" content="https://example.com" /&gt;</code></pre>
+
+                <h2>Twitter Cards</h2>
+                <pre><code>&lt;meta name="twitter:card" content="summary_large_image" /&gt;
+&lt;meta name="twitter:title" content="C# Mastery Hub" /&gt;
+&lt;meta name="twitter:description" content="Learn C# programming for free" /&gt;
+&lt;meta name="twitter:image" content="https://example.com/twitter-image.jpg" /&gt;</code></pre>
+
+                <h2>Canonical Tags</h2>
+                <pre><code>&lt;link rel="canonical" href="https://example.com/current-page" /&gt;</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Title tags and meta descriptions are crucial for SEO and CTR. They should be unique, descriptive, and include keywords.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Seo/01-SeoFundamentals" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Seo/03-SitemapAndRobotsTxt" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

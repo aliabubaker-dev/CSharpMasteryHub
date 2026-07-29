@@ -1,0 +1,116 @@
+﻿@page
+@model WhatIsRdlcModel
+@{
+    ViewData["Title"] = "What Is RDLC";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RdlcReports">RDLC Reports</a></li>
+                    <li class="breadcrumb-item active">What Is RDLC</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">What is RDLC?</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 5</span>
+                </div>
+
+                <h2>Introduction to RDLC</h2>
+                <p>
+                    RDLC stands for <strong>Report Definition Language Client-side</strong>.
+                    It is a file format used to create professional reports in .NET applications.
+                    Think of it as a document template that can show data in a structured way.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Simple Explanation</h5>
+                        <p class="card-text">RDLC is like a Word document template. You design how the report looks (headers, tables, charts), and then you fill it with data from your database.</p>
+                    </div>
+                </div>
+
+                <h2>Features of RDLC</h2>
+                <ul>
+                    <li><strong>Professional Layout:</strong> Design reports that look like official documents</li>
+                    <li><strong>Charts and Graphs:</strong> Visualize data with bar charts, pie charts, and line graphs</li>
+                    <li><strong>Grouping and Aggregation:</strong> Group data by categories and show totals (sum, average, count)</li>
+                    <li><strong>Export Options:</strong> Save reports as PDF, Excel, or Word files</li>
+                    <li><strong>Printing:</strong> Print reports directly from your application</li>
+                    <li><strong>Parameterized Reports:</strong> Ask the user for input (like a date range) before showing the report</li>
+                    <li><strong>Subreports:</strong> Embed one report inside another</li>
+                </ul>
+
+                <h2>RDLC vs RDL</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>RDLC</th>
+                                <th>RDL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Where it runs</td>
+                                <td>On your computer (client-side)</td>
+                                <td>On a server (server-side)</td>
+                            </tr>
+                            <tr>
+                                <td>Processing</td>
+                                <td>Local Processing (your app handles it)</td>
+                                <td>Server Processing (SQL Server handles it)</td>
+                            </tr>
+                            <tr>
+                                <td>What you need</td>
+                                <td>Just your .NET application</td>
+                                <td>SQL Server Reporting Services (SSRS)</td>
+                            </tr>
+                            <tr>
+                                <td>Best for</td>
+                                <td>Desktop applications (Windows Forms)</td>
+                                <td>Web applications</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Common Report Types</h2>
+                <ul>
+                    <li><strong>Tabular Reports:</strong> Simple data tables like a list of products</li>
+                    <li><strong>Matrix Reports:</strong> Like a pivot table in Excel (rows and columns)</li>
+                    <li><strong>Chart Reports:</strong> Visual data with graphs and charts</li>
+                    <li><strong>Summary Reports:</strong> Grouped data with totals</li>
+                    <li><strong>Invoice/Form Reports:</strong> Structured documents like invoices or certificates</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>RDLC is a powerful reporting tool for Windows Forms. It lets you create professional, printable reports from your data.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RdlcReports" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/RdlcReports/02-CreatingDataset" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

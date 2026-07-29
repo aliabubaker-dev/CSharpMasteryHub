@@ -1,0 +1,174 @@
+﻿@page
+@model IntroductionModel
+@{
+    ViewData["Title"] = "Introduction to C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Introduction to C#</li>
+                </ol>
+            </nav>
+
+            <h1 class="display-4 mb-3">Introduction to C#</h1>
+            <div class="d-flex gap-3 mb-4">
+                <span class="badge bg-success">Beginner</span>
+                <span class="badge bg-info text-dark">10 min read</span>
+                <span class="badge bg-primary">Lesson 1 of 13</span>
+            </div>
+
+            <div class="lesson-content">
+                <h2>What is C#?</h2>
+                <p>
+                    C# (pronounced "C-sharp") is a modern, object-oriented programming language developed by Microsoft
+                    as part of the .NET framework. It was designed by Anders Hejlsberg and his team at Microsoft and
+                    released in 2002. C# is one of the most popular programming languages in the world, used for building
+                    a wide variety of applications.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Fact</h5>
+                        <p class="card-text">C# was designed to be simple, modern, and type-safe. It combines the power of C++ with the simplicity of Visual Basic.</p>
+                    </div>
+                </div>
+
+                <h2>Why Learn C#?</h2>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-window-restore fa-3x text-primary mb-3"></i>
+                                <h5>Desktop Apps</h5>
+                                <p class="text-muted">Build Windows desktop applications with Windows Forms and WPF</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-globe fa-3x text-success mb-3"></i>
+                                <h5>Web Development</h5>
+                                <p class="text-muted">Create web applications with ASP.NET Core</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt fa-3x text-danger mb-3"></i>
+                                <h5>Mobile Apps</h5>
+                                <p class="text-muted">Build cross-platform apps with .NET MAUI and Xamarin</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-gamepad fa-3x text-warning mb-3"></i>
+                                <h5>Game Development</h5>
+                                <p class="text-muted">Create games with Unity game engine</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-cloud fa-3x text-info mb-3"></i>
+                                <h5>Cloud Services</h5>
+                                <p class="text-muted">Build cloud-native applications on Azure</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-microchip fa-3x text-secondary mb-3"></i>
+                                <h5>IoT & Embedded</h5>
+                                <p class="text-muted">Develop Internet of Things applications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>C# Features</h2>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Object-Oriented:</strong> Supports classes, inheritance, polymorphism, and encapsulation
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Type-Safe:</strong> Strong typing prevents common programming errors
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Automatic Memory Management:</strong> Garbage collection handles memory allocation
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Modern Language Features:</strong> LINQ, async/await, pattern matching, and more
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Cross-Platform:</strong> Run on Windows, Linux, and macOS with .NET Core
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Rich Standard Library:</strong> Extensive framework for common programming tasks
+                    </li>
+                </ul>
+
+                <h2>Your First C# Program</h2>
+                <p>Let's look at the traditional "Hello World" program in C#:</p>
+                <pre><code>using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}</code></pre>
+
+                <h3>Understanding the Code</h3>
+                <ul>
+                    <li><strong>using System;</strong> - Imports the System namespace</li>
+                    <li><strong>class Program</strong> - Defines a class named Program</li>
+                    <li><strong>static void Main()</strong> - The entry point of the program</li>
+                    <li><strong>Console.WriteLine()</strong> - Outputs text to the console</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">C# is a versatile, modern language that can be used to build almost any type of application. It's a great choice for beginners and experienced developers alike.</p>
+                    </div>
+                </div>
+
+                <h2>What's Next?</h2>
+                <p>
+                    In the next lesson, we'll set up your development environment and get you ready to write your
+                    first C# program. Make sure you have Visual Studio installed, or we'll guide you through the installation.
+                </p>
+            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <a href="/CSharpFundamentals" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                </a>
+                <a href="/CSharpFundamentals/02-SettingUpEnvironment" class="btn btn-primary-custom">
+                    Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

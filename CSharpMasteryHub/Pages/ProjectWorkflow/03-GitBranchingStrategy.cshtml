@@ -1,0 +1,151 @@
+﻿@page
+@model GitBranchingStrategyModel
+@{
+    ViewData["Title"] = "Git Branching Strategy";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ProjectWorkflow">Project Workflow</a></li>
+                    <li class="breadcrumb-item active">Git Branching Strategy</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Git Branching Strategy</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 5</span>
+                </div>
+
+                <h2>Why Use a Branching Strategy?</h2>
+                <p>A clear branching strategy enables team collaboration, stable releases, and efficient development workflow.</p>
+
+                <h2>Popular Branching Strategies</h2>
+
+                <h3>1. Git Flow</h3>
+                <pre><code># Git Flow Branches
+main          → Production-ready code
+develop       → Integration branch
+feature/*     → New features
+release/*     → Release preparation
+hotfix/*      → Emergency fixes</code></pre>
+
+                <h3>2. GitHub Flow</h3>
+                <pre><code># GitHub Flow (Simpler)
+main          → Production-ready code
+feature/*     → New features
+
+# Workflow Steps
+1. Create a branch from main
+2. Make changes and commit
+3. Push to GitHub
+4. Create Pull Request
+5. Review and merge
+6. Delete the branch</code></pre>
+
+                <h2>Branch Naming Conventions</h2>
+
+                <h3>Types of Branches</h3>
+                <pre><code># Feature branches
+feature/user-authentication
+feature/payment-integration
+
+# Bug fix branches
+bugfix/login-error
+
+# Hotfix branches
+hotfix/security-patch
+
+# Release branches
+release/v1.0.0</code></pre>
+
+                <h2>Pull Request Best Practices</h2>
+
+                <h3>PR Checklist</h3>
+                <pre><code># PR Template
+## Description
+Brief description of the changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+
+## Testing
+- [ ] Unit tests added
+- [ ] Manual testing performed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated</code></pre>
+
+                <h2>Common Git Commands</h2>
+                <pre><code># Basic Commands
+git init
+git status
+git add .
+git commit -m "Message"
+git push origin main
+git pull origin main
+
+# Branching
+git branch feature-name
+git checkout -b feature-name
+git branch -d feature-name
+git merge feature-name</code></pre>
+
+                <h2>Resolving Conflicts</h2>
+                <pre><code># When conflicts occur
+git merge feature/branch
+
+# Resolve conflicts in files
+# Then mark as resolved
+git add resolved-file.cs
+
+# Continue merge
+git commit -m "Merge: Resolve conflicts"
+
+# Or abort
+git merge --abort</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>A consistent Git branching strategy enables smooth team collaboration and reliable releases.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Choose a branching strategy for your team</li>
+                            <li>Create a feature branch and make commits</li>
+                            <li>Create a pull request</li>
+                            <li>Simulate and resolve a merge conflict</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ProjectWorkflow/02-PlanningAndArchitecture" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ProjectWorkflow/04-CodingStandards" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,323 @@
+﻿@page
+@model InheritanceModel
+@{
+    ViewData["Title"] = "Inheritance in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Inheritance</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Inheritance in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 11</span>
+                </div>
+
+                <h2>What is Inheritance?</h2>
+                <p>
+                    Inheritance is a mechanism that allows a class to inherit properties, methods, and fields
+                    from another class. It promotes code reuse and establishes relationships between classes.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">Inheritance represents an "is-a" relationship. A Dog "is-a" Animal, a Manager "is-a" Employee.</p>
+                    </div>
+                </div>
+
+                <h2>Base Class (Parent)</h2>
+                <pre><code>public class Animal
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    
+    public Animal(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+    
+    public virtual void MakeSound()
+    {
+        Console.WriteLine($"{Name} makes a sound");
+    }
+}</code></pre>
+
+                <h2>Derived Class (Child)</h2>
+                <pre><code>public class Dog : Animal
+{
+    public string Breed { get; set; }
+    
+    public Dog(string name, int age, string breed) 
+        : base(name, age) // Call base constructor
+    {
+        Breed = breed;
+    }
+    
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} barks: Woof!");
+    }
+    
+    public void Fetch()
+    {
+        Console.WriteLine($"{Name} is fetching the ball!");
+    }
+}</code></pre>
+
+                <h2>Inheritance Hierarchy</h2>
+                <pre><code>// Base class
+public class Vehicle
+{
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    
+    public virtual void Start()
+    {
+        Console.WriteLine("Vehicle starting...");
+    }
+}
+
+// Derived class 1
+public class Car : Vehicle
+{
+    public int Doors { get; set; }
+    
+    public override void Start()
+    {
+        Console.WriteLine($"{Make} {Model} car starting...");
+    }
+}
+
+// Derived class 2
+public class Motorcycle : Vehicle
+{
+    public bool HasSidecar { get; set; }
+    
+    public override void Start()
+    {
+        Console.WriteLine($"{Make} {Model} motorcycle starting...");
+    }
+}</code></pre>
+
+                <h2>Constructors in Inheritance</h2>
+                <pre><code>public class BaseClass
+{
+    public string Data { get; set; }
+    
+    public BaseClass(string data)
+    {
+        Data = data;
+        Console.WriteLine("Base class constructor");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public string ExtraData { get; set; }
+    
+    public DerivedClass(string data, string extraData) 
+        : base(data)
+    {
+        ExtraData = extraData;
+        Console.WriteLine("Derived class constructor");
+    }
+}</code></pre>
+
+                <h2>Protected Members</h2>
+                <pre><code>public class Person
+{
+    protected string SocialSecurityNumber { get; set; }
+    public string Name { get; set; }
+    
+    protected void DisplaySSN()
+    {
+        Console.WriteLine($"SSN: {SocialSecurityNumber}");
+    }
+}
+
+public class Employee : Person
+{
+    public string EmployeeId { get; set; }
+    
+    public void ShowInfo()
+    {
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Employee ID: {EmployeeId}");
+        // Can access protected member
+        DisplaySSN();
+    }
+}</code></pre>
+
+                <h2>Sealed Classes</h2>
+                <pre><code>public sealed class FinalClass
+{
+    // Cannot be inherited
+    public string Data { get; set; }
+}
+
+// This will cause a compilation error
+// public class Derived : FinalClass { }</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+// Base class
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime BirthDate { get; set; }
+    
+    public Person(string firstName, string lastName, DateTime birthDate)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        BirthDate = birthDate;
+    }
+    
+    public virtual string GetFullName()
+    {
+        return $"{FirstName} {LastName}";
+    }
+    
+    public virtual int GetAge()
+    {
+        return DateTime.Now.Year - BirthDate.Year;
+    }
+    
+    public virtual void DisplayInfo()
+    {
+        Console.WriteLine($"Name: {GetFullName()}");
+        Console.WriteLine($"Age: {GetAge()}");
+    }
+}
+
+// Derived class 1
+public class Student : Person
+{
+    public string StudentId { get; set; }
+    public string Major { get; set; }
+    public double GPA { get; set; }
+    
+    public Student(string firstName, string lastName, DateTime birthDate, 
+                   string studentId, string major) 
+        : base(firstName, lastName, birthDate)
+    {
+        StudentId = studentId;
+        Major = major;
+        GPA = 0.0;
+    }
+    
+    public void SetGPA(double gpa)
+    {
+        if (gpa >= 0 && gpa <= 4.0)
+            GPA = gpa;
+    }
+    
+    public override void DisplayInfo()
+    {
+        base.DisplayInfo();
+        Console.WriteLine($"Student ID: {StudentId}");
+        Console.WriteLine($"Major: {Major}");
+        Console.WriteLine($"GPA: {GPA:F2}");
+    }
+}
+
+// Derived class 2
+public class Teacher : Person
+{
+    public string TeacherId { get; set; }
+    public string Department { get; set; }
+    public decimal Salary { get; set; }
+    
+    public Teacher(string firstName, string lastName, DateTime birthDate,
+                   string teacherId, string department, decimal salary)
+        : base(firstName, lastName, birthDate)
+    {
+        TeacherId = teacherId;
+        Department = department;
+        Salary = salary;
+    }
+    
+    public void GiveRaise(decimal percentage)
+    {
+        Salary *= (1 + percentage / 100);
+    }
+    
+    public override void DisplayInfo()
+    {
+        base.DisplayInfo();
+        Console.WriteLine($"Teacher ID: {TeacherId}");
+        Console.WriteLine($"Department: {Department}");
+        Console.WriteLine($"Salary: {Salary:C}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Student student = new Student("John", "Doe", new DateTime(2000, 5, 15), 
+                                        "S001", "Computer Science");
+        student.SetGPA(3.8);
+        
+        Teacher teacher = new Teacher("Jane", "Smith", new DateTime(1980, 10, 20),
+                                        "T001", "Mathematics", 60000);
+        teacher.GiveRaise(10);
+        
+        Console.WriteLine("=== STUDENT ===");
+        student.DisplayInfo();
+        
+        Console.WriteLine("\n=== TEACHER ===");
+        teacher.DisplayInfo();
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Inheritance enables code reuse and creates hierarchical relationships between classes. It's a powerful tool for building extensible systems.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create an inheritance hierarchy for:</p>
+                        <ol>
+                            <li>Base class: Animal (Name, Age, MakeSound)</li>
+                            <li>Derived: Mammal, Bird, Fish</li>
+                            <li>Further derived: Dog, Cat, Eagle, Salmon</li>
+                            <li>Each with specific properties and methods</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/05-Encapsulation" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/07-Polymorphism" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

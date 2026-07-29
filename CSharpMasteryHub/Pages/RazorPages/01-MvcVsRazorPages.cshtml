@@ -1,0 +1,102 @@
+﻿@page
+@model MvcVsRazorPagesModel
+@{
+    ViewData["Title"] = "MVC vs Razor Pages";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">MVC vs Razor Pages</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">MVC vs Razor Pages</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 8</span>
+                </div>
+
+                <h2>What is MVC?</h2>
+                <p>MVC (Model-View-Controller) is a pattern with three components:</p>
+                <ul>
+                    <li><strong>Model:</strong> Data and business logic</li>
+                    <li><strong>View:</strong> User interface</li>
+                    <li><strong>Controller:</strong> Handles requests and coordinates</li>
+                </ul>
+
+                <h2>What are Razor Pages?</h2>
+                <p>Razor Pages is a page-based programming model that makes building web UIs easier. Each page has its own model and view.</p>
+
+                <h2>Comparison</h2>
+
+                <h3>MVC</h3>
+                <pre><code>// Controllers/HomeController.cs
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+
+// Views/Home/Index.cshtml
+&lt;h1&gt;Welcome&lt;/h1&gt;</code></pre>
+
+                <h3>Razor Pages</h3>
+                <pre><code>// Pages/Index.cshtml.cs
+public class IndexModel : PageModel
+{
+    public void OnGet() { }
+}
+
+// Pages/Index.cshtml
+@@page
+&lt;h1&gt;Welcome&lt;/h1&gt;</code></pre>
+
+                <h2>When to Use What</h2>
+
+                <h3>Use MVC When:</h3>
+                <ul>
+                    <li>Building complex web applications</li>
+                    <li>Need full control over views</li>
+                    <li>Working with large teams</li>
+                    <li>Building REST APIs</li>
+                </ul>
+
+                <h3>Use Razor Pages When:</h3>
+                <ul>
+                    <li>Building page-focused applications</li>
+                    <li>Need simpler structure</li>
+                    <li>Working on smaller projects</li>
+                    <li>Teaching or learning ASP.NET Core</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Both MVC and Razor Pages are valid approaches. Choose Razor Pages for simplicity and MVC for complex applications.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/RazorPages/02-PageModelAndRouting" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

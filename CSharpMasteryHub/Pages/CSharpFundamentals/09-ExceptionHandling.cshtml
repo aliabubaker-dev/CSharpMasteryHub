@@ -1,0 +1,134 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.ExceptionHandlingModel
+@{
+    ViewData["Title"] = "Exception Handling";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Exception Handling</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Exception Handling</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 9 of 13</span>
+                </div>
+
+                <h2>What are Exceptions?</h2>
+                <p>Exceptions are runtime errors that occur during program execution. Proper handling prevents application crashes.</p>
+
+                <h2>Basic Try-Catch</h2>
+                <pre><code>try
+{
+    int result = 10 / 0;  // This will throw DivideByZeroException
+    Console.WriteLine(result);
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine($"Error: {ex.Message}");
+}</code></pre>
+
+                <h2>Multiple Catch Blocks</h2>
+                <pre><code>try
+{
+    int[] numbers = { 1, 2, 3 };
+    Console.WriteLine(numbers[10]); // IndexOutOfRangeException
+}
+catch (IndexOutOfRangeException ex)
+{
+    Console.WriteLine($"Index error: {ex.Message}");
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine($"Division error: {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"General error: {ex.Message}");
+}</code></pre>
+
+                <h2>Finally Block</h2>
+                <pre><code>FileStream file = null;
+try
+{
+    file = File.Open("data.txt", FileMode.Open);
+    // Process file
+}
+catch (FileNotFoundException ex)
+{
+    Console.WriteLine($"File not found: {ex.Message}");
+}
+finally
+{
+    // Always executes, even if an exception occurs
+    if (file != null)
+        file.Close();
+}</code></pre>
+
+                <h2>Using Statement (Auto-dispose)</h2>
+                <pre><code>// Equivalent to try/finally with Dispose
+using (var file = File.Open("data.txt", FileMode.Open))
+{
+    // Process file
+} // Automatically disposed</code></pre>
+
+                <h2>Throwing Exceptions</h2>
+                <pre><code>public void Divide(int a, int b)
+{
+    if (b == 0)
+        throw new DivideByZeroException("Cannot divide by zero");
+    
+    return a / b;
+}
+
+public void ProcessAge(int age)
+{
+    if (age < 0 || age > 150)
+        throw new ArgumentException("Age must be between 0 and 150");
+    
+    // Process age
+}</code></pre>
+
+                <h2>Creating Custom Exceptions</h2>
+                <pre><code>public class InvalidEmailException : Exception
+{
+    public InvalidEmailException(string email)
+        : base($"Email '{email}' is invalid")
+    {
+        Email = email;
+    }
+    
+    public string Email { get; }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Always handle exceptions gracefully. Use specific exceptions rather than generic ones.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/08-Strings" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/10-MethodsBasics" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

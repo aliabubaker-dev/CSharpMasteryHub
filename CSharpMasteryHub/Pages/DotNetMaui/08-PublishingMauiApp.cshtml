@@ -1,0 +1,241 @@
+﻿@page
+@model PublishingMauiAppModel
+@{
+    ViewData["Title"] = "Publishing .NET MAUI App";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">Publishing MAUI App</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Publishing Your .NET MAUI Application</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 8 of 8</span>
+                </div>
+
+                <h2>Publishing Overview</h2>
+                <p>
+                    Publishing your .NET MAUI app involves preparing it for distribution through various app stores
+                    or direct deployment. Each platform has specific requirements and processes.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Publishing Options</h5>
+                        <ul class="mb-0">
+                            <li><strong>Android</strong> - Google Play Store, APK/AAB distribution</li>
+                            <li><strong>iOS</strong> - Apple App Store</li>
+                            <li><strong>Windows</strong> - Microsoft Store</li>
+                            <li><strong>macOS</strong> - Mac App Store</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>1. Publishing for Android</h2>
+
+                <h3>Step 1: Configure Android Manifest</h3>
+                <pre><code>// Platforms/Android/AndroidManifest.xml
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.yourcompany.yourapp"&gt;
+    &lt;application android:allowBackup="true"
+                 android:icon="@@mipmap/appicon"
+                 android:roundIcon="@@mipmap/appicon_round"
+                 android:label="Your App Name"
+                 android:supportsRtl="true"&gt;
+    &lt;/application&gt;
+    
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+&lt;/manifest&gt;</code></pre>
+
+                <h3>Step 2: Create Keystore</h3>
+                <pre><code>// Generate keystore
+keytool -genkey -v -keystore myapp.keystore -alias myapp -keyalg RSA -keysize 2048 -validity 10000
+
+// Build signed APK/AAB
+dotnet publish -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=myapp.keystore -p:AndroidSigningStorePass=password -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=password</code></pre>
+
+                <h3>Step 3: Configure for Google Play</h3>
+                <pre><code>// In .csproj file
+&lt;PropertyGroup&gt;
+    &lt;AndroidPackageFormat&gt;aab&lt;/AndroidPackageFormat&gt;
+    &lt;AndroidCreatePackagePerAbi&gt;false&lt;/AndroidCreatePackagePerAbi&gt;
+&lt;/PropertyGroup&gt;
+
+// Create Google Play Console account
+// Set up store listing
+// Upload AAB file
+// Complete store listing and pricing</code></pre>
+
+                <h2>2. Publishing for iOS</h2>
+
+                <h3>Step 1: Configure Info.plist</h3>
+                <pre><code>// Platforms/iOS/Info.plist
+&lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+&lt;string&gt;Your App Name&lt;/string&gt;
+&lt;key&gt;CFBundleIdentifier&lt;/key&gt;
+&lt;string&gt;com.yourcompany.yourapp&lt;/string&gt;
+&lt;key&gt;CFBundleVersion&lt;/key&gt;
+&lt;string&gt;1.0&lt;/string&gt;
+&lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+&lt;string&gt;1.0&lt;/string&gt;
+&lt;key&gt;UIRequiredDeviceCapabilities&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;armv7&lt;/string&gt;
+&lt;/array&gt;</code></pre>
+
+                <h3>Step 2: Create Certificates</h3>
+                <pre><code>// Apple Developer Account required
+1. Create App ID
+2. Create Development Certificate
+3. Create Distribution Certificate
+4. Create Provisioning Profile
+5. Configure in Visual Studio</code></pre>
+
+                <h3>Step 3: Build and Distribute</h3>
+                <pre><code>// Build for App Store
+dotnet publish -f net10.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64
+
+// Using Visual Studio
+1. Set configuration to Release
+2. Set target to iPhone
+3. Archive the app
+4. Distribute to App Store</code></pre>
+
+                <h2>3. Publishing for Windows</h2>
+
+                <h3>Step 1: Configure Package.appxmanifest</h3>
+                <pre><code>// Platforms/Windows/Package.appxmanifest
+&lt;Identity Name="YourAppName"
+          Publisher="CN=YourCompany"
+          Version="1.0.0.0" /&gt;
+
+&lt;Properties&gt;
+    &lt;DisplayName&gt;Your App Name&lt;/DisplayName&gt;
+    &lt;PublisherDisplayName&gt;Your Company&lt;/PublisherDisplayName&gt;
+    &lt;Logo&gt;Assets\StoreLogo.png&lt;/Logo&gt;
+&lt;/Properties&gt;</code></pre>
+
+                <h3>Step 2: Create App Package</h3>
+                <pre><code>// Create app package
+1. Right-click project
+2. Select "Publish"
+3. Choose "Create App Package"
+4. Select "Microsoft Store"
+5. Configure options
+6. Generate package</code></pre>
+
+                <h3>Step 3: Submit to Microsoft Store</h3>
+                <pre><code>// Requirements
+1. Microsoft Partner Center account
+2. Create app listing
+3. Upload package
+4. Set pricing and availability
+5. Submit for certification</code></pre>
+
+                <h2>App Store Optimization (ASO)</h2>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>App Name:</strong> Use descriptive, keyword-rich name
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Description:</strong> Clear, compelling with keywords
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Screenshots:</strong> High-quality, showcasing features
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>App Icon:</strong> Professional and recognizable
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Ratings:</strong> Encourage positive reviews
+                    </li>
+                </ul>
+
+                <h2>Pre-Publishing Checklist</h2>
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-list me-2"></i>Checklist</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Test thoroughly on all target devices</li>
+                            <li class="list-group-item">Optimize app performance</li>
+                            <li class="list-group-item">Check for memory leaks</li>
+                            <li class="list-group-item">Verify all strings are localized</li>
+                            <li class="list-group-item">Update version numbers</li>
+                            <li class="list-group-item">Create app store listings</li>
+                            <li class="list-group-item">Prepare promotional materials</li>
+                            <li class="list-group-item">Set up analytics tracking</li>
+                            <li class="list-group-item">Implement crash reporting</li>
+                            <li class="list-group-item">Prepare support documentation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Each platform has specific publishing requirements</li>
+                            <li>Prepare necessary certificates and accounts</li>
+                            <li>Optimize your app store listing for visibility</li>
+                            <li>Thorough testing before submission</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Publish your MAUI app:</p>
+                        <ol>
+                            <li>Create required store accounts</li>
+                            <li>Prepare all certificates and keys</li>
+                            <li>Build release versions for each platform</li>
+                            <li>Create store listings with screenshots</li>
+                            <li>Submit to app stores</li>
+                            <li>Monitor analytics and feedback</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/07-ConnectingToApiOrDb" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

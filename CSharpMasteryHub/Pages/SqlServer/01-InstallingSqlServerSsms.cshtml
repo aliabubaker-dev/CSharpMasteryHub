@@ -1,0 +1,79 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.InstallingSqlServerSsmsModel
+@{
+    ViewData["Title"] = "SSMS Interface Tour";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">SSMS Interface Tour</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">SSMS Interface Tour</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 10</span>
+                </div>
+
+                <p>
+                    If you haven't installed SQL Server Express and SSMS yet, do that first in
+                    the <a href="/GettingStarted/03-InstallingSqlExpressSsms">Getting Started module</a>.
+                    This lesson tours the interface you'll live in for the rest of this course.
+                </p>
+
+                <h2>Object Explorer (left panel)</h2>
+                <p>
+                    This tree shows every server you're connected to, and under each server:
+                    <strong>Databases</strong>, <strong>Security</strong>, <strong>Server Objects</strong>,
+                    and more. Expand <em>Databases &rarr; System Databases</em> to see the four
+                    built-in databases SQL Server needs to operate.
+                </p>
+
+                <h2>New Query window</h2>
+                <p>
+                    Click <strong>New Query</strong> in the toolbar. This opens a blank editor
+                    connected to whichever database is selected in the dropdown above it —
+                    always double-check this dropdown before running anything.
+                </p>
+
+                <h2>Executing queries</h2>
+                <p>
+                    Type a query and press <kbd>F5</kbd> or click <strong>Execute</strong>.
+                    Results appear in the grid below. Try this right now:
+                </p>
+                <pre><code>SELECT @@VERSION;</code></pre>
+
+                <h2>Creating your first database</h2>
+                <pre><code>CREATE DATABASE SchoolDB;</code></pre>
+                <p>Right-click <strong>Databases</strong> in Object Explorer and choose Refresh to see it appear.</p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>SSMS is your primary tool for managing SQL Server. The Object Explorer and Query windows are where you'll spend most of your time.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

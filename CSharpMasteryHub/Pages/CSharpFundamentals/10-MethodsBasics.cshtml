@@ -1,0 +1,149 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.MethodsBasicsModel
+@{
+    ViewData["Title"] = "Methods Basics";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Methods Basics</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Methods Basics</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 10 of 13</span>
+                </div>
+
+                <h2>What are Methods?</h2>
+                <p>Methods are blocks of code that perform specific tasks. They help organize, reuse, and maintain code.</p>
+
+                <h2>Basic Method Structure</h2>
+                <pre><code>// Syntax:
+[access_modifier] [static] return_type MethodName(parameters)
+{
+    // Method body
+    return value; // if return type is not void
+}</code></pre>
+
+                <h2>Method Examples</h2>
+
+                <h3>Void Method (No Return)</h3>
+                <pre><code>public void Greet(string name)
+{
+    Console.WriteLine($"Hello, {name}!");
+}
+
+Greet("John"); // Output: Hello, John!</code></pre>
+
+                <h3>Method with Return Value</h3>
+                <pre><code>public int Add(int a, int b)
+{
+    return a + b;
+}
+
+int result = Add(5, 3); // result = 8</code></pre>
+
+                <h3>Static Method</h3>
+                <pre><code>public static double CalculateCircleArea(double radius)
+{
+    return Math.PI * radius * radius;
+}
+
+double area = CalculateCircleArea(5);</code></pre>
+
+                <h2>Method Parameters</h2>
+
+                <h3>Optional Parameters</h3>
+                <pre><code>public void Greet(string name, string greeting = "Hello")
+{
+    Console.WriteLine($"{greeting}, {name}!");
+}
+
+Greet("John");          // Hello, John!
+Greet("Jane", "Hi");    // Hi, Jane!</code></pre>
+
+                <h3>Params Array</h3>
+                <pre><code>public int Sum(params int[] numbers)
+{
+    int total = 0;
+    foreach (int num in numbers)
+        total += num;
+    return total;
+}
+
+int result = Sum(1, 2, 3, 4, 5); // result = 15</code></pre>
+
+                <h3>Ref and Out Parameters</h3>
+                <pre><code>// ref - passes by reference
+public void Increment(ref int number)
+{
+    number++;
+}
+
+int x = 5;
+Increment(ref x); // x is now 6
+
+// out - returns multiple values
+public bool TryDivide(int a, int b, out int result)
+{
+    if (b == 0)
+    {
+        result = 0;
+        return false;
+    }
+    result = a / b;
+    return true;
+}
+
+if (TryDivide(10, 2, out int quotient))
+{
+    Console.WriteLine(quotient); // 5
+}</code></pre>
+
+                <h2>Method Overloading</h2>
+                <pre><code>public int Add(int a, int b)
+{
+    return a + b;
+}
+
+public double Add(double a, double b)
+{
+    return a + b;
+}
+
+public int Add(int a, int b, int c)
+{
+    return a + b + c;
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Methods should do one thing and do it well. Use meaningful names and keep them focused.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/09-ExceptionHandling" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/11-PatternMatchingAndNullables" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

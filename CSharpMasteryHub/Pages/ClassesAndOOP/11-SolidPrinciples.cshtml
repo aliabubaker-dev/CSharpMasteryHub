@@ -1,0 +1,560 @@
+﻿@page
+@model SolidPrinciplesModel
+@{
+    ViewData["Title"] = "SOLID Principles in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">SOLID Principles</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">SOLID Principles in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 11 of 11</span>
+                </div>
+
+                <h2>What are SOLID Principles?</h2>
+                <p>
+                    SOLID is an acronym for five design principles that help create maintainable, scalable,
+                    and robust object-oriented software. These principles were introduced by Robert C. Martin.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>SOLID Acronym</h5>
+                        <ul class="mb-0">
+                            <li><strong>S</strong> - Single Responsibility Principle</li>
+                            <li><strong>O</strong> - Open/Closed Principle</li>
+                            <li><strong>L</strong> - Liskov Substitution Principle</li>
+                            <li><strong>I</strong> - Interface Segregation Principle</li>
+                            <li><strong>D</strong> - Dependency Inversion Principle</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>1. Single Responsibility Principle (SRP)</h2>
+                <p>A class should have only one reason to change (one responsibility).</p>
+
+                <h3>❌ Bad Example - Violating SRP</h3>
+                <pre><code>public class Employee
+{
+    public string Name { get; set; }
+    public decimal Salary { get; set; }
+    public string Email { get; set; }
+    
+    // Business logic
+    public decimal CalculateBonus()
+    {
+        return Salary * 0.1m;
+    }
+    
+    // Data access logic
+    public void SaveToDatabase()
+    {
+        // Save employee to database
+    }
+    
+    // Email logic
+    public void SendEmail()
+    {
+        // Send email to employee
+    }
+}</code></pre>
+
+                <h3>✅ Good Example - Following SRP</h3>
+                <pre><code>// Employee class - only responsible for employee data
+public class Employee
+{
+    public string Name { get; set; }
+    public decimal Salary { get; set; }
+    public string Email { get; set; }
+}
+
+// Bonus calculator - responsible for bonus calculation
+public class BonusCalculator
+{
+    public decimal CalculateBonus(Employee employee)
+    {
+        return employee.Salary * 0.1m;
+    }
+}
+
+// Employee repository - responsible for data access
+public class EmployeeRepository
+{
+    public void Save(Employee employee)
+    {
+        // Save employee to database
+    }
+}
+
+// Email service - responsible for email operations
+public class EmailService
+{
+    public void SendEmail(Employee employee, string message)
+    {
+        // Send email to employee
+    }
+}</code></pre>
+
+                <h2>2. Open/Closed Principle (OCP)</h2>
+                <p>Software entities should be open for extension but closed for modification.</p>
+
+                <h3>❌ Bad Example - Violating OCP</h3>
+                <pre><code>public class ShapeCalculator
+{
+    public double CalculateArea(object shape)
+    {
+        if (shape is Circle circle)
+            return Math.PI * circle.Radius * circle.Radius;
+        else if (shape is Rectangle rectangle)
+            return rectangle.Width * rectangle.Height;
+        else if (shape is Triangle triangle)
+            return triangle.Base * triangle.Height / 2;
+        // Adding new shapes requires modifying this method
+        return 0;
+    }
+}</code></pre>
+
+                <h3>✅ Good Example - Following OCP</h3>
+                <pre><code>// Abstract base class
+public abstract class Shape
+{
+    public abstract double CalculateArea();
+}
+
+// Individual shape classes
+public class Circle : Shape
+{
+    public double Radius { get; set; }
+    
+    public override double CalculateArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+}
+
+public class Rectangle : Shape
+{
+    public double Width { get; set; }
+    public double Height { get; set; }
+    
+    public override double CalculateArea()
+    {
+        return Width * Height;
+    }
+}
+
+public class Triangle : Shape
+{
+    public double Base { get; set; }
+    public double Height { get; set; }
+    
+    public override double CalculateArea()
+    {
+        return Base * Height / 2;
+    }
+}
+
+// New shapes can be added without modifying existing code</code></pre>
+
+                <h2>3. Liskov Substitution Principle (LSP)</h2>
+                <p>Objects of a derived class should be able to replace objects of the base class without affecting the program.</p>
+
+                <h3>❌ Bad Example - Violating LSP</h3>
+                <pre><code>public class Rectangle
+{
+    public virtual int Width { get; set; }
+    public virtual int Height { get; set; }
+}
+
+public class Square : Rectangle
+{
+    public override int Width 
+    { 
+        get { return base.Width; }
+        set { base.Width = value; base.Height = value; }
+    }
+    
+    public override int Height 
+    { 
+        get { return base.Height; }
+        set { base.Width = value; base.Height = value; }
+    }
+}</code></pre>
+
+                <h3>✅ Good Example - Following LSP</h3>
+                <pre><code>// Abstract base class
+public abstract class Shape
+{
+    public abstract int GetArea();
+}
+
+// Separate classes for different shapes
+public class Rectangle : Shape
+{
+    public int Width { get; set; }
+    public int Height { get; set; }
+    
+    public override int GetArea()
+    {
+        return Width * Height;
+    }
+}
+
+public class Square : Shape
+{
+    public int Side { get; set; }
+    
+    public override int GetArea()
+    {
+        return Side * Side;
+    }
+}</code></pre>
+
+                <h2>4. Interface Segregation Principle (ISP)</h2>
+                <p>Clients should not be forced to depend on interfaces they don't use.</p>
+
+                <h3>❌ Bad Example - Violating ISP</h3>
+                <pre><code>public interface IWorker
+{
+    void Work();
+    void Eat();
+    void Sleep();
+}
+
+public class HumanWorker : IWorker
+{
+    public void Work() { /* Work */ }
+    public void Eat() { /* Eat */ }
+    public void Sleep() { /* Sleep */ }
+}
+
+public class RobotWorker : IWorker
+{
+    public void Work() { /* Work */ }
+    public void Eat() { /* Robots don't eat! */ }
+    public void Sleep() { /* Robots don't sleep! */ }
+}</code></pre>
+
+                <h3>✅ Good Example - Following ISP</h3>
+                <pre><code>public interface IWorkable
+{
+    void Work();
+}
+
+public interface IEatable
+{
+    void Eat();
+}
+
+public interface ISleepable
+{
+    void Sleep();
+}
+
+public class HumanWorker : IWorkable, IEatable, ISleepable
+{
+    public void Work() { /* Work */ }
+    public void Eat() { /* Eat */ }
+    public void Sleep() { /* Sleep */ }
+}
+
+public class RobotWorker : IWorkable
+{
+    public void Work() { /* Work */ }
+}</code></pre>
+
+                <h2>5. Dependency Inversion Principle (DIP)</h2>
+                <p>High-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
+
+                <h3>❌ Bad Example - Violating DIP</h3>
+                <pre><code>public class EmailSender
+{
+    public void SendEmail(string message)
+    {
+        Console.WriteLine($"Sending email: {message}");
+    }
+}
+
+public class NotificationService
+{
+    private EmailSender emailSender = new EmailSender();
+    
+    public void Notify(string message)
+    {
+        emailSender.SendEmail(message);
+    }
+}</code></pre>
+
+                <h3>✅ Good Example - Following DIP</h3>
+                <pre><code>// Abstraction
+public interface IMessageService
+{
+    void SendMessage(string message);
+}
+
+// Low-level module
+public class EmailService : IMessageService
+{
+    public void SendMessage(string message)
+    {
+        Console.WriteLine($"Sending email: {message}");
+    }
+}
+
+public class SMSService : IMessageService
+{
+    public void SendMessage(string message)
+    {
+        Console.WriteLine($"Sending SMS: {message}");
+    }
+}
+
+// High-level module depends on abstraction
+public class NotificationService
+{
+    private readonly IMessageService messageService;
+    
+    public NotificationService(IMessageService messageService)
+    {
+        this.messageService = messageService;
+    }
+    
+    public void Notify(string message)
+    {
+        messageService.SendMessage(message);
+    }
+}</code></pre>
+
+                <h2>Complete Example - All SOLID Principles Applied</h2>
+                <pre><code>using System;
+using System.Collections.Generic;
+
+// 1. SRP - Each class has single responsibility
+// 2. OCP - Open for extension, closed for modification
+// 3. LSP - Derived classes can substitute base classes
+// 4. ISP - Segregated interfaces
+// 5. DIP - Dependency inversion
+
+// Interfaces (ISP)
+public interface IEmployee
+{
+    string Name { get; }
+    decimal Salary { get; }
+}
+
+public interface IWorkable
+{
+    void Work();
+}
+
+public interface IPayable
+{
+    void CalculatePay();
+}
+
+public interface IReportable
+{
+    string GenerateReport();
+}
+
+// Abstract base class (OCP)
+public abstract class Employee : IEmployee, IWorkable, IPayable, IReportable
+{
+    public string Name { get; set; }
+    public decimal Salary { get; set; }
+    
+    public Employee(string name, decimal salary)
+    {
+        Name = name;
+        Salary = salary;
+    }
+    
+    public abstract void Work();
+    public abstract void CalculatePay();
+    public abstract string GenerateReport();
+}
+
+// Derived classes (LSP)
+public class Developer : Employee
+{
+    public Developer(string name, decimal salary) : base(name, salary) { }
+    
+    public override void Work()
+    {
+        Console.WriteLine($"{Name} is writing code");
+    }
+    
+    public override void CalculatePay()
+    {
+        Console.WriteLine($"{Name} is paid ${Salary:0.00}");
+    }
+    
+    public override string GenerateReport()
+    {
+        return $"Developer: {Name} - Salary: ${Salary:0.00}";
+    }
+}
+
+public class Manager : Employee
+{
+    public Manager(string name, decimal salary) : base(name, salary) { }
+    
+    public override void Work()
+    {
+        Console.WriteLine($"{Name} is managing team");
+    }
+    
+    public override void CalculatePay()
+    {
+        Console.WriteLine($"{Name} is paid ${Salary:0.00} with bonus");
+    }
+    
+    public override string GenerateReport()
+    {
+        return $"Manager: {Name} - Salary: ${Salary:0.00}";
+    }
+}
+
+// Services following DIP
+public interface IEmployeeRepository
+{
+    void Add(Employee employee);
+    IEnumerable<Employee> GetAll();
+}
+
+public interface IPayrollProcessor
+{
+    void ProcessPayroll(IEnumerable<Employee> employees);
+}
+
+public interface IReportGenerator
+{
+    void GenerateReports(IEnumerable<Employee> employees);
+}
+
+// Implementations
+public class EmployeeRepository : IEmployeeRepository
+{
+    private List<Employee> employees = new List<Employee>();
+    
+    public void Add(Employee employee)
+    {
+        employees.Add(employee);
+    }
+    
+    public IEnumerable<Employee> GetAll()
+    {
+        return employees;
+    }
+}
+
+public class PayrollProcessor : IPayrollProcessor
+{
+    public void ProcessPayroll(IEnumerable<Employee> employees)
+    {
+        Console.WriteLine("\n=== PAYROLL PROCESSING ===");
+        foreach (var employee in employees)
+        {
+            employee.CalculatePay();
+        }
+    }
+}
+
+public class ReportGenerator : IReportGenerator
+{
+    public void GenerateReports(IEnumerable<Employee> employees)
+    {
+        Console.WriteLine("\n=== EMPLOYEE REPORTS ===");
+        foreach (var employee in employees)
+        {
+            Console.WriteLine(employee.GenerateReport());
+        }
+    }
+}
+
+// Main application
+class Program
+{
+    static void Main()
+    {
+        // Dependency injection
+        IEmployeeRepository repository = new EmployeeRepository();
+        IPayrollProcessor payroll = new PayrollProcessor();
+        IReportGenerator reportGenerator = new ReportGenerator();
+        
+        // Add employees
+        repository.Add(new Developer("John Doe", 5000));
+        repository.Add(new Developer("Jane Smith", 4500));
+        repository.Add(new Manager("Bob Johnson", 7000));
+        
+        // Get all employees
+        var employees = repository.GetAll();
+        
+        // Work
+        Console.WriteLine("=== WORK ACTIVITIES ===");
+        foreach (var employee in employees)
+        {
+            employee.Work();
+        }
+        
+        // Process payroll
+        payroll.ProcessPayroll(employees);
+        
+        // Generate reports
+        reportGenerator.GenerateReports(employees);
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>SOLID principles create maintainable and scalable code</li>
+                            <li>Each principle addresses a specific design problem</li>
+                            <li>Applying SOLID leads to better software architecture</li>
+                            <li>These principles complement each other</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Apply SOLID principles to create a system for:</p>
+                        <ol>
+                            <li>A library management system</li>
+                            <li>Apply all 5 SOLID principles</li>
+                            <li>Include interfaces, abstract classes, and services</li>
+                            <li>Use dependency injection</li>
+                            <li>Write unit tests for the system</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/10-Generics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

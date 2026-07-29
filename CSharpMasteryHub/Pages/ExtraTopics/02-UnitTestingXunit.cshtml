@@ -1,0 +1,117 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.UnitTestingXunitModel
+@{
+    ViewData["Title"] = "Unit Testing with xUnit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">Unit Testing with xUnit</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Unit Testing with xUnit</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 6</span>
+                </div>
+
+                <p>
+                    Unit tests verify small pieces of your code behave correctly, and catch
+                    regressions automatically when you change something later.
+                </p>
+
+                <h2>Setting up a test project</h2>
+                <pre><code>dotnet new xunit -n MyProject.Tests
+cd MyProject.Tests
+dotnet add reference ../MyProject/MyProject.csproj</code></pre>
+
+                <h2>The code under test</h2>
+                <pre><code>public class DiscountCalculator
+{
+    public decimal ApplyDiscount(decimal price, decimal percent)
+    {
+        if (percent < 0 || percent > 100)
+            throw new ArgumentOutOfRangeException(nameof(percent));
+
+        return price - (price * percent / 100);
+    }
+}</code></pre>
+
+                <h2>Writing tests</h2>
+                <pre><code>using Xunit;
+
+public class DiscountCalculatorTests
+{
+    [Fact]
+    public void ApplyDiscount_TenPercentOff_ReturnsReducedPrice()
+    {
+        var calculator = new DiscountCalculator();
+
+        decimal result = calculator.ApplyDiscount(100m, 10m);
+
+        Assert.Equal(90m, result);
+    }
+
+    [Theory]
+    [InlineData(100, 0, 100)]
+    [InlineData(100, 50, 50)]
+    [InlineData(200, 25, 150)]
+    public void ApplyDiscount_VariousInputs_ReturnsExpected(
+        decimal price, decimal percent, decimal expected)
+    {
+        var calculator = new DiscountCalculator();
+        Assert.Equal(expected, calculator.ApplyDiscount(price, percent));
+    }
+
+    [Fact]
+    public void ApplyDiscount_PercentOver100_ThrowsException()
+    {
+        var calculator = new DiscountCalculator();
+
+        Assert.Throws&lt;ArgumentOutOfRangeException&gt;(() =>
+            calculator.ApplyDiscount(100m, 150m));
+    }
+}</code></pre>
+
+                <h2>The AAA pattern</h2>
+                <p>Every good test follows <strong>Arrange, Act, Assert</strong>:</p>
+                <ul>
+                    <li><strong>Arrange</strong> — set up the object and inputs.</li>
+                    <li><strong>Act</strong> — call the method being tested.</li>
+                    <li><strong>Assert</strong> — check the result is what you expected.</li>
+                </ul>
+
+                <h2>Running tests</h2>
+                <pre><code>dotnet test</code></pre>
+                <p>Or in Visual Studio: <strong>Test &rarr; Run All Tests</strong>, or open Test Explorer.</p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Unit testing catches bugs early and gives you confidence when making changes to your code.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics/01-GitAndGitHub" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ExtraTopics/03-DesignPatterns" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

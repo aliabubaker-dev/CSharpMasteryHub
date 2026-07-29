@@ -1,0 +1,110 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.EntityFrameworkCoreIntroModel
+@{
+    ViewData["Title"] = "Entity Framework Core (Intro)";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/VsSqlConnection">VS + SQL Connection</a></li>
+                    <li class="breadcrumb-item active">Entity Framework Core (Intro)</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Entity Framework Core (Intro)</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 5</span>
+                </div>
+
+                <p>
+                    Entity Framework Core (EF Core) is an ORM (Object-Relational Mapper) — it
+                    lets you work with the database using C# classes and LINQ instead of
+                    writing raw SQL by hand.
+                </p>
+
+                <h2>Install the packages</h2>
+                <pre><code>Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Tools</code></pre>
+
+                <h2>Define your model</h2>
+                <pre><code>public class Student
+{
+    public int StudentId { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public DateTime EnrolledOn { get; set; }
+}</code></pre>
+
+                <h2>Define your DbContext</h2>
+                <pre><code>using Microsoft.EntityFrameworkCore;
+
+public class SchoolDbContext : DbContext
+{
+    public SchoolDbContext(DbContextOptions&lt;SchoolDbContext&gt; options) : base(options) { }
+
+    public DbSet&lt;Student&gt; Students => Set&lt;Student&gt;();
+}</code></pre>
+
+                <h2>Register it in Program.cs</h2>
+                <pre><code>builder.Services.AddDbContext&lt;SchoolDbContext&gt;(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDb")));</code></pre>
+
+                <h2>Using it — no raw SQL required</h2>
+                <pre><code>// Read
+var students = await context.Students
+    .Where(s => s.LastName == "Ahmed")
+    .OrderBy(s => s.FirstName)
+    .ToListAsync();
+
+// Insert
+context.Students.Add(new Student { FirstName = "Nour", LastName = "Saeed", Email = "nour@example.com" });
+await context.SaveChangesAsync();
+
+// Update
+var student = await context.Students.FindAsync(1);
+student!.Email = "updated@example.com";
+await context.SaveChangesAsync();
+
+// Delete
+var toDelete = await context.Students.FindAsync(3);
+context.Students.Remove(toDelete!);
+await context.SaveChangesAsync();</code></pre>
+
+                <h2>ADO.NET vs EF Core — when to use which</h2>
+                <p>
+                    ADO.NET gives you full control and top performance for complex queries.
+                    EF Core is faster to write, safer by default, and is what most modern
+                    ASP.NET Core apps use. Learning both, as you just did, makes you far more
+                    versatile than developers who only know one.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>EF Core is an ORM that lets you work with databases using C# classes and LINQ. It's faster to write and safer by default.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/VsSqlConnection/04-DataReaderVsDataAdapter" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/VsSqlConnection" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

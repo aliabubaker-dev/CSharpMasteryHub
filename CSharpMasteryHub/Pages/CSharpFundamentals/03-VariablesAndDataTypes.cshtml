@@ -1,0 +1,90 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.VariablesAndDataTypesModel
+@{
+    ViewData["Title"] = "Variables and Data Types";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Variables and Data Types</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Variables and Data Types</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 13</span>
+                </div>
+
+                <h2>What are Variables?</h2>
+                <p>Variables are containers that store data in memory. Each variable has a name, a type, and a value.</p>
+
+                <h2>Common Data Types</h2>
+
+                <h3>Value Types</h3>
+                <pre><code>int age = 25;                    // Whole numbers
+double price = 19.99;            // Decimal numbers
+bool isActive = true;            // True or false
+char grade = 'A';                // Single character
+decimal salary = 50000.50m;      // High precision decimal</code></pre>
+
+                <h3>Reference Types</h3>
+                <pre><code>string name = "John Doe";        // Text
+int[] numbers = {1, 2, 3};       // Array
+DateTime today = DateTime.Now;   // Date and time</code></pre>
+
+                <h2>Declaring Variables</h2>
+
+                <h3>Explicit Typing</h3>
+                <pre><code>int count = 10;
+string message = "Hello";
+double pi = 3.14159;</code></pre>
+
+                <h3>Implicit Typing (var)</h3>
+                <pre><code>var number = 42;        // int
+var text = "Hello";     // string
+var isReady = false;    // bool</code></pre>
+
+                <h2>Constants</h2>
+                <pre><code>const double Pi = 3.14159;
+const int MaxValue = 100;
+const string AppName = "MyApp";</code></pre>
+
+                <h2>Nullable Types</h2>
+                <pre><code>int? age = null;
+bool? isMember = null;
+
+if (age.HasValue)
+{
+    Console.WriteLine($"Age: {age.Value}");
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Choose the right data type for your data. Use <code>var</code> when the type is obvious from the assignment.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/02-SettingUpEnvironment" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/04-OperatorsAndExpressions" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,360 @@
+﻿@page
+@model CiCdGithubActionsModel
+@{
+    ViewData["Title"] = "CI/CD with GitHub Actions";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Deployment">Deployment</a></li>
+                    <li class="breadcrumb-item active">CI/CD with GitHub Actions</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">CI/CD with GitHub Actions</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 5</span>
+                </div>
+
+                <h2>What is CI/CD?</h2>
+                <p>
+                    Continuous Integration (CI) and Continuous Deployment (CD) automate the process of
+                    building, testing, and deploying your applications. GitHub Actions provides a powerful
+                    platform for implementing CI/CD pipelines.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Benefits</h5>
+                        <ul class="mb-0">
+                            <li>Automated testing and building</li>
+                            <li>Consistent deployment process</li>
+                            <li>Faster release cycles</li>
+                            <li>Reduced human error</li>
+                            <li>Better code quality</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>GitHub Actions Basics</h2>
+                <pre><code>// Basic workflow structure
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build
+      
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish</code></pre>
+
+                <h2>Complete CI/CD Pipeline Example</h2>
+                <pre><code># .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Manual trigger
+
+env:
+  PROJECT_PATH: CSharpMasteryHub
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+      
+      - name: Build
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+      
+      - name: Run unit tests
+        run: dotnet test ${{ env.PROJECT_PATH }}/Tests --configuration Release --no-build --verbosity normal
+      
+      - name: Run integration tests
+        run: dotnet test ${{ env.PROJECT_PATH }}/IntegrationTests --configuration Release --no-build --verbosity normal
+
+  build-and-deploy:
+    name: Build and Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+      
+      - name: Build
+        run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+      
+      - name: Publish
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o ./publish
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: published-app
+          path: ./publish
+      
+      # Deploy to Azure
+      - name: Deploy to Azure
+        if: github.ref == 'refs/heads/main'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'csharpmasteryhub'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./publish
+      
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./publish/wwwroot
+          force_orphan: true</code></pre>
+
+                <h2>Environment-Specific Deployment</h2>
+                <pre><code># .github/workflows/deploy-env.yml
+name: Deploy to Environment
+
+on:
+  push:
+    branches: 
+      - dev
+      - staging
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Build and Publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release -o ./publish
+      
+      - name: Deploy to Development
+        if: github.ref == 'refs/heads/dev'
+        run: echo "Deploying to development environment"
+      
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/staging'
+        run: echo "Deploying to staging environment"
+      
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        run: echo "Deploying to production environment"</code></pre>
+
+                <h2>Testing in CI/CD</h2>
+                <pre><code># Unit test workflow
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Run unit tests
+        run: |
+          dotnet test Tests/UnitTests --configuration Release
+      
+      - name: Run integration tests
+        run: |
+          dotnet test Tests/IntegrationTests --configuration Release
+      
+      - name: Run code coverage
+        run: |
+          dotnet test Tests/UnitTests --collect:"XPlat Code Coverage"
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3</code></pre>
+
+                <h2>Security Checks</h2>
+                <pre><code># Security scanning workflow
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run security scan
+        uses: dotnet/security@v1
+      
+      - name: Scan for vulnerabilities
+        run: |
+          dotnet restore
+          dotnet list package --vulnerable
+      
+      - name: Run SAST
+        uses: github/codeql-action/analyze@v2</code></pre>
+
+                <h2>Database Migration in CI/CD</h2>
+                <pre><code># Database migration step
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Install EF Core tools
+        run: dotnet tool install --global dotnet-ef
+      
+      - name: Apply migrations
+        run: |
+          dotnet ef database update --connection "${{ secrets.DB_CONNECTION_STRING }}"</code></pre>
+
+                <h2>Complete Workflow with Secrets</h2>
+                <pre><code># Using GitHub Secrets
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.x'
+      
+      - name: Build and Publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release -o ./publish
+      
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_APP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./publish
+      
+      - name: Send notification
+        uses: actions/slack@v1
+        with:
+          channel: '#deployments'
+          message: 'Deployment completed successfully!'
+          webhook: ${{ secrets.SLACK_WEBHOOK }}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>GitHub Actions provides powerful CI/CD capabilities</li>
+                            <li>Automate building, testing, and deployment</li>
+                            <li>Use environment-specific configurations</li>
+                            <li>Implement security scanning and testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Set up CI/CD for your project:</p>
+                        <ol>
+                            <li>Create GitHub Actions workflow</li>
+                            <li>Add build and test steps</li>
+                            <li>Configure deployment to free hosting</li>
+                            <li>Set up environment-specific configurations</li>
+                            <li>Add security scanning</li>
+                            <li>Test the complete pipeline</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Deployment/04-FreeCustomDomainOptions" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Deployment" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

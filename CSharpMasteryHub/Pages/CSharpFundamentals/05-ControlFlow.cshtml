@@ -1,0 +1,122 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.ControlFlowModel
+@{
+    ViewData["Title"] = "Control Flow";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Control Flow</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Control Flow</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 13</span>
+                </div>
+
+                <h2>if Statement</h2>
+                <pre><code>int age = 20;
+
+if (age >= 18)
+{
+    Console.WriteLine("You are an adult.");
+}</code></pre>
+
+                <h2>if-else Statement</h2>
+                <pre><code>int score = 75;
+
+if (score >= 60)
+{
+    Console.WriteLine("Pass");
+}
+else
+{
+    Console.WriteLine("Fail");
+}</code></pre>
+
+                <h2>if-else if-else</h2>
+                <pre><code>int grade = 85;
+
+if (grade >= 90)
+{
+    Console.WriteLine("A");
+}
+else if (grade >= 80)
+{
+    Console.WriteLine("B");
+}
+else if (grade >= 70)
+{
+    Console.WriteLine("C");
+}
+else if (grade >= 60)
+{
+    Console.WriteLine("D");
+}
+else
+{
+    Console.WriteLine("F");
+}</code></pre>
+
+                <h2>Switch Statement</h2>
+                <pre><code>string day = "Monday";
+
+switch (day)
+{
+    case "Monday":
+        Console.WriteLine("Start of week");
+        break;
+    case "Friday":
+        Console.WriteLine("End of week");
+        break;
+    case "Saturday":
+    case "Sunday":
+        Console.WriteLine("Weekend");
+        break;
+    default:
+        Console.WriteLine("Midweek");
+        break;
+}</code></pre>
+
+                <h2>Ternary Operator</h2>
+                <pre><code>int age = 20;
+string status = age >= 18 ? "Adult" : "Minor";
+
+// Same as:
+string status;
+if (age >= 18)
+    status = "Adult";
+else
+    status = "Minor";</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Control flow statements determine which code executes based on conditions.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/04-OperatorsAndExpressions" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/06-Loops" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

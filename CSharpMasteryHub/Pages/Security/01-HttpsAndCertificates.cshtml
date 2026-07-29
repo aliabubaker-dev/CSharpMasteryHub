@@ -1,0 +1,107 @@
+﻿@page
+@model HttpsAndCertificatesModel
+@{
+    ViewData["Title"] = "HTTPS and Certificates";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Security">Security</a></li>
+                    <li class="breadcrumb-item active">HTTPS and Certificates</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">HTTPS and SSL Certificates</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 6</span>
+                </div>
+
+                <h2>Why HTTPS Matters</h2>
+                <ul>
+                    <li>Encrypts data between client and server</li>
+                    <li>Prevents man-in-the-middle attacks</li>
+                    <li>Builds user trust</li>
+                    <li>Required for SEO (Google ranks HTTPS higher)</li>
+                    <li>Required for modern web features</li>
+                </ul>
+
+                <h2>Setting up HTTPS in ASP.NET Core</h2>
+
+                <h3>1. Development Environment</h3>
+                <pre><code>// Program.cs
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();</code></pre>
+
+                <h3>2. HSTS (HTTP Strict Transport Security)</h3>
+                <pre><code>// Program.cs
+app.UseHsts();
+
+// Configure HSTS options
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = true;
+    options.Preload = true;
+});</code></pre>
+
+                <h3>3. Free SSL Certificates (Let's Encrypt)</h3>
+                <pre><code>// Install Certbot from https://certbot.eff.org/
+
+# For Windows
+certbot certonly --standalone -d yourdomain.com
+
+# For Linux
+sudo certbot certonly --standalone -d yourdomain.com
+
+// In Program.cs
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 80);
+    options.Listen(IPAddress.Any, 443, listenOptions =>
+    {
+        listenOptions.UseHttps("/path/to/certificate.pfx", "password");
+    });
+});</code></pre>
+
+                <h3>4. Azure SSL (Free)</h3>
+                <pre><code>// Azure App Service
+1. Go to App Service → TLS/SSL settings
+2. Click "Add TLS/SSL binding"
+3. Choose "App Service Managed Certificate" (Free)
+4. Configure domain and binding</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>HTTPS is essential for security and trust. Free SSL certificates are available from multiple providers.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Security" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/Security/02-AuthenticationIdentity" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

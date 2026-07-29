@@ -1,0 +1,189 @@
+﻿@page
+@model PlanningAndArchitectureModel
+@{
+    ViewData["Title"] = "Planning and Architecture";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ProjectWorkflow">Project Workflow</a></li>
+                    <li class="breadcrumb-item active">Planning and Architecture</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Planning and Architecture</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 5</span>
+                </div>
+
+                <h2>Why Planning Matters</h2>
+                <p>A well-planned project reduces risks, saves time, and ensures a successful outcome.</p>
+
+                <h2>Project Planning</h2>
+
+                <h3>1. Define Scope</h3>
+                <ul>
+                    <li>What is included in the project</li>
+                    <li>What is excluded</li>
+                    <li>Project boundaries and constraints</li>
+                </ul>
+
+                <h3>2. Create Timeline</h3>
+                <pre><code># 3-Month Timeline
+Month 1: Requirements & Design
+  - Requirements gathering
+  - Architecture design
+  - Database schema design
+  - UI/UX mockups
+
+Month 2: Development
+  - Backend development
+  - Frontend development
+  - API implementation
+  - Database implementation
+
+Month 3: Testing & Deployment
+  - Unit testing
+  - Integration testing
+  - UAT
+  - Deployment
+  - Documentation</code></pre>
+
+                <h3>3. Resource Allocation</h3>
+                <ul>
+                    <li>Team members and roles</li>
+                    <li>Budget and costs</li>
+                    <li>Tools and infrastructure</li>
+                    <li>Training requirements</li>
+                </ul>
+
+                <h3>4. Risk Management</h3>
+                <pre><code># Risk Register
+Risk: Data breach due to security vulnerabilities
+Probability: Medium
+Impact: High
+Mitigation: Security audit, penetration testing, encryption</code></pre>
+
+                <h2>System Architecture</h2>
+
+                <h3>Common Architecture Patterns</h3>
+
+                <h4>1. Layered Architecture (N-Tier)</h4>
+                <pre><code>Presentation Layer (UI)
+    ↓
+Business Logic Layer (Services)
+    ↓
+Data Access Layer (Repositories)
+    ↓
+Database Layer</code></pre>
+
+                <h4>2. Clean Architecture</h4>
+                <pre><code>Domain Layer (Entities & Interfaces)
+    ↓
+Application Layer (Use Cases)
+    ↓
+Infrastructure Layer (Data Access, External Services)
+    ↓
+Presentation Layer (UI)</code></pre>
+
+                <h2>Technology Selection</h2>
+
+                <h3>Criteria for Selection</h3>
+                <ul>
+                    <li>Project requirements</li>
+                    <li>Team expertise</li>
+                    <li>Scalability needs</li>
+                    <li>Community support</li>
+                    <li>Cost considerations</li>
+                </ul>
+
+                <h3>Technology Stack Example</h3>
+                <pre><code># Full Stack Example
+Frontend: ASP.NET Core Razor Pages
+Backend: C# .NET 10
+Database: SQL Server
+ORM: Entity Framework Core
+Hosting: Azure
+CI/CD: GitHub Actions</code></pre>
+
+                <h2>Database Design</h2>
+
+                <h3>Steps in Database Design</h3>
+                <ol>
+                    <li>Identify entities and relationships</li>
+                    <li>Create Entity-Relationship (ER) diagram</li>
+                    <li>Normalize tables</li>
+                    <li>Define primary and foreign keys</li>
+                    <li>Create indexes for performance</li>
+                </ol>
+
+                <pre><code># Example ER Diagram
+Users
+  - Id (PK)
+  - Name
+  - Email
+
+Orders
+  - Id (PK)
+  - UserId (FK → Users.Id)
+  - OrderDate
+  - Status</code></pre>
+
+                <h2>API Design</h2>
+
+                <h3>RESTful API Principles</h3>
+                <ul>
+                    <li>Use HTTP methods: GET, POST, PUT, DELETE</li>
+                    <li>Use resource-based URLs: /api/users, /api/users/{id}</li>
+                    <li>Use status codes appropriately</li>
+                    <li>Version your API</li>
+                </ul>
+
+                <pre><code># API Endpoints Example
+GET    /api/users              → Get all users
+GET    /api/users/{id}         → Get user by ID
+POST   /api/users              → Create a new user
+PUT    /api/users/{id}         → Update an existing user
+DELETE /api/users/{id}         → Delete a user</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Proper planning and architecture design are essential for building scalable, maintainable applications.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <ol>
+                            <li>Create a timeline for a project</li>
+                            <li>Design a system architecture diagram</li>
+                            <li>Create an ER diagram for a database</li>
+                            <li>Design RESTful API endpoints</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ProjectWorkflow/01-UnderstandingRequirements" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ProjectWorkflow/03-GitBranchingStrategy" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,172 @@
+﻿@page
+@model AuthenticationIdentityModel
+@{
+    ViewData["Title"] = "Authentication & Identity";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Security">Security</a></li>
+                    <li class="breadcrumb-item active">Authentication & Identity</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Authentication & Identity</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 6</span>
+                </div>
+
+                <h2>ASP.NET Core Identity</h2>
+                <p>ASP.NET Core Identity is a membership system for adding authentication and authorization to your application.</p>
+
+                <h2>Setting Up Identity</h2>
+
+                <h3>1. Install Packages</h3>
+                <pre><code>dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer</code></pre>
+
+                <h3>2. Create ApplicationUser</h3>
+                <pre><code>public class ApplicationUser : IdentityUser
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime CreatedDate { get; set; }
+}</code></pre>
+
+                <h3>3. Configure DbContext</h3>
+                <pre><code>public class ApplicationDbContext : IdentityDbContext&lt;ApplicationUser&gt;
+{
+    public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+        : base(options)
+    {
+    }
+}</code></pre>
+
+                <h3>4. Configure Services</h3>
+                <pre><code>// Program.cs
+builder.Services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure&lt;IdentityOptions&gt;(options =>
+{
+    // Password settings
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+
+    // Lockout settings
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // User settings
+    options.User.RequireUniqueEmail = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});</code></pre>
+
+                <h3>5. Registration and Login</h3>
+                <pre><code>// Pages/Account/Register.cshtml.cs
+public class RegisterModel : PageModel
+{
+    private readonly UserManager&lt;ApplicationUser&gt; _userManager;
+    private readonly SignInManager&lt;ApplicationUser&gt; _signInManager;
+    
+    public RegisterModel(UserManager&lt;ApplicationUser&gt; userManager, 
+                         SignInManager&lt;ApplicationUser&gt; signInManager)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+    }
+    
+    [BindProperty]
+    public InputModel Input { get; set; }
+    
+    public async Task&lt;IActionResult&gt; OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+            return Page();
+        
+        var user = new ApplicationUser
+        {
+            UserName = Input.Email,
+            Email = Input.Email,
+            FirstName = Input.FirstName,
+            LastName = Input.LastName,
+            CreatedDate = DateTime.Now
+        };
+        
+        var result = await _userManager.CreateAsync(user, Input.Password);
+        
+        if (result.Succeeded)
+        {
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return RedirectToPage("/Index");
+        }
+        
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+        
+        return Page();
+    }
+}</code></pre>
+
+                <h3>6. Authorization</h3>
+                <pre><code>// In Pages/Admin/Index.cshtml
+@@page
+@@model IndexModel
+@@attribute [Authorize(Roles = "Admin")]
+
+// Or in code
+[Authorize(Roles = "Admin")]
+public class IndexModel : PageModel { }
+
+// Policy-based authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireRole("Admin"));
+});</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>ASP.NET Core Identity provides a complete authentication and authorization system out of the box.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Security/01-HttpsAndCertificates" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Security/03-SqlInjectionPrevention" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

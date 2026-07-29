@@ -1,0 +1,270 @@
+﻿@page
+@model MethodsDeepDiveModel
+@{
+    ViewData["Title"] = "Methods Deep Dive in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Methods Deep Dive</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Methods Deep Dive in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 11</span>
+                </div>
+
+                <h2>Understanding Methods</h2>
+                <p>
+                    Methods are blocks of code that perform specific tasks. They help organize code,
+                    promote reuse, and make programs more maintainable.
+                </p>
+
+                <h2>Method Syntax</h2>
+                <pre><code>// Basic method structure
+[access_modifier] [static] return_type MethodName(parameters)
+{
+    // Method body
+    return value; // if return_type is not void
+}</code></pre>
+
+                <h3>Method Examples</h3>
+                <pre><code>public class Calculator
+{
+    // Method with return value
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    // Void method (no return)
+    public void DisplayResult(int result)
+    {
+        Console.WriteLine($"Result: {result}");
+    }
+    
+    // Static method
+    public static double Pi()
+    {
+        return 3.14159;
+    }
+}</code></pre>
+
+                <h2>Method Parameters</h2>
+
+                <h3>Value Parameters</h3>
+                <pre><code>public void ChangeValue(int number)
+{
+    number = 100; // Only affects local copy
+}</code></pre>
+
+                <h3>Reference Parameters (ref)</h3>
+                <pre><code>public void ChangeValue(ref int number)
+{
+    number = 100; // Affects original variable
+}
+
+// Usage
+int x = 5;
+ChangeValue(ref x); // x becomes 100</code></pre>
+
+                <h3>Output Parameters (out)</h3>
+                <pre><code>public bool TryDivide(int a, int b, out int result)
+{
+    if (b == 0)
+    {
+        result = 0;
+        return false;
+    }
+    result = a / b;
+    return true;
+}
+
+// Usage
+if (TryDivide(10, 2, out int quotient))
+{
+    Console.WriteLine($"Quotient: {quotient}");
+}</code></pre>
+
+                <h3>Optional Parameters</h3>
+                <pre><code>public void Greet(string name, string greeting = "Hello")
+{
+    Console.WriteLine($"{greeting}, {name}!");
+}
+
+// Usage
+Greet("John");        // Hello, John!
+Greet("Jane", "Hi");  // Hi, Jane!</code></pre>
+
+                <h3>Params Keyword</h3>
+                <pre><code>public int Sum(params int[] numbers)
+{
+    int total = 0;
+    foreach (int num in numbers)
+        total += num;
+    return total;
+}
+
+// Usage
+int result = Sum(1, 2, 3, 4, 5); // returns 15</code></pre>
+
+                <h2>Method Overloading</h2>
+                <pre><code>public class MathOperations
+{
+    // Same method name, different parameters
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+    
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}</code></pre>
+
+                <h2>Expression-Bodied Methods</h2>
+                <pre><code>public class Math
+{
+    // Single expression method
+    public int Add(int a, int b) => a + b;
+    
+    public bool IsEven(int number) => number % 2 == 0;
+}</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+public class StudentManager
+{
+    // Fields
+    private List<string> students = new List<string>();
+    
+    // Add student
+    public void AddStudent(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty");
+        students.Add(name);
+        Console.WriteLine($"Student '{name}' added.");
+    }
+    
+    // Remove student
+    public bool RemoveStudent(string name)
+    {
+        if (students.Remove(name))
+        {
+            Console.WriteLine($"Student '{name}' removed.");
+            return true;
+        }
+        Console.WriteLine($"Student '{name}' not found.");
+        return false;
+    }
+    
+    // Find student
+    public bool FindStudent(string name, out int index)
+    {
+        index = students.IndexOf(name);
+        return index >= 0;
+    }
+    
+    // Get student at index
+    public string GetStudent(int index)
+    {
+        if (index < 0 || index >= students.Count)
+            throw new ArgumentOutOfRangeException("Invalid index");
+        return students[index];
+    }
+    
+    // Get all students
+    public string[] GetAllStudents() => students.ToArray();
+    
+    // Get count
+    public int Count => students.Count;
+    
+    // Clear all
+    public void Clear() => students.Clear();
+}
+
+class Program
+{
+    static void Main()
+    {
+        StudentManager manager = new StudentManager();
+        
+        manager.AddStudent("Alice");
+        manager.AddStudent("Bob");
+        manager.AddStudent("Charlie");
+        
+        if (manager.FindStudent("Bob", out int index))
+            Console.WriteLine($"Bob found at index {index}");
+        
+        Console.WriteLine($"Total students: {manager.Count}");
+        
+        foreach (string student in manager.GetAllStudents())
+            Console.WriteLine($"- {student}");
+    }
+}</code></pre>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practices</h5>
+                        <ul class="mb-0">
+                            <li>Keep methods focused and single-purpose</li>
+                            <li>Use meaningful method names</li>
+                            <li>Validate parameters</li>
+                            <li>Document complex methods with comments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Methods are the building blocks of C# programs. Mastering different parameter types and overloading enables flexible and reusable code.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a class "InventoryManager" with methods:</p>
+                        <ol>
+                            <li>AddItem with name, quantity, and optional price</li>
+                            <li>RemoveItem with name and optional quantity</li>
+                            <li>FindItem that returns item info</li>
+                            <li>GetTotalValue method</li>
+                            <li>DisplayInventory with formatting</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/02-FieldsAndProperties" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/04-Constructors" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.EventHandlingModel
+@{
+    ViewData["Title"] = "Event Handling";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Event Handling</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Event Handling</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 7</span>
+                </div>
+
+                <p>
+                    WinForms apps are event-driven: code runs in response to things the user
+                    does — clicking a button, typing in a textbox, closing the form.
+                </p>
+
+                <h2>Wiring up a Click event</h2>
+                <p>Double-click a button in the designer and Visual Studio generates the handler and wires it up automatically:</p>
+                <pre><code>private void btnSave_Click(object sender, EventArgs e)
+{
+    MessageBox.Show("Saved!");
+}</code></pre>
+
+                <h2>What's happening behind the scenes</h2>
+                <p>In <code>Form1.Designer.cs</code>, this line connects the event to the handler:</p>
+                <pre><code>this.btnSave.Click += new System.EventHandler(this.btnSave_Click);</code></pre>
+
+                <h2>Common events you'll use constantly</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Fires when</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Click</td><td>Button/control is clicked</td></tr>
+                            <tr><td>Load</td><td>The form first loads — great place to populate a grid or dropdown</td></tr>
+                            <tr><td>TextChanged</td><td>Text in a TextBox changes — useful for live validation</td></tr>
+                            <tr><td>SelectedIndexChanged</td><td>A ComboBox/ListBox selection changes</td></tr>
+                            <tr><td>FormClosing</td><td>The form is about to close — good for "unsaved changes?" prompts</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Example: Form Load populating a ComboBox</h2>
+                <pre><code>private void Form1_Load(object sender, EventArgs e)
+{
+    cmbCourse.Items.AddRange(new object[] { "Math", "Science", "History" });
+    cmbCourse.SelectedIndex = 0;
+}</code></pre>
+
+                <h2>Example: simple validation on TextChanged</h2>
+                <pre><code>private void txtEmail_TextChanged(object sender, EventArgs e)
+{
+    btnSave.Enabled = txtEmail.Text.Contains("@@");
+}</code></pre>
+
+                <h2>Preventing a form from closing</h2>
+                <pre><code>private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+{
+    var result = MessageBox.Show("Discard unsaved changes?", "Confirm",
+        MessageBoxButtons.YesNo);
+
+    if (result == DialogResult.No)
+        e.Cancel = true;
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>WinForms is event-driven. Events fire in response to user actions, and you handle them to make your app interactive.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WindowsForms/02-ControlsBasics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

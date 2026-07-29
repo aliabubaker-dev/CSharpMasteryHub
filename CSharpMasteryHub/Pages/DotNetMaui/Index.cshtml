@@ -1,0 +1,124 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = ".NET MAUI - Cross-Platform App Development";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">.NET MAUI - Cross-Platform App Development</h1>
+            <p class="lead mb-4">Build cross-platform mobile and desktop applications with .NET MAUI. Learn XAML, MVVM, navigation, and publishing.</p>
+
+            <div class="progress-section mb-4">
+                <h5><i class="fas fa-tasks me-2 text-primary"></i>Your Progress</h5>
+                <div class="progress" style="height: 25px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" id="mauiProgress">0%</div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/01-WhatIsMaui">
+                            <h5><span class="card-number">1</span>What Is MAUI</h5>
+                            <p>Introduction to .NET MAUI and its capabilities for cross-platform development.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/02-EnvironmentSetup">
+                            <h5><span class="card-number">2</span>Environment Setup</h5>
+                            <p>Install and configure your development environment for .NET MAUI.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/03-XamlBasics">
+                            <h5><span class="card-number">3</span>XAML Basics</h5>
+                            <p>Learn XAML markup language for building user interfaces in MAUI.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/04-LayoutsAndControls">
+                            <h5><span class="card-number">4</span>Layouts and Controls</h5>
+                            <p>Master layouts and controls for building responsive UI in MAUI.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/05-ShellNavigation">
+                            <h5><span class="card-number">5</span>Shell Navigation</h5>
+                            <p>Implement navigation using Shell in .NET MAUI applications.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/06-MvvmPattern">
+                            <h5><span class="card-number">6</span>MVVM Pattern</h5>
+                            <p>Implement the Model-View-ViewModel pattern in MAUI applications.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/07-ConnectingToApiOrDb">
+                            <h5><span class="card-number">7</span>Connecting to API or DB</h5>
+                            <p>Connect your MAUI app to REST APIs and databases.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/DotNetMaui/08-PublishingMauiApp">
+                            <h5><span class="card-number">8</span>Publishing MAUI App</h5>
+                            <p>Prepare and publish your MAUI app to stores and platforms.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+            const totalLessons = document.querySelectorAll('.lesson-card').length;
+            const completedLessons = Object.values(progress).filter(v => v === true).length;
+            const percentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+            const progressBar = document.getElementById('mauiProgress');
+            if (progressBar) {
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = percentage + '%';
+            }
+        });
+    </script>
+}

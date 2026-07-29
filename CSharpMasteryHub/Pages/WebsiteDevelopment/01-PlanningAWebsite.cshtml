@@ -1,0 +1,343 @@
+﻿@page
+@model PlanningAWebsiteModel
+@{
+    ViewData["Title"] = "Planning A Website";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WebsiteDevelopment">Website Development</a></li>
+                    <li class="breadcrumb-item active">Planning A Website</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Planning A Website</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 4</span>
+                </div>
+
+                <h2>Why Planning Matters</h2>
+                <p>
+                    Planning is the most critical phase of website development. A well-planned project saves time,
+                    reduces costs, and ensures a successful outcome. Without proper planning, projects often fail
+                    or go over budget.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">"Failing to plan is planning to fail." - A good plan is the foundation of a successful website.</p>
+                    </div>
+                </div>
+
+                <h2>Step 1: Define Project Goals</h2>
+                <p>Before writing any code, clearly define what you want to achieve:</p>
+
+                <h3>Questions to Ask</h3>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        <strong>What is the purpose of the website?</strong> (e.g., e-commerce, portfolio, blog, SaaS)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        <strong>Who is the target audience?</strong> (e.g., professionals, consumers, developers)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        <strong>What are the key features?</strong> (e.g., login, search, payments)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        <strong>What is the timeline?</strong> (e.g., MVP in 3 months, full release in 6 months)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        <strong>What is the budget?</strong> (hosting, domain, design, development)
+                    </li>
+                </ul>
+
+                <h2>Step 2: Requirements Gathering</h2>
+
+                <h3>Functional Requirements</h3>
+                <pre><code>// Example Functional Requirements
+1. User Authentication
+   - Sign up with email/password
+   - Login with email/password
+   - Password reset via email
+   - Social login (Google, Facebook)
+
+2. Content Management
+   - Create, read, update, delete content
+   - Rich text editor for content
+   - Image upload and management
+   - Content categories and tags
+
+3. User Dashboard
+   - User profile management
+   - Activity history
+   - Notification system
+
+4. Admin Panel
+   - User management
+   - Content moderation
+   - Analytics and reporting
+   - System configuration</code></pre>
+
+                <h3>Non-Functional Requirements</h3>
+                <pre><code>// Example Non-Functional Requirements
+1. Performance
+   - Page load time < 2 seconds
+   - Support 1000 concurrent users
+   - 99.9% uptime
+
+2. Security
+   - HTTPS encryption
+   - SQL injection prevention
+   - XSS protection
+   - CSRF protection
+
+3. Scalability
+   - Horizontal scaling support
+   - Database optimization
+   - Caching strategy
+
+4. SEO
+   - Meta tags optimization
+   - Sitemap generation
+   - Semantic HTML
+   - Mobile-friendly design</code></pre>
+
+                <h2>Step 3: Create Site Map</h2>
+                <p>A sitemap outlines the structure of your website:</p>
+
+                <pre><code>// Example Sitemap
+Home
+├── About
+├── Products
+│   ├── Category 1
+│   │   ├── Product A
+│   │   └── Product B
+│   └── Category 2
+│       ├── Product C
+│       └── Product D
+├── Blog
+│   ├── Blog Post 1
+│   ├── Blog Post 2
+│   └── Blog Post 3
+├── Services
+│   ├── Service 1
+│   └── Service 2
+├── Contact
+└── FAQ</code></pre>
+
+                <h2>Step 4: Wireframing</h2>
+                <p>Create wireframes to visualize the layout and structure:</p>
+
+                <pre><code>// Wireframe Example (Text Representation)
++------------------------------------------+
+| [Logo]        [Nav] [Nav] [Nav] [Search]  |
++------------------------------------------+
+|                                           |
+|         Hero Section with Headline        |
+|         Call to Action Button             |
+|                                           |
++------------------------------------------+
+| [Feature 1]  [Feature 2]  [Feature 3]    |
++------------------------------------------+
+|                                           |
+|         Content Section                   |
+|         More Information                  |
+|                                           |
++------------------------------------------+
+| [Testimonial 1]  [Testimonial 2]         |
++------------------------------------------+
+| Footer - Links, Contact, Social          |
++------------------------------------------+</code></pre>
+
+                <h2>Step 5: Technology Stack Selection</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Options</th>
+                                <th>Recommended</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Frontend Framework</td>
+                                <td>React, Angular, Vue, Blazor</td>
+                                <td>ASP.NET Core Razor Pages</td>
+                            </tr>
+                            <tr>
+                                <td>Backend</td>
+                                <td>ASP.NET Core, Node.js, PHP</td>
+                                <td>.NET 10 (LTS)</td>
+                            </tr>
+                            <tr>
+                                <td>Database</td>
+                                <td>SQL Server, PostgreSQL, MySQL</td>
+                                <td>SQL Server / PostgreSQL</td>
+                            </tr>
+                            <tr>
+                                <td>Hosting</td>
+                                <td>Azure, AWS, Heroku, Netlify</td>
+                                <td>Azure Free Tier</td>
+                            </tr>
+                            <tr>
+                                <td>Version Control</td>
+                                <td>Git, SVN</td>
+                                <td>Git with GitHub</td>
+                            </tr>
+                            <tr>
+                                <td>CI/CD</td>
+                                <td>GitHub Actions, Azure DevOps</td>
+                                <td>GitHub Actions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Step 6: Create Project Timeline</h2>
+                <pre><code>// Example 6-Month Timeline
+Month 1: Planning & Design
+  - Requirements gathering
+  - Wireframing and prototyping
+  - UI/UX design
+  - Technology stack finalization
+
+Month 2: Foundation
+  - Project setup
+  - Database design
+  - Authentication system
+  - CI/CD setup
+
+Month 3: Core Features
+  - User management
+  - Content management
+  - Basic functionality
+
+Month 4: Advanced Features
+  - Payment integration
+  - Search functionality
+  - Notifications
+
+Month 5: Testing & Refinement
+  - QA testing
+  - Performance optimization
+  - Security audit
+  - Bug fixes
+
+Month 6: Deployment & Launch
+  - Production deployment
+  - SEO setup
+  - Analytics integration
+  - Launch campaign</code></pre>
+
+                <h2>Step 7: Risk Assessment</h2>
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-exclamation-triangle text-warning me-2"></i>Common Risks</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Scope Creep:</strong> Features keep expanding beyond the original plan
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Technical Debt:</strong> Quick fixes leading to long-term maintenance issues
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Security Vulnerabilities:</strong> Data breaches or attacks
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Performance Issues:</strong> Slow loading times or downtime
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Integration Problems:</strong> APIs or third-party services not working
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Team Communication:</strong> Misaligned expectations and priorities
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Step 8: Documentation</h2>
+                <pre><code>// Required Documentation
+1. Project Overview
+   - Vision and mission
+   - Project goals and objectives
+   - Key stakeholders
+
+2. Technical Documentation
+   - Architecture diagram
+   - Database schema
+   - API documentation
+   - Code style guide
+
+3. User Documentation
+   - User manual
+   - FAQ
+   - Troubleshooting guide
+
+4. Business Documentation
+   - Marketing plan
+   - Monetization strategy
+   - Legal compliance</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">A well-planned project is the foundation of a successful website. Invest time in planning to save time and money in development.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a project plan for a website:</p>
+                        <ol>
+                            <li>Define project goals and target audience</li>
+                            <li>Create a sitemap</li>
+                            <li>Design wireframes</li>
+                            <li>Select technology stack</li>
+                            <li>Create a timeline</li>
+                            <li>Identify risks and mitigation strategies</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WebsiteDevelopment" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/WebsiteDevelopment/02-ProjectStructureBestPractices" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

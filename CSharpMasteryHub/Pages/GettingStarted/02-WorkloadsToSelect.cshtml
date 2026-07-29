@@ -1,0 +1,77 @@
+@page
+@model CSharpMasteryHub.Pages.GettingStarted.WorkloadsToSelectModel
+@{
+    ViewData["Title"] = "Choosing the Right Workloads";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/GettingStarted">Getting Started</a></li>
+                    <li class="breadcrumb-item active">Choosing the Right Workloads</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Choosing the Right Workloads</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">10 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 4</span>
+                </div>
+
+                <p>
+                    Workloads are bundles of tools. For this entire course, select these
+                    workloads in the Visual Studio Installer:
+                </p>
+
+                <ul>
+                    <li><strong>ASP.NET and web development</strong> — required for Razor Pages, SQL connections, and general web work.</li>
+                    <li><strong>.NET desktop development</strong> — required for Console Apps and Windows Forms.</li>
+                    <li><strong>.NET Multi-platform App UI development (.NET MAUI)</strong> — required later for the mobile/desktop MAUI module.</li>
+                    <li><strong>Data storage and processing</strong> (optional but useful) — adds SQL Server Data Tools support inside Visual Studio.</li>
+                </ul>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>What is a Workload?</h5>
+                        <p class="card-text">A workload is a collection of tools, libraries, and templates for a specific type of development. Selecting the right workloads saves disk space and makes Visual Studio faster.</p>
+                    </div>
+                </div>
+
+                <h2>Individual components worth adding</h2>
+                <ul>
+                    <li>Git for Windows (or install separately — covered in Lesson 4)</li>
+                    <li>SQL Server Express LocalDB (usually included automatically with ASP.NET workload)</li>
+                </ul>
+
+                <p>
+                    After selecting workloads, click <strong>Install</strong>. This can take
+                    20&ndash;60 minutes depending on your connection. Grab a coffee.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Selecting the right workloads ensures you have all the tools you need without wasting disk space.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/GettingStarted/01-InstallingVisualStudio" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/GettingStarted/03-InstallingSqlExpressSsms" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

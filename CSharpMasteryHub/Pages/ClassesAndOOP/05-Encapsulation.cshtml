@@ -1,0 +1,337 @@
+﻿@page
+@model EncapsulationModel
+@{
+    ViewData["Title"] = "Encapsulation in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Encapsulation</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Encapsulation in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 11</span>
+                </div>
+
+                <h2>What is Encapsulation?</h2>
+                <p>
+                    Encapsulation is a fundamental principle of object-oriented programming that bundles data
+                    and methods together while restricting direct access to internal details. It's about
+                    hiding implementation details and exposing only what's necessary.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Real-World Analogy</h5>
+                        <p class="card-text">A car's steering wheel and pedals are the public interface. The engine, transmission, and fuel injection system are encapsulated - you don't need to know how they work to drive the car.</p>
+                    </div>
+                </div>
+
+                <h2>Access Modifiers</h2>
+
+                <table class="table table-bordered mb-4">
+                    <thead>
+                        <tr>
+                            <th>Modifier</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>public</strong></td>
+                            <td>Accessible from anywhere</td>
+                        </tr>
+                        <tr>
+                            <td><strong>private</strong></td>
+                            <td>Accessible only within the same class</td>
+                        </tr>
+                        <tr>
+                            <td><strong>protected</strong></td>
+                            <td>Accessible within same class and derived classes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>internal</strong></td>
+                            <td>Accessible within the same assembly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>protected internal</strong></td>
+                            <td>Accessible within same assembly or derived classes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>private protected</strong></td>
+                            <td>Accessible within same class or derived classes in same assembly</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Encapsulation Example</h2>
+                <pre><code>public class BankAccount
+{
+    // Private fields - hidden from outside
+    private decimal balance;
+    private string accountNumber;
+    private DateTime lastTransactionDate;
+    private List<Transaction> transactions = new List<Transaction>();
+    
+    // Public properties - controlled access
+    public decimal Balance 
+    { 
+        get { return balance; }
+        private set { balance = value; }
+    }
+    
+    public string AccountNumber
+    {
+        get { return accountNumber; }
+        private set { accountNumber = value; }
+    }
+    
+    // Read-only property
+    public int TransactionCount => transactions.Count;
+    
+    // Constructor
+    public BankAccount(string accountNumber, decimal initialBalance)
+    {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+        this.lastTransactionDate = DateTime.Now;
+    }
+    
+    // Public methods - expose behavior
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Deposit amount must be positive");
+        
+        balance += amount;
+        AddTransaction("Deposit", amount);
+    }
+    
+    public bool Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+            throw new ArgumentException("Withdrawal amount must be positive");
+            
+        if (amount > balance)
+            return false;
+            
+        balance -= amount;
+        AddTransaction("Withdrawal", amount);
+        return true;
+    }
+    
+    public Transaction[] GetRecentTransactions(int count)
+    {
+        return transactions
+            .OrderByDescending(t => t.Date)
+            .Take(count)
+            .ToArray();
+    }
+    
+    // Private method - internal behavior
+    private void AddTransaction(string type, decimal amount)
+    {
+        transactions.Add(new Transaction
+        {
+            Type = type,
+            Amount = amount,
+            Date = DateTime.Now
+        });
+    }
+}</code></pre>
+
+                <h2>Property Access Control</h2>
+                <pre><code>public class Product
+{
+    private decimal price;
+    
+    // Public get, private set
+    public decimal Price 
+    { 
+        get { return price; }
+        private set 
+        {
+            if (value < 0)
+                throw new ArgumentException("Price cannot be negative");
+            price = value;
+        }
+    }
+    
+    // Public get, protected set
+    public string Category { get; protected set; }
+    
+    // Public get, init set (C# 9+)
+    public int Id { get; init; }
+}</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+public class EmployeeManagement
+{
+    // Private fields
+    private string employeeId;
+    private string name;
+    private decimal salary;
+    private string department;
+    private DateTime hireDate;
+    private List<PerformanceReview> reviews = new List<PerformanceReview>();
+    
+    // Public properties with validation
+    public string EmployeeId 
+    { 
+        get { return employeeId; }
+        private set 
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Employee ID cannot be empty");
+            employeeId = value;
+        }
+    }
+    
+    public string Name
+    {
+        get { return name; }
+        set 
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Name cannot be empty");
+            name = value;
+        }
+    }
+    
+    public decimal Salary
+    {
+        get { return salary; }
+        set 
+        {
+            if (value < 0)
+                throw new ArgumentException("Salary cannot be negative");
+            salary = value;
+        }
+    }
+    
+    public string Department
+    {
+        get { return department; }
+        set { department = value ?? "Unassigned"; }
+    }
+    
+    public int YearsOfService => (DateTime.Now - hireDate).Days / 365;
+    
+    public int ReviewCount => reviews.Count;
+    
+    // Constructor
+    public EmployeeManagement(string employeeId, string name, decimal salary)
+    {
+        EmployeeId = employeeId;
+        Name = name;
+        Salary = salary;
+        hireDate = DateTime.Now;
+        Department = "Unassigned";
+    }
+    
+    // Public methods
+    public void GiveRaise(decimal percentage)
+    {
+        if (percentage <= 0)
+            throw new ArgumentException("Percentage must be positive");
+        
+        salary *= (1 + percentage / 100);
+    }
+    
+    public void AddReview(string comments, int rating)
+    {
+        if (rating < 1 || rating > 5)
+            throw new ArgumentException("Rating must be between 1 and 5");
+        
+        reviews.Add(new PerformanceReview
+        {
+            Date = DateTime.Now,
+            Comments = comments,
+            Rating = rating
+        });
+    }
+    
+    public PerformanceReview GetLatestReview()
+    {
+        return reviews.OrderByDescending(r => r.Date).FirstOrDefault();
+    }
+    
+    public double GetAverageRating()
+    {
+        if (reviews.Count == 0)
+            return 0;
+        return reviews.Average(r => r.Rating);
+    }
+}
+
+public class PerformanceReview
+{
+    public DateTime Date { get; set; }
+    public string Comments { get; set; }
+    public int Rating { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        EmployeeManagement emp = new EmployeeManagement("EMP001", "John Doe", 50000);
+        emp.Department = "IT";
+        emp.GiveRaise(10);
+        emp.AddReview("Excellent performance", 5);
+        
+        Console.WriteLine($"Employee: {emp.Name}");
+        Console.WriteLine($"Years of service: {emp.YearsOfService}");
+        Console.WriteLine($"Current salary: {emp.Salary:C}");
+        Console.WriteLine($"Average rating: {emp.GetAverageRating():F1}");
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Encapsulation is about protecting data and hiding implementation details. It makes code more maintainable, flexible, and secure.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a class "Course" with:</p>
+                        <ol>
+                            <li>Private fields for all data</li>
+                            <li>Public properties with validation</li>
+                            <li>Methods to add/remove students</li>
+                            <li>Method to calculate average grade</li>
+                            <li>Private methods for internal calculations</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/04-Constructors" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

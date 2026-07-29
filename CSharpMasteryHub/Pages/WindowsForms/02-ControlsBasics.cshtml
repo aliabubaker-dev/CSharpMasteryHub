@@ -1,0 +1,101 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.ControlsBasicsModel
+@{
+    ViewData["Title"] = "Controls Basics";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Controls Basics</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Controls Basics</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 7</span>
+                </div>
+
+                <p>Controls are the visual building blocks of a form. Drag them from the Toolbox onto the design surface.</p>
+
+                <h2>The essentials</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Control</th>
+                                <th>Use for</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Label</td><td>Static text</td></tr>
+                            <tr><td>TextBox</td><td>Single-line text input</td></tr>
+                            <tr><td>Button</td><td>Triggers an action on click</td></tr>
+                            <tr><td>ComboBox</td><td>Dropdown selection</td></tr>
+                            <tr><td>CheckBox / RadioButton</td><td>Boolean / mutually-exclusive choices</td></tr>
+                            <tr><td>DataGridView</td><td>Tabular data display and editing</td></tr>
+                            <tr><td>ListBox</td><td>Scrollable list of items</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Naming controls properly</h2>
+                <p>
+                    In the Properties panel, always rename controls from the default
+                    (<code>textBox1</code>) to something meaningful before writing code:
+                </p>
+                <pre><code>txtFirstName   (TextBox)
+txtLastName    (TextBox)
+btnSave        (Button)
+cmbCourse      (ComboBox)
+dgvStudents    (DataGridView)</code></pre>
+                <p>The prefix convention (<code>txt</code>, <code>btn</code>, <code>cmb</code>, <code>dgv</code>) makes code much easier to read.</p>
+
+                <h2>Reading control values in code</h2>
+                <pre><code>string firstName = txtFirstName.Text;
+string lastName = txtLastName.Text;
+bool isActive = chkActive.Checked;
+string? selectedCourse = cmbCourse.SelectedItem?.ToString();</code></pre>
+
+                <h2>Setting control values in code</h2>
+                <pre><code>txtFirstName.Text = "Ali";
+lblStatus.Text = "Saved successfully";
+lblStatus.ForeColor = Color.Green;</code></pre>
+
+                <h2>Anchoring and docking</h2>
+                <p>
+                    Use the <strong>Anchor</strong> property to keep a control's distance
+                    fixed from an edge as the form resizes, and <strong>Dock</strong> to make
+                    a control fill an edge or the whole parent (common for a DataGridView
+                    filling the form body).
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Controls are the building blocks of WinForms. Use meaningful names with prefixes for better code readability.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WindowsForms/03-EventHandling" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

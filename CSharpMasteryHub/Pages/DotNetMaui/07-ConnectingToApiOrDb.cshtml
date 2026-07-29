@@ -1,0 +1,396 @@
+﻿@page
+@model ConnectingToApiOrDbModel
+@{
+    ViewData["Title"] = "Connecting to API or Database in .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">Connecting to API or DB</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Connecting to API or Database in .NET MAUI</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 8</span>
+                </div>
+
+                <h2>Data Access Options</h2>
+                <p>
+                    .NET MAUI applications can connect to various data sources including REST APIs, SQL databases,
+                    and local storage. Choose the right approach based on your needs.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Data Access Options</h5>
+                        <ul class="mb-0">
+                            <li><strong>REST APIs</strong> - For cloud-based data</li>
+                            <li><strong>SQLite</strong> - For local database storage</li>
+                            <li><strong>Entity Framework Core</strong> - For ORM-based access</li>
+                            <li><strong>Azure Services</strong> - For cloud data services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>1. Connecting to REST APIs</h2>
+
+                <h3>Setting up HttpClient</h3>
+                <pre><code>// Services/ApiService.cs
+using System.Net.Http;
+using System.Text.Json;
+
+public class ApiService
+{
+    private readonly HttpClient httpClient;
+    private readonly JsonSerializerOptions jsonOptions;
+    
+    public ApiService()
+    {
+        httpClient = new HttpClient();
+        httpClient.BaseAddress = new Uri("https://api.example.com/");
+        httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+        
+        jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
+    }
+    
+    public async Task<List<T>> GetItemsAsync<T>(string endpoint)
+    {
+        var response = await httpClient.GetAsync(endpoint);
+        response.EnsureSuccessStatusCode();
+
+var json = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<List<T>>(json, jsonOptions);
+    }
+
+public async Task<T> GetItemAsync<T>(string endpoint, int id)
+    {
+        var response = await httpClient.GetAsync($"{endpoint}/{id}");
+        response.EnsureSuccessStatusCode();
+
+var json = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<T>(json, jsonOptions);
+    }
+
+public async Task<T> PostItemAsync<T>(string endpoint, T item)
+    {
+        var json = JsonSerializer.Serialize(item, jsonOptions);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+var response = await httpClient.PostAsync(endpoint, content);
+        response.EnsureSuccessStatusCode();
+
+var responseJson = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<T>(responseJson, jsonOptions);
+    }
+
+public async Task<bool> PutItemAsync<T>(string endpoint, int id, T item)
+    {
+        var json = JsonSerializer.Serialize(item, jsonOptions);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+var response = await httpClient.PutAsync($"{endpoint}/{id}", content);
+        return response.IsSuccessStatusCode;
+    }
+
+public async Task<bool> DeleteItemAsync(string endpoint, int id)
+    {
+        var response = await httpClient.DeleteAsync($"{endpoint}/{id}");
+        return response.IsSuccessStatusCode;
+    }
+}</code></pre>
+
+                <h3>Using HttpClient in ViewModel</h3>
+                <pre><code>// ViewModels/ProductViewModel.cs
+public partial class ProductViewModel : ObservableObject
+{
+    private readonly ApiService apiService;
+    
+    [ObservableProperty]
+    private ObservableCollection<Product> products;
+    
+    public ProductViewModel(ApiService apiService)
+    {
+        this.apiService = apiService;
+        Products = new ObservableCollection<Product>();
+        LoadProductsCommand = new AsyncRelayCommand(LoadProductsAsync);
+    }
+    
+    public IAsyncRelayCommand LoadProductsCommand { get; }
+    
+    private async Task LoadProductsAsync()
+    {
+        try
+        {
+            var items = await apiService.GetItemsAsync<Product>("products");
+            Products.Clear();
+            foreach (var item in items)
+                Products.Add(item);
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", 
+                $"Failed to load products: {ex.Message}", "OK");
+        }
+    }
+}</code></pre>
+
+                <h2>2. SQLite Local Database</h2>
+
+                <h3>Install SQLite Package</h3>
+                <pre><code>// Install NuGet Package
+// dotnet add package sqlite-net-pcl
+
+// Or using Package Manager Console
+// Install-Package sqlite-net-pcl</code></pre>
+
+                <h3>Creating Database Models</h3>
+                <pre><code>// Models/Product.cs
+using SQLite;
+
+[Table("Products")]
+public class Product
+{
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+    
+    [MaxLength(100)]
+    public string Name { get; set; }
+    
+    public string Description { get; set; }
+    public decimal Price { get; set; }
+    public int Quantity { get; set; }
+    public string Category { get; set; }
+    public DateTime CreatedDate { get; set; }
+}</code></pre>
+
+                <h3>Database Service</h3>
+                <pre><code>// Services/DatabaseService.cs
+using SQLite;
+
+public class DatabaseService
+{
+    private readonly SQLiteAsyncConnection database;
+    
+    public DatabaseService()
+    {
+        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "appdata.db3");
+        database = new SQLiteAsyncConnection(dbPath);
+        CreateTablesAsync();
+    }
+    
+    private async Task CreateTablesAsync()
+    {
+        await database.CreateTableAsync<Product>();
+        await database.CreateTableAsync<Order>();
+    }
+    
+    public async Task<List<T>> GetItemsAsync<T>() where T : new()
+    {
+        return await database.Table<T>().ToListAsync();
+    }
+
+public async Task<T> GetItemAsync<T>(int id) where T : new()
+    {
+        return await database.GetAsync<T>(id);
+    }
+
+public async Task<int> InsertItemAsync<T>(T item)
+    {
+        return await database.InsertAsync(item);
+    }
+
+public async Task<int> UpdateItemAsync<T>(T item)
+    {
+        return await database.UpdateAsync(item);
+    }
+
+public async Task<int> DeleteItemAsync<T>(int id)
+    {
+        return await database.DeleteAsync<T>(id);
+    }
+
+public async Task<int> CountItemsAsync<T>() where T : new()
+    {
+        return await database.Table<T>().CountAsync();
+    }
+}</code></pre>
+
+                <h3>Using SQLite in ViewModel</h3>
+                <pre><code>// ViewModels/ProductViewModel.cs
+public partial class ProductViewModel : ObservableObject
+{
+    private readonly DatabaseService databaseService;
+    
+    [ObservableProperty]
+    private ObservableCollection<Product> products;
+    
+    public ProductViewModel(DatabaseService databaseService)
+    {
+        this.databaseService = databaseService;
+        Products = new ObservableCollection<Product>();
+        LoadProductsCommand = new AsyncRelayCommand(LoadProductsAsync);
+        SaveProductCommand = new AsyncRelayCommand(SaveProductAsync);
+        DeleteProductCommand = new AsyncRelayCommand(DeleteProductAsync);
+    }
+    
+    public IAsyncRelayCommand LoadProductsCommand { get; }
+    public IAsyncRelayCommand SaveProductCommand { get; }
+    public IAsyncRelayCommand DeleteProductCommand { get; }
+    
+    [ObservableProperty]
+    private Product selectedProduct;
+    
+    private async Task LoadProductsAsync()
+    {
+        var items = await databaseService.GetItemsAsync<Product>();
+        Products.Clear();
+        foreach (var item in items)
+            Products.Add(item);
+    }
+    
+    private async Task SaveProductAsync()
+    {
+        if (SelectedProduct == null) return;
+        
+        if (SelectedProduct.Id == 0)
+            await databaseService.InsertItemAsync(SelectedProduct);
+        else
+            await databaseService.UpdateItemAsync(SelectedProduct);
+            
+        await LoadProductsAsync();
+    }
+    
+    private async Task DeleteProductAsync()
+    {
+        if (SelectedProduct == null) return;
+        
+        var confirm = await Application.Current.MainPage.DisplayAlert(
+            "Confirm Delete",
+            $"Delete {SelectedProduct.Name}?",
+            "Yes", "No");
+            
+        if (confirm)
+        {
+            await databaseService.DeleteItemAsync<Product>(SelectedProduct.Id);
+            await LoadProductsAsync();
+        }
+    }
+}</code></pre>
+
+                <h2>3. Entity Framework Core</h2>
+
+                <h3>Install EF Core Packages</h3>
+                <pre><code>// Install NuGet Packages
+// dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+// dotnet add package Microsoft.EntityFrameworkCore.Tools</code></pre>
+
+                <h3>Create DbContext</h3>
+                <pre><code>// Data/AppDbContext.cs
+using Microsoft.EntityFrameworkCore;
+
+public class AppDbContext : DbContext
+{
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "appdata.db");
+        optionsBuilder.UseSqlite($"Data Source={dbPath}");
+    }
+}</code></pre>
+
+                <h2>Best Practices</h2>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Handle network errors gracefully
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Implement offline support with local caching
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Use connection pooling for performance
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Implement retry policies for network failures
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Use async/await for all I/O operations
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Secure sensitive data with encryption
+                    </li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>MAUI supports multiple data access options</li>
+                            <li>REST APIs for cloud data, SQLite for local storage</li>
+                            <li>EF Core provides ORM capabilities</li>
+                            <li>Handle errors and offline scenarios appropriately</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Build a data-driven MAUI app:</p>
+                        <ol>
+                            <li>Connect to a REST API</li>
+                            <li>Implement local SQLite database</li>
+                            <li>Add offline support</li>
+                            <li>Implement CRUD operations</li>
+                            <li>Handle errors and connectivity issues</li>
+                            <li>Add data synchronization</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/06-MvvmPattern" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui/08-PublishingMauiApp" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

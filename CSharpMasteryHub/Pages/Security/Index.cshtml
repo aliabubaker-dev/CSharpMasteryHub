@@ -1,0 +1,80 @@
+﻿@page
+@model SecurityIndexModel
+@{
+    ViewData["Title"] = "Web Application Security";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Web Application Security</h1>
+            <p class="lead mb-4">Secure your web applications with HTTPS, authentication, SQL injection prevention, and security best practices.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/01-HttpsAndCertificates">
+                            <h5><span class="card-number">1</span>HTTPS and Certificates</h5>
+                            <p>Configure HTTPS and SSL certificates for secure communication.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/02-AuthenticationIdentity">
+                            <h5><span class="card-number">2</span>Authentication & Identity</h5>
+                            <p>Implement authentication with ASP.NET Core Identity.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/03-SqlInjectionPrevention">
+                            <h5><span class="card-number">3</span>SQL Injection Prevention</h5>
+                            <p>Protect your application from SQL injection attacks.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/04-XssCsrfProtection">
+                            <h5><span class="card-number">4</span>XSS & CSRF Protection</h5>
+                            <p>Prevent cross-site scripting and cross-site request forgery.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/05-SecurityHeaders">
+                            <h5><span class="card-number">5</span>Security Headers</h5>
+                            <p>Add security headers to protect your application.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Security/06-SecretsManagement">
+                            <h5><span class="card-number">6</span>Secrets Management</h5>
+                            <p>Manage secrets and sensitive data securely.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

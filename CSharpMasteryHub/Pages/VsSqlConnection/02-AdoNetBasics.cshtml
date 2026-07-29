@@ -1,0 +1,87 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.AdoNetBasicsModel
+@{
+    ViewData["Title"] = "ADO.NET Basics";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/VsSqlConnection">VS + SQL Connection</a></li>
+                    <li class="breadcrumb-item active">ADO.NET Basics</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">ADO.NET Basics</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 5</span>
+                </div>
+
+                <p>
+                    ADO.NET is the core .NET library for talking to databases. First, add the
+                    NuGet package:
+                </p>
+                <pre><code>Install-Package Microsoft.Data.SqlClient</code></pre>
+
+                <h2>The core objects</h2>
+                <ul>
+                    <li><strong>SqlConnection</strong> — represents the connection to the database.</li>
+                    <li><strong>SqlCommand</strong> — represents a SQL statement or stored procedure call.</li>
+                    <li><strong>SqlParameter</strong> — a safely-typed value passed into a command (prevents SQL injection).</li>
+                    <li><strong>SqlDataReader</strong> — reads results row-by-row, forward-only.</li>
+                </ul>
+
+                <h2>A minimal read example</h2>
+                <pre><code>using Microsoft.Data.SqlClient;
+
+string connectionString = "Server=localhost\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;";
+
+using var connection = new SqlConnection(connectionString);
+connection.Open();
+
+using var command = new SqlCommand("SELECT StudentId, FirstName, LastName FROM Students", connection);
+using var reader = command.ExecuteReader();
+
+while (reader.Read())
+{
+    int id = reader.GetInt32(0);
+    string firstName = reader.GetString(1);
+    string lastName = reader.GetString(2);
+    Console.WriteLine($"{id}: {firstName} {lastName}");
+}</code></pre>
+
+                <h2>Why "using"?</h2>
+                <p>
+                    <code>SqlConnection</code>, <code>SqlCommand</code>, and <code>SqlDataReader</code>
+                    all hold unmanaged resources. The <code>using</code> keyword guarantees
+                    they're closed and disposed even if an exception occurs.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>ADO.NET is the foundation of database access in C#. Always use <code>using</code> blocks to properly dispose database resources.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/VsSqlConnection/01-ConnectionStrings" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/VsSqlConnection/03-InsertDeleteUpdateExample" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

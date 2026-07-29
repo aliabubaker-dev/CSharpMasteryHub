@@ -1,0 +1,112 @@
+﻿@page
+@model XssCsrfProtectionModel
+@{
+    ViewData["Title"] = "XSS and CSRF Protection";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Security">Security</a></li>
+                    <li class="breadcrumb-item active">XSS & CSRF Protection</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">XSS and CSRF Protection</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 6</span>
+                </div>
+
+                <h2>Cross-Site Scripting (XSS)</h2>
+                <p>XSS occurs when malicious scripts are injected into trusted websites.</p>
+
+                <h3>Prevention</h3>
+
+                <h4>1. Input Encoding</h4>
+                <pre><code>// Razor automatically encodes output
+&lt;div&gt;@@userInput&lt;/div&gt; // HTML encoded
+
+// For manual encoding
+@@Html.Raw(HttpUtility.HtmlEncode(userInput))</code></pre>
+
+                <h4>2. Content Security Policy (CSP)</h4>
+                <pre><code>// Add CSP header
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy",
+        "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'");
+    await next();
+});</code></pre>
+
+                <h4>3. Anti-XSS Library</h4>
+                <pre><code>// Install: dotnet add package Microsoft.Security.Application
+using Microsoft.Security.Application;
+
+string safeInput = Sanitizer.GetSafeHtmlFragment(userInput);</code></pre>
+
+                <h2>Cross-Site Request Forgery (CSRF)</h2>
+                <p>CSRF tricks a user into performing unwanted actions on a website where they're authenticated.</p>
+
+                <h3>Prevention in ASP.NET Core</h3>
+
+                <h4>1. Anti-Forgery Tokens</h4>
+                <pre><code>// In forms
+&lt;form method="post"&gt;
+    @@Html.AntiForgeryToken()
+    // or
+    &lt;input type="hidden" name="__RequestVerificationToken" 
+           value="@@Html.AntiForgeryToken()" /&gt;
+&lt;/form&gt;</code></pre>
+
+                <h4>2. Validate Tokens</h4>
+                <pre><code>// Auto-validation for all POST requests
+[AutoValidateAntiforgeryToken]
+public class SomeController : Controller { }
+
+// Manual validation
+[ValidateAntiForgeryToken]
+public IActionResult PostMethod() { }</code></pre>
+
+                <h4>3. Global Configuration</h4>
+                <pre><code>// Program.cs
+builder.Services.AddAntiforgery(options => 
+{
+    options.HeaderName = "X-CSRF-TOKEN";
+    options.SuppressXFrameOptionsHeader = false;
+});</code></pre>
+
+                <h4>4. SameSite Cookies</h4>
+                <pre><code>builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Prevent XSS by encoding user input and using CSP. Prevent CSRF with anti-forgery tokens and SameSite cookies.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Security/03-SqlInjectionPrevention" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Security/05-SecurityHeaders" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

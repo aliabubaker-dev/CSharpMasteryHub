@@ -1,0 +1,322 @@
+﻿@page
+@model MvvmPatternModel
+@{
+    ViewData["Title"] = "MVVM Pattern in .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">MVVM Pattern</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">MVVM Pattern in .NET MAUI</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 8</span>
+                </div>
+
+                <h2>What is MVVM?</h2>
+                <p>
+                    MVVM (Model-View-ViewModel) is an architectural pattern that separates the user interface (View) 
+                    from the business logic (ViewModel) and data (Model). It enables better separation of concerns, 
+                    testability, and maintainability.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>MVVM Components</h5>
+                        <ul class="mb-0">
+                            <li><strong>Model</strong> - Data and business logic</li>
+                            <li><strong>View</strong> - UI and user interaction</li>
+                            <li><strong>ViewModel</strong> - Bridge between Model and View</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>MVVM Architecture</h2>
+                <pre><code>// Project Structure
+MyApp/
+├── Models/
+│   └── (Data models)
+├── ViewModels/
+│   └── (View models)
+├── Views/
+│   └── (XAML pages)
+└── Services/
+    └── (Data services)</code></pre>
+
+                <h2>Implementing MVVM</h2>
+
+                <h3>1. The Model</h3>
+                <pre><code>// Models/Product.cs
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public decimal Price { get; set; }
+    public int Quantity { get; set; }
+    public string Category { get; set; }
+    public DateTime CreatedDate { get; set; }
+}</code></pre>
+
+                <h3>2. The ViewModel</h3>
+                <pre><code>// ViewModels/ProductViewModel.cs
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+public partial class ProductViewModel : ObservableObject
+{
+    [ObservableProperty]
+    private ObservableCollection<Product> products;
+    
+    [ObservableProperty]
+    private Product selectedProduct;
+    
+    [ObservableProperty]
+    private string searchText;
+    
+    [ObservableProperty]
+    private bool isLoading;
+    
+    private readonly IProductService productService;
+    
+    public ProductViewModel(IProductService productService)
+    {
+        this.productService = productService;
+        Products = new ObservableCollection<Product>();
+        LoadProductsCommand = new AsyncRelayCommand(LoadProductsAsync);
+        SaveProductCommand = new AsyncRelayCommand(SaveProductAsync);
+        DeleteProductCommand = new AsyncRelayCommand(DeleteProductAsync);
+    }
+    
+    public IAsyncRelayCommand LoadProductsCommand { get; }
+    public IAsyncRelayCommand SaveProductCommand { get; }
+    public IAsyncRelayCommand DeleteProductCommand { get; }
+    
+    private async Task LoadProductsAsync()
+    {
+        try
+        {
+            IsLoading = true;
+            var items = await productService.GetProductsAsync();
+            Products.Clear();
+            foreach (var item in items)
+                Products.Add(item);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+    
+    private async Task SaveProductAsync()
+    {
+        if (SelectedProduct == null) return;
+        await productService.SaveProductAsync(SelectedProduct);
+        await LoadProductsAsync();
+    }
+    
+    private async Task DeleteProductAsync()
+    {
+        if (SelectedProduct == null) return;
+        await productService.DeleteProductAsync(SelectedProduct.Id);
+        await LoadProductsAsync();
+    }
+}</code></pre>
+
+                <h3>3. The View</h3>
+                <pre><code>// Views/ProductsPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.Views.ProductsPage"
+             Title="Products">
+    
+    <ContentPage.BindingContext>
+        <local:ProductViewModel />
+    </ContentPage.BindingContext>
+    
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="10">
+        
+        <!-- Search Bar -->
+        <SearchBar Grid.Row="0"
+                   Placeholder="Search products..."
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding LoadProductsCommand}" />
+        
+        <!-- Product List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Products}"
+                        SelectedItem="{Binding SelectedProduct}"
+                        SelectionMode="Single"
+                        IsRefreshing="{Binding IsLoading}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextColor="Gray" />
+                            <Label Text="{Binding Price, StringFormat='${0:F2}'}"
+                                   FontSize="14"
+                                   TextColor="Green" />
+                        </VerticalStackLayout>
+                        
+                        <Label Grid.Column="1"
+                               Text="{Binding Quantity}"
+                               FontSize="14"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <!-- Action Buttons -->
+        <StackLayout Grid.Row="2"
+                     Orientation="Horizontal"
+                     Spacing="10">
+            <Button Text="Add"
+                    Command="{Binding SaveProductCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White" />
+            <Button Text="Edit"
+                    Command="{Binding SaveProductCommand}"
+                    BackgroundColor="Blue"
+                    TextColor="White" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteProductCommand}"
+                    BackgroundColor="Red"
+                    TextColor="White" />
+        </StackLayout>
+    </Grid>
+</ContentPage></code></pre>
+
+                <h2>Data Binding</h2>
+                <pre><code>// One-way binding
+<Label Text="{Binding Name}" />
+
+// Two-way binding
+<Entry Text="{Binding Name, Mode=TwoWay}" />
+
+// One-way to source
+<Entry Text="{Binding Name, Mode=OneWayToSource}" />
+
+// One-time binding
+<Label Text="{Binding Name, Mode=OneTime}" />
+
+// Default binding mode
+<Label Text="{Binding Name}" Mode="Default" /></code></pre>
+
+                <h2>Command Binding</h2>
+                <pre><code>// ViewModel
+public ICommand SaveCommand { get; }
+
+public ProductViewModel()
+{
+    SaveCommand = new RelayCommand(Save, CanSave);
+}
+
+private bool CanSave()
+{
+    return !string.IsNullOrEmpty(SelectedProduct?.Name);
+}
+
+private void Save()
+{
+    // Save logic
+}
+
+// View
+<Button Text="Save" Command="{Binding SaveCommand}" /></code></pre>
+
+                <h2>Dependency Injection with MVVM</h2>
+                <pre><code>// Services registration in MauiProgram.cs
+builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddSingleton<ProductViewModel>();
+
+// ViewModel injection
+public partial class ProductsPage : ContentPage
+{
+    public ProductsPage(ProductViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
+}
+
+// Using Service Provider
+var viewModel = ServiceHelper.GetService<ProductViewModel>();</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>MVVM separates UI from business logic</li>
+                            <li>Data binding connects View and ViewModel</li>
+                            <li>Commands handle user actions</li>
+                            <li>Dependency injection improves testability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Implement MVVM for a simple app:</p>
+                        <ol>
+                            <li>Create Model for your data</li>
+                            <li>Implement ViewModel with properties and commands</li>
+                            <li>Create View with XAML</li>
+                            <li>Implement data binding</li>
+                            <li>Add CRUD operations</li>
+                            <li>Implement validation</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/05-ShellNavigation" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui/07-ConnectingToApiOrDb" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,82 @@
+@page
+@model CSharpMasteryHub.Pages.GettingStarted.InstallingSqlExpressSsmsModel
+@{
+    ViewData["Title"] = "Installing SQL Server Express and SSMS";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/GettingStarted">Getting Started</a></li>
+                    <li class="breadcrumb-item active">Installing SQL Server Express & SSMS</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Installing SQL Server Express and SSMS</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 4</span>
+                </div>
+
+                <p>
+                    You'll need a real SQL Server engine (not just LocalDB) for the SQL Server
+                    module later, plus SQL Server Management Studio (SSMS) to manage it visually.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>What is SQL Server?</h5>
+                        <p class="card-text">SQL Server is Microsoft's database system. SQL Server Express is the free version. SSMS is the tool you use to manage it.</p>
+                    </div>
+                </div>
+
+                <h2>Step 1 — Install SQL Server Express</h2>
+                <p>
+                    Download <strong>SQL Server Express</strong> (free) from Microsoft's SQL
+                    Server downloads page. Choose the "Basic" installation type — it configures
+                    a working default instance automatically, usually named
+                    <code>localhost\SQLEXPRESS</code>.
+                </p>
+
+                <h2>Step 2 — Install SSMS</h2>
+                <p>
+                    SSMS is a separate download: search "Download SQL Server Management
+                    Studio." Install it, then open it and connect using:
+                </p>
+                <pre><code>Server name: localhost\SQLEXPRESS
+Authentication: Windows Authentication</code></pre>
+
+                <h2>Step 3 — Verify the connection</h2>
+                <p>
+                    Once connected, expand <strong>Databases</strong> in Object Explorer.
+                    You should see the system databases (master, model, msdb, tempdb).
+                    If you can see these, your installation is working.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>SQL Server Express is free and powerful. SSMS is your visual tool for managing databases.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/GettingStarted/02-WorkloadsToSelect" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/GettingStarted/04-InstallingGit" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

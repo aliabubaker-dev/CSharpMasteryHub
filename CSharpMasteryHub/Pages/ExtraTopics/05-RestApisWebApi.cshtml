@@ -1,0 +1,140 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.RestApisWebApiModel
+@{
+    ViewData["Title"] = "REST APIs with Web API";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">REST APIs with Web API</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">REST APIs with Web API</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 6</span>
+                </div>
+
+                <p>
+                    While this whole site is built with Razor Pages (server-rendered HTML),
+                    ASP.NET Core also lets you build pure JSON APIs — useful for mobile apps
+                    (like the .NET MAUI module), JavaScript front-ends, or other services.
+                </p>
+
+                <h2>Creating a minimal API controller</h2>
+                <pre><code>using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/[controller]")]
+public class StudentsController : ControllerBase
+{
+    private readonly SchoolDbContext _context;
+
+    public StudentsController(SchoolDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public async Task&lt;ActionResult&lt;List&lt;Student&gt;&gt;&gt; GetAll()
+    {
+        return await _context.Students.ToListAsync();
+    }
+
+    [HttpGet("{id}")]
+    public async Task&lt;ActionResult&lt;Student&gt;&gt; GetById(int id)
+    {
+        var student = await _context.Students.FindAsync(id);
+        if (student == null) return NotFound();
+        return student;
+    }
+
+    [HttpPost]
+    public async Task&lt;ActionResult&lt;Student&gt;&gt; Create(Student student)
+    {
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetById), new { id = student.StudentId }, student);
+    }
+
+    [HttpPut("{id}")]
+    public async Task&lt;IActionResult&gt; Update(int id, Student student)
+    {
+        if (id != student.StudentId) return BadRequest();
+        _context.Entry(student).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task&lt;IActionResult&gt; Delete(int id)
+    {
+        var student = await _context.Students.FindAsync(id);
+        if (student == null) return NotFound();
+
+        _context.Students.Remove(student);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+}</code></pre>
+
+                <h2>Registering controllers in Program.cs</h2>
+                <pre><code>builder.Services.AddControllers();
+// ...
+app.MapControllers();</code></pre>
+
+                <h2>REST verbs at a glance</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Verb</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>GET</td><td>Read data</td></tr>
+                            <tr><td>POST</td><td>Create new data</td></tr>
+                            <tr><td>PUT</td><td>Replace/update existing data</td></tr>
+                            <tr><td>DELETE</td><td>Remove data</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Testing the API</h2>
+                <p>
+                    Use the Swagger UI (enabled by default in new API projects at
+                    <code>/swagger</code>), or a tool like Postman, to call these endpoints
+                    without writing a client first.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>REST APIs allow your application to serve data to mobile apps, frontends, and other services.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics/04-AsyncAwaitDeepDive" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ExtraTopics/06-NugetPackages" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

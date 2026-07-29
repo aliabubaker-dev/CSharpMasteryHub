@@ -1,0 +1,140 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.PatternMatchingAndNullablesModel
+@{
+    ViewData["Title"] = "Pattern Matching & Nullables";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Pattern Matching & Nullables</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Pattern Matching & Nullables</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 11 of 13</span>
+                </div>
+
+                <h2>Nullable Value Types</h2>
+
+                <h3>Declaring Nullables</h3>
+                <pre><code>int? age = null;
+bool? isMember = null;
+DateTime? birthDate = null;</code></pre>
+
+                <h3>Checking for Null</h3>
+                <pre><code>int? age = 25;
+
+if (age.HasValue)
+{
+    Console.WriteLine($"Age: {age.Value}");
+}
+
+// Or using the value
+if (age != null)
+{
+    Console.WriteLine($"Age: {age}");
+}</code></pre>
+
+                <h3>Null-Coalescing Operator (??)</h3>
+                <pre><code>int? age = null;
+int defaultAge = 18;
+
+int actualAge = age ?? defaultAge; // 18
+
+string name = null;
+string displayName = name ?? "Guest"; // "Guest"</code></pre>
+
+                <h3>Null-Coalescing Assignment (??=)</h3>
+                <pre><code>List&lt;string&gt; names = null;
+names ??= new List&lt;string&gt;(); // Creates new list if null</code></pre>
+
+                <h2>Pattern Matching</h2>
+
+                <h3>Type Pattern</h3>
+                <pre><code>object data = "Hello";
+
+if (data is string text)
+{
+    Console.WriteLine($"Text length: {text.Length}");
+}
+
+if (data is int number)
+{
+    Console.WriteLine($"Number: {number}");
+}</code></pre>
+
+                <h3>Switch Pattern Matching</h3>
+                <pre><code>public string GetDescription(object obj)
+{
+    return obj switch
+    {
+        int i => $"Integer: {i}",
+        string s => $"String of length {s.Length}",
+        DateTime d => $"Date: {d:d}",
+        null => "Null value",
+        _ => "Unknown type"
+    };
+}</code></pre>
+
+                <h3>Pattern Matching with Conditions</h3>
+                <pre><code>int score = 85;
+
+string grade = score switch
+{
+    >= 90 => "A",
+    >= 80 => "B",
+    >= 70 => "C",
+    >= 60 => "D",
+    _ => "F"
+};
+
+Console.WriteLine($"Grade: {grade}"); // B</code></pre>
+
+                <h3>Pattern Matching with Objects</h3>
+                <pre><code>public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+Person person = new Person { Name = "John", Age = 25 };
+
+string description = person switch
+{
+    { Age: >= 18 } => $"{person.Name} is an adult",
+    { Age: < 18 } => $"{person.Name} is a minor",
+    null => "No person",
+    _ => "Unknown"
+};</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Nullable types handle missing values safely. Pattern matching simplifies conditional logic and type checking.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/10-MethodsBasics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/12-LinqIntroduction" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

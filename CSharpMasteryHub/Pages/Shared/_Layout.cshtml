@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @await Html.PartialAsync("_SeoHead")
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code me-2"></i>C# Mastery Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="lessonsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-book me-1"></i>Lessons
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/CSharpFundamentals">C# Fundamentals</a></li>
+                            <li><a class="dropdown-item" href="/ConsoleApp">Console Applications</a></li>
+                            <li><a class="dropdown-item" href="/ClassesAndOOP">Classes & OOP</a></li>
+                            <li><a class="dropdown-item" href="/WindowsForms">Windows Forms</a></li>
+                            <li><a class="dropdown-item" href="/RazorPages">ASP.NET Core</a></li>
+                            <li><a class="dropdown-item" href="/SqlServer">SQL Server</a></li>
+                            <li><a class="dropdown-item" href="/VsSqlConnection">VS & SQL Connection</a></li>
+                            <li><a class="dropdown-item" href="/RdlcReports">RDLC Reports</a></li>
+                            <li><a class="dropdown-item" href="/DotNetMaui">.NET MAUI</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/GettingStarted">Getting Started</a></li>
+                            <li><a class="dropdown-item" href="/Security">Security</a></li>
+                            <li><a class="dropdown-item" href="/Deployment">Deployment</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/About">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Contact">
+                            <i class="fas fa-envelope me-1"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-code me-2"></i>C# Mastery Hub</h5>
+                    <p>Your complete free guide to mastering C# from beginner to professional developer.</p>
+                    <div class="social-links">
+                        <a href="#" class="me-2"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                        <li><a href="/ClassesAndOOP">Classes & OOP</a></li>
+                        <li><a href="/WindowsForms">Windows Forms</a></li>
+                        <li><a href="/RazorPages">ASP.NET Core</a></li>
+                        <li><a href="/SqlServer">SQL Server</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/GettingStarted">Getting Started</a></li>
+                        <li><a href="/Security">Security Guide</a></li>
+                        <li><a href="/Deployment">Deployment Guide</a></li>
+                        <li><a href="/sitemap.xml">Sitemap</a></li>
+                        <li><a href="/robots.txt">Robots.txt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p class="mb-0">&copy; @DateTime.Now.Year C# Mastery Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

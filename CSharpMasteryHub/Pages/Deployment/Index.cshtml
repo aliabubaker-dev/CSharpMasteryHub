@@ -1,0 +1,101 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Deploy Your C# Projects for Free";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Deploy Your C# Projects for Free</h1>
+            <p class="lead mb-4">Learn how to deploy your ASP.NET Core applications for free using various hosting platforms. From Azure to GitHub Actions, we've got you covered.</p>
+
+            <div class="progress-section mb-4">
+                <h5><i class="fas fa-tasks me-2 text-primary"></i>Your Progress</h5>
+                <div class="progress" style="height: 25px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" id="deploymentProgress">0%</div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Deployment/01-PreparingForDeployment">
+                            <h5><span class="card-number">1</span>Preparing for Deployment</h5>
+                            <p>Learn how to prepare your application for deployment with proper configuration and settings.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Deployment/02-FreeHostingOptions">
+                            <h5><span class="card-number">2</span>Free Hosting Options</h5>
+                            <p>Explore free hosting platforms including Azure, Netlify, Vercel, and more.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Deployment/03-DeployingToAzureFree">
+                            <h5><span class="card-number">3</span>Deploying to Azure Free</h5>
+                            <p>Step-by-step guide to deploy your ASP.NET Core app to Azure for free.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Deployment/04-FreeCustomDomainOptions">
+                            <h5><span class="card-number">4</span>Free Custom Domain Options</h5>
+                            <p>Learn how to get and configure custom domains for free.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/Deployment/05-CiCdGithubActions">
+                            <h5><span class="card-number">5</span>CI/CD with GitHub Actions</h5>
+                            <p>Set up continuous integration and deployment using GitHub Actions.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-info bg-opacity-10 mt-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Why Deploy Your Projects?</h5>
+                    <p class="card-text">Deploying your applications allows you to share your work with the world, build a portfolio, and gain real-world experience. All the options covered in this section are completely free!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+            const totalLessons = document.querySelectorAll('.lesson-card').length;
+            const completedLessons = Object.values(progress).filter(v => v === true).length;
+            const percentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+            const progressBar = document.getElementById('deploymentProgress');
+            if (progressBar) {
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = percentage + '%';
+            }
+        });
+    </script>
+}

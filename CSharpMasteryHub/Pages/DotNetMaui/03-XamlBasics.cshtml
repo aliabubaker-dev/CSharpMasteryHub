@@ -1,0 +1,311 @@
+﻿@page
+@model XamlBasicsModel
+@{
+    ViewData["Title"] = "XAML Basics in .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">XAML Basics</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">XAML Basics in .NET MAUI</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 8</span>
+                </div>
+
+                <h2>What is XAML?</h2>
+                <p>
+                    XAML (eXtensible Application Markup Language) is a declarative markup language used in .NET MAUI
+                    to define user interfaces. It separates UI design from code logic, making it easier to create
+                    and maintain applications.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">XAML is XML-based, meaning it follows XML syntax rules and is both machine-readable and human-readable.</p>
+                    </div>
+                </div>
+
+                <h2>Basic XAML Structure</h2>
+                <pre><code>// MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.MainPage">
+    
+    <VerticalStackLayout>
+        <Label Text="Hello, MAUI!"
+               FontSize="24"
+               HorizontalOptions="Center" />
+        <Button Text="Click Me"
+                Clicked="OnButtonClicked" />
+    </VerticalStackLayout>
+    
+</ContentPage></code></pre>
+
+                <h2>XAML Syntax</h2>
+
+                <h3>Elements and Attributes</h3>
+                <pre><code>// Element with attributes
+<Label Text="Hello World" FontSize="20" TextColor="Blue" />
+
+// Nested elements
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Label Text="Row 1" Grid.Row="0" />
+    <Label Text="Row 2" Grid.Row="1" />
+</Grid>
+
+// Property element syntax
+<Label>
+    <Label.Text>
+        Hello World
+    </Label.Text>
+</Label></code></pre>
+
+                <h3>XAML Namespaces</h3>
+                <pre><code>// Default namespace
+xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+
+// XAML namespace
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+// Custom namespace
+xmlns:local="clr-namespace:MyApp.Views"
+xmlns:converters="clr-namespace:MyApp.Converters"</code></pre>
+
+                <h3>XAML Markup Extensions</h3>
+                <pre><code>// Binding
+<Label Text="{Binding Name}" />
+
+// Static Resource
+<Label Text="{StaticResource AppName}" />
+
+// Dynamic Resource
+<Label Text="{DynamicResource AppName}" />
+
+// Binding with Path
+<Label Text="{Binding Person.FirstName}" />
+
+// Binding with Converter
+<Label Text="{Binding Value, Converter={StaticResource ValueConverter}}" />
+
+// Multibinding
+<Label>
+    <Label.Text>
+        <MultiBinding StringFormat="{}{0} {1}">
+            <Binding Path="FirstName" />
+            <Binding Path="LastName" />
+        </MultiBinding>
+    </Label.Text>
+</Label></code></pre>
+
+                <h2>XAML vs Code-behind</h2>
+                <pre><code>// MainPage.xaml.cs
+public partial class MainPage : ContentPage
+{
+    public MainPage()
+    {
+        InitializeComponent();
+        
+        // Access XAML elements
+        MyLabel.Text = "Hello from code-behind!";
+    }
+    
+    private void OnButtonClicked(object sender, EventArgs e)
+    {
+        MyLabel.Text = "Button clicked!";
+    }
+}
+
+// MainPage.xaml
+<ContentPage x:Class="MyApp.MainPage">
+    <VerticalStackLayout>
+        <Label x:Name="MyLabel" Text="Hello" />
+        <Button Text="Click Me" Clicked="OnButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage></code></pre>
+
+                <h2>Common XAML Controls</h2>
+                <pre><code>// Label
+<Label Text="Hello"
+       FontSize="24"
+       FontAttributes="Bold"
+       TextColor="Blue"
+       HorizontalOptions="Center"
+       VerticalOptions="Center" />
+
+// Button
+<Button Text="Click Me"
+        BackgroundColor="Green"
+        TextColor="White"
+        CornerRadius="10"
+        Command="{Binding ButtonCommand}" />
+
+// Entry
+<Entry Placeholder="Enter text"
+       Text="{Binding UserInput}"
+       Keyboard="Text"
+       MaxLength="100" />
+
+// Image
+<Image Source="icon.png"
+       WidthRequest="50"
+       HeightRequest="50"
+       Aspect="AspectFit" />
+
+// ListView
+<ListView ItemsSource="{Binding Items}"
+          SelectionMode="Single">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding Name}"
+                     Detail="{Binding Description}" />
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView></code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>// MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.MainPage"
+             Title="My App">
+    
+    <Grid RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="*,*"
+          Padding="20">
+        
+        <!-- Header -->
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Text="Welcome to MAUI"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20" />
+        
+        <!-- Input Field -->
+        <Entry Grid.Row="1"
+               Grid.Column="0"
+               x:Name="NameEntry"
+               Placeholder="Enter your name"
+               VerticalOptions="Center"
+               Margin="0,0,10,0" />
+        
+        <!-- Button -->
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Text="Greet Me"
+                Command="{Binding GreetCommand}"
+                VerticalOptions="Center" />
+        
+        <!-- Result Label -->
+        <Label Grid.Row="2"
+               Grid.ColumnSpan="2"
+               x:Name="ResultLabel"
+               Text="Hello there!"
+               FontSize="20"
+               HorizontalOptions="Center"
+               Margin="0,20,0,0" />
+        
+    </Grid>
+    
+</ContentPage>
+
+// MainPage.xaml.cs
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+
+public partial class MainPage : ContentPage
+{
+    public MainPage()
+    {
+        InitializeComponent();
+        BindingContext = new MainPageViewModel();
+    }
+}
+
+public class MainPageViewModel
+{
+    public string Name { get; set; }
+    public ICommand GreetCommand { get; }
+    
+    public MainPageViewModel()
+    {
+        GreetCommand = new RelayCommand(Greet);
+    }
+    
+    private void Greet()
+    {
+        // Implementation
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>XAML provides a clean, declarative way to build UIs</li>
+                            <li>Separation of UI and logic improves maintainability</li>
+                            <li>XAML supports data binding and MVVM pattern</li>
+                            <li>Code-behind complements XAML for event handling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a XAML page with:</p>
+                        <ol>
+                            <li>Label with formatted text</li>
+                            <li>Entry for user input</li>
+                            <li>Button with click handler</li>
+                            <li>ListView or CollectionView</li>
+                            <li>Grid layout with multiple sections</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/02-EnvironmentSetup" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui/04-LayoutsAndControls" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,110 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.LoopsModel
+@{
+    ViewData["Title"] = "Loops";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">Loops</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Loops</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 13</span>
+                </div>
+
+                <h2>for Loop</h2>
+                <pre><code>// Count from 1 to 5
+for (int i = 1; i <= 5; i++)
+{
+    Console.WriteLine(i);
+}
+
+// Count down from 5 to 1
+for (int i = 5; i >= 1; i--)
+{
+    Console.WriteLine(i);
+}</code></pre>
+
+                <h2>while Loop</h2>
+                <pre><code>int count = 0;
+while (count < 5)
+{
+    Console.WriteLine(count);
+    count++;
+}</code></pre>
+
+                <h2>do-while Loop</h2>
+                <pre><code>int number;
+do
+{
+    Console.Write("Enter a number (0 to quit): ");
+    number = int.Parse(Console.ReadLine());
+    Console.WriteLine($"You entered: {number}");
+} while (number != 0);</code></pre>
+
+                <h2>foreach Loop</h2>
+                <pre><code>string[] names = { "Alice", "Bob", "Charlie" };
+
+foreach (string name in names)
+{
+    Console.WriteLine($"Hello, {name}");
+}
+
+// With index
+int index = 0;
+foreach (string name in names)
+{
+    Console.WriteLine($"{index}: {name}");
+    index++;
+}</code></pre>
+
+                <h2>Loop Control Statements</h2>
+                <pre><code>// break - exit the loop
+for (int i = 1; i <= 10; i++)
+{
+    if (i == 5)
+        break;  // Stops at 4
+    Console.WriteLine(i);
+}
+
+// continue - skip iteration
+for (int i = 1; i <= 5; i++)
+{
+    if (i == 3)
+        continue;  // Skips 3
+    Console.WriteLine(i);
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Choose the right loop: <code>for</code> for known count, <code>while</code> for conditions, <code>foreach</code> for collections.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/05-ControlFlow" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/07-ArraysAndCollections" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

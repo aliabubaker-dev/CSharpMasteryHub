@@ -1,0 +1,369 @@
+﻿@page
+@model ResponsiveDesignBootstrapModel
+@{
+    ViewData["Title"] = "Responsive Design with Bootstrap";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WebsiteDevelopment">Website Development</a></li>
+                    <li class="breadcrumb-item active">Responsive Design with Bootstrap</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Responsive Design with Bootstrap</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 4</span>
+                </div>
+
+                <h2>What is Responsive Design?</h2>
+                <p>
+                    Responsive design is an approach to web design that makes web pages render well on a variety of
+                    devices and window or screen sizes. It ensures a consistent user experience across desktop, tablet,
+                    and mobile devices.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Principle</h5>
+                        <p class="card-text">"One design for all screens" - The same HTML content adapts to different screen sizes using CSS media queries and flexible layouts.</p>
+                    </div>
+                </div>
+
+                <h2>Bootstrap Grid System</h2>
+                <p>Bootstrap uses a 12-column grid system for responsive layouts:</p>
+
+                <h3>Grid Breakpoints</h3>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Breakpoint</th>
+                                <th>Class Prefix</th>
+                                <th>Dimensions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Extra small</td>
+                                <td>.col-</td>
+                                <td>Less than 576px</td>
+                            </tr>
+                            <tr>
+                                <td>Small</td>
+                                <td>.col-sm-</td>
+                                <td>576px and up</td>
+                            </tr>
+                            <tr>
+                                <td>Medium</td>
+                                <td>.col-md-</td>
+                                <td>768px and up</td>
+                            </tr>
+                            <tr>
+                                <td>Large</td>
+                                <td>.col-lg-</td>
+                                <td>992px and up</td>
+                            </tr>
+                            <tr>
+                                <td>Extra large</td>
+                                <td>.col-xl-</td>
+                                <td>1200px and up</td>
+                            </tr>
+                            <tr>
+                                <td>Extra extra large</td>
+                                <td>.col-xxl-</td>
+                                <td>1400px and up</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Grid Examples</h3>
+                <pre><code>&lt;!-- Equal width columns --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col"&gt;Column 1&lt;/div&gt;
+    &lt;div class="col"&gt;Column 2&lt;/div&gt;
+    &lt;div class="col"&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Different width columns --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-4"&gt;4 columns wide&lt;/div&gt;
+    &lt;div class="col-8"&gt;8 columns wide&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Responsive columns --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-12 col-md-6 col-lg-4"&gt;
+        Full on mobile, half on tablet, third on desktop
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h2>Bootstrap Components</h2>
+
+                <h3>1. Navbar</h3>
+                <pre><code>&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+    &lt;div class="container"&gt;
+        &lt;a class="navbar-brand" href="#"&gt;My App&lt;/a&gt;
+        &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+            &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+            &lt;ul class="navbar-nav ms-auto"&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="#"&gt;Home&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="#"&gt;About&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+
+                <h3>2. Cards</h3>
+                <pre><code>&lt;div class="row"&gt;
+    &lt;div class="col-12 col-md-4 mb-4"&gt;
+        &lt;div class="card"&gt;
+            &lt;img src="image.jpg" class="card-img-top" alt="..."&gt;
+            &lt;div class="card-body"&gt;
+                &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+                &lt;p class="card-text"&gt;Some quick example text.&lt;/p&gt;
+                &lt;a href="#" class="btn btn-primary"&gt;Learn More&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>3. Forms</h3>
+                <pre><code>&lt;form&gt;
+    &lt;div class="mb-3"&gt;
+        &lt;label for="email" class="form-label"&gt;Email address&lt;/label&gt;
+        &lt;input type="email" class="form-control" id="email" placeholder="Enter email"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="mb-3"&gt;
+        &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
+        &lt;input type="password" class="form-control" id="password" placeholder="Password"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="mb-3 form-check"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="remember"&gt;
+        &lt;label class="form-check-label" for="remember"&gt;Remember me&lt;/label&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <h3>4. Modals</h3>
+                <pre><code>&lt;!-- Button trigger modal --&gt;
+&lt;button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"&gt;
+    Launch demo modal
+&lt;/button&gt;
+
+&lt;!-- Modal --&gt;
+&lt;div class="modal fade" id="exampleModal" tabindex="-1"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title"&gt;Modal Title&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;Modal content goes here.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h2>Customizing Bootstrap</h2>
+
+                <h3>Custom CSS Overrides</h3>
+                <pre><code>/* wwwroot/css/custom.css */
+:root {
+    --primary-color: #512BD4;
+    --secondary-color: #0D6EFD;
+    --dark-color: #1a1a2e;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+}
+
+.navbar-custom {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+}</code></pre>
+
+                <h2>Complete Responsive Page Example</h2>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Responsive Page&lt;/title&gt;
+    
+    &lt;!-- Bootstrap CSS --&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;!-- Font Awesome --&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+    &lt;!-- Custom CSS --&gt;
+    &lt;link href="css/custom.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Navbar --&gt;
+    &lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+        &lt;div class="container"&gt;
+            &lt;a class="navbar-brand" href="#"&gt;MyApp&lt;/a&gt;
+            &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+                &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+                &lt;ul class="navbar-nav ms-auto"&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Features&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Hero Section --&gt;
+    &lt;div class="hero-section py-5 text-center"&gt;
+        &lt;div class="container"&gt;
+            &lt;h1 class="display-4 fw-bold"&gt;Welcome to MyApp&lt;/h1&gt;
+            &lt;p class="lead"&gt;A responsive web application built with Bootstrap&lt;/p&gt;
+            &lt;a href="#" class="btn btn-primary btn-lg"&gt;Get Started&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Features Section --&gt;
+    &lt;div class="container py-5"&gt;
+        &lt;h2 class="text-center mb-4"&gt;Features&lt;/h2&gt;
+        &lt;div class="row g-4"&gt;
+            &lt;div class="col-12 col-md-4"&gt;
+                &lt;div class="card h-100 text-center"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;i class="fas fa-rocket fa-3x text-primary mb-3"&gt;&lt;/i&gt;
+                        &lt;h5 class="card-title"&gt;Fast&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Built for speed and performance.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-12 col-md-4"&gt;
+                &lt;div class="card h-100 text-center"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;i class="fas fa-shield-alt fa-3x text-success mb-3"&gt;&lt;/i&gt;
+                        &lt;h5 class="card-title"&gt;Secure&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Built with security in mind.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-12 col-md-4"&gt;
+                &lt;div class="card h-100 text-center"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;i class="fas fa-mobile-alt fa-3x text-warning mb-3"&gt;&lt;/i&gt;
+                        &lt;h5 class="card-title"&gt;Responsive&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Works on all devices.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Footer --&gt;
+    &lt;footer class="bg-dark text-white py-4 mt-5"&gt;
+        &lt;div class="container text-center"&gt;
+            &lt;p class="mb-0"&gt;&copy; 2024 MyApp. All rights reserved.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+
+    &lt;!-- Bootstrap JS --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Responsive design ensures your website works on all devices</li>
+                            <li>Bootstrap provides a powerful grid system and components</li>
+                            <li>Customize Bootstrap to match your brand</li>
+                            <li>Always test on multiple screen sizes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Build a responsive landing page:</p>
+                        <ol>
+                            <li>Use Bootstrap grid system</li>
+                            <li>Include responsive navbar</li>
+                            <li>Add cards for features</li>
+                            <li>Create a contact form</li>
+                            <li>Add a footer</li>
+                            <li>Customize with custom CSS</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WebsiteDevelopment/02-ProjectStructureBestPractices" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WebsiteDevelopment/04-GitWorkflow" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

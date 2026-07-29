@@ -1,0 +1,70 @@
+﻿@page
+@model RdlcReportsIndexModel
+@{
+    ViewData["Title"] = "RDLC Reports in Windows Forms";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">RDLC Reports in Windows Forms</h1>
+            <p class="lead mb-4">Create professional reports with RDLC in Windows Forms. Learn dataset design, report creation, and SQL integration.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RdlcReports/01-WhatIsRdlc">
+                            <h5><span class="card-number">1</span>What Is RDLC</h5>
+                            <p>Understanding RDLC reports and their capabilities.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RdlcReports/02-CreatingDataset">
+                            <h5><span class="card-number">2</span>Creating Dataset</h5>
+                            <p>Create datasets to feed data to your reports.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RdlcReports/03-DesigningReport">
+                            <h5><span class="card-number">3</span>Designing Report</h5>
+                            <p>Design professional RDLC reports with multiple data sources.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RdlcReports/04-BindingReportToForm">
+                            <h5><span class="card-number">4</span>Binding Report to Form</h5>
+                            <p>Bind RDLC reports to Windows Forms and display them.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RdlcReports/05-FullReportProjectWithSql">
+                            <h5><span class="card-number">5</span>Full Report Project with SQL</h5>
+                            <p>Build a complete reporting application with SQL Server integration.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

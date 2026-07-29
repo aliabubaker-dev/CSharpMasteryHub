@@ -1,0 +1,102 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.DataBindingModel
+@{
+    ViewData["Title"] = "Data Binding";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Data Binding</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Data Binding</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 7</span>
+                </div>
+
+                <p>
+                    Data binding connects controls directly to data so they display and
+                    update automatically, instead of manually copying values in and out.
+                </p>
+
+                <h2>Binding a DataGridView to a DataTable</h2>
+                <pre><code>using Microsoft.Data.SqlClient;
+using System.Data;
+
+private void LoadStudents()
+{
+    using var connection = new SqlConnection(connectionString);
+    var adapter = new SqlDataAdapter("SELECT StudentId, FirstName, LastName, Email FROM Students", connection);
+
+    var table = new DataTable();
+    adapter.Fill(table);
+
+    dgvStudents.DataSource = table;
+}</code></pre>
+                <p>That's it — the grid populates itself with columns and rows automatically.</p>
+
+                <h2>Binding a ComboBox to a lookup table</h2>
+                <pre><code>private void LoadCourses()
+{
+    using var connection = new SqlConnection(connectionString);
+    var adapter = new SqlDataAdapter("SELECT CourseId, Title FROM Courses", connection);
+
+    var table = new DataTable();
+    adapter.Fill(table);
+
+    cmbCourse.DataSource = table;
+    cmbCourse.DisplayMember = "Title";   // what the user sees
+    cmbCourse.ValueMember = "CourseId";  // what you read in code
+}
+
+// Later:
+int selectedCourseId = (int)cmbCourse.SelectedValue!;</code></pre>
+
+                <h2>Reacting to a grid row selection</h2>
+                <pre><code>private void dgvStudents_SelectionChanged(object sender, EventArgs e)
+{
+    if (dgvStudents.CurrentRow == null) return;
+
+    txtFirstName.Text = dgvStudents.CurrentRow.Cells["FirstName"].Value?.ToString();
+    txtLastName.Text = dgvStudents.CurrentRow.Cells["LastName"].Value?.ToString();
+}</code></pre>
+
+                <h2>Binding a form to a single object (BindingSource)</h2>
+                <pre><code>var student = new Student { FirstName = "Ali", LastName = "Hassan" };
+var bindingSource = new BindingSource { DataSource = student };
+
+txtFirstName.DataBindings.Add("Text", bindingSource, "FirstName");
+txtLastName.DataBindings.Add("Text", bindingSource, "LastName");</code></pre>
+                <p>Now changes in the textbox flow directly into the <code>student</code> object.</p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Data binding connects controls to data automatically, reducing manual code and keeping your UI synchronized with your data.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WindowsForms/06-MultiFormApps" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿@page
+@model CSharpMasteryHub.Pages.CSharpFundamentals.LinqIntroductionModel
+@{
+    ViewData["Title"] = "LINQ Introduction";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/CSharpFundamentals">C# Fundamentals</a></li>
+                    <li class="breadcrumb-item active">LINQ Introduction</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">LINQ Introduction</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 12 of 13</span>
+                </div>
+
+                <h2>What is LINQ?</h2>
+                <p>LINQ (Language Integrated Query) allows you to query collections using C# syntax.</p>
+
+                <h2>Sample Data</h2>
+                <pre><code>List&lt;Person&gt; people = new List&lt;Person&gt;
+{
+    new Person { Name = "Alice", Age = 25, City = "New York" },
+    new Person { Name = "Bob", Age = 30, City = "London" },
+    new Person { Name = "Charlie", Age = 22, City = "New York" },
+    new Person { Name = "Diana", Age = 28, City = "Paris" }
+};</code></pre>
+
+                <h2>Where - Filtering</h2>
+                <pre><code>// Query syntax
+var adults = from p in people
+             where p.Age >= 18
+             select p;
+
+// Method syntax
+var adults = people.Where(p => p.Age >= 18);
+
+// Multiple conditions
+var newYorkers = people.Where(p => p.City == "New York" && p.Age > 20);</code></pre>
+
+                <h2>Select - Projection</h2>
+                <pre><code>// Select specific properties
+var names = people.Select(p => p.Name);
+
+// Select new object
+var nameAge = people.Select(p => new { p.Name, p.Age });
+
+// Select with transformation
+var greetings = people.Select(p => $"Hello, {p.Name}!");</code></pre>
+
+                <h2>OrderBy - Sorting</h2>
+                <pre><code>// Ascending
+var sorted = people.OrderBy(p => p.Name);
+
+// Descending
+var sortedDesc = people.OrderByDescending(p => p.Age);
+
+// Multiple sort
+var sortedMulti = people
+    .OrderBy(p => p.City)
+    .ThenBy(p => p.Name);</code></pre>
+
+                <h2>GroupBy - Grouping</h2>
+                <pre><code>var groupedByCity = people.GroupBy(p => p.City);
+
+foreach (var group in groupedByCity)
+{
+    Console.WriteLine($"City: {group.Key}");
+    foreach (var person in group)
+    {
+        Console.WriteLine($"  {person.Name}");
+    }
+}</code></pre>
+
+                <h2>Aggregate Functions</h2>
+                <pre><code>int totalAge = people.Sum(p => p.Age);           // Sum
+double avgAge = people.Average(p => p.Age);      // Average
+int maxAge = people.Max(p => p.Age);             // Maximum
+int minAge = people.Min(p => p.Age);             // Minimum
+int count = people.Count(p => p.Age > 25);       // Count</code></pre>
+
+                <h2>First and Single</h2>
+                <pre><code>// First element or default
+var first = people.FirstOrDefault();
+var firstNY = people.FirstOrDefault(p => p.City == "New York");
+
+// Single element (throws if not exactly one)
+var single = people.Single(p => p.Name == "Alice");
+
+// Contains check
+bool hasBob = people.Any(p => p.Name == "Bob");</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>LINQ makes querying collections intuitive and powerful. Use it for filtering, sorting, and transforming data.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/CSharpFundamentals/11-PatternMatchingAndNullables" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/CSharpFundamentals/13-DelegatesEventsAsync" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

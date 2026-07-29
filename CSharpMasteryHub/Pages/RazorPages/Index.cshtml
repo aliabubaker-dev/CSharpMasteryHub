@@ -1,0 +1,100 @@
+﻿@page
+@model RazorPagesIndexModel
+@{
+    ViewData["Title"] = "ASP.NET Core Razor Pages";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">ASP.NET Core Razor Pages</h1>
+            <p class="lead mb-4">Build modern web applications with ASP.NET Core using Razor Pages. Learn routing, model binding, validation, and CRUD operations.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/01-MvcVsRazorPages">
+                            <h5><span class="card-number">1</span>MVC vs Razor Pages</h5>
+                            <p>Understand the differences between MVC and Razor Pages approaches.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/02-PageModelAndRouting">
+                            <h5><span class="card-number">2</span>PageModel and Routing</h5>
+                            <p>Learn about PageModel and routing in Razor Pages.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/03-TagHelpers">
+                            <h5><span class="card-number">3</span>Tag Helpers</h5>
+                            <p>Master Tag Helpers for cleaner Razor syntax.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/04-FormsAndModelBinding">
+                            <h5><span class="card-number">4</span>Forms and Model Binding</h5>
+                            <p>Create forms and implement model binding in Razor Pages.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/05-ValidationDataAnnotations">
+                            <h5><span class="card-number">5</span>Validation & Data Annotations</h5>
+                            <p>Implement validation using Data Annotations.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/06-PartialsAndLayouts">
+                            <h5><span class="card-number">6</span>Partials and Layouts</h5>
+                            <p>Organize your UI with partials and layouts.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/07-DependencyInjection">
+                            <h5><span class="card-number">7</span>Dependency Injection</h5>
+                            <p>Implement dependency injection in Razor Pages.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/RazorPages/08-FullCrudProject">
+                            <h5><span class="card-number">8</span>Full CRUD Project</h5>
+                            <p>Build a complete CRUD application with Razor Pages.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

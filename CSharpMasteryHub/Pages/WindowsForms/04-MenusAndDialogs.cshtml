@@ -1,0 +1,106 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.MenusAndDialogsModel
+@{
+    ViewData["Title"] = "Menus & Dialogs";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Menus & Dialogs</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Menus &amp; Dialogs</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 7</span>
+                </div>
+
+                <h2>Adding a MenuStrip</h2>
+                <p>
+                    Drag a <strong>MenuStrip</strong> from the Toolbox onto the form. Type
+                    directly into the "Type Here" boxes to create menu items like
+                    <strong>File &rarr; Open</strong>, <strong>File &rarr; Exit</strong>, and
+                    <strong>Help &rarr; About</strong>.
+                </p>
+
+                <h2>Handling a menu click</h2>
+                <pre><code>private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    Application.Exit();
+}</code></pre>
+
+                <h2>Built-in MessageBox dialogs</h2>
+                <pre><code>MessageBox.Show("Student saved successfully.", "Success",
+    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+var confirm = MessageBox.Show("Delete this student?", "Confirm Delete",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+if (confirm == DialogResult.Yes)
+{
+    // perform delete
+}</code></pre>
+
+                <h2>OpenFileDialog and SaveFileDialog</h2>
+                <pre><code>using var openDialog = new OpenFileDialog
+{
+    Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*"
+};
+
+if (openDialog.ShowDialog() == DialogResult.OK)
+{
+    string path = openDialog.FileName;
+    string[] lines = File.ReadAllLines(path);
+    // process the file
+}</code></pre>
+
+                <h2>Building a custom dialog form</h2>
+                <p>
+                    Add a second form (right-click project &rarr; Add &rarr; Windows Form)
+                    for things like an "Add Student" popup. Show it modally so the user must
+                    finish with it before returning to the main form:
+                </p>
+                <pre><code>using var addForm = new AddStudentForm();
+if (addForm.ShowDialog() == DialogResult.OK)
+{
+    // addForm.NewStudentName, etc. are now populated
+    RefreshGrid();
+}</code></pre>
+                <p>
+                    Inside <code>AddStudentForm</code>, set <code>
+                    this.DialogResult =
+                    DialogResult.OK;
+                </code> in the Save button's click handler — this
+                automatically closes the form and returns that result to the caller.
+            </p>
+
+            <div class="card bg-info bg-opacity-10 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                    <p>Menus provide navigation, and dialogs (MessageBox, OpenFileDialog, custom forms) handle user interaction and file operations.</p>
+                </div>
+            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <a href="/WindowsForms/03-EventHandling" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                </a>
+                <a href="/WindowsForms/05-DataBinding" class="btn btn-primary-custom">
+                    Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+</div>
+</div>

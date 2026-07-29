@@ -1,0 +1,89 @@
+﻿@page
+@model PageSpeedCoreWebVitalsModel
+@{
+    ViewData["Title"] = "Page Speed & Core Web Vitals";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Seo">SEO Guide</a></li>
+                    <li class="breadcrumb-item active">Page Speed & Core Web Vitals</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Page Speed & Core Web Vitals</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 6</span>
+                </div>
+
+                <h2>Why Page Speed Matters</h2>
+                <ul>
+                    <li>Direct ranking factor for Google</li>
+                    <li>Improves user experience</li>
+                    <li>Reduces bounce rate</li>
+                    <li>Increases conversion rates</li>
+                </ul>
+
+                <h2>Core Web Vitals</h2>
+
+                <h3>1. Largest Contentful Paint (LCP)</h3>
+                <p>Measures loading performance. Should be under 2.5 seconds.</p>
+                <pre><code>// Optimize LCP
+- Optimize images (lazy loading, WebP format)
+- Enable compression (gzip, brotli)
+- Minimize render-blocking resources
+- Use a CDN</code></pre>
+
+                <h3>2. First Input Delay (FID)</h3>
+                <p>Measures interactivity. Should be under 100 milliseconds.</p>
+                <pre><code>// Optimize FID
+- Minify JavaScript
+- Defer non-critical JavaScript
+- Use web workers
+- Optimize third-party scripts</code></pre>
+
+                <h3>3. Cumulative Layout Shift (CLS)</h3>
+                <p>Measures visual stability. Should be under 0.1.</p>
+                <pre><code>// Optimize CLS
+- Set explicit dimensions on images
+- Reserve space for ads and embeds
+- Avoid inserting content above existing content
+- Use CSS aspect-ratio property</code></pre>
+
+                <h2>Testing Tools</h2>
+                <ul>
+                    <li><strong>PageSpeed Insights</strong> - Google's tool for measuring performance</li>
+                    <li><strong>Lighthouse</strong> - Built into Chrome DevTools</li>
+                    <li><strong>WebPageTest</strong> - Advanced performance testing</li>
+                    <li><strong>GTmetrix</strong> - Performance analysis tool</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Core Web Vitals are essential ranking factors. Optimize for LCP, FID, and CLS for better performance.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/Seo/04-SemanticHtmlHeadings" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/Seo/06-GoogleSearchConsole" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

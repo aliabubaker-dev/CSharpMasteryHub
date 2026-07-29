@@ -1,0 +1,199 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.CrudProjectWalkthroughModel
+@{
+    ViewData["Title"] = "Full CRUD Project Walkthrough";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Full CRUD Project Walkthrough</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Full CRUD Project Walkthrough</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 7</span>
+                </div>
+
+                <p>
+                    Let's put everything from this module together: a Student Manager app
+                    with a grid, add/edit/delete, and a live SQL Server connection.
+                </p>
+
+                <h2>Form layout</h2>
+                <ul>
+                    <li><code>txtFirstName</code>, <code>txtLastName</code>, <code>txtEmail</code> — TextBoxes</li>
+                    <li><code>btnSave</code>, <code>btnDelete</code>, <code>btnClear</code> — Buttons</li>
+                    <li><code>dgvStudents</code> — DataGridView, Dock = Fill in a panel</li>
+                </ul>
+
+                <h2>The full code-behind</h2>
+                <pre><code>using System.Data;
+using Microsoft.Data.SqlClient;
+
+public partial class MainForm : Form
+{
+    private const string ConnectionString =
+        "Server=localhost\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;";
+
+    private int? _selectedStudentId = null;
+
+    public MainForm()
+    {
+        InitializeComponent();
+    }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+        LoadStudents();
+    }
+
+    private void LoadStudents()
+    {
+        using var connection = new SqlConnection(ConnectionString);
+        var adapter = new SqlDataAdapter(
+            "SELECT StudentId, FirstName, LastName, Email FROM Students ORDER BY LastName",
+            connection);
+
+        var table = new DataTable();
+        adapter.Fill(table);
+        dgvStudents.DataSource = table;
+    }
+
+    private void dgvStudents_SelectionChanged(object sender, EventArgs e)
+    {
+        if (dgvStudents.CurrentRow == null) return;
+
+        _selectedStudentId = (int)dgvStudents.CurrentRow.Cells["StudentId"].Value;
+        txtFirstName.Text = dgvStudents.CurrentRow.Cells["FirstName"].Value?.ToString();
+        txtLastName.Text = dgvStudents.CurrentRow.Cells["LastName"].Value?.ToString();
+        txtEmail.Text = dgvStudents.CurrentRow.Cells["Email"].Value?.ToString();
+    }
+
+    private void btnSave_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtFirstName.Text) ||
+            string.IsNullOrWhiteSpace(txtLastName.Text) ||
+            string.IsNullOrWhiteSpace(txtEmail.Text))
+        {
+            MessageBox.Show("All fields are required.", "Validation",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        using var connection = new SqlConnection(ConnectionString);
+        connection.Open();
+
+        SqlCommand command;
+
+        if (_selectedStudentId == null)
+        {
+            command = new SqlCommand(
+                "INSERT INTO Students (FirstName, LastName, Email) VALUES (@@FirstName, @@LastName, @@Email)",
+                connection);
+        }
+        else
+        {
+            command = new SqlCommand(
+                "UPDATE Students SET FirstName = @@FirstName, LastName = @@LastName, Email = @@Email WHERE StudentId = @@StudentId",
+                connection);
+            command.Parameters.AddWithValue("@@StudentId", _selectedStudentId.Value);
+        }
+
+        command.Parameters.AddWithValue("@@FirstName", txtFirstName.Text.Trim());
+        command.Parameters.AddWithValue("@@LastName", txtLastName.Text.Trim());
+        command.Parameters.AddWithValue("@@Email", txtEmail.Text.Trim());
+
+        command.ExecuteNonQuery();
+
+        MessageBox.Show("Saved successfully.");
+        ClearForm();
+        LoadStudents();
+    }
+
+    private void btnDelete_Click(object sender, EventArgs e)
+    {
+        if (_selectedStudentId == null)
+        {
+            MessageBox.Show("Select a student first.");
+            return;
+        }
+
+        var confirm = MessageBox.Show("Delete this student?", "Confirm",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+        if (confirm != DialogResult.Yes) return;
+
+        using var connection = new SqlConnection(ConnectionString);
+        connection.Open();
+
+        using var command = new SqlCommand(
+            "DELETE FROM Students WHERE StudentId = @@StudentId", connection);
+        command.Parameters.AddWithValue("@@StudentId", _selectedStudentId.Value);
+        command.ExecuteNonQuery();
+
+        ClearForm();
+        LoadStudents();
+    }
+
+    private void btnClear_Click(object sender, EventArgs e)
+    {
+        ClearForm();
+    }
+
+    private void ClearForm()
+    {
+        _selectedStudentId = null;
+        txtFirstName.Clear();
+        txtLastName.Clear();
+        txtEmail.Clear();
+        dgvStudents.ClearSelection();
+    }
+}</code></pre>
+
+                <h2>What this demonstrates</h2>
+                <ul>
+                    <li>Loading and refreshing a DataGridView (Lesson 5)</li>
+                    <li>Reacting to grid selection to populate an edit form (Lesson 5)</li>
+                    <li>One Save button that intelligently INSERTs or UPDATEs depending on whether something is selected</li>
+                    <li>Parameterized commands throughout — no SQL injection risk (Module 8)</li>
+                    <li>MessageBox confirmations before destructive actions (Lesson 4)</li>
+                </ul>
+
+                <h2>Ideas to extend it yourself</h2>
+                <ul>
+                    <li>Add a search TextBox that filters the grid as you type</li>
+                    <li>Add a Courses ComboBox and an Enrollments grid on a second tab</li>
+                    <li>Add the RDLC report from the next module, printable from this same form</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>You can now build a full data-driven desktop app with CRUD operations using Windows Forms and SQL Server.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WindowsForms/06-MultiFormApps" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WindowsForms" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+@page
+@model CSharpMasteryHub.Pages.GettingStarted.InstallingGitModel
+@{
+    ViewData["Title"] = "Installing Git";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/GettingStarted">Getting Started</a></li>
+                    <li class="breadcrumb-item active">Installing Git</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Installing Git</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">10 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 4</span>
+                </div>
+
+                <p>
+                    Git is the version control system nearly every professional C# team uses.
+                    You'll need it for the Project Workflow module and for deployment later.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>What is Version Control?</h5>
+                        <p class="card-text">Version control tracks changes to your code over time. It lets you go back to previous versions, work with teams, and experiment safely.</p>
+                    </div>
+                </div>
+
+                <h2>Step 1 — Download Git</h2>
+                <p>Go to <code>git-scm.com</code> and download the installer for your OS.</p>
+
+                <h2>Step 2 — Install with default options</h2>
+                <p>
+                    The defaults are fine for beginners. Keep "Git from the command line and
+                    also from 3rd-party software" selected, and leave the default branch name
+                    as <code>main</code>.
+                </p>
+
+                <h2>Step 3 — Configure your identity</h2>
+                <p>Open a terminal (or Git Bash) and run:</p>
+                <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>
+
+                <h2>Step 4 — Verify</h2>
+                <pre><code>git --version</code></pre>
+                <p>You should see a version number printed. You're ready to start coding.</p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Git is the industry standard for version control. Set it up once and you're ready for all your C# projects.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/GettingStarted/03-InstallingSqlExpressSsms" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/GettingStarted" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

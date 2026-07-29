@@ -1,0 +1,131 @@
+﻿@page
+@model CreatingConsoleAppModel
+@{
+    ViewData["Title"] = "Creating Console App";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ConsoleApp">Console Applications</a></li>
+                    <li class="breadcrumb-item active">Creating Console App</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Creating Your First Console Application</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 4</span>
+                </div>
+
+                <h2>What is a Console Application?</h2>
+                <p>
+                    A console application is a program that runs in a command-line interface (terminal/command prompt).
+                    It's the simplest type of application you can build in C# and is perfect for learning the fundamentals.
+                </p>
+
+                <h2>Creating Your First Project</h2>
+
+                <h3>Method 1: Using Visual Studio</h3>
+                <div class="step-by-step">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">1</span>Open Visual Studio</h5>
+                            <p>Launch Visual Studio and click "Create a new project".</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">2</span>Select Template</h5>
+                            <p>Choose "Console App (.NET Core)" or "Console App (.NET Framework)"</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><span class="badge bg-primary me-2">3</span>Configure Project</h5>
+                            <p>Set Project Name: "MyConsoleApp", Location, and click "Create".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Method 2: Using Command Line</h3>
+                <pre><code>dotnet new console -n MyConsoleApp
+cd MyConsoleApp
+dotnet run</code></pre>
+
+                <h2>Understanding the Project Structure</h2>
+                <pre><code>MyConsoleApp/
+├── Program.cs          // Main program file
+├── MyConsoleApp.csproj // Project configuration
+├── obj/               // Build objects
+└── bin/               // Compiled binaries</code></pre>
+
+                <h2>The Program.cs File</h2>
+                <p>Here's what the default Program.cs looks like:</p>
+                <pre><code>using System;
+
+namespace MyConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}</code></pre>
+
+                <h3>Breaking Down the Code</h3>
+                <ul>
+                    <li><strong>using System;</strong> - Imports the System namespace</li>
+                    <li><strong>namespace MyConsoleApp</strong> - Defines a namespace</li>
+                    <li><strong>class Program</strong> - The main class</li>
+                    <li><strong>static void Main(string[] args)</strong> - Entry point of the application</li>
+                    <li><strong>Console.WriteLine</strong> - Outputs text to the console</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Every console application starts with the Main method. This is where your program begins execution.</p>
+                    </div>
+                </div>
+
+                <h2>Running Your Application</h2>
+                <ul>
+                    <li><strong>Visual Studio:</strong> Press F5 or click "Start" button</li>
+                    <li><strong>Command Line:</strong> Navigate to project folder and run <code>dotnet run</code></li>
+                </ul>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a console application that:</p>
+                        <ol>
+                            <li>Prints "Welcome to C#!"</li>
+                            <li>Prints your name on a new line</li>
+                            <li>Prints "Press any key to exit..." and waits for input</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ConsoleApp" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/ConsoleApp/02-InputOutput" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

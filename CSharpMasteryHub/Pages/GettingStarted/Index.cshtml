@@ -1,0 +1,71 @@
+@page
+@model CSharpMasteryHub.Pages.GettingStarted.IndexModel
+@{
+    ViewData["Title"] = "Getting Started with C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Getting Started</h1>
+            <p class="lead mb-4">
+                Before writing a single line of C#, you need the right tools installed.
+                This module walks you through everything: Visual Studio, the workloads
+                you need, SQL Server Express + SSMS, and Git. Follow these in order.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/GettingStarted/01-InstallingVisualStudio">
+                            <h5><span class="card-number">1</span>Installing Visual Studio</h5>
+                            <p>Download and install Visual Studio Community for free.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/GettingStarted/02-WorkloadsToSelect">
+                            <h5><span class="card-number">2</span>Choosing the Right Workloads</h5>
+                            <p>Select the right workloads for C#, ASP.NET, WinForms, and MAUI.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">10 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/GettingStarted/03-InstallingSqlExpressSsms">
+                            <h5><span class="card-number">3</span>Installing SQL Server Express &amp; SSMS</h5>
+                            <p>Set up SQL Server Express and Management Studio for database work.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/GettingStarted/04-InstallingGit">
+                            <h5><span class="card-number">4</span>Installing Git</h5>
+                            <p>Install and configure Git for version control.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">10 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-info bg-opacity-10 mt-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>What's Next?</h5>
+                    <p class="card-text">After completing this module, you'll have a fully configured development environment ready for C# programming. Proceed to <a href="/CSharpFundamentals">C# Fundamentals</a> to start learning.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

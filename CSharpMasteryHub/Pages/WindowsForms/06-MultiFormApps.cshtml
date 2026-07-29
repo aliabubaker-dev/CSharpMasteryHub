@@ -1,0 +1,112 @@
+@page
+@model CSharpMasteryHub.Pages.WindowsForms.MultiFormAppsModel
+@{
+    ViewData["Title"] = "Multi-Form Applications";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Multi-Form Applications</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Multi-Form Applications</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 7</span>
+                </div>
+
+                <p>Real applications rarely fit on one form. This lesson covers navigating between forms and passing data cleanly.</p>
+
+                <h2>Opening a second form (non-modal)</h2>
+                <pre><code>private void btnOpenReports_Click(object sender, EventArgs e)
+{
+    var reportsForm = new ReportsForm();
+    reportsForm.Show();   // Show() = non-modal, user can switch between windows
+}</code></pre>
+
+                <h2>Opening a form modally and getting data back</h2>
+                <pre><code>private void btnAddStudent_Click(object sender, EventArgs e)
+{
+    using var addForm = new AddStudentForm();
+
+    if (addForm.ShowDialog(this) == DialogResult.OK)
+    {
+        // addForm exposes public properties set right before closing
+        InsertStudent(addForm.FirstName, addForm.LastName, addForm.Email);
+        LoadStudents();
+    }
+}</code></pre>
+
+                <h2>Exposing data from a child form</h2>
+                <pre><code>public partial class AddStudentForm : Form
+{
+    public string FirstName => txtFirstName.Text;
+    public string LastName => txtLastName.Text;
+    public string Email => txtEmail.Text;
+
+    public AddStudentForm()
+    {
+        InitializeComponent();
+    }
+
+    private void btnSave_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtFirstName.Text))
+        {
+            MessageBox.Show("First name is required.");
+            return;
+        }
+
+        DialogResult = DialogResult.OK;  // closes the form automatically
+    }
+}</code></pre>
+
+                <h2>Choosing a "main form" pattern (MDI)</h2>
+                <p>
+                    For apps with many child windows docked inside one parent (like an old
+                    Office app), set <code>IsMdiContainer = true</code> on the main form and
+                    <code>MdiParent = this;</code> before showing a child form. Most modern
+                    apps skip MDI in favor of a single main form with panels/tabs, which is
+                    simpler to maintain.
+                </p>
+
+                <h2>Sharing a connection string across forms</h2>
+                <pre><code>public static class AppConfig
+{
+    public const string ConnectionString =
+        "Server=localhost\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;";
+}
+
+// Used anywhere:
+using var connection = new SqlConnection(AppConfig.ConnectionString);</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Multi-form apps use <code>Show()</code> for non-modal and <code>ShowDialog()</code> for modal forms. Use public properties or a shared config class to pass data between forms.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WindowsForms/05-DataBinding" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WindowsForms/07-CrudProjectWalkthrough" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

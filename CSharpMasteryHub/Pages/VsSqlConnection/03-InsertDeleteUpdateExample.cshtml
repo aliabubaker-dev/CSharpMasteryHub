@@ -1,0 +1,123 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.InsertDeleteUpdateExampleModel
+@{
+    ViewData["Title"] = "Insert / Delete / Update — Full Example";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/VsSqlConnection">VS + SQL Connection</a></li>
+                    <li class="breadcrumb-item active">Insert / Delete / Update</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Insert / Delete / Update — Full Example</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 5</span>
+                </div>
+
+                <p>This lesson wires up all three operations against the <code>Students</code> table using parameterized commands (never string concatenation — that's how SQL injection happens).</p>
+
+                <h2>A reusable repository class</h2>
+                <pre><code>using Microsoft.Data.SqlClient;
+
+public class StudentRepository
+{
+    private readonly string _connectionString;
+
+    public StudentRepository(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
+    public void AddStudent(string firstName, string lastName, string email)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        connection.Open();
+
+        using var command = new SqlCommand(
+            "INSERT INTO Students (FirstName, LastName, Email) VALUES (@@FirstName, @@LastName, @@Email)",
+            connection);
+
+        command.Parameters.AddWithValue("@@FirstName", firstName);
+        command.Parameters.AddWithValue("@@LastName", lastName);
+        command.Parameters.AddWithValue("@@Email", email);
+
+        command.ExecuteNonQuery();
+    }
+
+    public void UpdateStudentEmail(int studentId, string newEmail)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        connection.Open();
+
+        using var command = new SqlCommand(
+            "UPDATE Students SET Email = @@Email WHERE StudentId = @@StudentId",
+            connection);
+
+        command.Parameters.AddWithValue("@@Email", newEmail);
+        command.Parameters.AddWithValue("@@StudentId", studentId);
+
+        int rowsAffected = command.ExecuteNonQuery();
+        if (rowsAffected == 0)
+            throw new InvalidOperationException($"No student found with Id {studentId}");
+    }
+
+    public void DeleteStudent(int studentId)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        connection.Open();
+
+        using var command = new SqlCommand(
+            "DELETE FROM Students WHERE StudentId = @@StudentId",
+            connection);
+
+        command.Parameters.AddWithValue("@@StudentId", studentId);
+        command.ExecuteNonQuery();
+    }
+}</code></pre>
+
+                <h2>Using it</h2>
+                <pre><code>var repo = new StudentRepository(connectionString);
+
+repo.AddStudent("Layla", "Ibrahim", "layla.i@@example.com");
+repo.UpdateStudentEmail(1, "ali.updated@@example.com");
+repo.DeleteStudent(3);</code></pre>
+
+                <h2>Why @@Parameters instead of string interpolation?</h2>
+                <pre><code>// NEVER DO THIS — vulnerable to SQL injection:
+var command = new SqlCommand($"DELETE FROM Students WHERE StudentId = {studentId}", connection);
+
+// ALWAYS DO THIS instead — parameters are sent separately from the query text:
+var command = new SqlCommand("DELETE FROM Students WHERE StudentId = @@StudentId", connection);
+command.Parameters.AddWithValue("@@StudentId", studentId);</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Always use parameterized commands to prevent SQL injection. Never concatenate user input into SQL strings.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/VsSqlConnection/02-AdoNetBasics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/VsSqlConnection/04-DataReaderVsDataAdapter" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

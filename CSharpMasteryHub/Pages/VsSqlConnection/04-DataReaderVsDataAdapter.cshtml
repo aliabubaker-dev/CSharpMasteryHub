@@ -1,0 +1,102 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.DataReaderVsDataAdapterModel
+@{
+    ViewData["Title"] = "DataReader vs DataAdapter";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/VsSqlConnection">VS + SQL Connection</a></li>
+                    <li class="breadcrumb-item active">DataReader vs DataAdapter</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">DataReader vs DataAdapter</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 5</span>
+                </div>
+
+                <h2>SqlDataReader — forward-only streaming</h2>
+                <p>
+                    Fast and lightweight. Reads one row at a time and doesn't hold the whole
+                    result set in memory. Best for simply looping through and printing/using
+                    data once.
+                </p>
+                <pre><code>using var reader = command.ExecuteReader();
+while (reader.Read())
+{
+    Console.WriteLine(reader["FirstName"]);
+}</code></pre>
+
+                <h2>SqlDataAdapter + DataTable — an in-memory snapshot</h2>
+                <p>
+                    Loads the entire result into a <code>DataTable</code> you can pass around,
+                    bind to a grid (very common in Windows Forms), filter, or sort without
+                    touching the database again.
+                </p>
+                <pre><code>using var connection = new SqlConnection(connectionString);
+var adapter = new SqlDataAdapter("SELECT * FROM Students", connection);
+
+var table = new DataTable();
+adapter.Fill(table);
+
+foreach (DataRow row in table.Rows)
+{
+    Console.WriteLine(row["FirstName"]);
+}</code></pre>
+
+                <h2>Which one should you use?</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web API / Razor Pages, read once and render</td>
+                                <td>SqlDataReader</td>
+                            </tr>
+                            <tr>
+                                <td>Windows Forms DataGridView binding</td>
+                                <td>SqlDataAdapter + DataTable</td>
+                            </tr>
+                            <tr>
+                                <td>Need to edit data offline then push changes back</td>
+                                <td>SqlDataAdapter (supports Update())</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Use SqlDataReader for fast forward-only reading. Use SqlDataAdapter + DataTable for binding to grids or editing data offline.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/VsSqlConnection/03-InsertDeleteUpdateExample" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/VsSqlConnection/05-EntityFrameworkCoreIntro" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

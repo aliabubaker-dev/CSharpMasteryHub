@@ -1,0 +1,60 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Console Applications in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Console Applications in C#</h1>
+            <p class="lead mb-4">Learn to build console applications with C# .NET Framework. From basic input/output to file handling and complete projects.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ConsoleApp/01-CreatingConsoleApp">
+                            <h5><span class="card-number">1</span>Creating Console App</h5>
+                            <p>Create your first console application and understand the project structure.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ConsoleApp/02-InputOutput">
+                            <h5><span class="card-number">2</span>Input and Output</h5>
+                            <p>Master console input/output operations, formatting, and user interaction.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ConsoleApp/03-CalculatorProject">
+                            <h5><span class="card-number">3</span>Calculator Project</h5>
+                            <p>Build a complete calculator application with error handling.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/ConsoleApp/04-FileHandling">
+                            <h5><span class="card-number">4</span>File Handling</h5>
+                            <p>Read, write, and manipulate files in C# console applications.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

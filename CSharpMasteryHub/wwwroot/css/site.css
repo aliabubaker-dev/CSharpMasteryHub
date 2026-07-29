@@ -1,0 +1,265 @@
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #512BD4;
+    --secondary-color: #0D6EFD;
+    --success-color: #198754;
+    --info-color: #0DCAF0;
+    --warning-color: #FFC107;
+    --danger-color: #DC3545;
+    --dark-color: #1a1a2e;
+    --light-color: #f8f9fa;
+    --gray-color: #6c757d;
+    --body-bg: #f5f7fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--body-bg);
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a2e 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+    .navbar-custom .navbar-brand {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+        .navbar-custom .navbar-brand:hover {
+            color: var(--warning-color);
+        }
+
+    .navbar-custom .nav-link {
+        color: rgba(255,255,255,0.8) !important;
+        transition: all 0.3s ease;
+    }
+
+        .navbar-custom .nav-link:hover {
+            color: #fff !important;
+            transform: translateY(-2px);
+        }
+
+/* Main Content */
+.main-content {
+    min-height: 70vh;
+    padding: 2rem 0;
+}
+
+/* Cards */
+.lesson-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+    .lesson-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    }
+
+    .lesson-card .card-number {
+        background: var(--primary-color);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 1rem;
+    }
+
+    .lesson-card h5 {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .lesson-card a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary-custom:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(81, 43, 212, 0.3);
+        color: white;
+    }
+
+/* Sidebar */
+.sidebar-nav {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 2rem;
+}
+
+    .sidebar-nav .nav-item {
+        border-bottom: 1px solid #eee;
+        padding: 0.5rem 0;
+    }
+
+        .sidebar-nav .nav-item:last-child {
+            border-bottom: none;
+        }
+
+    .sidebar-nav .nav-link {
+        color: #555;
+        padding: 0.3rem 0;
+        transition: all 0.3s ease;
+    }
+
+        .sidebar-nav .nav-link:hover {
+            color: var(--primary-color);
+            padding-left: 0.5rem;
+        }
+
+        .sidebar-nav .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+/* Code Blocks */
+pre {
+    background: #1a1a2e;
+    color: #e1e1e1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* Progress */
+.progress-section {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+/* Footer */
+.footer-custom {
+    background: var(--dark-color);
+    color: rgba(255,255,255,0.8);
+    padding: 3rem 0 1.5rem;
+    margin-top: 3rem;
+}
+
+    .footer-custom h5 {
+        color: #fff;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-custom a {
+        color: rgba(255,255,255,0.6);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .footer-custom a:hover {
+            color: #fff;
+        }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-nav {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .lesson-card {
+        padding: 1rem;
+    }
+}
+
+/* Animated Counter */
+.feature-box {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    }
+
+    .feature-box .number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+/* Back to Top */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary-color);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+    .back-to-top:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(81, 43, 212, 0.3);
+        color: white;
+    }
+
+/* Print Styles */
+@media print {
+    .navbar-custom,
+    .footer-custom,
+    .sidebar-nav,
+    .back-to-top {
+        display: none !important;
+    }
+}

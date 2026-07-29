@@ -1,0 +1,302 @@
+﻿@page
+@model PolymorphismModel
+@{
+    ViewData["Title"] = "Polymorphism in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Polymorphism</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Polymorphism in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 11</span>
+                </div>
+
+                <h2>What is Polymorphism?</h2>
+                <p>
+                    Polymorphism means "many forms". It allows objects of different types to be treated as objects
+                    of a common base type, with the correct method being called based on the actual object type.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">Polymorphism enables you to write code that works with a base class, but the actual behavior comes from the derived class.</p>
+                    </div>
+                </div>
+
+                <h2>Virtual and Override</h2>
+                <pre><code>public class Animal
+{
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound");
+    }
+}
+
+public class Dog : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Dog barks: Woof!");
+    }
+}
+
+public class Cat : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Cat meows: Meow!");
+    }
+}</code></pre>
+
+                <h2>Using Polymorphism</h2>
+                <pre><code>Animal animal1 = new Dog();
+Animal animal2 = new Cat();
+
+animal1.MakeSound(); // Output: Dog barks: Woof!
+animal2.MakeSound(); // Output: Cat meows: Meow!
+
+// Collection of animals
+List<Animal> animals = new List<Animal>
+{
+    new Dog(),
+    new Cat(),
+    new Dog()
+};
+
+foreach (Animal animal in animals)
+{
+    animal.MakeSound(); // Each animal makes its own sound
+}</code></pre>
+
+                <h2>Abstract Methods</h2>
+                <pre><code>public abstract class Shape
+{
+    public abstract double GetArea();
+    public abstract double GetPerimeter();
+    
+    // Concrete method
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Area: {GetArea():F2}");
+        Console.WriteLine($"Perimeter: {GetPerimeter():F2}");
+    }
+}
+
+public class Circle : Shape
+{
+    public double Radius { get; set; }
+    
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+    
+    public override double GetArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+    
+    public override double GetPerimeter()
+    {
+        return 2 * Math.PI * Radius;
+    }
+}</code></pre>
+
+                <h2>Interface Implementation</h2>
+                <pre><code>public interface IPrintable
+{
+    void Print();
+}
+
+public interface ISerializable
+{
+    string Serialize();
+}
+
+public class Document : IPrintable, ISerializable
+{
+    public string Content { get; set; }
+    
+    public void Print()
+    {
+        Console.WriteLine($"Printing: {Content}");
+    }
+    
+    public string Serialize()
+    {
+        return $"Document: {Content}";
+    }
+}</code></pre>
+
+                <h2>Method Overloading (Compile-time Polymorphism)</h2>
+                <pre><code>public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+    
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+
+// Abstract base class
+public abstract class Employee
+{
+    public string Name { get; set; }
+    public int EmployeeId { get; set; }
+    
+    public Employee(string name, int employeeId)
+    {
+        Name = name;
+        EmployeeId = employeeId;
+    }
+    
+    public abstract decimal CalculateSalary();
+    public abstract void DisplayInfo();
+}
+
+// Derived class 1
+public class FullTimeEmployee : Employee
+{
+    public decimal MonthlySalary { get; set; }
+    public decimal Bonus { get; set; }
+    
+    public FullTimeEmployee(string name, int employeeId, decimal monthlySalary, decimal bonus)
+        : base(name, employeeId)
+    {
+        MonthlySalary = monthlySalary;
+        Bonus = bonus;
+    }
+    
+    public override decimal CalculateSalary()
+    {
+        return MonthlySalary + Bonus;
+    }
+    
+    public override void DisplayInfo()
+    {
+        Console.WriteLine($"Full-Time Employee: {Name}");
+        Console.WriteLine($"ID: {EmployeeId}");
+        Console.WriteLine($"Monthly Salary: {MonthlySalary:C}");
+        Console.WriteLine($"Bonus: {Bonus:C}");
+        Console.WriteLine($"Total: {CalculateSalary():C}");
+    }
+}
+
+// Derived class 2
+public class ContractEmployee : Employee
+{
+    public decimal HourlyRate { get; set; }
+    public int HoursWorked { get; set; }
+    
+    public ContractEmployee(string name, int employeeId, decimal hourlyRate, int hoursWorked)
+        : base(name, employeeId)
+    {
+        HourlyRate = hourlyRate;
+        HoursWorked = hoursWorked;
+    }
+    
+    public override decimal CalculateSalary()
+    {
+        return HourlyRate * HoursWorked;
+    }
+    
+    public override void DisplayInfo()
+    {
+        Console.WriteLine($"Contract Employee: {Name}");
+        Console.WriteLine($"ID: {EmployeeId}");
+        Console.WriteLine($"Hourly Rate: {HourlyRate:C}");
+        Console.WriteLine($"Hours Worked: {HoursWorked}");
+        Console.WriteLine($"Total: {CalculateSalary():C}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Polymorphic collection
+        List<Employee> employees = new List<Employee>
+        {
+            new FullTimeEmployee("John Doe", 1001, 5000, 1000),
+            new ContractEmployee("Jane Smith", 1002, 50, 160),
+            new FullTimeEmployee("Bob Johnson", 1003, 4500, 500)
+        };
+        
+        // Process all employees polymorphically
+        foreach (Employee emp in employees)
+        {
+            emp.DisplayInfo();
+            Console.WriteLine();
+        }
+        
+        // Method that works with any Employee
+        ProcessEmployee(new FullTimeEmployee("Alice", 1004, 6000, 2000));
+    }
+    
+    static void ProcessEmployee(Employee emp)
+    {
+        Console.WriteLine($"Processing {emp.Name}:");
+        Console.WriteLine($"Salary: {emp.CalculateSalary():C}");
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Polymorphism enables flexible, extensible code where objects of different types can be treated uniformly while maintaining their unique behavior.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a polymorphic system for:</p>
+                        <ol>
+                            <li>Base class: Account (abstract)</li>
+                            <li>Derived: SavingsAccount, CheckingAccount, InvestmentAccount</li>
+                            <li>Each with different interest calculation</li>
+                            <li>Method to process transactions polymorphically</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

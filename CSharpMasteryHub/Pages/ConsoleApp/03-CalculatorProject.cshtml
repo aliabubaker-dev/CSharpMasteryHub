@@ -1,0 +1,228 @@
+﻿@page
+@model CalculatorProjectModel
+@{
+    ViewData["Title"] = "Calculator Project";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ConsoleApp">Console Applications</a></li>
+                    <li class="breadcrumb-item active">Calculator Project</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Building a Calculator Console Application</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 4</span>
+                </div>
+
+                <h2>Project Overview</h2>
+                <p>We'll build a fully functional calculator with the following features:</p>
+                <ul>
+                    <li>Addition, Subtraction, Multiplication, Division</li>
+                    <li>Error handling (division by zero, invalid input)</li>
+                    <li>Continue or exit options</li>
+                    <li>Clean and user-friendly interface</li>
+                </ul>
+
+                <h2>Step 1: Create the Project Structure</h2>
+                <pre><code>Calculator/
+├── Program.cs
+├── Calculator.cs
+└── Calculator.csproj</code></pre>
+
+                <h2>Step 2: The Calculator Class</h2>
+                <p>Create a separate class to handle calculations:</p>
+                <pre><code>using System;
+
+public class Calculator
+{
+    public double Add(double a, double b) => a + b;
+    public double Subtract(double a, double b) => a - b;
+    public double Multiply(double a, double b) => a * b;
+    
+    public double Divide(double a, double b)
+    {
+        if (b == 0)
+            throw new DivideByZeroException("Cannot divide by zero!");
+        return a / b;
+    }
+}</code></pre>
+
+                <h2>Step 3: The Main Program</h2>
+                <pre><code>using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Title = "Calculator App";
+        Calculator calculator = new Calculator();
+        
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== CALCULATOR ===\n");
+            
+            // Display menu
+            Console.WriteLine("Select operation:");
+            Console.WriteLine("1. Addition (+)");
+            Console.WriteLine("2. Subtraction (-)");
+            Console.WriteLine("3. Multiplication (*)");
+            Console.WriteLine("4. Division (/)");
+            Console.WriteLine("5. Exit");
+            Console.Write("\nEnter your choice: ");
+            
+            string choice = Console.ReadLine();
+            
+            if (choice == "5")
+            {
+                Console.WriteLine("\nGoodbye!");
+                break;
+            }
+            
+            // Get numbers
+            double num1 = GetNumber("Enter first number: ");
+            double num2 = GetNumber("Enter second number: ");
+            
+            // Perform calculation
+            try
+            {
+                double result = 0;
+                string operation = "";
+                
+                switch (choice)
+                {
+                    case "1":
+                        result = calculator.Add(num1, num2);
+                        operation = "+";
+                        break;
+                    case "2":
+                        result = calculator.Subtract(num1, num2);
+                        operation = "-";
+                        break;
+                    case "3":
+                        result = calculator.Multiply(num1, num2);
+                        operation = "*";
+                        break;
+                    case "4":
+                        result = calculator.Divide(num1, num2);
+                        operation = "/";
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice!");
+                        continue;
+                }
+                
+                Console.WriteLine($"\nResult: {num1} {operation} {num2} = {result:F2}");
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\nError: {ex.Message}");
+            }
+            
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+        }
+    }
+    
+    static double GetNumber(string prompt)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            if (double.TryParse(Console.ReadLine(), out double number))
+                return number;
+            Console.WriteLine("Invalid input! Please enter a number.");
+        }
+    }
+}</code></pre>
+
+                <h2>Step 4: Enhanced Features</h2>
+                <h3>Add History Feature</h3>
+                <pre><code>List<string> history = new List<string>();
+
+// After each calculation
+string historyEntry = $"{num1} {operation} {num2} = {result:F2}";
+history.Add(historyEntry);
+
+// Display history option
+Console.WriteLine("\nPress 'H' to view history");
+if (Console.ReadKey().Key == ConsoleKey.H)
+{
+    Console.Clear();
+    Console.WriteLine("=== HISTORY ===\n");
+    if (history.Count == 0)
+        Console.WriteLine("No calculations yet.");
+    else
+    {
+        for (int i = 0; i < history.Count; i++)
+            Console.WriteLine($"{i + 1}. {history[i]}");
+    }
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
+}</code></pre>
+
+                <h3>Add Scientific Functions</h3>
+                <pre><code>public double Power(double a, double b) => Math.Pow(a, b);
+public double SquareRoot(double a) => Math.Sqrt(a);
+public double Sine(double a) => Math.Sin(a * Math.PI / 180);</code></pre>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practices</h5>
+                        <ul class="mb-0">
+                            <li>Separate business logic from UI</li>
+                            <li>Use exception handling for errors</li>
+                            <li>Validate user input</li>
+                            <li>Keep methods focused and single-purpose</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">This project demonstrates key concepts: class design, user input handling, exception handling, and application flow control.</p>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Challenge</h5>
+                        <p>Extend the calculator with:</p>
+                        <ol>
+                            <li>Percentage calculation</li>
+                            <li>Memory functions (M+, M-, MR, MC)</li>
+                            <li>Keyboard shortcuts for operations</li>
+                            <li>Export history to a text file</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ConsoleApp/02-InputOutput" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ConsoleApp/04-FileHandling" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.IndexesPerformanceModel
+@{
+    ViewData["Title"] = "Indexes & Performance";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Indexes & Performance</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Indexes &amp; Performance</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 9 of 10</span>
+                </div>
+
+                <p>
+                    An index lets SQL Server find rows without scanning the entire table —
+                    similar to a book's index letting you skip straight to a page.
+                </p>
+
+                <h2>Creating an index</h2>
+                <pre><code>CREATE INDEX IX_Students_LastName
+ON Students (LastName);</code></pre>
+                <p>Now queries filtering or sorting on <code>LastName</code> are much faster on large tables.</p>
+
+                <h2>Composite index</h2>
+                <pre><code>CREATE INDEX IX_Students_LastFirst
+ON Students (LastName, FirstName);</code></pre>
+                <p>Useful when you frequently filter/sort by both columns together, in that order.</p>
+
+                <h2>Primary keys are indexed automatically</h2>
+                <p>
+                    You don't need to manually index a <code>PRIMARY KEY</code> column —
+                    SQL Server creates a clustered index for it automatically.
+                </p>
+
+                <h2>Checking query performance</h2>
+                <pre><code>SET STATISTICS IO ON;
+SELECT * FROM Students WHERE LastName = 'Ahmed';</code></pre>
+                <p>Look at the "logical reads" in the Messages tab — fewer reads generally means a faster query.</p>
+
+                <h2>When NOT to over-index</h2>
+                <ul>
+                    <li>Every index speeds up reads but slows down INSERT/UPDATE/DELETE (the index must be maintained too).</li>
+                    <li>Don't index columns you rarely filter or sort by.</li>
+                    <li>Don't index small tables — a full scan is already fast.</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Indexes speed up reads but slow down writes. Create indexes on columns you frequently filter or sort by.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/08-FunctionsAndViews" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/10-Transactions" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

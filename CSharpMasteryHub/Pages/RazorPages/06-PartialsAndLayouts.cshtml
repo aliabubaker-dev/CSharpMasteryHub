@@ -1,0 +1,127 @@
+﻿@page
+@model PartialsAndLayoutsModel
+@{
+    ViewData["Title"] = "Partials and Layouts";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">Partials and Layouts</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Partials and Layouts</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 8</span>
+                </div>
+
+                <h2>Layouts</h2>
+                <p>Layouts provide a consistent structure across pages.</p>
+
+                <h3>Creating a Layout</h3>
+                <pre><code>// Pages/Shared/_Layout.cshtml
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;@@ViewData["Title"]&lt;/title&gt;
+    &lt;link rel="stylesheet" href="~/css/site.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+    
+    &lt;div class="container"&gt;
+        @@RenderBody()
+    &lt;/div&gt;
+    
+    &lt;footer&gt;...&lt;/footer&gt;
+    
+    &lt;script src="~/js/site.js"&gt;&lt;/script&gt;
+    @@await RenderSectionAsync("Scripts", required: false)
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h3>Using a Layout</h3>
+                <pre><code>// Pages/Index.cshtml
+@@page
+@@{
+    Layout = "_Layout";
+}
+
+&lt;h1&gt;Welcome&lt;/h1&gt;
+
+// Or use _ViewStart.cshtml
+@@{ Layout = "_Layout"; }</code></pre>
+
+                <h2>Partials</h2>
+                <p>Partials are reusable components that can be included in multiple pages.</p>
+
+                <h3>Creating a Partial</h3>
+                <pre><code>// Pages/Shared/_ProductCard.cshtml
+@@model Product
+
+&lt;div class="card"&gt;
+    &lt;h3&gt;@@Model.Name&lt;/h3&gt;
+    &lt;p&gt;Price: @@Model.Price.ToString("C")&lt;/p&gt;
+    &lt;a href="/Products/Details/@@Model.Id"&gt;View&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>Using a Partial</h3>
+                <pre><code>// Using with model
+@@await Html.PartialAsync("_ProductCard", product)
+
+// Using without model
+@@await Html.PartialAsync("_Header")
+
+// Using with ViewData
+@@await Html.PartialAsync("_ProductCard", product, new ViewDataDictionary(ViewData) {
+    { "ShowPrice", true }
+})</code></pre>
+
+                <h3>Partial with Tag Helper</h3>
+                <pre><code>&lt;partial name="_ProductCard" model="product" /&gt;</code></pre>
+
+                <h2>Sections</h2>
+                <p>Sections allow you to inject content into specific areas of the layout.</p>
+
+                <pre><code>// In layout
+&lt;head&gt;
+    @@await RenderSectionAsync("Head", required: false)
+&lt;/head&gt;
+
+// In page
+@@section Head {
+    &lt;style&gt;
+        .custom { color: red; }
+    &lt;/style&gt;
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Layouts and partials help you maintain a consistent UI and avoid code duplication.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/05-ValidationDataAnnotations" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/07-DependencyInjection" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

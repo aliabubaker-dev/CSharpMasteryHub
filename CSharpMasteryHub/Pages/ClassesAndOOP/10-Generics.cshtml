@@ -1,0 +1,384 @@
+﻿@page
+@model GenericsModel
+@{
+    ViewData["Title"] = "Generics in C#";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
+                    <li class="breadcrumb-item active">Generics</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Generics in C#</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 10 of 11</span>
+                </div>
+
+                <h2>What are Generics?</h2>
+                <p>
+                    Generics allow you to define classes, methods, and structures with type parameters.
+                    They enable code reuse with type safety, eliminating the need for type casting and reducing runtime errors.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
+                        <p class="card-text">Generics let you write code that works with any data type while maintaining type safety. Instead of using object or casting, you specify the type when using the generic.</p>
+                    </div>
+                </div>
+
+                <h2>Generic Classes</h2>
+                <pre><code>// Generic class with type parameter T
+public class Box<T>
+{
+    private T item;
+    
+    public void Store(T value)
+    {
+        item = value;
+    }
+    
+    public T Retrieve()
+    {
+        return item;
+    }
+}
+
+// Usage
+Box<int> intBox = new Box<int>();
+intBox.Store(42);
+int value = intBox.Retrieve();
+
+Box<string> stringBox = new Box<string>();
+stringBox.Store("Hello World");
+string text = stringBox.Retrieve();</code></pre>
+
+                <h2>Generic Methods</h2>
+                <pre><code>public class Utilities
+{
+    // Generic method
+    public T Max<T>(T a, T b) where T : IComparable<T>
+    {
+        return a.CompareTo(b) > 0 ? a : b;
+    }
+    
+    public T Min<T>(T a, T b) where T : IComparable<T>
+    {
+        return a.CompareTo(b) < 0 ? a : b;
+    }
+    
+    public void Swap<T>(ref T a, ref T b)
+    {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
+}
+
+// Usage
+Utilities utils = new Utilities();
+int max = utils.Max(10, 20); // Returns 20
+string maxString = utils.Max("Apple", "Banana");
+int x = 5, y = 10;
+utils.Swap(ref x, ref y);</code></pre>
+
+                <h2>Generic Constraints</h2>
+                <pre><code>public class GenericClass<T>
+    where T : class, new()        // T must be a class with default constructor
+{
+    public T CreateInstance()
+    {
+        return new T();
+    }
+}
+
+public class Processor<T> where T : IComparable<T>
+{
+    public T GetMax(T a, T b)
+    {
+        return a.CompareTo(b) > 0 ? a : b;
+    }
+}
+
+public class Repository<T> where T : Entity
+{
+    public T GetById(int id)
+    {
+        // T must inherit from Entity
+        return null; // Implementation
+    }
+}
+
+public class Entity
+{
+    public int Id { get; set; }
+}</code></pre>
+
+                <h2>Generic Interfaces</h2>
+                <pre><code>// Generic interface
+public interface IRepository<T>
+{
+    void Add(T item);
+    T GetById(int id);
+    IEnumerable<T> GetAll();
+    void Update(T item);
+    void Delete(T item);
+}
+
+// Implementation
+public class Repository<T> : IRepository<T> where T : Entity
+{
+    private List<T> items = new List<T>();
+    
+    public void Add(T item)
+    {
+        items.Add(item);
+    }
+    
+    public T GetById(int id)
+    {
+        return items.FirstOrDefault(x => x.Id == id);
+    }
+    
+    public IEnumerable<T> GetAll()
+    {
+        return items;
+    }
+    
+    public void Update(T item)
+    {
+        var existing = GetById(item.Id);
+        if (existing != null)
+        {
+            items.Remove(existing);
+            items.Add(item);
+        }
+    }
+    
+    public void Delete(T item)
+    {
+        items.Remove(item);
+    }
+}</code></pre>
+
+                <h2>Multiple Type Parameters</h2>
+                <pre><code>public class Pair<TKey, TValue>
+{
+    public TKey Key { get; set; }
+    public TValue Value { get; set; }
+    
+    public Pair(TKey key, TValue value)
+    {
+        Key = key;
+        Value = value;
+    }
+    
+    public override string ToString()
+    {
+        return $"{Key}: {Value}";
+    }
+}
+
+// Usage
+Pair<string, int> pair1 = new Pair<string, int>("Age", 25);
+Pair<int, string> pair2 = new Pair<int, string>(1, "One");</code></pre>
+
+                <h2>Generic Collections</h2>
+                <pre><code>using System.Collections.Generic;
+
+// List<T>
+List<string> names = new List<string>();
+names.Add("Alice");
+names.Add("Bob");
+string firstName = names[0];
+
+// Dictionary<TKey, TValue>
+Dictionary<string, int> ages = new Dictionary<string, int>();
+ages.Add("Alice", 25);
+ages.Add("Bob", 30);
+int aliceAge = ages["Alice"];
+
+// Queue<T>
+Queue<int> queue = new Queue<int>();
+queue.Enqueue(1);
+queue.Enqueue(2);
+int first = queue.Dequeue();
+
+// Stack<T>
+Stack<int> stack = new Stack<int>();
+stack.Push(1);
+stack.Push(2);
+int last = stack.Pop();</code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>using System;
+using System.Collections.Generic;
+
+// Generic class with constraints
+public class DataStore<T> where T : new()
+{
+    private List<T> items = new List<T>();
+    private static int instanceCount = 0;
+    
+    public DataStore()
+    {
+        instanceCount++;
+    }
+    
+    public void Add(T item)
+    {
+        items.Add(item);
+    }
+    
+    public T GetAt(int index)
+    {
+        if (index < 0 || index >= items.Count)
+            throw new IndexOutOfRangeException();
+        return items[index];
+    }
+    
+    public int Count => items.Count;
+    
+    public static int InstanceCount => instanceCount;
+    
+    public void Process(Func<T, bool> predicate)
+    {
+        foreach (var item in items.Where(predicate))
+        {
+            Console.WriteLine($"Processing: {item}");
+        }
+    }
+    
+    public DataStore<TResult> Map<TResult>(Func<T, TResult> mapper) where TResult : new()
+    {
+        DataStore<TResult> result = new DataStore<TResult>();
+        foreach (var item in items)
+        {
+            result.Add(mapper(item));
+        }
+        return result;
+    }
+}
+
+// Generic class with inheritance
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    
+    public override string ToString()
+    {
+        return $"{Name} - {Price:C}";
+    }
+}
+
+public class OrderItem
+{
+    public int ProductId { get; set; }
+    public int Quantity { get; set; }
+    public decimal Total { get; set; }
+    
+    public override string ToString()
+    {
+        return $"Product {ProductId}: {Quantity} x {Total:C}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create data store
+        DataStore<Product> productStore = new DataStore<Product>();
+        
+        // Add products
+        productStore.Add(new Product { Id = 1, Name = "Laptop", Price = 999.99m });
+        productStore.Add(new Product { Id = 2, Name = "Mouse", Price = 29.99m });
+        productStore.Add(new Product { Id = 3, Name = "Keyboard", Price = 79.99m });
+        
+        Console.WriteLine($"Products: {productStore.Count}");
+        
+        // Get specific product
+        Product product = productStore.GetAt(0);
+        Console.WriteLine($"First product: {product}");
+        
+        // Process products
+        productStore.Process(p => p.Price > 50);
+        
+        // Map to order items
+        DataStore<OrderItem> orderStore = productStore.Map(p => new OrderItem
+        {
+            ProductId = p.Id,
+            Quantity = 1,
+            Total = p.Price
+        });
+        
+        Console.WriteLine($"Order items: {orderStore.Count}");
+        Console.WriteLine($"DataStore instances: {DataStore<Product>.InstanceCount}");
+    }
+}</code></pre>
+
+                <h2>Generic Delegates</h2>
+                <pre><code>// Action<T> - no return value
+Action<string> print = (s) => Console.WriteLine(s);
+print("Hello");
+
+// Func<T, TResult> - returns value
+Func<int, int, int> add = (a, b) => a + b;
+int sum = add(5, 3);
+
+// Predicate<T> - returns bool
+Predicate<int> isEven = (n) => n % 2 == 0;
+bool even = isEven(4);</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Generics provide type safety without sacrificing flexibility</li>
+                            <li>Use constraints to restrict generic types</li>
+                            <li>Generic collections are preferred over non-generic</li>
+                            <li>Generics improve code reuse and maintainability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a generic class "Cache<T>" with:</p>
+                        <ol>
+                            <li>Generic type parameter T</li>
+                            <li>Methods: Add, Get, Remove, Clear</li>
+                            <li>Properties: Count, Contains</li>
+                            <li>Generic method to filter items</li>
+                            <li>Implement IDisposable interface</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ClassesAndOOP/09-StaticVsInstance" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/ClassesAndOOP/11-SolidPrinciples" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

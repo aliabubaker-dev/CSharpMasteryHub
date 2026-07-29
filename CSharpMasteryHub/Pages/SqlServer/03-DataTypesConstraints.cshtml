@@ -1,0 +1,87 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.DataTypesConstraintsModel
+@{
+    ViewData["Title"] = "Data Types & Constraints";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Data Types & Constraints</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Data Types &amp; Constraints</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 10</span>
+                </div>
+
+                <h2>Common data types</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Use for</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>INT / BIGINT</td><td>Whole numbers</td></tr>
+                            <tr><td>DECIMAL(p,s)</td><td>Exact money/decimal values, e.g. DECIMAL(10,2)</td></tr>
+                            <tr><td>NVARCHAR(n)</td><td>Variable-length text (Unicode) — use this for names, emails, etc.</td></tr>
+                            <tr><td>DATE / DATETIME2</td><td>Dates and timestamps</td></tr>
+                            <tr><td>BIT</td><td>Boolean (0 or 1)</td></tr>
+                            <tr><td>UNIQUEIDENTIFIER</td><td>GUIDs</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Constraints</h2>
+                <pre><code>CREATE TABLE Courses (
+    CourseId    INT IDENTITY PRIMARY KEY,
+    Title       NVARCHAR(100) NOT NULL,
+    Credits     INT NOT NULL CHECK (Credits BETWEEN 1 AND 6),
+    DeptCode    NVARCHAR(10) NOT NULL,
+    CONSTRAINT FK_Courses_Dept FOREIGN KEY (DeptCode)
+        REFERENCES Departments(DeptCode)
+);</code></pre>
+
+                <ul>
+                    <li><strong>CHECK</strong> — restricts values to a valid range or condition.</li>
+                    <li><strong>FOREIGN KEY</strong> — enforces that a value must exist in another table (referential integrity).</li>
+                    <li><strong>NOT NULL / UNIQUE</strong> — covered in the previous lesson.</li>
+                </ul>
+
+                <h2>Adding a constraint after the fact</h2>
+                <pre><code>ALTER TABLE Courses
+ADD CONSTRAINT CK_Credits_Positive CHECK (Credits > 0);</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Choosing the right data type and adding constraints ensures data integrity and prevents invalid data from entering your database.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

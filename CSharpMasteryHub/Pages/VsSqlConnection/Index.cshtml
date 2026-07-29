@@ -1,0 +1,74 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.IndexModel
+@{
+    ViewData["Title"] = "Visual Studio + SQL Connection";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">Visual Studio + SQL Connection</h1>
+            <p class="lead mb-4">
+                Now that you know SQL Server, let's connect it to a real C# project.
+                This module covers connection strings, ADO.NET, and a full worked
+                example of INSERT, UPDATE, and DELETE from C# code.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/VsSqlConnection/01-ConnectionStrings">
+                            <h5><span class="card-number">1</span>Connection Strings</h5>
+                            <p>Learn how to write and safely store SQL Server connection strings.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/VsSqlConnection/02-AdoNetBasics">
+                            <h5><span class="card-number">2</span>ADO.NET Basics</h5>
+                            <p>Learn SqlConnection, SqlCommand, SqlParameter, and SqlDataReader.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/VsSqlConnection/03-InsertDeleteUpdateExample">
+                            <h5><span class="card-number">3</span>Insert / Delete / Update — Full Example</h5>
+                            <p>Complete CRUD example with parameterized ADO.NET commands.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/VsSqlConnection/04-DataReaderVsDataAdapter">
+                            <h5><span class="card-number">4</span>DataReader vs DataAdapter</h5>
+                            <p>Understand when to use SqlDataReader vs SqlDataAdapter/DataTable.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/VsSqlConnection/05-EntityFrameworkCoreIntro">
+                            <h5><span class="card-number">5</span>Entity Framework Core (Intro)</h5>
+                            <p>Get started with EF Core using LINQ instead of raw SQL.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

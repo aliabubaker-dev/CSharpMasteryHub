@@ -1,0 +1,126 @@
+﻿@page
+@model FormsAndModelBindingModel
+@{
+    ViewData["Title"] = "Forms and Model Binding";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">Forms and Model Binding</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Forms and Model Binding</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 8</span>
+                </div>
+
+                <h2>Creating Forms</h2>
+
+                <h3>Basic Form</h3>
+                <pre><code>&lt;form method="post"&gt;
+    &lt;div&gt;
+        &lt;label&gt;Name:&lt;/label&gt;
+        &lt;input type="text" name="Name" /&gt;
+    &lt;/div&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <h3>Using Tag Helpers</h3>
+                <pre><code>&lt;form asp-page="/Products/Create" method="post"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label asp-for="Product.Name"&gt;&lt;/label&gt;
+        &lt;input asp-for="Product.Name" class="form-control" /&gt;
+        &lt;span asp-validation-for="Product.Name" class="text-danger"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label asp-for="Product.Price"&gt;&lt;/label&gt;
+        &lt;input asp-for="Product.Price" class="form-control" /&gt;
+        &lt;span asp-validation-for="Product.Price" class="text-danger"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Create&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <h2>Model Binding</h2>
+
+                <h3>Simple Binding</h3>
+                <pre><code>// Pages/Products/Create.cshtml.cs
+public class CreateModel : PageModel
+{
+    [BindProperty]
+    public Product Product { get; set; }
+    
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+        // Save product
+        return RedirectToPage("Index");
+    }
+}</code></pre>
+
+                <h3>Binding Specific Properties</h3>
+                <pre><code>[BindProperty(Name = "name")]
+public string Name { get; set; }
+
+[BindProperty(Name = "price")]
+public decimal Price { get; set; }</code></pre>
+
+                <h3>Binding to Complex Objects</h3>
+                <pre><code>public class OrderViewModel
+{
+    public List&lt;OrderItem&gt; Items { get; set; }
+    public string ShippingAddress { get; set; }
+    public PaymentInfo Payment { get; set; }
+}
+
+[BindProperty]
+public OrderViewModel Order { get; set; }</code></pre>
+
+                <h2>Post-Redirect-Get Pattern</h2>
+                <pre><code>public IActionResult OnPost()
+{
+    if (!ModelState.IsValid)
+        return Page();
+    
+    // Process data
+    TempData["Success"] = "Product created successfully!";
+    
+    // Redirect to avoid duplicate submission
+    return RedirectToPage("Index");
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Model binding automatically maps form data to C# objects, simplifying form handling.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/03-TagHelpers" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/05-ValidationDataAnnotations" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

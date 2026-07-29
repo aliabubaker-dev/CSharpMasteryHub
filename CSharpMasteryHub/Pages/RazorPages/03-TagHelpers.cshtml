@@ -1,0 +1,102 @@
+﻿@page
+@model TagHelpersModel
+@{
+    ViewData["Title"] = "Tag Helpers";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">Tag Helpers</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Tag Helpers</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 8</span>
+                </div>
+
+                <h2>What are Tag Helpers?</h2>
+                <p>Tag Helpers are server-side components that participate in HTML rendering. They provide a more HTML-friendly way to generate dynamic content.</p>
+
+                <h2>Common Tag Helpers</h2>
+
+                <h3>Anchor Tag Helper</h3>
+                <pre><code>&lt;a asp-page="/Products/Details" asp-route-id="5"&gt;
+    View Product
+&lt;/a&gt;
+
+// Outputs: &lt;a href="/Products/Details/5"&gt;View Product&lt;/a&gt;</code></pre>
+
+                <h3>Form Tag Helper</h3>
+                <pre><code>&lt;form asp-page="/Products/Create" method="post"&gt;
+    &lt;!-- Form fields --&gt;
+&lt;/form&gt;
+
+// Outputs: &lt;form action="/Products/Create" method="post"&gt;</code></pre>
+
+                <h3>Input Tag Helper</h3>
+                <pre><code>&lt;input asp-for="Product.Name" /&gt;
+&lt;input asp-for="Product.Price" /&gt;
+&lt;textarea asp-for="Product.Description"&gt;&lt;/textarea&gt;
+
+// Generates appropriate input types with value binding</code></pre>
+
+                <h3>Label Tag Helper</h3>
+                <pre><code>&lt;label asp-for="Product.Name"&gt;&lt;/label&gt;
+// Outputs: &lt;label for="Product_Name"&gt;Name&lt;/label&gt;</code></pre>
+
+                <h3>Select Tag Helper</h3>
+                <pre><code>&lt;select asp-for="Product.CategoryId" asp-items="Model.Categories"&gt;
+&lt;/select&gt;</code></pre>
+
+                <h3>Validation Tag Helpers</h3>
+                <pre><code>&lt;span asp-validation-for="Product.Name" class="text-danger"&gt;&lt;/span&gt;
+&lt;div asp-validation-summary="ModelOnly" class="text-danger"&gt;&lt;/div&gt;</code></pre>
+
+                <h2>Custom Tag Helpers</h2>
+                <pre><code>// TagHelpers/EmailTagHelper.cs
+public class EmailTagHelper : TagHelper
+{
+    public string Address { get; set; }
+    
+    public override void Process(TagHelperContext context, TagHelperOutput output)
+    {
+        output.TagName = "a";
+        output.Attributes.SetAttribute("href", $"mailto:{Address}");
+        output.Content.SetContent(Address);
+    }
+}
+
+// Usage
+&lt;email address="support@example.com"&gt;&lt;/email&gt;</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Tag Helpers provide a clean, HTML-friendly way to generate dynamic content in Razor Pages.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/02-PageModelAndRouting" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/04-FormsAndModelBinding" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

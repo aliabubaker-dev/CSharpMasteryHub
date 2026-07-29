@@ -1,0 +1,74 @@
+@page
+@model CSharpMasteryHub.Pages.VsSqlConnection.ConnectionStringsModel
+@{
+    ViewData["Title"] = "Connection Strings";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/VsSqlConnection">VS + SQL Connection</a></li>
+                    <li class="breadcrumb-item active">Connection Strings</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Connection Strings</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 5</span>
+                </div>
+
+                <p>
+                    A connection string tells your C# app how to find and authenticate to a
+                    SQL Server database.
+                </p>
+
+                <h2>Typical connection string (Windows Authentication)</h2>
+                <pre><code>Server=localhost\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;</code></pre>
+
+                <h2>SQL Authentication (username/password)</h2>
+                <pre><code>Server=localhost\SQLEXPRESS;Database=SchoolDB;User Id=myuser;Password=mypassword;TrustServerCertificate=True;</code></pre>
+
+                <h2>Storing it properly in appsettings.json</h2>
+                <p>Never hard-code connection strings in your C# files. Put them here instead:</p>
+                <pre><code>{
+  "ConnectionStrings": {
+    "SchoolDb": "Server=localhost\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}</code></pre>
+
+                <h2>Reading it in C#</h2>
+                <pre><code>string? connectionString = builder.Configuration.GetConnectionString("SchoolDb");</code></pre>
+
+                <p>
+                    We'll cover keeping passwords out of source control entirely (User
+                    Secrets, environment variables) in the Security module.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Connection strings tell your app how to find the database. Store them in appsettings.json, never hard-code them.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/VsSqlConnection" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/VsSqlConnection/02-AdoNetBasics" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

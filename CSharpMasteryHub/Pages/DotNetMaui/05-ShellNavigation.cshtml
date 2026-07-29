@@ -1,0 +1,297 @@
+﻿@page
+@model ShellNavigationModel
+@{
+    ViewData["Title"] = "Shell Navigation in .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">Shell Navigation</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Shell Navigation in .NET MAUI</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 8</span>
+                </div>
+
+                <h2>What is Shell?</h2>
+                <p>
+                    Shell is a navigation container that provides a consistent way to implement navigation in .NET MAUI applications.
+                    It simplifies navigation patterns and provides a structured way to manage your app's pages.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Benefits</h5>
+                        <ul class="mb-0">
+                            <li>Consistent navigation experience</li>
+                            <li>Built-in flyout and tab navigation</li>
+                            <li>URI-based navigation</li>
+                            <li>Simplified page management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Setting Up Shell</h2>
+
+                <h3>App.xaml Configuration</h3>
+                <pre><code>// App.xaml
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Resources -->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+
+// App.xaml.cs
+public partial class App : Application
+{
+    public App()
+    {
+        InitializeComponent();
+        MainPage = new AppShell();
+    }
+}</code></pre>
+
+                <h3>AppShell.xaml</h3>
+                <pre><code>// AppShell.xaml
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MyApp.Views"
+       x:Class="MyApp.AppShell">
+    
+    <!-- Flyout Menu -->
+    <FlyoutItem Title="Home" Icon="home_icon.png">
+        <ShellContent Route="Home" ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="About" Icon="about_icon.png">
+        <ShellContent Route="About" ContentTemplate="{DataTemplate local:AboutPage}" />
+    </FlyoutItem>
+    
+    <!-- Tab Bar -->
+    <TabBar>
+        <Tab Title="Home" Icon="home_icon.png">
+            <ShellContent Route="Home" ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+        
+        <Tab Title="Settings" Icon="settings_icon.png">
+            <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        </Tab>
+    </TabBar>
+    
+</Shell></code></pre>
+
+                <h2>Shell Navigation Methods</h2>
+
+                <h3>Navigating to Pages</h3>
+                <pre><code>// Navigation without Shell
+await Navigation.PushAsync(new DetailsPage());
+
+// Shell Navigation - Absolute
+await Shell.Current.GoToAsync("//Home/Details");
+
+// Shell Navigation - Relative
+await Shell.Current.GoToAsync("Details");
+
+// Shell Navigation with parameters
+await Shell.Current.GoToAsync("Details?id=123&name=test");</code></pre>
+
+                <h3>Navigating Back</h3>
+                <pre><code>// Go back
+await Shell.Current.GoToAsync("..");
+
+// Go back with parameter
+await Shell.Current.GoToAsync("../Details?id=123");
+
+// Go back to root
+await Shell.Current.GoToAsync("///");
+
+// Pop modal
+await Shell.Current.GoToAsync("..", true);</code></pre>
+
+                <h3>Query Parameters</h3>
+                <pre><code>// Receiving parameters in target page
+[QueryProperty(nameof(Id), "id")]
+[QueryProperty(nameof(Name), "name")]
+public partial class DetailsPage : ContentPage
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    
+    public DetailsPage()
+    {
+        InitializeComponent();
+        BindingContext = this;
+    }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        // Use Id and Name
+    }
+}</code></pre>
+
+                <h2>Custom Shell Structure</h2>
+
+                <h3>Flyout Menu</h3>
+                <pre><code><Shell>
+    <FlyoutItem Title="Menu 1">
+        <ShellContent Title="Item 1" Route="Page1" ContentTemplate="{DataTemplate local:Page1}" />
+        <ShellContent Title="Item 2" Route="Page2" ContentTemplate="{DataTemplate local:Page2}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Menu 2">
+        <ShellContent Title="Item 3" Route="Page3" ContentTemplate="{DataTemplate local:Page3}" />
+        <ShellContent Title="Item 4" Route="Page4" ContentTemplate="{DataTemplate local:Page4}" />
+    </FlyoutItem>
+</Shell></code></pre>
+
+                <h3>Custom Flyout Header</h3>
+                <pre><code><Shell.FlyoutHeader>
+    <Grid BackgroundColor="Primary" HeightRequest="100">
+        <Label Text="My App"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               TextColor="White" />
+    </Grid>
+</Shell.FlyoutHeader></code></pre>
+
+                <h3>Tab Bar</h3>
+                <pre><code><Shell>
+    <TabBar>
+        <Tab Title="Tab 1" Icon="tab1.png">
+            <ShellContent Route="Tab1" ContentTemplate="{DataTemplate local:Tab1Page}" />
+        </Tab>
+        
+        <Tab Title="Tab 2" Icon="tab2.png">
+            <ShellContent Route="Tab2" ContentTemplate="{DataTemplate local:Tab2Page}" />
+        </Tab>
+        
+        <Tab Title="Tab 3" Icon="tab3.png">
+            <ShellContent Route="Tab3" ContentTemplate="{DataTemplate local:Tab3Page}" />
+        </Tab>
+    </TabBar>
+</Shell></code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>// AppShell.xaml
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MyApp.Views"
+       x:Class="MyApp.AppShell">
+    
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style TargetType="FlyoutItem">
+                    <Setter Property="FlyoutBackgroundColor" Value="Transparent" / >
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <FlyoutItem Title="Home" Icon="home.png">
+        <ShellContent Route="Home" ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Products" Icon="products.png">
+        <TabBar>
+            <Tab Title="All Products">
+                <ShellContent Route="Products" ContentTemplate="{DataTemplate local:ProductsPage}" />
+            </Tab>
+            <Tab Title="Favorites">
+                <ShellContent Route="Favorites" ContentTemplate="{DataTemplate local:FavoritesPage}" />
+            </Tab>
+        </TabBar>
+    </FlyoutItem>
+    
+    <FlyoutItem Title="About" Icon="about.png">
+        <ShellContent Route="About" ContentTemplate="{DataTemplate local:AboutPage}" />
+    </FlyoutItem>
+    
+    <ShellContent Route="ProductDetails" ContentTemplate="{DataTemplate local:ProductDetailsPage}" />
+    <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    
+</Shell>
+
+// ProductDetailsPage.xaml.cs
+[QueryProperty(nameof(ProductId), "id")]
+public partial class ProductDetailsPage : ContentPage
+{
+    public string ProductId { get; set; }
+    
+    public ProductDetailsPage()
+    {
+        InitializeComponent();
+    }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        LoadProduct(ProductId);
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Shell provides a structured navigation system</li>
+                            <li>Supports flyout and tab navigation patterns</li>
+                            <li>URI-based navigation with query parameters</li>
+                            <li>Simplifies page management and navigation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a Shell-based app with:</p>
+                        <ol>
+                            <li>Flyout with at least 3 items</li>
+                            <li>Tab bar with at least 2 tabs</li>
+                            <li>Navigation to detail pages with parameters</li>
+                            <li>Custom flyout header</li>
+                            <li>Back navigation with parameters</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/04-LayoutsAndControls" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui/06-MvvmPattern" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,83 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.TransactionsModel
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Transactions</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Transactions</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 10 of 10</span>
+                </div>
+
+                <p>
+                    A transaction groups multiple statements so they either <strong>all</strong>
+                    succeed or <strong>all</strong> fail together — critical for operations like
+                    transferring money between two accounts.
+                </p>
+
+                <h2>Basic transaction</h2>
+                <pre><code>BEGIN TRANSACTION;
+
+UPDATE Accounts SET Balance = Balance - 100 WHERE AccountId = 1;
+UPDATE Accounts SET Balance = Balance + 100 WHERE AccountId = 2;
+
+COMMIT TRANSACTION;</code></pre>
+
+                <h2>Rolling back on error</h2>
+                <pre><code>BEGIN TRY
+    BEGIN TRANSACTION;
+
+    UPDATE Accounts SET Balance = Balance - 100 WHERE AccountId = 1;
+    UPDATE Accounts SET Balance = Balance + 100 WHERE AccountId = 2;
+
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    ROLLBACK TRANSACTION;
+    THROW;
+END CATCH;</code></pre>
+
+                <h2>The ACID properties</h2>
+                <ul>
+                    <li><strong>Atomicity</strong> — all statements succeed or none do.</li>
+                    <li><strong>Consistency</strong> — the database moves from one valid state to another.</li>
+                    <li><strong>Isolation</strong> — concurrent transactions don't interfere with each other.</li>
+                    <li><strong>Durability</strong> — once committed, changes survive a crash.</li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Transactions ensure data integrity by grouping operations that must succeed or fail together.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/09-IndexesPerformance" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer" class="btn btn-primary-custom">
+                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

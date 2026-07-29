@@ -1,0 +1,100 @@
+﻿@page
+@model PageModelAndRoutingModel
+@{
+    ViewData["Title"] = "PageModel and Routing";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RazorPages">Razor Pages</a></li>
+                    <li class="breadcrumb-item active">PageModel and Routing</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">PageModel and Routing</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 8</span>
+                </div>
+
+                <h2>PageModel</h2>
+                <p>The PageModel is the code-behind file for a Razor Page.</p>
+
+                <pre><code>// Pages/Products/Index.cshtml.cs
+public class IndexModel : PageModel
+{
+    private readonly ApplicationDbContext _context;
+    public List&lt;Product&gt; Products { get; set; }
+
+    public IndexModel(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task OnGetAsync()
+    {
+        Products = await _context.Products.ToListAsync();
+    }
+}</code></pre>
+
+                <h2>Routing</h2>
+
+                <h3>Default Routing</h3>
+                <pre><code>// Pages/Products.cshtml → /Products
+// Pages/Products/Index.cshtml → /Products
+// Pages/Products/Details.cshtml → /Products/Details</code></pre>
+
+                <h3>Custom Routing</h3>
+                <pre><code>// Pages/Products/Details.cshtml
+@@page "{id:int}"
+@@model DetailsModel
+
+// URL: /Products/Details/5</code></pre>
+
+                <h3>Route Parameters</h3>
+                <pre><code>// Pages/Products/Details.cshtml
+@@page "{id:int?}"
+public class DetailsModel : PageModel
+{
+    public int? Id { get; set; }
+    
+    public void OnGet(int? id)
+    {
+        Id = id;
+    }
+}</code></pre>
+
+                <h3>Route Constraints</h3>
+                <pre><code>// Pages/Products/Details.cshtml
+@@page "{id:int:min(1)}"  // Must be positive integer
+@@page "{slug:alpha}"     // Must be alphabetic
+@@page "{id:guid}"        // Must be GUID</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>PageModel contains the logic for a page, and routing determines how URLs map to pages.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RazorPages/01-MvcVsRazorPages" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RazorPages/03-TagHelpers" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

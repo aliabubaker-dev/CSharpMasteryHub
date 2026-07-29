@@ -1,0 +1,86 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.FunctionsAndViewsModel
+@{
+    ViewData["Title"] = "Functions & Views";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">Functions & Views</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Functions &amp; Views</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 8 of 10</span>
+                </div>
+
+                <h2>Scalar function — returns one value</h2>
+                <pre><code>CREATE FUNCTION fn_GetFullName (@@FirstName NVARCHAR(50), @@LastName NVARCHAR(50))
+RETURNS NVARCHAR(101)
+AS
+BEGIN
+    RETURN @@FirstName + ' ' + @@LastName;
+END;
+GO
+
+SELECT dbo.fn_GetFullName(FirstName, LastName) AS FullName FROM Students;</code></pre>
+
+                <h2>Table-valued function — returns a table</h2>
+                <pre><code>CREATE FUNCTION fn_StudentsByYear (@@Year INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM Students
+    WHERE YEAR(EnrolledOn) = @@Year
+);
+GO
+
+SELECT * FROM fn_StudentsByYear(2024);</code></pre>
+
+                <h2>Views — saved, reusable queries</h2>
+                <pre><code>CREATE VIEW vw_StudentEnrollments AS
+SELECT s.StudentId, s.FirstName, s.LastName, c.Title AS CourseTitle
+FROM Students s
+INNER JOIN Enrollments e ON e.StudentId = s.StudentId
+INNER JOIN Courses c ON c.CourseId = e.CourseId;
+GO
+
+SELECT * FROM vw_StudentEnrollments WHERE LastName = 'Ahmed';</code></pre>
+
+                <p>
+                    A view looks and behaves like a table for SELECT purposes, but it's just
+                    a saved query definition — the underlying data always stays live.
+                </p>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Functions return values (scalar or table), views are saved queries that act like virtual tables.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/07-StoredProcedures" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/09-IndexesPerformance" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

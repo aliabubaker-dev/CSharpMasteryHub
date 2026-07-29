@@ -1,0 +1,314 @@
+﻿@page
+@model LayoutsAndControlsModel
+@{
+    ViewData["Title"] = "Layouts and Controls in .NET MAUI";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/DotNetMaui">.NET MAUI</a></li>
+                    <li class="breadcrumb-item active">Layouts and Controls</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Layouts and Controls in .NET MAUI</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 8</span>
+                </div>
+
+                <h2>Layout Types in MAUI</h2>
+                <p>
+                    Layouts are containers that arrange child elements in a specific structure. MAUI provides several
+                    layout types for different scenarios.
+                </p>
+
+                <h3>1. StackLayout</h3>
+                <pre><code>// Vertical Stack
+<StackLayout Spacing="10" Padding="20">
+    <Label Text="Item 1" />
+    <Label Text="Item 2" />
+    <Label Text="Item 3" />
+</StackLayout>
+
+// Horizontal Stack
+<StackLayout Orientation="Horizontal" Spacing="10">
+    <Button Text="Button 1" />
+    <Button Text="Button 2" />
+    <Button Text="Button 3" />
+</StackLayout></code></pre>
+
+                <h3>2. Grid</h3>
+                <pre><code><Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="100" />
+    </Grid.RowDefinitions>
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="2*" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    
+    <Label Grid.Row="0" Grid.Column="0" Text="Row 0, Col 0" />
+    <Label Grid.Row="0" Grid.Column="1" Text="Row 0, Col 1" />
+    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Row 1, Col 0-1" />
+</Grid></code></pre>
+
+                <h3>3. FlexLayout</h3>
+                <pre><code><FlexLayout Direction="Row"
+              Wrap="Wrap"
+              JustifyContent="Center"
+              AlignItems="Center">
+    
+    <BoxView Color="Red" WidthRequest="100" HeightRequest="100" />
+    <BoxView Color="Green" WidthRequest="100" HeightRequest="100" />
+    <BoxView Color="Blue" WidthRequest="100" HeightRequest="100" />
+    <BoxView Color="Yellow" WidthRequest="100" HeightRequest="100" />
+    
+</FlexLayout></code></pre>
+
+                <h3>4. AbsoluteLayout</h3>
+                <pre><code><AbsoluteLayout>
+    <Label Text="Positioned"
+           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+           AbsoluteLayout.LayoutFlags="PositionProportional" />
+    
+    <BoxView Color="Red"
+             AbsoluteLayout.LayoutBounds="0.1, 0.1, 50, 50"
+             AbsoluteLayout.LayoutFlags="None" />
+</AbsoluteLayout></code></pre>
+
+                <h3>5. RelativeLayout</h3>
+                <pre><code><RelativeLayout>
+    <Label x:Name="HeaderLabel"
+           Text="Header"
+           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
+    
+    <Label Text="Below Header"
+           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=HeaderLabel, Property=Height, Factor=1}" />
+</RelativeLayout></code></pre>
+
+                <h2>Common Controls</h2>
+
+                <h3>Text Display Controls</h3>
+                <pre><code>// Label - Basic text display
+<Label Text="Hello World"
+       FontSize="20"
+       FontAttributes="Bold"
+       TextColor="Blue"
+       HorizontalTextAlignment="Center" />
+
+// FormattedText
+<Label>
+    <Label.FormattedText>
+        <FormattedString>
+            <Span Text="Hello, " />
+            <Span Text="World!" FontAttributes="Bold" TextColor="Red" />
+        </FormattedString>
+    </Label.FormattedText>
+</Label></code></pre>
+
+                <h3>Input Controls</h3>
+                <pre><code>// Entry - Single line text input
+<Entry Placeholder="Enter your name"
+       Text="{Binding Name}"
+       MaxLength="100"
+       Keyboard="Text"
+       ReturnType="Next" />
+
+// Editor - Multi-line text input
+<Editor Placeholder="Enter description"
+        Text="{Binding Description}"
+        AutoSize="TextChanges"
+        MaxLength="500" />
+
+// Password Entry
+<Entry Placeholder="Enter password"
+       IsPassword="True"
+       Text="{Binding Password}" />
+
+// SearchBar
+<SearchBar Placeholder="Search..."
+           Text="{Binding SearchText}"
+           SearchCommand="{Binding SearchCommand}" /></code></pre>
+
+                <h3>Selection Controls</h3>
+                <pre><code>// CheckBox
+<CheckBox IsChecked="{Binding IsSelected}" />
+
+// RadioButton
+<RadioButton Content="Option 1" GroupName="Options" />
+<RadioButton Content="Option 2" GroupName="Options" />
+<RadioButton Content="Option 3" GroupName="Options" />
+
+// Slider
+<Slider Minimum="0" Maximum="100" Value="{Binding Value}" />
+
+// Switch
+<Switch IsToggled="{Binding IsEnabled}" />
+
+// Picker
+<Picker Title="Select Color"
+        ItemsSource="{Binding Colors}"
+        SelectedItem="{Binding SelectedColor}" />
+
+// DatePicker
+<DatePicker Date="{Binding SelectedDate}" MinimumDate="2024-01-01" />
+
+// TimePicker
+<TimePicker Time="{Binding SelectedTime}" /></code></pre>
+
+                <h3>Collection Controls</h3>
+                <pre><code>// ListView
+<ListView ItemsSource="{Binding Items}"
+          SelectionMode="Single"
+          SelectedItem="{Binding SelectedItem}">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding Name}"
+                     Detail="{Binding Description}" />
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+
+// CollectionView (more flexible)
+<CollectionView ItemsSource="{Binding Items}"
+                SelectionMode="Single">
+    <CollectionView.ItemsLayout>
+        <GridItemsLayout Orientation="Vertical" Span="2" />
+    </CollectionView.ItemsLayout>
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="10">
+                <Label Text="{Binding Name}" />
+            </Grid>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView></code></pre>
+
+                <h2>Complete Example</h2>
+                <pre><code>// MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.MainPage"
+             Title="Form Example">
+    
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            
+            <!-- Header -->
+            <Label Text="User Registration"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            
+            <!-- Personal Information -->
+            <Label Text="Personal Information"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            
+            <Entry Placeholder="Full Name"
+                   Text="{Binding Name}" />
+            
+            <Entry Placeholder="Email"
+                   Keyboard="Email"
+                   Text="{Binding Email}" />
+            
+            <DatePicker Date="{Binding BirthDate}" />
+            
+            <!-- Gender Selection -->
+            <Label Text="Gender" />
+            <RadioButton Content="Male" GroupName="Gender" />
+            <RadioButton Content="Female" GroupName="Gender" />
+            <RadioButton Content="Other" GroupName="Gender" />
+            
+            <!-- Preferences -->
+            <Label Text="Preferences"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            
+            <CheckBox IsChecked="{Binding ReceiveNewsletter}" />
+            <Label Text="Receive Newsletter" />
+            
+            <CheckBox IsChecked="{Binding AcceptTerms}" />
+            <Label Text="Accept Terms and Conditions" />
+            
+            <!-- Submit Button -->
+            <Button Text="Submit"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Command="{Binding SubmitCommand}" />
+            
+            <!-- Result -->
+            <Label Text="{Binding ResultMessage}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="Blue" />
+            
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage></code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Layouts define how controls are arranged on the screen</li>
+                            <li>Choose the right layout based on your needs</li>
+                            <li>Controls provide various user interaction capabilities</li>
+                            <li>Combine layouts and controls for complex UIs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Create a registration form with:</p>
+                        <ol>
+                            <li>Grid or StackLayout structure</li>
+                            <li>Entry fields with validation</li>
+                            <li>Picker for selection</li>
+                            <li>CheckBox and RadioButton options</li>
+                            <li>Button with command binding</li>
+                            <li>Custom styling and colors</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/DotNetMaui/03-XamlBasics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/DotNetMaui/05-ShellNavigation" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,81 @@
+@page
+@model CSharpMasteryHub.Pages.SqlServer.InsertUpdateDeleteModel
+@{
+    ViewData["Title"] = "INSERT, UPDATE, DELETE";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
+                    <li class="breadcrumb-item active">INSERT, UPDATE, DELETE</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">INSERT, UPDATE, DELETE</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 10</span>
+                </div>
+
+                <h2>INSERT — adding rows</h2>
+                <pre><code>INSERT INTO Students (FirstName, LastName, Email)
+VALUES ('Ali', 'Hassan', 'ali.hassan@example.com');
+
+-- Insert multiple rows at once
+INSERT INTO Students (FirstName, LastName, Email)
+VALUES
+    ('Sara', 'Ahmed', 'sara.a@example.com'),
+    ('Omar', 'Khalid', 'omar.k@example.com');</code></pre>
+
+                <h2>UPDATE — modifying rows</h2>
+                <pre><code>UPDATE Students
+SET Email = 'ali.new@example.com'
+WHERE StudentId = 1;</code></pre>
+                <p>
+                    <strong>Always include a WHERE clause on UPDATE.</strong> Without one,
+                    every row in the table gets updated.
+                </p>
+
+                <h2>DELETE — removing rows</h2>
+                <pre><code>DELETE FROM Students
+WHERE StudentId = 5;</code></pre>
+                <p>
+                    Same rule applies: <strong>always use WHERE</strong> unless you genuinely
+                    want to empty the entire table.
+                </p>
+
+                <h2>Safe practice: test with SELECT first</h2>
+                <pre><code>-- Run this first to see exactly what will be affected
+SELECT * FROM Students WHERE LastName = 'Khalid';
+
+-- Then run the DELETE with the same WHERE clause
+DELETE FROM Students WHERE LastName = 'Khalid';</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Always use WHERE with UPDATE and DELETE. Test with SELECT first to verify what will be affected.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/SqlServer/05-Joins" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/SqlServer/07-StoredProcedures" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

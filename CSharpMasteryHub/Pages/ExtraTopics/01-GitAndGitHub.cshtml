@@ -1,0 +1,93 @@
+@page
+@model CSharpMasteryHub.Pages.ExtraTopics.GitAndGitHubModel
+@{
+    ViewData["Title"] = "Git & GitHub";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/ExtraTopics">Extra Topics</a></li>
+                    <li class="breadcrumb-item active">Git & GitHub</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Git &amp; GitHub</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 6</span>
+                </div>
+
+                <p>
+                    Git tracks changes to your code over time. GitHub hosts Git repositories
+                    online so you can back up code and collaborate with others.
+                </p>
+
+                <h2>Initializing a repository</h2>
+                <pre><code>cd MyProject
+git init
+git add .
+git commit -m "Initial commit"</code></pre>
+
+                <h2>Connecting to GitHub</h2>
+                <pre><code>git remote add origin https://github.com/yourusername/MyProject.git
+git branch -M main
+git push -u origin main</code></pre>
+
+                <h2>The daily workflow</h2>
+                <pre><code>git status                 # see what changed
+git add .                  # stage all changes
+git commit -m "Add login page"
+git push                   # send to GitHub</code></pre>
+
+                <h2>Branching</h2>
+                <pre><code>git checkout -b feature/student-search
+# ...make changes...
+git add .
+git commit -m "Add student search box"
+git push -u origin feature/student-search</code></pre>
+                <p>Then open a <strong>Pull Request</strong> on GitHub to merge it into <code>main</code> once it's reviewed.</p>
+
+                <h2>A .gitignore for .NET projects</h2>
+                <pre><code>bin/
+obj/
+*.user
+.vs/
+appsettings.Development.json</code></pre>
+                <p>
+                    Never commit build output or secrets — this file tells Git to skip them
+                    entirely.
+                </p>
+
+                <h2>Undoing mistakes</h2>
+                <pre><code>git checkout -- filename.cs     # discard uncommitted changes to one file
+git reset --soft HEAD~1         # undo the last commit, keep the changes staged
+git revert &lt;commit-hash&gt;        # safely undo a commit that's already pushed</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Git is essential for version control. GitHub makes collaboration and backup easy.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/ExtraTopics" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/ExtraTopics/02-UnitTestingXunit" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

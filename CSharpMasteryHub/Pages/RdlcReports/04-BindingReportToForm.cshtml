@@ -1,0 +1,177 @@
+﻿@page
+@model BindingReportToFormModel
+@{
+    ViewData["Title"] = "Binding Report to Form";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/RdlcReports">RDLC Reports</a></li>
+                    <li class="breadcrumb-item active">Binding Report to Form</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Binding RDLC Report to Windows Form</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 5</span>
+                </div>
+
+                <h2>What You Need</h2>
+                <ul>
+                    <li><strong>ReportViewer control</strong> - The visual control that shows the report</li>
+                    <li><strong>RDLC report file</strong> - The report you designed</li>
+                    <li><strong>Dataset with data</strong> - The data to fill the report</li>
+                    <li><strong>Data source binding</strong> - Connecting the data to the report</li>
+                </ul>
+
+                <h2>Step 1 — Add ReportViewer Control</h2>
+                <pre><code>// Install NuGet Package
+Install-Package Microsoft.ReportingServices.ReportViewerControl.WinForms
+
+// Add to Toolbox
+1. Right-click Toolbox → Choose Items
+2. Select Microsoft Report Viewer</code></pre>
+
+                <h2>Step 2 — Configure the Form</h2>
+                <pre><code>// Form Designer
+public partial class ReportForm : Form
+{
+    public ReportForm()
+    {
+        InitializeComponent();
+    }
+}</code></pre>
+
+                <h2>Step 3 — Load and Bind the Report</h2>
+                <pre><code>private void ReportForm_Load(object sender, EventArgs e)
+{
+    // Create dataset
+    DataSet dataSet = new DataSet();
+    DataTable productsTable = GetProductData();
+    dataSet.Tables.Add(productsTable);
+    
+    // Configure report viewer
+    reportViewer1.Reset();
+    reportViewer1.ProcessingMode = ProcessingMode.Local;
+    
+    // Load report
+    reportViewer1.LocalReport.ReportPath = "ProductReport.rdlc";
+    
+    // Set data source
+    reportViewer1.LocalReport.DataSources.Clear();
+    reportViewer1.LocalReport.DataSources.Add(
+        new ReportDataSource("ProductDataSet", dataSet.Tables[0]));
+    
+    // Refresh report
+    reportViewer1.RefreshReport();
+}</code></pre>
+
+                <h2>Step 4 — Get Data from Database</h2>
+                <pre><code>private DataTable GetProductData()
+{
+    DataTable table = new DataTable();
+    
+    string connectionString = "Server=localhost;Database=MyApp;Trusted_Connection=True;";
+    string query = "SELECT ProductId, Name, Price, Description, Category FROM Products";
+    
+    using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+        using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+        {
+            adapter.Fill(table);
+        }
+    }
+    
+    return table;
+}</code></pre>
+
+                <h2>Step 5 — Complete Code Example</h2>
+                <pre><code>using Microsoft.Reporting.WinForms;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
+public partial class ReportForm : Form
+{
+    public ReportForm()
+    {
+        InitializeComponent();
+    }
+    
+    private void ReportForm_Load(object sender, EventArgs e)
+    {
+        LoadReport();
+    }
+    
+    private void LoadReport()
+    {
+        try
+        {
+            DataTable data = GetProductData();
+            
+            reportViewer1.Reset();
+            reportViewer1.ProcessingMode = ProcessingMode.Local;
+            reportViewer1.LocalReport.ReportPath = "ProductReport.rdlc";
+            
+            ReportDataSource dataSource = new ReportDataSource("ProductDataSet", data);
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.LocalReport.DataSources.Add(dataSource);
+            
+            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.Percent;
+            reportViewer1.ZoomPercent = 100;
+            
+            reportViewer1.RefreshReport();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error loading report: {ex.Message}", "Error", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    
+    private DataTable GetProductData()
+    {
+        DataTable table = new DataTable();
+        string connectionString = "Server=localhost;Database=MyApp;Trusted_Connection=True;";
+        string query = "SELECT ProductId, Name, Price, Description, Category FROM Products";
+        
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+        {
+            adapter.Fill(table);
+        }
+        
+        return table;
+    }
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>Binding reports to Windows Forms is straightforward using the ReportViewer control and local processing.</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/RdlcReports/03-DesigningReport" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/RdlcReports/05-FullReportProjectWithSql" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>

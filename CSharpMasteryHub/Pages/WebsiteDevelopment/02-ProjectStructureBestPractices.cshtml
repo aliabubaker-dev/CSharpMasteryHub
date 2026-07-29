@@ -1,0 +1,392 @@
+﻿@page
+@model ProjectStructureBestPracticesModel
+@{
+    ViewData["Title"] = "Project Structure Best Practices";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WebsiteDevelopment">Website Development</a></li>
+                    <li class="breadcrumb-item active">Project Structure Best Practices</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Project Structure Best Practices</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 2 of 4</span>
+                </div>
+
+                <h2>Why Project Structure Matters</h2>
+                <p>
+                    A well-organized project structure is crucial for maintainability, scalability, and team collaboration.
+                    It makes the codebase easier to understand, navigate, and extend over time.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Principle</h5>
+                        <p class="card-text">"Separation of Concerns" - Each component should have a single, well-defined responsibility.</p>
+                    </div>
+                </div>
+
+                <h2>Recommended Project Structure</h2>
+
+                <h3>ASP.NET Core Project Structure</h3>
+                <pre><code>ProjectName/
+├── Properties/
+│   └── launchSettings.json          // Development environment settings
+├── wwwroot/                          // Static files
+│   ├── css/                          // Stylesheets
+│   │   └── site.css
+│   ├── js/                           // JavaScript files
+│   │   └── site.js
+│   ├── images/                       // Images
+│   ├── lib/                          // Third-party libraries
+│   └── favicon.ico                   // Favicon
+├── Pages/                            // Razor Pages
+│   ├── Shared/                       // Shared pages and partials
+│   │   ├── _Layout.cshtml            // Main layout
+│   │   ├── _ValidationScriptsPartial.cshtml
+│   │   └── _SidebarNav.cshtml
+│   ├── Index.cshtml                  // Home page
+│   ├── Index.cshtml.cs               // Home page model
+│   ├── About.cshtml                  // About page
+│   ├── Contact.cshtml                // Contact page
+│   ├── Error.cshtml                  // Error page
+│   └── _ViewImports.cshtml           // Common directives
+│   └── _ViewStart.cshtml             // Layout selection
+├── Models/                           // Data models
+│   ├── Entities/                     // Database entities
+│   ├── ViewModels/                   // View models for pages
+│   └── DTOs/                         // Data transfer objects
+├── Services/                         // Business logic
+│   ├── Interfaces/                   // Service interfaces
+│   └── Implementations/              // Service implementations
+├── Data/                             // Database context
+│   ├── ApplicationDbContext.cs
+│   └── Migrations/                   // EF Core migrations
+├── Middleware/                       // Custom middleware
+├── Filters/                          // Action filters
+├── Extensions/                       // Extension methods
+├── Helpers/                          // Helper classes
+├── Configuration/                    // Configuration classes
+├── appsettings.json                  // Application settings
+├── appsettings.Development.json      // Development settings
+├── appsettings.Production.json       // Production settings
+├── Program.cs                        // Application entry point
+└── ProjectName.csproj                // Project file</code></pre>
+
+                <h2>Separation of Concerns</h2>
+
+                <h3>1. Presentation Layer (UI)</h3>
+                <pre><code>// Pages/ - Contains all UI pages
+// Pages/Shared/ - Shared UI components
+// wwwroot/ - Static assets
+// Views/ - If using MVC pattern</code></pre>
+
+                <h3>2. Business Logic Layer (Services)</h3>
+                <pre><code>// Services/ - Contains business logic
+// Services/Interfaces/ - Service contracts
+// Services/Implementations/ - Service implementations</code></pre>
+
+                <h3>3. Data Access Layer (Repositories)</h3>
+                <pre><code>// Data/ - Database context
+// Models/Entities/ - Database entities
+// Models/DTOs/ - Data transfer objects</code></pre>
+
+                <h2>Naming Conventions</h2>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Convention</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Classes</td>
+                                <td>PascalCase</td>
+                                <td>UserService</td>
+                            </tr>
+                            <tr>
+                                <td>Interfaces</td>
+                                <td>I + PascalCase</td>
+                                <td>IUserService</td>
+                            </tr>
+                            <tr>
+                                <td>Methods</td>
+                                <td>PascalCase</td>
+                                <td>GetUserById</td>
+                            </tr>
+                            <tr>
+                                <td>Properties</td>
+                                <td>PascalCase</td>
+                                <td>UserName</td>
+                            </tr>
+                            <tr>
+                                <td>Fields</td>
+                                <td>_camelCase</td>
+                                <td>_userRepository</td>
+                            </tr>
+                            <tr>
+                                <td>Parameters</td>
+                                <td>camelCase</td>
+                                <td>userId</td>
+                            </tr>
+                            <tr>
+                                <td>Constants</td>
+                                <td>UPPER_CASE</td>
+                                <td>MAX_RETRY_COUNT</td>
+                            </tr>
+                            <tr>
+                                <td>Razor Pages</td>
+                                <td>PascalCase</td>
+                                <td>UserProfile.cshtml</td>
+                            </tr>
+                            <tr>
+                                <td>View Models</td>
+                                <td>PascalCase + ViewModel</td>
+                                <td>UserProfileViewModel</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Best Practices</h2>
+
+                <h3>1. Dependency Injection</h3>
+                <pre><code>// Services/Interfaces/IUserService.cs
+public interface IUserService
+{
+    Task<User> GetUserByIdAsync(int id);
+    Task<IEnumerable<User>> GetAllUsersAsync();
+    Task CreateUserAsync(User user);
+}
+
+// Services/Implementations/UserService.cs
+public class UserService : IUserService
+{
+    private readonly IUserRepository _userRepository;
+    private readonly ILogger<UserService> _logger;
+
+public UserService(IUserRepository userRepository, ILogger<UserService> logger)
+    {
+        _userRepository = userRepository;
+        _logger = logger;
+    }
+
+public async Task<User> GetUserByIdAsync(int id)
+    {
+        _logger.LogInformation($"Getting user with ID: {id}");
+        return await _userRepository.GetByIdAsync(id);
+    }
+}
+
+// Program.cs - Register services
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();</code></pre>
+
+                <h3>2. Repository Pattern</h3>
+                <pre><code>// Data/Repositories/IUserRepository.cs
+public interface IUserRepository
+{
+    Task<User> GetByIdAsync(int id);
+    Task<IEnumerable<User>> GetAllAsync();
+    Task AddAsync(User user);
+    Task UpdateAsync(User user);
+    Task DeleteAsync(int id);
+}
+
+// Data/Repositories/UserRepository.cs
+public class UserRepository : IUserRepository
+{
+    private readonly ApplicationDbContext _context;
+
+public UserRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+public async Task<User> GetByIdAsync(int id)
+    {
+        return await _context.Users.FindAsync(id);
+    }
+
+public async Task<IEnumerable<User>> GetAllAsync()
+    {
+        return await _context.Users.ToListAsync();
+    }
+
+public async Task AddAsync(User user)
+    {
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+    }
+}</code></pre>
+
+                <h3>3. Configuration Management</h3>
+                <pre><code>// Configuration/AppSettings.cs
+public class AppSettings
+{
+    public string ApiUrl { get; set; }
+    public int TimeoutSeconds { get; set; }
+    public EmailSettings Email { get; set; }
+}
+
+public class EmailSettings
+{
+    public string SmtpServer { get; set; }
+    public int SmtpPort { get; set; }
+    public string SenderEmail { get; set; }
+}
+
+// Program.cs - Bind configuration
+var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));</code></pre>
+
+                <h3>4. Error Handling</h3>
+                <pre><code>// Middleware/ExceptionHandlingMiddleware.cs
+public class ExceptionHandlingMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    
+    public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+    
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unhandled exception occurred");
+            await HandleExceptionAsync(context, ex);
+        }
+    }
+    
+    private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.StatusCode = exception switch
+        {
+            NotFoundException => StatusCodes.Status404NotFound,
+            UnauthorizedException => StatusCodes.Status401Unauthorized,
+            _ => StatusCodes.Status500InternalServerError
+        };
+        
+        await context.Response.WriteAsJsonAsync(new { error = exception.Message });
+    }
+}</code></pre>
+
+                <h3>5. Logging</h3>
+                <pre><code>// Program.cs - Configure logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.AddEventLog();
+
+// Using Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.ApplicationInsights("your-instrumentation-key", TelemetryConverter.Traces)
+    .CreateLogger();
+
+builder.Host.UseSerilog();</code></pre>
+
+                <h2>Common Anti-Patterns to Avoid</h2>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>God Object:</strong> A single class with too many responsibilities
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>Hardcoding:</strong> Hard-coded values instead of configuration
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>Magic Numbers:</strong> Using unexplained numeric literals
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>Spaghetti Code:</strong> Poorly structured, tangled code
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>Copy-Paste:</strong> Duplicating code instead of reusing
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-times-circle text-danger me-2"></i>
+                        <strong>Over-Engineering:</strong> Building for requirements that don't exist
+                    </li>
+                </ul>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <ul class="mb-0">
+                            <li>Organize your project with clear separation of concerns</li>
+                            <li>Follow consistent naming conventions</li>
+                            <li>Use dependency injection for loose coupling</li>
+                            <li>Implement proper error handling and logging</li>
+                            <li>Keep your codebase clean and maintainable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
+                        <p>Restructure a project with best practices:</p>
+                        <ol>
+                            <li>Organize files by feature or layer</li>
+                            <li>Implement repository pattern</li>
+                            <li>Add dependency injection</li>
+                            <li>Configure logging</li>
+                            <li>Add error handling middleware</li>
+                            <li>Implement configuration management</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/WebsiteDevelopment/01-PlanningAWebsite" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/WebsiteDevelopment/03-ResponsiveDesignBootstrap" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname;
+            if (!getProgress(currentPage)) {
+                saveProgress(currentPage, true);
+            }
+        });
+    </script>
+}

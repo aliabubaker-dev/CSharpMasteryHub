@@ -1,11 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+	<!-- ===== HOME PAGE ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
+
+	<!-- ===== ABOUT & CONTACT ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/About</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Contact</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+
+	<!-- ===== C# FUNDAMENTALS ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals</loc>
 		<lastmod>2026-07-29</lastmod>
@@ -13,11 +31,117 @@
 		<priority>0.9</priority>
 	</url>
 	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/01-Introduction</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/02-SettingUpEnvironment</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/03-VariablesAndDataTypes</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/04-OperatorsAndExpressions</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/05-ControlFlow</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/06-Loops</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/07-ArraysAndCollections</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/08-Strings</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/09-ExceptionHandling</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/10-MethodsBasics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/11-PatternMatchingAndNullables</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/12-LinqIntroduction</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/CSharpFundamentals/13-DelegatesEventsAsync</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<!-- ===== CONSOLE APPLICATIONS ===== -->
+	<url>
 		<loc>https://csharpmasteryhub.onrender.com/ConsoleApp</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ConsoleApp/01-CreatingConsoleApp</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ConsoleApp/02-InputOutput</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ConsoleApp/03-CalculatorProject</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ConsoleApp/04-FileHandling</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- ===== CLASSES & OOP ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP</loc>
 		<lastmod>2026-07-29</lastmod>
@@ -25,11 +149,123 @@
 		<priority>0.9</priority>
 	</url>
 	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/01-WhatIsAClass</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/02-FieldsAndProperties</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/03-MethodsDeepDive</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/04-Constructors</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/05-Encapsulation</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/06-Inheritance</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/07-Polymorphism</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/08-AbstractionInterfaces</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/09-StaticVsInstance</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/10-Generics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ClassesAndOOP/11-SolidPrinciples</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- ===== WINDOWS FORMS ===== -->
+	<url>
 		<loc>https://csharpmasteryhub.onrender.com/WindowsForms</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/01-CreatingWinFormsProject</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/02-ControlsBasics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/03-EventHandling</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/04-MenusAndDialogs</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/05-DataBinding</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/06-MultiFormApps</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WindowsForms/07-CrudProjectWalkthrough</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- ===== ASP.NET CORE RAZOR PAGES ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/RazorPages</loc>
 		<lastmod>2026-07-29</lastmod>
@@ -37,11 +273,123 @@
 		<priority>0.8</priority>
 	</url>
 	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/01-MvcVsRazorPages</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/02-PageModelAndRouting</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/03-TagHelpers</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/04-FormsAndModelBinding</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/05-ValidationDataAnnotations</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/06-PartialsAndLayouts</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/07-DependencyInjection</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RazorPages/08-FullCrudProject</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- ===== SQL SERVER ===== -->
+	<url>
 		<loc>https://csharpmasteryhub.onrender.com/SqlServer</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.8</priority>
 	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/01-InstallingSqlServerSsms</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/02-DatabasesAndTables</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/03-DataTypesConstraints</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/04-SelectWhereOrderBy</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/05-Joins</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/06-InsertUpdateDelete</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/07-StoredProcedures</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/08-FunctionsAndViews</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/09-IndexesPerformance</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/SqlServer/10-Transactions</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+
+	<!-- ===== VS SQL CONNECTION ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection</loc>
 		<lastmod>2026-07-29</lastmod>
@@ -49,11 +397,75 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
+		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection/01-ConnectionStrings</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection/02-AdoNetBasics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection/03-InsertDeleteUpdateExample</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection/04-DataReaderVsDataAdapter</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/VsSqlConnection/05-EntityFrameworkCoreIntro</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== RDLC REPORTS ===== -->
+	<url>
 		<loc>https://csharpmasteryhub.onrender.com/RdlcReports</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.7</priority>
 	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RdlcReports/01-WhatIsRdlc</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RdlcReports/02-CreatingDataset</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RdlcReports/03-DesigningReport</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RdlcReports/04-BindingReportToForm</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/RdlcReports/05-FullReportProjectWithSql</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== .NET MAUI ===== -->
 	<url>
 		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui</loc>
 		<lastmod>2026-07-29</lastmod>
@@ -61,21 +473,324 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://csharpmasteryhub.onrender.com/GettingStarted</loc>
-		<lastmod>2026-07-29</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.9</priority>
-	</url>
-	<url>
-		<loc>https://csharpmasteryhub.onrender.com/Security</loc>
-		<lastmod>2026-07-29</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.7</priority>
-	</url>
-	<url>
-		<loc>https://csharpmasteryhub.onrender.com/Deployment</loc>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/01-WhatIsMaui</loc>
 		<lastmod>2026-07-29</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.6</priority>
 	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/02-EnvironmentSetup</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/03-XamlBasics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/04-LayoutsAndControls</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/05-ShellNavigation</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/06-MvvmPattern</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/07-ConnectingToApiOrDb</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/DotNetMaui/08-PublishingMauiApp</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== GETTING STARTED ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/GettingStarted</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/GettingStarted/01-InstallingVisualStudio</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/GettingStarted/02-WorkloadsToSelect</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/GettingStarted/03-InstallingSqlExpressSsms</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/GettingStarted/04-InstallingGit</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<!-- ===== WEBSITE DEVELOPMENT ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WebsiteDevelopment</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WebsiteDevelopment/01-PlanningAWebsite</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WebsiteDevelopment/02-ProjectStructureBestPractices</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WebsiteDevelopment/03-ResponsiveDesignBootstrap</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/WebsiteDevelopment/04-GitWorkflow</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== SEO GUIDE ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/01-SeoFundamentals</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/02-MetaTagsTitleDescription</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/03-SitemapAndRobotsTxt</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/04-SemanticHtmlHeadings</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/05-PageSpeedCoreWebVitals</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Seo/06-GoogleSearchConsole</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== SECURITY ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/01-HttpsAndCertificates</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/02-AuthenticationIdentity</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/03-SqlInjectionPrevention</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/04-XssCsrfProtection</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/05-SecurityHeaders</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Security/06-SecretsManagement</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== PROJECT WORKFLOW ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow/01-UnderstandingRequirements</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow/02-PlanningAndArchitecture</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow/03-GitBranchingStrategy</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow/04-CodingStandards</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ProjectWorkflow/05-TestingAndDelivering</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== EXTRA TOPICS ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/01-GitAndGitHub</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/02-UnitTestingXunit</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/03-DesignPatterns</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/04-AsyncAwaitDeepDive</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/05-RestApisWebApi</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/ExtraTopics/06-NugetPackages</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
+	<!-- ===== DEPLOYMENT ===== -->
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment/01-PreparingForDeployment</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment/02-FreeHostingOptions</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment/03-DeployingToAzureFree</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment/04-FreeCustomDomainOptions</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://csharpmasteryhub.onrender.com/Deployment/05-CiCdGithubActions</loc>
+		<lastmod>2026-07-29</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>
+
 </urlset>

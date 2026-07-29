@@ -38,10 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Search functionality
+    // Search functionality
     function performSearch() {
-        const query = searchInput.value.trim().toLowerCase();
+        const query = searchInput.value.trim();
         if (query.length > 0) {
-            // Redirect to search results or filter content
+            // Redirect to search results page
             window.location.href = `/search?q=${encodeURIComponent(query)}`;
         }
     }

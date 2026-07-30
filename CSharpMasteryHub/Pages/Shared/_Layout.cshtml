@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <!-- CrossPlatformDev Favicons -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg">
+
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 <body>
     <!-- ===== NAVBAR ===== -->
@@ -17,7 +24,8 @@
         <div class="container">
             <!-- Brand/Logo -->
             <a class="navbar-brand" href="/">
-                <i class="fas fa-code me-2"></i>C# Mastery Hub
+                <img src="~/img/logo-icon.png" alt="CrossPlatformDev" height="35" class="me-2" style="display: inline-block;">
+                <span style="font-size: 1.1rem; font-weight: 600; color: #fff;">C# Mastery Hub</span>
             </a>
 
             <!-- Mobile Toggle Button -->
@@ -33,14 +41,12 @@
             <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Home -->
                     <li class="nav-item">
                         <a class="nav-link" href="/">
                             <i class="fas fa-home me-1"></i>Home
                         </a>
                     </li>
 
-                    <!-- Lessons Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#"
                            id="lessonsDropdown"
@@ -50,114 +56,42 @@
                             <i class="fas fa-book me-1"></i>Lessons
                         </a>
                         <ul class="dropdown-menu scrollable-dropdown" aria-labelledby="lessonsDropdown">
-                            <!-- Core Topics -->
                             <li><h6 class="dropdown-header text-primary">Core Topics</h6></li>
-                            <li>
-                                <a class="dropdown-item" href="/CSharpFundamentals">
-                                    <i class="fas fa-code me-2"></i>C# Fundamentals
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/ConsoleApp">
-                                    <i class="fas fa-terminal me-2"></i>Console Applications
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/ClassesAndOOP">
-                                    <i class="fas fa-cubes me-2"></i>Classes & OOP
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/WindowsForms">
-                                    <i class="fas fa-window-maximize me-2"></i>Windows Forms
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/RazorPages">
-                                    <i class="fas fa-globe me-2"></i>ASP.NET Core
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/SqlServer">
-                                    <i class="fas fa-database me-2"></i>SQL Server
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/VsSqlConnection">
-                                    <i class="fas fa-plug me-2"></i>VS & SQL Connection
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/RdlcReports">
-                                    <i class="fas fa-file-alt me-2"></i>RDLC Reports
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/DotNetMaui">
-                                    <i class="fas fa-mobile-alt me-2"></i>.NET MAUI
-                                </a>
-                            </li>
+                            <li><a class="dropdown-item" href="/CSharpFundamentals"><i class="fas fa-code me-2"></i>C# Fundamentals</a></li>
+                            <li><a class="dropdown-item" href="/ConsoleApp"><i class="fas fa-terminal me-2"></i>Console Applications</a></li>
+                            <li><a class="dropdown-item" href="/ClassesAndOOP"><i class="fas fa-cubes me-2"></i>Classes & OOP</a></li>
+                            <li><a class="dropdown-item" href="/WindowsForms"><i class="fas fa-window-maximize me-2"></i>Windows Forms</a></li>
+                            <li><a class="dropdown-item" href="/RazorPages"><i class="fas fa-globe me-2"></i>ASP.NET Core</a></li>
+                            <li><a class="dropdown-item" href="/SqlServer"><i class="fas fa-database me-2"></i>SQL Server</a></li>
+                            <li><a class="dropdown-item" href="/VsSqlConnection"><i class="fas fa-plug me-2"></i>VS & SQL Connection</a></li>
+                            <li><a class="dropdown-item" href="/RdlcReports"><i class="fas fa-file-alt me-2"></i>RDLC Reports</a></li>
+                            <li><a class="dropdown-item" href="/DotNetMaui"><i class="fas fa-mobile-alt me-2"></i>.NET MAUI</a></li>
                             <li><hr class="dropdown-divider"></li>
-
-                            <!-- Getting Started -->
                             <li><h6 class="dropdown-header text-primary">Getting Started</h6></li>
-                            <li>
-                                <a class="dropdown-item" href="/GettingStarted">
-                                    <i class="fas fa-rocket me-2"></i>Getting Started
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/WebsiteDevelopment">
-                                    <i class="fas fa-code-branch me-2"></i>Website Development
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/Seo">
-                                    <i class="fas fa-search me-2"></i>SEO Guide
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/Security">
-                                    <i class="fas fa-shield-alt me-2"></i>Security
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/ProjectWorkflow">
-                                    <i class="fas fa-tasks me-2"></i>Project Workflow
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/ExtraTopics">
-                                    <i class="fas fa-plus-circle me-2"></i>Extra Topics
-                                </a>
-                            </li>
+                            <li><a class="dropdown-item" href="/GettingStarted"><i class="fas fa-rocket me-2"></i>Getting Started</a></li>
+                            <li><a class="dropdown-item" href="/WebsiteDevelopment"><i class="fas fa-code-branch me-2"></i>Website Development</a></li>
+                            <li><a class="dropdown-item" href="/Seo"><i class="fas fa-search me-2"></i>SEO Guide</a></li>
+                            <li><a class="dropdown-item" href="/Security"><i class="fas fa-shield-alt me-2"></i>Security</a></li>
+                            <li><a class="dropdown-item" href="/ProjectWorkflow"><i class="fas fa-tasks me-2"></i>Project Workflow</a></li>
+                            <li><a class="dropdown-item" href="/ExtraTopics"><i class="fas fa-plus-circle me-2"></i>Extra Topics</a></li>
                             <li><hr class="dropdown-divider"></li>
-
-                            <!-- Deployment -->
                             <li><h6 class="dropdown-header text-primary">Deployment</h6></li>
-                            <li>
-                                <a class="dropdown-item" href="/Deployment">
-                                    <i class="fas fa-cloud-upload-alt me-2"></i>Deployment
-                                </a>
-                            </li>
+                            <li><a class="dropdown-item" href="/Deployment"><i class="fas fa-cloud-upload-alt me-2"></i>Deployment</a></li>
                         </ul>
                     </li>
 
-                    <!-- About -->
                     <li class="nav-item">
                         <a class="nav-link" href="/About">
                             <i class="fas fa-info-circle me-1"></i>About
                         </a>
                     </li>
 
-                    <!-- Contact -->
                     <li class="nav-item">
                         <a class="nav-link" href="/Contact">
                             <i class="fas fa-envelope me-1"></i>Contact
                         </a>
                     </li>
 
-                    <!-- Search Toggle - Only ONE search icon -->
                     <li class="nav-item search-item">
                         <a class="nav-link" id="searchToggle" href="#" role="button">
                             <i class="fas fa-search"></i>
@@ -193,6 +127,19 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer-custom">
         <div class="container">
+            <!-- Company Branding in Footer -->
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <a href="https://crossplatformdev.com" target="_blank" class="text-decoration-none">
+                        <img src="~/img/logo-icon.png" alt="CrossPlatformDev" height="30" class="me-2">
+                        <span style="color: #fff; font-weight: 500;">CrossPlatformDev</span>
+                        <span style="color: rgba(255,255,255,0.5); font-size: 0.85rem;"> — Custom Websites, Mobile Apps &amp; Business Systems</span>
+                    </a>
+                </div>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1);">
+
             <div class="row g-4">
                 <div class="col-md-4">
                     <h5><i class="fas fa-code me-2"></i>C# Mastery Hub</h5>
@@ -233,6 +180,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

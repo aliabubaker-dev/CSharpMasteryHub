@@ -55,6 +55,8 @@ public class Calculator
         return a / b;
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Step 3: The Main Program</h2>
                 <pre><code>using System;
@@ -148,6 +150,8 @@ class Program
         }
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Step 4: Enhanced Features</h2>
                 <h3>Add History Feature</h3>
@@ -173,6 +177,8 @@ if (Console.ReadKey().Key == ConsoleKey.H)
     Console.WriteLine("\nPress any key to continue...");
     Console.ReadKey();
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Add Scientific Functions</h3>
                 <pre><code>public double Power(double a, double b) => Math.Pow(a, b);

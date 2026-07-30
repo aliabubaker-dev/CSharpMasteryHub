@@ -55,6 +55,8 @@ while (reader.Read())
     string lastName = reader.GetString(2);
     Console.WriteLine($"{id}: {firstName} {lastName}");
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Why "using"?</h2>
                 <p>
@@ -85,3 +87,5 @@ while (reader.Read())
         </div>
     </div>
 </div>
+
+@await Html.PartialAsync("_QuizButton", "VsSqlConnection_Lesson2")

@@ -50,9 +50,13 @@
                     Results appear in the grid below. Try this right now:
                 </p>
                 <pre><code>SELECT @@VERSION;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Creating your first database</h2>
                 <pre><code>CREATE DATABASE SchoolDB;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
                 <p>Right-click <strong>Databases</strong> in Object Explorer and choose Refresh to see it appear.</p>
 
                 <div class="card bg-info bg-opacity-10 mb-4">

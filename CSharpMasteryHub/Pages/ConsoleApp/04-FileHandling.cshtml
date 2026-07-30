@@ -62,6 +62,7 @@ using (StreamReader reader = new StreamReader("example.txt"))
     while ((line = reader.ReadLine()) != null)
         Console.WriteLine(line);
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h2>File Operations Example</h2>
                 <pre><code>using System;
@@ -145,6 +146,7 @@ class Program
         FileManager.DeleteFile("backup.txt");
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h2>Working with Directories</h2>
                 <pre><code>using System.IO;
@@ -182,6 +184,7 @@ Console.WriteLine($"Read-Only: {fileInfo.IsReadOnly}");
 
 // Change file attributes
 fileInfo.Attributes = FileAttributes.Normal;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <div class="card bg-light mb-4">
                     <div class="card-body">
@@ -207,6 +210,7 @@ foreach (var line in lines)
     var values = line.Split(',');
     Console.WriteLine($"Name: {values[0]}, Age: {values[1]}, City: {values[2]}");
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <div class="card bg-info bg-opacity-10 mb-4">
                     <div class="card-body">

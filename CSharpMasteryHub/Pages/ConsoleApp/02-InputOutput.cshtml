@@ -37,6 +37,8 @@ Console.Write("the same line");
 // Output: 
 // This is a line
 // This is the same line</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>String Formatting</h3>
                 <pre><code>string name = "John";
@@ -50,6 +52,8 @@ Console.WriteLine($"Hello {name}, you are {age} years old.");
 
 // Method 3: Composite formatting
 Console.WriteLine("Hello {0}, you are {1} years old.", name, age);</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Console Input Methods</h2>
 
@@ -58,12 +62,16 @@ Console.WriteLine("Hello {0}, you are {1} years old.", name, age);</code></pre>
                 <pre><code>Console.Write("Enter your name: ");
 string name = Console.ReadLine();
 Console.WriteLine($"Hello, {name}!");</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>ReadKey()</h3>
                 <p>Reads a single character without requiring Enter:</p>
                 <pre><code>Console.WriteLine("Press any key to continue...");
 Console.ReadKey();
 Console.WriteLine("Key pressed!");</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Reading Numbers</h3>
                 <pre><code>Console.Write("Enter your age: ");
@@ -80,6 +88,8 @@ else
 {
     Console.WriteLine("Invalid input!");
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card bg-light mb-4">
                     <div class="card-body">
@@ -105,6 +115,8 @@ Console.WriteLine($"{"Jane",-20} {30,5}");
 // Name                 Age
 // John                  25
 // Jane                  30</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Colors</h3>
                 <pre><code>Console.ForegroundColor = ConsoleColor.Green;
@@ -115,6 +127,8 @@ Console.BackgroundColor = ConsoleColor.DarkBlue;
 Console.ForegroundColor = ConsoleColor.White;
 Console.WriteLine("White text on blue background");
 Console.ResetColor();</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card bg-info bg-opacity-10 mb-4">
                     <div class="card-body">
@@ -165,6 +179,8 @@ class Program
         Console.ReadKey();
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card border-primary mb-4">
                     <div class="card-body">

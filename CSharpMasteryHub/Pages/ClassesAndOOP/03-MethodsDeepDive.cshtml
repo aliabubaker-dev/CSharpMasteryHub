@@ -58,6 +58,8 @@
         return 3.14159;
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Method Parameters</h2>
 
@@ -66,6 +68,8 @@
 {
     number = 100; // Only affects local copy
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Reference Parameters (ref)</h3>
                 <pre><code>public void ChangeValue(ref int number)
@@ -76,6 +80,8 @@
 // Usage
 int x = 5;
 ChangeValue(ref x); // x becomes 100</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Output Parameters (out)</h3>
                 <pre><code>public bool TryDivide(int a, int b, out int result)
@@ -116,6 +122,8 @@ Greet("Jane", "Hi");  // Hi, Jane!</code></pre>
 
 // Usage
 int result = Sum(1, 2, 3, 4, 5); // returns 15</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Method Overloading</h2>
                 <pre><code>public class MathOperations
@@ -145,6 +153,8 @@ int result = Sum(1, 2, 3, 4, 5); // returns 15</code></pre>
     
     public bool IsEven(int number) => number % 2 == 0;
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Complete Example</h2>
                 <pre><code>using System;
@@ -219,6 +229,8 @@ class Program
             Console.WriteLine($"- {student}");
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card bg-light mb-4">
                     <div class="card-body">

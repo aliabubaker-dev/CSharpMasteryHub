@@ -52,6 +52,8 @@
     CONSTRAINT FK_Courses_Dept FOREIGN KEY (DeptCode)
         REFERENCES Departments(DeptCode)
 );</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <ul>
                     <li><strong>CHECK</strong> — restricts values to a valid range or condition.</li>
@@ -62,6 +64,8 @@
                 <h2>Adding a constraint after the fact</h2>
                 <pre><code>ALTER TABLE Courses
 ADD CONSTRAINT CK_Credits_Positive CHECK (Credits > 0);</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card bg-info bg-opacity-10 mb-4">
                     <div class="card-body">

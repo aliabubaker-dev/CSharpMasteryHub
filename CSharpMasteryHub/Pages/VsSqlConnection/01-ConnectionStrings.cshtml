@@ -30,6 +30,8 @@
 
                 <h2>Typical connection string (Windows Authentication)</h2>
                 <pre><code>Server=localhost\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>SQL Authentication (username/password)</h2>
                 <pre><code>Server=localhost\SQLEXPRESS;Database=SchoolDB;User Id=myuser;Password=mypassword;TrustServerCertificate=True;</code></pre>
@@ -41,9 +43,13 @@
     "SchoolDb": "Server=localhost\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;"
   }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Reading it in C#</h2>
                 <pre><code>string? connectionString = builder.Configuration.GetConnectionString("SchoolDb");</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <p>
                     We'll cover keeping passwords out of source control entirely (User
@@ -72,3 +78,6 @@
         </div>
     </div>
 </div>
+
+
+@await Html.PartialAsync("_QuizButton", "VsSqlConnection_Lesson1")

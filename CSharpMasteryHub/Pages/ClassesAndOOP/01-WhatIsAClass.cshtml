@@ -50,6 +50,8 @@ public class Person
         Console.WriteLine($"Hi, I'm {Name} and I'm {Age} years old.");
     }
 }</code></pre>
+              
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h2>Creating Objects</h2>
                 <pre><code>// Creating an instance of the class
@@ -61,6 +63,7 @@ person1.Introduce();
 // Using object initializer
 Person person2 = new Person { Name = "Jane", Age = 30 };
 person2.Introduce();</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h2>Class Components</h2>
                 <h3>1. Fields</h3>
@@ -72,6 +75,7 @@ person2.Introduce();</code></pre>
     public int StudentId;
     public double GPA;
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h3>2. Properties</h3>
                 <p>Provide controlled access to fields:</p>
@@ -97,6 +101,7 @@ person2.Introduce();</code></pre>
         }
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h3>3. Methods</h3>
                 <p>Define behavior for the class:</p>
@@ -112,6 +117,7 @@ person2.Introduce();</code></pre>
         return a * b;
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <h2>Complete Example</h2>
                 <pre><code>using System;
@@ -174,6 +180,7 @@ class Program
         myBook.DisplayInfo();
     }
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <div class="card bg-info bg-opacity-10 mb-4">
                     <div class="card-body">
@@ -210,6 +217,7 @@ class Program
 int sum = MathHelper.Add(5, 3); // Static call
 MathHelper helper = new MathHelper();
 int product = helper.Multiply(5, 3); // Instance call</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
 
                 <div class="card border-primary mb-4">
                     <div class="card-body">

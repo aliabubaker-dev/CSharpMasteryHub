@@ -33,17 +33,23 @@
 git init
 git add .
 git commit -m "Initial commit"</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Connecting to GitHub</h2>
                 <pre><code>git remote add origin https://github.com/yourusername/MyProject.git
 git branch -M main
 git push -u origin main</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>The daily workflow</h2>
                 <pre><code>git status                 # see what changed
 git add .                  # stage all changes
 git commit -m "Add login page"
 git push                   # send to GitHub</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>Branching</h2>
                 <pre><code>git checkout -b feature/student-search
@@ -51,6 +57,8 @@ git push                   # send to GitHub</code></pre>
 git add .
 git commit -m "Add student search box"
 git push -u origin feature/student-search</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
                 <p>Then open a <strong>Pull Request</strong> on GitHub to merge it into <code>main</code> once it's reviewed.</p>
 
                 <h2>A .gitignore for .NET projects</h2>
@@ -59,6 +67,8 @@ obj/
 *.user
 .vs/
 appsettings.Development.json</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
                 <p>
                     Never commit build output or secrets — this file tells Git to skip them
                     entirely.
@@ -68,6 +78,8 @@ appsettings.Development.json</code></pre>
                 <pre><code>git checkout -- filename.cs     # discard uncommitted changes to one file
 git reset --soft HEAD~1         # undo the last commit, keep the changes staged
 git revert &lt;commit-hash&gt;        # safely undo a commit that's already pushed</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <div class="card bg-info bg-opacity-10 mb-4">
                     <div class="card-body">

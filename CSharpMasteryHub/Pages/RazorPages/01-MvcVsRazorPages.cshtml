@@ -48,6 +48,8 @@ public class HomeController : Controller
 
 // Views/Home/Index.cshtml
 &lt;h1&gt;Welcome&lt;/h1&gt;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>Razor Pages</h3>
                 <pre><code>// Pages/Index.cshtml.cs
@@ -59,6 +61,8 @@ public class IndexModel : PageModel
 // Pages/Index.cshtml
 @@page
 &lt;h1&gt;Welcome&lt;/h1&gt;</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h2>When to Use What</h2>
 

@@ -1,0 +1,7 @@
+﻿@model string
+
+<div class="mt-2 mb-3">
+    <a href="https://dotnetfiddle.net" target="_blank" class="btn btn-sm btn-outline-primary">
+        <i class="fas fa-external-link-alt me-1"></i>@(string.IsNullOrEmpty(Model) ? "Try this code in .NET Fiddle" : Model)
+    </a>
+</div>

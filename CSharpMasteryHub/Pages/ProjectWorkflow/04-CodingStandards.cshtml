@@ -95,6 +95,8 @@ public void ProcessOrder(Order order)
     if (order.Items.Count == 0)
         throw new InvalidOperationException("Order has no items");
 }</code></pre>
+                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
+
 
                 <h3>4. Async/Await</h3>
                 <pre><code>// Good - Async all the way

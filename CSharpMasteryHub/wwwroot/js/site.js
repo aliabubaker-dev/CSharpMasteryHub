@@ -2,30 +2,60 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Auto-close mobile menu on link click
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    // ===== DROPDOWN FIX FOR MOBILE =====
+    // Let Bootstrap handle dropdowns natively, just prevent navbar from closing
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                navbarToggler.click();
+    // Only close navbar when clicking on actual page links (not dropdown toggles)
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Check if this is a dropdown toggle
+            const isDropdownToggle = this.classList.contains('dropdown-toggle') ||
+                this.getAttribute('data-bs-toggle') === 'dropdown' ||
+                this.getAttribute('data-bs-toggle') === 'dropdown' ||
+                this.getAttribute('href') === '#';
+
+            // Check if this is the search toggle
+            const isSearchToggle = this.id === 'searchToggle';
+
+            // Only close if it's NOT a dropdown toggle and NOT the search toggle
+            if (!isDropdownToggle && !isSearchToggle) {
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    // Use Bootstrap's collapse hide method
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    }
+                }
             }
         });
     });
 
-    // Toggle search bar
+    // Fix for dropdown toggles on mobile - use Bootstrap's native behavior
+    // Just ensure the navbar stays open when dropdown is toggled
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+            // Don't stop propagation - let Bootstrap handle it
+            // Just prevent any custom interference
+        });
+    });
+
+    // ===== SEARCH TOGGLE =====
     const searchToggle = document.getElementById('searchToggle');
     const searchContainer = document.getElementById('searchContainer');
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
 
     if (searchToggle && searchContainer) {
-        searchToggle.addEventListener('click', function () {
+        searchToggle.addEventListener('click', function (e) {
+            e.preventDefault();
             // Close mobile menu if open
             if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                navbarToggler.click();
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
             }
             // Toggle search
             searchContainer.classList.toggle('show');
@@ -37,12 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Search functionality
-    // Search functionality
+    // ===== SEARCH FUNCTIONALITY =====
     function performSearch() {
         const query = searchInput.value.trim();
         if (query.length > 0) {
-            // Redirect to search results page
             window.location.href = `/search?q=${encodeURIComponent(query)}`;
         }
     }
@@ -56,9 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Highlight current page in navigation
+    // ===== HIGHLIGHT CURRENT PAGE =====
     const currentPath = window.location.pathname;
     document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        // Skip dropdown toggles
+        if (link.classList.contains('dropdown-toggle')) return;
+        if (link.getAttribute('data-bs-toggle') === 'dropdown') return;
+        if (link.id === 'searchToggle') return;
+
         const href = link.getAttribute('href');
         if (href && href !== '/' && currentPath.startsWith(href)) {
             link.classList.add('active');
@@ -67,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Close search on outside click
+    // ===== CLOSE SEARCH ON OUTSIDE CLICK =====
     document.addEventListener('click', function (e) {
         if (searchContainer && searchContainer.classList.contains('show')) {
             const isSearchClick = searchContainer.contains(e.target) ||
@@ -78,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Back to top button
+    // ===== BACK TO TOP =====
     const backToTopBtn = document.createElement('a');
     backToTopBtn.className = 'back-to-top';
     backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';

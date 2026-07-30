@@ -11,6 +11,7 @@ if (builder.Environment.IsDevelopment())
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<SeoService>();
+builder.Services.AddScoped<QuizService>();
 
 var app = builder.Build();
 

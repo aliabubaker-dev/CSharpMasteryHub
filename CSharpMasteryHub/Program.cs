@@ -12,6 +12,8 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<SeoService>();
 builder.Services.AddScoped<QuizService>();
+builder.Services.AddScoped<ChallengeService>();
+builder.Services.AddScoped<DiscussionService>(); // Add this line
 
 var app = builder.Build();
 

@@ -1,0 +1,230 @@
+﻿@page
+@model ChallengesModel
+@{
+    ViewData["Title"] = "Code Challenges Hub - C# Mastery Hub";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <div class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-2">
+                    <i class="fas fa-puzzle-piece me-1"></i> Practice & Learn
+                </div>
+                <h1 class="display-4 fw-bold">🧩 Code Challenges Hub</h1>
+                <p class="lead text-muted">Test your skills with hands-on coding challenges. Choose a topic and start practicing!</p>
+            </div>
+
+            @if (Model.CurrentChallenge != null)
+            {
+                <!-- SINGLE CHALLENGE VIEW -->
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
+                        <!-- Breadcrumb -->
+                        <nav aria-label="breadcrumb" class="mb-3">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/Challenges">All Challenges</a></li>
+                                <li class="breadcrumb-item"><a href="/Challenges?Topic=@Model.CurrentChallenge.Topic">@Model.CurrentChallenge.Topic</a></li>
+                                <li class="breadcrumb-item active">@Model.CurrentChallenge.Title</li>
+                            </ol>
+                        </nav>
+
+                        <!-- Challenge Info -->
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-@(Model.CurrentChallenge.Difficulty == "Beginner" ? "success" : Model.CurrentChallenge.Difficulty == "Intermediate" ? "warning" : "danger")">
+                                @Model.CurrentChallenge.Difficulty
+                            </span>
+                            <span class="badge bg-primary">@Model.CurrentChallenge.Topic</span>
+                            <span class="badge bg-secondary">#@Model.CurrentChallenge.Id</span>
+                        </div>
+
+                        <h2 class="fw-bold mb-2">@Model.CurrentChallenge.Title</h2>
+                        <p class="text-muted mb-3">@Model.CurrentChallenge.Description</p>
+
+                        <!-- Hint -->
+                        <div class="alert alert-info bg-info bg-opacity-10 border-0">
+                            <strong>💡 Hint:</strong>
+                            <span>@(Model.CurrentChallenge.CodeSnippet.Contains("Hint:") ? Model.CurrentChallenge.CodeSnippet.Split("Hint:").Last().Trim() : "Think about the concepts covered in this lesson.")</span>
+                        </div>
+
+                        <!-- Code Editor -->
+                        <form method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="Topic" />
+
+                            <div class="mb-3">
+                                <label class="fw-bold mb-2">✏️ Your Code:</label>
+                                <textarea asp-for="UserCode" class="form-control font-monospace" rows="10" style="background: #1a1a2e; color: #e1e1e1; border: none; border-radius: 8px; padding: 15px; font-family: 'Consolas', monospace; font-size: 0.9rem; line-height: 1.8;"></textarea>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-play me-2"></i>Run Code
+                                </button>
+                                <a href="/Challenges" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>All Challenges
+                                </a>
+                            </div>
+                        </form>
+
+                        <!-- Results -->
+                        @if (Model.IsSubmitted)
+                        {
+                            <div class="alert @(Model.IsCorrect ? "alert-success" : "alert-danger") mt-3">
+                                <h5>@Model.ResultMessage</h5>
+                                @if (Model.IsCorrect)
+                                {
+                                    <p class="mb-0">💡 @Model.CurrentChallenge.Explanation</p>
+                                }
+                            </div>
+                        }
+
+                        <!-- Show Solution -->
+                        <div class="mt-3">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="toggleSolution()">
+                                <i class="fas fa-eye me-1"></i>Show Solution
+                            </button>
+                            <div id="solutionContainer" style="display:none;" class="mt-2">
+                                <div class="p-3 bg-dark text-light rounded">
+                                    <pre class="mb-0 text-light"><code>@Model.CurrentChallenge.Solution</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!-- CHALLENGES LIST VIEW -->
+                <!-- Quick Stats -->
+                <div class="row g-3 mb-4">
+                    <div class="col-4 col-md-3">
+                        <div class="text-center p-2 bg-light rounded">
+                            <div class="h4 fw-bold text-primary mb-0">@Model.AllChallenges.Count</div>
+                            <small class="text-muted">Total</small>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-3">
+                        <div class="text-center p-2 bg-light rounded">
+                            <div class="h4 fw-bold text-success mb-0">@Model.AllTopics.Count</div>
+                            <small class="text-muted">Topics</small>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-3">
+                        <div class="text-center p-2 bg-light rounded">
+                            <div class="h4 fw-bold text-warning mb-0">@Model.AllChallenges.Count(c => c.Difficulty == "Beginner")</div>
+                            <small class="text-muted">Beginner</small>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-3">
+                        <div class="text-center p-2 bg-light rounded">
+                            <div class="h4 fw-bold text-danger mb-0">@Model.AllChallenges.Count(c => c.Difficulty != "Beginner")</div>
+                            <small class="text-muted">Advanced</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap align-items-center gap-2">
+                            <span class="fw-bold me-2"><i class="fas fa-filter"></i> Filter:</span>
+                            <a href="/Challenges" class="btn btn-sm @(string.IsNullOrEmpty(Model.SelectedTopic) ? "btn-primary" : "btn-outline-primary")">All</a>
+                            @foreach (var topic in Model.AllTopics)
+                            {
+                                <a href="/Challenges?Topic=@topic"
+                                   class="btn btn-sm @(Model.SelectedTopic == topic ? "btn-primary" : "btn-outline-primary")">
+                                    @topic
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Count -->
+                <p class="text-muted mb-3">
+                    Showing <strong>@Model.FilteredChallenges.Count</strong> challenge(s)
+                </p>
+
+                <!-- Challenges Grid -->
+                <div class="row g-4">
+                    @if (Model.FilteredChallenges.Any())
+                    {
+                        @foreach (var challenge in Model.FilteredChallenges)
+                        {
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card h-100 shadow-sm border-0 rounded-4 challenge-card">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <span class="badge bg-@(challenge.Difficulty == "Beginner" ? "success" : challenge.Difficulty == "Intermediate" ? "warning" : "danger")">
+                                                @challenge.Difficulty
+                                            </span>
+                                            <span class="badge bg-secondary">#@challenge.Id</span>
+                                        </div>
+                                        <h5 class="fw-bold mb-2">@challenge.Title</h5>
+                                        <p class="text-muted small mb-3">@challenge.Description</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-primary">@challenge.Topic</span>
+                                            <a href="/Challenges?Id=@challenge.Id" class="btn btn-primary btn-sm">
+                                                Start <i class="fas fa-arrow-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-puzzle-piece fa-3x text-muted mb-3"></i>
+                            <h4>No challenges found</h4>
+                            <p class="text-muted">Try selecting a different topic.</p>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .challenge-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        }
+
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+    }
+
+    .breadcrumb-item a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<script>
+    function toggleSolution() {
+        const container = document.getElementById('solutionContainer');
+        const btn = document.querySelector('[onclick="toggleSolution()"]');
+        if (container.style.display === 'none') {
+            container.style.display = 'block';
+            btn.innerHTML = '<i class="fas fa-eye-slash me-1"></i>Hide Solution';
+        } else {
+            container.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-eye me-1"></i>Show Solution';
+        }
+    }
+</script>

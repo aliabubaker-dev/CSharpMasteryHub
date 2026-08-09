@@ -1,0 +1,158 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.TextBoxModel
+@{
+    ViewData["Title"] = "TextBox Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">TextBox</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 10 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #26</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-font text-primary me-2"></i>TextBox Control
+                </h1>
+                <p class="lead mb-4">
+                    TextBox is one of the most common controls. It allows users to enter and edit text.
+                </p>
+
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a TextBox?</h4>
+                        <p>
+                            TextBox is used for user input. It can be single-line or multi-line,
+                            and supports password masking, read-only mode, and text validation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <pre class="bg-dark text-light p-3 rounded-3"><code>// Set text
+txtName.Text = "John Doe";
+
+// Get text
+string name = txtName.Text;
+
+// Make it a password box
+txtPassword.PasswordChar = '*';
+
+// Multi-line
+txtDescription.Multiline = true;
+txtDescription.ScrollBars = ScrollBars.Vertical;
+txtDescription.WordWrap = true;
+
+// Validation
+private void txtEmail_TextChanged(object sender, EventArgs e)
+{
+    bool isValid = txtEmail.Text.Contains("@@");
+    btnSubmit.Enabled = isValid;
+    lblValid.Visible = isValid;
+}
+
+// Clear text
+txtName.Clear();
+
+// Select all
+txtName.SelectAll();</code></pre>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create a simple contact form.</p>
+                        <ul>
+                            <li>Add TextBoxes for First Name, Last Name, Email, Phone</li>
+                            <li>Add a multi-line TextBox for address</li>
+                            <li>Add a Password TextBox for password</li>
+                            <li>Validate that email contains the @@ symbol</li>
+                            <li>Show a message when the user submits</li>
+                            <li>Clear all fields after submission</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            TextBox is essential for user input. Use <code>PasswordChar</code> for passwords,
+                            <code>Multiline</code> for longer text, and <code>TextChanged</code> for validation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: TableLayoutPanel
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/Timer" class="btn btn-primary-custom">
+                        Next: Timer <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Button">Button</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckBox">CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox">CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox">ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView">DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker">DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox">GroupBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ImageList">ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label">Label</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel">LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox">ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView">ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip">MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon">NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog">PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel">Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox">PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog">PrintDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument">PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog">PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton">RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox">RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog">SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer">SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel">TableLayoutPanel</a>
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/TextBox">TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer">Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip">ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser">WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+}

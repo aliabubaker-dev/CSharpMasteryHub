@@ -90,6 +90,1043 @@ public class QuizService
     }
 };
 
+
+
+        // ================================================================
+        // WINDOWS FORMS - C# REFRESHER (20 Questions)
+        // ================================================================
+        _quizzes["WindowsForms_Refresher"] = new List<QuizQuestion>
+{
+    // === ARRAYS (Questions 1-4) ===
+    new QuizQuestion
+    {
+        Id = 1,
+        Topic = "WindowsForms_Refresher",
+        Question = "What is the correct way to declare an array of 5 integers in C#?",
+        Options = new List<string>
+        {
+            "int[] numbers = new int[5];",
+            "int numbers[5] = new int[];",
+            "array<int> numbers = new array<int>(5);",
+            "int[] numbers = new int[]{5};"
+        },
+        CorrectAnswer = 0,
+        Explanation = "int[] numbers = new int[5]; is the correct syntax. The array is initialized with 5 elements, all defaulting to 0."
+    },
+    new QuizQuestion
+    {
+        Id = 2,
+        Topic = "WindowsForms_Refresher",
+        Question = "How do you access the third element in an array named 'scores'?",
+        Options = new List<string>
+        {
+            "scores[2]",
+            "scores[3]",
+            "scores.Third()",
+            "scores.Item(3)"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Arrays are zero-indexed, so the third element is at index 2."
+    },
+    new QuizQuestion
+    {
+        Id = 3,
+        Topic = "WindowsForms_Refresher",
+        Question = "What does Array.Length return?",
+        Options = new List<string>
+        {
+            "The number of elements in the array",
+            "The memory size of the array",
+            "The index of the last element",
+            "The number of dimensions"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Array.Length returns the total number of elements in the array."
+    },
+    new QuizQuestion
+    {
+        Id = 4,
+        Topic = "WindowsForms_Refresher",
+        Question = "Which loop is best for iterating through an array when you don't need the index?",
+        Options = new List<string>
+        {
+            "foreach",
+            "for",
+            "while",
+            "do-while"
+        },
+        CorrectAnswer = 0,
+        Explanation = "foreach is the cleanest and most readable way to iterate through a collection when you don't need the index."
+    },
+
+    // === LISTS (Questions 5-8) ===
+    new QuizQuestion
+    {
+        Id = 5,
+        Topic = "WindowsForms_Refresher",
+        Question = "How do you create a new List of strings in C#?",
+        Options = new List<string>
+        {
+            "List<string> names = new List<string>();",
+            "string[] names = new List<string>();",
+            "List<string> names = new List();",
+            "new List<string> names = new List<string>();"
+        },
+        CorrectAnswer = 0,
+        Explanation = "List<string> names = new List<string>(); is the correct syntax. var names = new List<string>(); is also valid."
+    },
+    new QuizQuestion
+    {
+        Id = 6,
+        Topic = "WindowsForms_Refresher",
+        Question = "Which method adds an item to a List?",
+        Options = new List<string>
+        {
+            "Add()",
+            "Append()",
+            "Insert()",
+            "Push()"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Add() adds an item to the end of the list. Insert() adds at a specific index."
+    },
+    new QuizQuestion
+    {
+        Id = 7,
+        Topic = "WindowsForms_Refresher",
+        Question = "What property gives you the number of items in a List?",
+        Options = new List<string>
+        {
+            "Count",
+            "Length",
+            "Size",
+            "Items"
+        },
+        CorrectAnswer = 0,
+        Explanation = "List<T>.Count returns the number of elements in the list. Arrays use Length."
+    },
+    new QuizQuestion
+    {
+        Id = 8,
+        Topic = "WindowsForms_Refresher",
+        Question = "What is the key difference between an array and a List?",
+        Options = new List<string>
+        {
+            "Lists can grow dynamically, arrays have fixed size",
+            "Arrays can store more data",
+            "Lists are faster than arrays",
+            "Arrays can store different types"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Lists are dynamic collections that grow as needed. Arrays have a fixed size defined at creation."
+    },
+
+    // === IF/ELSE (Questions 9-12) ===
+    new QuizQuestion
+    {
+        Id = 9,
+        Topic = "WindowsForms_Refresher",
+        Question = "What will this code output? int x = 10; if (x > 5) { Console.Write('A'); } else { Console.Write('B'); }",
+        Options = new List<string>
+        {
+            "A",
+            "B",
+            "AB",
+            "Nothing"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Since 10 > 5 is true, the code executes the first block and outputs 'A'."
+    },
+    new QuizQuestion
+    {
+        Id = 10,
+        Topic = "WindowsForms_Refresher",
+        Question = "Which operator is used for AND in C#?",
+        Options = new List<string>
+        {
+            "&&",
+            "&",
+            "and",
+            "AND"
+        },
+        CorrectAnswer = 0,
+        Explanation = "&& is the logical AND operator in C#. & is the bitwise AND operator."
+    },
+    new QuizQuestion
+    {
+        Id = 11,
+        Topic = "WindowsForms_Refresher",
+        Question = "What is the correct syntax for an else-if statement?",
+        Options = new List<string>
+        {
+            "else if (condition) { }",
+            "elsif (condition) { }",
+            "elseif (condition) { }",
+            "elif (condition) { }"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The correct syntax is 'else if' with a space between else and if."
+    },
+    new QuizQuestion
+    {
+        Id = 12,
+        Topic = "WindowsForms_Refresher",
+        Question = "What will this code output? int age = 15; if (age >= 18) { Console.Write('Adult'); } else if (age >= 13) { Console.Write('Teen'); } else { Console.Write('Child'); }",
+        Options = new List<string>
+        {
+            "Teen",
+            "Adult",
+            "Child",
+            "Nothing"
+        },
+        CorrectAnswer = 0,
+        Explanation = "age is 15, which is >= 13 but < 18, so the else-if block executes and outputs 'Teen'."
+    },
+
+    // === SWITCH (Questions 13-16) ===
+    new QuizQuestion
+    {
+        Id = 13,
+        Topic = "WindowsForms_Refresher",
+        Question = "What keyword is used to end a case in a switch statement?",
+        Options = new List<string>
+        {
+            "break",
+            "exit",
+            "end",
+            "return"
+        },
+        CorrectAnswer = 0,
+        Explanation = "break is used to exit a case block. Without break, execution falls through to the next case."
+    },
+    new QuizQuestion
+    {
+        Id = 14,
+        Topic = "WindowsForms_Refresher",
+        Question = "What is the default case in a switch statement?",
+        Options = new List<string>
+        {
+            "Runs when no other case matches",
+            "Runs first",
+            "Runs last",
+            "Is optional and runs always"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The default case executes when none of the case values match the switch expression."
+    },
+    new QuizQuestion
+    {
+        Id = 15,
+        Topic = "WindowsForms_Refresher",
+        Question = "What will this code output? string color = 'Red'; switch(color) { case 'Red': Console.Write('R'); break; case 'Blue': Console.Write('B'); break; default: Console.Write('?'); break; }",
+        Options = new List<string>
+        {
+            "R",
+            "B",
+            "?",
+            "RB"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The value 'Red' matches the first case, so it outputs 'R' and breaks out."
+    },
+    new QuizQuestion
+    {
+        Id = 16,
+        Topic = "WindowsForms_Refresher",
+        Question = "What does the default case do in a switch statement?",
+        Options = new List<string>
+        {
+            "Handles all unmatched values",
+            "Handles only the first value",
+            "Exits the switch",
+            "Throws an exception"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The default case handles all values that don't match any other case."
+    },
+
+    // === LOOPS (Questions 17-20) ===
+    new QuizQuestion
+    {
+        Id = 17,
+        Topic = "WindowsForms_Refresher",
+        Question = "Which loop is best when you know exactly how many times to iterate?",
+        Options = new List<string>
+        {
+            "for",
+            "while",
+            "do-while",
+            "foreach"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The for loop is best when you know the exact number of iterations in advance."
+    },
+    new QuizQuestion
+    {
+        Id = 18,
+        Topic = "WindowsForms_Refresher",
+        Question = "Which loop always executes the code block at least once?",
+        Options = new List<string>
+        {
+            "for",
+            "while",
+            "do-while",
+            "foreach"
+        },
+        CorrectAnswer = 2,
+        Explanation = "The do-while loop always executes the code block at least once before checking the condition."
+    },
+    new QuizQuestion
+    {
+        Id = 19,
+        Topic = "WindowsForms_Refresher",
+        Question = "What does the continue statement do in a loop?",
+        Options = new List<string>
+        {
+            "Exits the loop entirely",
+            "Skips the current iteration",
+            "Restarts the loop",
+            "Throws an exception"
+        },
+        CorrectAnswer = 1,
+        Explanation = "The continue statement skips the current iteration and continues with the next one."
+    },
+    new QuizQuestion
+    {
+        Id = 20,
+        Topic = "WindowsForms_Refresher",
+        Question = "What is the difference between a for loop and a foreach loop?",
+        Options = new List<string>
+        {
+            "for uses an index, foreach works directly with elements",
+            "foreach uses an index, for works directly with elements",
+            "They are identical",
+            "for is only for arrays, foreach is for lists"
+        },
+        CorrectAnswer = 0,
+        Explanation = "for loops use an index variable to access elements, while foreach iterates directly over the elements in a collection."
+    }
+};
+
+
+        // ================================================================
+        // WINDOWS FORMS - TOOLBOX MASTERY (60 Questions)
+        // ================================================================
+        _quizzes["WindowsForms_ToolboxMastery"] = new List<QuizQuestion>
+{
+    // ===== LABEL (Questions 1-3) =====
+    new QuizQuestion
+    {
+        Id = 1,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the primary purpose of a Label control?",
+        Options = new List<string> {
+            "To accept user input",
+            "To display static text",
+            "To display images",
+            "To group controls"
+        },
+        CorrectAnswer = 1,
+        Explanation = "The Label control is used to display static text that users cannot edit."
+    },
+    new QuizQuestion
+    {
+        Id = 2,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Which property sets the text displayed on a Label?",
+        Options = new List<string> { "Text", "Name", "Caption", "Value" },
+        CorrectAnswer = 0,
+        Explanation = "The Text property sets the text displayed on a Label control."
+    },
+    new QuizQuestion
+    {
+        Id = 3,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Can a Label be used as a shortcut key for another control?",
+        Options = new List<string> {
+            "Yes, using the UseMnemonic property",
+            "No, labels cannot have shortcuts",
+            "Only with the Shortcut property",
+            "Only with the AccessKey property"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Yes, by setting UseMnemonic to true and using an ampersand (&) in the text."
+    },
+
+    // ===== TEXTBOX (Questions 4-6) =====
+    new QuizQuestion
+    {
+        Id = 4,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property makes a TextBox read-only?",
+        Options = new List<string> { "ReadOnly", "Enabled", "Locked", "Editable" },
+        CorrectAnswer = 0,
+        Explanation = "The ReadOnly property makes a TextBox read-only while still allowing selection and copying."
+    },
+    new QuizQuestion
+    {
+        Id = 5,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you make a TextBox show password characters?",
+        Options = new List<string> {
+            "Use PasswordChar property",
+            "Use SecureText property",
+            "Use HideText property",
+            "Use Mask property"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Set the PasswordChar property to a character like '*' to mask input."
+    },
+    new QuizQuestion
+    {
+        Id = 6,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Which event fires when text in a TextBox changes?",
+        Options = new List<string> { "TextChanged", "TextModified", "ValueChanged", "InputChanged" },
+        CorrectAnswer = 0,
+        Explanation = "The TextChanged event fires every time the text in a TextBox changes."
+    },
+
+    // ===== BUTTON (Questions 7-9) =====
+    new QuizQuestion
+    {
+        Id = 7,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event is most commonly used with a Button?",
+        Options = new List<string> { "Click", "DoubleClick", "MouseEnter", "KeyPress" },
+        CorrectAnswer = 0,
+        Explanation = "The Click event is the most commonly used event with Buttons."
+    },
+    new QuizQuestion
+    {
+        Id = 8,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you disable a Button?",
+        Options = new List<string> {
+            "button.Enabled = false",
+            "button.Hide()",
+            "button.Lock()",
+            "button.Visible = false"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Set the Enabled property to false to disable a Button."
+    },
+    new QuizQuestion
+    {
+        Id = 9,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property sets the image displayed on a Button?",
+        Options = new List<string> { "Image", "Icon", "Picture", "BackgroundImage" },
+        CorrectAnswer = 0,
+        Explanation = "The Image property sets the image displayed on a Button."
+    },
+
+    // ===== CHECKBOX (Questions 10-12) =====
+    new QuizQuestion
+    {
+        Id = 10,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property indicates whether a CheckBox is checked?",
+        Options = new List<string> { "Checked", "Selected", "Value", "State" },
+        CorrectAnswer = 0,
+        Explanation = "The Checked property indicates whether a CheckBox is checked (true/false)."
+    },
+    new QuizQuestion
+    {
+        Id = 11,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event fires when a CheckBox is checked or unchecked?",
+        Options = new List<string> { "CheckedChanged", "Click", "StateChanged", "Toggled" },
+        CorrectAnswer = 0,
+        Explanation = "The CheckedChanged event fires when the Checked property changes."
+    },
+    new QuizQuestion
+    {
+        Id = 12,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What does the ThreeState property do on a CheckBox?",
+        Options = new List<string> {
+            "Allows three states (checked, unchecked, indeterminate)",
+            "Makes the checkbox three times larger",
+            "Creates three checkboxes",
+            "Disables the checkbox"
+        },
+        CorrectAnswer = 0,
+        Explanation = "ThreeState allows the checkbox to have three states: checked, unchecked, and indeterminate."
+    },
+
+    // ===== RADIOBUTTON (Questions 13-15) =====
+    new QuizQuestion
+    {
+        Id = 13,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the purpose of RadioButton controls?",
+        Options = new List<string> {
+            "Allow multiple selections",
+            "Allow only one selection in a group",
+            "Display static text",
+            "Display images"
+        },
+        CorrectAnswer = 1,
+        Explanation = "RadioButtons allow only one selection in a group - they are mutually exclusive."
+    },
+    new QuizQuestion
+    {
+        Id = 14,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you group RadioButtons so only one can be selected?",
+        Options = new List<string> {
+            "Put them in a GroupBox or Panel",
+            "Give them the same name",
+            "Set their Group property",
+            "They automatically group"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Put RadioButtons in a GroupBox or Panel to group them so only one can be selected."
+    },
+    new QuizQuestion
+    {
+        Id = 15,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property indicates if a RadioButton is selected?",
+        Options = new List<string> { "Checked", "Selected", "Active", "Chosen" },
+        CorrectAnswer = 0,
+        Explanation = "The Checked property indicates whether a RadioButton is selected."
+    },
+
+    // ===== COMBOBOX (Questions 16-18) =====
+    new QuizQuestion
+    {
+        Id = 16,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What does DropDownStyle property control?",
+        Options = new List<string> {
+            "How the ComboBox displays items",
+            "The color of the ComboBox",
+            "The size of the ComboBox",
+            "The font of the ComboBox"
+        },
+        CorrectAnswer = 0,
+        Explanation = "DropDownStyle controls whether the ComboBox is editable, dropdown list, or dropdown list with button."
+    },
+    new QuizQuestion
+    {
+        Id = 17,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you add items to a ComboBox in code?",
+        Options = new List<string> {
+            "comboBox.Items.Add()",
+            "comboBox.AddItem()",
+            "comboBox.Insert()",
+            "comboBox.Push()"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Use the Items.Add() method to add items to a ComboBox."
+    },
+    new QuizQuestion
+    {
+        Id = 18,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event fires when the selected item in a ComboBox changes?",
+        Options = new List<string> { "SelectedIndexChanged", "SelectionChanged", "ItemChanged", "TextChanged" },
+        CorrectAnswer = 0,
+        Explanation = "The SelectedIndexChanged event fires when the selected item changes."
+    },
+
+    // ===== LISTBOX (Questions 19-21) =====
+    new QuizQuestion
+    {
+        Id = 19,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property determines how many items are visible in a ListBox?",
+        Options = new List<string> { "IntegralHeight", "Size", "Items.Count", "VisibleCount" },
+        CorrectAnswer = 0,
+        Explanation = "IntegralHeight determines whether the ListBox adjusts its height to show complete items."
+    },
+    new QuizQuestion
+    {
+        Id = 20,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you get the selected item from a ListBox?",
+        Options = new List<string> {
+            "listBox.SelectedItem",
+            "listBox.Item",
+            "listBox.Selected",
+            "listBox.SelectedValue"
+        },
+        CorrectAnswer = 0,
+        Explanation = "SelectedItem returns the selected object from the ListBox."
+    },
+    new QuizQuestion
+    {
+        Id = 21,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property allows multiple selection in a ListBox?",
+        Options = new List<string> { "SelectionMode", "MultiSelect", "SelectMode", "Multiple" },
+        CorrectAnswer = 0,
+        Explanation = "SelectionMode controls whether single, multi, or no selection is allowed."
+    },
+
+    // ===== CHECKEDLISTBOX (Questions 22-24) =====
+    new QuizQuestion
+    {
+        Id = 22,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the difference between ListBox and CheckedListBox?",
+        Options = new List<string> {
+            "CheckedListBox allows checking items, ListBox doesn't",
+            "ListBox allows checking items, CheckedListBox doesn't",
+            "They are exactly the same",
+            "CheckedListBox is only for strings"
+        },
+        CorrectAnswer = 0,
+        Explanation = "CheckedListBox extends ListBox by allowing items to be checked/unchecked."
+    },
+    new QuizQuestion
+    {
+        Id = 23,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you check if an item is checked in a CheckedListBox?",
+        Options = new List<string> {
+            "checkedListBox.GetItemChecked(index)",
+            "checkedListBox.IsChecked(index)",
+            "checkedListBox.ItemChecked(index)",
+            "checkedListBox.Checked(index)"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Use GetItemChecked(index) to check if an item is checked."
+    },
+    new QuizQuestion
+    {
+        Id = 24,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event fires when an item is checked or unchecked?",
+        Options = new List<string> { "ItemCheck", "CheckedChanged", "SelectedIndexChanged", "Click" },
+        CorrectAnswer = 0,
+        Explanation = "The ItemCheck event fires before the check state changes."
+    },
+
+    // ===== DATAGRIDVIEW (Questions 25-27) =====
+    new QuizQuestion
+    {
+        Id = 25,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control displays tabular data?",
+        Options = new List<string> { "DataGridView", "ListView", "ListBox", "ComboBox" },
+        CorrectAnswer = 0,
+        Explanation = "DataGridView is used to display and edit tabular data."
+    },
+    new QuizQuestion
+    {
+        Id = 26,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you bind data to a DataGridView?",
+        Options = new List<string> {
+            "dataGridView.DataSource = data",
+            "dataGridView.Bind(data)",
+            "dataGridView.SetData(data)",
+            "dataGridView.Load(data)"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Set the DataSource property to bind data to a DataGridView."
+    },
+    new QuizQuestion
+    {
+        Id = 27,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property gets the selected row in a DataGridView?",
+        Options = new List<string> { "CurrentRow", "SelectedRow", "ActiveRow", "FocusedRow" },
+        CorrectAnswer = 0,
+        Explanation = "CurrentRow returns the currently selected row in the DataGridView."
+    },
+
+    // ===== DATETIMEPICKER (Questions 28-30) =====
+    new QuizQuestion
+    {
+        Id = 28,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control allows users to select a date?",
+        Options = new List<string> { "DateTimePicker", "DatePicker", "Calendar", "DateBox" },
+        CorrectAnswer = 0,
+        Explanation = "DateTimePicker allows users to select a date and time."
+    },
+    new QuizQuestion
+    {
+        Id = 29,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property gets the selected date from a DateTimePicker?",
+        Options = new List<string> { "Value", "Date", "SelectedDate", "Text" },
+        CorrectAnswer = 0,
+        Explanation = "The Value property returns the selected date as a DateTime object."
+    },
+    new QuizQuestion
+    {
+        Id = 30,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What format does a DateTimePicker display by default?",
+        Options = new List<string> { "Short date", "Long date", "Time", "Custom" },
+        CorrectAnswer = 0,
+        Explanation = "By default, DateTimePicker displays the short date format."
+    },
+
+    // ===== GROUPBOX (Questions 31-33) =====
+    new QuizQuestion
+    {
+        Id = 31,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the purpose of a GroupBox?",
+        Options = new List<string> {
+            "To group related controls with a visible border",
+            "To display images",
+            "To accept user input",
+            "To display text"
+        },
+        CorrectAnswer = 0,
+        Explanation = "GroupBox groups related controls with a visible border and caption."
+    },
+    new QuizQuestion
+    {
+        Id = 32,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property sets the text in a GroupBox header?",
+        Options = new List<string> { "Text", "Caption", "Title", "Header" },
+        CorrectAnswer = 0,
+        Explanation = "The Text property sets the header text displayed on the GroupBox."
+    },
+    new QuizQuestion
+    {
+        Id = 33,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Can a GroupBox contain other controls?",
+        Options = new List<string> {
+            "Yes, it's a container control",
+            "No, it only displays text",
+            "Only if you set AllowContainer = true",
+            "Only for RadioButtons"
+        },
+        CorrectAnswer = 0,
+        Explanation = "GroupBox is a container control that can hold other controls."
+    },
+
+    // ===== PICTUREBOX (Questions 34-36) =====
+    new QuizQuestion
+    {
+        Id = 34,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control displays images?",
+        Options = new List<string> { "PictureBox", "ImageBox", "PhotoBox", "GraphicsBox" },
+        CorrectAnswer = 0,
+        Explanation = "PictureBox is used to display images in Windows Forms."
+    },
+    new QuizQuestion
+    {
+        Id = 35,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property sets the image in a PictureBox?",
+        Options = new List<string> { "Image", "Picture", "Source", "Bitmap" },
+        CorrectAnswer = 0,
+        Explanation = "The Image property sets the image displayed in the PictureBox."
+    },
+    new QuizQuestion
+    {
+        Id = 36,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What does SizeMode property control?",
+        Options = new List<string> {
+            "How the image is displayed (stretch, zoom, etc.)",
+            "The size of the PictureBox",
+            "The color of the image",
+            "The image format"
+        },
+        CorrectAnswer = 0,
+        Explanation = "SizeMode controls how the image is displayed (Normal, StretchImage, AutoSize, CenterImage, Zoom)."
+    },
+
+    // ===== TIMER (Questions 37-39) =====
+    new QuizQuestion
+    {
+        Id = 37,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the purpose of a Timer control?",
+        Options = new List<string> {
+            "To execute code at regular intervals",
+            "To measure time",
+            "To display the current time",
+            "To stop code execution"
+        },
+        CorrectAnswer = 0,
+        Explanation = "The Timer control executes code at regular intervals defined by the Interval property."
+    },
+    new QuizQuestion
+    {
+        Id = 38,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event does a Timer fire when the interval elapses?",
+        Options = new List<string> { "Tick", "Elapsed", "Timeout", "Interval" },
+        CorrectAnswer = 0,
+        Explanation = "The Tick event fires every time the Timer's interval elapses."
+    },
+    new QuizQuestion
+    {
+        Id = 39,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you start a Timer?",
+        Options = new List<string> { "timer.Start()", "timer.Enable()", "timer.Run()", "timer.Begin()" },
+        CorrectAnswer = 0,
+        Explanation = "Use the Start() method or set Enabled = true to start the Timer."
+    },
+
+    // ===== MENUSTRIP (Questions 40-42) =====
+    new QuizQuestion
+    {
+        Id = 40,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control creates menus like File, Edit, Help?",
+        Options = new List<string> { "MenuStrip", "ToolStrip", "StatusStrip", "ContextMenuStrip" },
+        CorrectAnswer = 0,
+        Explanation = "MenuStrip creates traditional menus with items like File, Edit, and Help."
+    },
+    new QuizQuestion
+    {
+        Id = 41,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you add a menu item in the designer?",
+        Options = new List<string> {
+            "Type directly in the 'Type Here' boxes",
+            "Use the Items collection property",
+            "Add from the Toolbox",
+            "Write code only"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Type directly in the 'Type Here' boxes in the designer to add menu items."
+    },
+    new QuizQuestion
+    {
+        Id = 42,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event handles a menu item click?",
+        Options = new List<string> { "Click", "ItemClicked", "Selected", "Activated" },
+        CorrectAnswer = 0,
+        Explanation = "The Click event handles menu item clicks."
+    },
+
+    // ===== TOOLSTRIP (Questions 43-45) =====
+    new QuizQuestion
+    {
+        Id = 43,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control creates a toolbar with buttons?",
+        Options = new List<string> { "ToolStrip", "MenuStrip", "StatusStrip", "ToolBar" },
+        CorrectAnswer = 0,
+        Explanation = "ToolStrip creates a toolbar with buttons, dropdowns, and other controls."
+    },
+    new QuizQuestion
+    {
+        Id = 44,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Can you add images to ToolStrip buttons?",
+        Options = new List<string> {
+            "Yes, using the Image property",
+            "No, ToolStrip only has text",
+            "Only if you use a separate ImageList",
+            "Only for certain buttons"
+        },
+        CorrectAnswer = 0,
+        Explanation = "ToolStripButton has an Image property that can display an image."
+    },
+    new QuizQuestion
+    {
+        Id = 45,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event handles a ToolStrip button click?",
+        Options = new List<string> { "Click", "ButtonClicked", "ItemClicked", "ToolStripClick" },
+        CorrectAnswer = 0,
+        Explanation = "The Click event handles ToolStrip button clicks."
+    },
+
+    // ===== NOTIFYICON (Questions 46-48) =====
+    new QuizQuestion
+    {
+        Id = 46,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Where does a NotifyIcon appear?",
+        Options = new List<string> {
+            "In the system tray (notification area)",
+            "On the form",
+            "In the taskbar",
+            "In the start menu"
+        },
+        CorrectAnswer = 0,
+        Explanation = "NotifyIcon appears in the system tray (notification area) of the taskbar."
+    },
+    new QuizQuestion
+    {
+        Id = 47,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property sets the text shown when hovering over NotifyIcon?",
+        Options = new List<string> { "Text", "ToolTipText", "Hint", "Caption" },
+        CorrectAnswer = 0,
+        Explanation = "The Text property sets the tooltip text that appears when hovering over the NotifyIcon."
+    },
+    new QuizQuestion
+    {
+        Id = 48,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "How do you show a balloon tip from NotifyIcon?",
+        Options = new List<string> {
+            "notifyIcon.ShowBalloonTip()",
+            "notifyIcon.ShowTip()",
+            "notifyIcon.BalloonTip.Show()",
+            "notifyIcon.DisplayBalloon()"
+        },
+        CorrectAnswer = 0,
+        Explanation = "Use ShowBalloonTip(timeout, title, text, icon) to display a balloon tip."
+    },
+
+    // ===== PRINTING CONTROLS (Questions 49-51) =====
+    new QuizQuestion
+    {
+        Id = 49,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Which control is used to define what gets printed?",
+        Options = new List<string> { "PrintDocument", "PrintDialog", "PrintPreviewDialog", "PageSetupDialog" },
+        CorrectAnswer = 0,
+        Explanation = "PrintDocument defines what content gets printed through the PrintPage event."
+    },
+    new QuizQuestion
+    {
+        Id = 50,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Which control shows a preview before printing?",
+        Options = new List<string> { "PrintPreviewDialog", "PrintDialog", "PrintDocument", "PageSetupDialog" },
+        CorrectAnswer = 0,
+        Explanation = "PrintPreviewDialog shows a preview of the document before printing."
+    },
+    new QuizQuestion
+    {
+        Id = 51,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What event in PrintDocument draws the content to print?",
+        Options = new List<string> { "PrintPage", "DrawPage", "PrintContent", "PageDraw" },
+        CorrectAnswer = 0,
+        Explanation = "The PrintPage event is where you draw the content to be printed using Graphics."
+    },
+
+    // ===== DIALOGS (Questions 52-54) =====
+    new QuizQuestion
+    {
+        Id = 52,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "Which dialog allows users to select a file to save?",
+        Options = new List<string> { "SaveFileDialog", "OpenFileDialog", "FileDialog", "FolderBrowserDialog" },
+        CorrectAnswer = 0,
+        Explanation = "SaveFileDialog allows users to select where to save a file."
+    },
+    new QuizQuestion
+    {
+        Id = 53,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What method shows a file dialog?",
+        Options = new List<string> { "ShowDialog()", "Show()", "Open()", "Display()" },
+        CorrectAnswer = 0,
+        Explanation = "ShowDialog() displays the file dialog modally."
+    },
+    new QuizQuestion
+    {
+        Id = 54,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What property gets the selected file from OpenFileDialog?",
+        Options = new List<string> { "FileName", "FilePath", "SelectedFile", "File" },
+        CorrectAnswer = 0,
+        Explanation = "FileName property gets the full path of the selected file."
+    },
+
+    // ===== CONTAINERS & LAYOUT (Questions 55-57) =====
+    new QuizQuestion
+    {
+        Id = 55,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the purpose of a SplitContainer?",
+        Options = new List<string> {
+            "To divide the form into resizable panels",
+            "To split text",
+            "To create tables",
+            "To display images"
+        },
+        CorrectAnswer = 0,
+        Explanation = "SplitContainer divides the form into two resizable panels with a splitter."
+    },
+    new QuizQuestion
+    {
+        Id = 56,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What does TableLayoutPanel do?",
+        Options = new List<string> {
+            "Arranges controls in a grid layout",
+            "Creates tables for data",
+            "Displays database tables",
+            "Creates HTML tables"
+        },
+        CorrectAnswer = 0,
+        Explanation = "TableLayoutPanel arranges controls in a grid with rows and columns."
+    },
+    new QuizQuestion
+    {
+        Id = 57,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the main difference between Panel and GroupBox?",
+        Options = new List<string> {
+            "GroupBox has a title border, Panel doesn't",
+            "Panel has a title border, GroupBox doesn't",
+            "Panel can scroll, GroupBox can't",
+            "GroupBox can scroll, Panel can't"
+        },
+        CorrectAnswer = 0,
+        Explanation = "GroupBox has a visible border with a title, while Panel has no border by default."
+    },
+
+    // ===== ADVANCED CONTROLS (Questions 58-60) =====
+    new QuizQuestion
+    {
+        Id = 58,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What does RichTextBox do that a regular TextBox cannot?",
+        Options = new List<string> {
+            "Format text with colors and fonts",
+            "Display large text",
+            "Scroll horizontally",
+            "Accept user input"
+        },
+        CorrectAnswer = 0,
+        Explanation = "RichTextBox supports rich text formatting with different fonts, colors, and styles."
+    },
+    new QuizQuestion
+    {
+        Id = 59,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What control displays web pages?",
+        Options = new List<string> { "WebBrowser", "WebView", "Browser", "HTMLViewer" },
+        CorrectAnswer = 0,
+        Explanation = "WebBrowser control embeds a browser and displays web pages."
+    },
+    new QuizQuestion
+    {
+        Id = 60,
+        Topic = "WindowsForms_ToolboxMastery",
+        Question = "What is the purpose of ImageList control?",
+        Options = new List<string> {
+            "To store images for other controls",
+            "To display images",
+            "To edit images",
+            "To create images"
+        },
+        CorrectAnswer = 0,
+        Explanation = "ImageList stores images that can be used by ListView, TreeView, and ToolStrip controls."
+    }
+};
+
+
+
         // ================================================================
         // WINDOWS FORMS - LESSON 2: Controls Basics
         // ================================================================

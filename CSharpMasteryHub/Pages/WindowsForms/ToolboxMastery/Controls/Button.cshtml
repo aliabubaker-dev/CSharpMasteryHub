@@ -1,0 +1,381 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.ButtonModel
+@{
+    ViewData["Title"] = "Button Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">Button</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <!-- Header -->
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 10 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #1</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-square text-primary me-2"></i>Button Control
+                </h1>
+                <p class="lead mb-4">
+                    The Button is one of the most common controls in Windows Forms.
+                    It allows users to click to perform an action.
+                </p>
+
+                <!-- What is it -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a Button?</h4>
+                        <p>
+                            A Button is a control that users click to trigger an action. When clicked, it fires a
+                            <code>Click</code> event that you handle in your code. Buttons are used everywhere -
+                            from "Submit" and "Cancel" to "Save" and "Delete".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- How to Use -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-cogs text-success me-2"></i>How to Use</h4>
+                        <ol>
+                            <li><strong>Drag and drop</strong> a Button from the Toolbox onto your form.</li>
+                            <li><strong>Rename it</strong> in the Properties panel (e.g., <code>btnSave</code>, <code>btnCancel</code>).</li>
+                            <li><strong>Set the Text</strong> property to what users will see (e.g., "Save", "Cancel").</li>
+                            <li><strong>Double-click</strong> the button to create a Click event handler.</li>
+                            <li><strong>Write code</strong> inside the event handler to perform the action.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Code Example -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// 1. Drag a Button onto the form</span>
+<span class="comment">// 2. Set properties in the designer:</span>
+<span class="comment">//    - Name: btnSave</span>
+<span class="comment">//    - Text: Save</span>
+<span class="comment">//    - BackColor: Green</span>
+<span class="comment">//    - ForeColor: White</span>
+
+<span class="comment">// 3. Double-click the button to create the Click event</span>
+<span class="keyword">private void</span> <span class="function">btnSave_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Show a message when the button is clicked</span>
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Data saved successfully!"</span>);
+}
+
+<span class="comment">// 4. You can also enable/disable the button</span>
+<span class="keyword">private void</span> <span class="function">btnSave_Enabled</span>()
+{
+    <span class="comment">// Disable the button</span>
+    <span class="variable">btnSave</span>.<span class="property">Enabled</span> = <span class="keyword">false</span>;
+    
+    <span class="comment">// Enable the button</span>
+    <span class="variable">btnSave</span>.<span class="property">Enabled</span> = <span class="keyword">true</span>;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Important Properties -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list text-info me-2"></i>Important Properties</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>Text</code></td>
+                                        <td>The text displayed on the button</td>
+                                        <td><code>btnSave.Text = "Save";</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Enabled</code></td>
+                                        <td>Whether the button can be clicked</td>
+                                        <td><code>btnSave.Enabled = false;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>BackColor</code></td>
+                                        <td>Background color of the button</td>
+                                        <td><code>btnSave.BackColor = Color.Green;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ForeColor</code></td>
+                                        <td>Text color of the button</td>
+                                        <td><code>btnSave.ForeColor = Color.White;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Font</code></td>
+                                        <td>Font style and size</td>
+                                        <td><code>btnSave.Font = new Font("Arial", 12);</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Image</code></td>
+                                        <td>An image on the button</td>
+                                        <td><code>btnSave.Image = Image.FromFile("save.png");</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>DialogResult</code></td>
+                                        <td>Sets the result when used in a dialog</td>
+                                        <td><code>btnCancel.DialogResult = DialogResult.Cancel;</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Events -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-bolt text-warning me-2"></i>Common Events</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>Click</code></td>
+                                        <td>Fires when the button is clicked (most common)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>MouseEnter</code></td>
+                                        <td>Fires when the mouse hovers over the button</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>MouseLeave</code></td>
+                                        <td>Fires when the mouse leaves the button</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create a simple counter application.</p>
+                        <ol>
+                            <li>Create a new Windows Forms project.</li>
+                            <li>Add a <strong>Label</strong> to display the count (start at 0).</li>
+                            <li>
+                                Add three <strong>Buttons</strong>:
+                                <ul>
+                                    <li>One with Text "Increment" to increase the count</li>
+                                    <li>One with Text "Decrement" to decrease the count</li>
+                                    <li>One with Text "Reset" to reset the count to 0</li>
+                                </ul>
+                            </li>
+                            <li>Write Click event handlers for each button.</li>
+                            <li>Add a fourth Button with Text "Disable" that disables all three buttons.</li>
+                            <li>Add a fifth Button with Text "Enable" that enables all three buttons.</li>
+                        </ol>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hint:</strong> Keep a variable <code>int count = 0;</code> at the class level to track the count.
+                        </div>
+                        <details class="mt-3">
+                            <summary class="btn btn-outline-success btn-sm">Show Solution</summary>
+                            <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                                <pre><code class="language-csharp"><span class="keyword">public partial class</span> <span class="class">MainForm</span> : <span class="class">Form</span>
+{
+    <span class="keyword">private int</span> <span class="variable">_count</span> = <span class="number">0</span>;
+
+    <span class="keyword">public</span> <span class="function">MainForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+        <span class="function">UpdateLabel</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnIncrement_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">_count</span>++;
+        <span class="function">UpdateLabel</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnDecrement_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">_count</span>--;
+        <span class="function">UpdateLabel</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnReset_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">_count</span> = <span class="number">0</span>;
+        <span class="function">UpdateLabel</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnDisable_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">btnIncrement</span>.<span class="property">Enabled</span> = <span class="keyword">false</span>;
+        <span class="variable">btnDecrement</span>.<span class="property">Enabled</span> = <span class="keyword">false</span>;
+        <span class="variable">btnReset</span>.<span class="property">Enabled</span> = <span class="keyword">false</span>;
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnEnable_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">btnIncrement</span>.<span class="property">Enabled</span> = <span class="keyword">true</span>;
+        <span class="variable">btnDecrement</span>.<span class="property">Enabled</span> = <span class="keyword">true</span>;
+        <span class="variable">btnReset</span>.<span class="property">Enabled</span> = <span class="keyword">true</span>;
+    }
+
+    <span class="keyword">private void</span> <span class="function">UpdateLabel</span>()
+    {
+        <span class="variable">lblCount</span>.<span class="property">Text</span> = <span class="string">$"Count: {<span class="variable">_count</span>}"</span>;
+    }
+}</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Buttons are the most common way for users to trigger actions.
+                            Always use meaningful names (e.g., <code>btnSave</code>, <code>btnCancel</code>)
+                            and handle the <code>Click</code> event to perform the desired action.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Toolbox
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/CheckBox" class="btn btn-primary-custom">
+                        Next Control: CheckBox <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/Button"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Button</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>GroupBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ImageList"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Label</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>PrintDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>TableLayoutPanel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TextBox"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+
+        details summary {
+            cursor: pointer;
+        }
+    </style>
+}

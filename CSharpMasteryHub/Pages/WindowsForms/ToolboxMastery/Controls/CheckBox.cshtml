@@ -1,0 +1,294 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.CheckBoxModel
+@{
+    ViewData["Title"] = "CheckBox Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">CheckBox</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 8 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #2</span
+<a href="c:\users\ali pc\onedrive\desktop\csharpmasteryhub\csharpmasteryhub\pages\windowsforms\toolboxmastery\controls\checkbox.cshtml">c:\users\ali pc\onedrive\desktop\csharpmasteryhub\csharpmasteryhub\pages\windowsforms\toolboxmastery\controls\checkbox.cshtml</a>
+<a href="c:\users\ali pc\onedrive\desktop\csharpmasteryhub\csharpmasteryhub\pages\windowsforms\toolboxmastery\controls\checkbox.cshtml.cs">c:\users\ali pc\onedrive\desktop\csharpmasteryhub\csharpmasteryhub\pages\windowsforms\toolboxmastery\controls\checkbox.cshtml.cs</a>>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-check-square text-primary me-2"></i>CheckBox Control
+                </h1>
+                <p class="lead mb-4">
+                    The CheckBox control allows users to select or deselect an option. It's perfect for Yes/No, True/False,
+                    or On/Off choices.
+                </p>
+
+                <!-- What is it -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a CheckBox?</h4>
+                        <p>
+                            A CheckBox is a control that displays a check mark when selected. Users can click it to toggle
+                            between checked and unchecked states. Unlike RadioButtons, CheckBoxes are independent -
+                            checking one doesn't uncheck others.
+                        </p>
+                        <p>
+                            <strong>Common uses:</strong> "I agree to terms", "Remember me", "Enable notifications",
+                            "Show password", and other Yes/No options.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- How to Use -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-cogs text-success me-2"></i>How to Use</h4>
+                        <ol>
+                            <li><strong>Drag and drop</strong> a CheckBox from the Toolbox onto your form.</li>
+                            <li><strong>Rename it</strong> (e.g., <code>chkAgree</code>, <code>chkRemember</code>).</li>
+                            <li><strong>Set the Text</strong> property to what users will see.</li>
+                            <li><strong>Set the Checked</strong> property to <code>true</code> if you want it checked by default.</li>
+                            <li><strong>Double-click</strong> to create a CheckedChanged event handler.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Code Example -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// 1. Drag a CheckBox onto the form</span>
+<span class="comment">// 2. Set properties in the designer:</span>
+<span class="comment">//    - Name: chkAgree</span>
+<span class="comment">//    - Text: I agree to the terms</span>
+<span class="comment">//    - Checked: false</span>
+
+<span class="comment">// 3. Double-click to create CheckedChanged event</span>
+<span class="keyword">private void</span> <span class="function">chkAgree_CheckedChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Enable or disable a button based on the checkbox</span>
+    <span class="variable">btnSubmit</span>.<span class="property">Enabled</span> = <span class="variable">chkAgree</span>.<span class="property">Checked</span>;
+}
+
+<span class="comment">// 4. Check the state in code</span>
+<span class="keyword">if</span> (<span class="variable">chkAgree</span>.<span class="property">Checked</span>)
+{
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"User agreed to terms"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"User did not agree"</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Important Properties -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list text-info me-2"></i>Important Properties</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>Text</code></td>
+                                        <td>The text displayed next to the checkbox</td>
+                                        <td><code>chkAgree.Text = "I agree";</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Checked</code></td>
+                                        <td>Whether the checkbox is checked</td>
+                                        <td><code>chkAgree.Checked = true;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>CheckState</code></td>
+                                        <td>Can be Checked, Unchecked, or Indeterminate</td>
+                                        <td><code>chkAgree.CheckState = CheckState.Indeterminate;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ThreeState</code></td>
+                                        <td>Allows three states (checked, unchecked, indeterminate)</td>
+                                        <td><code>chkAgree.ThreeState = true;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>AutoCheck</code></td>
+                                        <td>Whether the checkbox toggles automatically on click</td>
+                                        <td><code>chkAgree.AutoCheck = false;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Appearance</code></td>
+                                        <td>Normal or Button appearance</td>
+                                        <td><code>chkAgree.Appearance = Appearance.Button;</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create a pizza order form with checkboxes for toppings.</p>
+                        <ol>
+                            <li>Create a new Windows Forms project.</li>
+                            <li>Add a Label: "Select your pizza toppings".</li>
+                            <li>
+                                Add <strong>CheckBox</strong> controls for:
+                                <ul>
+                                    <li>Pepperoni</li>
+                                    <li>Mushrooms</li>
+                                    <li>Onions</li>
+                                    <li>Extra Cheese</li>
+                                    <li>Olives</li>
+                                </ul>
+                            </li>
+                            <li>Add a Button: "Order Pizza".</li>
+                            <li>When clicked, show a message with all selected toppings.</li>
+                            <li>Add a "Select All" checkbox that checks/unchecks all toppings.</li>
+                        </ol>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hint:</strong> Use a list or StringBuilder to collect all checked items.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            CheckBoxes are perfect for independent Yes/No choices. Use the <code>Checked</code> property
+                            to read the state and the <code>CheckedChanged</code> event to respond to changes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery/Controls/Button" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: Button
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox" class="btn btn-primary-custom">
+                        Next: CheckedListBox <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Button">Button</a>
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/CheckBox">CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox">CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox">ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView">DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker">DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox">GroupBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ImageList">ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label">Label</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel">LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox">ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView">ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip">MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon">NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog">PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel">Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox">PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog">PrintDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument">PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog">PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton">RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox">RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog">SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer">SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel">TableLayoutPanel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TextBox">TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer">Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip">ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser">WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

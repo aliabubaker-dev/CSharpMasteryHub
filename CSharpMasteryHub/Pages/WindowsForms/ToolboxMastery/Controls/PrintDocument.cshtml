@@ -1,0 +1,218 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.PrintDocumentModel
+@{
+    ViewData["Title"] = "PrintDocument Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">PrintDocument</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-danger p-2 px-3 rounded-pill">Advanced</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 15 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #19</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-file-alt text-primary me-2"></i>PrintDocument Control
+                </h1>
+                <p class="lead mb-4">
+                    PrintDocument is the core control for printing in Windows Forms. It defines what gets printed
+                    through the PrintPage event.
+                </p>
+
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a PrintDocument?</h4>
+                        <p>
+                            PrintDocument is a component that handles the printing process. It raises the PrintPage
+                            event where you draw the content using Graphics. It works with PrintDialog, PrintPreviewDialog,
+                            and PageSetupDialog.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// The PrintPage event does the actual drawing</span>
+<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, 
+    <span class="class">PrintPageEventArgs</span> e)
+{
+    <span class="class">Graphics</span> <span class="variable">g</span> = <span class="variable">e</span>.<span class="property">Graphics</span>;
+    <span class="class">Rectangle</span> <span class="variable">printArea</span> = <span class="variable">e</span>.<span class="property">MarginBounds</span>;
+
+    <span class="comment">// Draw a header</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">font</span> = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">16</span>, <span class="class">FontStyle</span>.<span class="property">Bold</span>))
+    {
+        <span class="variable">g</span>.<span class="function">DrawString</span>(<span class="string">"My Document"</span>, <span class="variable">font</span>, 
+            <span class="class">Brushes</span>.<span class="property">Black</span>, <span class="variable">printArea</span>.<span class="property">X</span>, <span class="variable">printArea</span>.<span class="property">Y</span>);
+    }
+
+    <span class="comment">// Draw content</span>
+    <span class="keyword">string</span> <span class="variable">content</span> = <span class="string">"This is the content of the document."</span>;
+    <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">font</span> = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>))
+    {
+        <span class="variable">g</span>.<span class="function">DrawString</span>(<span class="variable">content</span>, <span class="variable">font</span>, 
+            <span class="class">Brushes</span>.<span class="property">Black</span>, <span class="variable">printArea</span>.<span class="property">X</span>, 
+            <span class="variable">printArea</span>.<span class="property">Y</span> + <span class="number">40</span>);
+    }
+
+    <span class="comment">// Draw a footer</span>
+    <span class="keyword">string</span> <span class="variable">footer</span> = <span class="string">$"Page {<span class="variable">e</span>.PageNumber}"</span>;
+    <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">font</span> = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">10</span>))
+    {
+        <span class="keyword">var</span> <span class="variable">size</span> = <span class="variable">g</span>.<span class="function">MeasureString</span>(<span class="variable">footer</span>, <span class="variable">font</span>);
+        <span class="variable">g</span>.<span class="function">DrawString</span>(<span class="variable">footer</span>, <span class="variable">font</span>, 
+            <span class="class">Brushes</span>.<span class="property">Gray</span>, 
+            <span class="variable">printArea</span>.<span class="property">Right</span> - <span class="variable">size</span>.<span class="property">Width</span>, 
+            <span class="variable">printArea</span>.<span class="property">Bottom</span> - <span class="number">20</span>);
+    }
+
+    <span class="comment">// Set HasMorePages for multi-page documents</span>
+    <span class="variable">e</span>.<span class="property">HasMorePages</span> = <span class="keyword">false</span>;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create a document printing app.</p>
+                        <ol>
+                            <li>Add a PrintDocument component.</li>
+                            <li>Write the PrintPage event to draw content.</li>
+                            <li>Add a Button to print the document.</li>
+                            <li>Add a Button to show print preview.</li>
+                            <li>Add a Button for page setup.</li>
+                            <li>Add support for multi-page documents.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            PrintDocument is the foundation of printing. Use the PrintPage event to draw
+                            content using the Graphics object.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery/Controls/PrintDialog" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: PrintDialog
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog" class="btn btn-primary-custom">
+                        Next: PrintPreviewDialog <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Button">Button</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckBox">CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox">CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox">ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView">DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker">DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox">GroupBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ImageList">ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label">Label</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel">LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox">ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView">ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip">MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon">NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog">PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel">Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox">PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog">PrintDialog</a>
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument">PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog">PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton">RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox">RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog">SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer">SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel">TableLayoutPanel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TextBox">TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer">Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip">ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser">WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

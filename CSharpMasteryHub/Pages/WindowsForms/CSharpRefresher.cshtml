@@ -1,0 +1,306 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.CSharpRefresherModel
+@{
+    ViewData["Title"] = "C# Refresher for Windows Forms";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">C# Refresher</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content refresher-lesson" data-aos="fade-up" data-aos-duration="800">
+                <div class="refresher-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill"><i class="fas fa-sync-alt me-1"></i> Refresher</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 15 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Essential syntax</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">C# Essentials for Windows Forms <i class="fas fa-code text-primary ms-2"></i></h1>
+                <p class="lead mb-4">
+                    If you're new to C# or need a quick refresh on arrays, lists, conditionals, and loops —
+                    this guide is for you. We'll cover the core syntax you'll use daily in WinForms development.
+                </p>
+
+                <!-- ===== ARRAYS ===== -->
+                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-primary" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="h4 fw-bold"><i class="fas fa-layer-group text-primary me-2"></i>Arrays</h3>
+                    <p class="text-muted">Fixed-size collections of the same type.</p>
+                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
+                        <pre><code class="language-csharp"><span class="comment">// Declaration & initialization</span>
+<span class="keyword">string</span>[] <span class="variable">names</span> = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">3</span>];
+<span class="variable">names</span>[<span class="number">0</span>] = <span class="string">"Alice"</span>;
+<span class="variable">names</span>[<span class="number">1</span>] = <span class="string">"Bob"</span>;
+<span class="variable">names</span>[<span class="number">2</span>] = <span class="string">"Charlie"</span>;
+
+<span class="comment">// Shorthand</span>
+<span class="keyword">int</span>[] <span class="variable">scores</span> = { <span class="number">95</span>, <span class="number">88</span>, <span class="number">76</span>, <span class="number">92</span> };
+
+<span class="comment">// Looping over an array</span>
+<span class="keyword">foreach</span> (<span class="keyword">int</span> <span class="variable">score</span> <span class="keyword">in</span> <span class="variable">scores</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">score</span>);
+}</code></pre>
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-primary me-1">fixed size</span>
+                        <span class="badge bg-secondary me-1">zero-indexed</span>
+                        <span class="badge bg-info text-dark">Array.Length</span>
+                    </div>
+                </div>
+
+                <!-- ===== LISTS ===== -->
+                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-success" data-aos="fade-left" data-aos-delay="200">
+                    <h3 class="h4 fw-bold"><i class="fas fa-list-ul text-success me-2"></i>Lists (List&lt;T&gt;)</h3>
+                    <p class="text-muted">Dynamic collections that grow as needed.</p>
+                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
+                        <pre><code class="language-csharp"><span class="comment">// Creating a list</span>
+<span class="keyword">var</span> <span class="variable">students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"Maria"</span>);
+<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"James"</span>);
+<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"Sophia"</span>);
+
+<span class="comment">// Count and access</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">students</span>.<span class="property">Count</span>;  <span class="comment">// 3</span>
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">students</span>[<span class="number">0</span>];   <span class="comment">// "Maria"</span>
+
+<span class="comment">// Loop with for or foreach</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">students</span>.<span class="property">Count</span>; <span class="variable">i</span>++)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">students</span>[<span class="variable">i</span>]);
+}</code></pre>
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-success me-1">dynamic size</span>
+                        <span class="badge bg-secondary me-1">List&lt;T&gt;</span>
+                        <span class="badge bg-info text-dark">.Add() .Remove()</span>
+                    </div>
+                </div>
+
+                <!-- ===== IF / ELSE ===== -->
+                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-warning" data-aos="fade-right" data-aos-delay="300">
+                    <h3 class="h4 fw-bold"><i class="fas fa-code-branch text-warning me-2"></i>If / Else Statements</h3>
+                    <p class="text-muted">Make decisions based on conditions.</p>
+                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
+                        <pre><code class="language-csharp"><span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+
+<span class="keyword">if</span> (<span class="variable">age</span> &gt;= <span class="number">18</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are an adult."</span>);
+}
+<span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">age</span> &gt;= <span class="number">13</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are a teenager."</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are a child."</span>);
+}
+
+<span class="comment">// Common operators: ==, !=, &lt;, &gt;, &lt;=, &gt;=, &&, ||</span></code></pre>
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-warning text-dark me-1">condition</span>
+                        <span class="badge bg-secondary me-1">else if</span>
+                        <span class="badge bg-info text-dark">&& ||</span>
+                    </div>
+                </div>
+
+                <!-- ===== SWITCH ===== -->
+                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-danger" data-aos="fade-left" data-aos-delay="400">
+                    <h3 class="h4 fw-bold"><i class="fas fa-arrow-right text-danger me-2"></i>Switch Case</h3>
+                    <p class="text-muted">Clean alternative to multiple if-else statements.</p>
+                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
+                        <pre><code class="language-csharp"><span class="keyword">string</span> <span class="variable">role</span> = <span class="string">"Admin"</span>;
+
+<span class="keyword">switch</span> (<span class="variable">role</span>)
+{
+    <span class="keyword">case</span> <span class="string">"Admin"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Full access"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Editor"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Can edit content"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Viewer"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Read-only"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Unknown role"</span>);
+        <span class="keyword">break</span>;
+}</code></pre>
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-danger me-1">switch</span>
+                        <span class="badge bg-secondary me-1">case</span>
+                        <span class="badge bg-info text-dark">default</span>
+                    </div>
+                </div>
+
+                <!-- ===== LOOPS ===== -->
+                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-info" data-aos="fade-right" data-aos-delay="500">
+                    <h3 class="h4 fw-bold"><i class="fas fa-sync text-info me-2"></i>Loops</h3>
+                    <p class="text-muted">Repeat code blocks efficiently.</p>
+                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
+                        <pre><code class="language-csharp"><span class="comment">// for loop - when you know the count</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="number">5</span>; <span class="variable">i</span>++)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Iteration {<span class="variable">i</span>}"</span>);
+}
+
+<span class="comment">// while loop - condition checked before each iteration</span>
+<span class="keyword">int</span> <span class="variable">counter</span> = <span class="number">0</span>;
+<span class="keyword">while</span> (<span class="variable">counter</span> &lt; <span class="number">3</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Counter: {<span class="variable">counter</span>}"</span>);
+    <span class="variable">counter</span>++;
+}
+
+<span class="comment">// foreach - ideal for collections</span>
+<span class="keyword">string</span>[] <span class="variable">colors</span> = { <span class="string">"Red"</span>, <span class="string">"Green"</span>, <span class="string">"Blue"</span> };
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">color</span> <span class="keyword">in</span> <span class="variable">colors</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">color</span>);
+}</code></pre>
+                    </div>
+                    <div class="mt-2">
+                        <span class="badge bg-info text-dark me-1">for</span>
+                        <span class="badge bg-secondary me-1">while</span>
+                        <span class="badge bg-primary">foreach</span>
+                    </div>
+                </div>
+
+                <!-- ===== SUMMARY ===== -->
+                <div class="refresher-summary p-4 rounded-4 bg-primary bg-opacity-10 border border-primary" data-aos="fade-up" data-aos-delay="600">
+                    <h4 class="fw-bold"><i class="fas fa-lightbulb text-warning me-2"></i>Summary</h4>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Arrays</strong> – fixed size, fast access.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Lists</strong> – dynamic, flexible, rich methods.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>If/Else</strong> – conditional branching.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Switch</strong> – clean multi-case logic.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Loops</strong> – for, while, foreach — repeat code.</li>
+                    </ul>
+                    <p class="mt-3 mb-0 text-muted small">
+                        <i class="fas fa-info-circle me-1"></i> You'll use these daily in WinForms — from handling button clicks to populating grids.
+                    </p>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Windows Forms
+                    </a>
+                    <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-primary-custom">
+                        Start WinForms Lessons <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SIDEBAR ===== -->
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Windows Forms</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Overview</a>
+                    <a class="nav-link active" href="/WindowsForms/CSharpRefresher"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>C# Refresher</a>
+                    <a class="nav-link" href="/WindowsForms/01-CreatingWinFormsProject"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Creating a WinForms Project</a>
+                    <a class="nav-link" href="/WindowsForms/02-ControlsBasics"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Controls Basics</a>
+                    <a class="nav-link" href="/WindowsForms/03-EventHandling"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Event Handling</a>
+                    <a class="nav-link" href="/WindowsForms/04-MenusAndDialogs"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Menus & Dialogs</a>
+                    <a class="nav-link" href="/WindowsForms/05-DataBinding"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Data Binding</a>
+                    <a class="nav-link" href="/WindowsForms/06-MultiFormApps"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Multi-Form Apps</a>
+                    <a class="nav-link" href="/WindowsForms/07-CrudProjectWalkthrough"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>CRUD Walkthrough</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_QuizButton", "WindowsForms_Refresher")
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 40,
+                    duration: 600
+                });
+            }
+
+            // Optional: add a little "copy" interaction for code blocks
+            document.querySelectorAll('.code-block pre code').forEach(block => {
+                block.style.cursor = 'default';
+            });
+        });
+    </script>
+
+    <style>
+        /* ===== REFRESHER PAGE STYLES ===== */
+        .refresher-lesson .refresher-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 16px !important;
+        }
+
+        .refresher-lesson .refresher-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08) !important;
+        }
+
+        .refresher-lesson .code-block {
+            background: #1a1a2e !important;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .refresher-lesson .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .refresher-lesson .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.9rem;
+            color: #e4e4e4;
+            line-height: 1.6;
+        }
+
+        /* Syntax colors (light on dark) */
+        .language-csharp .keyword { color: #c792ea; font-weight: 600; }
+        .language-csharp .comment { color: #676e95; font-style: italic; }
+        .language-csharp .string { color: #c3e88d; }
+        .language-csharp .number { color: #f78c6c; }
+        .language-csharp .function { color: #82aaff; }
+        .language-csharp .variable { color: #eeffff; }
+        .language-csharp .class { color: #ffcb6b; }
+        .language-csharp .property { color: #80cbc4; }
+
+        .refresher-summary {
+            border-left: 4px solid var(--primary-color) !important;
+        }
+
+        .refresher-header .badge {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Responsive tweaks */
+        @@media (max-width: 768px) {
+            .refresher-lesson .refresher-card {
+                padding: 1.25rem !important;
+            }
+            .refresher-lesson .code-block code {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+}

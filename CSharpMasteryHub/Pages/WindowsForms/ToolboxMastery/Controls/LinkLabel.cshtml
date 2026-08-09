@@ -1,0 +1,193 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.LinkLabelModel
+@{
+    ViewData["Title"] = "LinkLabel Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">LinkLabel</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 8 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #10</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-link text-primary me-2"></i>LinkLabel Control
+                </h1>
+                <p class="lead mb-4">
+                    LinkLabel is like a Label that looks and acts like a hyperlink. When clicked, it triggers an action.
+                </p>
+
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a LinkLabel?</h4>
+                        <p>
+                            LinkLabel displays text as a hyperlink (blue, underlined). Clicking it is like clicking
+                            a web link. It's perfect for navigation, opening URLs, or triggering actions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Basic usage - open a website</span>
+<span class="keyword">private void</span> <span class="function">linkLabel1_LinkClicked</span>(<span class="keyword">object</span> sender, <span class="class">LinkLabelLinkClickedEventArgs</span> e)
+{
+    <span class="class">System</span>.<span class="class">Diagnostics</span>.<span class="class">Process</span>.<span class="function">Start</span>(<span class="string">"https://www.google.com"</span>);
+}
+
+<span class="comment">// Multiple links in one LinkLabel</span>
+<span class="variable">linkLabel1</span>.<span class="property">Text</span> = <span class="string">"Visit our website or contact support"</span>;
+<span class="variable">linkLabel1</span>.<span class="property">Links</span>.<span class="function">Add</span>(<span class="number">6</span>, <span class="number">7</span>, <span class="string">"https://website.com"</span>);   <span class="comment">// "website"</span>
+<span class="variable">linkLabel1</span>.<span class="property">Links</span>.<span class="function">Add</span>(<span class="number">28</span>, <span class="number">7</span>, <span class="string">"mailto:support@site.com"</span>); <span class="comment">// "support"</span>
+
+<span class="keyword">private void</span> <span class="function">linkLabel1_LinkClicked</span>(<span class="keyword">object</span> sender, <span class="class">LinkLabelLinkClickedEventArgs</span> e)
+{
+    <span class="keyword">string</span> <span class="variable">url</span> = <span class="variable">e</span>.<span class="property">Link</span>.<span class="property">LinkData</span>.<span class="function">ToString</span>();
+    <span class="class">System</span>.<span class="class">Diagnostics</span>.<span class="class">Process</span>.<span class="function">Start</span>(<span class="variable">url</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create a help/about page with LinkLabels.</p>
+                        <ol>
+                            <li>Add a LinkLabel: "Visit our website".</li>
+                            <li>Add a LinkLabel: "Email support".</li>
+                            <li>Add a LinkLabel: "Terms and Conditions" that shows a MessageBox.</li>
+                            <li>Add a LinkLabel with multiple links in one text.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            LinkLabel provides a familiar hyperlink experience in Windows Forms. Use it for
+                            navigation, opening URLs, and triggering actions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery/Controls/Label" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: Label
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/ListBox" class="btn btn-primary-custom">
+                        Next: ListBox <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Button">Button</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckBox">CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox">CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox">ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView">DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker">DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox">GroupBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ImageList">ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label">Label</a>
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel">LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox">ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView">ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip">MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon">NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog">PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel">Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox">PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog">PrintDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument">PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog">PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton">RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox">RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog">SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer">SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel">TableLayoutPanel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TextBox">TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer">Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip">ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser">WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

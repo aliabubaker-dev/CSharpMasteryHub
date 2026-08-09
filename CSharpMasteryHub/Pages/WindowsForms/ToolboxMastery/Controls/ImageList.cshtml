@@ -1,0 +1,205 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.ToolboxMastery.Controls.ImageListModel
+@{
+    ViewData["Title"] = "ImageList Control - Toolbox Mastery";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms/ToolboxMastery">Toolbox Mastery</a></li>
+                    <li class="breadcrumb-item active">ImageList</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="control-header d-flex align-items-center gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 10 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Control #8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-images text-primary me-2"></i>ImageList Control
+                </h1>
+                <p class="lead mb-4">
+                    The ImageList is a non-visual component that stores images for other controls like
+                    ListView, TreeView, and ToolStrip.
+                </p>
+
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is an ImageList?</h4>
+                        <p>
+                            ImageList doesn't appear on your form - it's a component that stores images in memory.
+                            Other controls use it to display icons. This saves memory and makes it easy to share
+                            images across multiple controls.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-cogs text-success me-2"></i>How to Use</h4>
+                        <ol>
+                            <li><strong>Drag</strong> an ImageList component onto your form (it appears in the component tray).</li>
+                            <li><strong>Click</strong> the Images property to open the Image Collection Editor.</li>
+                            <li><strong>Add</strong> images (PNG, ICO, JPG, BMP).</li>
+                            <li><strong>Set</strong> ImageSize property (16x16, 32x32, etc.).</li>
+                            <li><strong>Assign</strong> to controls like ListView's SmallImageList or LargeImageList.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>Code Example</h4>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Add images to ImageList programmatically</span>
+<span class="variable">imageList1</span>.<span class="property">ImageSize</span> = <span class="keyword">new</span> <span class="class">Size</span>(<span class="number">32</span>, <span class="number">32</span>);
+<span class="variable">imageList1</span>.<span class="property">Images</span>.<span class="function">Add</span>(<span class="class">Image</span>.<span class="function">FromFile</span>(<span class="string">"icon1.png"</span>));
+<span class="variable">imageList1</span>.<span class="property">Images</span>.<span class="function">Add</span>(<span class="class">Image</span>.<span class="function">FromFile</span>(<span class="string">"icon2.png"</span>));
+<span class="variable">imageList1</span>.<span class="property">Images</span>.<span class="function">Add</span>(<span class="class">Image</span>.<span class="function">FromFile</span>(<span class="string">"icon3.png"</span>));
+
+<span class="comment">// Assign to ListView</span>
+<span class="variable">listView1</span>.<span class="property">LargeImageList</span> = <span class="variable">imageList1</span>;
+<span class="variable">listView1</span>.<span class="property">Items</span>[<span class="number">0</span>].<span class="property">ImageIndex</span> = <span class="number">0</span>; <span class="comment">// First image</span>
+
+<span class="comment">// Or use the ImageKey property</span>
+<span class="variable">listView1</span>.<span class="property">Items</span>[<span class="number">1</span>].<span class="property">ImageKey</span> = <span class="string">"icon2.png"</span>;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise</h4>
+                        <p><strong>Task:</strong> Create an icon toolbar using ImageList.</p>
+                        <ol>
+                            <li>Add an ImageList with 5-8 icons (or use built-in images).</li>
+                            <li>Add a ToolStrip and set its ImageList property.</li>
+                            <li>Add ToolStripButtons and set their ImageIndex.</li>
+                            <li>Add a ListView with SmallImageList and LargeImageList.</li>
+                            <li>Add items with different icons.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            ImageList stores images in memory for reuse by multiple controls. It's
+                            essential for creating professional-looking applications with icons.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms/ToolboxMastery/Controls/GroupBox" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: GroupBox
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery/Controls/Label" class="btn btn-primary-custom">
+                        Next: Label <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Controls</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Button">Button</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckBox">CheckBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/CheckedListBox">CheckedListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ComboBox">ComboBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DataGridView">DataGridView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/DateTimePicker">DateTimePicker</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/GroupBox">GroupBox</a>
+                    <a class="nav-link active" href="/WindowsForms/ToolboxMastery/Controls/ImageList">ImageList</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Label">Label</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/LinkLabel">LinkLabel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListBox">ListBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ListView">ListView</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/MenuStrip">MenuStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/NotifyIcon">NotifyIcon</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PageSetupDialog">PageSetupDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Panel">Panel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PictureBox">PictureBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDialog">PrintDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintDocument">PrintDocument</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/PrintPreviewDialog">PrintPreviewDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RadioButton">RadioButton</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/RichTextBox">RichTextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SaveFileDialog">SaveFileDialog</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/SplitContainer">SplitContainer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TableLayoutPanel">TableLayoutPanel</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/TextBox">TextBox</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/Timer">Timer</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/ToolStrip">ToolStrip</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery/Controls/WebBrowser">WebBrowser</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

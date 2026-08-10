@@ -1,0 +1,296 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.NetworkingModel
+@{
+    ViewData["Title"] = "AWS Networking - VPC, Subnets & Security";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">Networking</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 35 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 5 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-network-wired text-info me-2"></i>AWS Networking
+                </h1>
+                <p class="lead mb-4">
+                    Learn how AWS networking works. <span class="text-info fw-bold">VPC</span>,
+                    <span class="text-success fw-bold">Subnets</span>,
+                    <span class="text-warning fw-bold">Security Groups</span>, and more explained in simple terms.
+                </p>
+
+                <!-- What is VPC -->
+                <div class="card mb-4 border-info" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-info me-2"></i>What is VPC?</h4>
+                        <p>
+                            <strong>VPC (Virtual Private Cloud)</strong> is your private network in AWS.
+                            Think of it as your own personal data center in the cloud.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Isolated</strong> from other AWS customers
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>You control</strong> IP addresses, subnets, routing
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Security</strong> with Security Groups and NACLs
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Connect</strong> to the internet via Internet Gateway
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Every AWS account gets a default VPC</strong> when you create it.
+                            You can use it or create your own.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VPC Components -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-cogs text-success me-2"></i>VPC Components Explained</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Description</th>
+                                        <th>Analogy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>VPC</strong></td>
+                                        <td>Your private network</td>
+                                        <td>A house</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Subnet</strong></td>
+                                        <td>A section of your VPC</td>
+                                        <td>Rooms in the house</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Internet Gateway</strong></td>
+                                        <td>Connects VPC to internet</td>
+                                        <td>Front door</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Route Table</strong></td>
+                                        <td>Controls traffic routing</td>
+                                        <td>House map</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security Group</strong></td>
+                                        <td>Firewall for instances</td>
+                                        <td>Room locks</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>NACL</strong></td>
+                                        <td>Firewall for subnets</td>
+                                        <td>House security system</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subnets -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-primary"><i class="fas fa-layer-group me-2"></i>Subnets - Dividing Your VPC</h4>
+                        <p>
+                            A <strong>Subnet</strong> is a range of IP addresses in your VPC. You divide your VPC
+                            into subnets to organize resources.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded border-success">
+                                    <h6 class="text-success"><i class="fas fa-cloud me-2"></i>Public Subnet</h6>
+                                    <p class="small mb-0">Has internet access via Internet Gateway. Used for web servers, load balancers.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded border-primary">
+                                    <h6 class="text-primary"><i class="fas fa-database me-2"></i>Private Subnet</h6>
+                                    <p class="small mb-0">No direct internet access. Used for databases, application servers.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Best Practice:</strong> Always use at least <strong>2 subnets</strong> in different
+                            Availability Zones for high availability.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Groups -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-shield-alt me-2"></i>Security Groups - Your First Line of Defense</h4>
+                        <p>
+                            A <strong>Security Group</strong> acts as a virtual firewall for your EC2 instances.
+                            It controls inbound and outbound traffic.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6><i class="fas fa-sign-in-alt text-success me-2"></i>Inbound Rules</h6>
+                                    <p class="small mb-0">Controls what traffic can <strong>enter</strong> your instance.</p>
+                                    <code class="small">Example: Allow SSH (port 22) from your IP</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6><i class="fas fa-sign-out-alt text-danger me-2"></i>Outbound Rules</h6>
+                                    <p class="small mb-0">Controls what traffic can <strong>leave</strong> your instance.</p>
+                                    <code class="small">Example: Allow all outbound traffic</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-success mt-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Remember:</strong> Security Groups are <strong>stateful</strong> - if you allow inbound,
+                            outbound is automatically allowed.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create a VPC</h4>
+                        <p><strong>Task:</strong> Create a VPC with public and private subnets.</p>
+                        <ol>
+                            <li>Create a VPC with CIDR block <code>10.0.0.0/16</code></li>
+                            <li>Create 2 public subnets (10.0.1.0/24, 10.0.2.0/24)</li>
+                            <li>Create 2 private subnets (10.0.3.0/24, 10.0.4.0/24)</li>
+                            <li>Create an Internet Gateway and attach it</li>
+                            <li>Create a route table and associate with public subnets</li>
+                            <li>Launch an EC2 instance in a public subnet</li>
+                            <li>Connect to it and verify internet access</li>
+                        </ol>
+                        <details class="mt-3">
+                            <summary class="btn btn-outline-success btn-sm">Show Solution</summary>
+                            <div class="bg-dark text-light p-3 rounded-3 mt-2">
+                                <pre><code># 1. Create VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+
+# 2. Create Subnets
+aws ec2 create-subnet --vpc-id vpc-xxx --cidr-block 10.0.1.0/24 --availability-zone us-east-1a
+aws ec2 create-subnet --vpc-id vpc-xxx --cidr-block 10.0.2.0/24 --availability-zone us-east-1b
+aws ec2 create-subnet --vpc-id vpc-xxx --cidr-block 10.0.3.0/24 --availability-zone us-east-1a
+aws ec2 create-subnet --vpc-id vpc-xxx --cidr-block 10.0.4.0/24 --availability-zone us-east-1b
+
+# 3. Create and attach Internet Gateway
+aws ec2 create-internet-gateway
+aws ec2 attach-internet-gateway --internet-gateway-id igw-xxx --vpc-id vpc-xxx
+
+# 4. Create route table for public subnets
+aws ec2 create-route-table --vpc-id vpc-xxx
+aws ec2 create-route --route-table-id rtb-xxx --destination-cidr-block 0.0.0.0/0 --gateway-id igw-xxx
+aws ec2 associate-route-table --route-table-id rtb-xxx --subnet-id subnet-xxx</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            VPC is your private network in AWS. Use <strong>public subnets</strong> for resources that
+                            need internet access and <strong>private subnets</strong> for internal resources.
+                            <span class="text-info fw-bold">Security Groups</span> are your first line of defense
+                            for EC2 instances.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS/Lambda" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: Lambda
+                    </a>
+                    <a href="/AWS/Databases" class="btn btn-primary-custom">
+                        Next: Databases <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link active" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        details summary {
+            cursor: pointer;
+        }
+    </style>
+}

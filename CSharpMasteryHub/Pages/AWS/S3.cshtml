@@ -1,0 +1,251 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.S3Model
+@{
+    ViewData["Title"] = "S3 - Cloud Storage on AWS";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">S3 Storage</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 3 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-database text-warning me-2"></i>S3 - Cloud Storage
+                </h1>
+                <p class="lead mb-4">
+                    S3 (Simple Storage Service) is Amazon's cloud storage. Think of it as a massive hard drive
+                    in the cloud that never runs out of space.
+                </p>
+
+                <!-- What is S3 -->
+                <div class="card mb-4 border-warning" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-warning me-2"></i>What is S3?</h4>
+                        <p>
+                            S3 is a storage service that lets you store and retrieve any amount of data from anywhere in the world.
+                            It's like a hard drive that's always online, never breaks, and can store anything.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>5 GB</strong> of free storage
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>99.999999999%</strong> durability (11 nines!)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Host websites</strong> for free
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Store</strong> photos, videos, documents, anything!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step by Step -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-list-ol me-2"></i>Your Second Mission: Host a File</h4>
+                        <ol>
+                            <li>
+                                <strong>Go to S3:</strong> Type <code>S3</code> in the search bar and click it.
+                            </li>
+                            <li>
+                                <strong>Click "Create bucket"</strong> (the orange button).
+                            </li>
+                            <li>
+                                <strong>Give it a unique name:</strong>
+                                <code>my-test-bucket-2026-yourname</code> (no two people on Earth can have the same bucket name).
+                            </li>
+                            <li>
+                                <strong>UNCHECK</strong> the box that says <strong>"Block all public access"</strong>.
+                                (A warning will pop up; just acknowledge it).
+                            </li>
+                            <li>
+                                <strong>Click "Create bucket"</strong> at the bottom.
+                            </li>
+                            <li>
+                                <strong>Upload a file:</strong> Click into your new bucket → "Upload" → drag a photo
+                                (like cat.jpg) → click "Upload".
+                            </li>
+                            <li>
+                                <strong>Find the URL:</strong> Click on your uploaded file's name → scroll down →
+                                you will see an <strong>"Object URL"</strong>. Copy it and paste it into a new browser tab.
+                            </li>
+                            <li>
+                                <span class="text-danger fw-bold">You will get an "Access Denied" error.</span>
+                                That's good! It means your file is private.
+                            </li>
+                            <li>
+                                <strong>Make it public:</strong> Click the "Permissions" tab → "Object Ownership" →
+                                "Edit" → check "ACLs enabled". Scroll down to "Access Control List (ACL)" →
+                                click "Grant public read access" to "Everyone".
+                            </li>
+                            <li>
+                                <span class="text-success fw-bold">Now copy the Object URL again and paste it in your browser.</span>
+                                <span class="text-primary fw-bold">You see your cat photo! You just hosted a file on the internet!</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Host a Static Website -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-globe me-2"></i>Bonus: Host a Static Website for FREE</h4>
+                        <p>
+                            S3 can host static websites (HTML, CSS, JavaScript) for free. Here's how:
+                        </p>
+                        <ol>
+                            <li>Create a bucket with the same name as your domain (e.g., <code>mywebsite.com</code>)</li>
+                            <li>Enable <strong>"Static website hosting"</strong> in the Properties tab</li>
+                            <li>Set <code>index.html</code> as the index document</li>
+                            <li>Upload your HTML files</li>
+                            <li>Make them public</li>
+                            <li>Visit your bucket URL and see your website live!</li>
+                        </ol>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> You can use S3 with CloudFront to add HTTPS and a custom domain!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Concepts -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list text-info me-2"></i>Key S3 Concepts</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Concept</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Bucket</strong></td>
+                                        <td>A container for your files (globally unique name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Object</strong></td>
+                                        <td>A file stored in a bucket</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Key</strong></td>
+                                        <td>The name of the file (can include folders like <code>images/cat.jpg</code>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ACL</strong></td>
+                                        <td>Access Control List - who can access your files</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Bucket Policy</strong></td>
+                                        <td>A JSON document that controls permissions</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Versioning</strong></td>
+                                        <td>Keep multiple versions of files for rollback</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create a Photo Gallery</h4>
+                        <p><strong>Task:</strong> Create a public photo gallery using S3.</p>
+                        <ol>
+                            <li>Create a bucket with a unique name.</li>
+                            <li>Disable "Block all public access" for the bucket.</li>
+                            <li>Enable static website hosting.</li>
+                            <li>Upload 5-10 photos to the bucket.</li>
+                            <li>Make each photo public.</li>
+                            <li>Create a simple HTML page that displays all photos.</li>
+                            <li>Upload the HTML page to the bucket.</li>
+                            <li>Visit your website URL and see your photo gallery!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            S3 is AWS's storage service. You get <strong>5 GB for free</strong> for 12 months.
+                            You can store any type of file and even host static websites.
+                            <span class="text-danger">Remember to delete your buckets when you're done!</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS/EC2" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: EC2
+                    </a>
+                    <a href="/AWS/Lambda" class="btn btn-primary-custom">
+                        Next: Lambda Serverless <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link active" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+}

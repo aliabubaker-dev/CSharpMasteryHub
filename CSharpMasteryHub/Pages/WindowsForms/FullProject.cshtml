@@ -1,0 +1,1197 @@
+﻿@page
+@model CSharpMasteryHub.Pages.WindowsForms.FullProjectModel
+@{
+    ViewData["Title"] = "Full WinForms Project - All 29 Controls";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
+                    <li class="breadcrumb-item active">Full WinForms Project</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-danger p-2 px-3 rounded-pill">Advanced</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 60 min read</span>
+                    <span class="badge" style="background-color: #6f42c1; color: #fff;">All 29 Controls</span>
+                    <span class="badge bg-warning text-dark">Step by Step</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-project-diagram text-primary me-2"></i>Full WinForms Project
+                </h1>
+                <p class="lead mb-4">
+                    Build a complete Windows Forms application using <span class="fw-bold text-primary">all 29 controls</span>
+                    from the Toolbox. Follow this <span class="text-warning fw-bold">step-by-step</span> guide.
+                </p>
+
+                <!-- Important Note -->
+                <div class="alert alert-danger mb-4" data-aos="fade-right">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>IMPORTANT:</strong> You will <u>ONLY</u> drag controls from the Toolbox.
+                    <strong>DO NOT</strong> touch or edit the <code>MainForm.Designer.cs</code> file.
+                    The designer file is auto-generated and will be updated automatically when you drag controls.
+                </div>
+
+                <!-- Project Overview -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>Project Overview</h4>
+                        <p>
+                            We'll build a <strong>"Student Management System"</strong> that uses every control in the
+                            Windows Forms Toolbox.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <span class="small">29 Controls</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <span class="small">Drag & Drop</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <span class="small">Full Code</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <span class="small">Working App</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 1: SETUP ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-primary"><i class="fas fa-tools me-2"></i>Part 1: Project Setup</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-1 me-2"></i>Step 1: Open Visual Studio</h4>
+                        <p>
+                            Open <strong>Visual Studio 2022</strong> from your Start Menu or Desktop shortcut.
+                        </p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Need Visual Studio?</strong> Download it for free from
+                            <a href="https://visualstudio.microsoft.com/" target="_blank">visualstudio.microsoft.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-2 me-2"></i>Step 2: Create New Project</h4>
+                        <ol>
+                            <li>Click <strong>"Create a new project"</strong></li>
+                            <li>Search for <strong>"Windows Forms App"</strong></li>
+                            <li>Select <strong>"Windows Forms App (.NET Framework)"</strong></li>
+                            <li>Click <strong>"Next"</strong></li>
+                        </ol>
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-text">Project Name: StudentManager
+Location: C:\Users\YourName\Documents\Projects\
+Framework: .NET 8.0</code></pre>
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge bg-primary">Project Name</span>
+                            <span class="badge bg-success">StudentManager</span>
+                            <span class="badge bg-info text-dark">.NET 8.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-3 me-2"></i>Step 3: Understand the Solution Explorer</h4>
+                        <p>
+                            After creating the project, look at the <strong>Solution Explorer</strong> on the right side.
+                            You'll see this structure:
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-text">📁 StudentManager/
+├── 📁 Properties/
+│   └── Resources.resx          (Images, icons - we'll use this)
+├── 📄 Form1.cs                 (Your code - we'll rename this)
+├── 📄 Form1.Designer.cs        (⚠️ DO NOT TOUCH this file!)
+├── 📄 Program.cs               (Entry point - don't change)
+├── 📄 App.config               (Settings - don't change)
+└── 📄 StudentManager.csproj    (Project file)</code></pre>
+                        </div>
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-hand-paper me-2"></i>
+                            <strong>REMEMBER:</strong> <code>Form1.Designer.cs</code> is auto-generated.
+                            <span class="text-danger fw-bold">NEVER edit it manually!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-4 me-2"></i>Step 4: Rename Form1 to MainForm</h4>
+                        <ol>
+                            <li>In Solution Explorer, <strong>right-click</strong> on <code>Form1.cs</code></li>
+                            <li>Select <strong>"Rename"</strong></li>
+                            <li>Change it to <strong>MainForm.cs</strong></li>
+                            <li>Press <strong>Enter</strong></li>
+                            <li>When asked, click <strong>"Yes"</strong> to rename all references</li>
+                        </ol>
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Done!</strong> You should now see <code>MainForm.cs</code> in Solution Explorer.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 2: BASIC CONTROLS ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-primary"><i class="fas fa-cubes me-2"></i>Part 2: Basic Controls</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-5 me-2"></i>Step 5: Open the Form Designer</h4>
+                        <p>
+                            <strong>Double-click</strong> on <code>MainForm.cs</code> in Solution Explorer to open the
+                            form designer. You should see a blank form.
+                        </p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-mouse-pointer me-2"></i>
+                            <strong>Make sure:</strong> The <strong>Toolbox</strong> is visible. If not, go to
+                            <strong>View → Toolbox</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-6 me-2"></i>Step 6: Add Controls (Drag from Toolbox)</h4>
+                        <p>
+                            <strong>IMPORTANT:</strong> For each control, <u>drag it from the Toolbox</u> onto the form.
+                            <span class="text-danger fw-bold">DO NOT type code</span> - the designer will handle everything!
+                        </p>
+
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>REMEMBER:</strong> You are <u>only</u> dragging controls from the Toolbox.
+                            You will <u>never</u> open or edit the <code>MainForm.Designer.cs</code> file.
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">Add these controls in order:</h6>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Control</th>
+                                            <th>Name</th>
+                                            <th>Text/Properties</th>
+                                            <th>Where to Find</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Label</td>
+                                            <td><code>lblTitle</code></td>
+                                            <td>"Student Manager"</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>TextBox</td>
+                                            <td><code>txtFirstName</code></td>
+                                            <td>""</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>TextBox</td>
+                                            <td><code>txtLastName</code></td>
+                                            <td>""</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Button</td>
+                                            <td><code>btnSave</code></td>
+                                            <td>"Save Student"</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>CheckBox</td>
+                                            <td><code>chkActive</code></td>
+                                            <td>"Active"</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>RadioButton</td>
+                                            <td><code>rbMale</code></td>
+                                            <td>"Male"</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>RadioButton</td>
+                                            <td><code>rbFemale</code></td>
+                                            <td>"Female"</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>ComboBox</td>
+                                            <td><code>cmbCourse</code></td>
+                                            <td>Items: Math, Science, History</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>ListBox</td>
+                                            <td><code>lstStudents</code></td>
+                                            <td>Items: (empty for now)</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>CheckedListBox</td>
+                                            <td><code>clbHobbies</code></td>
+                                            <td>Items: Reading, Sports, Music</td>
+                                            <td>Toolbox → Common Controls</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Show Code for Step 6 -->
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary btn-sm" onclick="toggleCode('codeStep6')">
+                                <i class="fas fa-code me-1"></i> Show Code for Step 6
+                            </button>
+                            <div id="codeStep6" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// After dragging all controls from the Toolbox</span>
+<span class="comment">// The designer file (MainForm.Designer.cs) will automatically have:</span>
+
+<span class="comment">// 1. Label - lblTitle</span>
+<span class="keyword">this</span>.<span class="variable">lblTitle</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">Label</span>();
+<span class="keyword">this</span>.<span class="variable">lblTitle</span>.<span class="property">Text</span> = <span class="string">"Student Manager"</span>;
+
+<span class="comment">// 2. TextBox - txtFirstName</span>
+<span class="keyword">this</span>.<span class="variable">txtFirstName</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">TextBox</span>();
+
+<span class="comment">// 3. TextBox - txtLastName</span>
+<span class="keyword">this</span>.<span class="variable">txtLastName</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">TextBox</span>();
+
+<span class="comment">// 4. Button - btnSave</span>
+<span class="keyword">this</span>.<span class="variable">btnSave</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">Button</span>();
+<span class="keyword">this</span>.<span class="variable">btnSave</span>.<span class="property">Text</span> = <span class="string">"Save Student"</span>;
+
+<span class="comment">// ... and so on for all controls</span>
+<span class="comment">// ⚠️ DO NOT EDIT THIS FILE - It's auto-generated!</span></code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 3: CONTAINER CONTROLS ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-info"><i class="fas fa-layer-group me-2"></i>Part 3: Container Controls</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-info"><i class="fas fa-7 me-2"></i>Step 7: Add Container Controls</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Control</th>
+                                        <th>Name</th>
+                                        <th>Properties</th>
+                                        <th>Where to Find</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>GroupBox</td>
+                                        <td><code>grpPersonalInfo</code></td>
+                                        <td>Text: "Personal Information"</td>
+                                        <td>Toolbox → Containers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>Panel</td>
+                                        <td><code>pnlButtons</code></td>
+                                        <td>Dock: Bottom</td>
+                                        <td>Toolbox → Containers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>SplitContainer</td>
+                                        <td><code>splitContainer</code></td>
+                                        <td>Orientation: Vertical</td>
+                                        <td>Toolbox → Containers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>TableLayoutPanel</td>
+                                        <td><code>tblLayout</code></td>
+                                        <td>2 columns, 5 rows</td>
+                                        <td>Toolbox → Containers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>DataGridView</td>
+                                        <td><code>dgvStudents</code></td>
+                                        <td>Dock: Fill</td>
+                                        <td>Toolbox → Data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>ListView</td>
+                                        <td><code>lvStudents</code></td>
+                                        <td>View: Details</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-mouse-pointer me-2"></i>
+                            <strong>Tip:</strong> Drag the <strong>SplitContainer</strong> first, then drag other
+                            controls inside its panels.
+                        </div>
+
+                        <!-- Show Code for Step 7 -->
+                        <div class="mt-3">
+                            <button class="btn btn-outline-info btn-sm" onclick="toggleCode('codeStep7')">
+                                <i class="fas fa-code me-1"></i> Show Code for Step 7
+                            </button>
+                            <div id="codeStep7" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// After dragging container controls from the Toolbox</span>
+<span class="comment">// The designer file will automatically have:</span>
+
+<span class="comment">// 11. GroupBox</span>
+<span class="keyword">this</span>.<span class="variable">grpPersonalInfo</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">GroupBox</span>();
+<span class="keyword">this</span>.<span class="variable">grpPersonalInfo</span>.<span class="property">Text</span> = <span class="string">"Personal Information"</span>;
+
+<span class="comment">// 12. Panel</span>
+<span class="keyword">this</span>.<span class="variable">pnlButtons</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">Panel</span>();
+<span class="keyword">this</span>.<span class="variable">pnlButtons</span>.<span class="property">Dock</span> = <span class="class">DockStyle</span>.<span class="property">Bottom</span>;
+
+<span class="comment">// 13. SplitContainer</span>
+<span class="keyword">this</span>.<span class="variable">splitContainer</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">SplitContainer</span>();
+<span class="keyword">this</span>.<span class="variable">splitContainer</span>.<span class="property">Orientation</span> = <span class="class">Orientation</span>.<span class="property">Vertical</span>;
+
+<span class="comment">// 14. TableLayoutPanel</span>
+<span class="keyword">this</span>.<span class="variable">tblLayout</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">TableLayoutPanel</span>();
+
+<span class="comment">// 15. DataGridView</span>
+<span class="keyword">this</span>.<span class="variable">dgvStudents</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">DataGridView</span>();
+<span class="keyword">this</span>.<span class="variable">dgvStudents</span>.<span class="property">Dock</span> = <span class="class">DockStyle</span>.<span class="property">Fill</span>;
+
+<span class="comment">// 16. ListView</span>
+<span class="keyword">this</span>.<span class="variable">lvStudents</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">ListView</span>();
+<span class="keyword">this</span>.<span class="variable">lvStudents</span>.<span class="property">View</span> = <span class="class">View</span>.<span class="property">Details</span>;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 4: SPECIALIZED CONTROLS ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-warning"><i class="fas fa-cog me-2"></i>Part 4: Specialized Controls</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-warning"><i class="fas fa-8 me-2"></i>Step 8: Add Specialized Controls</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Control</th>
+                                        <th>Name</th>
+                                        <th>Properties</th>
+                                        <th>Where to Find</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>17</td>
+                                        <td>DateTimePicker</td>
+                                        <td><code>dtpBirthDate</code></td>
+                                        <td>Format: Short</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>PictureBox</td>
+                                        <td><code>pbProfile</code></td>
+                                        <td>SizeMode: Zoom</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td>ImageList</td>
+                                        <td><code>imgList</code></td>
+                                        <td>Images: Add icons (click the ... button)</td>
+                                        <td>Toolbox → Components</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>RichTextBox</td>
+                                        <td><code>rtbNotes</code></td>
+                                        <td>""</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>WebBrowser</td>
+                                        <td><code>webBrowser</code></td>
+                                        <td>Navigate to "about:blank"</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                    <tr>
+                                        <td>22</td>
+                                        <td>Timer</td>
+                                        <td><code>timerClock</code></td>
+                                        <td>Interval: 1000 (Enabled: false)</td>
+                                        <td>Toolbox → Components</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>LinkLabel</td>
+                                        <td><code>llHelp</code></td>
+                                        <td>"Need Help?"</td>
+                                        <td>Toolbox → Common Controls</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Note:</strong> The <strong>ImageList</strong> and <strong>Timer</strong> controls
+                            appear in the <strong>component tray</strong> (the gray area below the form), not on the form itself.
+                        </div>
+
+                        <!-- Show Code for Step 8 -->
+                        <div class="mt-3">
+                            <button class="btn btn-outline-warning btn-sm" onclick="toggleCode('codeStep8')">
+                                <i class="fas fa-code me-1"></i> Show Code for Step 8
+                            </button>
+                            <div id="codeStep8" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// After dragging specialized controls from the Toolbox</span>
+
+<span class="comment">// 17. DateTimePicker</span>
+<span class="keyword">this</span>.<span class="variable">dtpBirthDate</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">DateTimePicker</span>();
+<span class="keyword">this</span>.<span class="variable">dtpBirthDate</span>.<span class="property">Format</span> = <span class="class">DateTimePickerFormat</span>.<span class="property">Short</span>;
+
+<span class="comment">// 18. PictureBox</span>
+<span class="keyword">this</span>.<span class="variable">pbProfile</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">PictureBox</span>();
+<span class="keyword">this</span>.<span class="variable">pbProfile</span>.<span class="property">SizeMode</span> = <span class="class">PictureBoxSizeMode</span>.<span class="property">Zoom</span>;
+
+<span class="comment">// 19. ImageList</span>
+<span class="keyword">this</span>.<span class="variable">imgList</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">ImageList</span>();
+
+<span class="comment">// 20. RichTextBox</span>
+<span class="keyword">this</span>.<span class="variable">rtbNotes</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">RichTextBox</span>();
+
+<span class="comment">// 21. WebBrowser</span>
+<span class="keyword">this</span>.<span class="variable">webBrowser</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">WebBrowser</span>();
+
+<span class="comment">// 22. Timer</span>
+<span class="keyword">this</span>.<span class="variable">timerClock</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">Timer</span>();
+<span class="keyword">this</span>.<span class="variable">timerClock</span>.<span class="property">Interval</span> = <span class="number">1000</span>;
+
+<span class="comment">// 23. LinkLabel</span>
+<span class="keyword">this</span>.<span class="variable">llHelp</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">LinkLabel</span>();
+<span class="keyword">this</span>.<span class="variable">llHelp</span>.<span class="property">Text</span> = <span class="string">"Need Help?"</span>;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 5: MENUS & DIALOGS ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-danger"><i class="fas fa-bars me-2"></i>Part 5: Menus & Dialogs</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-danger"><i class="fas fa-9 me-2"></i>Step 9: Add Menus & Dialogs</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Control</th>
+                                        <th>Name</th>
+                                        <th>Properties</th>
+                                        <th>Where to Find</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>MenuStrip</td>
+                                        <td><code>menuStrip</code></td>
+                                        <td>Add: File, Edit, Help</td>
+                                        <td>Toolbox → Menus & Toolbars</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25</td>
+                                        <td>ToolStrip</td>
+                                        <td><code>toolStrip</code></td>
+                                        <td>Add buttons: New, Save, Print</td>
+                                        <td>Toolbox → Menus & Toolbars</td>
+                                    </tr>
+                                    <tr>
+                                        <td>26</td>
+                                        <td>NotifyIcon</td>
+                                        <td><code>notifyIcon</code></td>
+                                        <td>Icon: Set (click ... to choose)</td>
+                                        <td>Toolbox → Components</td>
+                                    </tr>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>SaveFileDialog</td>
+                                        <td><code>saveFileDialog</code></td>
+                                        <td>Filter: "Text files|*.txt"</td>
+                                        <td>Toolbox → Dialogs</td>
+                                    </tr>
+                                    <tr>
+                                        <td>28</td>
+                                        <td>PrintDocument</td>
+                                        <td><code>printDocument</code></td>
+                                        <td>-</td>
+                                        <td>Toolbox → Printing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>29</td>
+                                        <td>PrintPreviewDialog</td>
+                                        <td><code>printPreviewDialog</code></td>
+                                        <td>-</td>
+                                        <td>Toolbox → Dialogs</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-mouse-pointer me-2"></i>
+                            <strong>Tip for MenuStrip:</strong> Click on the MenuStrip, then type directly into the
+                            "Type Here" boxes to add menu items.
+                        </div>
+
+                        <!-- Show Code for Step 9 -->
+                        <div class="mt-3">
+                            <button class="btn btn-outline-danger btn-sm" onclick="toggleCode('codeStep9')">
+                                <i class="fas fa-code me-1"></i> Show Code for Step 9
+                            </button>
+                            <div id="codeStep9" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// After dragging menu & dialog controls from the Toolbox</span>
+
+<span class="comment">// 24. MenuStrip</span>
+<span class="keyword">this</span>.<span class="variable">menuStrip</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">MenuStrip</span>();
+<span class="comment">// Menu items added by typing in the designer</span>
+
+<span class="comment">// 25. ToolStrip</span>
+<span class="keyword">this</span>.<span class="variable">toolStrip</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">ToolStrip</span>();
+
+<span class="comment">// 26. NotifyIcon</span>
+<span class="keyword">this</span>.<span class="variable">notifyIcon</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">NotifyIcon</span>();
+
+<span class="comment">// 27. SaveFileDialog</span>
+<span class="keyword">this</span>.<span class="variable">saveFileDialog</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">SaveFileDialog</span>();
+<span class="keyword">this</span>.<span class="variable">saveFileDialog</span>.<span class="property">Filter</span> = <span class="string">"Text files|*.txt"</span>;
+
+<span class="comment">// 28. PrintDocument</span>
+<span class="keyword">this</span>.<span class="variable">printDocument</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Drawing</span>.<span class="class">Printing</span>.<span class="class">PrintDocument</span>();
+
+<span class="comment">// 29. PrintPreviewDialog</span>
+<span class="keyword">this</span>.<span class="variable">printPreviewDialog</span> = <span class="keyword">new</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>.<span class="class">PrintPreviewDialog</span>();</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 6: CODE ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-success"><i class="fas fa-code me-2"></i>Part 6: Write the Code</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 10 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-10 me-2"></i>Step 10: Open MainForm.cs</h4>
+                        <p>
+                            Now we'll write the code. <strong>Double-click</strong> on <code>MainForm.cs</code>
+                            in Solution Explorer (not the designer file).
+                        </p>
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            You'll see the code-behind file where we'll add our logic.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 11 -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-11 me-2"></i>Step 11: Add the Code</h4>
+                        <p>
+                            <strong>Copy and paste</strong> the code below into <code>MainForm.cs</code>.
+                        </p>
+
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>IMPORTANT:</strong> Make sure the code matches the control names you used.
+                        </div>
+
+                        <!-- Step 11: Partial Code - Show Step by Step -->
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11a. Add the Student Class</h6>
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleCode('codeStep11a')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Code
+                            </button>
+                            <div id="codeStep11a" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Add this at the bottom of MainForm.cs (outside the class)</span>
+<span class="keyword">public class</span> <span class="class">Student</span>
+{
+    <span class="keyword">public string</span> <span class="property">FirstName</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">LastName</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Course</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public bool</span> <span class="property">Active</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Gender</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public DateTime</span> <span class="property">BirthDate</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Notes</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11b. Add the Data Store</h6>
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleCode('codeStep11b')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Code
+                            </button>
+                            <div id="codeStep11b" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Add this inside the MainForm class</span>
+<span class="keyword">private</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt; <span class="variable">_students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt;();</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11c. Add the Form Load Code</h6>
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleCode('codeStep11c')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Code
+                            </button>
+                            <div id="codeStep11c" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Add this inside the MainForm class</span>
+<span class="keyword">private void</span> <span class="function">MainForm_Load</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Setup ComboBox</span>
+    <span class="variable">cmbCourse</span>.<span class="property">Items</span>.<span class="function">AddRange</span>(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Math"</span>, <span class="string">"Science"</span>, <span class="string">"History"</span>, <span class="string">"Art"</span> });
+    <span class="variable">cmbCourse</span>.<span class="property">SelectedIndex</span> = <span class="number">0</span>;
+    
+    <span class="comment">// Setup CheckedListBox</span>
+    <span class="variable">clbHobbies</span>.<span class="property">Items</span>.<span class="function">AddRange</span>(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Reading"</span>, <span class="string">"Sports"</span>, <span class="string">"Music"</span>, <span class="string">"Gaming"</span> });
+    
+    <span class="comment">// Setup ListView</span>
+    <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Name"</span>, <span class="number">150</span>);
+    <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Course"</span>, <span class="number">100</span>);
+    <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Status"</span>, <span class="number">80</span>);
+    
+    <span class="comment">// Start Timer</span>
+    <span class="variable">timerClock</span>.<span class="function">Start</span>();
+    
+    <span class="comment">// Load sample data</span>
+    <span class="function">LoadSampleData</span>();
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11d. Add the Save Button Click</h6>
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleCode('codeStep11d')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Code
+                            </button>
+                            <div id="codeStep11d" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Double-click the Save button to create this event</span>
+<span class="keyword">private void</span> <span class="function">btnSave_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Validate input</span>
+    <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="function">IsNullOrWhiteSpace</span>(<span class="variable">txtFirstName</span>.<span class="property">Text</span>))
+    {
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a first name."</span>, <span class="string">"Validation"</span>);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// Create student</span>
+    <span class="keyword">var</span> <span class="variable">student</span> = <span class="keyword">new</span> <span class="class">Student</span>
+    {
+        <span class="property">FirstName</span> = <span class="variable">txtFirstName</span>.<span class="property">Text</span>,
+        <span class="property">LastName</span> = <span class="variable">txtLastName</span>.<span class="property">Text</span>,
+        <span class="property">Course</span> = <span class="variable">cmbCourse</span>.<span class="property">SelectedItem</span>.<span class="function">ToString</span>(),
+        <span class="property">Active</span> = <span class="variable">chkActive</span>.<span class="property">Checked</span>,
+        <span class="property">Gender</span> = <span class="variable">rbMale</span>.<span class="property">Checked</span> ? <span class="string">"Male"</span> : <span class="string">"Female"</span>,
+        <span class="property">BirthDate</span> = <span class="variable">dtpBirthDate</span>.<span class="property">Value</span>,
+        <span class="property">Notes</span> = <span class="variable">rtbNotes</span>.<span class="property">Text</span>
+    };
+    
+    <span class="comment">// Add and refresh</span>
+    <span class="variable">_students</span>.<span class="function">Add</span>(<span class="variable">student</span>);
+    <span class="function">RefreshDisplay</span>();
+    <span class="function">ClearForm</span>();
+    
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student saved successfully!"</span>, <span class="string">"Success"</span>);
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11e. Add the Timer Tick</h6>
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleCode('codeStep11e')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Code
+                            </button>
+                            <div id="codeStep11e" style="display: none;" class="mt-2">
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Double-click the Timer to create this event</span>
+<span class="keyword">private void</span> <span class="function">timerClock_Tick</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Update a label with current time</span>
+    <span class="variable">lblStatus</span>.<span class="property">Text</span> = <span class="string">$"Current Time: {<span class="class">DateTime</span>.<span class="property">Now</span>:HH:mm:ss}"</span>;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">11f. Add the Full Code (All Together)</h6>
+                            <button class="btn btn-success btn-sm" onclick="toggleCode('codeStep11f')">
+                                <i class="fas fa-code me-1"></i> Show/Hide Full Code
+                            </button>
+                            <div id="codeStep11f" style="display: none;" class="mt-2">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    This is the complete code for <code>MainForm.cs</code>. Copy all of it.
+                                </div>
+                                <div class="code-block bg-dark p-3 rounded-3">
+                                    <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">System</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Drawing</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Windows</span>.<span class="class">Forms</span>;
+
+<span class="keyword">public partial class</span> <span class="class">MainForm</span> : <span class="class">Form</span>
+{
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt; <span class="variable">_students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt;();
+
+    <span class="keyword">public</span> <span class="function">MainForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">MainForm_Load</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="comment">// Setup ComboBox</span>
+        <span class="variable">cmbCourse</span>.<span class="property">Items</span>.<span class="function">AddRange</span>(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Math"</span>, <span class="string">"Science"</span>, <span class="string">"History"</span>, <span class="string">"Art"</span> });
+        <span class="variable">cmbCourse</span>.<span class="property">SelectedIndex</span> = <span class="number">0</span>;
+        
+        <span class="variable">clbHobbies</span>.<span class="property">Items</span>.<span class="function">AddRange</span>(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Reading"</span>, <span class="string">"Sports"</span>, <span class="string">"Music"</span>, <span class="string">"Gaming"</span> });
+        
+        <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Name"</span>, <span class="number">150</span>);
+        <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Course"</span>, <span class="number">100</span>);
+        <span class="variable">lvStudents</span>.<span class="property">Columns</span>.<span class="function">Add</span>(<span class="string">"Status"</span>, <span class="number">80</span>);
+        
+        <span class="variable">timerClock</span>.<span class="function">Start</span>();
+        <span class="function">LoadSampleData</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">LoadSampleData</span>()
+    {
+        <span class="variable">_students</span>.<span class="function">Add</span>(<span class="keyword">new</span> <span class="class">Student</span> { <span class="property">FirstName</span> = <span class="string">"John"</span>, <span class="property">LastName</span> = <span class="string">"Doe"</span>, <span class="property">Course</span> = <span class="string">"Math"</span>, <span class="property">Active</span> = <span class="keyword">true</span> });
+        <span class="variable">_students</span>.<span class="function">Add</span>(<span class="keyword">new</span> <span class="class">Student</span> { <span class="property">FirstName</span> = <span class="string">"Jane"</span>, <span class="property">LastName</span> = <span class="string">"Smith"</span>, <span class="property">Course</span> = <span class="string">"Science"</span>, <span class="property">Active</span> = <span class="keyword">true</span> });
+        <span class="function">RefreshDisplay</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">RefreshDisplay</span>()
+    {
+        <span class="comment">// DataGridView</span>
+        <span class="variable">dgvStudents</span>.<span class="property">DataSource</span> = <span class="keyword">null</span>;
+        <span class="variable">dgvStudents</span>.<span class="property">DataSource</span> = <span class="variable">_students</span>;
+        
+        <span class="comment">// ListView</span>
+        <span class="variable">lvStudents</span>.<span class="property">Items</span>.<span class="function">Clear</span>();
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">student</span> <span class="keyword">in</span> <span class="variable">_students</span>)
+        {
+            <span class="keyword">var</span> <span class="variable">item</span> = <span class="keyword">new</span> <span class="class">ListViewItem</span>(<span class="string">$"{<span class="variable">student</span>.<span class="property">FirstName</span>} {<span class="variable">student</span>.<span class="property">LastName</span>}"</span>);
+            <span class="variable">item</span>.<span class="property">SubItems</span>.<span class="function">Add</span>(<span class="variable">student</span>.<span class="property">Course</span>);
+            <span class="variable">item</span>.<span class="property">SubItems</span>.<span class="function">Add</span>(<span class="variable">student</span>.<span class="property">Active</span> ? <span class="string">"Active"</span> : <span class="string">"Inactive"</span>);
+            <span class="variable">lvStudents</span>.<span class="property">Items</span>.<span class="function">Add</span>(<span class="variable">item</span>);
+        }
+        
+        <span class="comment">// ListBox</span>
+        <span class="variable">lstStudents</span>.<span class="property">Items</span>.<span class="function">Clear</span>();
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">student</span> <span class="keyword">in</span> <span class="variable">_students</span>)
+        {
+            <span class="variable">lstStudents</span>.<span class="property">Items</span>.<span class="function">Add</span>(<span class="string">$"{<span class="variable">student</span>.<span class="property">FirstName</span>} {<span class="variable">student</span>.<span class="property">LastName</span>}"</span>);
+        }
+    }
+
+    <span class="keyword">private void</span> <span class="function">ClearForm</span>()
+    {
+        <span class="variable">txtFirstName</span>.<span class="function">Clear</span>();
+        <span class="variable">txtLastName</span>.<span class="function">Clear</span>();
+        <span class="variable">chkActive</span>.<span class="property">Checked</span> = <span class="keyword">false</span>;
+        <span class="variable">rbMale</span>.<span class="property">Checked</span> = <span class="keyword">true</span>;
+        <span class="variable">rtbNotes</span>.<span class="function">Clear</span>();
+        <span class="variable">dtpBirthDate</span>.<span class="property">Value</span> = <span class="class">DateTime</span>.<span class="property">Today</span>;
+        
+        <span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">clbHobbies</span>.<span class="property">Items</span>.<span class="property">Count</span>; <span class="variable">i</span>++)
+        {
+            <span class="variable">clbHobbies</span>.<span class="function">SetItemChecked</span>(<span class="variable">i</span>, <span class="keyword">false</span>);
+        }
+    }
+
+    <span class="keyword">private void</span> <span class="function">btnSave_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="function">IsNullOrWhiteSpace</span>(<span class="variable">txtFirstName</span>.<span class="property">Text</span>))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a first name."</span>, <span class="string">"Validation"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">var</span> <span class="variable">student</span> = <span class="keyword">new</span> <span class="class">Student</span>
+        {
+            <span class="property">FirstName</span> = <span class="variable">txtFirstName</span>.<span class="property">Text</span>,
+            <span class="property">LastName</span> = <span class="variable">txtLastName</span>.<span class="property">Text</span>,
+            <span class="property">Course</span> = <span class="variable">cmbCourse</span>.<span class="property">SelectedItem</span>.<span class="function">ToString</span>(),
+            <span class="property">Active</span> = <span class="variable">chkActive</span>.<span class="property">Checked</span>,
+            <span class="property">Gender</span> = <span class="variable">rbMale</span>.<span class="property">Checked</span> ? <span class="string">"Male"</span> : <span class="string">"Female"</span>,
+            <span class="property">BirthDate</span> = <span class="variable">dtpBirthDate</span>.<span class="property">Value</span>,
+            <span class="property">Notes</span> = <span class="variable">rtbNotes</span>.<span class="property">Text</span>
+        };
+        
+        <span class="variable">_students</span>.<span class="function">Add</span>(<span class="variable">student</span>);
+        <span class="function">RefreshDisplay</span>();
+        <span class="function">ClearForm</span>();
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student saved successfully!"</span>, <span class="string">"Success"</span>);
+    }
+
+    <span class="keyword">private void</span> <span class="function">timerClock_Tick</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="variable">lblStatus</span>.<span class="property">Text</span> = <span class="string">$"Current Time: {<span class="class">DateTime</span>.<span class="property">Now</span>:HH:mm:ss}"</span>;
+    }
+
+    <span class="keyword">private void</span> <span class="function">llHelp_LinkClicked</span>(<span class="keyword">object</span> sender, <span class="class">LinkLabelLinkClickedEventArgs</span> e)
+    {
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Help is available!\nContact support at support@example.com"</span>, <span class="string">"Help"</span>);
+    }
+
+    <span class="keyword">private void</span> <span class="function">newToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="function">ClearForm</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">exitToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="class">Application</span>.<span class="function">Exit</span>();
+    }
+
+    <span class="keyword">private void</span> <span class="function">aboutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student Manager v1.0\nBuilt with C# and WinForms"</span>, <span class="string">"About"</span>);
+    }
+
+    <span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (<span class="variable">printPreviewDialog</span>.<span class="function">ShowDialog</span>() == <span class="class">DialogResult</span>.<span class="property">OK</span>)
+        {
+            <span class="variable">printDocument</span>.<span class="function">Print</span>();
+        }
+    }
+
+    <span class="keyword">private void</span> <span class="function">printDocument_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">System</span>.<span class="class">Drawing</span>.<span class="class">Printing</span>.<span class="class">PrintPageEventArgs</span> e)
+    {
+        <span class="keyword">int</span> <span class="variable">y</span> = <span class="number">50</span>;
+        <span class="keyword">var</span> <span class="variable">font</span> = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>);
+        
+        <span class="variable">e</span>.<span class="property">Graphics</span>.<span class="function">DrawString</span>(<span class="string">"Student List"</span>, <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">16</span>, <span class="class">FontStyle</span>.<span class="property">Bold</span>), <span class="class">Brushes</span>.<span class="property">Black</span>, <span class="number">50</span>, <span class="variable">y</span>);
+        <span class="variable">y</span> += <span class="number">40</span>;
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">student</span> <span class="keyword">in</span> <span class="variable">_students</span>)
+        {
+            <span class="variable">e</span>.<span class="property">Graphics</span>.<span class="function">DrawString</span>(<span class="string">$"{<span class="variable">student</span>.<span class="property">FirstName</span>} {<span class="variable">student</span>.<span class="property">LastName</span>} - {<span class="variable">student</span>.<span class="property">Course</span>}"</span>, <span class="variable">font</span>, <span class="class">Brushes</span>.<span class="property">Black</span>, <span class="number">50</span>, <span class="variable">y</span>);
+            <span class="variable">y</span> += <span class="number">30</span>;
+        }
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">Student</span>
+{
+    <span class="keyword">public string</span> <span class="property">FirstName</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">LastName</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Course</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public bool</span> <span class="property">Active</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Gender</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public DateTime</span> <span class="property">BirthDate</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Notes</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 7: RUN ===== -->
+                <div class="section-divider mt-5 mb-4" data-aos="fade-up">
+                    <h2 class="fw-bold text-success"><i class="fas fa-play me-2"></i>Part 7: Run the Project</h2>
+                    <hr>
+                </div>
+
+                <!-- Step 12 -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-12 me-2"></i>Step 12: Run and Test</h4>
+                        <ol>
+                            <li>Press <strong>F5</strong> to run the project</li>
+                            <li>Test adding students with all controls</li>
+                            <li>Test the menu items (File, Edit, Help)</li>
+                            <li>Test the ToolStrip buttons</li>
+                            <li>Test printing</li>
+                            <li>Verify everything works</li>
+                        </ol>
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Congratulations!</strong> You've built a complete Windows Forms application
+                            using <span class="fw-bold">all 29 controls</span> from the Toolbox!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls Summary -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list-check text-success me-2"></i>All 29 Controls Used</h4>
+                        <p>You have successfully used every control from the Toolbox:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> Label</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> TextBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> Button</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> CheckBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> RadioButton</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> ComboBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> ListBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> CheckedListBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> GroupBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> Panel</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> SplitContainer</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> TableLayoutPanel</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> DataGridView</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> ListView</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> DateTimePicker</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> PictureBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> ImageList</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> RichTextBox</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> WebBrowser</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> Timer</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> LinkLabel</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> MenuStrip</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> ToolStrip</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> NotifyIcon</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> SaveFileDialog</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> PrintDocument</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> PrintPreviewDialog</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> PageSetupDialog</li>
+                                    <li><i class="fas fa-check-circle text-success me-1"></i> PrintDialog</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <span class="badge bg-success p-2 px-3">29/29 Controls Used</span>
+                            <span class="badge bg-primary p-2 px-3">Complete Project</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/WindowsForms" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Windows Forms
+                    </a>
+                    <a href="/WindowsForms/ToolboxMastery" class="btn btn-primary-custom">
+                        Toolbox Mastery <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Windows Forms</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/WindowsForms"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Overview</a>
+                    <a class="nav-link" href="/WindowsForms/CSharpRefresher"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>C# Refresher</a>
+                    <a class="nav-link" href="/WindowsForms/01-CreatingWinFormsProject"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Creating a WinForms Project</a>
+                    <a class="nav-link" href="/WindowsForms/02-ControlsBasics"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Controls Basics</a>
+                    <a class="nav-link" href="/WindowsForms/03-EventHandling"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Event Handling</a>
+                    <a class="nav-link" href="/WindowsForms/04-MenusAndDialogs"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Menus & Dialogs</a>
+                    <a class="nav-link" href="/WindowsForms/05-DataBinding"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Data Binding</a>
+                    <a class="nav-link" href="/WindowsForms/06-MultiFormApps"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Multi-Form Apps</a>
+                    <a class="nav-link" href="/WindowsForms/07-CrudProjectWalkthrough"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>CRUD Walkthrough</a>
+                    <a class="nav-link" href="/WindowsForms/ToolboxMastery"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Toolbox Mastery</a>
+                    <a class="nav-link active" href="/WindowsForms/FullProject"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Full WinForms Project</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleCode(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+
+        .language-text {
+            color: #e4e4e4;
+        }
+
+        .section-divider hr {
+            border-top: 3px solid #512BD4;
+            opacity: 0.3;
+        }
+
+        .section-divider h2 {
+            margin-bottom: 0;
+        }
+
+        .btn-sm {
+            font-size: 0.8rem;
+        }
+    </style>
+}

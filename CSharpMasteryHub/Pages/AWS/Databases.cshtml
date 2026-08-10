@@ -1,0 +1,288 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.DatabasesModel
+@{
+    ViewData["Title"] = "AWS Databases - RDS, DynamoDB & More";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">Databases</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-danger p-2 px-3 rounded-pill">Advanced</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 40 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 6 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-database text-success me-2"></i>AWS Databases
+                </h1>
+                <p class="lead mb-4">
+                    Learn about <span class="text-primary fw-bold">RDS</span> (relational databases),
+                    <span class="text-warning fw-bold">DynamoDB</span> (NoSQL), and choosing the right database for your needs.
+                </p>
+
+                <!-- Database Options -->
+                <div class="card mb-4 border-success" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-options text-success me-2"></i>Database Options in AWS</h4>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded border-primary text-center h-100">
+                                    <i class="fas fa-database fa-2x text-primary"></i>
+                                    <h6 class="mt-2">RDS</h6>
+                                    <p class="small">Relational Databases<br>MySQL, PostgreSQL, SQL Server</p>
+                                    <span class="badge bg-primary">Free Tier Available</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded border-warning text-center h-100">
+                                    <i class="fas fa-table fa-2x text-warning"></i>
+                                    <h6 class="mt-2">DynamoDB</h6>
+                                    <p class="small">NoSQL Database<br>Key-Value & Document</p>
+                                    <span class="badge bg-warning text-dark">Always Free Tier</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded border-success text-center h-100">
+                                    <i class="fas fa-database fa-2x text-success"></i>
+                                    <h6 class="mt-2">Aurora</h6>
+                                    <p class="small">MySQL/PostgreSQL Compatible<br>5x faster than MySQL</p>
+                                    <span class="badge bg-success">Free Tier Available</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RDS -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-primary"><i class="fas fa-server me-2"></i>RDS - Relational Database Service</h4>
+                        <p>
+                            <strong>RDS</strong> is a managed relational database service. AWS handles backups, patching,
+                            and replication for you.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Supported Engines:</strong> MySQL, PostgreSQL, MariaDB, Oracle, SQL Server
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Free Tier:</strong> 750 hours/month of db.t2.micro
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Backups:</strong> Automated daily backups, point-in-time recovery
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-light rounded">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Read Replicas:</strong> Scale read traffic across multiple instances
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-code me-2"></i>
+                            <strong>Connect from your app:</strong> Use connection string from RDS console
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DynamoDB -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-warning"><i class="fas fa-table me-2"></i>DynamoDB - NoSQL Database</h4>
+                        <p>
+                            <strong>DynamoDB</strong> is a fully managed NoSQL database. It's perfect for
+                            high-traffic applications that need low latency.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-bolt fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Speed</strong><br>Single-digit millisecond latency</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-infinity fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Scale</strong><br>Auto-scales to any size</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-gift fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Free Tier</strong><br>25 GB free forever</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>When to use DynamoDB:</strong> High-traffic apps, real-time data,
+                            flexible schemas, and serverless applications.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Choosing the Right Database -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-question-circle text-info me-2"></i>How to Choose the Right Database</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Use Case</th>
+                                        <th>Recommended Service</th>
+                                        <th>Why?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>E-commerce, CRM, ERP</td>
+                                        <td><span class="text-primary fw-bold">RDS</span></td>
+                                        <td>Complex queries, transactions, relationships</td>
+                                    </tr>
+                                    <tr>
+                                        <td>High-traffic web apps</td>
+                                        <td><span class="text-warning fw-bold">DynamoDB</span></td>
+                                        <td>Fast, scalable, serverless friendly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Analytics, Data warehousing</td>
+                                        <td><span class="text-danger fw-bold">Redshift</span></td>
+                                        <td>Petabyte-scale data analysis</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile/Serverless apps</td>
+                                        <td><span class="text-success fw-bold">DynamoDB</span></td>
+                                        <td>Low latency, auto-scaling</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Blogs, CMS</td>
+                                        <td><span class="text-primary fw-bold">RDS</span></td>
+                                        <td>Simple relational data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create a Database</h4>
+                        <p><strong>Task:</strong> Create and connect to an RDS database.</p>
+                        <ol>
+                            <li>Go to RDS and click "Create database"</li>
+                            <li>Choose MySQL or PostgreSQL</li>
+                            <li>Select Free Tier template</li>
+                            <li>Set master username and password</li>
+                            <li>Create the database (takes 5-10 minutes)</li>
+                            <li>Note the endpoint URL</li>
+                            <li>Connect using MySQL Workbench or a Lambda function</li>
+                            <li>Create a table and insert data</li>
+                        </ol>
+                        <details class="mt-3">
+                            <summary class="btn btn-outline-success btn-sm">Show Solution</summary>
+                            <div class="bg-dark text-light p-3 rounded-3 mt-2">
+                                <pre><code># Python Lambda function to connect to RDS
+import pymysql
+import json
+
+def lambda_handler(event, context):
+    connection = pymysql.connect(
+        host='your-database-endpoint',
+        user='your-username',
+        password='your-password',
+        database='your-database'
+    )
+    
+    cursor = connection.cursor()
+    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT, name VARCHAR(100))")
+    cursor.execute("INSERT INTO users VALUES (1, 'John Doe')")
+    connection.commit()
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Database created and data inserted!')
+    }</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Choose <span class="text-primary fw-bold">RDS</span> for relational data with complex queries.
+                            Choose <span class="text-warning fw-bold">DynamoDB</span> for high-scale, low-latency applications.
+                            Both have <strong>free tier options</strong> to get started!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS/Networking" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: Networking
+                    </a>
+                    <a href="/AWS/Security" class="btn btn-primary-custom">
+                        Next: Security & IAM <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link active" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        details summary {
+            cursor: pointer;
+        }
+    </style>
+}

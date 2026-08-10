@@ -1,0 +1,338 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.IndexModel
+@{
+    ViewData["Title"] = "AWS Cloud Mastery - Complete Learning Path";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Hero Section -->
+            <div class="aws-hero text-center py-5" data-aos="fade-up">
+                <div class="aws-badge mb-3">
+                    <span class="badge bg-warning text-dark px-4 py-2 rounded-pill">
+                        <i class="fas fa-cloud me-2"></i>Start for $0 - No Credit Card Required
+                    </span>
+                </div>
+                <h1 class="display-3 fw-bold">
+                    <span class="text-primary">AWS Cloud</span>
+                    <span class="text-warning">Mastery</span>
+                </h1>
+                <p class="lead text-muted mt-3">
+                    From absolute beginner to cloud master. Learn Amazon Web Services step by step.
+                </p>
+                <div class="mt-4">
+                    <a href="/AWS/GettingStarted" class="btn btn-warning btn-lg pulse-btn">
+                        <i class="fas fa-rocket me-2"></i>Start Learning FREE
+                    </a>
+                    <a href="#modules" class="btn btn-outline-primary btn-lg ms-2">
+                        <i class="fas fa-list me-2"></i>View Modules
+                    </a>
+                </div>
+                <div class="mt-3">
+                    <span class="badge bg-success p-2 px-3 me-2">100% Free Tier</span>
+                    <span class="badge bg-info text-dark p-2 px-3 me-2">8 Modules</span>
+                    <span class="badge bg-danger p-2 px-3">50+ Lessons</span>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="row g-4 mb-5" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box text-center p-3 bg-white shadow-sm rounded-3">
+                        <div class="stat-number display-4 fw-bold text-warning">750</div>
+                        <div class="stat-label text-muted">Free Hours/Month</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box text-center p-3 bg-white shadow-sm rounded-3">
+                        <div class="stat-number display-4 fw-bold text-success">12</div>
+                        <div class="stat-label text-muted">Months Free Tier</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box text-center p-3 bg-white shadow-sm rounded-3">
+                        <div class="stat-number display-4 fw-bold text-primary">100+</div>
+                        <div class="stat-label text-muted">AWS Services</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box text-center p-3 bg-white shadow-sm rounded-3">
+                        <div class="stat-number display-4 fw-bold text-danger">$0</div>
+                        <div class="stat-label text-muted">Starting Cost</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Modules -->
+            <div id="modules" class="row g-4">
+                <div class="col-12 mb-3" data-aos="fade-right">
+                    <h2 class="fw-bold"><i class="fas fa-graduation-cap text-warning me-2"></i>Learning Modules</h2>
+                    <p class="text-muted">Follow this path from beginner to AWS master</p>
+                </div>
+
+                <!-- Module 1: Getting Started -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-success">
+                        <div class="module-number bg-success text-white rounded-circle d-flex align-items-center justify-content-center mb-3">1</div>
+                        <h4 class="fw-bold">Getting Started</h4>
+                        <p class="text-muted small">Create your free AWS account, set up billing alerts, and understand the free tier.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-success me-1">Beginner</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </div>
+                        <a href="/AWS/GettingStarted" class="btn btn-outline-success btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 2: EC2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-primary">
+                        <div class="module-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3">2</div>
+                        <h4 class="fw-bold">EC2 - Virtual Servers</h4>
+                        <p class="text-muted small">Launch, connect to, and manage virtual servers in the cloud.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-success me-1">Beginner</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </div>
+                        <a href="/AWS/EC2" class="btn btn-outline-primary btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 3: S3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-warning">
+                        <div class="module-number bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center mb-3">3</div>
+                        <h4 class="fw-bold">S3 - Storage</h4>
+                        <p class="text-muted small">Store files, host static websites, and manage cloud storage.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-success me-1">Beginner</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </div>
+                        <a href="/AWS/S3" class="btn btn-outline-warning btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 4: Lambda -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-danger">
+                        <div class="module-number bg-danger text-white rounded-circle d-flex align-items-center justify-content-center mb-3">4</div>
+                        <h4 class="fw-bold">Lambda - Serverless</h4>
+                        <p class="text-muted small">Run code without servers. Pay only for what you use.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-warning text-dark me-1">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </div>
+                        <a href="/AWS/Lambda" class="btn btn-outline-danger btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 5: Networking -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-info">
+                        <div class="module-number bg-info text-white rounded-circle d-flex align-items-center justify-content-center mb-3">5</div>
+                        <h4 class="fw-bold">Networking</h4>
+                        <p class="text-muted small">VPC, subnets, security groups, and network basics.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-warning text-dark me-1">Intermediate</span>
+                            <span class="badge bg-info text-dark">35 min</span>
+                        </div>
+                        <a href="/AWS/Networking" class="btn btn-outline-info btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 6: Databases -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="350">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-secondary">
+                        <div class="module-number bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mb-3">6</div>
+                        <h4 class="fw-bold">Databases</h4>
+                        <p class="text-muted small">RDS, DynamoDB, and database management in the cloud.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-danger me-1">Advanced</span>
+                            <span class="badge bg-info text-dark">40 min</span>
+                        </div>
+                        <a href="/AWS/Databases" class="btn btn-outline-secondary btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 7: Security -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-dark">
+                        <div class="module-number bg-dark text-white rounded-circle d-flex align-items-center justify-content-center mb-3">7</div>
+                        <h4 class="fw-bold">Security & IAM</h4>
+                        <p class="text-muted small">IAM, roles, policies, and keeping your AWS account safe.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-danger me-1">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </div>
+                        <a href="/AWS/Security" class="btn btn-outline-dark btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Module 8: Deployment -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="450">
+                    <div class="module-card p-4 bg-white shadow-sm rounded-4 h-100 border-start border-5 border-purple">
+                        <div class="module-number bg-purple text-white rounded-circle d-flex align-items-center justify-content-center mb-3">8</div>
+                        <h4 class="fw-bold">Deployment</h4>
+                        <p class="text-muted small">Deploy real applications to AWS using best practices.</p>
+                        <div class="mt-2">
+                            <span class="badge bg-danger me-1">Advanced</span>
+                            <span class="badge bg-info text-dark">45 min</span>
+                        </div>
+                        <a href="/AWS/Deployment" class="btn btn-outline-purple btn-sm mt-3">
+                            Start <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="row mt-5" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="text-center p-5 bg-primary bg-opacity-10 rounded-4">
+                        <h3 class="fw-bold mb-3">
+                            <i class="fas fa-brain text-warning me-2"></i>Test Your AWS Knowledge
+                        </h3>
+                        <p class="lead mb-4">
+                            Take the comprehensive AWS quiz to validate your learning.
+                        </p>
+                        <a href="/AWS/Quiz" class="btn btn-warning btn-lg pulse-btn">
+                            <i class="fas fa-play me-2"></i>Start Quiz
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Golden Rule -->
+            <div class="row mt-4" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="golden-rule p-4 bg-danger bg-opacity-10 border border-danger rounded-4">
+                        <h4 class="text-danger fw-bold">
+                            <i class="fas fa-exclamation-triangle me-2"></i>THE GOLDEN RULE
+                        </h4>
+                        <p class="mb-0">
+                            <strong>Always TERMINATE (delete) your resources when you're done testing.</strong>
+                            Do not just "stop" them. "Stop" keeps the hard drive active and costs money.
+                            "Terminate" deletes everything completely. Set up a <strong>Billing Alarm</strong> for $1
+                            as your safety net!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .aws-hero {
+        background: linear-gradient(135deg, rgba(255, 193, 7, 0.05), rgba(13, 110, 253, 0.05));
+        border-radius: 20px;
+        margin-bottom: 2rem;
+    }
+
+    .aws-badge .badge {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .stat-box {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        }
+
+    .module-card {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
+        }
+
+    .module-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    .border-purple {
+        border-color: #6f42c1 !important;
+    }
+
+    .bg-purple {
+        background-color: #6f42c1 !important;
+    }
+
+    .btn-outline-purple {
+        color: #6f42c1;
+        border-color: #6f42c1;
+    }
+
+        .btn-outline-purple:hover {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+    .golden-rule {
+        border-width: 3px !important;
+    }
+
+    .pulse-btn {
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(255, 193, 7, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .aws-hero h1 {
+            font-size: 2rem;
+        }
+
+        .module-card {
+            padding: 1.5rem !important;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+}

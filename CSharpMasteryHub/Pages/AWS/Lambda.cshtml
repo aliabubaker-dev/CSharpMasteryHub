@@ -1,0 +1,524 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.LambdaModel
+@{
+    ViewData["Title"] = "Lambda - Serverless Computing on AWS";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">Lambda Serverless</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 4 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-code text-danger me-2"></i>Lambda - Serverless Computing
+                </h1>
+                <p class="lead mb-4">
+                    Lambda is AWS's serverless computing service. <span class="text-success fw-bold">You write C# code, AWS runs it.</span>
+                    No servers to manage, no infrastructure to maintain. Just C# code that runs when you need it.
+                </p>
+
+                <!-- What is Lambda -->
+                <div class="card mb-4 border-danger" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-danger me-2"></i>What is Lambda?</h4>
+                        <p>
+                            Lambda lets you run C# code without provisioning or managing servers. You upload your .NET code,
+                            and AWS handles everything else:
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-microchip fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Scaling</strong><br>Automatic</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-clock fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Pay Per Use</strong><br>Milliseconds</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-code fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Languages</strong><br>C#, .NET 6/8</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <span class="badge bg-success">1 million requests FREE per month</span>
+                            <span class="badge bg-info text-dark">Always free tier</span>
+                            <span class="badge bg-primary">.NET 6/8 Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Setup .NET for Lambda -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-primary"><i class="fas fa-tools me-2"></i>Setting Up .NET for Lambda</h4>
+                        <ol>
+                            <li>
+                                <strong>Install the AWS .NET SDK:</strong>
+                                <div class="bg-dark text-light p-2 rounded-2 mt-1">
+                                    <code>dotnet add package AWSSDK.Lambda</code>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Install the Lambda .NET Core Global Tool:</strong>
+                                <div class="bg-dark text-light p-2 rounded-2 mt-1">
+                                    <code>dotnet tool install -g Amazon.Lambda.Tools</code>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Create a new Lambda project:</strong>
+                                <div class="bg-dark text-light p-2 rounded-2 mt-1">
+                                    <code>dotnet new lambda.EmptyFunction -n MyCSharpLambda</code>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Deploy your function:</strong>
+                                <div class="bg-dark text-light p-2 rounded-2 mt-1">
+                                    <code>dotnet lambda deploy-function MyCSharpLambda</code>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Step by Step -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-list-ol me-2"></i>Your Third Mission: Create a C# Lambda Function</h4>
+                        <ol>
+                            <li>
+                                <strong>Go to Lambda:</strong> Type <code>Lambda</code> in the search bar and click it.
+                            </li>
+                            <li>
+                                <strong>Click "Create function"</strong>.
+                            </li>
+                            <li>
+                                <strong>Name it:</strong> <code>HelloWorldCSharp</code>.
+                            </li>
+                            <li>
+                                <strong>Runtime:</strong> Choose <code>.NET 6</code> or <code>.NET 8</code>.
+                            </li>
+                            <li>
+                                <strong>Architecture:</strong> Choose <code>x86_64</code> or <code>arm64</code>.
+                            </li>
+                            <li>
+                                <strong>Click "Create function"</strong> (the orange button).
+                            </li>
+                            <li>
+                                <strong>Scroll down</strong> to the code editor. You will see default C# code.
+                            </li>
+                            <li>
+                                <strong>Click "Test"</strong> (the orange button right above the code).
+                            </li>
+                            <li>
+                                <strong>Event name:</strong> Type <code>MyTest</code>, ignore everything else, click "Save".
+                            </li>
+                            <li>
+                                <strong>Click "Test"</strong> again.
+                            </li>
+                            <li>
+                                <span class="text-success fw-bold">BOOM!</span> You will see a green box at the top saying
+                                <strong>"Execution succeeded"</strong>.
+                            </li>
+                            <li>
+                                <span class="text-primary fw-bold">
+                                    AWS just woke up, ran your C# code for 100 milliseconds,
+                                    gave you a response, and went back to sleep.
+                                </span>
+                                <span class="text-warning fw-bold">You just did "Serverless" computing with C#!</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- C# Code Examples -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-code text-warning me-2"></i>C# Lambda Code Examples</h4>
+
+                        <!-- Basic Function -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-primary">1. Basic C# Lambda Function</h6>
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Using Amazon.Lambda.Core</span>
+<span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Core</span>;
+
+<span class="comment">// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.</span>
+[<span class="class">LambdaSerializer</span>(<span class="keyword">typeof</span>(<span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Serialization</span>.<span class="class">SystemTextJson</span>.<span class="class">DefaultLambdaJsonSerializer</span>))]
+
+<span class="keyword">public class</span> <span class="class">Function</span>
+{
+    <span class="comment">/// &lt;summary&gt;</span>
+    <span class="comment">/// A simple function that takes a string and returns a greeting</span>
+    <span class="comment">/// &lt;/summary&gt;</span>
+    <span class="keyword">public string</span> <span class="function">FunctionHandler</span>(<span class="keyword">string</span> <span class="variable">name</span>, <span class="class">ILambdaContext</span> <span class="variable">context</span>)
+    {
+        <span class="keyword">return</span> <span class="string">$"Hello, {<span class="variable">name</span> ?? "World"}!"</span>;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- With Input Parameters -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-success">2. Lambda with Input Parameters</h6>
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Core</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Text</span>.<span class="class">Json</span>;
+
+[<span class="class">LambdaSerializer</span>(<span class="keyword">typeof</span>(<span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Serialization</span>.<span class="class">SystemTextJson</span>.<span class="class">DefaultLambdaJsonSerializer</span>))]
+
+<span class="keyword">public class</span> <span class="class">Function</span>
+{
+    <span class="keyword">public class</span> <span class="class">Request</span>
+    {
+        <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+        <span class="keyword">public int</span> <span class="property">Age</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    }
+
+    <span class="keyword">public class</span> <span class="class">Response</span>
+    {
+        <span class="keyword">public string</span> <span class="property">Message</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+        <span class="keyword">public bool</span> <span class="property">IsAdult</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    }
+
+    <span class="keyword">public</span> <span class="class">Response</span> <span class="function">FunctionHandler</span>(<span class="class">Request</span> <span class="variable">request</span>, <span class="class">ILambdaContext</span> <span class="variable">context</span>)
+    {
+        <span class="keyword">return new</span> <span class="class">Response</span>
+        {
+            <span class="property">Message</span> = <span class="string">$"Hello, {<span class="variable">request</span>.<span class="property">Name</span>}!"</span>,
+            <span class="property">IsAdult</span> = <span class="variable">request</span>.<span class="property">Age</span> >= <span class="number">18</span>
+        };
+    }
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Using AWS Services -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-warning">3. Lambda with S3 Integration</h6>
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Core</span>;
+<span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">S3</span>;
+<span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">S3</span>.<span class="class">Model</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Text</span>.<span class="class">Json</span>;
+
+[<span class="class">LambdaSerializer</span>(<span class="keyword">typeof</span>(<span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Serialization</span>.<span class="class">SystemTextJson</span>.<span class="class">DefaultLambdaJsonSerializer</span>))]
+
+<span class="keyword">public class</span> <span class="class">Function</span>
+{
+    <span class="keyword">private readonly</span> <span class="class">IAmazonS3</span> <span class="variable">_s3Client</span>;
+
+    <span class="keyword">public</span> <span class="function">Function</span>()
+    {
+        <span class="variable">_s3Client</span> = <span class="keyword">new</span> <span class="class">AmazonS3Client</span>();
+    }
+
+    <span class="keyword">public async Task</span>&lt;<span class="keyword">string</span>&gt; <span class="function">FunctionHandler</span>(<span class="class">S3Event</span> <span class="variable">s3Event</span>, <span class="class">ILambdaContext</span> <span class="variable">context</span>)
+    {
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">record</span> <span class="keyword">in</span> <span class="variable">s3Event</span>.<span class="property">Records</span>)
+        {
+            <span class="keyword">var</span> <span class="variable">bucketName</span> = <span class="variable">record</span>.<span class="property">S3</span>.<span class="property">Bucket</span>.<span class="property">Name</span>;
+            <span class="keyword">var</span> <span class="variable">objectKey</span> = <span class="variable">record</span>.<span class="property">S3</span>.<span class="property">Object</span>.<span class="property">Key</span>;
+
+            <span class="comment">// Get the object from S3</span>
+            <span class="keyword">var</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="variable">_s3Client</span>.<span class="function">GetObjectAsync</span>(<span class="variable">bucketName</span>, <span class="variable">objectKey</span>);
+
+            <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">reader</span> = <span class="keyword">new</span> <span class="class">StreamReader</span>(<span class="variable">response</span>.<span class="property">ResponseStream</span>))
+            {
+                <span class="keyword">var</span> <span class="variable">content</span> = <span class="keyword">await</span> <span class="variable">reader</span>.<span class="function">ReadToEndAsync</span>();
+                <span class="variable">context</span>.<span class="class">Logger</span>.<span class="function">LogInformation</span>(<span class="string">$"File content: {<span class="variable">content</span>}"</span>);
+            }
+        }
+
+        <span class="keyword">return</span> <span class="string">"S3 event processed successfully!"</span>;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- API Gateway Integration -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-info">4. Lambda with API Gateway (HTTP API)</h6>
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Core</span>;
+<span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">APIGateway</span>.<span class="class">Events</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Text</span>.<span class="class">Json</span>;
+
+[<span class="class">LambdaSerializer</span>(<span class="keyword">typeof</span>(<span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Serialization</span>.<span class="class">SystemTextJson</span>.<span class="class">DefaultLambdaJsonSerializer</span>))]
+
+<span class="keyword">public class</span> <span class="class">Function</span>
+{
+    <span class="keyword">public async Task</span>&lt;<span class="class">APIGatewayHttpApiV2ProxyResponse</span>&gt; <span class="function">FunctionHandler</span>(
+        <span class="class">APIGatewayHttpApiV2ProxyRequest</span> <span class="variable">request</span>, 
+        <span class="class">ILambdaContext</span> <span class="variable">context</span>)
+    {
+        <span class="comment">// Get the HTTP method</span>
+        <span class="keyword">var</span> <span class="variable">httpMethod</span> = <span class="variable">request</span>.<span class="property">RequestContext</span>.<span class="property">Http</span>.<span class="property">Method</span>;
+        
+        <span class="comment">// Get query parameters</span>
+        <span class="keyword">var</span> <span class="variable">name</span> = <span class="variable">request</span>.<span class="property">QueryStringParameters</span>?.<span class="function">GetValueOrDefault</span>(<span class="string">"name"</span>) ?? <span class="string">"World"</span>;
+
+        <span class="comment">// Create response body</span>
+        <span class="keyword">var</span> <span class="variable">responseBody</span> = <span class="keyword">new</span>
+        {
+            <span class="property">Message</span> = <span class="string">$"Hello, {<span class="variable">name</span>}!"</span>,
+            <span class="property">Method</span> = <span class="variable">httpMethod</span>,
+            <span class="property">Timestamp</span> = <span class="class">DateTime</span>.<span class="property">UtcNow</span>
+        };
+
+        <span class="keyword">return new</span> <span class="class">APIGatewayHttpApiV2ProxyResponse</span>
+        {
+            <span class="property">StatusCode</span> = <span class="number">200</span>,
+            <span class="property">Headers</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;
+            {
+                { <span class="string">"Content-Type"</span>, <span class="string">"application/json"</span> },
+                { <span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span> }
+            },
+            <span class="property">Body</span> = <span class="class">JsonSerializer</span>.<span class="function">Serialize</span>(<span class="variable">responseBody</span>)
+        };
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Concepts -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list text-info me-2"></i>Key Lambda Concepts</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Concept</th>
+                                        <th>Description</th>
+                                        <th>C# Implementation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Function</strong></td>
+                                        <td>Your C# code that runs when triggered</td>
+                                        <td><code>public class Function</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Handler</strong></td>
+                                        <td>The method that gets called</td>
+                                        <td><code>FunctionHandler()</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Trigger</strong></td>
+                                        <td>What causes your function to run</td>
+                                        <td>API Gateway, S3, SNS, etc.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LambdaSerializer</strong></td>
+                                        <td>Serializes JSON input/output</td>
+                                        <td><code>[LambdaSerializer]</code> attribute</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ILambdaContext</strong></td>
+                                        <td>Info about execution environment</td>
+                                        <td><code>ILambdaContext context</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Timeout</strong></td>
+                                        <td>Max time your function can run</td>
+                                        <td>15 minutes max, 5 minutes default</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Memory</strong></td>
+                                        <td>RAM allocated to your function</td>
+                                        <td>128 MB to 10 GB</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create a C# Weather API</h4>
+                        <p><strong>Task:</strong> Create a C# Lambda function that returns weather data.</p>
+                        <ol>
+                            <li>Create a new .NET 6 Lambda function named "WeatherAPI".</li>
+                            <li>Write C# code that takes a city name as input.</li>
+                            <li>Return mock weather data (temperature, conditions, humidity).</li>
+                            <li>Test the function with different city names.</li>
+                            <li>Add API Gateway trigger to access it via HTTP.</li>
+                            <li>Test the API URL in your browser.</li>
+                        </ol>
+                        <details class="mt-3">
+                            <summary class="btn btn-outline-success btn-sm">Show Solution</summary>
+                            <div class="bg-dark text-light p-3 rounded-3 mt-2">
+                                <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Core</span>;
+<span class="keyword">using</span> <span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">APIGateway</span>.<span class="class">Events</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Text</span>.<span class="class">Json</span>;
+
+[<span class="class">LambdaSerializer</span>(<span class="keyword">typeof</span>(<span class="class">Amazon</span>.<span class="class">Lambda</span>.<span class="class">Serialization</span>.<span class="class">SystemTextJson</span>.<span class="class">DefaultLambdaJsonSerializer</span>))]
+
+<span class="keyword">public class</span> <span class="class">Function</span>
+{
+    <span class="keyword">private static readonly</span> <span class="class">Random</span> <span class="variable">_random</span> = <span class="keyword">new</span> <span class="class">Random</span>();
+    <span class="keyword">private static readonly</span> <span class="keyword">string</span>[] <span class="variable">_conditions</span> = { <span class="string">"Sunny"</span>, <span class="string">"Cloudy"</span>, <span class="string">"Rainy"</span>, <span class="string">"Snowy"</span>, <span class="string">"Windy"</span> };
+
+    <span class="keyword">public</span> <span class="class">APIGatewayHttpApiV2ProxyResponse</span> <span class="function">FunctionHandler</span>(
+        <span class="class">APIGatewayHttpApiV2ProxyRequest</span> <span class="variable">request</span>, 
+        <span class="class">ILambdaContext</span> <span class="variable">context</span>)
+    {
+        <span class="comment">// Get city from query string</span>
+        <span class="keyword">var</span> <span class="variable">city</span> = <span class="variable">request</span>.<span class="property">QueryStringParameters</span>?.<span class="function">GetValueOrDefault</span>(<span class="string">"city"</span>) ?? <span class="string">"Unknown"</span>;
+
+        <span class="comment">// Generate mock weather data</span>
+        <span class="keyword">var</span> <span class="variable">weather</span> = <span class="keyword">new</span>
+        {
+            <span class="property">City</span> = <span class="variable">city</span>,
+            <span class="property">Temperature</span> = <span class="variable">_random</span>.<span class="function">Next</span>(-10, 41),
+            <span class="property">Conditions</span> = <span class="variable">_conditions</span>[<span class="variable">_random</span>.<span class="function">Next</span>(<span class="variable">_conditions</span>.<span class="property">Length</span>)],
+            <span class="property">Humidity</span> = <span class="variable">_random</span>.<span class="function">Next</span>(20, 91),
+            <span class="property">WindSpeed</span> = <span class="variable">_random</span>.<span class="function">Next</span>(0, 51),
+            <span class="property">Timestamp</span> = <span class="class">DateTime</span>.<span class="property">UtcNow</span>
+        };
+
+        <span class="keyword">return new</span> <span class="class">APIGatewayHttpApiV2ProxyResponse</span>
+        {
+            <span class="property">StatusCode</span> = <span class="number">200</span>,
+            <span class="property">Headers</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;
+            {
+                { <span class="string">"Content-Type"</span>, <span class="string">"application/json"</span> },
+                { <span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span> }
+            },
+            <span class="property">Body</span> = <span class="class">JsonSerializer</span>.<span class="function">Serialize</span>(<span class="variable">weather</span>)
+        };
+    }
+}</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Lambda is the easiest way to run C# code in the cloud. <span class="text-success fw-bold">No servers to manage.</span>
+                            Just write C# code, upload it, and AWS handles the rest. You get <strong>1 million requests for FREE</strong>
+                            every month, forever! Use <strong>.NET 6 or 8</strong> for the best performance.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS/S3" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: S3
+                    </a>
+                    <a href="/AWS/Networking" class="btn btn-primary-custom">
+                        Next: Networking <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link active" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+
+        details summary {
+            cursor: pointer;
+        }
+    </style>
+}

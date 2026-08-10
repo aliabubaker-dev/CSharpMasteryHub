@@ -1,0 +1,173 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.GettingStartedModel
+@{
+    ViewData["Title"] = "AWS Getting Started - Complete Guide";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">Getting Started</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 20 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 1 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-rocket text-warning me-2"></i>Getting Started with AWS
+                </h1>
+                <p class="lead mb-4">
+                    The best part: You can start right now, for absolutely <span class="text-success fw-bold">$0</span>,
+                    and you don't even need a credit card to get started.
+                </p>
+
+                <!-- Step 0: Golden Rule -->
+                <div class="card mb-4 border-danger" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Step 0: The Golden Rule (Read this first!)
+                        </h4>
+                        <p>
+                            AWS will give you <strong>750 hours</strong> of a tiny server FOR FREE every month
+                            for 12 months. That is enough to run one server continuously for the whole month for free.
+                        </p>
+                        <div class="alert alert-warning">
+                            <strong>To avoid accidental charges:</strong>
+                            As soon as you finish testing, <strong>TERMINATE (delete)</strong> the server.
+                            Do not just "stop" it. "Stop" keeps the hard drive active, which costs a tiny bit of money.
+                            "Terminate" deletes it completely.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Create Account -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-primary">
+                            <i class="fas fa-user-plus me-2"></i>Step 1: Create your Free Account
+                        </h4>
+                        <ol>
+                            <li>Go to <a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a> and click <strong>"Create an AWS Account"</strong>.</li>
+                            <li>Enter your email, name, and a strong password.</li>
+                            <li><strong>Address & Phone:</strong> Enter your real details.</li>
+                            <li>
+                                <strong>Payment Method:</strong> Yes, they will ask for your credit/debit card.
+                                <span class="text-success fw-bold">Don't panic!</span> They charge $1 temporarily just to verify
+                                your card is real (they refund it within a few days).
+                            </li>
+                            <li><strong>Phone Verification:</strong> They will send an automated voice call with a PIN to verify it's really you.</li>
+                            <li><strong>Support Plan:</strong> When asked, choose <strong>"Basic" (Free)</strong>. Ignore the expensive ones.</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Pro Tip:</strong> Take a screenshot of your Account ID and keep it somewhere safe.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Set Up Billing Alarm -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success">
+                            <i class="fas fa-bell me-2"></i>Step 2: Set Up a Billing Alarm (Your Safety Net!)
+                        </h4>
+                        <ol>
+                            <li>Go to the top right corner, click your name, and click <strong>"Billing Dashboard"</strong>.</li>
+                            <li>Scroll down and click <strong>"Create a Billing Alarm"</strong>.</li>
+                            <li>Set it to notify you via email if your bill ever goes above <strong>$1</strong>.</li>
+                            <li><strong>Why this is important:</strong> If you ever get that email, you know you forgot to delete something, and you can log in and fix it instantly!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Step 3: Understand the Free Tier -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-warning">
+                            <i class="fas fa-gift me-2"></i>Step 3: Understand the Free Tier
+                        </h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th>Free Tier</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>EC2</strong> (Virtual Servers)</td>
+                                        <td>750 hours/month of t2.micro or t3.micro</td>
+                                        <td>12 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>S3</strong> (Storage)</td>
+                                        <td>5 GB of standard storage</td>
+                                        <td>12 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lambda</strong> (Serverless)</td>
+                                        <td>1 million requests/month</td>
+                                        <td>Always free</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RDS</strong> (Databases)</td>
+                                        <td>750 hours/month of db.t2.micro</td>
+                                        <td>12 months</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to AWS Home
+                    </a>
+                    <a href="/AWS/EC2" class="btn btn-primary-custom">
+                        Next: EC2 Virtual Servers <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+}

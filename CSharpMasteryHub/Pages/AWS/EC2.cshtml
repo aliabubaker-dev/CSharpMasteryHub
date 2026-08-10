@@ -1,0 +1,279 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AWS.EC2Model
+@{
+    ViewData["Title"] = "EC2 - Virtual Servers on AWS";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AWS">AWS Cloud</a></li>
+                    <li class="breadcrumb-item active">EC2 Virtual Servers</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content" data-aos="fade-up">
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3 rounded-pill">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 30 min read</span>
+                    <span class="badge bg-primary p-2 px-3 rounded-pill">Module 2 of 8</span>
+                </div>
+
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-server text-primary me-2"></i>EC2 - Virtual Servers
+                </h1>
+                <p class="lead mb-4">
+                    EC2 (Elastic Compute Cloud) gives you virtual computers in the cloud.
+                    Think of it as renting a computer that lives in an Amazon warehouse somewhere in the world.
+                </p>
+
+                <!-- What is EC2 -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is EC2?</h4>
+                        <p>
+                            EC2 is Amazon's virtual server service. It lets you:
+                        </p>
+                        <ul>
+                            <li><strong>Launch</strong> a virtual computer in seconds</li>
+                            <li><strong>Choose</strong> the operating system (Windows, Linux, Ubuntu, etc.)</li>
+                            <li><strong>Pick</strong> the size (CPU, memory, storage) you need</li>
+                            <li><strong>Pay</strong> only for what you use (or use the free tier)</li>
+                            <li><strong>Scale</strong> up or down as your needs change</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step by Step -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-list-ol me-2"></i>Your First Mission: Launch a Server</h4>
+                        <ol>
+                            <li>
+                                <strong>Login to AWS</strong> and type <code>EC2</code> in the search bar at the top.
+                                Click the EC2 result.
+                            </li>
+                            <li>
+                                <strong>Click "Launch Instance"</strong> (the big orange button).
+                            </li>
+                            <li>
+                                <strong>Name it:</strong> Call it <code>My-First-Server</code>.
+                            </li>
+                            <li>
+                                <strong>Choose an OS (AMI):</strong> Pick <strong>"Amazon Linux"</strong> or <strong>"Ubuntu"</strong>
+                                (both are free).
+                            </li>
+                            <li>
+                                <strong>Choose a free server (Crucial!):</strong> Under "Instance type",
+                                select <code>t2.micro</code> or <code>t3.micro</code>. This is the <span class="text-success fw-bold">ONLY</span>
+                                free tier server.
+                            </li>
+                            <li>
+                                <strong>Key pair (Login password) - MOST IMPORTANT STEP!</strong>
+                                <ul>
+                                    <li>Scroll down to "Key pair (login)"</li>
+                                    <li>Click <strong>"Create new key pair"</strong></li>
+                                    <li>Name it: <code>my-aws-key</code></li>
+                                    <li>Choose <strong>RSA</strong> and <strong>.pem</strong> (Mac/Linux) or <strong>.ppk</strong> (Windows)</li>
+                                    <li class="text-danger fw-bold">DOWNLOAD THIS FILE AND SAVE IT SOMEWHERE SAFE! You cannot download it again.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Leave everything else as default</strong> (Don't change storage or network settings).
+                            </li>
+                            <li>
+                                <strong>Click "Launch Instance"</strong> at the bottom right.
+                            </li>
+                        </ol>
+                        <div class="alert alert-success mt-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>CONGRATULATIONS!</strong> You just turned on a computer in a warehouse somewhere in the world!
+                            Wait 30 seconds for it to boot up.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connect to Server -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-warning"><i class="fas fa-plug me-2"></i>Connect to Your Server</h4>
+                        <ol>
+                            <li>Go back to the EC2 dashboard and click <strong>"Instances"</strong> on the left sidebar.</li>
+                            <li>You will see your server. Click the checkbox next to it.</li>
+                            <li>At the top, click the <strong>"Connect"</strong> button.</li>
+                            <li>AWS will open a new browser tab. Click the button that says <strong>"EC2 Instance Connect"</strong> and click <strong>"Connect"</strong>.</li>
+                            <li>
+                                <span class="text-success fw-bold">BOOM!</span> A black terminal window will open in your browser.
+                                You are now literally typing commands into a real computer in the cloud.
+                            </li>
+                            <li>
+                                <strong>Test it out:</strong>
+                                <ul>
+                                    <li>Type <code>sudo su</code> (to become the admin)</li>
+                                    <li>Type <code>yum update -y</code> (to update the software)</li>
+                                </ul>
+                                Watch the text fly by. <span class="text-primary fw-bold">You are a cloud engineer now!</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Exercise -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h4 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Host a Website</h4>
+                        <p><strong>Task:</strong> Install Nginx and host a simple website.</p>
+                        <ol>
+                            <li>Connect to your EC2 instance via SSH.</li>
+                            <li>Install Nginx: <code>sudo yum install nginx -y</code></li>
+                            <li>Start Nginx: <code>sudo systemctl start nginx</code></li>
+                            <li>Edit the default page: <code>sudo nano /usr/share/nginx/html/index.html</code></li>
+                            <li>Change it to: <code>Hello, my name is [Your Name]!</code></li>
+                            <li>Visit your server's Public IP address in your browser and see your live website!</li>
+                            <li><strong class="text-danger">IMPORTANT:</strong> Terminate the server immediately when done!</li>
+                        </ol>
+                        <details class="mt-3">
+                            <summary class="btn btn-outline-success btn-sm">Show Solution</summary>
+                            <div class="bg-dark text-light p-3 rounded-3 mt-2">
+                                <pre><code># Connect to your EC2 instance
+ssh -i my-aws-key.pem ec2-user@your-server-ip
+
+# Install Nginx
+sudo yum install nginx -y
+
+# Start Nginx
+sudo systemctl start nginx
+
+# Enable Nginx to start on boot
+sudo systemctl enable nginx
+
+# Edit the default page
+sudo nano /usr/share/nginx/html/index.html
+
+# Replace with: Hello, my name is [Your Name]!
+
+# Save with Ctrl+X, Y, Enter
+
+# Find your public IP in the EC2 console
+# Visit: http://your-public-ip
+
+# DONE! Now TERMINATE your instance!</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Important Properties -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h4 class="fw-bold"><i class="fas fa-list text-info me-2"></i>Important EC2 Concepts</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Concept</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>AMI</strong></td>
+                                        <td>Amazon Machine Image - the operating system template</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Instance Type</strong></td>
+                                        <td>The size of your server (CPU, RAM). t2.micro = 1 vCPU, 1GB RAM</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Key Pair</strong></td>
+                                        <td>Your SSH password to log in. Keep it safe!</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security Group</strong></td>
+                                        <td>A firewall that controls traffic to your server</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>EBS Volume</strong></td>
+                                        <td>The hard drive of your server</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Elastic IP</strong></td>
+                                        <td>A fixed public IP address that doesn't change</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Takeaway -->
+                <div class="card bg-info bg-opacity-10 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            EC2 gives you virtual servers in the cloud. Always use the <strong>Free Tier (t2.micro or t3.micro)</strong>,
+                            and <strong class="text-danger">always terminate</strong> your instances when you're done testing!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
+                    <a href="/AWS/GettingStarted" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous: Getting Started
+                    </a>
+                    <a href="/AWS/S3" class="btn btn-primary-custom">
+                        Next: S3 Storage <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="sidebar-nav">
+                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Modules</h5>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="/AWS/GettingStarted"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Getting Started</a>
+                    <a class="nav-link active" href="/AWS/EC2"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>EC2 Virtual Servers</a>
+                    <a class="nav-link" href="/AWS/S3"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>S3 Storage</a>
+                    <a class="nav-link" href="/AWS/Lambda"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Lambda Serverless</a>
+                    <a class="nav-link" href="/AWS/Networking"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Networking</a>
+                    <a class="nav-link" href="/AWS/Databases"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Databases</a>
+                    <a class="nav-link" href="/AWS/Security"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Security & IAM</a>
+                    <a class="nav-link" href="/AWS/Deployment"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Deployment</a>
+                    <a class="nav-link" href="/AWS/Quiz"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Quiz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 40, duration: 600 });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        details summary {
+            cursor: pointer;
+        }
+    </style>
+}

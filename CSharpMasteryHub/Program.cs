@@ -1,6 +1,7 @@
 using CSharpMasteryHub.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseSetting("hostBuilder:reloadConfigOnChange", "false");
 
 // Add configuration from user secrets in development
 if (builder.Environment.IsDevelopment())

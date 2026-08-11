@@ -140,3 +140,73 @@ string description = person switch
 </div>
 
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson11")
+
+@section Scripts {
+    <script>
+        function toggleExercise() {
+            var solution = document.getElementById('exerciseSolution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 40,
+                    duration: 600
+                });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

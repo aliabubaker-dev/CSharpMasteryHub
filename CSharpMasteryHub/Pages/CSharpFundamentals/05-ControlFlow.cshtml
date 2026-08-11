@@ -15,97 +15,532 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
+            <div class="lesson-content" data-aos="fade-up">
                 <h1 class="display-4 mb-3">Control Flow</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 5 of 13</span>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 20 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 5 of 13</span>
                 </div>
 
-                <h2>if Statement</h2>
-                <pre><code>int age = 20;
-
-if (age >= 18)
-{
-    Console.WriteLine("You are an adult.");
-}</code></pre>
-
-                <h2>if-else Statement</h2>
-                <pre><code>int score = 75;
-
-if (score >= 60)
-{
-    Console.WriteLine("Pass");
-}
-else
-{
-    Console.WriteLine("Fail");
-}</code></pre>
-
-                <h2>if-else if-else</h2>
-                <pre><code>int grade = 85;
-
-if (grade >= 90)
-{
-    Console.WriteLine("A");
-}
-else if (grade >= 80)
-{
-    Console.WriteLine("B");
-}
-else if (grade >= 70)
-{
-    Console.WriteLine("C");
-}
-else if (grade >= 60)
-{
-    Console.WriteLine("D");
-}
-else
-{
-    Console.WriteLine("F");
-}</code></pre>
-
-                <h2>Switch Statement</h2>
-                <pre><code>string day = "Monday";
-
-switch (day)
-{
-    case "Monday":
-        Console.WriteLine("Start of week");
-        break;
-    case "Friday":
-        Console.WriteLine("End of week");
-        break;
-    case "Saturday":
-    case "Sunday":
-        Console.WriteLine("Weekend");
-        break;
-    default:
-        Console.WriteLine("Midweek");
-        break;
-}</code></pre>
-
-                <h2>Ternary Operator</h2>
-                <pre><code>int age = 20;
-string status = age >= 18 ? "Adult" : "Minor";
-
-// Same as:
-string status;
-if (age >= 18)
-    status = "Adult";
-else
-    status = "Minor";</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Control flow statements determine which code executes based on conditions.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is Control Flow?</h2>
+                        <p>
+                            <strong>Control flow</strong> is how your program decides which code to run and when.
+                            It's like a traffic light for your code - it directs the flow of execution based on conditions.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-code-branch fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>If/Else</strong><br>Make decisions</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-arrow-right fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Switch</strong><br>Multiple choices</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-question-circle fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Ternary</strong><br>Short conditions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> When you wake up, if it's raining you take an umbrella,
+                            else you don't. That's control flow in real life!
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== IF STATEMENT ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-1 me-2"></i>The if Statement</h2>
+                        <p>
+                            The <strong>if</strong> statement checks a condition. If the condition is <strong>true</strong>,
+                            it runs the code inside the curly braces.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>Basic if</h6>
+                                    <div class="code-block bg-dark p-2 rounded-2">
+                                        <pre><code class="language-csharp"><span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Adult"</span>);
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>What if condition is false?</h6>
+                                    <p class="small mb-0">If the condition is <strong>false</strong>, the code inside is <strong>skipped</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== SIMPLE IF =====</span>
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+
+<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are an adult."</span>);
+}
+<span class="comment">// Output: "You are an adult."</span>
+
+<span class="comment">// ===== WITH MULTIPLE LINES =====</span>
+<span class="keyword">if</span> (<span class="variable">isLoggedIn</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Welcome back!"</span>);
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You have 3 new messages."</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== IF-ELSE ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-2 me-2"></i>The if-else Statement</h2>
+                        <p>
+                            The <strong>if-else</strong> statement gives you two paths. If the condition is <strong>true</strong>,
+                            run the first block. If <strong>false</strong>, run the second block.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>True Path</h6>
+                                    <code class="small">if (score >= 60) → "Pass"</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>False Path</h6>
+                                    <code class="small">else → "Fail"</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== IF-ELSE =====</span>
+<span class="keyword">int</span> <span class="variable">score</span> = <span class="number">75</span>;
+
+<span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">60</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Pass"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Fail"</span>);
+}
+<span class="comment">// Output: "Pass"</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE =====</span>
+<span class="keyword">bool</span> <span class="variable">hasPermission</span> = <span class="keyword">false</span>;
+
+<span class="keyword">if</span> (<span class="variable">hasPermission</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You can delete this file."</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You don't have permission."</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== IF-ELSE IF-ELSE ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-3 me-2"></i>The if-else if-else Statement</h2>
+                        <p>
+                            When you have <strong>multiple conditions</strong>, use <strong>else if</strong>.
+                            It checks each condition in order until one is true.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== MULTIPLE CONDITIONS =====</span>
+<span class="keyword">int</span> <span class="variable">grade</span> = <span class="number">85</span>;
+
+<span class="keyword">if</span> (<span class="variable">grade</span> >= <span class="number">90</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"A"</span>);
+}
+<span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="number">80</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"B"</span>);
+}
+<span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="number">70</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"C"</span>);
+}
+<span class="keyword">else if</span> (<span class="variable">grade</span> >= <span class="number">60</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"D"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"F"</span>);
+}
+<span class="comment">// Output: "B"</span>
+
+<span class="comment">// ===== IMPORTANT: Order Matters! =====</span>
+<span class="comment">// Conditions are checked from top to bottom</span>
+<span class="comment">// Once one is true, the rest are skipped</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important!</strong> The order of conditions matters. Put the <strong>most specific</strong>
+                            conditions first, and the <strong>most general</strong> last.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SWITCH STATEMENT ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-4 me-2"></i>The Switch Statement</h2>
+                        <p>
+                            The <strong>switch</strong> statement is a cleaner way to check <strong>many specific values</strong>
+                            of a single variable. It's like a multiple-choice question.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>When to use Switch</h6>
+                                    <ul class="small mb-0">
+                                        <li>Checking one variable against many values</li>
+                                        <li>The variable has a limited set of possibilities</li>
+                                        <li>You want cleaner code than multiple if-else</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use Switch</h6>
+                                    <ul class="small mb-0">
+                                        <li>Complex conditions with ranges</li>
+                                        <li>When you need to check multiple variables</li>
+                                        <li>When conditions use different operators</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC SWITCH =====</span>
+<span class="keyword">string</span> <span class="variable">day</span> = <span class="string">"Monday"</span>;
+
+<span class="keyword">switch</span> (<span class="variable">day</span>)
+{
+    <span class="keyword">case</span> <span class="string">"Monday"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Start of week"</span>);
+        <span class="keyword">break</span>;  <span class="comment">// Don't forget break!</span>
+    <span class="keyword">case</span> <span class="string">"Friday"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"End of week"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Saturday"</span>:
+    <span class="keyword">case</span> <span class="string">"Sunday"</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Weekend"</span>);
+        <span class="keyword">break</span>;  <span class="comment">// Both Saturday and Sunday run the same code</span>
+    <span class="keyword">default</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Midweek"</span>);
+        <span class="keyword">break</span>;  <span class="comment">// default runs when no case matches</span>
+}
+
+<span class="comment">// ===== SWITCH WITH NUMBERS =====</span>
+<span class="keyword">int</span> <span class="variable">month</span> = <span class="number">3</span>;
+
+<span class="keyword">switch</span> (<span class="variable">month</span>)
+{
+    <span class="keyword">case</span> <span class="number">1</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"January"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">2</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"February"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">3</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"March"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Invalid month"</span>);
+        <span class="keyword">break</span>;
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Remember:</strong> Always include a <code>break</code> at the end of each case.
+                            Without it, code will "fall through" to the next case!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== TERNARY OPERATOR ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-5 me-2"></i>The Ternary Operator</h2>
+                        <p>
+                            The <strong>ternary operator</strong> (<code>? :</code>) is a short way to write an if-else
+                            statement in one line. It's like a quick question: <strong>"If true, do this, else do that."</strong>
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== TERNARY OPERATOR SYNTAX =====</span>
+<span class="comment">// condition ? value_if_true : value_if_false</span>
+
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+<span class="keyword">string</span> <span class="variable">status</span> = <span class="variable">age</span> >= <span class="number">18</span> ? <span class="string">"Adult"</span> : <span class="string">"Minor"</span>;
+<span class="comment">// status = "Adult"</span>
+
+<span class="comment">// ===== SAME AS THIS IF-ELSE =====</span>
+<span class="keyword">string</span> <span class="variable">status2</span>;
+<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>)
+    <span class="variable">status2</span> = <span class="string">"Adult"</span>;
+<span class="keyword">else</span>
+    <span class="variable">status2</span> = <span class="string">"Minor"</span>;
+
+<span class="comment">// ===== MORE EXAMPLES =====</span>
+<span class="keyword">bool</span> <span class="variable">isLoggedIn</span> = <span class="keyword">true</span>;
+<span class="keyword">string</span> <span class="variable">greeting</span> = <span class="variable">isLoggedIn</span> ? <span class="string">"Welcome back!"</span> : <span class="string">"Please login."</span>;
+
+<span class="comment">// ===== NESTED TERNARY (Use carefully!) =====</span>
+<span class="keyword">int</span> <span class="variable">score</span> = <span class="number">85</span>;
+<span class="keyword">string</span> <span class="variable">grade</span> = <span class="variable">score</span> >= <span class="number">90</span> ? <span class="string">"A"</span> : 
+             <span class="variable">score</span> >= <span class="number">80</span> ? <span class="string">"B"</span> : 
+             <span class="variable">score</span> >= <span class="number">70</span> ? <span class="string">"C"</span> : 
+             <span class="variable">score</span> >= <span class="number">60</span> ? <span class="string">"D"</span> : <span class="string">"F"</span>;</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Tip:</strong> Ternary operators are great for simple conditions.
+                            For complex logic, use if-else - it's easier to read!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== COMPARISON TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>When to Use Each</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Statement</th>
+                                        <th>Best For</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>if</strong></td>
+                                        <td>Single condition check</td>
+                                        <td><code>if (age >= 18)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>if-else</strong></td>
+                                        <td>Two possible outcomes</td>
+                                        <td><code>if (score >= 60) else</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>if-else if</strong></td>
+                                        <td>Multiple related conditions</td>
+                                        <td><code>if (score >= 90) else if (score >= 80)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>switch</strong></td>
+                                        <td>Multiple specific values</td>
+                                        <td><code>switch (day) { case "Monday": ... }</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ternary</strong></td>
+                                        <td>Simple one-line decisions</td>
+                                        <td><code>age >= 18 ? "Adult" : "Minor"</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Grade Calculator</h2>
+
+                        <p class="fw-bold">Task: Create a grade calculator that uses all types of control flow.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "GradeCalculator"</li>
+                                <li>Ask the user to enter their test score (0-100)</li>
+                                <li>
+                                    Use <strong>if-else if</strong> to calculate the letter grade:
+                                    <ul>
+                                        <li>90-100: A</li>
+                                        <li>80-89: B</li>
+                                        <li>70-79: C</li>
+                                        <li>60-69: D</li>
+                                        <li>Below 60: F</li>
+                                    </ul>
+                                </li>
+                                <li>Use a <strong>switch</strong> to display a message based on the letter grade</li>
+                                <li>Use the <strong>ternary operator</strong> to check if the student passed</li>
+                                <li>Add validation to make sure the score is between 0 and 100</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hints:</strong>
+                            <ul class="mb-0">
+                                <li>Use <code>Console.ReadLine()</code> to get user input</li>
+                                <li>Use <code>int.Parse()</code> or <code>Convert.ToInt32()</code> to convert to a number</li>
+                                <li>Use <code>if (score >= 90)</code> for the first condition</li>
+                                <li>In the switch, use <code>case "A":</code> etc.</li>
+                                <li>Ternary example: <code>string result = passed ? "Passed" : "Failed";</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Expected Output:</strong>
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">Enter your test score (0-100): 85
+Letter Grade: B
+Message: Good job!
+Result: Passed!</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Grade Calculator</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Ask for user input</span>
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter your test score (0-100): "</span>);
+        <span class="keyword">string</span> <span class="variable">input</span> = <span class="function">Console</span>.<span class="function">ReadLine</span>();
+
+        <span class="comment">// Convert to integer</span>
+        <span class="keyword">int</span> <span class="variable">score</span> = <span class="keyword">int</span>.<span class="function">Parse</span>(<span class="variable">input</span>);
+
+        <span class="comment">// Validate the score</span>
+        <span class="keyword">if</span> (<span class="variable">score</span> &lt; <span class="number">0</span> || <span class="variable">score</span> > <span class="number">100</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Invalid score! Please enter a number between 0 and 100."</span>);
+            <span class="keyword">return</span>;
+        }
+
+        <span class="comment">// Calculate letter grade using if-else if</span>
+        <span class="keyword">string</span> <span class="variable">letterGrade</span>;
+
+        <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">90</span>)
+        {
+            <span class="variable">letterGrade</span> = <span class="string">"A"</span>;
+        }
+        <span class="keyword">else if</span> (<span class="variable">score</span> >= <span class="number">80</span>)
+        {
+            <span class="variable">letterGrade</span> = <span class="string">"B"</span>;
+        }
+        <span class="keyword">else if</span> (<span class="variable">score</span> >= <span class="number">70</span>)
+        {
+            <span class="variable">letterGrade</span> = <span class="string">"C"</span>;
+        }
+        <span class="keyword">else if</span> (<span class="variable">score</span> >= <span class="number">60</span>)
+        {
+            <span class="variable">letterGrade</span> = <span class="string">"D"</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="variable">letterGrade</span> = <span class="string">"F"</span>;
+        }
+
+        <span class="comment">// Display grade using switch</span>
+        <span class="keyword">string</span> <span class="variable">message</span>;
+        <span class="keyword">switch</span> (<span class="variable">letterGrade</span>)
+        {
+            <span class="keyword">case</span> <span class="string">"A"</span>:
+                <span class="variable">message</span> = <span class="string">"Excellent work!"</span>;
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"B"</span>:
+                <span class="variable">message</span> = <span class="string">"Good job!"</span>;
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"C"</span>:
+                <span class="variable">message</span> = <span class="string">"Keep practicing!"</span>;
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"D"</span>:
+                <span class="variable">message</span> = <span class="string">"Need more effort!"</span>;
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"F"</span>:
+                <span class="variable">message</span> = <span class="string">"Please review the material!"</span>;
+                <span class="keyword">break</span>;
+            <span class="keyword">default</span>:
+                <span class="variable">message</span> = <span class="string">"Unknown grade"</span>;
+                <span class="keyword">break</span>;
+        }
+
+        <span class="comment">// Check if passed using ternary operator</span>
+        <span class="keyword">bool</span> <span class="variable">passed</span> = <span class="variable">score</span> >= <span class="number">60</span>;
+        <span class="keyword">string</span> <span class="variable">result</span> = <span class="variable">passed</span> ? <span class="string">"Passed!"</span> : <span class="string">"Failed!"</span>;
+
+        <span class="comment">// Print results</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Letter Grade: {<span class="variable">letterGrade</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Message: {<span class="variable">message</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Result: {<span class="variable">result</span>}"</span>);
+
+        <span class="comment">// Bonus: Print the grade scale</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\nGrade Scale:"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"90-100: A"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"80-89:  B"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"70-79:  C"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"60-69:  D"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"0-59:   F"</span>);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Control flow statements let you control which code runs and when.
+                            Use <strong>if</strong> for simple decisions, <strong>if-else</strong> for two paths,
+                            <strong>if-else if</strong> for multiple conditions, <strong>switch</strong> for many
+                            specific values, and <strong>ternary</strong> for quick one-line decisions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/04-OperatorsAndExpressions" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -121,5 +556,74 @@ else
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson5")
+
+@section Scripts {
+    <script>
+        function toggleExercise() {
+            var solution = document.getElementById('exerciseSolution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 40,
+                    duration: 600
+                });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

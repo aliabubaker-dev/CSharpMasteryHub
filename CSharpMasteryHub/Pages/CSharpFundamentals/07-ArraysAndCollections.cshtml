@@ -19,7 +19,7 @@
                 <h1 class="display-4 mb-3">Arrays and Collections</h1>
                 <div class="d-flex gap-3 mb-4 flex-wrap">
                     <span class="badge bg-warning text-dark p-2 px-3">Intermediate</span>
-                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 35 min read</span>
                     <span class="badge bg-primary p-2 px-3">Lesson 7 of 13</span>
                 </div>
 
@@ -34,28 +34,40 @@
                         </p>
 
                         <div class="row mt-3">
-                            <div class="col-md-3">
-                                <div class="p-3 bg-light rounded text-center">
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
                                     <i class="fas fa-arrow-right fa-2x text-primary"></i>
                                     <p class="small mt-1"><strong>Array</strong><br>Fixed size</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="p-3 bg-light rounded text-center">
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
                                     <i class="fas fa-list-ul fa-2x text-success"></i>
                                     <p class="small mt-1"><strong>List</strong><br>Dynamic size</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="p-3 bg-light rounded text-center">
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
                                     <i class="fas fa-key fa-2x text-warning"></i>
                                     <p class="small mt-1"><strong>Dictionary</strong><br>Key-Value pairs</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="p-3 bg-light rounded text-center">
-                                    <i class="fas fa-cubes fa-2x text-info"></i>
-                                    <p class="small mt-1"><strong>Others</strong><br>Queue, Stack, HashSet</p>
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-hashtag fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>HashSet</strong><br>Unique items</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-arrow-right fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Queue</strong><br>FIFO</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="p-2 bg-light rounded text-center">
+                                    <i class="fas fa-arrow-left fa-2x text-danger"></i>
+                                    <p class="small mt-1"><strong>Stack</strong><br>LIFO</p>
                                 </div>
                             </div>
                         </div>
@@ -165,13 +177,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SECTION 2: LISTS ===== -->
+                <!-- ===== SECTION 2: LISTS (DETAILED) ===== -->
                 <div class="card mb-4" data-aos="fade-right">
                     <div class="card-body">
-                        <h2 class="h4 fw-bold text-success"><i class="fas fa-list-ul me-2"></i>2. Lists (List&lt;T&gt;)</h2>
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-list-ul me-2"></i>2. Lists (List&lt;T&gt;) - The Most Used Collection</h2>
                         <p>
-                            A <strong>List</strong> is like an array that can <strong>grow and shrink</strong>.
-                            It's the most commonly used collection in C# because it's flexible and easy to use.
+                            A <strong>List</strong> is like an array that can <strong>grow and shrink</strong> automatically.
+                            It's the most commonly used collection in C# because it's flexible, powerful, and easy to use.
                         </p>
 
                         <div class="row mt-3">
@@ -180,20 +192,23 @@
                                     <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>When to use Lists</h6>
                                     <ul class="small mb-0">
                                         <li>You don't know how many items you'll have</li>
-                                        <li>You need to add or remove items</li>
+                                        <li>You need to add or remove items frequently</li>
                                         <li>You need to insert items in the middle</li>
-                                        <li>You need to search for items</li>
-                                        <li>You need to sort items</li>
+                                        <li>You need to search, sort, or filter items</li>
+                                        <li>You're working with dynamic data from users or databases</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="p-3 bg-primary bg-opacity-10 rounded">
-                                    <h6 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Most Common Use</h6>
-                                    <p class="small mb-0">
-                                        <strong>Lists are used in 90% of cases</strong> when you need a collection
-                                        of items. They are the go-to choice for most developers.
-                                    </p>
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Real-World Examples</h6>
+                                    <ul class="small mb-0">
+                                        <li>Shopping cart items</li>
+                                        <li>Student list in a school</li>
+                                        <li>Employee records</li>
+                                        <li>Search results</li>
+                                        <li>Product catalog</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -202,20 +217,28 @@
                             <pre><code class="language-csharp"><span class="comment">// ===== CREATING A LIST =====</span>
 <span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;  <span class="comment">// Required for List</span>
 
-<span class="comment">// Create an empty list of strings</span>
+<span class="comment">// Empty list (most common)</span>
 <span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
 
-<span class="comment">// Create a list with initial items</span>
+<span class="comment">// With initial items</span>
 <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> };
 
-<span class="comment">// ===== ADDING ITEMS =====</span>
-<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);     <span class="comment">// Adds "Alice" at the end</span>
-<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);       <span class="comment">// Adds "Bob" at the end</span>
-<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>);  <span class="comment">// Adds "Charlie" at the end</span>
+<span class="comment">// Using var (shortcut)</span>
+<span class="keyword">var</span> <span class="variable">students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt;();  <span class="comment">// List of Student objects</span>
 
-<span class="comment">// ===== INSERTING ITEMS =====</span>
-<span class="variable">names</span>.<span class="function">Insert</span>(<span class="number">1</span>, <span class="string">"Dave"</span>);  <span class="comment">// Inserts "Dave" at index 1</span>
-<span class="comment">// Now: ["Alice", "Dave", "Bob", "Charlie"]</span>
+<span class="comment">// ===== ADDING ITEMS =====</span>
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);     <span class="comment">// Adds at the end</span>
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>);
+
+<span class="comment">// Add multiple items at once</span>
+<span class="keyword">var</span> <span class="variable">moreNames</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt; { <span class="string">"Dave"</span>, <span class="string">"Eve"</span> };
+<span class="variable">names</span>.<span class="function">AddRange</span>(<span class="variable">moreNames</span>);  <span class="comment">// Adds all items from another list</span>
+
+<span class="comment">// ===== INSERTING ITEMS (IN THE MIDDLE) =====</span>
+<span class="variable">names</span>.<span class="function">Insert</span>(<span class="number">1</span>, <span class="string">"Zara"</span>);  <span class="comment">// Inserts "Zara" at index 1</span>
+<span class="comment">// Before: ["Alice", "Bob", "Charlie"]</span>
+<span class="comment">// After:  ["Alice", "Zara", "Bob", "Charlie"]</span>
 
 <span class="comment">// ===== ACCESSING ITEMS =====</span>
 <span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">names</span>[<span class="number">0</span>];  <span class="comment">// "Alice"</span>
@@ -224,23 +247,28 @@
 <span class="comment">// ===== REMOVING ITEMS =====</span>
 <span class="variable">names</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);       <span class="comment">// Removes "Bob" by value</span>
 <span class="variable">names</span>.<span class="function">RemoveAt</span>(<span class="number">0</span>);      <span class="comment">// Removes the first item (index 0)</span>
-<span class="variable">names</span>.<span class="function">Clear</span>();           <span class="comment">// Removes all items</span>
+<span class="variable">names</span>.<span class="function">RemoveAll</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));  <span class="comment">// Removes all items starting with "A"</span>
+<span class="variable">names</span>.<span class="function">Clear</span>();           <span class="comment">// Removes ALL items</span>
 
 <span class="comment">// ===== LIST PROPERTIES =====</span>
-<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">names</span>.<span class="property">Count</span>;   <span class="comment">// Number of items (like Length for arrays)</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">names</span>.<span class="property">Count</span>;   <span class="comment">// Number of items</span>
 <span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">names</span>.<span class="property">Count</span> == <span class="number">0</span>;
+<span class="keyword">int</span> <span class="variable">capacity</span> = <span class="variable">names</span>.<span class="property">Capacity</span>;  <span class="comment">// Internal size (usually bigger than Count)</span>
 
 <span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
 <span class="keyword">bool</span> <span class="variable">hasAlice</span> = <span class="variable">names</span>.<span class="function">Contains</span>(<span class="string">"Alice"</span>);  <span class="comment">// true or false</span>
 
 <span class="comment">// ===== FINDING ITEMS =====</span>
-<span class="keyword">int</span> <span class="variable">index</span> = <span class="variable">names</span>.<span class="function">IndexOf</span>(<span class="string">"Alice"</span>);  <span class="comment">// Returns the index, or -1 if not found</span>
+<span class="keyword">int</span> <span class="variable">index</span> = <span class="variable">names</span>.<span class="function">IndexOf</span>(<span class="string">"Alice"</span>);  <span class="comment">// Returns index or -1 if not found</span>
+<span class="keyword">string</span> <span class="variable">found</span> = <span class="variable">names</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));  <span class="comment">// Returns first match</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">allFound</span> = <span class="variable">names</span>.<span class="function">FindAll</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="property">Length</span> > <span class="number">3</span>);
 
 <span class="comment">// ===== SORTING =====</span>
-<span class="variable">names</span>.<span class="function">Sort</span>();  <span class="comment">// Sorts the list alphabetically</span>
+<span class="variable">names</span>.<span class="function">Sort</span>();  <span class="comment">// Sorts alphabetically (A to Z)</span>
+<span class="variable">names</span>.<span class="function">Reverse</span>();  <span class="comment">// Reverses the order</span>
 
 <span class="comment">// ===== LOOPING THROUGH A LIST =====</span>
-<span class="comment">// Using foreach (cleanest)</span>
+<span class="comment">// Using foreach (cleanest - most common)</span>
 <span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">name</span> <span class="keyword">in</span> <span class="variable">names</span>)
 {
     <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Hello, {<span class="variable">name</span>}"</span>);
@@ -250,24 +278,29 @@
 <span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">names</span>.<span class="property">Count</span>; <span class="variable">i</span>++)
 {
     <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index {<span class="variable">i</span>}: {<span class="variable">names</span>[<span class="variable">i</span>]}"</span>);
-}</code></pre>
+}
+
+<span class="comment">// ===== CONVERTING =====</span>
+<span class="keyword">string</span>[] <span class="variable">nameArray</span> = <span class="variable">names</span>.<span class="function">ToArray</span>();  <span class="comment">// Convert to array</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">newList</span> = <span class="variable">nameArray</span>.<span class="function">ToList</span>();  <span class="comment">// Convert array to list</span></code></pre>
                         </div>
 
                         <div class="alert alert-success mt-2">
                             <i class="fas fa-check-circle me-2"></i>
-                            <strong>Pro Tip:</strong> Use <strong>List&lt;T&gt;</strong> by default. Only use arrays when
-                            you have a very specific reason (like fixed size or performance-critical code).
+                            <strong>Pro Tip:</strong> Use <strong>List&lt;T&gt;</strong> by default for 90% of your collection needs.
+                            It's fast, flexible, and has all the methods you need.
                         </div>
                     </div>
                 </div>
 
-                <!-- ===== SECTION 3: DICTIONARY ===== -->
+                <!-- ===== SECTION 3: DICTIONARY (DETAILED) ===== -->
                 <div class="card mb-4" data-aos="fade-left">
                     <div class="card-body">
-                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-key me-2"></i>3. Dictionary&lt;TKey, TValue&gt;</h2>
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-key me-2"></i>3. Dictionary&lt;TKey, TValue&gt; - Key-Value Lookups</h2>
                         <p>
                             A <strong>Dictionary</strong> stores items as <strong>key-value pairs</strong>.
-                            Think of it like a real dictionary - you look up a word (the key) to find its definition (the value).
+                            Think of it like a real dictionary or phone book - you look up a word (the key)
+                            to find its definition (the value). <strong>Keys must be unique.</strong>
                         </p>
 
                         <div class="row mt-3">
@@ -276,9 +309,10 @@
                                     <h6 class="fw-bold text-warning"><i class="fas fa-check-circle me-2"></i>When to use Dictionary</h6>
                                     <ul class="small mb-0">
                                         <li>You need to look up items by a unique key</li>
-                                        <li>You need fast lookups</li>
+                                        <li>You need <strong>fast lookups</strong> (O(1) time)</li>
                                         <li>You have key-value data</li>
-                                        <li>Example: Student ID → Student Name</li>
+                                        <li>Example: Student ID → Student, Product ID → Product</li>
+                                        <li>Example: Username → User object</li>
                                     </ul>
                                 </div>
                             </div>
@@ -287,9 +321,10 @@
                                     <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use Dictionary</h6>
                                     <ul class="small mb-0">
                                         <li>You don't have unique keys</li>
-                                        <li>You need to access items by position</li>
-                                        <li>You have a small collection</li>
-                                        <li>You need to preserve order</li>
+                                        <li>You need to access items by position (use List instead)</li>
+                                        <li>You have a small collection (List is simpler)</li>
+                                        <li>You need to preserve insertion order</li>
+                                        <li>You need to iterate in a specific order</li>
                                     </ul>
                                 </div>
                             </div>
@@ -299,10 +334,10 @@
                             <pre><code class="language-csharp"><span class="comment">// ===== CREATING A DICTIONARY =====</span>
 <span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;  <span class="comment">// Required</span>
 
-<span class="comment">// Create a dictionary with string keys and int values</span>
+<span class="comment">// Empty dictionary</span>
 <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; <span class="variable">ages</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt;();
 
-<span class="comment">// Create a dictionary with initial values</span>
+<span class="comment">// With initial values</span>
 <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; <span class="variable">countries</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;
 {
     { <span class="string">"USA"</span>, <span class="string">"Washington D.C."</span> },
@@ -310,141 +345,482 @@
     { <span class="string">"UK"</span>, <span class="string">"London"</span> }
 };
 
+<span class="comment">// Using var</span>
+<span class="keyword">var</span> <span class="variable">productPrices</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">int</span>, <span class="keyword">decimal</span>&gt;();
+
 <span class="comment">// ===== ADDING ITEMS =====</span>
-<span class="variable">ages</span>[<span class="string">"Alice"</span>] = <span class="number">25</span>;        <span class="comment">// Adds or updates</span>
-<span class="variable">ages</span>[<span class="string">"Bob"</span>] = <span class="number">30</span>;          <span class="comment">// Adds or updates</span>
-<span class="variable">ages</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>, <span class="number">35</span>);  <span class="comment">// Only adds (throws error if exists)</span>
+<span class="comment">// Method 1: Using indexer (adds or updates)</span>
+<span class="variable">ages</span>[<span class="string">"Alice"</span>] = <span class="number">25</span>;
+<span class="variable">ages</span>[<span class="string">"Bob"</span>] = <span class="number">30</span>;
+
+<span class="comment">// Method 2: Using Add() (throws error if key exists)</span>
+<span class="variable">ages</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>, <span class="number">35</span>);
+
+<span class="comment">// Method 3: TryAdd (safe - returns true/false)</span>
+<span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">TryAdd</span>(<span class="string">"Dave"</span>, <span class="number">28</span>))
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Dave added successfully"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Dave already exists"</span>);
+}
 
 <span class="comment">// ===== ACCESSING VALUES =====</span>
-<span class="keyword">int</span> <span class="variable">age</span> = <span class="variable">ages</span>[<span class="string">"Alice"</span>];  <span class="comment">// 25</span>
+<span class="keyword">int</span> <span class="variable">aliceAge</span> = <span class="variable">ages</span>[<span class="string">"Alice"</span>];  <span class="comment">// 25 (throws error if key doesn't exist)</span>
 
-<span class="comment">// ===== SAFE ACCESS (Check if key exists first) =====</span>
+<span class="comment">// ===== SAFE ACCESS (Best Practices) =====</span>
+
+<span class="comment">// Method 1: Check if key exists first</span>
 <span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">ContainsKey</span>(<span class="string">"Bob"</span>))
 {
     <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Bob is {<span class="variable">ages</span>[<span class="string">"Bob"</span>]} years old"</span>);
 }
 
-<span class="comment">// ===== TRYGETVALUE (Best way to safely access) =====</span>
-<span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">TryGetValue</span>(<span class="string">"Dave"</span>, <span class="keyword">out</span> <span class="keyword">int</span> <span class="variable">age2</span>))
+<span class="comment">// Method 2: TryGetValue (BEST - one lookup, no error)</span>
+<span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">TryGetValue</span>(<span class="string">"Unknown"</span>, <span class="keyword">out</span> <span class="keyword">int</span> <span class="variable">age</span>))
 {
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Dave is {<span class="variable">age2</span>} years old"</span>);
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Age: {<span class="variable">age</span>}"</span>);
 }
 <span class="keyword">else</span>
 {
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Dave not found"</span>);
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Key not found"</span>);
 }
 
+<span class="comment">// Method 3: GetValueOrDefault (C# 8+)</span>
+<span class="keyword">int</span> <span class="variable">unknownAge</span> = <span class="variable">ages</span>.<span class="function">GetValueOrDefault</span>(<span class="string">"Unknown"</span>, <span class="number">0</span>);  <span class="comment">// Returns 0 if not found</span>
+
+<span class="comment">// ===== UPDATING VALUES =====</span>
+<span class="variable">ages</span>[<span class="string">"Alice"</span>] = <span class="number">26</span>;  <span class="comment">// Updates Alice's age to 26</span>
+
 <span class="comment">// ===== REMOVING ITEMS =====</span>
-<span class="variable">ages</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);        <span class="comment">// Removes Bob</span>
-<span class="variable">ages</span>.<span class="function">Clear</span>();               <span class="comment">// Removes all items</span>
+<span class="keyword">bool</span> <span class="variable">removed</span> = <span class="variable">ages</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);  <span class="comment">// Removes Bob, returns true if found</span>
+<span class="variable">ages</span>.<span class="function">Clear</span>();  <span class="comment">// Removes ALL items</span>
 
 <span class="comment">// ===== DICTIONARY PROPERTIES =====</span>
-<span class="keyword">int</span> <span class="variable">count2</span> = <span class="variable">ages</span>.<span class="property">Count</span>;      <span class="comment">// Number of key-value pairs</span>
-<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">keys</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;(<span class="variable">ages</span>.<span class="property">Keys</span>);  <span class="comment">// Get all keys</span>
-<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">values</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">ages</span>.<span class="property">Values</span>);  <span class="comment">// Get all values</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">ages</span>.<span class="property">Count</span>;  <span class="comment">// Number of key-value pairs</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">allKeys</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;(<span class="variable">ages</span>.<span class="property">Keys</span>);  <span class="comment">// Get all keys</span>
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">allValues</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">ages</span>.<span class="property">Values</span>);  <span class="comment">// Get all values</span>
+<span class="keyword">bool</span> <span class="variable">hasKeys</span> = <span class="variable">ages</span>.<span class="property">Keys</span>.<span class="function">Any</span>();  <span class="comment">// Check if there are any keys</span>
 
 <span class="comment">// ===== LOOPING THROUGH A DICTIONARY =====</span>
+<span class="comment">// Using foreach with KeyValuePair</span>
 <span class="keyword">foreach</span> (<span class="class">KeyValuePair</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; <span class="variable">item</span> <span class="keyword">in</span> <span class="variable">ages</span>)
 {
     <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"{<span class="variable">item</span>.<span class="property">Key</span>} is {<span class="variable">item</span>.<span class="property">Value</span>} years old"</span>);
+}
+
+<span class="comment">// Loop through keys only</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">key</span> <span class="keyword">in</span> <span class="variable">ages</span>.<span class="property">Keys</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Key: {<span class="variable">key</span>}"</span>);
+}
+
+<span class="comment">// Loop through values only</span>
+<span class="keyword">foreach</span> (<span class="keyword">int</span> <span class="variable">value</span> <span class="keyword">in</span> <span class="variable">ages</span>.<span class="property">Values</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Value: {<span class="variable">value</span>}"</span>);
 }</code></pre>
                         </div>
 
                         <div class="alert alert-warning mt-2">
                             <i class="fas fa-exclamation-triangle me-2"></i>
                             <strong>Important:</strong> Keys must be <strong>unique</strong>. If you try to add a key that
-                            already exists, the program will throw an error.
+                            already exists using <code>Add()</code>, the program will throw an error. Use the indexer
+                            <code>dictionary[key] = value</code> to update existing keys.
                         </div>
                     </div>
                 </div>
 
-                <!-- ===== SECTION 4: OTHER COLLECTIONS ===== -->
+                <!-- ===== SECTION 4: HASHSET (DETAILED) ===== -->
                 <div class="card mb-4" data-aos="fade-right">
                     <div class="card-body">
-                        <h2 class="h4 fw-bold text-info"><i class="fas fa-cog me-2"></i>4. Other Collections</h2>
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-hashtag me-2"></i>4. HashSet&lt;T&gt; - Unique Items Only</h2>
+                        <p>
+                            A <strong>HashSet</strong> stores <strong>unique</strong> items. If you try to add a duplicate,
+                            it's automatically ignored. Think of it like a guest list - each person can only be on the list once.
+                        </p>
 
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <div class="p-3 border border-primary rounded">
-                                    <h6 class="fw-bold text-primary"><i class="fas fa-hashtag me-2"></i>HashSet&lt;T&gt;</h6>
-                                    <p class="small mb-0">Stores <strong>unique</strong> items. Duplicates are automatically ignored.</p>
-                                    <code class="small">HashSet&lt;string&gt; unique = new HashSet&lt;string&gt;();</code>
+                                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-check-circle me-2"></i>When to use HashSet</h6>
+                                    <ul class="small mb-0">
+                                        <li>You need to store <strong>unique</strong> items</li>
+                                        <li>You need fast lookups (check if an item exists)</li>
+                                        <li>You want to remove duplicates from a list</li>
+                                        <li>You need to perform set operations (union, intersection)</li>
+                                        <li>Example: Unique visitors, unique tags, unique words</li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="p-3 border border-success rounded">
-                                    <h6 class="fw-bold text-success"><i class="fas fa-arrow-right me-2"></i>Queue&lt;T&gt;</h6>
-                                    <p class="small mb-0"><strong>FIFO</strong> - First In, First Out. Like a line at a store.</p>
-                                    <code class="small">Queue&lt;string&gt; queue = new Queue&lt;string&gt;();</code>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 border border-warning rounded">
-                                    <h6 class="fw-bold text-warning"><i class="fas fa-arrow-left me-2"></i>Stack&lt;T&gt;</h6>
-                                    <p class="small mb-0"><strong>LIFO</strong> - Last In, First Out. Like a stack of plates.</p>
-                                    <code class="small">Stack&lt;string&gt; stack = new Stack&lt;string&gt;();</code>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 border border-info rounded">
-                                    <h6 class="fw-bold text-info"><i class="fas fa-list me-2"></i>LinkedList&lt;T&gt;</h6>
-                                    <p class="small mb-0">Each item points to the next. Fast insert/delete in the middle.</p>
-                                    <code class="small">LinkedList&lt;string&gt; list = new LinkedList&lt;string&gt;();</code>
+                                <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use HashSet</h6>
+                                    <ul class="small mb-0">
+                                        <li>You need to access items by index</li>
+                                        <li>You need to preserve insertion order</li>
+                                        <li>You have duplicate items (use List instead)</li>
+                                        <li>You need to sort items</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="code-block bg-dark p-3 rounded-3 mt-3">
-                            <pre><code class="language-csharp"><span class="comment">// ===== HASHSET - Unique Items Only =====</span>
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A HASHSET =====</span>
 <span class="class">HashSet</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">uniqueNames</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">string</span>&gt;();
-<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);
-<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);
-<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);  <span class="comment">// Ignored - duplicate</span>
-<span class="comment">// uniqueNames = ["Alice", "Bob"]</span>
 
-<span class="comment">// ===== QUEUE - FIFO (First In, First Out) =====</span>
-<span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">queue</span> = <span class="keyword">new</span> <span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt;();
-<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"First"</span>);   <span class="comment">// Add to the end</span>
-<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Second"</span>);  <span class="comment">// Add to the end</span>
-<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Third"</span>);   <span class="comment">// Add to the end</span>
+<span class="comment">// With initial items (duplicates automatically removed)</span>
+<span class="keyword">var</span> <span class="variable">tags</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">string</span>&gt; { <span class="string">"C#"</span>, <span class="string">"Java"</span>, <span class="string">"Python"</span>, <span class="string">"C#"</span> };
+<span class="comment">// tags = ["C#", "Java", "Python"]  (C# only appears once)</span>
 
-<span class="keyword">string</span> <span class="variable">firstItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();  <span class="comment">// "First" (removes first)</span>
-<span class="keyword">string</span> <span class="variable">nextItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();   <span class="comment">// "Second"</span>
-<span class="comment">// queue now has: ["Third"]</span>
+<span class="comment">// ===== ADDING ITEMS =====</span>
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);  <span class="comment">// true (added)</span>
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);    <span class="comment">// true (added)</span>
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);  <span class="comment">// false (ignored - already exists)</span>
 
-<span class="comment">// Peek - look at the first item without removing</span>
-<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">queue</span>.<span class="function">Peek</span>();  <span class="comment">// "Third" (doesn't remove)</span>
+<span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
+<span class="keyword">bool</span> <span class="variable">hasAlice</span> = <span class="variable">uniqueNames</span>.<span class="function">Contains</span>(<span class="string">"Alice"</span>);  <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">hasDave</span> = <span class="variable">uniqueNames</span>.<span class="function">Contains</span>(<span class="string">"Dave"</span>);    <span class="comment">// false</span>
 
-<span class="comment">// ===== STACK - LIFO (Last In, First Out) =====</span>
-<span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">stack</span> = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;();
-<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"First"</span>);   <span class="comment">// Add to the top</span>
-<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Second"</span>);  <span class="comment">// Add to the top</span>
-<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Third"</span>);   <span class="comment">// Add to the top</span>
+<span class="comment">// ===== REMOVING ITEMS =====</span>
+<span class="keyword">bool</span> <span class="variable">removed</span> = <span class="variable">uniqueNames</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);  <span class="comment">// true</span>
+<span class="variable">uniqueNames</span>.<span class="function">Clear</span>();  <span class="comment">// Removes all items</span>
 
-<span class="keyword">string</span> <span class="variable">lastItem</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Third" (removes from top)</span>
-<span class="keyword">string</span> <span class="variable">previous</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Second"</span>
-<span class="comment">// stack now has: ["First"]</span>
+<span class="comment">// ===== HASHSET PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">uniqueNames</span>.<span class="property">Count</span>;  <span class="comment">// Number of unique items</span>
 
-<span class="comment">// Peek - look at the top item without removing</span>
-<span class="keyword">string</span> <span class="variable">top</span> = <span class="variable">stack</span>.<span class="function">Peek</span>();  <span class="comment">// "First" (doesn't remove)</span>
+<span class="comment">// ===== SET OPERATIONS =====</span>
+<span class="keyword">var</span> <span class="variable">setA</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> };
+<span class="keyword">var</span> <span class="variable">setB</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> };
 
-<span class="comment">// ===== LINKEDLIST - Fast insert/delete in the middle =====</span>
-<span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">linkedList</span> = <span class="keyword">new</span> <span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt;();
-<span class="variable">linkedList</span>.<span class="function">AddLast</span>(<span class="string">"First"</span>);
-<span class="variable">linkedList</span>.<span class="function">AddLast</span>(<span class="string">"Second"</span>);
-<span class="variable">linkedList</span>.<span class="function">AddFirst</span>(<span class="string">"Zero"</span>);  <span class="comment">// Adds at the beginning</span>
-<span class="comment">// linkedList = ["Zero", "First", "Second"]</span></code></pre>
+<span class="comment">// Union - combines both sets (no duplicates)</span>
+<span class="keyword">var</span> <span class="variable">union</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">setA</span>);
+<span class="variable">union</span>.<span class="function">UnionWith</span>(<span class="variable">setB</span>);  <span class="comment">// {1,2,3,4,5,6}</span>
+
+<span class="comment">// Intersection - items in both sets</span>
+<span class="keyword">var</span> <span class="variable">intersection</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">setA</span>);
+<span class="variable">intersection</span>.<span class="function">IntersectWith</span>(<span class="variable">setB</span>);  <span class="comment">// {3,4}</span>
+
+<span class="comment">// Difference - items in setA but not in setB</span>
+<span class="keyword">var</span> <span class="variable">difference</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">setA</span>);
+<span class="variable">difference</span>.<span class="function">ExceptWith</span>(<span class="variable">setB</span>);  <span class="comment">// {1,2}</span>
+
+<span class="comment">// ===== LOOPING THROUGH A HASHSET =====</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">name</span> <span class="keyword">in</span> <span class="variable">uniqueNames</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">name</span>);
+}
+
+<span class="comment">// ===== REMOVING DUPLICATES FROM A LIST =====</span>
+<span class="keyword">var</span> <span class="variable">listWithDuplicates</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span> };
+<span class="keyword">var</span> <span class="variable">uniqueNumbers</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">listWithDuplicates</span>);
+<span class="comment">// uniqueNumbers = {1,2,3,4}</span></code></pre>
                         </div>
 
                         <div class="alert alert-info mt-2">
                             <i class="fas fa-lightbulb me-2"></i>
-                            <strong>Quick Summary:</strong>
-                            <ul class="mb-0">
-                                <li><strong>Queue</strong> → Line of people (first come, first served)</li>
-                                <li><strong>Stack</strong> → Stack of plates (last one on top comes off first)</li>
-                                <li><strong>HashSet</strong> → Unique items only (no duplicates)</li>
-                                <li><strong>LinkedList</strong> → Fast insert/delete in the middle</li>
-                            </ul>
+                            <strong>Remember:</strong> HashSet is perfect when you need to check if an item exists
+                            quickly and you don't care about the order.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 5: QUEUE (DETAILED) ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-arrow-right me-2"></i>5. Queue&lt;T&gt; - First In, First Out (FIFO)</h2>
+                        <p>
+                            A <strong>Queue</strong> works like a line at a store or a ticket counter.
+                            <strong>The first person in line is the first person served.</strong>
+                            Items are added to the back and removed from the front.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>When to use Queue</h6>
+                                    <ul class="small mb-0">
+                                        <li>Processing items in order</li>
+                                        <li>Task scheduling</li>
+                                        <li>Customer service systems</li>
+                                        <li>Print jobs</li>
+                                        <li>Message processing</li>
+                                        <li>Order processing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-info"><i class="fas fa-lightbulb me-2"></i>Real-World Examples</h6>
+                                    <ul class="small mb-0">
+                                        <li>Line at a coffee shop</li>
+                                        <li>Print queue</li>
+                                        <li>Customer support tickets</li>
+                                        <li>Background tasks</li>
+                                        <li>Data processing pipeline</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A QUEUE =====</span>
+<span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">queue</span> = <span class="keyword">new</span> <span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// With initial items</span>
+<span class="keyword">var</span> <span class="variable">tasks</span> = <span class="keyword">new</span> <span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt;(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Task 1"</span>, <span class="string">"Task 2"</span>, <span class="string">"Task 3"</span> });
+
+<span class="comment">// ===== ADDING ITEMS (Enqueue) =====</span>
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"First"</span>);   <span class="comment">// Adds to the back</span>
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Second"</span>);  <span class="comment">// Adds to the back</span>
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Third"</span>);   <span class="comment">// Adds to the back</span>
+<span class="comment">// queue = ["First", "Second", "Third"]</span>
+
+<span class="comment">// ===== REMOVING ITEMS (Dequeue) =====</span>
+<span class="keyword">string</span> <span class="variable">firstItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();  <span class="comment">// "First" (removes from front)</span>
+<span class="keyword">string</span> <span class="variable">nextItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();   <span class="comment">// "Second"</span>
+<span class="comment">// queue now has: ["Third"]</span>
+
+<span class="comment">// ===== LOOKING AT ITEMS WITHOUT REMOVING =====</span>
+<span class="keyword">string</span> <span class="variable">front</span> = <span class="variable">queue</span>.<span class="function">Peek</span>();  <span class="comment">// "Third" (doesn't remove)</span>
+
+<span class="comment">// ===== QUEUE PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">queue</span>.<span class="property">Count</span>;  <span class="comment">// Number of items</span>
+<span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">queue</span>.<span class="property">Count</span> == <span class="number">0</span>;
+
+<span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
+<span class="keyword">bool</span> <span class="variable">hasFirst</span> = <span class="variable">queue</span>.<span class="function">Contains</span>(<span class="string">"First"</span>);  <span class="comment">// true or false</span>
+
+<span class="comment">// ===== CLEARING =====</span>
+<span class="variable">queue</span>.<span class="function">Clear</span>();  <span class="comment">// Removes all items</span>
+
+<span class="comment">// ===== LOOPING THROUGH A QUEUE =====</span>
+<span class="comment">// Using foreach (doesn't remove items)</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">item</span> <span class="keyword">in</span> <span class="variable">queue</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Processing: {<span class="variable">item</span>}"</span>);
+}
+
+<span class="comment">// Process all items (removes them)</span>
+<span class="keyword">while</span> (<span class="variable">queue</span>.<span class="property">Count</span> > <span class="number">0</span>)
+{
+    <span class="keyword">string</span> <span class="variable">item</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Processing and removing: {<span class="variable">item</span>}"</span>);
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Remember:</strong> FIFO = First In, First Out. Think of a queue like a line at a store.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 6: STACK (DETAILED) ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-arrow-left me-2"></i>6. Stack&lt;T&gt; - Last In, First Out (LIFO)</h2>
+                        <p>
+                            A <strong>Stack</strong> works like a stack of plates. <strong>
+                            The last plate you put on top
+                            is the first plate you take off.
+                        </strong> Items are added to the top and removed from the top.
+                    </p>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                <h6 class="fw-bold text-danger"><i class="fas fa-check-circle me-2"></i>When to use Stack</h6>
+                                <ul class="small mb-0">
+                                    <li>Undo/Redo functionality</li>
+                                    <li>Browser history</li>
+                                    <li>Backtracking algorithms</li>
+                                    <li>Expression evaluation</li>
+                                    <li>Function call stack</li>
+                                    <li>Recursive operations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-info bg-opacity-10 rounded">
+                                <h6 class="fw-bold text-info"><i class="fas fa-lightbulb me-2"></i>Real-World Examples</h6>
+                                <ul class="small mb-0">
+                                    <li>Browser back button</li>
+                                    <li>Undo in text editors (Ctrl+Z)</li>
+                                    <li>Stack of books</li>
+                                    <li>Calculator history</li>
+                                    <li>Game inventory (LIFO)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                        <pre><code class="language-csharp"><span class="comment">// ===== CREATING A STACK =====</span>
+<span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">stack</span> = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// With initial items</span>
+<span class="keyword">var</span> <span class="variable">history</span> = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Page 1"</span>, <span class="string">"Page 2"</span> });
+
+<span class="comment">// ===== ADDING ITEMS (Push) =====</span>
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"First"</span>);   <span class="comment">// Adds to the top</span>
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Second"</span>);  <span class="comment">// Adds to the top</span>
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Third"</span>);   <span class="comment">// Adds to the top</span>
+<span class="comment">// stack = ["First", "Second", "Third"] (Third is on top)</span>
+
+<span class="comment">// ===== REMOVING ITEMS (Pop) =====</span>
+<span class="keyword">string</span> <span class="variable">lastItem</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Third" (removes from top)</span>
+<span class="keyword">string</span> <span class="variable">previous</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Second"</span>
+<span class="comment">// stack now has: ["First"]</span>
+
+<span class="comment">// ===== LOOKING AT ITEMS WITHOUT REMOVING =====</span>
+<span class="keyword">string</span> <span class="variable">top</span> = <span class="variable">stack</span>.<span class="function">Peek</span>();  <span class="comment">// "First" (doesn't remove)</span>
+
+<span class="comment">// ===== STACK PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">stack</span>.<span class="property">Count</span>;  <span class="comment">// Number of items</span>
+<span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">stack</span>.<span class="property">Count</span> == <span class="number">0</span>;
+
+<span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
+<span class="keyword">bool</span> <span class="variable">hasFirst</span> = <span class="variable">stack</span>.<span class="function">Contains</span>(<span class="string">"First"</span>);  <span class="comment">// true or false</span>
+
+<span class="comment">// ===== CLEARING =====</span>
+<span class="variable">stack</span>.<span class="function">Clear</span>();  <span class="comment">// Removes all items</span>
+
+<span class="comment">// ===== LOOPING THROUGH A STACK =====</span>
+<span class="comment">// Using foreach (doesn't remove items)</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">item</span> <span class="keyword">in</span> <span class="variable">stack</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Item: {<span class="variable">item</span>}"</span>);
+}
+
+<span class="comment">// Process all items (removes them)</span>
+<span class="keyword">while</span> (<span class="variable">stack</span>.<span class="property">Count</span> > <span class="number">0</span>)
+{
+    <span class="keyword">string</span> <span class="variable">item</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Processing and removing: {<span class="variable">item</span>}"</span>);
+}
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Undo System =====</span>
+<span class="keyword">var</span> <span class="variable">undoStack</span> = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// User performs actions</span>
+<span class="variable">undoStack</span>.<span class="function">Push</span>(<span class="string">"Typed 'Hello'"</span>);
+<span class="variable">undoStack</span>.<span class="function">Push</span>(<span class="string">"Typed ' World'"</span>);
+<span class="variable">undoStack</span>.<span class="function">Push</span>(<span class="string">"Added emoji"</span>);
+
+<span class="comment">// User presses Undo (Ctrl+Z)</span>
+<span class="keyword">string</span> <span class="variable">lastAction</span> = <span class="variable">undoStack</span>.<span class="function">Pop</span>();  <span class="comment">// "Added emoji"</span>
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Undo: {<span class="variable">lastAction</span>}"</span>);
+
+<span class="comment">// Undo again</span>
+<span class="variable">lastAction</span> = <span class="variable">undoStack</span>.<span class="function">Pop</span>();  <span class="comment">// "Typed ' World'"</span>
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Undo: {<span class="variable">lastAction</span>}"</span>);</code></pre>
+                    </div>
+
+                    <div class="alert alert-danger mt-2">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Remember:</strong> LIFO = Last In, First Out. Think of a stack like a stack of plates
+                        or a pile of books.
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 7: LINKEDLIST (DETAILED) ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-link me-2"></i>7. LinkedList&lt;T&gt; - Fast Insert/Delete</h2>
+                        <p>
+                            A <strong>LinkedList</strong> is a collection where each item points to the next and previous item.
+                            It's like a chain of items. <strong>It's very fast at inserting and deleting items in the middle.</strong>
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-info"><i class="fas fa-check-circle me-2"></i>When to use LinkedList</h6>
+                                    <ul class="small mb-0">
+                                        <li>You frequently insert/delete in the middle</li>
+                                        <li>You need to process items in both directions (forward/backward)</li>
+                                        <li>You don't need random access by index</li>
+                                        <li>You're building a queue or stack</li>
+                                        <li>Example: Music playlist, document history</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use LinkedList</h6>
+                                    <ul class="small mb-0">
+                                        <li>You need to access items by index (use List instead)</li>
+                                        <li>You need to search for items (LinkedList is slow for searching)</li>
+                                        <li>You have a small collection (List is simpler)</li>
+                                        <li>You need to sort items</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A LINKEDLIST =====</span>
+<span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">playlist</span> = <span class="keyword">new</span> <span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// With initial items</span>
+<span class="keyword">var</span> <span class="variable">songs</span> = <span class="keyword">new</span> <span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt;(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Song 1"</span>, <span class="string">"Song 2"</span>, <span class="string">"Song 3"</span> });
+
+<span class="comment">// ===== ADDING ITEMS =====</span>
+<span class="variable">playlist</span>.<span class="function">AddLast</span>(<span class="string">"First"</span>);   <span class="comment">// Adds at the end</span>
+<span class="variable">playlist</span>.<span class="function">AddLast</span>(<span class="string">"Second"</span>);  <span class="comment">// Adds at the end</span>
+<span class="variable">playlist</span>.<span class="function">AddFirst</span>(<span class="string">"Zero"</span>);   <span class="comment">// Adds at the beginning</span>
+<span class="comment">// playlist = ["Zero", "First", "Second"]</span>
+
+<span class="comment">// Insert before/after a specific node</span>
+<span class="class">LinkedListNode</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">firstNode</span> = <span class="variable">playlist</span>.<span class="property">First</span>;
+<span class="variable">playlist</span>.<span class="function">AddAfter</span>(<span class="variable">firstNode</span>, <span class="string">"After First"</span>);
+<span class="comment">// playlist = ["Zero", "First", "After First", "Second"]</span>
+
+<span class="comment">// ===== ACCESSING ITEMS =====</span>
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">playlist</span>.<span class="property">First</span>.<span class="property">Value</span>;     <span class="comment">// "Zero"</span>
+<span class="keyword">string</span> <span class="variable">last</span> = <span class="variable">playlist</span>.<span class="property">Last</span>.<span class="property">Value</span>;       <span class="comment">// "Second"</span>
+<span class="class">LinkedListNode</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">node</span> = <span class="variable">playlist</span>.<span class="property">First</span>.<span class="property">Next</span>;  <span class="comment">// Gets the next node</span>
+<span class="class">LinkedListNode</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">prevNode</span> = <span class="variable">node</span>.<span class="property">Previous</span>;  <span class="comment">// Gets the previous node</span>
+
+<span class="comment">// ===== REMOVING ITEMS =====</span>
+<span class="keyword">bool</span> <span class="variable">removed</span> = <span class="variable">playlist</span>.<span class="function">Remove</span>(<span class="string">"First"</span>);  <span class="comment">// Removes by value</span>
+<span class="variable">playlist</span>.<span class="function">RemoveFirst</span>();  <span class="comment">// Removes the first item</span>
+<span class="variable">playlist</span>.<span class="function">RemoveLast</span>();   <span class="comment">// Removes the last item</span>
+<span class="variable">playlist</span>.<span class="function">Clear</span>();  <span class="comment">// Removes all items</span>
+
+<span class="comment">// Remove a specific node</span>
+<span class="class">LinkedListNode</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">nodeToRemove</span> = <span class="variable">playlist</span>.<span class="property">First</span>;
+<span class="variable">playlist</span>.<span class="function">Remove</span>(<span class="variable">nodeToRemove</span>);
+
+<span class="comment">// ===== LINKEDLIST PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">playlist</span>.<span class="property">Count</span>;  <span class="comment">// Number of items</span>
+<span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">playlist</span>.<span class="property">Count</span> == <span class="number">0</span>;
+
+<span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
+<span class="keyword">bool</span> <span class="variable">hasFirst</span> = <span class="variable">playlist</span>.<span class="function">Contains</span>(<span class="string">"First"</span>);  <span class="comment">// true or false</span>
+
+<span class="comment">// ===== LOOPING THROUGH A LINKEDLIST =====</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">item</span> <span class="keyword">in</span> <span class="variable">playlist</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Song: {<span class="variable">item</span>}"</span>);
+}
+
+<span class="comment">// Looping with nodes</span>
+<span class="class">LinkedListNode</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">current</span> = <span class="variable">playlist</span>.<span class="property">First</span>;
+<span class="keyword">while</span> (<span class="variable">current</span> != <span class="keyword">null</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Current: {<span class="variable">current</span>.<span class="property">Value</span>}"</span>);
+    <span class="variable">current</span> = <span class="variable">current</span>.<span class="property">Next</span>;  <span class="comment">// Move to the next node</span>
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Remember:</strong> LinkedList is great when you need to insert or delete items in the middle
+                            frequently. But if you need to access items by index, use List instead.
                         </div>
                     </div>
                 </div>
@@ -452,46 +828,60 @@
                 <!-- ===== COMPARISON TABLE ===== -->
                 <div class="card mb-4" data-aos="fade-up">
                     <div class="card-body">
-                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Which Collection to Use?</h2>
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Comparison</h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>Collection</th>
-                                        <th>Use When</th>
-                                        <th>Example</th>
+                                        <th>Order</th>
+                                        <th>Unique</th>
+                                        <th>Access</th>
+                                        <th>Best For</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Array</strong></td>
-                                        <td>Fixed size, fastest performance</td>
-                                        <td>Days of the week, months</td>
-                                    </tr>
-                                    <tr>
                                         <td><strong>List&lt;T&gt;</strong></td>
-                                        <td>Dynamic size, most common</td>
-                                        <td>Shopping cart, student list</td>
+                                        <td>Insertion order</td>
+                                        <td>No</td>
+                                        <td>By index</td>
+                                        <td>Most common, dynamic data</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Dictionary</strong></td>
-                                        <td>Key-value lookups</td>
-                                        <td>Phone book, student IDs</td>
+                                        <td>Not guaranteed</td>
+                                        <td>Keys only</td>
+                                        <td>By key</td>
+                                        <td>Fast lookups</td>
                                     </tr>
                                     <tr>
                                         <td><strong>HashSet</strong></td>
-                                        <td>Unique items only</td>
-                                        <td>Unique visitors, tags</td>
+                                        <td>Not guaranteed</td>
+                                        <td>Yes</td>
+                                        <td>By value</td>
+                                        <td>Unique items</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Queue</strong></td>
-                                        <td>First In, First Out</td>
-                                        <td>Customer service queue, print queue</td>
+                                        <td>FIFO</td>
+                                        <td>No</td>
+                                        <td>First only</td>
+                                        <td>Ordered processing</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Stack</strong></td>
-                                        <td>Last In, First Out</td>
-                                        <td>Undo/Redo, browser history</td>
+                                        <td>LIFO</td>
+                                        <td>No</td>
+                                        <td>Last only</td>
+                                        <td>Undo/redo, backtracking</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LinkedList</strong></td>
+                                        <td>Insertion order</td>
+                                        <td>No</td>
+                                        <td>Node traversal</td>
+                                        <td>Fast insert/delete in middle</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -753,70 +1143,70 @@ ID: 102, Name: Bob, Grade: 92.0</pre>
 
 @section Scripts {
     <script>
-        function toggleExercise() {
-            var solution = document.getElementById('exerciseSolution');
-            if (solution.style.display === 'none') {
-                solution.style.display = 'block';
-            } else {
-                solution.style.display = 'none';
+            function toggleExercise() {
+                var solution = document.getElementById('exerciseSolution');
+                if (solution.style.display === 'none') {
+                    solution.style.display = 'block';
+                } else {
+                    solution.style.display = 'none';
+                }
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    once: true,
-                    offset: 40,
-                    duration: 600
-                });
-            }
-        });
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        once: true,
+                        offset: 40,
+                        duration: 600
+                    });
+                }
+            });
     </script>
     <style>
-        .code-block pre {
-            background: transparent !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
+            .code-block pre {
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
 
-        .code-block code {
-            font-family: 'Consolas', monospace;
-            font-size: 0.85rem;
-            color: #e4e4e4;
-        }
+            .code-block code {
+                font-family: 'Consolas', monospace;
+                font-size: 0.85rem;
+                color: #e4e4e4;
+            }
 
-        .language-csharp .keyword {
-            color: #c792ea;
-            font-weight: 600;
-        }
+            .language-csharp .keyword {
+                color: #c792ea;
+                font-weight: 600;
+            }
 
-        .language-csharp .comment {
-            color: #676e95;
-            font-style: italic;
-        }
+            .language-csharp .comment {
+                color: #676e95;
+                font-style: italic;
+            }
 
-        .language-csharp .string {
-            color: #c3e88d;
-        }
+            .language-csharp .string {
+                color: #c3e88d;
+            }
 
-        .language-csharp .number {
-            color: #f78c6c;
-        }
+            .language-csharp .number {
+                color: #f78c6c;
+            }
 
-        .language-csharp .function {
-            color: #82aaff;
-        }
+            .language-csharp .function {
+                color: #82aaff;
+            }
 
-        .language-csharp .variable {
-            color: #eeffff;
-        }
+            .language-csharp .variable {
+                color: #eeffff;
+            }
 
-        .language-csharp .class {
-            color: #ffcb6b;
-        }
+            .language-csharp .class {
+                color: #ffcb6b;
+            }
 
-        .language-csharp .property {
-            color: #80cbc4;
-        }
+            .language-csharp .property {
+                color: #80cbc4;
+            }
     </style>
 }

@@ -999,3 +999,56 @@ code {
         font-size: 0.55rem !important;
     }
 }
+
+/* ===== STICKY SIDEBAR FIX ===== */
+.sidebar-nav-wrapper {
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+    .sidebar-nav-wrapper .sidebar-nav {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .sidebar-nav-wrapper::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .sidebar-nav-wrapper::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .sidebar-nav-wrapper::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 4px;
+    }
+
+        .sidebar-nav-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+
+/* For Firefox */
+.sidebar-nav-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+}
+
+/* Responsive - remove sticky on mobile */
+@media (max-width: 768px) {
+    .sidebar-nav-wrapper {
+        position: relative !important;
+        top: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        margin-bottom: 2rem;
+    }
+}

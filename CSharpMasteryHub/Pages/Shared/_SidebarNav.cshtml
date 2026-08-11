@@ -1,14 +1,16 @@
 ﻿@model List<LessonNavItem>
 
-<div class="sidebar-nav">
-    <h5 class="mb-3"><i class="fas fa-list me-2"></i>Lessons</h5>
-    <nav class="nav flex-column">
-        @foreach (var item in Model)
-        {
-            <a class="nav-link @(item.IsActive ? "active" : "")" href="@item.Url">
-                <i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>
-                @item.Title
-            </a>
-        }
-    </nav>
+<div class="sidebar-nav-wrapper">
+    <div class="sidebar-nav">
+        <h5 class="mb-3"><i class="fas fa-list me-2"></i>Lessons</h5>
+        <nav class="nav flex-column">
+            @foreach (var item in Model)
+            {
+                <a class="nav-link @(item.IsActive ? "active" : "")" href="@item.Url">
+                    <i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>
+                    @item.Title
+                </a>
+            }
+        </nav>
+    </div>
 </div>

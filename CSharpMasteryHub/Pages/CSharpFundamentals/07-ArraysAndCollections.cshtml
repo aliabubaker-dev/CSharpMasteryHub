@@ -15,90 +15,725 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
+            <div class="lesson-content" data-aos="fade-up">
                 <h1 class="display-4 mb-3">Arrays and Collections</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 7 of 13</span>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 7 of 13</span>
                 </div>
 
-                <h2>Arrays</h2>
-
-                <h3>Declaring Arrays</h3>
-                <pre><code>// Fixed size array
-int[] numbers = new int[5];  // {0, 0, 0, 0, 0}
-
-// Initialize with values
-string[] names = { "Alice", "Bob", "Charlie" };
-
-// Multidimensional array
-int[,] matrix = new int[2, 3];
-int[,] grid = { { 1, 2 }, { 3, 4 } };</code></pre>
-
-                <h3>Accessing Array Elements</h3>
-                <pre><code>string[] fruits = { "Apple", "Banana", "Orange" };
-
-string first = fruits[0];     // "Apple"
-string last = fruits[2];      // "Orange"
-fruits[1] = "Grape";          // Change value
-
-int length = fruits.Length;   // 3</code></pre>
-
-                <h2>List &lt;T&gt;</h2>
-                <pre><code>// Dynamic size
-List&lt;string&gt; names = new List&lt;string&gt;();
-
-names.Add("Alice");
-names.Add("Bob");
-names.Add("Charlie");
-
-string first = names[0];      // "Alice"
-names.Remove("Bob");          // Remove by value
-names.Insert(1, "Dave");      // Insert at index
-
-int count = names.Count;      // Number of items</code></pre>
-
-                <h2>Dictionary &lt;TKey, TValue&gt;</h2>
-                <pre><code>Dictionary&lt;string, int&gt; ages = new Dictionary&lt;string, int&gt;();
-
-ages["Alice"] = 25;
-ages["Bob"] = 30;
-ages.Add("Charlie", 35);
-
-int age = ages["Alice"];  // 25
-
-if (ages.ContainsKey("Bob"))
-{
-    Console.WriteLine($"Bob is {ages["Bob"]} years old");
-}</code></pre>
-
-                <h2>Other Collections</h2>
-                <pre><code>// HashSet - unique items
-HashSet&lt;string&gt; uniqueNames = new HashSet&lt;string&gt;();
-uniqueNames.Add("Alice");
-uniqueNames.Add("Alice"); // Ignored (duplicate)
-
-// Queue - FIFO
-Queue&lt;string&gt; queue = new Queue&lt;string&gt;();
-queue.Enqueue("First");
-queue.Enqueue("Second");
-string firstItem = queue.Dequeue(); // "First"
-
-// Stack - LIFO
-Stack&lt;string&gt; stack = new Stack&lt;string&gt;();
-stack.Push("First");
-stack.Push("Second");
-string lastItem = stack.Pop(); // "Second"</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Use <code>List&lt;T&gt;</code> for dynamic collections and <code>Dictionary&lt;TKey, TValue&gt;</code> for key-value lookups.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What are Collections?</h2>
+                        <p>
+                            <strong>Collections</strong> are containers that hold <strong>multiple items</strong> of data.
+                            Think of them like a shopping cart - you can put many items in it, add new ones, remove ones you don't want,
+                            and access any item you need.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-arrow-right fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Array</strong><br>Fixed size</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-list-ul fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>List</strong><br>Dynamic size</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-key fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Dictionary</strong><br>Key-Value pairs</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-cubes fa-2x text-info"></i>
+                                    <p class="small mt-1"><strong>Others</strong><br>Queue, Stack, HashSet</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> Imagine you have a box of chocolates.
+                            An <strong>array</strong> is a box with a fixed number of slots. A <strong>list</strong>
+                            is a box that can grow. A <strong>dictionary</strong> is like a labeled box where each
+                            chocolate has a name tag.
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== SECTION 1: ARRAYS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-cubes me-2"></i>1. Arrays</h2>
+                        <p>
+                            An <strong>array</strong> is a fixed-size collection of items of the same type.
+                            <strong>Once you create an array, its size cannot change.</strong>
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>When to use Arrays</h6>
+                                    <ul class="small mb-0">
+                                        <li>You know the exact number of items</li>
+                                        <li>You need the fastest performance</li>
+                                        <li>You're working with a fixed dataset</li>
+                                        <li>You need to store items of the same type</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use Arrays</h6>
+                                    <ul class="small mb-0">
+                                        <li>You don't know how many items</li>
+                                        <li>You need to add/remove items</li>
+                                        <li>You need to insert items in the middle</li>
+                                        <li>You need a dynamic collection</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== DECLARING ARRAYS =====</span>
+
+<span class="comment">// Method 1: Create with size (all elements are default values)</span>
+<span class="keyword">int</span>[] <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];  <span class="comment">// 5 slots: [0, 0, 0, 0, 0]</span>
+
+<span class="comment">// Method 2: Create and initialize with values</span>
+<span class="keyword">string</span>[] <span class="variable">names</span> = { <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span> };  <span class="comment">// Size is 3</span>
+
+<span class="comment">// Method 3: Create with size and assign values</span>
+<span class="keyword">int</span>[] <span class="variable">scores</span> = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>] { <span class="number">95</span>, <span class="number">88</span>, <span class="number">76</span> };
+
+<span class="comment">// ===== ACCESSING ARRAY ELEMENTS =====</span>
+<span class="keyword">string</span>[] <span class="variable">fruits</span> = { <span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span> };
+
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">fruits</span>[<span class="number">0</span>];  <span class="comment">// "Apple" (first element - index 0)</span>
+<span class="keyword">string</span> <span class="variable">second</span> = <span class="variable">fruits</span>[<span class="number">1</span>]; <span class="comment">// "Banana" (second element - index 1)</span>
+<span class="keyword">string</span> <span class="variable">last</span> = <span class="variable">fruits</span>[<span class="number">2</span>];   <span class="comment">// "Orange" (third element - index 2)</span>
+
+<span class="comment">// Change a value</span>
+<span class="variable">fruits</span>[<span class="number">1</span>] = <span class="string">"Grape"</span>;  <span class="comment">// Now: ["Apple", "Grape", "Orange"]</span>
+
+<span class="comment">// ===== ARRAY PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">length</span> = <span class="variable">fruits</span>.<span class="property">Length</span>;  <span class="comment">// Gets the number of elements (3)</span>
+
+<span class="comment">// ===== LOOPING THROUGH AN ARRAY =====</span>
+<span class="comment">// Using for loop (with index)</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">fruits</span>.<span class="property">Length</span>; <span class="variable">i</span>++)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index {<span class="variable">i</span>}: {<span class="variable">fruits</span>[<span class="variable">i</span>]}"</span>);
+}
+
+<span class="comment">// Using foreach (cleaner, no index)</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">fruit</span> <span class="keyword">in</span> <span class="variable">fruits</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Fruit: {<span class="variable">fruit</span>}"</span>);
+}
+
+<span class="comment">// ===== MULTIDIMENSIONAL ARRAYS =====</span>
+<span class="comment">// 2D array (like a grid or table)</span>
+<span class="keyword">int</span>[,] <span class="variable">grid</span> = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>, <span class="number">3</span>];  <span class="comment">// 2 rows, 3 columns</span>
+<span class="variable">grid</span>[<span class="number">0</span>, <span class="number">0</span>] = <span class="number">1</span>;
+<span class="variable">grid</span>[<span class="number">0</span>, <span class="number">1</span>] = <span class="number">2</span>;
+<span class="variable">grid</span>[<span class="number">0</span>, <span class="number">2</span>] = <span class="number">3</span>;
+<span class="variable">grid</span>[<span class="number">1</span>, <span class="number">0</span>] = <span class="number">4</span>;
+<span class="variable">grid</span>[<span class="number">1</span>, <span class="number">1</span>] = <span class="number">5</span>;
+<span class="variable">grid</span>[<span class="number">1</span>, <span class="number">2</span>] = <span class="number">6</span>;
+<span class="comment">// grid = [[1,2,3], [4,5,6]]</span>
+
+<span class="comment">// Initialize 2D array with values</span>
+<span class="keyword">int</span>[,] <span class="variable">grid2</span> = { { <span class="number">1</span>, <span class="number">2</span> }, { <span class="number">3</span>, <span class="number">4</span> } };</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Remember:</strong> Arrays are <strong>zero-indexed</strong>. The first element is at index 0,
+                            not 1. Trying to access an index that doesn't exist will cause an error!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 2: LISTS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-list-ul me-2"></i>2. Lists (List&lt;T&gt;)</h2>
+                        <p>
+                            A <strong>List</strong> is like an array that can <strong>grow and shrink</strong>.
+                            It's the most commonly used collection in C# because it's flexible and easy to use.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>When to use Lists</h6>
+                                    <ul class="small mb-0">
+                                        <li>You don't know how many items you'll have</li>
+                                        <li>You need to add or remove items</li>
+                                        <li>You need to insert items in the middle</li>
+                                        <li>You need to search for items</li>
+                                        <li>You need to sort items</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Most Common Use</h6>
+                                    <p class="small mb-0">
+                                        <strong>Lists are used in 90% of cases</strong> when you need a collection
+                                        of items. They are the go-to choice for most developers.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A LIST =====</span>
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;  <span class="comment">// Required for List</span>
+
+<span class="comment">// Create an empty list of strings</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// Create a list with initial items</span>
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> };
+
+<span class="comment">// ===== ADDING ITEMS =====</span>
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);     <span class="comment">// Adds "Alice" at the end</span>
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);       <span class="comment">// Adds "Bob" at the end</span>
+<span class="variable">names</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>);  <span class="comment">// Adds "Charlie" at the end</span>
+
+<span class="comment">// ===== INSERTING ITEMS =====</span>
+<span class="variable">names</span>.<span class="function">Insert</span>(<span class="number">1</span>, <span class="string">"Dave"</span>);  <span class="comment">// Inserts "Dave" at index 1</span>
+<span class="comment">// Now: ["Alice", "Dave", "Bob", "Charlie"]</span>
+
+<span class="comment">// ===== ACCESSING ITEMS =====</span>
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">names</span>[<span class="number">0</span>];  <span class="comment">// "Alice"</span>
+<span class="keyword">string</span> <span class="variable">last</span> = <span class="variable">names</span>[<span class="variable">names</span>.<span class="property">Count</span> - <span class="number">1</span>];  <span class="comment">// "Charlie"</span>
+
+<span class="comment">// ===== REMOVING ITEMS =====</span>
+<span class="variable">names</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);       <span class="comment">// Removes "Bob" by value</span>
+<span class="variable">names</span>.<span class="function">RemoveAt</span>(<span class="number">0</span>);      <span class="comment">// Removes the first item (index 0)</span>
+<span class="variable">names</span>.<span class="function">Clear</span>();           <span class="comment">// Removes all items</span>
+
+<span class="comment">// ===== LIST PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">names</span>.<span class="property">Count</span>;   <span class="comment">// Number of items (like Length for arrays)</span>
+<span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">names</span>.<span class="property">Count</span> == <span class="number">0</span>;
+
+<span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
+<span class="keyword">bool</span> <span class="variable">hasAlice</span> = <span class="variable">names</span>.<span class="function">Contains</span>(<span class="string">"Alice"</span>);  <span class="comment">// true or false</span>
+
+<span class="comment">// ===== FINDING ITEMS =====</span>
+<span class="keyword">int</span> <span class="variable">index</span> = <span class="variable">names</span>.<span class="function">IndexOf</span>(<span class="string">"Alice"</span>);  <span class="comment">// Returns the index, or -1 if not found</span>
+
+<span class="comment">// ===== SORTING =====</span>
+<span class="variable">names</span>.<span class="function">Sort</span>();  <span class="comment">// Sorts the list alphabetically</span>
+
+<span class="comment">// ===== LOOPING THROUGH A LIST =====</span>
+<span class="comment">// Using foreach (cleanest)</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">name</span> <span class="keyword">in</span> <span class="variable">names</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Hello, {<span class="variable">name</span>}"</span>);
+}
+
+<span class="comment">// Using for loop (when you need the index)</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">names</span>.<span class="property">Count</span>; <span class="variable">i</span>++)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index {<span class="variable">i</span>}: {<span class="variable">names</span>[<span class="variable">i</span>]}"</span>);
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Pro Tip:</strong> Use <strong>List&lt;T&gt;</strong> by default. Only use arrays when
+                            you have a very specific reason (like fixed size or performance-critical code).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 3: DICTIONARY ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-key me-2"></i>3. Dictionary&lt;TKey, TValue&gt;</h2>
+                        <p>
+                            A <strong>Dictionary</strong> stores items as <strong>key-value pairs</strong>.
+                            Think of it like a real dictionary - you look up a word (the key) to find its definition (the value).
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-warning"><i class="fas fa-check-circle me-2"></i>When to use Dictionary</h6>
+                                    <ul class="small mb-0">
+                                        <li>You need to look up items by a unique key</li>
+                                        <li>You need fast lookups</li>
+                                        <li>You have key-value data</li>
+                                        <li>Example: Student ID → Student Name</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>When NOT to use Dictionary</h6>
+                                    <ul class="small mb-0">
+                                        <li>You don't have unique keys</li>
+                                        <li>You need to access items by position</li>
+                                        <li>You have a small collection</li>
+                                        <li>You need to preserve order</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A DICTIONARY =====</span>
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;  <span class="comment">// Required</span>
+
+<span class="comment">// Create a dictionary with string keys and int values</span>
+<span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; <span class="variable">ages</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt;();
+
+<span class="comment">// Create a dictionary with initial values</span>
+<span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; <span class="variable">countries</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;
+{
+    { <span class="string">"USA"</span>, <span class="string">"Washington D.C."</span> },
+    { <span class="string">"Canada"</span>, <span class="string">"Ottawa"</span> },
+    { <span class="string">"UK"</span>, <span class="string">"London"</span> }
+};
+
+<span class="comment">// ===== ADDING ITEMS =====</span>
+<span class="variable">ages</span>[<span class="string">"Alice"</span>] = <span class="number">25</span>;        <span class="comment">// Adds or updates</span>
+<span class="variable">ages</span>[<span class="string">"Bob"</span>] = <span class="number">30</span>;          <span class="comment">// Adds or updates</span>
+<span class="variable">ages</span>.<span class="function">Add</span>(<span class="string">"Charlie"</span>, <span class="number">35</span>);  <span class="comment">// Only adds (throws error if exists)</span>
+
+<span class="comment">// ===== ACCESSING VALUES =====</span>
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="variable">ages</span>[<span class="string">"Alice"</span>];  <span class="comment">// 25</span>
+
+<span class="comment">// ===== SAFE ACCESS (Check if key exists first) =====</span>
+<span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">ContainsKey</span>(<span class="string">"Bob"</span>))
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Bob is {<span class="variable">ages</span>[<span class="string">"Bob"</span>]} years old"</span>);
+}
+
+<span class="comment">// ===== TRYGETVALUE (Best way to safely access) =====</span>
+<span class="keyword">if</span> (<span class="variable">ages</span>.<span class="function">TryGetValue</span>(<span class="string">"Dave"</span>, <span class="keyword">out</span> <span class="keyword">int</span> <span class="variable">age2</span>))
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Dave is {<span class="variable">age2</span>} years old"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Dave not found"</span>);
+}
+
+<span class="comment">// ===== REMOVING ITEMS =====</span>
+<span class="variable">ages</span>.<span class="function">Remove</span>(<span class="string">"Bob"</span>);        <span class="comment">// Removes Bob</span>
+<span class="variable">ages</span>.<span class="function">Clear</span>();               <span class="comment">// Removes all items</span>
+
+<span class="comment">// ===== DICTIONARY PROPERTIES =====</span>
+<span class="keyword">int</span> <span class="variable">count2</span> = <span class="variable">ages</span>.<span class="property">Count</span>;      <span class="comment">// Number of key-value pairs</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">keys</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;(<span class="variable">ages</span>.<span class="property">Keys</span>);  <span class="comment">// Get all keys</span>
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">values</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt;(<span class="variable">ages</span>.<span class="property">Values</span>);  <span class="comment">// Get all values</span>
+
+<span class="comment">// ===== LOOPING THROUGH A DICTIONARY =====</span>
+<span class="keyword">foreach</span> (<span class="class">KeyValuePair</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; <span class="variable">item</span> <span class="keyword">in</span> <span class="variable">ages</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"{<span class="variable">item</span>.<span class="property">Key</span>} is {<span class="variable">item</span>.<span class="property">Value</span>} years old"</span>);
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> Keys must be <strong>unique</strong>. If you try to add a key that
+                            already exists, the program will throw an error.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SECTION 4: OTHER COLLECTIONS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-cog me-2"></i>4. Other Collections</h2>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border border-primary rounded">
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-hashtag me-2"></i>HashSet&lt;T&gt;</h6>
+                                    <p class="small mb-0">Stores <strong>unique</strong> items. Duplicates are automatically ignored.</p>
+                                    <code class="small">HashSet&lt;string&gt; unique = new HashSet&lt;string&gt;();</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border border-success rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-arrow-right me-2"></i>Queue&lt;T&gt;</h6>
+                                    <p class="small mb-0"><strong>FIFO</strong> - First In, First Out. Like a line at a store.</p>
+                                    <code class="small">Queue&lt;string&gt; queue = new Queue&lt;string&gt;();</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border border-warning rounded">
+                                    <h6 class="fw-bold text-warning"><i class="fas fa-arrow-left me-2"></i>Stack&lt;T&gt;</h6>
+                                    <p class="small mb-0"><strong>LIFO</strong> - Last In, First Out. Like a stack of plates.</p>
+                                    <code class="small">Stack&lt;string&gt; stack = new Stack&lt;string&gt;();</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border border-info rounded">
+                                    <h6 class="fw-bold text-info"><i class="fas fa-list me-2"></i>LinkedList&lt;T&gt;</h6>
+                                    <p class="small mb-0">Each item points to the next. Fast insert/delete in the middle.</p>
+                                    <code class="small">LinkedList&lt;string&gt; list = new LinkedList&lt;string&gt;();</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== HASHSET - Unique Items Only =====</span>
+<span class="class">HashSet</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">uniqueNames</span> = <span class="keyword">new</span> <span class="class">HashSet</span>&lt;<span class="keyword">string</span>&gt;();
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Bob"</span>);
+<span class="variable">uniqueNames</span>.<span class="function">Add</span>(<span class="string">"Alice"</span>);  <span class="comment">// Ignored - duplicate</span>
+<span class="comment">// uniqueNames = ["Alice", "Bob"]</span>
+
+<span class="comment">// ===== QUEUE - FIFO (First In, First Out) =====</span>
+<span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">queue</span> = <span class="keyword">new</span> <span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt;();
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"First"</span>);   <span class="comment">// Add to the end</span>
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Second"</span>);  <span class="comment">// Add to the end</span>
+<span class="variable">queue</span>.<span class="function">Enqueue</span>(<span class="string">"Third"</span>);   <span class="comment">// Add to the end</span>
+
+<span class="keyword">string</span> <span class="variable">firstItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();  <span class="comment">// "First" (removes first)</span>
+<span class="keyword">string</span> <span class="variable">nextItem</span> = <span class="variable">queue</span>.<span class="function">Dequeue</span>();   <span class="comment">// "Second"</span>
+<span class="comment">// queue now has: ["Third"]</span>
+
+<span class="comment">// Peek - look at the first item without removing</span>
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">queue</span>.<span class="function">Peek</span>();  <span class="comment">// "Third" (doesn't remove)</span>
+
+<span class="comment">// ===== STACK - LIFO (Last In, First Out) =====</span>
+<span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">stack</span> = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;();
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"First"</span>);   <span class="comment">// Add to the top</span>
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Second"</span>);  <span class="comment">// Add to the top</span>
+<span class="variable">stack</span>.<span class="function">Push</span>(<span class="string">"Third"</span>);   <span class="comment">// Add to the top</span>
+
+<span class="keyword">string</span> <span class="variable">lastItem</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Third" (removes from top)</span>
+<span class="keyword">string</span> <span class="variable">previous</span> = <span class="variable">stack</span>.<span class="function">Pop</span>();  <span class="comment">// "Second"</span>
+<span class="comment">// stack now has: ["First"]</span>
+
+<span class="comment">// Peek - look at the top item without removing</span>
+<span class="keyword">string</span> <span class="variable">top</span> = <span class="variable">stack</span>.<span class="function">Peek</span>();  <span class="comment">// "First" (doesn't remove)</span>
+
+<span class="comment">// ===== LINKEDLIST - Fast insert/delete in the middle =====</span>
+<span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">linkedList</span> = <span class="keyword">new</span> <span class="class">LinkedList</span>&lt;<span class="keyword">string</span>&gt;();
+<span class="variable">linkedList</span>.<span class="function">AddLast</span>(<span class="string">"First"</span>);
+<span class="variable">linkedList</span>.<span class="function">AddLast</span>(<span class="string">"Second"</span>);
+<span class="variable">linkedList</span>.<span class="function">AddFirst</span>(<span class="string">"Zero"</span>);  <span class="comment">// Adds at the beginning</span>
+<span class="comment">// linkedList = ["Zero", "First", "Second"]</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Quick Summary:</strong>
+                            <ul class="mb-0">
+                                <li><strong>Queue</strong> → Line of people (first come, first served)</li>
+                                <li><strong>Stack</strong> → Stack of plates (last one on top comes off first)</li>
+                                <li><strong>HashSet</strong> → Unique items only (no duplicates)</li>
+                                <li><strong>LinkedList</strong> → Fast insert/delete in the middle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== COMPARISON TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Which Collection to Use?</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Collection</th>
+                                        <th>Use When</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Array</strong></td>
+                                        <td>Fixed size, fastest performance</td>
+                                        <td>Days of the week, months</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>List&lt;T&gt;</strong></td>
+                                        <td>Dynamic size, most common</td>
+                                        <td>Shopping cart, student list</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Dictionary</strong></td>
+                                        <td>Key-value lookups</td>
+                                        <td>Phone book, student IDs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>HashSet</strong></td>
+                                        <td>Unique items only</td>
+                                        <td>Unique visitors, tags</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Queue</strong></td>
+                                        <td>First In, First Out</td>
+                                        <td>Customer service queue, print queue</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Stack</strong></td>
+                                        <td>Last In, First Out</td>
+                                        <td>Undo/Redo, browser history</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Student Management System</h2>
+
+                        <p class="fw-bold">Task: Create a student management system using collections.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "StudentManager"</li>
+                                <li>Use a <strong>List&lt;Student&gt;</strong> to store students</li>
+                                <li>Each student should have: <strong>ID</strong> (int), <strong>Name</strong> (string), <strong>Grade</strong> (double)</li>
+                                <li>Use a <strong>Dictionary</strong> to map student IDs to student objects</li>
+                                <li>
+                                    Implement these features:
+                                    <ul>
+                                        <li>Add a new student</li>
+                                        <li>Find a student by ID</li>
+                                        <li>Display all students</li>
+                                        <li>Calculate the average grade</li>
+                                        <li>Find the highest and lowest grade</li>
+                                    </ul>
+                                </li>
+                                <li>Use <strong>foreach</strong> to display all students</li>
+                                <li>Use <strong>ContainsKey</strong> to check if a student exists</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hints:</strong>
+                            <ul class="mb-0">
+                                <li>Create a <code>Student</code> class with properties</li>
+                                <li>Use <code>List&lt;Student&gt; students = new List&lt;Student&gt;();</code></li>
+                                <li>Use <code>Dictionary&lt;int, Student&gt; studentDict = new Dictionary&lt;int, Student&gt;();</code></li>
+                                <li>When adding, add to both the List and Dictionary</li>
+                                <li>Use <code>students.Average(s => s.Grade)</code> for average</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Expected Output:</strong>
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">--- Student Management System ---
+1. Add Student
+2. Find Student
+3. Display All Students
+4. Show Statistics
+5. Exit
+Choose an option: 1
+Enter student ID: 101
+Enter student name: Alice
+Enter student grade: 85.5
+Student added successfully!
+
+--- Student Management System ---
+1. Add Student
+2. Find Student
+3. Display All Students
+4. Show Statistics
+5. Exit
+Choose an option: 3
+ID: 101, Name: Alice, Grade: 85.5
+ID: 102, Name: Bob, Grade: 92.0</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Student Management System</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Collections</span>.<span class="class">Generic</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Linq</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt; <span class="variable">students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Student</span>&gt;();
+    <span class="keyword">static</span> <span class="class">Dictionary</span>&lt;<span class="keyword">int</span>, <span class="class">Student</span>&gt; <span class="variable">studentDict</span> = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">int</span>, <span class="class">Student</span>&gt;();
+
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="keyword">bool</span> <span class="variable">running</span> = <span class="keyword">true</span>;
+
+        <span class="keyword">while</span> (<span class="variable">running</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n--- Student Management System ---"</span>);
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"1. Add Student"</span>);
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"2. Find Student"</span>);
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"3. Display All Students"</span>);
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"4. Show Statistics"</span>);
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"5. Exit"</span>);
+            <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Choose an option: "</span>);
+            <span class="keyword">string</span> <span class="variable">choice</span> = <span class="function">Console</span>.<span class="function">ReadLine</span>();
+
+            <span class="keyword">switch</span> (<span class="variable">choice</span>)
+            {
+                <span class="keyword">case</span> <span class="string">"1"</span>:
+                    <span class="function">AddStudent</span>();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"2"</span>:
+                    <span class="function">FindStudent</span>();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"3"</span>:
+                    <span class="function">DisplayAllStudents</span>();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"4"</span>:
+                    <span class="function">ShowStatistics</span>();
+                    <span class="keyword">break</span>;
+                <span class="keyword">case</span> <span class="string">"5"</span>:
+                    <span class="variable">running</span> = <span class="keyword">false</span>;
+                    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Goodbye!"</span>);
+                    <span class="keyword">break</span>;
+                <span class="keyword">default</span>:
+                    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Invalid choice!"</span>);
+                    <span class="keyword">break</span>;
+            }
+        }
+    }
+
+    <span class="keyword">static void</span> <span class="function">AddStudent</span>()
+    {
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter student ID: "</span>);
+        <span class="keyword">int</span> <span class="variable">id</span> = <span class="keyword">int</span>.<span class="function">Parse</span>(<span class="function">Console</span>.<span class="function">ReadLine</span>());
+
+        <span class="comment">// Check if ID already exists</span>
+        <span class="keyword">if</span> (<span class="variable">studentDict</span>.<span class="function">ContainsKey</span>(<span class="variable">id</span>))
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Student ID already exists!"</span>);
+            <span class="keyword">return</span>;
+        }
+
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter student name: "</span>);
+        <span class="keyword">string</span> <span class="variable">name</span> = <span class="function">Console</span>.<span class="function">ReadLine</span>();
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter student grade: "</span>);
+        <span class="keyword">double</span> <span class="variable">grade</span> = <span class="keyword">double</span>.<span class="function">Parse</span>(<span class="function">Console</span>.<span class="function">ReadLine</span>());
+
+        <span class="class">Student</span> <span class="variable">student</span> = <span class="keyword">new</span> <span class="class">Student</span>
+        {
+            <span class="property">ID</span> = <span class="variable">id</span>,
+            <span class="property">Name</span> = <span class="variable">name</span>,
+            <span class="property">Grade</span> = <span class="variable">grade</span>
+        };
+
+        <span class="variable">students</span>.<span class="function">Add</span>(<span class="variable">student</span>);
+        <span class="variable">studentDict</span>[<span class="variable">id</span>] = <span class="variable">student</span>;
+
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Student added successfully!"</span>);
+    }
+
+    <span class="keyword">static void</span> <span class="function">FindStudent</span>()
+    {
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter student ID: "</span>);
+        <span class="keyword">int</span> <span class="variable">id</span> = <span class="keyword">int</span>.<span class="function">Parse</span>(<span class="function">Console</span>.<span class="function">ReadLine</span>());
+
+        <span class="keyword">if</span> (<span class="variable">studentDict</span>.<span class="function">TryGetValue</span>(<span class="variable">id</span>, <span class="keyword">out</span> <span class="class">Student</span> <span class="variable">student</span>))
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"ID: {<span class="variable">student</span>.<span class="property">ID</span>}, Name: {<span class="variable">student</span>.<span class="property">Name</span>}, Grade: {<span class="variable">student</span>.<span class="property">Grade</span>}"</span>);
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Student not found!"</span>);
+        }
+    }
+
+    <span class="keyword">static void</span> <span class="function">DisplayAllStudents</span>()
+    {
+        <span class="keyword">if</span> (<span class="variable">students</span>.<span class="property">Count</span> == <span class="number">0</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"No students found!"</span>);
+            <span class="keyword">return</span>;
+        }
+
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n--- All Students ---"</span>);
+        <span class="keyword">foreach</span> (<span class="class">Student</span> <span class="variable">student</span> <span class="keyword">in</span> <span class="variable">students</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"ID: {<span class="variable">student</span>.<span class="property">ID</span>}, Name: {<span class="variable">student</span>.<span class="property">Name</span>}, Grade: {<span class="variable">student</span>.<span class="property">Grade</span>}"</span>);
+        }
+    }
+
+    <span class="keyword">static void</span> <span class="function">ShowStatistics</span>()
+    {
+        <span class="keyword">if</span> (<span class="variable">students</span>.<span class="property">Count</span> == <span class="number">0</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"No students to analyze!"</span>);
+            <span class="keyword">return</span>;
+        }
+
+        <span class="keyword">double</span> <span class="variable">average</span> = <span class="variable">students</span>.<span class="function">Average</span>(<span class="variable">s</span> => <span class="variable">s</span>.<span class="property">Grade</span>);
+        <span class="keyword">double</span> <span class="variable">highest</span> = <span class="variable">students</span>.<span class="function">Max</span>(<span class="variable">s</span> => <span class="variable">s</span>.<span class="property">Grade</span>);
+        <span class="keyword">double</span> <span class="variable">lowest</span> = <span class="variable">students</span>.<span class="function">Min</span>(<span class="variable">s</span> => <span class="variable">s</span>.<span class="property">Grade</span>);
+        <span class="class">Student</span> <span class="variable">topStudent</span> = <span class="variable">students</span>.<span class="function">First</span>(<span class="variable">s</span> => <span class="variable">s</span>.<span class="property">Grade</span> == <span class="variable">highest</span>);
+        <span class="class">Student</span> <span class="variable">bottomStudent</span> = <span class="variable">students</span>.<span class="function">First</span>(<span class="variable">s</span> => <span class="variable">s</span>.<span class="property">Grade</span> == <span class="variable">lowest</span>);
+
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n--- Statistics ---"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Total Students: {<span class="variable">students</span>.<span class="property">Count</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Average Grade: {<span class="variable">average</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Highest Grade: {<span class="variable">highest</span>} (Student: {<span class="variable">topStudent</span>.<span class="property">Name</span>})"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Lowest Grade: {<span class="variable">lowest</span>} (Student: {<span class="variable">bottomStudent</span>.<span class="property">Name</span>})"</span>);
+    }
+}
+
+<span class="keyword">class</span> <span class="class">Student</span>
+{
+    <span class="keyword">public int</span> <span class="property">ID</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public double</span> <span class="property">Grade</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Collections are essential for storing and managing groups of data:
+                            <br><br>
+                            <span class="fw-bold">Array</span> → Fixed size, fast<br>
+                            <span class="fw-bold">List&lt;T&gt;</span> → Dynamic size, most common<br>
+                            <span class="fw-bold">Dictionary</span> → Key-value lookups<br>
+                            <span class="fw-bold">HashSet</span> → Unique items<br>
+                            <span class="fw-bold">Queue</span> → First In, First Out<br>
+                            <span class="fw-bold">Stack</span> → Last In, First Out
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/06-Loops" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -114,10 +749,8 @@ string lastItem = stack.Pop(); // "Second"</code></pre>
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson7")
 
-                        
 @section Scripts {
     <script>
         function toggleExercise() {

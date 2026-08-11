@@ -15,69 +15,614 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
+            <div class="lesson-content" data-aos="fade-up">
                 <h1 class="display-4 mb-3">Operators and Expressions</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-success">Beginner</span>
-                    <span class="badge bg-info text-dark">15 min read</span>
-                    <span class="badge bg-primary">Lesson 4 of 13</span>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 15 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 4 of 13</span>
                 </div>
 
-                <h2>Arithmetic Operators</h2>
-                <pre><code>int a = 10, b = 3;
-
-int sum = a + b;        // 13
-int difference = a - b; // 7
-int product = a * b;    // 30
-int quotient = a / b;   // 3 (integer division)
-int remainder = a % b;  // 1 (modulus)
-double exact = 10.0 / 3; // 3.333...</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-                <h2>Comparison Operators</h2>
-                <pre><code>int x = 5, y = 10;
-
-bool isEqual = x == y;      // false
-bool isNotEqual = x != y;   // true
-bool isGreater = x > y;     // false
-bool isLess = x &lt; y;        // true
-bool isGreaterOrEqual = x >= y; // false
-bool isLessOrEqual = x <= y;    // true</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-                <h2>Logical Operators</h2>
-                <pre><code>bool isAdult = age >= 18;
-bool hasLicense = true;
-
-bool canDrive = isAdult && hasLicense;   // AND
-bool canRentCar = isAdult || hasLicense; // OR
-bool isMinor = !isAdult;                 // NOT</code></pre>
-
-                <h2>Assignment Operators</h2>
-                <pre><code>int num = 5;
-num += 3;   // num = 8
-num -= 2;   // num = 6
-num *= 2;   // num = 12
-num /= 3;   // num = 4
-num %= 3;   // num = 1</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-                <h2>Increment and Decrement</h2>
-                <pre><code>int count = 5;
-count++;    // count = 6 (post-increment)
-++count;    // count = 7 (pre-increment)
-count--;    // count = 6 (post-decrement)
---count;    // count = 5 (pre-decrement)</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Operators perform operations on data. Be careful with integer division and operator precedence.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What are Operators?</h2>
+                        <p>
+                            <strong>Operators</strong> are symbols that tell C# to perform specific operations on data.
+                            Think of them like the buttons on a calculator - they help you add, subtract, compare,
+                            and combine values.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-plus-circle fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Arithmetic</strong><br>Math calculations</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-balance-scale fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Comparison</strong><br>Compare values</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-code-branch fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Logical</strong><br>True/False decisions</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== ARITHMETIC OPERATORS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-calculator me-2"></i>Arithmetic Operators</h2>
+                        <p>
+                            Use these operators to do <strong>math calculations</strong>. They work like a calculator.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Meaning</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>+</code></td>
+                                        <td>Addition</td>
+                                        <td><code>5 + 3</code></td>
+                                        <td>8</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>-</code></td>
+                                        <td>Subtraction</td>
+                                        <td><code>10 - 4</code></td>
+                                        <td>6</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>*</code></td>
+                                        <td>Multiplication</td>
+                                        <td><code>6 * 7</code></td>
+                                        <td>42</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>/</code></td>
+                                        <td>Division</td>
+                                        <td><code>15 / 3</code></td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%</code></td>
+                                        <td>Modulus (Remainder)</td>
+                                        <td><code>10 % 3</code></td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important!</strong> When you divide two integers, C# gives you an integer result
+                            (no decimals). Use <code>double</code> if you need decimal results.
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC MATH =====</span>
+<span class="keyword">int</span> <span class="variable">a</span> = <span class="number">10</span>;
+<span class="keyword">int</span> <span class="variable">b</span> = <span class="number">3</span>;
+
+<span class="keyword">int</span> <span class="variable">sum</span> = <span class="variable">a</span> + <span class="variable">b</span>;           <span class="comment">// 13</span>
+<span class="keyword">int</span> <span class="variable">difference</span> = <span class="variable">a</span> - <span class="variable">b</span>;      <span class="comment">// 7</span>
+<span class="keyword">int</span> <span class="variable">product</span> = <span class="variable">a</span> * <span class="variable">b</span>;        <span class="comment">// 30</span>
+<span class="keyword">int</span> <span class="variable">quotient</span> = <span class="variable">a</span> / <span class="variable">b</span>;      <span class="comment">// 3 (not 3.33 - integer division)</span>
+<span class="keyword">int</span> <span class="variable">remainder</span> = <span class="variable">a</span> % <span class="variable">b</span>;     <span class="comment">// 1 (10 divided by 3 leaves 1)</span>
+
+<span class="comment">// If you want decimal result, use double</span>
+<span class="keyword">double</span> <span class="variable">exact</span> = <span class="number">10.0</span> / <span class="number">3</span>;    <span class="comment">// 3.333...</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== COMPARISON OPERATORS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-balance-scale me-2"></i>Comparison Operators</h2>
+                        <p>
+                            Use these operators to <strong>compare values</strong>. They always return <strong>true</strong> or <strong>false</strong>.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Meaning</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>==</code></td>
+                                        <td>Equal to</td>
+                                        <td><code>5 == 5</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>!=</code></td>
+                                        <td>Not equal to</td>
+                                        <td><code>5 != 3</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&gt;</code></td>
+                                        <td>Greater than</td>
+                                        <td><code>10 &gt; 5</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&lt;</code></td>
+                                        <td>Less than</td>
+                                        <td><code>3 &lt; 7</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&gt;=</code></td>
+                                        <td>Greater or equal</td>
+                                        <td><code>10 &gt;= 10</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&lt;=</code></td>
+                                        <td>Less or equal</td>
+                                        <td><code>5 &lt;= 10</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== COMPARING VALUES =====</span>
+<span class="keyword">int</span> <span class="variable">x</span> = <span class="number">5</span>;
+<span class="keyword">int</span> <span class="variable">y</span> = <span class="number">10</span>;
+
+<span class="keyword">bool</span> <span class="variable">isEqual</span> = <span class="variable">x</span> == <span class="variable">y</span>;        <span class="comment">// false (5 is not 10)</span>
+<span class="keyword">bool</span> <span class="variable">isNotEqual</span> = <span class="variable">x</span> != <span class="variable">y</span>;     <span class="comment">// true (5 is not 10)</span>
+<span class="keyword">bool</span> <span class="variable">isGreater</span> = <span class="variable">x</span> > <span class="variable">y</span>;        <span class="comment">// false (5 is not greater than 10)</span>
+<span class="keyword">bool</span> <span class="variable">isLess</span> = <span class="variable">x</span> &lt; <span class="variable">y</span>;           <span class="comment">// true (5 is less than 10)</span>
+<span class="keyword">bool</span> <span class="variable">isGreaterOrEqual</span> = <span class="variable">x</span> >= <span class="variable">y</span>;  <span class="comment">// false</span>
+<span class="keyword">bool</span> <span class="variable">isLessOrEqual</span> = <span class="variable">x</span> <= <span class="variable">y</span>;     <span class="comment">// true</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== LOGICAL OPERATORS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-code-branch me-2"></i>Logical Operators</h2>
+                        <p>
+                            Use these operators to <strong>combine conditions</strong>. They help you make complex decisions.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Meaning</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>&&</code></td>
+                                        <td>AND (both must be true)</td>
+                                        <td><code>true && true</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>||</code></td>
+                                        <td>OR (at least one is true)</td>
+                                        <td><code>true || false</code></td>
+                                        <td>true</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>!</code></td>
+                                        <td>NOT (flips the value)</td>
+                                        <td><code>!true</code></td>
+                                        <td>false</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== LOGICAL OPERATORS IN ACTION =====</span>
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+<span class="keyword">bool</span> <span class="variable">hasLicense</span> = <span class="keyword">true</span>;
+<span class="keyword">bool</span> <span class="variable">hasPassedTest</span> = <span class="keyword">false</span>;
+
+<span class="comment">// AND - both conditions must be true</span>
+<span class="keyword">bool</span> <span class="variable">canDrive</span> = <span class="variable">age</span> >= <span class="number">18</span> && <span class="variable">hasLicense</span>;  <span class="comment">// true</span>
+
+<span class="comment">// OR - at least one condition must be true</span>
+<span class="keyword">bool</span> <span class="variable">canRentCar</span> = <span class="variable">hasLicense</span> || <span class="variable">hasPassedTest</span>;  <span class="comment">// true</span>
+
+<span class="comment">// NOT - flips the value</span>
+<span class="keyword">bool</span> <span class="variable">isMinor</span> = !(<span class="variable">age</span> >= <span class="number">18</span>);  <span class="comment">// false (age is 20, so not a minor)</span>
+
+<span class="comment">// Complex condition</span>
+<span class="keyword">bool</span> <span class="variable">canVote</span> = <span class="variable">age</span> >= <span class="number">18</span> && (<span class="variable">hasLicense</span> || <span class="variable">hasPassedTest</span>);</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Remember:</strong> <code>&&</code> is like saying "and" - everything must be true.
+                            <code>||</code> is like saying "or" - at least one must be true.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ASSIGNMENT OPERATORS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-equals me-2"></i>Assignment Operators</h2>
+                        <p>
+                            These operators <strong>assign values</strong> to variables. The <code>=</code> operator
+                            is the most basic one.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Meaning</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>=</code></td>
+                                        <td>Assign value</td>
+                                        <td><code>x = 5</code></td>
+                                        <td>x is 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>+=</code></td>
+                                        <td>Add and assign</td>
+                                        <td><code>x += 3</code></td>
+                                        <td>x = x + 3</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>-=</code></td>
+                                        <td>Subtract and assign</td>
+                                        <td><code>x -= 2</code></td>
+                                        <td>x = x - 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>*=</code></td>
+                                        <td>Multiply and assign</td>
+                                        <td><code>x *= 2</code></td>
+                                        <td>x = x * 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>/=</code></td>
+                                        <td>Divide and assign</td>
+                                        <td><code>x /= 3</code></td>
+                                        <td>x = x / 3</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%=</code></td>
+                                        <td>Modulus and assign</td>
+                                        <td><code>x %= 3</code></td>
+                                        <td>x = x % 3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== ASSIGNMENT SHORTCUTS =====</span>
+<span class="keyword">int</span> <span class="variable">num</span> = <span class="number">5</span>;
+
+<span class="variable">num</span> += <span class="number">3</span>;   <span class="comment">// num = 8  (same as: num = num + 3)</span>
+<span class="variable">num</span> -= <span class="number">2</span>;   <span class="comment">// num = 6  (same as: num = num - 2)</span>
+<span class="variable">num</span> *= <span class="number">2</span>;   <span class="comment">// num = 12 (same as: num = num * 2)</span>
+<span class="variable">num</span> /= <span class="number">3</span>;   <span class="comment">// num = 4  (same as: num = num / 3)</span>
+<span class="variable">num</span> %= <span class="number">3</span>;   <span class="comment">// num = 1  (same as: num = num % 3)</span>
+
+<span class="comment">// These shortcuts are very common in C#</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== INCREMENT / DECREMENT ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-arrow-up me-2"></i>Increment and Decrement</h2>
+                        <p>
+                            These operators <strong>increase or decrease</strong> a number by 1.
+                        </p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-arrow-up me-2"></i>Increment (++)</h6>
+                                    <p class="small mb-0">Adds 1 to a variable</p>
+                                    <code class="small">count++; // count = count + 1</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-arrow-down me-2"></i>Decrement (--)</h6>
+                                    <p class="small mb-0">Subtracts 1 from a variable</p>
+                                    <code class="small">count--; // count = count - 1</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== INCREMENT (++) =====</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="number">5</span>;
+
+<span class="variable">count</span>++;               <span class="comment">// count = 6 (post-increment)</span>
+<span class="variable">++count</span>;              <span class="comment">// count = 7 (pre-increment)</span>
+
+<span class="comment">// ===== DECREMENT (--) =====</span>
+<span class="variable">count</span>--;               <span class="comment">// count = 6 (post-decrement)</span>
+<span class="variable">--count</span>;              <span class="comment">// count = 5 (pre-decrement)</span>
+
+<span class="comment">// Pre vs Post: When used alone, they do the same thing.</span>
+<span class="comment">// But in expressions, they differ:</span>
+
+<span class="keyword">int</span> <span class="variable">x</span> = <span class="number">5</span>;
+<span class="keyword">int</span> <span class="variable">y</span> = <span class="variable">x</span>++;          <span class="comment">// y = 5, then x becomes 6</span>
+                        
+<span class="keyword">int</span> <span class="variable">a</span> = <span class="number">5</span>;
+<span class="keyword">int</span> <span class="variable">b</span> = ++<span class="variable">a</span>;          <span class="comment">// a becomes 6, then b = 6</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== OPERATOR PRECEDENCE ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-sort-amount-down me-2"></i>Operator Precedence (Order of Operations)</h2>
+                        <p>
+                            Like in math, some operators are <strong>evaluated before others</strong>. Use parentheses
+                            <code>()</code> to control the order.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== ORDER OF OPERATIONS =====</span>
+<span class="comment">// 1. Parentheses</span>
+<span class="comment">// 2. Multiplication, Division, Modulus</span>
+<span class="comment">// 3. Addition, Subtraction</span>
+
+<span class="keyword">int</span> <span class="variable">result</span> = <span class="number">5</span> + <span class="number">3</span> * <span class="number">2</span>;   <span class="comment">// 11 (3*2=6, then 5+6=11)</span>
+<span class="keyword">int</span> <span class="variable">result2</span> = (<span class="number">5</span> + <span class="number">3</span>) * <span class="number">2</span>; <span class="comment">// 16 (5+3=8, then 8*2=16)</span>
+
+<span class="comment">// Use parentheses to be clear and avoid mistakes</span>
+<span class="keyword">int</span> <span class="variable">total</span> = (<span class="variable">price</span> + <span class="variable">tax</span>) * <span class="variable">quantity</span>;</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Tip:</strong> When in doubt, use parentheses <code>()</code> to make your intention clear!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PRACTICAL EXAMPLES ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-laptop-code text-primary me-2"></i>Real-World Examples</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">🧮 Calculate Total Price</h6>
+                                    <code class="small">decimal total = price + (price * taxRate);</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📊 Average Score</h6>
+                                    <code class="small">double average = (score1 + score2 + score3) / 3;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">✅ Eligibility Check</h6>
+                                    <code class="small">bool eligible = age >= 18 && hasLicense;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">🔄 Round Robin</h6>
+                                    <code class="small">int nextPlayer = (currentPlayer + 1) % totalPlayers;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SUMMARY TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Reference</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Operators</th>
+                                        <th>Use</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Arithmetic</strong></td>
+                                        <td><code>+ - * / %</code></td>
+                                        <td>Math calculations</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Comparison</strong></td>
+                                        <td><code>== != &lt; &gt; &lt;= &gt;=</code></td>
+                                        <td>Compare values</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Logical</strong></td>
+                                        <td><code>&& || !</code></td>
+                                        <td>Combine conditions</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Assignment</strong></td>
+                                        <td><code>= += -= *= /= %=</code></td>
+                                        <td>Assign values</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Increment/Decrement</strong></td>
+                                        <td><code>++ --</code></td>
+                                        <td>Add or subtract 1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Pizza Order Calculator</h2>
+
+                        <p class="fw-bold">Task: Create a pizza order calculator using operators.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "PizzaOrder"</li>
+                                <li>
+                                    Declare variables for:
+                                    <ul>
+                                        <li>Pizza price (decimal) - $12.99</li>
+                                        <li>Topping price (decimal) - $2.50 per topping</li>
+                                        <li>Number of toppings (int)</li>
+                                        <li>Tax rate (decimal) - 0.08 (8%)</li>
+                                        <li>Number of pizzas (int)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Calculate:
+                                    <ul>
+                                        <li>Base cost = pizza price × number of pizzas</li>
+                                        <li>Topping cost = topping price × number of toppings</li>
+                                        <li>Subtotal = base cost + topping cost</li>
+                                        <li>Tax amount = subtotal × tax rate</li>
+                                        <li>Total = subtotal + tax amount</li>
+                                    </ul>
+                                </li>
+                                <li>Print all the values with proper formatting</li>
+                                <li>Use <strong>at least 3 different operators</strong> (+, *, %, etc.)</li>
+                                <li>Use <strong>string interpolation</strong> to display the total</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hint:</strong> Your output should look like:
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">Pizza Price: $12.99
+Number of Pizzas: 3
+Toppings per Pizza: 2
+--------------------------------
+Base Cost: $38.97
+Topping Cost: $15.00
+Subtotal: $53.97
+Tax (8%): $4.32
+--------------------------------
+Total: $58.29</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Pizza Order Calculator</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Prices</span>
+        <span class="keyword">decimal</span> <span class="variable">pizzaPrice</span> = <span class="number">12.99</span><span class="keyword">m</span>;
+        <span class="keyword">decimal</span> <span class="variable">toppingPrice</span> = <span class="number">2.50</span><span class="keyword">m</span>;
+        <span class="keyword">decimal</span> <span class="variable">taxRate</span> = <span class="number">0.08</span><span class="keyword">m</span>;
+
+        <span class="comment">// Order details</span>
+        <span class="keyword">int</span> <span class="variable">numberOfPizzas</span> = <span class="number">3</span>;
+        <span class="keyword">int</span> <span class="variable">toppingsPerPizza</span> = <span class="number">2</span>;
+
+        <span class="comment">// Calculations</span>
+        <span class="keyword">int</span> <span class="variable">totalToppings</span> = <span class="variable">numberOfPizzas</span> * <span class="variable">toppingsPerPizza</span>;
+        <span class="keyword">decimal</span> <span class="variable">baseCost</span> = <span class="variable">pizzaPrice</span> * <span class="variable">numberOfPizzas</span>;
+        <span class="keyword">decimal</span> <span class="variable">toppingCost</span> = <span class="variable">toppingPrice</span> * <span class="variable">totalToppings</span>;
+        <span class="keyword">decimal</span> <span class="variable">subtotal</span> = <span class="variable">baseCost</span> + <span class="variable">toppingCost</span>;
+        <span class="keyword">decimal</span> <span class="variable">taxAmount</span> = <span class="variable">subtotal</span> * <span class="variable">taxRate</span>;
+        <span class="keyword">decimal</span> <span class="variable">total</span> = <span class="variable">subtotal</span> + <span class="variable">taxAmount</span>;
+
+        <span class="comment">// Print results</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Pizza Price: ${<span class="variable">pizzaPrice</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Number of Pizzas: {<span class="variable">numberOfPizzas</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Toppings per Pizza: {<span class="variable">toppingsPerPizza</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"--------------------------------"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Base Cost: ${<span class="variable">baseCost</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Topping Cost: ${<span class="variable">toppingCost</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Subtotal: ${<span class="variable">subtotal</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Tax ({(<span class="variable">taxRate</span> * <span class="number">100</span>):F0}%): ${<span class="variable">taxAmount</span>:F2}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"--------------------------------"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Total: ${<span class="variable">total</span>:F2}"</span>);
+
+        <span class="comment">// Bonus: Check if total is even</span>
+        <span class="keyword">int</span> <span class="variable">totalCents</span> = (<span class="keyword">int</span>)(<span class="variable">total</span> * <span class="number">100</span>);
+        <span class="keyword">bool</span> <span class="variable">isEven</span> = <span class="variable">totalCents</span> % <span class="number">2</span> == <span class="number">0</span>;
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Total is {(<span class="variable">isEven</span> ? "even" : "odd")} cents."</span>);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Operators are the building blocks of calculations and decisions in C#.
+                            Use <strong>arithmetic</strong> operators for math, <strong>comparison</strong> operators
+                            to compare values, <strong>logical</strong> operators for complex conditions,
+                            and <strong>assignment</strong> operators to update values.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/03-VariablesAndDataTypes" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -94,3 +639,73 @@ count--;    // count = 6 (post-decrement)
 </div>
 
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson4")
+
+@section Scripts {
+    <script>
+        function toggleExercise() {
+            var solution = document.getElementById('exerciseSolution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 40,
+                    duration: 600
+                });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+
+        .language-csharp .keyword {
+            color: #c792ea;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c;
+        }
+
+        .language-csharp .function {
+            color: #82aaff;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4;
+        }
+    </style>
+}

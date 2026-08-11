@@ -15,75 +15,581 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
+            <div class="lesson-content" data-aos="fade-up">
                 <h1 class="display-4 mb-3">Variables and Data Types</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-success">Beginner</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 3 of 13</span>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-success p-2 px-3">Beginner</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 20 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 3 of 13</span>
                 </div>
 
-                <h2>What are Variables?</h2>
-                <p>Variables are containers that store data in memory. Each variable has a name, a type, and a value.</p>
-
-                <h2>Common Data Types</h2>
-
-                <h3>Value Types</h3>
-                <pre><code>int age = 25;                    // Whole numbers
-double price = 19.99;            // Decimal numbers
-bool isActive = true;            // True or false
-char grade = 'A';                // Single character
-decimal salary = 50000.50m;      // High precision decimal</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h3>Reference Types</h3>
-                <pre><code>string name = "John Doe";        // Text
-int[] numbers = {1, 2, 3};       // Array
-DateTime today = DateTime.Now;   // Date and time</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Declaring Variables</h2>
-
-                <h3>Explicit Typing</h3>
-                <pre><code>int count = 10;
-string message = "Hello";
-double pi = 3.14159;</code></pre>
-
-                <h3>Implicit Typing (var)</h3>
-                <pre><code>var number = 42;        // int
-var text = "Hello";     // string
-var isReady = false;    // bool</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Constants</h2>
-                <pre><code>const double Pi = 3.14159;
-const int MaxValue = 100;
-const string AppName = "MyApp";</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Nullable Types</h2>
-                <pre><code>int? age = null;
-bool? isMember = null;
-
-if (age.HasValue)
-{
-    Console.WriteLine($"Age: {age.Value}");
-}</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Choose the right data type for your data. Use <code>var</code> when the type is obvious from the assignment.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What are Variables?</h2>
+                        <p>
+                            A <strong>variable</strong> is like a labeled box where you can store information. 
+                            Think of it as a container in your computer's memory that holds data you want to use later.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-tag fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Name</strong><br>A label for your data</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-database fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Type</strong><br>What kind of data</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-edit fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Value</strong><br>The actual data stored</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> <code>int age = 25;</code> means:
+                            "Create a box called <strong>age</strong> that can hold whole numbers, 
+                            and put the number <strong>25</strong> in it."
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== COMMON DATA TYPES ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-list-ul text-info me-2"></i>Common Data Types</h2>
+                        <p>
+                            In C#, each variable must have a <strong>data type</strong>. The type tells the computer:
+                        </p>
+                        <ul>
+                            <li>What kind of data the variable can store</li>
+                            <li>How much memory to reserve</li>
+                            <li>What operations you can perform on it</li>
+                        </ul>
+
+                        <h3 class="h5 fw-bold text-primary mt-4"><i class="fas fa-cubes me-2"></i>Value Types (Store actual data)</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                        <th>Range</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>int</code></td>
+                                        <td>Whole numbers (no decimals)</td>
+                                        <td><code>int age = 25;</code></td>
+                                        <td>-2 billion to 2 billion</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>double</code></td>
+                                        <td>Decimal numbers</td>
+                                        <td><code>double price = 19.99;</code></td>
+                                        <td>Very large/small decimals</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>bool</code></td>
+                                        <td>True or False</td>
+                                        <td><code>bool isActive = true;</code></td>
+                                        <td>true or false</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>char</code></td>
+                                        <td>Single character</td>
+                                        <td><code>char grade = 'A';</code></td>
+                                        <td>Any character</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>decimal</code></td>
+                                        <td>High precision decimals</td>
+                                        <td><code>decimal salary = 50000.50m;</code></td>
+                                        <td>Very precise (best for money)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Tip:</strong> Use <code>decimal</code> for money, <code>double</code> for 
+                            scientific calculations, and <code>int</code> for counting.
+                        </div>
+
+                        <h3 class="h5 fw-bold text-success mt-4"><i class="fas fa-link me-2"></i>Reference Types (Store a reference to data)</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>string</code></td>
+                                        <td>Text (a sequence of characters)</td>
+                                        <td><code>string name = "John Doe";</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>array</code></td>
+                                        <td>A list of items</td>
+                                        <td><code>int[] numbers = {1, 2, 3};</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>DateTime</code></td>
+                                        <td>Date and time</td>
+                                        <td><code>DateTime today = DateTime.Now;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>object</code></td>
+                                        <td>Can hold any type</td>
+                                        <td><code>object something = 42;</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== VALUE TYPE EXAMPLES =====</span>
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">25</span>;                    <span class="comment">// Whole number</span>
+<span class="keyword">double</span> <span class="variable">price</span> = <span class="number">19.99</span>;            <span class="comment">// Decimal number</span>
+<span class="keyword">bool</span> <span class="variable">isActive</span> = <span class="keyword">true</span>;            <span class="comment">// True or false</span>
+<span class="keyword">char</span> <span class="variable">grade</span> = <span class="string">'A'</span>;                <span class="comment">// Single character</span>
+<span class="keyword">decimal</span> <span class="variable">salary</span> = <span class="number">50000.50</span><span class="keyword">m</span>;    <span class="comment">// High precision (money)</span>
+
+<span class="comment">// ===== REFERENCE TYPE EXAMPLES =====</span>
+<span class="keyword">string</span> <span class="variable">name</span> = <span class="string">"John Doe"</span>;        <span class="comment">// Text</span>
+<span class="keyword">int</span>[] <span class="variable">numbers</span> = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> };    <span class="comment">// Array of numbers</span>
+<span class="class">DateTime</span> <span class="variable">today</span> = <span class="class">DateTime</span>.<span class="property">Now</span>;   <span class="comment">// Current date and time</span>
+<span class="keyword">object</span> <span class="variable">something</span> = <span class="number">42</span>;           <span class="comment">// Can hold anything</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DECLARING VARIABLES ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-pencil-alt text-warning me-2"></i>Declaring Variables</h2>
+                        <p>
+                            To create a variable, you need to tell C#:
+                            <strong>What type</strong> of data it will hold, <strong>what name</strong> to give it, 
+                            and optionally <strong>what value</strong> to put in it.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-primary mt-3">Explicit Typing (Tell C# the type)</h3>
+                        <p>
+                            You specify the type directly. This is clear and explicit.
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Explicit typing - you tell C# the type</span>
+<span class="keyword">int</span> <span class="variable">count</span> = <span class="number">10</span>;                    <span class="comment">// count is an integer</span>
+<span class="keyword">string</span> <span class="variable">message</span> = <span class="string">"Hello"</span>;          <span class="comment">// message is a string</span>
+<span class="keyword">double</span> <span class="variable">pi</span> = <span class="number">3.14159</span>;              <span class="comment">// pi is a double</span>
+<span class="keyword">bool</span> <span class="variable">isReady</span> = <span class="keyword">false</span>;             <span class="comment">// isReady is a bool</span></code></pre>
+                        </div>
+
+                        <h3 class="h5 fw-bold text-success mt-3">Implicit Typing (Let C# figure it out)</h3>
+                        <p>
+                            Use <code>var</code> and let C# figure out the type based on the value you assign.
+                            This is shorter and cleaner when the type is obvious.
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Implicit typing - C# figures out the type</span>
+<span class="keyword">var</span> <span class="variable">number</span> = <span class="number">42</span>;        <span class="comment">// C# knows this is an int</span>
+<span class="keyword">var</span> <span class="variable">text</span> = <span class="string">"Hello"</span>;     <span class="comment">// C# knows this is a string</span>
+<span class="keyword">var</span> <span class="variable">isReady</span> = <span class="keyword">false</span>;    <span class="comment">// C# knows this is a bool</span>
+<span class="keyword">var</span> <span class="variable">price</span> = <span class="number">19.99</span>;     <span class="comment">// C# knows this is a double</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>When to use var?</strong> Use <code>var</code> when the type is obvious 
+                            from the assignment (like <code>var name = "John"</code>). Use explicit typing 
+                            when the type is not obvious or you want to be extra clear.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== NAMING RULES ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-tag text-info me-2"></i>Naming Rules</h2>
+                        <p>
+                            Variable names must follow these rules:
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-2 bg-success bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Allowed:</strong> letters, numbers, underscore (_)
+                                </div>
+                                <div class="p-2 bg-success bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Allowed:</strong> start with letter or underscore
+                                </div>
+                                <div class="p-2 bg-success bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Allowed:</strong> meaningful names (like <code>studentName</code>)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-2 bg-danger bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-times-circle text-danger me-2"></i>
+                                    <strong>NOT Allowed:</strong> start with a number (1name)
+                                </div>
+                                <div class="p-2 bg-danger bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-times-circle text-danger me-2"></i>
+                                    <strong>NOT Allowed:</strong> spaces (my name)
+                                </div>
+                                <div class="p-2 bg-danger bg-opacity-10 rounded mb-2">
+                                    <i class="fas fa-times-circle text-danger me-2"></i>
+                                    <strong>NOT Allowed:</strong> special characters (@@, #, $)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== GOOD NAMES =====</span>
+<span class="keyword">string</span> <span class="variable">studentName</span> = <span class="string">"Alice"</span>;
+<span class="keyword">int</span> <span class="variable">studentAge</span> = <span class="number">20</span>;
+<span class="keyword">bool</span> <span class="variable">isEnrolled</span> = <span class="keyword">true</span>;
+<span class="keyword">decimal</span> <span class="variable">monthlyFee</span> = <span class="number">150.50</span><span class="keyword">m</span>;
+
+<span class="comment">// ===== BAD NAMES =====</span>
+<span class="comment">// int 1stName = 10;    // ERROR: starts with number</span>
+<span class="comment">// string my name = "John"; // ERROR: has a space</span>
+<span class="comment">// string @@name = "John"; // ERROR: has special character</span>
+<span class="comment">// int x = 10;           // BAD: not descriptive</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Best Practice:</strong> Use <strong>camelCase</strong> for variable names 
+                            (e.g., <code>studentName</code>, <code>isActive</code>).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== CONSTANTS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-lock text-danger me-2"></i>Constants</h2>
+                        <p>
+                            A <strong>constant</strong> is a variable whose value <strong>cannot change</strong> 
+                            once you set it. Use <code>const</code> for values that never change.
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Constants - values that never change</span>
+<span class="keyword">const</span> <span class="keyword">double</span> <span class="variable">Pi</span> = <span class="number">3.14159</span>;        <span class="comment">// Pi never changes</span>
+<span class="keyword">const</span> <span class="keyword">int</span> <span class="variable">MaxValue</span> = <span class="number">100</span>;          <span class="comment">// Maximum allowed</span>
+<span class="keyword">const</span> <span class="keyword">string</span> <span class="variable">AppName</span> = <span class="string">"MyApp"</span>;     <span class="comment">// Application name</span>
+
+<span class="comment">// You CANNOT change a constant</span>
+<span class="comment">// Pi = 3.14; // ERROR: Cannot assign to a constant</span></code></pre>
+                        </div>
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>When to use constants?</strong> Use constants for values that never change 
+                            like <strong>PI</strong>, <strong>tax rates</strong>, or <strong>application names</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== NULLABLE TYPES ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-circle text-muted me-2"></i>Nullable Types</h2>
+                        <p>
+                            By default, value types (like <code>int</code>, <code>bool</code>) cannot be <code>null</code>.
+                            But sometimes you need to represent "no value". That's where <strong>nullable types</strong> come in.
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// Nullable types - can hold null</span>
+<span class="keyword">int</span>? <span class="variable">age</span> = <span class="keyword">null</span>;           <span class="comment">// Age is unknown</span>
+<span class="keyword">bool</span>? <span class="variable">isMember</span> = <span class="keyword">null</span>;     <span class="comment">// Membership status unknown</span>
+
+<span class="comment">// Check if it has a value</span>
+<span class="keyword">if</span> (<span class="variable">age</span>.<span class="property">HasValue</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Age: {<span class="variable">age</span>.<span class="property">Value</span>}"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Age not provided"</span>);
+}
+
+<span class="comment">// Using the null-coalescing operator</span>
+<span class="keyword">int</span> <span class="variable">actualAge</span> = <span class="variable">age</span> ?? <span class="number">0</span>;  <span class="comment">// If age is null, use 0</span></code></pre>
+                        </div>
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> Use <code>HasValue</code> to check if a nullable variable 
+                            has a value before using it.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== TYPE CONVERSIONS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-exchange-alt text-success me-2"></i>Type Conversions</h2>
+                        <p>
+                            Sometimes you need to convert data from one type to another.
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3">
+                            <pre><code class="language-csharp"><span class="comment">// ===== IMPLICIT CONVERSION (Automatic) =====</span>
+<span class="keyword">int</span> <span class="variable">num</span> = <span class="number">10</span>;
+<span class="keyword">double</span> <span class="variable">numDouble</span> = <span class="variable">num</span>;  <span class="comment">// Works automatically</span>
+
+<span class="comment">// ===== EXPLICIT CONVERSION (Cast) =====</span>
+<span class="keyword">double</span> <span class="variable">pi</span> = <span class="number">3.14</span>;
+<span class="keyword">int</span> <span class="variable">piInt</span> = (<span class="keyword">int</span>)<span class="variable">pi</span>;  <span class="comment">// piInt = 3 (loses decimal part)</span>
+
+<span class="comment">// ===== USING CONVERT CLASS =====</span>
+<span class="keyword">string</span> <span class="variable">numberString</span> = <span class="string">"123"</span>;
+<span class="keyword">int</span> <span class="variable">number</span> = <span class="class">Convert</span>.<span class="function">ToInt32</span>(<span class="variable">numberString</span>);
+
+<span class="comment">// ===== PARSING =====</span>
+<span class="keyword">string</span> <span class="variable">input</span> = <span class="string">"456"</span>;
+<span class="keyword">int</span> <span class="variable">parsedNumber</span> = <span class="keyword">int</span>.<span class="function">Parse</span>(<span class="variable">input</span>);
+
+<span class="comment">// ===== SAFE PARSING =====</span>
+<span class="keyword">if</span> (<span class="keyword">int</span>.<span class="function">TryParse</span>(<span class="variable">input</span>, <span class="keyword">out</span> <span class="keyword">int</span> <span class="variable">result</span>))
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Parsed successfully: {<span class="variable">result</span>}"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Invalid number"</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PRACTICAL EXAMPLES ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-laptop-code text-primary me-2"></i>Practical Examples</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">🔢 Counting Items</h6>
+                                    <code class="small">int itemCount = 50;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">💵 Money Calculation</h6>
+                                    <code class="small">decimal total = 99.99m;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">✅ On/Off Status</h6>
+                                    <code class="small">bool isLoggedIn = true;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📝 User Name</h6>
+                                    <code class="small">string userName = "Alice";</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📅 Current Date</h6>
+                                    <code class="small">DateTime today = DateTime.Now;</code>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📊 Average Score</h6>
+                                    <code class="small">double average = 87.5;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SUMMARY TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Reference Table</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Data Type</th>
+                                        <th>Used For</th>
+                                        <th>Example</th>
+                                        <th>Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>int</code></td>
+                                        <td>Whole numbers</td>
+                                        <td><code>int age = 30;</code></td>
+                                        <td>4 bytes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>double</code></td>
+                                        <td>Decimal numbers</td>
+                                        <td><code>double price = 19.99;</code></td>
+                                        <td>8 bytes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>decimal</code></td>
+                                        <td>High precision</td>
+                                        <td><code>decimal salary = 50000m;</code></td>
+                                        <td>16 bytes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>bool</code></td>
+                                        <td>True/False</td>
+                                        <td><code>bool active = true;</code></td>
+                                        <td>1 byte</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>string</code></td>
+                                        <td>Text</td>
+                                        <td><code>string name = "John";</code></td>
+                                        <td>Variable</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>char</code></td>
+                                        <td>Single character</td>
+                                        <td><code>char grade = 'A';</code></td>
+                                        <td>2 bytes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>DateTime</code></td>
+                                        <td>Date and time</td>
+                                        <td><code>DateTime now = DateTime.Now;</code></td>
+                                        <td>8 bytes</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Student Information System</h2>
+
+                        <p class="fw-bold">Task: Create a student information system using variables.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "StudentInfo"</li>
+                                <li>Declare variables for a student:
+                                    <ul>
+                                        <li>First name (string)</li>
+                                        <li>Last name (string)</li>
+                                        <li>Age (int)</li>
+                                        <li>Grade average (double)</li>
+                                        <li>Is enrolled (bool)</li>
+                                        <li>Enrollment date (DateTime)</li>
+                                    </ul>
+                                </li>
+                                <li>Assign values to each variable</li>
+                                <li>Print all student information to the console</li>
+                                <li>Use <strong>string interpolation</strong> (<code>$"Hello {name}"</code>)</li>
+                                <li>Use at least one <strong>constant</strong> for something like the school name</li>
+                                <li>Use a <strong>nullable type</strong> for the student's graduation year</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hint:</strong> Your output should look like:
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">Student Name: John Doe
+Age: 20
+Grade Average: 87.5
+Enrolled: True
+Enrollment Date: 1/15/2024
+School: C# Mastery Academy</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Student Information System</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Constants</span>
+        <span class="keyword">const</span> <span class="keyword">string</span> <span class="variable">SchoolName</span> = <span class="string">"C# Mastery Academy"</span>;
+
+        <span class="comment">// Student information variables</span>
+        <span class="keyword">string</span> <span class="variable">firstName</span> = <span class="string">"John"</span>;
+        <span class="keyword">string</span> <span class="variable">lastName</span> = <span class="string">"Doe"</span>;
+        <span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+        <span class="keyword">double</span> <span class="variable">gradeAverage</span> = <span class="number">87.5</span>;
+        <span class="keyword">bool</span> <span class="variable">isEnrolled</span> = <span class="keyword">true</span>;
+        <span class="class">DateTime</span> <span class="variable">enrollmentDate</span> = <span class="keyword">new</span> <span class="class">DateTime</span>(<span class="number">2024</span>, <span class="number">1</span>, <span class="number">15</span>);
+        
+        <span class="comment">// Nullable type - graduation year (unknown)</span>
+        <span class="keyword">int</span>? <span class="variable">graduationYear</span> = <span class="keyword">null</span>;
+
+        <span class="comment">// Print student information</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Student Name: {<span class="variable">firstName</span>} {<span class="variable">lastName</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Age: {<span class="variable">age</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Grade Average: {<span class="variable">gradeAverage</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Enrolled: {<span class="variable">isEnrolled</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Enrollment Date: {<span class="variable">enrollmentDate</span>.ToShortDateString()}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"School: {<span class="variable">SchoolName</span>}"</span>);
+        
+        <span class="comment">// Check if graduation year has a value</span>
+        <span class="keyword">if</span> (<span class="variable">graduationYear</span>.<span class="property">HasValue</span>)
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Graduation Year: {<span class="variable">graduationYear</span>.<span class="property">Value</span>}"</span>);
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Graduation Year: Not set yet"</span>);
+        }
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Variables are containers for data. Choose the right data type for your data. 
+                            Use <strong>camelCase</strong> for variable names. Use <code>var</code> when the type 
+                            is obvious. Use <strong>constants</strong> for values that never change.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/02-SettingUpEnvironment" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -99,5 +605,47 @@ if (age.HasValue)
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson3")
+
+@section Scripts {
+    <script>
+        function toggleExercise() {
+            var solution = document.getElementById('exerciseSolution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 40,
+                    duration: 600
+                });
+            }
+        });
+    </script>
+    <style>
+        .code-block pre {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .code-block code {
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e4e4e4;
+        }
+        .language-csharp .keyword { color: #c792ea; font-weight: 600; }
+        .language-csharp .comment { color: #676e95; font-style: italic; }
+        .language-csharp .string { color: #c3e88d; }
+        .language-csharp .number { color: #f78c6c; }
+        .language-csharp .function { color: #82aaff; }
+        .language-csharp .variable { color: #eeffff; }
+        .language-csharp .class { color: #ffcb6b; }
+        .language-csharp .property { color: #80cbc4; }
+    </style>
+}

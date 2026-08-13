@@ -1,7 +1,7 @@
 ﻿@page
 @model CSharpMasteryHub.Pages.CSharpFundamentals.LinqIntroductionModel
 @{
-    ViewData["Title"] = "LINQ Introduction";
+    ViewData["Title"] = "LINQ Introduction - The Complete Guide";
 }
 
 <div class="container">
@@ -15,98 +15,750 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">LINQ Introduction</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 12 of 13</span>
+            <div class="lesson-content" data-aos="fade-up">
+                <h1 class="display-4 mb-3">LINQ Introduction <i class="fas fa-database text-info ms-2"></i></h1>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-danger p-2 px-3">Advanced</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 30 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 12 of 13</span>
                 </div>
 
-                <h2>What is LINQ?</h2>
-                <p>LINQ (Language Integrated Query) allows you to query collections using C# syntax.</p>
-
-                <h2>Sample Data</h2>
-                <pre><code>List&lt;Person&gt; people = new List&lt;Person&gt;
-{
-    new Person { Name = "Alice", Age = 25, City = "New York" },
-    new Person { Name = "Bob", Age = 30, City = "London" },
-    new Person { Name = "Charlie", Age = 22, City = "New York" },
-    new Person { Name = "Diana", Age = 28, City = "Paris" }
-};</code></pre>
-
-                <h2>Where - Filtering</h2>
-                <pre><code>// Query syntax
-var adults = from p in people
-             where p.Age >= 18
-             select p;
-
-// Method syntax
-var adults = people.Where(p => p.Age >= 18);
-
-// Multiple conditions
-var newYorkers = people.Where(p => p.City == "New York" && p.Age > 20);</code></pre>
-
-                <h2>Select - Projection</h2>
-                <pre><code>// Select specific properties
-var names = people.Select(p => p.Name);
-
-// Select new object
-var nameAge = people.Select(p => new { p.Name, p.Age });
-
-// Select with transformation
-var greetings = people.Select(p => $"Hello, {p.Name}!");</code></pre>
-
-                <h2>OrderBy - Sorting</h2>
-                <pre><code>// Ascending
-var sorted = people.OrderBy(p => p.Name);
-
-// Descending
-var sortedDesc = people.OrderByDescending(p => p.Age);
-
-// Multiple sort
-var sortedMulti = people
-    .OrderBy(p => p.City)
-    .ThenBy(p => p.Name);</code></pre>
-
-                <h2>GroupBy - Grouping</h2>
-                <pre><code>var groupedByCity = people.GroupBy(p => p.City);
-
-foreach (var group in groupedByCity)
-{
-    Console.WriteLine($"City: {group.Key}");
-    foreach (var person in group)
-    {
-        Console.WriteLine($"  {person.Name}");
-    }
-}</code></pre>
-
-                <h2>Aggregate Functions</h2>
-                <pre><code>int totalAge = people.Sum(p => p.Age);           // Sum
-double avgAge = people.Average(p => p.Age);      // Average
-int maxAge = people.Max(p => p.Age);             // Maximum
-int minAge = people.Min(p => p.Age);             // Minimum
-int count = people.Count(p => p.Age > 25);       // Count</code></pre>
-
-                <h2>First and Single</h2>
-                <pre><code>// First element or default
-var first = people.FirstOrDefault();
-var firstNY = people.FirstOrDefault(p => p.City == "New York");
-
-// Single element (throws if not exactly one)
-var single = people.Single(p => p.Name == "Alice");
-
-// Contains check
-bool hasBob = people.Any(p => p.Name == "Bob");</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-info" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>LINQ makes querying collections intuitive and powerful. Use it for filtering, sorting, and transforming data.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-info me-2"></i>What is LINQ?</h2>
+                        <p>
+                            <strong>LINQ (Language Integrated Query)</strong> is a powerful feature in C# that lets you
+                            <strong>query collections</strong> (like lists, arrays, and databases) using C# syntax.
+                            Think of it like <strong>SQL for C#</strong> - but much more powerful!
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-search fa-2x text-info"></i>
+                                    <p class="small mt-1"><strong>Query</strong><br>Ask questions about your data</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-filter fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Filter</strong><br>Find exactly what you need</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-sort fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Transform</strong><br>Change data into new shapes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> Imagine you have a big box of LEGO pieces.
+                            LINQ is like a <strong>magic tool</strong> that can find all red pieces, sort them by size,
+                            and group them by shape - all in one go!
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== WHY LINQ IS IMPORTANT ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-question-circle me-2"></i>Why is LINQ Important?</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded mb-2">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>Benefits</h6>
+                                    <ul class="small mb-0">
+                                        <li><strong>Readable:</strong> Code looks like English sentences</li>
+                                        <li><strong>Powerful:</strong> Complex queries in few lines</li>
+                                        <li><strong>Consistent:</strong> Same syntax for arrays, lists, databases</li>
+                                        <li><strong>Type-safe:</strong> Compiler catches errors early</li>
+                                        <li><strong>IntelliSense:</strong> Visual Studio helps you write queries</li>
+                                        <li><strong>Productive:</strong> Write less code, do more</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Real-World Examples</h6>
+                                    <ul class="small mb-0">
+                                        <li>📊 Find all customers who spent more than $100</li>
+                                        <li>📅 Get all orders from last month</li>
+                                        <li>🏷️ Group products by category</li>
+                                        <li>📈 Sort employees by salary</li>
+                                        <li>🔍 Search for products by name</li>
+                                        <li>📋 Get top 10 best-selling items</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== WHEN LINQ WAS INTRODUCED ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-history me-2"></i>When Was LINQ Introduced?</h2>
+                        <p>
+                            LINQ was introduced in <strong>.NET 3.5</strong> (2007) as a <strong>game-changer</strong>
+                            for C# developers. Before LINQ, querying data required writing loops and complex code.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>Before LINQ</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Find adults - old way
+List&lt;Person&gt; adults = new List&lt;Person&gt;();
+foreach (var person in people)
+{
+    if (person.Age >= 18)
+    {
+        adults.Add(person);
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>With LINQ</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Find adults - LINQ way
+var adults = people
+    .Where(p => p.Age >= 18)
+    .ToList();</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Today, LINQ is an essential skill</strong> for every C# developer!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SAMPLE DATA ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-database me-2"></i>Sample Data</h2>
+                        <p>
+                            We'll use this sample data throughout the lesson:
+                        </p>
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== PERSON CLASS =====</span>
+<span class="keyword">public class</span> <span class="class">Person</span>
+{
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public int</span> <span class="property">Age</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">City</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public decimal</span> <span class="property">Salary</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// ===== SAMPLE DATA =====</span>
+<span class="class">List</span>&lt;<span class="class">Person</span>&gt; <span class="variable">people</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Person</span>&gt;
+{
+    <span class="keyword">new</span> <span class="class">Person</span> { <span class="property">Name</span> = <span class="string">"Alice"</span>, <span class="property">Age</span> = <span class="number">25</span>, <span class="property">City</span> = <span class="string">"New York"</span>, <span class="property">Salary</span> = <span class="number">75000</span> },
+    <span class="keyword">new</span> <span class="class">Person</span> { <span class="property">Name</span> = <span class="string">"Bob"</span>, <span class="property">Age</span> = <span class="number">30</span>, <span class="property">City</span> = <span class="string">"London"</span>, <span class="property">Salary</span> = <span class="number">65000</span> },
+    <span class="keyword">new</span> <span class="class">Person</span> { <span class="property">Name</span> = <span class="string">"Charlie"</span>, <span class="property">Age</span> = <span class="number">22</span>, <span class="property">City</span> = <span class="string">"New York"</span>, <span class="property">Salary</span> = <span class="number">55000</span> },
+    <span class="keyword">new</span> <span class="class">Person</span> { <span class="property">Name</span> = <span class="string">"Diana"</span>, <span class="property">Age</span> = <span class="number">28</span>, <span class="property">City</span> = <span class="string">"Paris"</span>, <span class="property">Salary</span> = <span class="number">82000</span> },
+    <span class="keyword">new</span> <span class="class">Person</span> { <span class="property">Name</span> = <span class="string">"Eve"</span>, <span class="property">Age</span> = <span class="number">35</span>, <span class="property">City</span> = <span class="string">"London"</span>, <span class="property">Salary</span> = <span class="number">90000</span> }
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== WHERE - FILTERING ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-1 me-2"></i>Where - Filtering Data</h2>
+                        <p>
+                            <code>Where()</code> is the most common LINQ method. It <strong>filters</strong> a collection
+                            based on a condition.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC WHERE =====</span>
+<span class="comment">// Find all adults (age >= 18)</span>
+<span class="keyword">var</span> <span class="variable">adults</span> = <span class="variable">people</span>.<span class="function">Where</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span> >= <span class="number">18</span>);
+
+<span class="comment">// ===== MULTIPLE CONDITIONS =====</span>
+<span class="comment">// Find people from New York who are over 20</span>
+<span class="keyword">var</span> <span class="variable">newYorkersOver20</span> = <span class="variable">people</span>.<span class="function">Where</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span> == <span class="string">"New York"</span> && <span class="variable">p</span>.<span class="property">Age</span> > <span class="number">20</span>);
+
+<span class="comment">// ===== REAL-WORLD: Find high earners =====</span>
+<span class="comment">// Find people earning more than 70000</span>
+<span class="keyword">var</span> <span class="variable">highEarners</span> = <span class="variable">people</span>.<span class="function">Where</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span> > <span class="number">70000</span>);
+
+<span class="comment">// ===== CHAINING WHERE =====</span>
+<span class="keyword">var</span> <span class="variable">result</span> = <span class="variable">people</span>
+    .<span class="function">Where</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span> > <span class="number">25</span>)
+    .<span class="function">Where</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span> == <span class="string">"London"</span>);</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Remember:</strong> <code>Where()</code> returns a <strong>new collection</strong>
+                            containing only the items that match your condition.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SELECT - PROJECTION ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-2 me-2"></i>Select - Projection (Transforming Data)</h2>
+                        <p>
+                            <code>Select()</code> <strong>transforms</strong> each item in a collection.
+                            It's like taking a <strong>shape</strong> and turning it into a <strong>new shape</strong>.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== SELECT SPECIFIC PROPERTIES =====</span>
+<span class="comment">// Get only names</span>
+<span class="keyword">var</span> <span class="variable">names</span> = <span class="variable">people</span>.<span class="function">Select</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span>);
+<span class="comment">// Result: ["Alice", "Bob", "Charlie", "Diana", "Eve"]</span>
+
+<span class="comment">// ===== CREATE NEW OBJECTS =====</span>
+<span class="comment">// Create anonymous objects with name and age</span>
+<span class="keyword">var</span> <span class="variable">nameAge</span> = <span class="variable">people</span>.<span class="function">Select</span>(<span class="variable">p</span> => <span class="keyword">new</span> { <span class="variable">p</span>.<span class="property">Name</span>, <span class="variable">p</span>.<span class="property">Age</span> });
+
+<span class="comment">// ===== TRANSFORM DATA =====</span>
+<span class="comment">// Create greeting strings</span>
+<span class="keyword">var</span> <span class="variable">greetings</span> = <span class="variable">people</span>.<span class="function">Select</span>(<span class="variable">p</span> => <span class="string">$"Hello, {<span class="variable">p</span>.<span class="property">Name</span>} from {<span class="variable">p</span>.<span class="property">City</span>}!"</span>);
+
+<span class="comment">// ===== CALCULATE WITH SELECT =====</span>
+<span class="comment">// Get annual salary (monthly * 12)</span>
+<span class="keyword">var</span> <span class="variable">annualSalaries</span> = <span class="variable">people</span>.<span class="function">Select</span>(<span class="variable">p</span> => <span class="keyword">new</span> 
+{ 
+    <span class="variable">p</span>.<span class="property">Name</span>, 
+    <span class="property">AnnualSalary</span> = <span class="variable">p</span>.<span class="property">Salary</span> * <span class="number">12</span> 
+});</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> <code>Select()</code> is powerful for <strong>shaping data</strong>
+                            - you can extract, transform, or create new objects from your data.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ORDERBY - SORTING ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-3 me-2"></i>OrderBy - Sorting Data</h2>
+                        <p>
+                            <code>OrderBy()</code> sorts your data in <strong>ascending</strong> order.
+                            Use <code>OrderByDescending()</code> for <strong>descending</strong> order.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC SORTING =====</span>
+<span class="comment">// Sort by name (A to Z)</span>
+<span class="keyword">var</span> <span class="variable">sortedByName</span> = <span class="variable">people</span>.<span class="function">OrderBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span>);
+
+<span class="comment">// Sort by age (oldest first)</span>
+<span class="keyword">var</span> <span class="variable">sortedByAgeDesc</span> = <span class="variable">people</span>.<span class="function">OrderByDescending</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);
+
+<span class="comment">// ===== MULTIPLE SORT CRITERIA =====</span>
+<span class="comment">// Sort by city, then by name</span>
+<span class="keyword">var</span> <span class="variable">sortedMulti</span> = <span class="variable">people</span>
+    .<span class="function">OrderBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span>)
+    .<span class="function">ThenBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span>);
+
+<span class="comment">// Sort by salary descending, then by age ascending</span>
+<span class="keyword">var</span> <span class="variable">sortedSalary</span> = <span class="variable">people</span>
+    .<span class="function">OrderByDescending</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>)
+    .<span class="function">ThenBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Remember:</strong> <code>OrderBy()</code> doesn't change the original collection -
+                            it returns a <strong>new sorted collection</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== GROUPBY - GROUPING ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-4 me-2"></i>GroupBy - Grouping Data</h2>
+                        <p>
+                            <code>GroupBy()</code> groups items that share a <strong>common property</strong>.
+                            It's like sorting LEGO pieces by color!
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC GROUPING =====</span>
+<span class="comment">// Group people by city</span>
+<span class="keyword">var</span> <span class="variable">groupedByCity</span> = <span class="variable">people</span>.<span class="function">GroupBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span>);
+
+<span class="comment">// Loop through groups</span>
+<span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">group</span> <span class="keyword">in</span> <span class="variable">groupedByCity</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"City: {<span class="variable">group</span>.<span class="property">Key</span>}"</span>);
+    <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">person</span> <span class="keyword">in</span> <span class="variable">group</span>)
+    {
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"  {<span class="variable">person</span>.<span class="property">Name</span>}"</span>);
+    }
+}
+
+<span class="comment">// ===== GROUP WITH COUNT =====</span>
+<span class="comment">// Count people in each city</span>
+<span class="keyword">var</span> <span class="variable">cityCounts</span> = <span class="variable">people</span>
+    .<span class="function">GroupBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span>)
+    .<span class="function">Select</span>(<span class="variable">g</span> => <span class="keyword">new</span> { <span class="property">City</span> = <span class="variable">g</span>.<span class="property">Key</span>, <span class="property">Count</span> = <span class="variable">g</span>.<span class="function">Count</span>() });
+
+<span class="comment">// ===== GROUP WITH AVERAGE =====</span>
+<span class="comment">// Average age by city</span>
+<span class="keyword">var</span> <span class="variable">avgAgeByCity</span> = <span class="variable">people</span>
+    .<span class="function">GroupBy</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span>)
+    .<span class="function">Select</span>(<span class="variable">g</span> => <span class="keyword">new</span> 
+    { 
+        <span class="property">City</span> = <span class="variable">g</span>.<span class="property">Key</span>, 
+        <span class="property">AverageAge</span> = <span class="variable">g</span>.<span class="function">Average</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>) 
+    });</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> GroupBy is perfect for <strong>summarizing data</strong>
+                            - counts, averages, sums, and more!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== AGGREGATE FUNCTIONS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-5 me-2"></i>Aggregate Functions</h2>
+                        <p>
+                            Aggregate functions <strong>calculate</strong> values from a collection.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== SUM =====</span>
+<span class="keyword">int</span> <span class="variable">totalAge</span> = <span class="variable">people</span>.<span class="function">Sum</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);        <span class="comment">// Total of all ages</span>
+<span class="keyword">decimal</span> <span class="variable">totalSalary</span> = <span class="variable">people</span>.<span class="function">Sum</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>); <span class="comment">// Total of all salaries</span>
+
+<span class="comment">// ===== AVERAGE =====</span>
+<span class="keyword">double</span> <span class="variable">avgAge</span> = <span class="variable">people</span>.<span class="function">Average</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);        <span class="comment">// Average age</span>
+<span class="keyword">decimal</span> <span class="variable">avgSalary</span> = <span class="variable">people</span>.<span class="function">Average</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>); <span class="comment">// Average salary</span>
+
+<span class="comment">// ===== MAX AND MIN =====</span>
+<span class="keyword">int</span> <span class="variable">maxAge</span> = <span class="variable">people</span>.<span class="function">Max</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);          <span class="comment">// Oldest person</span>
+<span class="keyword">int</span> <span class="variable">minAge</span> = <span class="variable">people</span>.<span class="function">Min</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span>);          <span class="comment">// Youngest person</span>
+<span class="keyword">decimal</span> <span class="variable">highestSalary</span> = <span class="variable">people</span>.<span class="function">Max</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>); <span class="comment">// Highest salary</span>
+
+<span class="comment">// ===== COUNT =====</span>
+<span class="keyword">int</span> <span class="variable">totalCount</span> = <span class="variable">people</span>.<span class="function">Count</span>();                     <span class="comment">// Total people</span>
+<span class="keyword">int</span> <span class="variable">countOver25</span> = <span class="variable">people</span>.<span class="function">Count</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span> > <span class="number">25</span>); <span class="comment">// People over 25</span>
+
+<span class="comment">// ===== REAL-WORLD: Salary Statistics =====</span>
+<span class="keyword">var</span> <span class="variable">stats</span> = <span class="keyword">new</span>
+{
+    <span class="property">TotalEmployees</span> = <span class="variable">people</span>.<span class="function">Count</span>(),
+    <span class="property">AverageSalary</span> = <span class="variable">people</span>.<span class="function">Average</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>),
+    <span class="property">HighestSalary</span> = <span class="variable">people</span>.<span class="function">Max</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>),
+    <span class="property">LowestSalary</span> = <span class="variable">people</span>.<span class="function">Min</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>),
+    <span class="property">TotalPayroll</span> = <span class="variable">people</span>.<span class="function">Sum</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Salary</span>)
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== FIRST AND SINGLE ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-6 me-2"></i>First and Single</h2>
+                        <p>
+                            These methods get <strong>specific items</strong> from a collection.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== FIRST / FIRSTORDEFAULT =====</span>
+<span class="comment">// Get the first person</span>
+<span class="keyword">var</span> <span class="variable">first</span> = <span class="variable">people</span>.<span class="function">First</span>();                    <span class="comment">// Throws if empty</span>
+<span class="keyword">var</span> <span class="variable">firstSafe</span> = <span class="variable">people</span>.<span class="function">FirstOrDefault</span>();        <span class="comment">// Returns null if empty</span>
+
+<span class="comment">// First from New York</span>
+<span class="keyword">var</span> <span class="variable">firstNY</span> = <span class="variable">people</span>.<span class="function">FirstOrDefault</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span> == <span class="string">"New York"</span>);
+
+<span class="comment">// ===== SINGLE / SINGLEORDEFAULT =====</span>
+<span class="comment">// Get exactly one person (throws if not exactly one)</span>
+<span class="keyword">var</span> <span class="variable">single</span> = <span class="variable">people</span>.<span class="function">Single</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span> == <span class="string">"Alice"</span>);
+
+<span class="comment">// ===== ANY - Check if any exist =====</span>
+<span class="keyword">bool</span> <span class="variable">hasBob</span> = <span class="variable">people</span>.<span class="function">Any</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span> == <span class="string">"Bob"</span>);      <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">hasAlice</span> = <span class="variable">people</span>.<span class="function">Any</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span> == <span class="string">"Alice"</span>);  <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">hasFrank</span> = <span class="variable">people</span>.<span class="function">Any</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Name</span> == <span class="string">"Frank"</span>); <span class="comment">// false</span>
+
+<span class="comment">// ===== ALL - Check if ALL match =====</span>
+<span class="keyword">bool</span> <span class="variable">allAdults</span> = <span class="variable">people</span>.<span class="function">All</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">Age</span> >= <span class="number">18</span>);    <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">allFromNY</span> = <span class="variable">people</span>.<span class="function">All</span>(<span class="variable">p</span> => <span class="variable">p</span>.<span class="property">City</span> == <span class="string">"New York"</span>); <span class="comment">// false</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> <code>First()</code> and <code>Single()</code> throw exceptions
+                            if no items match. Use <code>FirstOrDefault()</code> and <code>SingleOrDefault()</code> for safety.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== QUERY VS METHOD SYNTAX ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-7 me-2"></i>Query Syntax vs Method Syntax</h2>
+                        <p>
+                            LINQ has <strong>two ways</strong> to write queries. Both do the same thing -
+                            it's just <strong>different styles</strong>.
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-primary"><i class="fas fa-code me-2"></i>Query Syntax</h6>
+                                    <p class="small">Looks like SQL, more readable for complex queries</p>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>var adults = from p in people
+             where p.Age >= 18
+             orderby p.Name
+             select p;</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-code me-2"></i>Method Syntax</h6>
+                                    <p class="small">Uses methods like Where(), OrderBy(), Select()</p>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>var adults = people
+    .Where(p => p.Age >= 18)
+    .OrderBy(p => p.Name)
+    .ToList();</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> Most developers use <strong>Method Syntax</strong> because it's
+                            more consistent and works with all LINQ features. Choose whichever you prefer!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PRACTICAL EXAMPLES ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-laptop-code text-primary me-2"></i>Real-World Examples</h2>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📊 Employee Reports</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Get top 3 highest paid
+var topPaid = employees
+    .OrderByDescending(e => e.Salary)
+    .Take(3)
+    .ToList();
+
+// Get employees by department
+var byDept = employees
+    .GroupBy(e => e.Department)
+    .Select(g => new {
+        Dept = g.Key,
+        Count = g.Count(),
+        AvgSalary = g.Average(e => e.Salary)
+    });</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">🛒 Product Analysis</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Find expensive products
+var expensive = products
+    .Where(p => p.Price > 100)
+    .OrderByDescending(p => p.Price)
+    .ToList();
+
+// Products by category
+var byCategory = products
+    .GroupBy(p => p.Category)
+    .Select(g => new {
+        Category = g.Key,
+        Count = g.Count(),
+        TotalValue = g.Sum(p => p.Price * p.Stock)
+    });</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📅 Order Analytics</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Orders from last 30 days
+var recent = orders
+    .Where(o => o.Date >= DateTime.Now.AddDays(-30))
+    .OrderByDescending(o => o.Date)
+    .ToList();
+
+// Top customers
+var topCustomers = orders
+    .GroupBy(o => o.CustomerId)
+    .Select(g => new {
+        CustomerId = g.Key,
+        TotalSpent = g.Sum(o => o.Total)
+    })
+    .OrderByDescending(c => c.TotalSpent)
+    .Take(10);</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">🔍 Search Functionality</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>// Search products
+var searchResults = products
+    .Where(p => p.Name.Contains(searchTerm) ||
+                p.Description.Contains(searchTerm))
+    .OrderBy(p => p.Name)
+    .ToList();
+
+// Filter with multiple criteria
+var filtered = products
+    .Where(p => p.Price >= minPrice &&
+                p.Price <= maxPrice &&
+                p.Category == category)
+    .ToList();</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== COMPARISON TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Reference</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Purpose</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>Where()</code></td>
+                                        <td>Filter items</td>
+                                        <td><code>.Where(p => p.Age > 18)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Select()</code></td>
+                                        <td>Transform items</td>
+                                        <td><code>.Select(p => p.Name)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>OrderBy()</code></td>
+                                        <td>Sort ascending</td>
+                                        <td><code>.OrderBy(p => p.Name)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>OrderByDescending()</code></td>
+                                        <td>Sort descending</td>
+                                        <td><code>.OrderByDescending(p => p.Age)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>GroupBy()</code></td>
+                                        <td>Group items</td>
+                                        <td><code>.GroupBy(p => p.City)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Sum()</code></td>
+                                        <td>Total sum</td>
+                                        <td><code>.Sum(p => p.Salary)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Average()</code></td>
+                                        <td>Average value</td>
+                                        <td><code>.Average(p => p.Age)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Count()</code></td>
+                                        <td>Number of items</td>
+                                        <td><code>.Count(p => p.Age > 25)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>First()</code></td>
+                                        <td>First item</td>
+                                        <td><code>.First(p => p.City == "NY")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Any()</code></td>
+                                        <td>Check if any match</td>
+                                        <td><code>.Any(p => p.Name == "Bob")</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Employee Analytics</h2>
+
+                        <p class="fw-bold">Task: Use LINQ to analyze employee data.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a list of employees with: Name, Department, Salary, YearsOfExperience</li>
+                                <li>
+                                    Write LINQ queries to:
+                                    <ul>
+                                        <li>Get all employees making more than $60,000</li>
+                                        <li>Get the average salary by department</li>
+                                        <li>Get the top 3 highest paid employees</li>
+                                        <li>Get employees sorted by years of experience (descending)</li>
+                                        <li>Get the total salary for each department</li>
+                                        <li>Check if any employee has more than 20 years experience</li>
+                                        <li>Get the employee with the highest salary in each department</li>
+                                    </ul>
+                                </li>
+                                <li>Use <strong>at least 5 different LINQ methods</strong></li>
+                                <li>Use <strong>both query and method syntax</strong> (at least one of each)</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hints:</strong>
+                            <ul class="mb-0">
+                                <li>Use <code>Where()</code> for filtering</li>
+                                <li>Use <code>GroupBy()</code> for department grouping</li>
+                                <li>Use <code>OrderByDescending()</code> for sorting</li>
+                                <li>Use <code>Take()</code> for top 3</li>
+                                <li>Use <code>Sum()</code> and <code>Average()</code> for calculations</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// ===== Employee Class =====</span>
+<span class="keyword">public class</span> <span class="class">Employee</span>
+{
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Department</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public decimal</span> <span class="property">Salary</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public int</span> <span class="property">YearsOfExperience</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// ===== Sample Data =====</span>
+<span class="keyword">var</span> <span class="variable">employees</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Employee</span>&gt;
+{
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"John"</span>, <span class="property">Department</span> = <span class="string">"IT"</span>, <span class="property">Salary</span> = <span class="number">75000</span>, <span class="property">YearsOfExperience</span> = <span class="number">5</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Jane"</span>, <span class="property">Department</span> = <span class="string">"HR"</span>, <span class="property">Salary</span> = <span class="number">65000</span>, <span class="property">YearsOfExperience</span> = <span class="number">8</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Bob"</span>, <span class="property">Department</span> = <span class="string">"IT"</span>, <span class="property">Salary</span> = <span class="number">90000</span>, <span class="property">YearsOfExperience</span> = <span class="number">12</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Alice"</span>, <span class="property">Department</span> = <span class="string">"Sales"</span>, <span class="property">Salary</span> = <span class="number">82000</span>, <span class="property">YearsOfExperience</span> = <span class="number">6</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Charlie"</span>, <span class="property">Department</span> = <span class="string">"HR"</span>, <span class="property">Salary</span> = <span class="number">58000</span>, <span class="property">YearsOfExperience</span> = <span class="number">3</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Diana"</span>, <span class="property">Department</span> = <span class="string">"IT"</span>, <span class="property">Salary</span> = <span class="number">85000</span>, <span class="property">YearsOfExperience</span> = <span class="number">10</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Eve"</span>, <span class="property">Department</span> = <span class="string">"Sales"</span>, <span class="property">Salary</span> = <span class="number">95000</span>, <span class="property">YearsOfExperience</span> = <span class="number">15</span> },
+    <span class="keyword">new</span> <span class="class">Employee</span> { <span class="property">Name</span> = <span class="string">"Frank"</span>, <span class="property">Department</span> = <span class="string">"Sales"</span>, <span class="property">Salary</span> = <span class="number">70000</span>, <span class="property">YearsOfExperience</span> = <span class="number">4</span> }
+};
+
+<span class="comment">// ===== SOLUTIONS =====</span>
+
+<span class="comment">// 1. Employees making more than $60,000</span>
+<span class="keyword">var</span> <span class="variable">highEarners</span> = <span class="variable">employees</span>
+    .<span class="function">Where</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span> > <span class="number">60000</span>)
+    .<span class="function">ToList</span>();
+
+<span class="comment">// 2. Average salary by department</span>
+<span class="keyword">var</span> <span class="variable">avgByDept</span> = <span class="variable">employees</span>
+    .<span class="function">GroupBy</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Department</span>)
+    .<span class="function">Select</span>(<span class="variable">g</span> => <span class="keyword">new</span>
+    {
+        <span class="property">Department</span> = <span class="variable">g</span>.<span class="property">Key</span>,
+        <span class="property">AverageSalary</span> = <span class="variable">g</span>.<span class="function">Average</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span>)
+    });
+
+<span class="comment">// 3. Top 3 highest paid</span>
+<span class="keyword">var</span> <span class="variable">top3</span> = <span class="variable">employees</span>
+    .<span class="function">OrderByDescending</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span>)
+    .<span class="function">Take</span>(<span class="number">3</span>)
+    .<span class="function">ToList</span>();
+
+<span class="comment">// 4. Sorted by experience (descending)</span>
+<span class="keyword">var</span> <span class="variable">byExperience</span> = <span class="variable">employees</span>
+    .<span class="function">OrderByDescending</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">YearsOfExperience</span>)
+    .<span class="function">ToList</span>();
+
+<span class="comment">// 5. Total salary by department</span>
+<span class="keyword">var</span> <span class="variable">totalByDept</span> = <span class="variable">employees</span>
+    .<span class="function">GroupBy</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Department</span>)
+    .<span class="function">Select</span>(<span class="variable">g</span> => <span class="keyword">new</span>
+    {
+        <span class="property">Department</span> = <span class="variable">g</span>.<span class="property">Key</span>,
+        <span class="property">TotalSalary</span> = <span class="variable">g</span>.<span class="function">Sum</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span>)
+    });
+
+<span class="comment">// 6. Any employee with more than 20 years</span>
+<span class="keyword">bool</span> <span class="variable">hasVeteran</span> = <span class="variable">employees</span>.<span class="function">Any</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">YearsOfExperience</span> > <span class="number">20</span>);
+
+<span class="comment">// 7. Highest salary in each department (Query Syntax)</span>
+<span class="keyword">var</span> <span class="variable">highestInDept</span> = <span class="keyword">from</span> <span class="variable">e</span> <span class="keyword">in</span> <span class="variable">employees</span>
+    <span class="keyword">group</span> <span class="variable">e</span> <span class="keyword">by</span> <span class="variable">e</span>.<span class="property">Department</span> <span class="keyword">into</span> <span class="variable">g</span>
+    <span class="keyword">select</span> <span class="keyword">new</span>
+    {
+        <span class="property">Department</span> = <span class="variable">g</span>.<span class="property">Key</span>,
+        <span class="property">HighestSalary</span> = <span class="variable">g</span>.<span class="function">Max</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span>),
+        <span class="property">Employee</span> = <span class="variable">g</span>.<span class="function">First</span>(<span class="variable">e</span> => <span class="variable">e</span>.<span class="property">Salary</span> == <span class="variable">g</span>.<span class="function">Max</span>(<span class="variable">e2</span> => <span class="variable">e2</span>.<span class="property">Salary</span>))
+    };
+
+<span class="comment">// Display results</span>
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"=== High Earners ==="</span>);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">e</span> <span class="keyword">in</span> <span class="variable">highEarners</span>)
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"{<span class="variable">e</span>.<span class="property">Name</span>}: ${<span class="variable">e</span>.<span class="property">Salary</span>}"</span>);
+
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n=== Top 3 Paid ==="</span>);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">e</span> <span class="keyword">in</span> <span class="variable">top3</span>)
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"{<span class="variable">e</span>.<span class="property">Name</span>}: ${<span class="variable">e</span>.<span class="property">Salary</span>}"</span>);
+
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n=== Average Salary by Department ==="</span>);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">d</span> <span class="keyword">in</span> <span class="variable">avgByDept</span>)
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"{<span class="variable">d</span>.<span class="property">Department</span>}: ${<span class="variable">d</span>.<span class="property">AverageSalary</span>:F2}"</span>);
+
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"\nHas veteran: {<span class="variable">hasVeteran</span>}"</span>);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            LINQ makes working with data <strong>simple and powerful</strong>:
+                            <br><br>
+                            ✅ Use <strong>Where()</strong> to filter data<br>
+                            ✅ Use <strong>Select()</strong> to transform data<br>
+                            ✅ Use <strong>OrderBy()</strong> to sort data<br>
+                            ✅ Use <strong>GroupBy()</strong> to group data<br>
+                            ✅ Use <strong>Sum(), Average(), Count()</strong> for calculations<br>
+                            ✅ Use <strong>Any(), All()</strong> to check conditions<br>
+                            ✅ LINQ works with <strong>any collection</strong> - lists, arrays, databases<br>
+                            ✅ LINQ makes your code <strong>more readable</strong> and <strong>less error-prone</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/11-PatternMatchingAndNullables" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -116,12 +768,13 @@ bool hasBob = people.Any(p => p.Name == "Bob");</code></pre>
                 </div>
             </div>
         </div>
+
+        <!-- ===== SIDEBAR ===== -->
         <div class="col-lg-3">
             @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
         </div>
     </div>
 </div>
-
 
 @await Html.PartialAsync("_QuizButton", "CSharpFundamentals_Lesson12")
 
@@ -191,6 +844,20 @@ bool hasBob = people.Any(p => p.Name == "Bob");</code></pre>
 
         .language-csharp .property {
             color: #80cbc4;
+        }
+
+        .sidebar-nav {
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        @@media (max-width: 768px) {
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 }

@@ -254,7 +254,6 @@
 <span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">names</span>.<span class="property">Count</span>;   <span class="comment">// Number of items</span>
 <span class="keyword">bool</span> <span class="variable">isEmpty</span> = <span class="variable">names</span>.<span class="property">Count</span> == <span class="number">0</span>;
 <span class="keyword">int</span> <span class="variable">capacity</span> = <span class="variable">names</span>.<span class="property">Capacity</span>;  <span class="comment">// Internal size (usually bigger than Count)</span>
-
 <span class="comment">// ===== CHECKING IF AN ITEM EXISTS =====</span>
 <span class="keyword">bool</span> <span class="variable">hasAlice</span> = <span class="variable">names</span>.<span class="function">Contains</span>(<span class="string">"Alice"</span>);  <span class="comment">// true or false</span>
 
@@ -292,6 +291,382 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== FINDING ITEMS IN A LIST (DETAILED) ===== -->
+<div class="card mb-4 border-info" data-aos="fade-up">
+    <div class="card-body">
+        <h3 class="h4 fw-bold text-info"><i class="fas fa-search me-2"></i>Finding Items in a List - The Find Methods</h3>
+        <p>
+            One of the most powerful features of Lists is the ability to <strong>search for items</strong>.
+            You can find items that match a condition, check if an item exists, or get all items that match.
+        </p>
+
+        <!-- ===== UNDERSTANDING LAMBDA EXPRESSIONS ===== -->
+        <div class="p-3 bg-light rounded-3 mb-3">
+            <h5 class="fw-bold text-primary"><i class="fas fa-code me-2"></i>What is a Lambda Expression?</h5>
+            <p>
+                Before we dive into Find methods, you need to understand <strong>lambda expressions</strong>.
+                A lambda is a short way to write a condition. Think of it like saying:
+            </p>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="p-2 bg-white rounded">
+                        <strong>Example:</strong> <code>n => n.StartsWith("A")</code>
+                        <ul class="small mt-1 mb-0">
+                            <li><strong>n</strong> = each item in the list</li>
+                            <li><strong>=></strong> = "goes to" or "such that"</li>
+                            <li><strong>n.StartsWith("A")</strong> = the condition</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-2 bg-white rounded">
+                        <strong>In plain English:</strong>
+                        <p class="small mb-0">"For each item <code>n</code> in the list, check if <code>n</code> starts with 'A'"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FIND METHOD 1: Find() ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-success"><i class="fas fa-1 me-2"></i>Method 1: Find() - Returns the First Match</h5>
+            <p>
+                <code>Find()</code> searches the list and returns the <strong>first item</strong> that matches your condition.
+                If nothing matches, it returns <code>null</code> (or the default value).
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== Find() - Get the first matching item =====</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>, <span class="string">"Anna"</span>, <span class="string">"Alex"</span>
+};
+
+<span class="comment">// Find first name that starts with 'A'</span>
+<span class="keyword">string</span> <span class="variable">firstA</span> = <span class="variable">names</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">firstA</span>);  <span class="comment">// Output: "Alice"</span>
+
+<span class="comment">// Find first name with exactly 3 characters</span>
+<span class="keyword">string</span> <span class="variable">threeLetter</span> = <span class="variable">names</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="property">Length</span> == <span class="number">3</span>);
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">threeLetter</span>);  <span class="comment">// Output: "Bob"</span>
+
+<span class="comment">// Find first name that contains 'li'</span>
+<span class="keyword">string</span> <span class="variable">containsLi</span> = <span class="variable">names</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">Contains</span>(<span class="string">"li"</span>));
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">containsLi</span>);  <span class="comment">// Output: "Alice"</span>
+
+<span class="comment">// ===== SAFE WAY TO USE Find() - Check for null =====</span>
+<span class="keyword">string</span> <span class="variable">result</span> = <span class="variable">names</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span> == <span class="string">"Unknown"</span>);
+<span class="keyword">if</span> (<span class="variable">result</span> != <span class="keyword">null</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Found: {<span class="variable">result</span>}"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Name not found"</span>);
+}
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Find a customer by ID =====</span>
+<span class="keyword">var</span> <span class="variable">customers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Customer</span>&gt;
+{
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Id</span> = <span class="number">1</span>, <span class="property">Name</span> = <span class="string">"John"</span> },
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Id</span> = <span class="number">2</span>, <span class="property">Name</span> = <span class="string">"Jane"</span> },
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Id</span> = <span class="number">3</span>, <span class="property">Name</span> = <span class="string">"Bob"</span> }
+};
+
+<span class="comment">// Find customer with Id = 2</span>
+<span class="class">Customer</span> <span class="variable">foundCustomer</span> = <span class="variable">customers</span>.<span class="function">Find</span>(<span class="variable">c</span> => <span class="variable">c</span>.<span class="property">Id</span> == <span class="number">2</span>);
+<span class="keyword">if</span> (<span class="variable">foundCustomer</span> != <span class="keyword">null</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Found customer: {<span class="variable">foundCustomer</span>.<span class="property">Name</span>}"</span>);  <span class="comment">// Output: Jane</span>
+}</code></pre>
+            </div>
+            <div class="alert alert-success mt-2">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>When to use Find():</strong> Use it when you need <strong>one specific item</strong> and you want the first match.
+            </div>
+        </div>
+
+        <!-- ===== FIND METHOD 2: FindAll() ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-primary"><i class="fas fa-2 me-2"></i>Method 2: FindAll() - Returns All Matches</h5>
+            <p>
+                <code>FindAll()</code> returns a <strong>new List</strong> containing <strong>all items</strong> that match your condition.
+                If nothing matches, it returns an empty list (not null).
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== FindAll() - Get all matching items =====</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Anna"</span>, <span class="string">"Charlie"</span>, <span class="string">"Alex"</span>
+};
+
+<span class="comment">// Get all names that start with 'A'</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">namesStartingWithA</span> = <span class="variable">names</span>.<span class="function">FindAll</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">name</span> <span class="keyword">in</span> <span class="variable">namesStartingWithA</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">name</span>);  <span class="comment">// Output: Alice, Anna, Alex</span>
+}
+
+<span class="comment">// Get all names with exactly 3 characters</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">threeLetterNames</span> = <span class="variable">names</span>.<span class="function">FindAll</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="property">Length</span> == <span class="number">3</span>);
+<span class="comment">// threeLetterNames = ["Bob"]</span>
+
+<span class="comment">// Get all names longer than 4 characters</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">longNames</span> = <span class="variable">names</span>.<span class="function">FindAll</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="property">Length</span> > <span class="number">4</span>);
+<span class="comment">// longNames = ["Alice", "Charlie"]</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Filter active customers =====</span>
+<span class="keyword">var</span> <span class="variable">customers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Customer</span>&gt;
+{
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Name</span> = <span class="string">"John"</span>, <span class="property">IsActive</span> = <span class="keyword">true</span> },
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Name</span> = <span class="string">"Jane"</span>, <span class="property">IsActive</span> = <span class="keyword">false</span> },
+    <span class="keyword">new</span> <span class="class">Customer</span> { <span class="property">Name</span> = <span class="string">"Bob"</span>, <span class="property">IsActive</span> = <span class="keyword">true</span> }
+};
+
+<span class="comment">// Get all active customers</span>
+<span class="class">List</span>&lt;<span class="class">Customer</span>&gt; <span class="variable">activeCustomers</span> = <span class="variable">customers</span>.<span class="function">FindAll</span>(<span class="variable">c</span> => <span class="variable">c</span>.<span class="property">IsActive</span>);
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Active customers: {<span class="variable">activeCustomers</span>.<span class="property">Count</span>}"</span>);  <span class="comment">// Output: 2</span></code></pre>
+            </div>
+            <div class="alert alert-info mt-2">
+                <i class="fas fa-lightbulb me-2"></i>
+                <strong>When to use FindAll():</strong> Use it when you need <strong>all items</strong> that match a condition,
+                like filtering a list.
+            </div>
+        </div>
+
+        <!-- ===== FIND METHOD 3: FindIndex() ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-warning"><i class="fas fa-3 me-2"></i>Method 3: FindIndex() - Returns the Index</h5>
+            <p>
+                <code>FindIndex()</code> returns the <strong>index position</strong> of the first item that matches.
+                If nothing matches, it returns <strong>-1</strong>.
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== FindIndex() - Get the position of an item =====</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>, <span class="string">"Anna"</span>
+};
+
+<span class="comment">// Find index of first name starting with 'A'</span>
+<span class="keyword">int</span> <span class="variable">index</span> = <span class="variable">names</span>.<span class="function">FindIndex</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index: {<span class="variable">index</span>}"</span>);  <span class="comment">// Output: 0</span>
+
+<span class="comment">// Find index of name "Charlie"</span>
+<span class="keyword">int</span> <span class="variable">charlieIndex</span> = <span class="variable">names</span>.<span class="function">FindIndex</span>(<span class="variable">n</span> => <span class="variable">n</span> == <span class="string">"Charlie"</span>);
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Charlie is at index: {<span class="variable">charlieIndex</span>}"</span>);  <span class="comment">// Output: 2</span>
+
+<span class="comment">// Find index of name not in the list</span>
+<span class="keyword">int</span> <span class="variable">notFound</span> = <span class="variable">names</span>.<span class="function">FindIndex</span>(<span class="variable">n</span> => <span class="variable">n</span> == <span class="string">"Unknown"</span>);
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index: {<span class="variable">notFound</span>}"</span>);  <span class="comment">// Output: -1</span>
+
+<span class="comment">// ===== SAFE WAY TO USE FindIndex() =====</span>
+<span class="keyword">if</span> (<span class="variable">notFound</span> != <span class="number">-1</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Found at index {<span class="variable">notFound</span>}"</span>);
+}
+<span class="keyword">else</span>
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Item not found in the list"</span>);
+}</code></pre>
+            </div>
+            <div class="alert alert-warning mt-2">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <strong>Remember:</strong> <code>-1</code> means "not found". Always check for -1 before using the index!
+            </div>
+        </div>
+
+        <!-- ===== FIND METHOD 4: FindLast() and FindLastIndex() ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-danger"><i class="fas fa-4 me-2"></i>Method 4: FindLast() and FindLastIndex() - Search from the End</h5>
+            <p>
+                These methods search the list from the <strong>end to the beginning</strong>.
+                They are useful when you want the last match instead of the first.
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== FindLast() - Get the last matching item =====</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Anna"</span>, <span class="string">"Charlie"</span>, <span class="string">"Alex"</span>
+};
+
+<span class="comment">// Find the LAST name starting with 'A'</span>
+<span class="keyword">string</span> <span class="variable">lastA</span> = <span class="variable">names</span>.<span class="function">FindLast</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Last name starting with A: {<span class="variable">lastA</span>}"</span>);  <span class="comment">// Output: Alex</span>
+
+<span class="comment">// Find the last item with exactly 3 characters</span>
+<span class="keyword">string</span> <span class="variable">lastThreeLetter</span> = <span class="variable">names</span>.<span class="function">FindLast</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="property">Length</span> == <span class="number">3</span>);
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Last 3-letter name: {<span class="variable">lastThreeLetter</span>}"</span>);  <span class="comment">// Output: Bob</span>
+
+<span class="comment">// ===== FindLastIndex() - Get the index from the end =====</span>
+<span class="keyword">int</span> <span class="variable">lastIndex</span> = <span class="variable">names</span>.<span class="function">FindLastIndex</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Last A name is at index: {<span class="variable">lastIndex</span>}"</span>);  <span class="comment">// Output: 4</span></code></pre>
+            </div>
+        </div>
+
+        <!-- ===== FIND METHOD 5: Where() from LINQ ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-info"><i class="fas fa-5 me-2"></i>Method 5: Where() - The LINQ Way</h5>
+            <p>
+                <code>Where()</code> is similar to <code>FindAll()</code> but it comes from <strong>LINQ</strong>
+                (Language Integrated Query). It's more powerful and can be used with any collection.
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== Where() - LINQ filtering =====</span>
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Linq</span>;  <span class="comment">// Required for LINQ</span>
+
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Anna"</span>, <span class="string">"Charlie"</span>, <span class="string">"Alex"</span>
+};
+
+<span class="comment">// Filter names starting with 'A'</span>
+<span class="class">IEnumerable</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">filtered</span> = <span class="variable">names</span>.<span class="function">Where</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));
+
+<span class="comment">// Convert to List</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">result</span> = <span class="variable">filtered</span>.<span class="function">ToList</span>();
+
+<span class="comment">// Or chain it together</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">namesA</span> = <span class="variable">names</span>.<span class="function">Where</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>)).<span class="function">ToList</span>();
+
+<span class="comment">// ===== Difference between FindAll() and Where() =====</span>
+<span class="comment">// FindAll() returns a List immediately</span>
+<span class="comment">// Where() returns an IEnumerable (lazy evaluation) - more efficient</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Find customers who spent more than $100 =====</span>
+<span class="keyword">var</span> <span class="variable">orders</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">50</span>, <span class="number">150</span>, <span class="number">75</span>, <span class="number">200</span>, <span class="number">25</span> };
+<span class="keyword">var</span> <span class="variable">largeOrders</span> = <span class="variable">orders</span>.<span class="function">Where</span>(<span class="variable">o</span> => <span class="variable">o</span> > <span class="number">100</span>).<span class="function">ToList</span>();
+<span class="comment">// largeOrders = [150, 200]</span></code></pre>
+            </div>
+        </div>
+
+        <!-- ===== CHECKING METHODS ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold text-success"><i class="fas fa-6 me-2"></i>Checking Methods: Any(), All(), and Contains()</h5>
+            <p>
+                These methods check <strong>if items exist</strong> without returning the actual items.
+            </p>
+            <div class="code-block bg-dark p-3 rounded-3">
+                <pre><code class="language-csharp"><span class="comment">// ===== Any() - Check if ANY item matches =====</span>
+<span class="class">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">names</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>
+};
+
+<span class="keyword">bool</span> <span class="variable">hasA</span> = <span class="variable">names</span>.<span class="function">Any</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));  <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">hasZ</span> = <span class="variable">names</span>.<span class="function">Any</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"Z"</span>));  <span class="comment">// false</span>
+
+<span class="comment">// ===== All() - Check if ALL items match =====</span>
+<span class="keyword">bool</span> <span class="variable">allStartWithA</span> = <span class="variable">names</span>.<span class="function">All</span>(<span class="variable">n</span> => <span class="variable">n</span>.<span class="function">StartsWith</span>(<span class="string">"A"</span>));  <span class="comment">// false (Bob and Charlie don't start with A)</span>
+
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span> };
+<span class="keyword">bool</span> <span class="variable">allEven</span> = <span class="variable">numbers</span>.<span class="function">All</span>(<span class="variable">n</span> => <span class="variable">n</span> % <span class="number">2</span> == <span class="number">0</span>);  <span class="comment">// true</span>
+
+<span class="comment">// ===== Contains() - Check if specific item exists =====</span>
+<span class="keyword">bool</span> <span class="variable">hasBob</span> = <span class="variable">names</span>.<span class="function">Contains</span>(<span class="string">"Bob"</span>);  <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">hasDave</span> = <span class="variable">names</span>.<span class="function">Contains</span>(<span class="string">"Dave"</span>);  <span class="comment">// false</span></code></pre>
+            </div>
+        </div>
+
+        <!-- ===== COMPARISON TABLE ===== -->
+        <div class="mt-3">
+            <h5 class="fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Comparison: Which Method to Use?</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Method</th>
+                            <th>Returns</th>
+                            <th>When to Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Find()</code></td>
+                            <td>First match (or null)</td>
+                            <td>Need one specific item</td>
+                        </tr>
+                        <tr>
+                            <td><code>FindAll()</code></td>
+                            <td>List of all matches</td>
+                            <td>Need all items that match</td>
+                        </tr>
+                        <tr>
+                            <td><code>FindIndex()</code></td>
+                            <td>Index number (or -1)</td>
+                            <td>Need the position of an item</td>
+                        </tr>
+                        <tr>
+                            <td><code>FindLast()</code></td>
+                            <td>Last match (or null)</td>
+                            <td>Need the last matching item</td>
+                        </tr>
+                        <tr>
+                            <td><code>Where()</code></td>
+                            <td>IEnumerable (use ToList())</td>
+                            <td>LINQ filtering (more powerful)</td>
+                        </tr>
+                        <tr>
+                            <td><code>Any()</code></td>
+                            <td>true/false</td>
+                            <td>Check if ANY item matches</td>
+                        </tr>
+                        <tr>
+                            <td><code>All()</code></td>
+                            <td>true/false</td>
+                            <td>Check if ALL items match</td>
+                        </tr>
+                        <tr>
+                            <td><code>Contains()</code></td>
+                            <td>true/false</td>
+                            <td>Check if a specific item exists</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== PRACTICE EXERCISE ===== -->
+        <div class="mt-3 p-3 bg-success bg-opacity-10 rounded-3 border border-success">
+            <h5 class="fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Practice Finding</h5>
+            <p><strong>Try these challenges:</strong></p>
+            <ol class="small">
+                <li>Create a list of 10 random numbers</li>
+                <li>Use <code>Find()</code> to get the first number greater than 50</li>
+                <li>Use <code>FindAll()</code> to get all numbers between 20 and 80</li>
+                <li>Use <code>FindIndex()</code> to find the position of the number 42</li>
+                <li>Use <code>Any()</code> to check if any number is greater than 100</li>
+                <li>Use <code>All()</code> to check if all numbers are positive</li>
+            </ol>
+            <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleFindExercise()">
+                <i class="fas fa-code me-1"></i> Show Solution
+            </button>
+            <div id="findExerciseSolution" style="display: none;" class="mt-2">
+                <div class="code-block bg-dark p-2 rounded-2">
+                    <pre><code class="language-csharp"><span class="comment">// Practice Solutions</span>
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">int</span>&gt; { <span class="number">15</span>, <span class="number">42</span>, <span class="number">67</span>, <span class="number">23</span>, <span class="number">89</span>, <span class="number">12</span>, <span class="number">55</span>, <span class="number">33</span>, <span class="number">91</span>, <span class="number">7</span> };
+
+<span class="comment">// 1. First number greater than 50</span>
+<span class="keyword">int</span> <span class="variable">firstBig</span> = <span class="variable">numbers</span>.<span class="function">Find</span>(<span class="variable">n</span> => <span class="variable">n</span> > <span class="number">50</span>);  <span class="comment">// 67</span>
+
+<span class="comment">// 2. All numbers between 20 and 80</span>
+<span class="class">List</span>&lt;<span class="keyword">int</span>&gt; <span class="variable">between</span> = <span class="variable">numbers</span>.<span class="function">FindAll</span>(<span class="variable">n</span> => <span class="variable">n</span> >= <span class="number">20</span> && <span class="variable">n</span> <= <span class="number">80</span>);
+<span class="comment">// between = [42, 67, 23, 55, 33]</span>
+
+<span class="comment">// 3. Index of number 42</span>
+<span class="keyword">int</span> <span class="variable">indexOf42</span> = <span class="variable">numbers</span>.<span class="function">FindIndex</span>(<span class="variable">n</span> => <span class="variable">n</span> == <span class="number">42</span>);  <span class="comment">// 1</span>
+
+<span class="comment">// 4. Any number greater than 100</span>
+<span class="keyword">bool</span> <span class="variable">hasOver100</span> = <span class="variable">numbers</span>.<span class="function">Any</span>(<span class="variable">n</span> => <span class="variable">n</span> > <span class="number">100</span>);  <span class="comment">// false</span>
+
+<span class="comment">// 5. All numbers positive</span>
+<span class="keyword">bool</span> <span class="variable">allPositive</span> = <span class="variable">numbers</span>.<span class="function">All</span>(<span class="variable">n</span> => <span class="variable">n</span> > <span class="number">0</span>);  <span class="comment">// true</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 <!-- ===== SECTION 3: DICTIONARY (DETAILED) ===== -->
                 <div class="card mb-4" data-aos="fade-left">
@@ -1151,6 +1526,15 @@ ID: 102, Name: Bob, Grade: 92.0</pre>
                     solution.style.display = 'none';
                 }
             }
+
+            function toggleFindExercise() {
+    var solution = document.getElementById('findExerciseSolution');
+    if (solution.style.display === 'none') {
+        solution.style.display = 'block';
+    } else {
+        solution.style.display = 'none';
+    }
+}
 
             document.addEventListener('DOMContentLoaded', function() {
                 if (typeof AOS !== 'undefined') {

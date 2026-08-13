@@ -4,9 +4,10 @@
     ViewData["Title"] = "Delegates, Events & Async";
 }
 
-<div class="container">
+<div class="container py-4">
     <div class="row">
         <div class="col-lg-9">
+            <!-- Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -15,127 +16,575 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Delegates, Events & Async</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">30 min read</span>
-                    <span class="badge bg-primary">Lesson 13 of 13</span>
-                </div>
+            <!-- Main Content -->
+            <div class="lesson-content" data-aos="fade-up" data-aos-duration="800">
 
-                <h2>Delegates</h2>
-                <p>A delegate is a type that holds a reference to a method.</p>
-
-                <h3>Declaring and Using Delegates</h3>
-                <pre><code>// Declare delegate
-public delegate int Operation(int a, int b);
-
-// Methods that match the delegate
-public int Add(int a, int b) => a + b;
-public int Multiply(int a, int b) => a * b;
-
-// Using the delegate
-Operation op = Add;
-int result = op(5, 3); // 8
-
-op = Multiply;
-result = op(5, 3); // 15</code></pre>
-
-                <h3>Func and Action (Built-in Delegates)</h3>
-                <pre><code>// Func - returns a value
-Func&lt;int, int, int&gt; add = (a, b) => a + b;
-int sum = add(5, 3);
-
-// Action - no return value
-Action&lt;string&gt; print = (msg) => Console.WriteLine(msg);
-print("Hello");</code></pre>
-
-                <h2>Events</h2>
-
-                <h3>Defining an Event</h3>
-                <pre><code>public class Button
-{
-    // Define event
-    public event EventHandler Clicked;
-    
-    public void Click()
-    {
-        // Raise the event
-        Clicked?.Invoke(this, EventArgs.Empty);
-    }
-}
-
-// Using the event
-Button button = new Button();
-button.Clicked += (sender, e) => Console.WriteLine("Button clicked!");
-button.Click(); // Output: Button clicked!</code></pre>
-
-                <h2>Async/Await</h2>
-
-                <h3>Async Methods</h3>
-                <pre><code>public async Task&lt;string&gt; FetchDataAsync()
-{
-    // Simulate network call
-    await Task.Delay(2000);
-    return "Data loaded!";
-}
-
-// Using async method
-public async Task ProcessAsync()
-{
-    string result = await FetchDataAsync();
-    Console.WriteLine(result);
-}</code></pre>
-
-                <h3>Async with HTTP</h3>
-                <pre><code>using HttpClient client = new HttpClient();
-
-public async Task&lt;string&gt; GetWebContentAsync(string url)
-{
-    try
-    {
-        HttpResponseMessage response = await client.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
-    }
-    catch (HttpRequestException ex)
-    {
-        return $"Error: {ex.Message}";
-    }
-}</code></pre>
-
-                <h3>Parallel Async Operations</h3>
-                <pre><code>public async Task ProcessAllAsync()
-{
-    // Run multiple tasks in parallel
-    Task&lt;string&gt; task1 = FetchData1Async();
-    Task&lt;string&gt; task2 = FetchData2Async();
-    
-    // Wait for all to complete
-    string[] results = await Task.WhenAll(task1, task2);
-    
-    Console.WriteLine($"Result 1: {results[0]}");
-    Console.WriteLine($"Result 2: {results[1]}");
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Delegates enable method references, events enable notifications, and async/await enables non-blocking operations.</p>
+                <!-- Header -->
+                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                    <h1 class="display-4 fw-bold text-gradient">Delegates, Events & Async</h1>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-danger fs-6 px-3 py-2">Advanced</span>
+                        <span class="badge bg-info text-dark fs-6 px-3 py-2">30 min read</span>
+                        <span class="badge bg-primary fs-6 px-3 py-2">Lesson 13 of 13</span>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/CSharpFundamentals/12-LinqIntroduction" class="btn btn-outline-primary">
+                <!-- Introduction -->
+                <div class="card bg-light border-0 shadow-sm mb-4 p-3" data-aos="fade-right" data-aos-delay="100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-rocket me-2 text-primary"></i>Why This Matters</h5>
+                        <p class="card-text fs-6">
+                            Delegates, events, and async/await are the backbone of modern C# applications. They let you write code that is flexible, responsive, and scalable.
+                            <strong>Delegates</strong> allow methods to be passed as parameters — like handing a task to someone else.
+                            <strong>Events</strong> enable your app to react to user actions or system changes — think of clicking a button.
+                            <strong>Async/await</strong> keeps your app fast and responsive by letting it do other work while waiting for long operations (like downloading data).
+                            Mastering these will make you a true C# expert!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SECTION: Delegates -->
+                <section class="mb-5" data-aos="fade-up" data-aos-delay="150">
+                    <h2 class="border-bottom pb-2"><i class="fas fa-link text-primary me-2"></i>Delegates – The Method Pass</h2>
+                    <p class="lead">A delegate is a type that holds a reference to a method. It's like a remote control for functions.</p>
+
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white fw-bold">
+                            <i class="fas fa-code me-2"></i>Declaring and Using Delegates
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// 1. Declare a delegate (a blueprint for methods)</span>
+<span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">int</span> <span class="class">Operation</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b);
+
+<span class="comment">// 2. Create methods that match the blueprint</span>
+<span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a + b;
+<span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Multiply</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a * b;
+
+<span class="comment">// 3. Use the delegate to point to different methods</span>
+<span class="class">Operation</span> op = <span class="function">Add</span>;
+<span class="keyword">int</span> result = op(<span class="number">5</span>, <span class="number">3</span>);   <span class="comment">// result = 8</span>
+
+op = <span class="function">Multiply</span>;
+result = op(<span class="number">5</span>, <span class="number">3</span>);       <span class="comment">// result = 15</span></code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-lightbulb text-warning me-2"></i>What's happening here?</h6>
+                                <ul class="mb-0">
+                                    <li><strong>Step 1:</strong> We define a delegate called <code>Operation</code> that can point to any method taking two integers and returning an integer.</li>
+                                    <li><strong>Step 2:</strong> We create two methods (<code>Add</code> and <code>Multiply</code>) that match this signature.</li>
+                                    <li><strong>Step 3:</strong> We assign different methods to the delegate variable and call it. This lets us <strong>change behavior at runtime</strong> - very powerful!</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-success">Real-world use:</span> Calculator apps, sorting algorithms (where you can swap comparison logic), and plugin systems.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-white border-0 shadow-sm">
+                        <div class="card-header bg-success text-white fw-bold">
+                            <i class="fas fa-cog me-2"></i>Built-in Delegates: Func & Action
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// Func – returns a value (last type is the return type)</span>
+<span class="class">Func</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>&gt; add = (a, b) => a + b;
+<span class="keyword">int</span> sum = add(<span class="number">5</span>, <span class="number">3</span>);   <span class="comment">// sum = 8</span>
+
+<span class="comment">// Action – no return value (just does something)</span>
+<span class="class">Action</span>&lt;<span class="keyword">string</span>&gt; print = (msg) => Console.WriteLine(msg);
+print(<span class="string">"Hello World!"</span>);</code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-gem text-info me-2"></i>Why use Func and Action?</h6>
+                                <ul class="mb-0">
+                                    <li><strong>Func</strong> is for methods that <strong>return a value</strong>. The last type parameter is always the return type.</li>
+                                    <li><strong>Action</strong> is for methods that <strong>don't return anything</strong> (void).</li>
+                                    <li>They save you from declaring custom delegates. C# provides them out-of-the-box!</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-info">When to use:</span> Use <code>Func</code> for calculations, transformations, or any operation that produces a result. Use <code>Action</code> for logging, UI updates, or side-effect operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Events -->
+                <section class="mb-5" data-aos="fade-up" data-aos-delay="250">
+                    <h2 class="border-bottom pb-2"><i class="fas fa-bolt text-warning me-2"></i>Events – Notify When Something Happens</h2>
+                    <p class="lead">An event is a special delegate that lets objects broadcast when something occurs. Other objects can subscribe to react.</p>
+
+                    <div class="card bg-white border-0 shadow-sm">
+                        <div class="card-header bg-warning text-dark fw-bold">
+                            <i class="fas fa-bell me-2"></i>Defining and Using an Event
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Button</span>
+{
+    <span class="comment">// Define the event (using EventHandler is standard)</span>
+    <span class="keyword">public</span> <span class="keyword">event</span> <span class="class">EventHandler</span> Clicked;
+
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Click</span>()
+    {
+        <span class="comment">// Raise the event – notify all subscribers</span>
+        Clicked?.Invoke(<span class="keyword">this</span>, <span class="class">EventArgs</span>.Empty);
+    }
+}
+
+<span class="comment">// Usage:</span>
+<span class="class">Button</span> button = <span class="keyword">new</span> <span class="class">Button</span>();
+button.Clicked += (sender, e) => Console.WriteLine(<span class="string">"Button clicked!"</span>);
+button.Click();   <span class="comment">// Output: Button clicked!</span></code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-question-circle text-primary me-2"></i>How events work:</h6>
+                                <ul class="mb-0">
+                                    <li><strong>Publisher:</strong> The <code>Button</code> class defines the event and raises it when something happens.</li>
+                                    <li><strong>Subscriber:</strong> Your code "subscribes" to the event using <code>+=</code> and provides a method to run when the event fires.</li>
+                                    <li><strong>Safety:</strong> The <code>?.Invoke</code> checks if anyone is subscribed before raising the event (prevents null reference errors).</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-danger">Why events are powerful:</span> They <strong>decouple</strong> the sender (button) from the responder (your code). The button doesn't need to know what will happen when clicked - it just notifies. This makes your code more modular and maintainable. Used everywhere in UI frameworks, game development, and system notifications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Async/Await - EXTENDED WITH DETAILS -->
+                <section class="mb-5" data-aos="fade-up" data-aos-delay="350">
+                    <h2 class="border-bottom pb-2"><i class="fas fa-spinner text-info me-2"></i>Async/Await – Keep Your App Responsive</h2>
+                    <p class="lead">Async/await lets your app do other work while waiting for slow tasks (like web requests or file I/O). It's the <strong>most important feature</strong> for building modern, scalable applications.</p>
+
+                    <!-- What is Async/Await -->
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-info text-white fw-bold">
+                            <i class="fas fa-graduation-cap me-2"></i>What Exactly is Async/Await?
+                        </div>
+                        <div class="card-body">
+                            <div class="p-3 bg-light rounded mb-3">
+                                <h6><i class="fas fa-brain text-primary me-2"></i>Understanding the Concept</h6>
+                                <p>Imagine you're cooking dinner. You put the pasta in boiling water (a long task). Instead of standing there staring at the pot, you chop vegetables, set the table, and check your phone. When the pasta is done, you come back to it. That's exactly how async/await works!</p>
+                                <ul>
+                                    <li><strong>Synchronous (blocking):</strong> You stare at the pot until the pasta is done. Your app freezes.</li>
+                                    <li><strong>Asynchronous (non-blocking):</strong> You do other productive work while waiting. Your app stays responsive.</li>
+                                </ul>
+                            </div>
+
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// Basic structure of an async method</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; <span class="function">FetchDataAsync</span>()
+{
+    <span class="comment">// Simulate a 2-second network call</span>
+    <span class="keyword">await</span> <span class="class">Task</span>.<span class="function">Delay</span>(<span class="number">2000</span>);
+    <span class="keyword">return</span> <span class="string">"Data loaded!"</span>;
+}
+
+<span class="comment">// Calling it:</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">ProcessAsync</span>()
+{
+    <span class="keyword">string</span> result = <span class="keyword">await</span> <span class="function">FetchDataAsync</span>();
+    Console.WriteLine(result);
+}</code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-key text-warning me-2"></i>Breaking Down the Keywords:</h6>
+                                <ul class="mb-0">
+                                    <li><strong>async:</strong> This keyword marks the method as asynchronous. It tells the compiler "this method contains await operations."</li>
+                                    <li><strong>Task&lt;T&gt;:</strong> Represents an operation that will return a value of type T <strong>in the future</strong>. If your method returns nothing, use <code>Task</code> (not <code>void</code>).</li>
+                                    <li><strong>await:</strong> This is where the magic happens! It pauses the method <strong>without blocking the thread</strong>. While waiting, the thread can go do other work (like handling UI clicks or processing other requests).</li>
+                                    <li><strong>Return:</strong> When the awaited task completes, the method resumes right after the await, with the result ready to use.</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-danger">⚠️ Important:</span> Never use <code>async void</code> except for event handlers! Always return <code>Task</code> or <code>Task&lt;T&gt;</code> so callers can await your method and handle exceptions properly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How Async/Await Works Under the Hood -->
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white fw-bold">
+                            <i class="fas fa-cogs me-2"></i>How Async/Await Works Under the Hood
+                        </div>
+                        <div class="card-body">
+                            <div class="p-3 bg-light rounded mb-3">
+                                <h6><i class="fas fa-microchip text-primary me-2"></i>The State Machine</h6>
+                                <p>When you write async code, the C# compiler transforms your method into a <strong>state machine</strong>. This is what happens:</p>
+                                <ol>
+                                    <li><strong>Method Start:</strong> The method runs synchronously until it hits the first <code>await</code>.</li>
+                                    <li><strong>Await Encountered:</strong> The method returns a <code>Task</code> to the caller (who can continue with other work).</li>
+                                    <li><strong>Waiting:</strong> The awaited operation starts. The thread is freed to do other things.</li>
+                                    <li><strong>Completion:</strong> When the operation finishes, the state machine resumes the method from where it paused.</li>
+                                    <li><strong>Continuation:</strong> The method continues executing after the await, eventually returning the result.</li>
+                                </ol>
+                                <p class="mb-0"><span class="badge bg-success">Key insight:</span> Async/await doesn't create new threads! It uses the existing thread pool efficiently. For I/O operations (web requests, database queries), it's <strong>thread-free</strong> during the wait.</p>
+                            </div>
+
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// Visual representation of what happens:</span>
+<span class="comment">// The compiler transforms your code into something like this:</span>
+
+<span class="keyword">public</span> <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; <span class="function">FetchDataAsync</span>()
+{
+    <span class="keyword">var</span> stateMachine = <span class="keyword">new</span> StateMachine();
+    stateMachine.<span class="function">MoveNext</span>();
+    <span class="keyword">return</span> stateMachine.Task;
+}
+
+<span class="keyword">private</span> <span class="keyword">class</span> <span class="class">StateMachine</span>
+{
+    <span class="keyword">private</span> <span class="keyword">int</span> state = <span class="number">0</span>;
+    <span class="keyword">private</span> <span class="class">TaskAwaiter</span> awaiter;
+    <span class="keyword">public</span> <span class="class">TaskCompletionSource</span>&lt;<span class="keyword">string</span>&gt; tcs = <span class="keyword">new</span> <span class="class">TaskCompletionSource</span>&lt;<span class="keyword">string</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; Task => tcs.Task;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">MoveNext</span>()
+    {
+        <span class="keyword">switch</span>(state)
+        {
+            <span class="keyword">case</span> <span class="number">0</span>:
+                awaiter = <span class="class">Task</span>.<span class="function">Delay</span>(<span class="number">2000</span>).<span class="function">GetAwaiter</span>();
+                <span class="keyword">if</span> (!awaiter.IsCompleted)
+                {
+                    state = <span class="number">1</span>;
+                    awaiter.<span class="function">OnCompleted</span>(<span class="function">MoveNext</span>);
+                    <span class="keyword">return</span>;
+                }
+                <span class="keyword">goto</span> <span class="keyword">case</span> <span class="number">1</span>;
+            <span class="keyword">case</span> <span class="number">1</span>:
+                awaiter.<span class="function">GetResult</span>();
+                tcs.<span class="function">SetResult</span>(<span class="string">"Data loaded!"</span>);
+                <span class="keyword">break</span>;
+        }
+    }
+}</code></pre>
+                            </div>
+                            <div class="mt-3">
+                                <span class="badge bg-info">💡 Don't worry about writing this yourself!</span>
+                                <span class="badge bg-secondary ms-2">The compiler handles all this complexity for you.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Async with HTTP - Real World -->
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-danger text-white fw-bold">
+                            <i class="fas fa-globe me-2"></i>Async with HTTP (Real-world Example)
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="keyword">using</span> <span class="class">HttpClient</span> client = <span class="keyword">new</span> <span class="class">HttpClient</span>();
+
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; <span class="function">GetWebContentAsync</span>(<span class="keyword">string</span> url)
+{
+    <span class="keyword">try</span>
+    {
+        <span class="comment">// This starts the network request and immediately returns control</span>
+        <span class="class">HttpResponseMessage</span> response = <span class="keyword">await</span> client.<span class="function">GetAsync</span>(url);
+        
+        <span class="comment">// Check if the request succeeded</span>
+        response.<span class="function">EnsureSuccessStatusCode</span>();
+        
+        <span class="comment">// Read the response body asynchronously</span>
+        <span class="keyword">string</span> content = <span class="keyword">await</span> response.Content.<span class="function">ReadAsStringAsync</span>();
+        
+        <span class="keyword">return</span> content;
+    }
+    <span class="keyword">catch</span> (<span class="class">HttpRequestException</span> ex)
+    {
+        <span class="keyword">return</span> <span class="string">$"Error: {ex.Message}"</span>;
+    }
+    <span class="keyword">catch</span> (<span class="class">TaskCanceledException</span>)
+    {
+        <span class="keyword">return</span> <span class="string">"Request timed out!"</span>;
+    }
+}</code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-info-circle text-info me-2"></i>What's happening in this real-world example:</h6>
+                                <ul class="mb-0">
+                                    <li><strong>GetAsync:</strong> Starts a network request. This could take 1-10 seconds. The <strong>await</strong> releases the thread while waiting for the server response.</li>
+                                    <li><strong>EnsureSuccessStatusCode:</strong> Throws an exception for HTTP errors (404, 500, etc.) so you can handle them gracefully.</li>
+                                    <li><strong>ReadAsStringAsync:</strong> Reads the response body - also asynchronous because it might be large and require multiple network packets.</li>
+                                    <li><strong>Exception Handling:</strong> Catch specific exceptions to provide meaningful error messages to users.</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-warning text-dark">Pro tip:</span> Always use <code>HttpClient</code> as a <strong>static or singleton</strong> instance. Creating a new one for each request can cause socket exhaustion!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Parallel Async Operations -->
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-dark text-white fw-bold">
+                            <i class="fas fa-forward me-2"></i>Parallel Async Operations
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// Scenario: Fetch data from three different APIs</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">ProcessAllAsync</span>()
+{
+    <span class="comment">// Start ALL tasks at the same time (they run in parallel)</span>
+    <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; task1 = <span class="function">FetchUserDataAsync</span>();
+    <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; task2 = <span class="function">FetchProductDataAsync</span>();
+    <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; task3 = <span class="function">FetchOrderDataAsync</span>();
+
+    <span class="comment">// Wait for ALL to complete</span>
+    <span class="keyword">string</span>[] results = <span class="keyword">await</span> <span class="class">Task</span>.<span class="function">WhenAll</span>(task1, task2, task3);
+    
+    <span class="comment">// All data is ready to use</span>
+    Console.WriteLine(<span class="string">$"User: {results[0]}"</span>);
+    Console.WriteLine(<span class="string">$"Products: {results[1]}"</span>);
+    Console.WriteLine(<span class="string">$"Orders: {results[2]}"</span>);
+}
+
+<span class="comment">// Alternative: Process tasks one by one (slower)</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">ProcessSequentialAsync</span>()
+{
+    <span class="keyword">string</span> user = <span class="keyword">await</span> <span class="function">FetchUserDataAsync</span>();      <span class="comment">// Wait 3 seconds</span>
+    <span class="keyword">string</span> products = <span class="keyword">await</span> <span class="function">FetchProductDataAsync</span>(); <span class="comment">// Wait 2 more seconds</span>
+    <span class="keyword">string</span> orders = <span class="keyword">await</span> <span class="function">FetchOrderDataAsync</span>();   <span class="comment">// Wait 1 more second</span>
+    <span class="comment">// Total: 6 seconds</span>
+}
+
+<span class="comment">// Parallel version: All start at the same time</span>
+<span class="comment">// Total: Only 3 seconds (the longest one)!</span></code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-rocket text-primary me-2"></i>Why parallel execution is a game-changer:</h6>
+                                <ul class="mb-0">
+                                    <li><strong>Task.WhenAll</strong> starts multiple tasks simultaneously, not one after another.</li>
+                                    <li>If each fetch takes 2 seconds, sequential would take 6 seconds, but parallel takes only 2 seconds! That's <strong>3x faster</strong>.</li>
+                                    <li>The <strong>await</strong> waits for ALL tasks to complete before continuing.</li>
+                                    <li>Perfect for loading dashboards, reports, or any page that aggregates data from multiple sources.</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-success">Performance boost:</span> Use this pattern whenever you have <strong>independent</strong> operations that don't depend on each other's results. This is how modern websites load so fast!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cancellation and Timeouts -->
+                    <div class="card bg-white border-0 shadow-sm mb-4">
+                        <div class="card-header bg-warning text-dark fw-bold">
+                            <i class="fas fa-stopwatch me-2"></i>Cancellation and Timeouts
+                        </div>
+                        <div class="card-body">
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// Using CancellationToken to cancel long-running operations</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span>&lt;<span class="keyword">string</span>&gt; <span class="function">FetchWithTimeoutAsync</span>(
+    <span class="keyword">string</span> url, 
+    <span class="class">CancellationToken</span> cancellationToken = <span class="keyword">default</span>)
+{
+    <span class="keyword">using</span> (<span class="class">CancellationTokenSource</span> cts = <span class="class">CancellationTokenSource</span>.<span class="function">CreateLinkedTokenSource</span>(
+        cancellationToken,
+        <span class="keyword">new</span> <span class="class">CancellationTokenSource</span>(<span class="class">TimeSpan</span>.<span class="function">FromSeconds</span>(<span class="number">5</span>)).Token))
+    {
+        <span class="keyword">try</span>
+        {
+            <span class="class">HttpResponseMessage</span> response = <span class="keyword">await</span> client.<span class="function">GetAsync</span>(url, cts.Token);
+            response.<span class="function">EnsureSuccessStatusCode</span>();
+            <span class="keyword">return</span> <span class="keyword">await</span> response.Content.<span class="function">ReadAsStringAsync</span>();
+        }
+        <span class="keyword">catch</span> (<span class="class">OperationCanceledException</span>)
+        {
+            <span class="keyword">return</span> <span class="string">"Request was cancelled or timed out!"</span>;
+        }
+    }
+}
+
+<span class="comment">// Usage with cancellation</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">ExampleUsageAsync</span>()
+{
+    <span class="comment">// Create a cancellation token that cancels after 3 seconds</span>
+    <span class="keyword">using</span> <span class="keyword">var</span> cts = <span class="keyword">new</span> <span class="class">CancellationTokenSource</span>(<span class="class">TimeSpan</span>.<span class="function">FromSeconds</span>(<span class="number">3</span>));
+    
+    <span class="keyword">string</span> result = <span class="keyword">await</span> <span class="function">FetchWithTimeoutAsync</span>(<span class="string">"https://api.example.com/data"</span>, cts.Token);
+    Console.WriteLine(result);
+}</code></pre>
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded">
+                                <h6><i class="fas fa-exclamation-triangle text-warning me-2"></i>Why cancellation matters:</h6>
+                                <ul class="mb-0">
+                                    <li><strong>User experience:</strong> Users can cancel long operations (like downloading a large file).</li>
+                                    <li><strong>Resource management:</strong> Prevent wasted resources on operations that are no longer needed.</li>
+                                    <li><strong>Timeouts:</strong> Automatically cancel operations that take too long (5 seconds is a good default for web APIs).</li>
+                                    <li><strong>Graceful degradation:</strong> Provide fallback behavior when operations fail or timeout.</li>
+                                </ul>
+                                <p class="mt-2 mb-0"><span class="badge bg-danger">Best practice:</span> Always provide cancellation token support in your async methods. Your users will thank you!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Async Best Practices -->
+                    <div class="card bg-white border-0 shadow-sm">
+                        <div class="card-header bg-success text-white fw-bold">
+                            <i class="fas fa-check-circle me-2"></i>Async/Await Best Practices
+                        </div>
+                        <div class="card-body">
+                            <div class="p-3 bg-light rounded mb-3">
+                                <h6><i class="fas fa-list-check text-primary me-2"></i>Golden Rules of Async/Await:</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card border-success mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-success me-1">✅</span> <strong>DO</strong> use <code>async Task</code> for async methods
+                                            </div>
+                                        </div>
+                                        <div class="card border-success mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-success me-1">✅</span> <strong>DO</strong> use <code>await</code> with <code>Task.WhenAll</code> for parallel operations
+                                            </div>
+                                        </div>
+                                        <div class="card border-success mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-success me-1">✅</span> <strong>DO</strong> propagate cancellation tokens
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card border-danger mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-danger me-1">❌</span> <strong>DON'T</strong> use <code>async void</code> (except event handlers)
+                                            </div>
+                                        </div>
+                                        <div class="card border-danger mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-danger me-1">❌</span> <strong>DON'T</strong> use <code>.Result</code> or <code>.Wait()</code> - they can deadlock!
+                                            </div>
+                                        </div>
+                                        <div class="card border-danger mb-2">
+                                            <div class="card-body py-2">
+                                                <span class="badge bg-danger me-1">❌</span> <strong>DON'T</strong> wrap everything in <code>Task.Run</code> - only for CPU-bound work
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="code-block">
+                                <pre><code class="language-csharp"><span class="comment">// ❌ BAD: Blocking on async code (causes deadlocks!)</span>
+<span class="keyword">public</span> <span class="keyword">void</span> <span class="function">BadExample</span>()
+{
+    <span class="keyword">var</span> result = <span class="function">FetchDataAsync</span>().Result;  <span class="comment">// This will deadlock in UI apps!</span>
+}
+
+<span class="comment">// ✅ GOOD: Use async all the way down</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">GoodExample</span>()
+{
+    <span class="keyword">var</span> result = <span class="keyword">await</span> <span class="function">FetchDataAsync</span>();  <span class="comment">// Proper async handling</span>
+}
+
+<span class="comment">// ❌ BAD: Async void (exceptions are lost, hard to test)</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="keyword">void</span> <span class="function">BadEventHandler</span>()
+{
+    <span class="keyword">await</span> <span class="function">SomeAsyncOperation</span>();  <span class="comment">// If this throws, your app crashes without warning</span>
+}
+
+<span class="comment">// ✅ GOOD: Return Task from event handlers</span>
+<span class="keyword">public</span> <span class="keyword">async</span> <span class="class">Task</span> <span class="function">GoodEventHandler</span>()
+{
+    <span class="keyword">await</span> <span class="function">SomeAsyncOperation</span>();  <span class="comment">// Properly handled</span>
+}</code></pre>
+                            </div>
+                            <div class="mt-3">
+                                <span class="badge bg-info">📚 Common pitfall:</span>
+                                <span class="badge bg-secondary ms-2">Always use async all the way up! If you start with async, make sure every caller is also async.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Takeaway Card -->
+                <div class="card bg-primary bg-opacity-10 border-primary mb-4" data-aos="flip-up" data-aos-delay="450">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text fs-5">
+                            <strong>Delegates</strong> = method references (like assigning a task).<br>
+                            <strong>Events</strong> = notifications (like a alarm bell).<br>
+                            <strong>Async/await</strong> = non-blocking operations (keep UI responsive, scale web apps).<br>
+                            Master these and you'll write cleaner, faster, and more maintainable C# code.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- EXERCISE SECTION -->
+                <div class="card border-0 shadow-lg mt-5" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="card-header bg-dark text-white fw-bold fs-4">
+                        <i class="fas fa-pencil-alt me-2"></i> Exercise – Build a Simple Event System
+                    </div>
+                    <div class="card-body">
+                        <h5>Task:</h5>
+                        <p>Create a <code>WeatherStation</code> class that:</p>
+                        <ul>
+                            <li>Has a <code>TemperatureChanged</code> event (use <code>EventHandler&lt;int&gt;</code>).</li>
+                            <li>Has a <code>SetTemperature(int temp)</code> method that raises the event.</li>
+                            <li>In <code>Main</code>, subscribe to the event and print "Temperature is now {temp}°C".</li>
+                            <li>Also use a <code>Func&lt;int, int&gt;</code> delegate to convert Celsius to Fahrenheit (formula: F = C * 9/5 + 32).</li>
+                        </ul>
+                        <p class="text-muted">Hint: Use the code snippets above as reference. Write the solution, then click below to check.</p>
+
+                        <button class="btn btn-outline-primary mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-eye me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none; margin-top: 20px;">
+                            <div class="bg-light p-3 rounded border">
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="keyword">using</span> System;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">WeatherStation</span>
+{
+    <span class="keyword">public</span> <span class="keyword">event</span> <span class="class">EventHandler</span>&lt;<span class="keyword">int</span>&gt; TemperatureChanged;
+
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SetTemperature</span>(<span class="keyword">int</span> temp)
+    {
+        Console.WriteLine(<span class="string">$"New temperature set: {temp}°C"</span>);
+        TemperatureChanged?.Invoke(<span class="keyword">this</span>, temp);
+    }
+}
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="class">WeatherStation</span> station = <span class="keyword">new</span> <span class="class">WeatherStation</span>();
+
+        <span class="comment">// Subscribe to the event</span>
+        station.TemperatureChanged += (sender, temp) =>
+        {
+            Console.WriteLine(<span class="string">$"Temperature is now {temp}°C"</span>);
+        };
+
+        <span class="comment">// Define a Func delegate to convert C to F</span>
+        <span class="class">Func</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; celsiusToFahrenheit = c => c * <span class="number">9</span> / <span class="number">5</span> + <span class="number">32</span>;
+
+        <span class="comment">// Test</span>
+        station.<span class="function">SetTemperature</span>(<span class="number">25</span>);
+        <span class="keyword">int</span> fahrenheit = <span class="function">celsiusToFahrenheit</span>(<span class="number">25</span>);
+        Console.WriteLine(<span class="string">$"That's {fahrenheit}°F"</span>);
+
+        station.<span class="function">SetTemperature</span>(<span class="number">0</span>);
+        Console.WriteLine(<span class="string">$"0°C is {celsiusToFahrenheit(0)}°F"</span>);
+    }
+}</code></pre>
+                                </div>
+                                <p class="mt-2"><span class="badge bg-success">Why this exercise?</span> It combines events (notifications) and delegates (conversion) in one real-world scenario. You're practicing both concepts together, just like in professional applications!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-5 d-flex flex-wrap justify-content-between">
+                    <a href="/CSharpFundamentals/12-LinqIntroduction" class="btn btn-outline-primary btn-lg" data-aos="fade-right">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
-                    <a href="/CSharpFundamentals" class="btn btn-primary-custom">
+                    <a href="/CSharpFundamentals" class="btn btn-primary btn-lg" data-aos="fade-left">
                         Back to Section <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>
-            </div>
+
+            </div> <!-- end lesson-content -->
         </div>
-        <div class="col-lg-3">
+
+        <!-- Sidebar -->
+        <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
             @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
         </div>
     </div>
@@ -145,70 +594,164 @@ public async Task&lt;string&gt; GetWebContentAsync(string url)
 
 @section Scripts {
     <script>
+        // Toggle exercise solution
         function toggleExercise() {
             var solution = document.getElementById('exerciseSolution');
             if (solution.style.display === 'none') {
                 solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 solution.style.display = 'none';
             }
         }
 
+        // Initialize AOS animations (if available)
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof AOS !== 'undefined') {
                 AOS.init({
                     once: true,
-                    offset: 40,
-                    duration: 600
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
                 });
             }
         });
     </script>
+
     <style>
-        .code-block pre {
-            background: transparent !important;
-            padding: 0 !important;
-            margin: 0 !important;
+        /* General improvements */
+        .text-gradient {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .code-block code {
-            font-family: 'Consolas', monospace;
-            font-size: 0.85rem;
-            color: #e4e4e4;
+        .code-block {
+            position: relative;
         }
 
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.9rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+        /* Visual Studio-like color scheme for code */
         .language-csharp .keyword {
-            color: #c792ea;
+            color: #c792ea !important;
             font-weight: 600;
         }
 
         .language-csharp .comment {
-            color: #676e95;
+            color: #676e95 !important;
             font-style: italic;
         }
 
         .language-csharp .string {
-            color: #c3e88d;
+            color: #c3e88d !important;
         }
 
         .language-csharp .number {
-            color: #f78c6c;
+            color: #f78c6c !important;
         }
 
         .language-csharp .function {
-            color: #82aaff;
-        }
-
-        .language-csharp .variable {
-            color: #eeffff;
+            color: #82aaff !important;
         }
 
         .language-csharp .class {
-            color: #ffcb6b;
+            color: #ffcb6b !important;
+            font-weight: 600;
         }
 
         .language-csharp .property {
-            color: #80cbc4;
+            color: #80cbc4 !important;
         }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        .language-csharp .type {
+            color: #f07178 !important;
+        }
+
+        .language-csharp .method {
+            color: #82aaff !important;
+        }
+
+        .card {
+            border-radius: 16px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.1) !important;
+            }
+
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            padding: 12px 28px;
+        }
+
+        #exerciseSolution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
     </style>
 }

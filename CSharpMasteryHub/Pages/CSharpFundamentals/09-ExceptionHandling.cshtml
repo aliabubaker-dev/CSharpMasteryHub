@@ -1,7 +1,7 @@
 ﻿@page
 @model CSharpMasteryHub.Pages.CSharpFundamentals.ExceptionHandlingModel
 @{
-    ViewData["Title"] = "Exception Handling";
+    ViewData["Title"] = "Exception Handling - The Complete Guide";
 }
 
 <div class="container">
@@ -15,109 +15,655 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Exception Handling</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">15 min read</span>
-                    <span class="badge bg-primary">Lesson 9 of 13</span>
+            <div class="lesson-content" data-aos="fade-up">
+                <h1 class="display-4 mb-3">Exception Handling <i class="fas fa-shield-alt text-danger ms-2"></i></h1>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 9 of 13</span>
                 </div>
 
-                <h2>What are Exceptions?</h2>
-                <p>Exceptions are runtime errors that occur during program execution. Proper handling prevents application crashes.</p>
-
-                <h2>Basic Try-Catch</h2>
-                <pre><code>try
-{
-    int result = 10 / 0;  // This will throw DivideByZeroException
-    Console.WriteLine(result);
-}
-catch (DivideByZeroException ex)
-{
-    Console.WriteLine($"Error: {ex.Message}");
-}</code></pre>
-
-                <h2>Multiple Catch Blocks</h2>
-                <pre><code>try
-{
-    int[] numbers = { 1, 2, 3 };
-    Console.WriteLine(numbers[10]); // IndexOutOfRangeException
-}
-catch (IndexOutOfRangeException ex)
-{
-    Console.WriteLine($"Index error: {ex.Message}");
-}
-catch (DivideByZeroException ex)
-{
-    Console.WriteLine($"Division error: {ex.Message}");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"General error: {ex.Message}");
-}</code></pre>
-
-                <h2>Finally Block</h2>
-                <pre><code>FileStream file = null;
-try
-{
-    file = File.Open("data.txt", FileMode.Open);
-    // Process file
-}
-catch (FileNotFoundException ex)
-{
-    Console.WriteLine($"File not found: {ex.Message}");
-}
-finally
-{
-    // Always executes, even if an exception occurs
-    if (file != null)
-        file.Close();
-}</code></pre>
-
-                <h2>Using Statement (Auto-dispose)</h2>
-                <pre><code>// Equivalent to try/finally with Dispose
-using (var file = File.Open("data.txt", FileMode.Open))
-{
-    // Process file
-} // Automatically disposed</code></pre>
-
-                <h2>Throwing Exceptions</h2>
-                <pre><code>public void Divide(int a, int b)
-{
-    if (b == 0)
-        throw new DivideByZeroException("Cannot divide by zero");
-    
-    return a / b;
-}
-
-public void ProcessAge(int age)
-{
-    if (age < 0 || age > 150)
-        throw new ArgumentException("Age must be between 0 and 150");
-    
-    // Process age
-}</code></pre>
-
-                <h2>Creating Custom Exceptions</h2>
-                <pre><code>public class InvalidEmailException : Exception
-{
-    public InvalidEmailException(string email)
-        : base($"Email '{email}' is invalid")
-    {
-        Email = email;
-    }
-    
-    public string Email { get; }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-danger" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Always handle exceptions gracefully. Use specific exceptions rather than generic ones.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-danger me-2"></i>What are Exceptions?</h2>
+                        <p>
+                            An <strong>exception</strong> is an error that happens while your program is running. 
+                            Think of it like a <strong>roadblock</strong> - something unexpected that stops your code from working.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
+                                    <p class="small mt-1"><strong>Error</strong><br>Something went wrong</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-shield-alt fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Handle</strong><br>Protect your program</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-bug fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Fix</strong><br>Prevent crashes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> When you drive a car, you wear a seatbelt. 
+                            It doesn't prevent accidents, but it protects you when they happen. 
+                            Exception handling is your program's <strong>seatbelt</strong>!
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== COMMON EXCEPTIONS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-list me-2"></i>Common Exceptions</h2>
+                        <p>
+                            Here are the most common exceptions you'll encounter in C#:
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Exception</th>
+                                        <th>When It Happens</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>DivideByZeroException</code></td>
+                                        <td>Dividing by zero</td>
+                                        <td><code>int result = 10 / 0;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>IndexOutOfRangeException</code></td>
+                                        <td>Accessing an index outside array bounds</td>
+                                        <td><code>array[10]</code> when array has only 5 items</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>NullReferenceException</code></td>
+                                        <td>Using an object that is null</td>
+                                        <td><code>string s = null; s.Length;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>FormatException</code></td>
+                                        <td>Invalid format when converting</td>
+                                        <td><code>int.Parse("abc")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>FileNotFoundException</code></td>
+                                        <td>File doesn't exist</td>
+                                        <td><code>File.ReadAllText("notfound.txt")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ArgumentException</code></td>
+                                        <td>Invalid argument passed</td>
+                                        <td><code>Method with invalid parameter</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== BASIC TRY-CATCH ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-1 me-2"></i>Basic Try-Catch</h2>
+                        <p>
+                            The <strong>try-catch</strong> block is the foundation of exception handling.
+                            You put code that might fail in the <code>try</code> block, and handle errors in the <code>catch</code> block.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== BASIC TRY-CATCH STRUCTURE =====</span>
+<span class="keyword">try</span>
+{
+    <span class="comment">// Code that might cause an error</span>
+    <span class="keyword">int</span> <span class="variable">result</span> = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// This will throw DivideByZeroException</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">result</span>);
+}
+<span class="keyword">catch</span> (<span class="class">DivideByZeroException</span> <span class="variable">ex</span>)
+{
+    <span class="comment">// This code runs if an error happens</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}
+<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Program continues..."</span>);  <span class="comment">// This still runs</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Safe Division =====</span>
+<span class="keyword">int</span> <span class="function">SafeDivide</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>)
+{
+    <span class="keyword">try</span>
+    {
+        <span class="keyword">return</span> <span class="variable">a</span> / <span class="variable">b</span>;
+    }
+    <span class="keyword">catch</span> (<span class="class">DivideByZeroException</span>)
+    {
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Cannot divide by zero!"</span>);
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Remember:</strong> Always put code that <strong>might fail</strong> in the try block.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== MULTIPLE CATCH BLOCKS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-2 me-2"></i>Multiple Catch Blocks</h2>
+                        <p>
+                            You can have <strong>multiple catch blocks</strong> to handle different types of exceptions.
+                            The <strong>most specific</strong> exceptions should come first.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== MULTIPLE CATCH BLOCKS =====</span>
+<span class="keyword">try</span>
+{
+    <span class="keyword">string</span> <span class="variable">input</span> = <span class="keyword">null</span>;
+    <span class="keyword">int</span>[] <span class="variable">numbers</span> = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> };
+    
+    <span class="keyword">int</span> <span class="variable">value</span> = <span class="variable">numbers</span>[<span class="number">5</span>];  <span class="comment">// IndexOutOfRangeException</span>
+    <span class="keyword">int</span> <span class="variable">length</span> = <span class="variable">input</span>.<span class="property">Length</span>;  <span class="comment">// NullReferenceException</span>
+}
+<span class="keyword">catch</span> (<span class="class">IndexOutOfRangeException</span> <span class="variable">ex</span>)
+{
+    <span class="comment">// Handle index errors</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Index error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}
+<span class="keyword">catch</span> (<span class="class">NullReferenceException</span> <span class="variable">ex</span>)
+{
+    <span class="comment">// Handle null errors</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Null error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}
+<span class="keyword">catch</span> (<span class="class">Exception</span> <span class="variable">ex</span>)
+{
+    <span class="comment">// Handle ALL other errors (generic)</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"General error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}
+
+<span class="comment">// ===== IMPORTANT: Order Matters! =====</span>
+<span class="comment">// Put the most specific exceptions first, generic Exception last</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important:</strong> The order of catch blocks <strong>matters</strong>. 
+                            Put the most specific exceptions first, and <code>Exception</code> (generic) last!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== FINALLY BLOCK ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-3 me-2"></i>The Finally Block</h2>
+                        <p>
+                            The <strong>finally</strong> block <strong>always runs</strong> - whether an exception occurs or not.
+                            It's perfect for <strong>cleaning up</strong> resources like closing files or database connections.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== FINALLY BLOCK - Always Runs =====</span>
+<span class="class">FileStream</span> <span class="variable">file</span> = <span class="keyword">null</span>;
+
+<span class="keyword">try</span>
+{
+    <span class="variable">file</span> = <span class="class">File</span>.<span class="function">Open</span>(<span class="string">"data.txt"</span>, <span class="class">FileMode</span>.<span class="property">Open</span>);
+    <span class="comment">// Process file...</span>
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"File processed"</span>);
+}
+<span class="keyword">catch</span> (<span class="class">FileNotFoundException</span> <span class="variable">ex</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"File not found: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}
+<span class="keyword">finally</span>
+{
+    <span class="comment">// This ALWAYS runs - even if there was an error!</span>
+    <span class="keyword">if</span> (<span class="variable">file</span> != <span class="keyword">null</span>)
+    {
+        <span class="variable">file</span>.<span class="function">Close</span>();  <span class="comment">// Always close the file</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"File closed"</span>);
+    }
+}
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Database Connection =====</span>
+<span class="class">SqlConnection</span> <span class="variable">connection</span> = <span class="keyword">new</span> <span class="class">SqlConnection</span>(<span class="variable">connectionString</span>);
+
+<span class="keyword">try</span>
+{
+    <span class="variable">connection</span>.<span class="function">Open</span>();
+    <span class="comment">// Execute database commands...</span>
+}
+<span class="keyword">finally</span>
+{
+    <span class="keyword">if</span> (<span class="variable">connection</span>.<span class="property">State</span> == <span class="class">ConnectionState</span>.<span class="property">Open</span>)
+    {
+        <span class="variable">connection</span>.<span class="function">Close</span>();  <span class="comment">// Always close the connection</span>
+    }
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> The <code>finally</code> block is great for 
+                            <strong>cleaning up</strong> resources like files, database connections, and network streams.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== USING STATEMENT ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-4 me-2"></i>The Using Statement (Auto-Dispose)</h2>
+                        <p>
+                            The <strong>using</strong> statement is a <strong>shortcut</strong> for try-finally 
+                            when working with resources that need to be disposed (like files or database connections).
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== WITHOUT USING (Long way) =====</span>
+<span class="class">FileStream</span> <span class="variable">file</span> = <span class="keyword">null</span>;
+<span class="keyword">try</span>
+{
+    <span class="variable">file</span> = <span class="class">File</span>.<span class="function">Open</span>(<span class="string">"data.txt"</span>, <span class="class">FileMode</span>.<span class="property">Open</span>);
+    <span class="comment">// Read file...</span>
+}
+<span class="keyword">finally</span>
+{
+    <span class="variable">file</span>?.<span class="function">Dispose</span>();  <span class="comment">// Manual cleanup</span>
+}
+
+<span class="comment">// ===== WITH USING (Short and clean) =====</span>
+<span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">file</span> = <span class="class">File</span>.<span class="function">Open</span>(<span class="string">"data.txt"</span>, <span class="class">FileMode</span>.<span class="property">Open</span>))
+{
+    <span class="comment">// Read file...</span>
+}  <span class="comment">// Automatically disposed here!</span>
+
+<span class="comment">// ===== MULTIPLE USING STATEMENTS =====</span>
+<span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">reader</span> = <span class="keyword">new</span> <span class="class">StreamReader</span>(<span class="string">"file.txt"</span>))
+<span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">writer</span> = <span class="keyword">new</span> <span class="class">StreamWriter</span>(<span class="string">"output.txt"</span>))
+{
+    <span class="keyword">string</span> <span class="variable">content</span> = <span class="variable">reader</span>.<span class="function">ReadToEnd</span>();
+    <span class="variable">writer</span>.<span class="function">Write</span>(<span class="variable">content</span>);
+}  <span class="comment">// Both are automatically disposed</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Pro Tip:</strong> Always use <code>using</code> when working with files, 
+                            database connections, or any object that implements <code>IDisposable</code>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== THROWING EXCEPTIONS ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-5 me-2"></i>Throwing Exceptions</h2>
+                        <p>
+                            Sometimes you need to <strong>create</strong> and <strong>throw</strong> your own exceptions.
+                            This is useful when you want to <strong>stop the program</strong> when something is wrong.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== THROWING AN EXCEPTION =====</span>
+<span class="keyword">public void</span> <span class="function">Divide</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>)
+{
+    <span class="keyword">if</span> (<span class="variable">b</span> == <span class="number">0</span>)
+    {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">DivideByZeroException</span>(<span class="string">"Cannot divide by zero!"</span>);
+    }
+    <span class="keyword">return</span> <span class="variable">a</span> / <span class="variable">b</span>;
+}
+
+<span class="comment">// ===== VALIDATING USER INPUT =====</span>
+<span class="keyword">public void</span> <span class="function">SetAge</span>(<span class="keyword">int</span> <span class="variable">age</span>)
+{
+    <span class="keyword">if</span> (<span class="variable">age</span> &lt; <span class="number">0</span> || <span class="variable">age</span> > <span class="number">150</span>)
+    {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(
+            <span class="string">$"Age must be between 0 and 150. You entered: {<span class="variable">age</span>}"</span>);
+    }
+    <span class="variable">_age</span> = <span class="variable">age</span>;
+}
+
+<span class="comment">// ===== USING THE METHOD WITH TRY-CATCH =====</span>
+<span class="keyword">try</span>
+{
+    <span class="function">SetAge</span>(<span class="number">200</span>);  <span class="comment">// This will throw an exception</span>
+}
+<span class="keyword">catch</span> (<span class="class">ArgumentException</span> <span class="variable">ex</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>When to throw:</strong> Throw exceptions when <strong>input is invalid</strong> 
+                            or when the program <strong>cannot continue</strong> safely.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== CUSTOM EXCEPTIONS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-6 me-2"></i>Creating Custom Exceptions</h2>
+                        <p>
+                            You can create your own exception classes to represent <strong>specific errors</strong> 
+                            in your application. This makes error handling more <strong>meaningful</strong>.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== CREATING A CUSTOM EXCEPTION =====</span>
+<span class="keyword">public class</span> <span class="class">InvalidEmailException</span> : <span class="class">Exception</span>
+{
+    <span class="keyword">public string</span> <span class="property">Email</span> { <span class="keyword">get</span>; }
+
+    <span class="comment">// Constructor with message</span>
+    <span class="keyword">public</span> <span class="function">InvalidEmailException</span>(<span class="keyword">string</span> <span class="variable">email</span>)
+        : <span class="keyword">base</span>(<span class="string">$"Email '{<span class="variable">email</span>}' is invalid"</span>)
+    {
+        <span class="property">Email</span> = <span class="variable">email</span>;
+    }
+
+    <span class="comment">// Constructor with message and inner exception</span>
+    <span class="keyword">public</span> <span class="function">InvalidEmailException</span>(<span class="keyword">string</span> <span class="variable">email</span>, <span class="class">Exception</span> <span class="variable">inner</span>)
+        : <span class="keyword">base</span>(<span class="string">$"Email '{<span class="variable">email</span>}' is invalid"</span>, <span class="variable">inner</span>)
+    {
+        <span class="property">Email</span> = <span class="variable">email</span>;
+    }
+}
+
+<span class="comment">// ===== USING THE CUSTOM EXCEPTION =====</span>
+<span class="keyword">public void</span> <span class="function">ValidateEmail</span>(<span class="keyword">string</span> <span class="variable">email</span>)
+{
+    <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="function">IsNullOrWhiteSpace</span>(<span class="variable">email</span>))
+    {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">InvalidEmailException</span>(<span class="variable">email</span>);
+    }
+    
+    <span class="keyword">if</span> (!<span class="variable">email</span>.<span class="function">Contains</span>(<span class="string">"@@"</span>))
+    {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">InvalidEmailException</span>(<span class="variable">email</span>);
+    }
+}
+
+<span class="comment">// ===== HANDLING THE CUSTOM EXCEPTION =====</span>
+<span class="keyword">try</span>
+{
+    <span class="function">ValidateEmail</span>(<span class="string">"invalid-email"</span>);
+}
+<span class="keyword">catch</span> (<span class="class">InvalidEmailException</span> <span class="variable">ex</span>)
+{
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Invalid email: {<span class="variable">ex</span>.<span class="property">Email</span>}"</span>);
+    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+}</code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>When to create custom exceptions:</strong> When you need to represent 
+                            <strong>application-specific</strong> errors that are meaningful to your users.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== BEST PRACTICES ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-star text-warning me-2"></i>Exception Handling Best Practices</h2>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded mb-2">
+                                    <h6 class="fw-bold text-success"><i class="fas fa-check-circle me-2"></i>DO</h6>
+                                    <ul class="small mb-0">
+                                        <li>Handle specific exceptions first</li>
+                                        <li>Use <code>using</code> for disposable resources</li>
+                                        <li>Log exceptions for debugging</li>
+                                        <li>Show user-friendly error messages</li>
+                                        <li>Use <code>finally</code> for cleanup</li>
+                                        <li>Validate input before using it</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded mb-2">
+                                    <h6 class="fw-bold text-danger"><i class="fas fa-times-circle me-2"></i>DON'T</h6>
+                                    <ul class="small mb-0">
+                                        <li>Don't catch exceptions you can't handle</li>
+                                        <li>Don't use empty catch blocks</li>
+                                        <li>Don't throw <code>Exception</code> (be specific)</li>
+                                        <li>Don't hide errors - log them</li>
+                                        <li>Don't use exceptions for normal flow</li>
+                                        <li>Don't swallow exceptions silently</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== COMPARISON TABLE ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Reference: Try-Catch-Finally</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Block</th>
+                                        <th>Purpose</th>
+                                        <th>Always Runs?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>try</strong></td>
+                                        <td>Contains code that might throw an exception</td>
+                                        <td>Yes (runs first)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>catch</strong></td>
+                                        <td>Handles the exception</td>
+                                        <td>Only if an exception occurs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>finally</strong></td>
+                                        <td>Cleanup code (closing files, connections)</td>
+                                        <td><strong>Always</strong> (even if no exception)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>using</strong></td>
+                                        <td>Auto-dispose resources (shortcut)</td>
+                                        <td>Always (implicitly)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Safe Calculator</h2>
+
+                        <p class="fw-bold">Task: Create a calculator that handles errors gracefully.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "SafeCalculator"</li>
+                                <li>Ask the user to enter two numbers and an operator (+, -, *, /)</li>
+                                <li>Handle these exceptions:
+                                    <ul>
+                                        <li><strong>FormatException</strong> - if the user enters text instead of numbers</li>
+                                        <li><strong>DivideByZeroException</strong> - if the user tries to divide by zero</li>
+                                        <li><strong>ArgumentException</strong> - if the operator is invalid</li>
+                                    </ul>
+                                </li>
+                                <li>Use a <strong>finally</strong> block to log the operation</li>
+                                <li>Create a <strong>custom exception</strong> called <code>InvalidOperatorException</code></li>
+                                <li>Keep asking until the user enters valid input</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hints:</strong>
+                            <ul class="mb-0">
+                                <li>Use <code>int.TryParse()</code> or <code>try-catch</code> for number input</li>
+                                <li>Use a <code>while</code> loop to keep asking</li>
+                                <li>Use <code>switch</code> or <code>if-else</code> for the operator</li>
+                                <li>Log the operation in the finally block</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Expected Output:</strong>
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">Enter first number: 10
+Enter operator (+, -, *, /): /
+Enter second number: 0
+Error: Cannot divide by zero!
+Try again!
+
+Enter first number: 10
+Enter operator (+, -, *, /): +
+Enter second number: 5
+Result: 15
+Operation logged: 10 + 5 = 15</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Safe Calculator with Exception Handling</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="keyword">bool</span> <span class="variable">validInput</span> = <span class="keyword">false</span>;
+        
+        <span class="keyword">while</span> (!<span class="variable">validInput</span>)
+        {
+            <span class="keyword">try</span>
+            {
+                <span class="comment">// Get first number</span>
+                <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter first number: "</span>);
+                <span class="keyword">double</span> <span class="variable">num1</span> = <span class="keyword">double</span>.<span class="function">Parse</span>(<span class="function">Console</span>.<span class="function">ReadLine</span>());
+
+                <span class="comment">// Get operator</span>
+                <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter operator (+, -, *, /): "</span>);
+                <span class="keyword">string</span> <span class="variable">operatorChar</span> = <span class="function">Console</span>.<span class="function">ReadLine</span>();
+
+                <span class="comment">// Get second number</span>
+                <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter second number: "</span>);
+                <span class="keyword">double</span> <span class="variable">num2</span> = <span class="keyword">double</span>.<span class="function">Parse</span>(<span class="function">Console</span>.<span class="function">ReadLine</span>());
+
+                <span class="comment">// Calculate result</span>
+                <span class="keyword">double</span> <span class="variable">result</span> = <span class="function">Calculate</span>(<span class="variable">num1</span>, <span class="variable">operatorChar</span>, <span class="variable">num2</span>);
+                
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Result: {<span class="variable">result</span>}"</span>);
+                <span class="variable">validInput</span> = <span class="keyword">true</span>;
+            }
+            <span class="keyword">catch</span> (<span class="class">FormatException</span>)
+            {
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Error: Please enter valid numbers!"</span>);
+            }
+            <span class="keyword">catch</span> (<span class="class">DivideByZeroException</span>)
+            {
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Error: Cannot divide by zero!"</span>);
+            }
+            <span class="keyword">catch</span> (<span class="class">InvalidOperatorException</span> <span class="variable">ex</span>)
+            {
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+            }
+            <span class="keyword">catch</span> (<span class="class">Exception</span> <span class="variable">ex</span>)
+            {
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Unexpected error: {<span class="variable">ex</span>.<span class="property">Message</span>}"</span>);
+            }
+            <span class="keyword">finally</span>
+            {
+                <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\nOperation attempted. Try again or press Ctrl+C to exit."</span>);
+            }
+        }
+    }
+
+    <span class="keyword">static double</span> <span class="function">Calculate</span>(<span class="keyword">double</span> <span class="variable">num1</span>, <span class="keyword">string</span> <span class="variable">operatorChar</span>, <span class="keyword">double</span> <span class="variable">num2</span>)
+    {
+        <span class="keyword">switch</span> (<span class="variable">operatorChar</span>)
+        {
+            <span class="keyword">case</span> <span class="string">"+"</span>: <span class="keyword">return</span> <span class="variable">num1</span> + <span class="variable">num2</span>;
+            <span class="keyword">case</span> <span class="string">"-"</span>: <span class="keyword">return</span> <span class="variable">num1</span> - <span class="variable">num2</span>;
+            <span class="keyword">case</span> <span class="string">"*"</span>: <span class="keyword">return</span> <span class="variable">num1</span> * <span class="variable">num2</span>;
+            <span class="keyword">case</span> <span class="string">"/"</span>:
+                <span class="keyword">if</span> (<span class="variable">num2</span> == <span class="number">0</span>)
+                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">DivideByZeroException</span>();
+                <span class="keyword">return</span> <span class="variable">num1</span> / <span class="variable">num2</span>;
+            <span class="keyword">default</span>:
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">InvalidOperatorException</span>(<span class="variable">operatorChar</span>);
+        }
+    }
+}
+
+<span class="comment">// ===== CUSTOM EXCEPTION =====</span>
+<span class="keyword">public class</span> <span class="class">InvalidOperatorException</span> : <span class="class">Exception</span>
+{
+    <span class="keyword">public string</span> <span class="property">Operator</span> { <span class="keyword">get</span>; }
+
+    <span class="keyword">public</span> <span class="function">InvalidOperatorException</span>(<span class="keyword">string</span> <span class="variable">operatorChar</span>)
+        : <span class="keyword">base</span>(<span class="string">$"Invalid operator: '{<span class="variable">operatorChar</span>}'. Use +, -, *, or /."</span>)
+    {
+        <span class="property">Operator</span> = <span class="variable">operatorChar</span>;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Exception handling is essential for building <strong>robust</strong> applications:
+                            <br><br>
+                            ✅ Use <strong>try-catch</strong> to handle errors gracefully<br>
+                            ✅ Use <strong>finally</strong> for cleanup code that must run<br>
+                            ✅ Use <strong>using</strong> for automatic resource disposal<br>
+                            ✅ <strong>Throw</strong> exceptions when input is invalid<br>
+                            ✅ Create <strong>custom exceptions</strong> for specific errors<br>
+                            ✅ Always <strong>log</strong> exceptions for debugging<br>
+                            ✅ Show <strong>user-friendly</strong> error messages
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/08-Strings" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -127,6 +673,8 @@ public void ProcessAge(int age)
                 </div>
             </div>
         </div>
+
+        <!-- ===== SIDEBAR ===== -->
         <div class="col-lg-3">
             @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
         </div>
@@ -201,6 +749,20 @@ public void ProcessAge(int age)
 
         .language-csharp .property {
             color: #80cbc4;
+        }
+
+        .sidebar-nav {
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        @@media (max-width: 768px) {
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 }

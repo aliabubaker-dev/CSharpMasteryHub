@@ -1,7 +1,7 @@
 ﻿@page
 @model CSharpMasteryHub.Pages.CSharpFundamentals.StringsModel
 @{
-    ViewData["Title"] = "Strings";
+    ViewData["Title"] = "Strings - The Complete Guide";
 }
 
 <div class="container">
@@ -15,89 +15,575 @@
                 </ol>
             </nav>
 
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Strings</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 8 of 13</span>
+            <div class="lesson-content" data-aos="fade-up">
+                <h1 class="display-4 mb-3">Strings <i class="fas fa-font text-primary ms-2"></i></h1>
+                <div class="d-flex gap-3 mb-4 flex-wrap">
+                    <span class="badge bg-warning text-dark p-2 px-3">Intermediate</span>
+                    <span class="badge bg-info text-dark p-2 px-3"><i class="far fa-clock me-1"></i> 25 min read</span>
+                    <span class="badge bg-primary p-2 px-3">Lesson 8 of 13</span>
                 </div>
 
-                <h2>Creating Strings</h2>
-                <pre><code>string name = "John Doe";
-string empty = string.Empty;
-string nullString = null;
-
-// Verbose string (preserves formatting)
-string multiLine = "This is\na multi-line\nstring";
-
-// String interpolation
-int age = 25;
-string message = $"Hello, I'm {age} years old.";</code></pre>
-
-                <h2>String Operations</h2>
-
-                <h3>Concatenation</h3>
-                <pre><code>string first = "Hello";
-string second = "World";
-
-string combined = first + " " + second;     // "Hello World"
-string combined2 = string.Concat(first, " ", second);
-
-// StringBuilder for many concatenations
-var sb = new StringBuilder();
-sb.Append("Hello");
-sb.Append(" ");
-sb.Append("World");
-string result = sb.ToString();</code></pre>
-
-                <h3>Common Methods</h3>
-                <pre><code>string text = "Hello World";
-
-text.Length;                    // 11
-text.ToUpper();                 // "HELLO WORLD"
-text.ToLower();                 // "hello world"
-text.Contains("World");         // true
-text.StartsWith("Hello");       // true
-text.EndsWith("World");         // true
-text.IndexOf("World");          // 6
-
-// Substring
-string sub = text.Substring(6);    // "World"
-string sub2 = text.Substring(0, 5); // "Hello"
-
-// Split
-string data = "apple,banana,orange";
-string[] parts = data.Split(',');  // ["apple", "banana", "orange"]
-
-// Replace
-string replaced = text.Replace("World", "C#"); // "Hello C#"
-
-// Trim
-string messy = "  Hello  ";
-string trimmed = messy.Trim();  // "Hello"</code></pre>
-
-                <h2>String Formatting</h2>
-                <pre><code>decimal price = 19.99m;
-int quantity = 5;
-
-string formatted = string.Format("Total: {0:C}", price * quantity);
-// Output: "Total: $99.95"
-
-// Composite formatting
-string result = string.Format("Name: {0}, Age: {1}", "John", 25);
-
-// String interpolation (C# 6+)
-string result2 = $"Name: {"John"}, Age: {25}";</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
+                <!-- ===== INTRODUCTION ===== -->
+                <div class="card mb-4 border-primary" data-aos="fade-right">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Strings are immutable - every operation creates a new string. Use <code>StringBuilder</code> for heavy manipulation.</p>
+                        <h2 class="h4 fw-bold"><i class="fas fa-info-circle text-primary me-2"></i>What is a String?</h2>
+                        <p>
+                            A <strong>string</strong> is a sequence of characters. Think of it like a sentence, 
+                            a word, or even a single letter. In C#, strings are used to store text.
+                        </p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-font fa-2x text-primary"></i>
+                                    <p class="small mt-1"><strong>Text</strong><br>Stores words and sentences</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-lock fa-2x text-success"></i>
+                                    <p class="small mt-1"><strong>Immutable</strong><br>Cannot be changed once created</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-utensils fa-2x text-warning"></i>
+                                    <p class="small mt-1"><strong>Everywhere</strong><br>Used in almost every program</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Think of it like this:</strong> A string is like a sentence written on a piece of paper. 
+                            You can read it, copy it, or write a new sentence, but you can't erase or change the original paper!
+                            This is called <strong>"immutable"</strong> - once created, it cannot be changed.
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
+                <!-- ===== CREATING STRINGS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-primary"><i class="fas fa-plus-circle me-2"></i>Creating Strings</h2>
+                        <p>There are several ways to create a string in C#.</p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== WAYS TO CREATE A STRING =====</span>
+
+<span class="comment">// 1. Using double quotes (most common)</span>
+<span class="keyword">string</span> <span class="variable">name</span> = <span class="string">"John Doe"</span>;
+
+<span class="comment">// 2. Empty string</span>
+<span class="keyword">string</span> <span class="variable">empty</span> = <span class="string">""</span>;                <span class="comment">// Empty string</span>
+<span class="keyword">string</span> <span class="variable">empty2</span> = <span class="keyword">string</span>.<span class="property">Empty</span>;      <span class="comment">// Same as "" (recommended)</span>
+
+<span class="comment">// 3. Null string (no value)</span>
+<span class="keyword">string</span> <span class="variable">nullString</span> = <span class="keyword">null</span>;
+
+<span class="comment">// 4. Multi-line string (verbatim string)</span>
+<span class="keyword">string</span> <span class="variable">multiLine</span> = <span class="string">@@"This is a
+multi-line string
+with multiple lines."</span>;
+
+<span class="comment">// 5. String interpolation (C# 6+) - BEST WAY!</span>
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">25</span>;
+<span class="keyword">string</span> <span class="variable">message</span> = <span class="string">$"Hello, I'm {<span class="variable">age</span>} years old."</span>;
+
+<span class="comment">// 6. Using the string constructor</span>
+<span class="keyword">char</span>[] <span class="variable">chars</span> = { <span class="string">'H'</span>, <span class="string">'e'</span>, <span class="string">'l'</span>, <span class="string">'l'</span>, <span class="string">'o'</span> };
+<span class="keyword">string</span> <span class="variable">fromChars</span> = <span class="keyword">new</span> <span class="keyword">string</span>(<span class="variable">chars</span>);  <span class="comment">// "Hello"</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-success mt-2">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Pro Tip:</strong> Use <strong>string interpolation</strong> (<code>$"Hello {name}"</code>) 
+                            for most strings - it's the cleanest and most readable way!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STRING CONCATENATION ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-link me-2"></i>String Concatenation (Joining Strings)</h2>
+                        <p>
+                            <strong>Concatenation</strong> means joining two or more strings together. 
+                            Think of it like connecting pieces of a train.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== DIFFERENT WAYS TO JOIN STRINGS =====</span>
+
+<span class="keyword">string</span> <span class="variable">first</span> = <span class="string">"Hello"</span>;
+<span class="keyword">string</span> <span class="variable">second</span> = <span class="string">"World"</span>;
+
+<span class="comment">// 1. Using + operator (simple and common)</span>
+<span class="keyword">string</span> <span class="variable">combined1</span> = <span class="variable">first</span> + <span class="string">" "</span> + <span class="variable">second</span>;  <span class="comment">// "Hello World"</span>
+
+<span class="comment">// 2. Using string.Concat()</span>
+<span class="keyword">string</span> <span class="variable">combined2</span> = <span class="keyword">string</span>.<span class="function">Concat</span>(<span class="variable">first</span>, <span class="string">" "</span>, <span class="variable">second</span>);  <span class="comment">// "Hello World"</span>
+
+<span class="comment">// 3. Using interpolation (CLEANEST)</span>
+<span class="keyword">string</span> <span class="variable">combined3</span> = <span class="string">$"{<span class="variable">first</span>} {<span class="variable">second</span>}"</span>;  <span class="comment">// "Hello World"</span>
+
+<span class="comment">// 4. Joining a list of strings</span>
+<span class="keyword">string</span>[] <span class="variable">words</span> = { <span class="string">"Hello"</span>, <span class="string">"from"</span>, <span class="string">"C#"</span> };
+<span class="keyword">string</span> <span class="variable">joined</span> = <span class="keyword">string</span>.<span class="function">Join</span>(<span class="string">" "</span>, <span class="variable">words</span>);  <span class="comment">// "Hello from C#"</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Building a full name =====</span>
+<span class="keyword">string</span> <span class="variable">firstName</span> = <span class="string">"John"</span>;
+<span class="keyword">string</span> <span class="variable">lastName</span> = <span class="string">"Smith"</span>;
+<span class="keyword">string</span> <span class="variable">fullName</span> = <span class="string">$"{<span class="variable">firstName</span>} {<span class="variable">lastName</span>}"</span>;  <span class="comment">// "John Smith"</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Important!</strong> Remember that strings are <strong>immutable</strong>. 
+                            When you concatenate, you're creating a <strong>new string</strong>, not changing the old one.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STRING METHODS ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-warning"><i class="fas fa-tools me-2"></i>Common String Methods</h2>
+                        <p>
+                            Strings have many built-in methods that let you manipulate text. 
+                            Here are the most useful ones.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== LENGTH =====</span>
+<span class="keyword">string</span> <span class="variable">text</span> = <span class="string">"Hello World"</span>;
+<span class="keyword">int</span> <span class="variable">length</span> = <span class="variable">text</span>.<span class="property">Length</span>;  <span class="comment">// 11</span>
+
+<span class="comment">// ===== CASE CONVERSION =====</span>
+<span class="keyword">string</span> <span class="variable">upper</span> = <span class="variable">text</span>.<span class="function">ToUpper</span>();  <span class="comment">// "HELLO WORLD"</span>
+<span class="keyword">string</span> <span class="variable">lower</span> = <span class="variable">text</span>.<span class="function">ToLower</span>();  <span class="comment">// "hello world"</span>
+
+<span class="comment">// ===== CHECKING CONTENT =====</span>
+<span class="keyword">bool</span> <span class="variable">containsWorld</span> = <span class="variable">text</span>.<span class="function">Contains</span>(<span class="string">"World"</span>);       <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">startsWithHello</span> = <span class="variable">text</span>.<span class="function">StartsWith</span>(<span class="string">"Hello"</span>);  <span class="comment">// true</span>
+<span class="keyword">bool</span> <span class="variable">endsWithWorld</span> = <span class="variable">text</span>.<span class="function">EndsWith</span>(<span class="string">"World"</span>);    <span class="comment">// true</span>
+
+<span class="comment">// ===== FINDING POSITION =====</span>
+<span class="keyword">int</span> <span class="variable">indexOfWorld</span> = <span class="variable">text</span>.<span class="function">IndexOf</span>(<span class="string">"World"</span>);  <span class="comment">// 6</span>
+<span class="keyword">int</span> <span class="variable">indexOfX</span> = <span class="variable">text</span>.<span class="function">IndexOf</span>(<span class="string">"x"</span>);         <span class="comment">// -1 (not found)</span>
+
+<span class="comment">// ===== GETTING A PART (SUBSTRING) =====</span>
+<span class="keyword">string</span> <span class="variable">sub1</span> = <span class="variable">text</span>.<span class="function">Substring</span>(<span class="number">6</span>);       <span class="comment">// "World" (from index 6 to end)</span>
+<span class="keyword">string</span> <span class="variable">sub2</span> = <span class="variable">text</span>.<span class="function">Substring</span>(<span class="number">0</span>, <span class="number">5</span>);  <span class="comment">// "Hello" (5 characters from index 0)</span>
+
+<span class="comment">// ===== SPLITTING =====</span>
+<span class="keyword">string</span> <span class="variable">data</span> = <span class="string">"apple,banana,orange"</span>;
+<span class="keyword">string</span>[] <span class="variable">parts</span> = <span class="variable">data</span>.<span class="function">Split</span>(<span class="string">','</span>);  <span class="comment">// ["apple", "banana", "orange"]</span>
+
+<span class="comment">// ===== REPLACING =====</span>
+<span class="keyword">string</span> <span class="variable">replaced</span> = <span class="variable">text</span>.<span class="function">Replace</span>(<span class="string">"World"</span>, <span class="string">"C#"</span>);  <span class="comment">// "Hello C#"</span>
+
+<span class="comment">// ===== TRIMMING (REMOVING SPACES) =====</span>
+<span class="keyword">string</span> <span class="variable">messy</span> = <span class="string">"  Hello World  "</span>;
+<span class="keyword">string</span> <span class="variable">trimmed</span> = <span class="variable">messy</span>.<span class="function">Trim</span>();   <span class="comment">// "Hello World"</span>
+<span class="keyword">string</span> <span class="variable">trimStart</span> = <span class="variable">messy</span>.<span class="function">TrimStart</span>();  <span class="comment">// "Hello World  "</span>
+<span class="keyword">string</span> <span class="variable">trimEnd</span> = <span class="variable">messy</span>.<span class="function">TrimEnd</span>();    <span class="comment">// "  Hello World"</span></code></pre>
+                        </div>
+
+                        <!-- Methods Table -->
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>Length</code></td>
+                                        <td>Gets the number of characters</td>
+                                        <td><code>"Hello".Length // 5</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ToUpper()</code></td>
+                                        <td>Converts to uppercase</td>
+                                        <td><code>"Hello".ToUpper() // "HELLO"</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>ToLower()</code></td>
+                                        <td>Converts to lowercase</td>
+                                        <td><code>"Hello".ToLower() // "hello"</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Contains()</code></td>
+                                        <td>Checks if a substring exists</td>
+                                        <td><code>"Hello".Contains("el") // true</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>IndexOf()</code></td>
+                                        <td>Finds the position of a substring</td>
+                                        <td><code>"Hello".IndexOf("l") // 2</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Substring()</code></td>
+                                        <td>Extracts part of a string</td>
+                                        <td><code>"Hello".Substring(1, 3) // "ell"</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Replace()</code></td>
+                                        <td>Replaces occurrences</td>
+                                        <td><code>"Hello".Replace("l", "x") // "Hexxo"</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Split()</code></td>
+                                        <td>Splits into an array</td>
+                                        <td><code>"a,b,c".Split(',') // ["a","b","c"]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Trim()</code></td>
+                                        <td>Removes leading/trailing spaces</td>
+                                        <td><code>" Hello ".Trim() // "Hello"</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>Join()</code></td>
+                                        <td>Joins an array into a string</td>
+                                        <td><code>string.Join(",", new[]{"a","b"}) // "a,b"</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STRING FORMATTING ===== -->
+                <div class="card mb-4" data-aos="fade-right">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-info"><i class="fas fa-format me-2"></i>String Formatting</h2>
+                        <p>
+                            Formatting lets you <strong>control how text looks</strong> - like showing currency, 
+                            dates, or numbers in a specific way.
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== STRING INTERPOLATION (BEST WAY) =====</span>
+<span class="keyword">string</span> <span class="variable">name</span> = <span class="string">"Alice"</span>;
+<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">30</span>;
+<span class="keyword">string</span> <span class="variable">info</span> = <span class="string">$"Name: {<span class="variable">name</span>}, Age: {<span class="variable">age</span>}"</span>;  <span class="comment">// "Name: Alice, Age: 30"</span>
+
+<span class="comment">// ===== FORMATTING NUMBERS =====</span>
+<span class="keyword">decimal</span> <span class="variable">price</span> = <span class="number">19.99</span><span class="keyword">m</span>;
+<span class="keyword">string</span> <span class="variable">currency</span> = <span class="string">$"Price: {<span class="variable">price</span>:C}"</span>;        <span class="comment">// "Price: $19.99" (currency)</span>
+<span class="keyword">string</span> <span class="variable">percent</span> = <span class="string">$"Discount: {<span class="number">0.15</span>:P}"</span>;        <span class="comment">// "Discount: 15.00%"</span>
+<span class="keyword">string</span> <span class="variable">number</span> = <span class="string">$"Number: {<span class="number">12345.6789</span>:N2}"</span>;  <span class="comment">// "Number: 12,345.68"</span>
+<span class="keyword">string</span> <span class="variable">fixedNum</span> = <span class="string">$"Value: {<span class="number">42</span>:D5}"</span>;          <span class="comment">// "Value: 00042"</span>
+
+<span class="comment">// ===== FORMATTING DATES =====</span>
+<span class="class">DateTime</span> <span class="variable">today</span> = <span class="class">DateTime</span>.<span class="property">Now</span>;
+<span class="keyword">string</span> <span class="variable">shortDate</span> = <span class="string">$"Today: {<span class="variable">today</span>:d}"</span>;     <span class="comment">// "01/15/2024"</span>
+<span class="keyword">string</span> <span class="variable">longDate</span> = <span class="string">$"Today: {<span class="variable">today</span>:D}"</span>;       <span class="comment">// "Monday, January 15, 2024"</span>
+<span class="keyword">string</span> <span class="variable">time</span> = <span class="string">$"Time: {<span class="variable">today</span>:t}"</span>;           <span class="comment">// "2:30 PM"</span>
+<span class="keyword">string</span> <span class="variable">full</span> = <span class="string">$"Now: {<span class="variable">today</span>:F}"</span>;            <span class="comment">// "Monday, January 15, 2024 2:30:45 PM"</span>
+
+<span class="comment">// ===== STRING.PADLEFT / PADRIGHT =====</span>
+<span class="keyword">string</span> <span class="variable">id</span> = <span class="string">"42"</span>;
+<span class="keyword">string</span> <span class="variable">padded</span> = <span class="variable">id</span>.<span class="function">PadLeft</span>(<span class="number">5</span>, <span class="string">'0'</span>);  <span class="comment">// "00042"</span>
+<span class="keyword">string</span> <span class="variable">rightPadded</span> = <span class="variable">id</span>.<span class="function">PadRight</span>(<span class="number">5</span>, <span class="string">'*'</span>); <span class="comment">// "42***"</span></code></pre>
+                        </div>
+
+                        <div class="alert alert-info mt-2">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> String interpolation (<code>$"..."</code>) is the <strong>best</strong> 
+                            way to format strings. It's clean, readable, and powerful!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STRINGBUILDER ===== -->
+                <div class="card mb-4" data-aos="fade-left">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-danger"><i class="fas fa-cog me-2"></i>StringBuilder - For Heavy String Manipulation</h2>
+                        <p>
+                            <strong>StringBuilder</strong> is used when you need to <strong>modify a string many times</strong>. 
+                            Remember, strings are immutable - every change creates a new string. 
+                            StringBuilder is like a whiteboard - you can write, erase, and rewrite without creating new ones!
+                        </p>
+
+                        <div class="code-block bg-dark p-3 rounded-3 mt-2">
+                            <pre><code class="language-csharp"><span class="comment">// ===== WHEN TO USE STRINGBUILDER =====</span>
+<span class="comment">// BAD: Creating many new strings in a loop</span>
+<span class="keyword">string</span> <span class="variable">result</span> = <span class="string">""</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="number">1000</span>; <span class="variable">i</span>++)
+{
+    <span class="variable">result</span> += <span class="string">"x"</span>;  <span class="comment">// Creates 1000 new strings!</span>
+}
+
+<span class="comment">// GOOD: Using StringBuilder</span>
+<span class="keyword">var</span> <span class="variable">sb</span> = <span class="keyword">new</span> <span class="class">StringBuilder</span>();
+<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="number">1000</span>; <span class="variable">i</span>++)
+{
+    <span class="variable">sb</span>.<span class="function">Append</span>(<span class="string">"x"</span>);  <span class="comment">// Much more efficient!</span>
+}
+<span class="keyword">string</span> <span class="variable">result2</span> = <span class="variable">sb</span>.<span class="function">ToString</span>();
+
+<span class="comment">// ===== STRINGBUILDER METHODS =====</span>
+<span class="keyword">var</span> <span class="variable">builder</span> = <span class="keyword">new</span> <span class="class">StringBuilder</span>();
+
+<span class="comment">// Add text</span>
+<span class="variable">builder</span>.<span class="function">Append</span>(<span class="string">"Hello"</span>);
+<span class="variable">builder</span>.<span class="function">Append</span>(<span class="string">" "</span>);
+<span class="variable">builder</span>.<span class="function">Append</span>(<span class="string">"World"</span>);  <span class="comment">// "Hello World"</span>
+
+<span class="comment">// Insert at a position</span>
+<span class="variable">builder</span>.<span class="function">Insert</span>(<span class="number">6</span>, <span class="string">"Beautiful "</span>);  <span class="comment">// "Hello Beautiful World"</span>
+
+<span class="comment">// Remove characters</span>
+<span class="variable">builder</span>.<span class="function">Remove</span>(<span class="number">6</span>, <span class="number">10</span>);  <span class="comment">// Removes "Beautiful "</span>
+
+<span class="comment">// Replace text</span>
+<span class="variable">builder</span>.<span class="function">Replace</span>(<span class="string">"World"</span>, <span class="string">"C#"</span>);  <span class="comment">// "Hello C#"</span>
+
+<span class="comment">// Clear</span>
+<span class="variable">builder</span>.<span class="function">Clear</span>();  <span class="comment">// Removes all text</span>
+
+<span class="comment">// ===== REAL-WORLD EXAMPLE: Building HTML =====</span>
+<span class="keyword">var</span> <span class="variable">html</span> = <span class="keyword">new</span> <span class="class">StringBuilder</span>();
+<span class="variable">html</span>.<span class="function">AppendLine</span>(<span class="string">"&lt;div&gt;"</span>);
+<span class="variable">html</span>.<span class="function">AppendLine</span>(<span class="string">"&lt;h1&gt;Welcome&lt;/h1&gt;"</span>);
+<span class="variable">html</span>.<span class="function">AppendLine</span>(<span class="string">"&lt;p&gt;Hello World&lt;/p&gt;"</span>);
+<span class="variable">html</span>.<span class="function">AppendLine</span>(<span class="string">"&lt;/div&gt;"</span>);
+<span class="keyword">string</span> <span class="variable">htmlString</span> = <span class="variable">html</span>.<span class="function">ToString</span>();</code></pre>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>When to use StringBuilder:</strong> Use it when you need to modify a string 
+                            <strong>many times</strong> (like in a loop). For simple cases, regular strings are fine!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STRING VS STRINGBUILDER COMPARISON ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-balance-scale text-info me-2"></i>String vs StringBuilder</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>String</th>
+                                        <th>StringBuilder</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Mutability</strong></td>
+                                        <td>Immutable (cannot change)</td>
+                                        <td>Mutable (can change)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Performance</strong></td>
+                                        <td>Good for small operations</td>
+                                        <td>Better for many operations</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Memory Usage</strong></td>
+                                        <td>Creates new objects</td>
+                                        <td>Reuses the same object</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>When to Use</strong></td>
+                                        <td>When you create a string once</td>
+                                        <td>When you modify many times</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Examples</strong></td>
+                                        <td><code>string name = "John";</code></td>
+                                        <td><code>var sb = new StringBuilder();</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PRACTICAL EXAMPLES ===== -->
+                <div class="card mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold"><i class="fas fa-laptop-code text-primary me-2"></i>Real-World Examples</h2>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📝 Validating User Input</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>string input = "  John  ";
+string clean = input.Trim();
+if (string.IsNullOrEmpty(clean))
+    Console.WriteLine("Please enter a name");</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">💳 Formatting Credit Card</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>string card = "1234567812345678";
+string formatted = string.Join(" ", 
+    card.Chunk(4).Select(c => new string(c)));
+// "1234 5678 1234 5678"</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📧 Validating Email</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>string email = "user@example.com";
+bool isValid = email.Contains("@@") && 
+    email.Contains(".") && 
+    email.Length > 5;</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded mb-2">
+                                    <h6 class="fw-bold">📊 Generating CSV</h6>
+                                    <pre class="small bg-dark text-light p-2 rounded"><code>var data = new[] { "John", "25", "Engineer" };
+string csv = string.Join(",", data);
+// "John,25,Engineer"</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== EXERCISE ===== -->
+                <div class="card mb-4 border-success" data-aos="fade-up">
+                    <div class="card-body">
+                        <h2 class="h4 fw-bold text-success"><i class="fas fa-pencil-alt me-2"></i>Exercise: Text Analyzer</h2>
+
+                        <p class="fw-bold">Task: Create a program that analyzes text using string methods.</p>
+
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <h6 class="fw-bold">Instructions:</h6>
+                            <ol>
+                                <li>Create a console application called "TextAnalyzer"</li>
+                                <li>Ask the user to enter a sentence</li>
+                                <li>Analyze the text and display:
+                                    <ul>
+                                        <li>Total number of characters</li>
+                                        <li>Total number of words</li>
+                                        <li>Total number of vowels</li>
+                                        <li>Text in uppercase</li>
+                                        <li>Text in lowercase</li>
+                                        <li>The first 10 characters</li>
+                                        <li>Whether the text contains the word "C#"</li>
+                                    </ul>
+                                </li>
+                                <li>Use <strong>at least 6 different string methods</strong></li>
+                                <li>Use <strong>string interpolation</strong> for all output</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Hints:</strong>
+                            <ul class="mb-0">
+                                <li>Use <code>Console.ReadLine()</code> to get user input</li>
+                                <li>Use <code>Split()</code> to count words</li>
+                                <li>Use <code>ToLower()</code> and <code>Count()</code> to count vowels</li>
+                                <li>Use <code>Substring()</code> to get first 10 characters</li>
+                                <li>Use <code>Contains()</code> to check for "C#"</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-warning mt-2">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Expected Output:</strong>
+                            <pre class="mt-2 mb-0 bg-dark text-light p-2 rounded">Enter a sentence: I love learning C# programming!
+--- Text Analysis ---
+Characters: 31
+Words: 5
+Vowels: 9
+Uppercase: I LOVE LEARNING C# PROGRAMMING!
+Lowercase: i love learning c# programming!
+First 10 chars: I love lea
+Contains "C#": True</pre>
+                        </div>
+
+                        <button class="btn btn-outline-success btn-sm mt-2" onclick="toggleExercise()">
+                            <i class="fas fa-code me-1"></i> Show Solution
+                        </button>
+
+                        <div id="exerciseSolution" style="display: none;" class="mt-3">
+                            <div class="code-block bg-dark p-3 rounded-3">
+                                <pre><code class="language-csharp"><span class="comment">// Text Analyzer</span>
+<span class="keyword">using</span> <span class="class">System</span>;
+<span class="keyword">using</span> <span class="class">System</span>.<span class="class">Linq</span>;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Get user input</span>
+        <span class="function">Console</span>.<span class="function">Write</span>(<span class="string">"Enter a sentence: "</span>);
+        <span class="keyword">string</span> <span class="variable">text</span> = <span class="function">Console</span>.<span class="function">ReadLine</span>();
+
+        <span class="comment">// 1. Total characters</span>
+        <span class="keyword">int</span> <span class="variable">charCount</span> = <span class="variable">text</span>.<span class="property">Length</span>;
+
+        <span class="comment">// 2. Total words</span>
+        <span class="keyword">string</span>[] <span class="variable">words</span> = <span class="variable">text</span>.<span class="function">Split</span>(<span class="string">' '</span>, <span class="class">StringSplitOptions</span>.<span class="property">RemoveEmptyEntries</span>);
+        <span class="keyword">int</span> <span class="variable">wordCount</span> = <span class="variable">words</span>.<span class="property">Length</span>;
+
+        <span class="comment">// 3. Total vowels</span>
+        <span class="keyword">string</span> <span class="variable">lowerText</span> = <span class="variable">text</span>.<span class="function">ToLower</span>();
+        <span class="keyword">int</span> <span class="variable">vowelCount</span> = <span class="variable">lowerText</span>.<span class="function">Count</span>(<span class="variable">c</span> => <span class="string">"aeiou"</span>.<span class="function">Contains</span>(<span class="variable">c</span>));
+
+        <span class="comment">// 4. Uppercase</span>
+        <span class="keyword">string</span> <span class="variable">upper</span> = <span class="variable">text</span>.<span class="function">ToUpper</span>();
+
+        <span class="comment">// 5. Lowercase</span>
+        <span class="keyword">string</span> <span class="variable">lower</span> = <span class="variable">text</span>.<span class="function">ToLower</span>();
+
+        <span class="comment">// 6. First 10 characters</span>
+        <span class="keyword">string</span> <span class="variable">first10</span> = <span class="variable">text</span>.<span class="property">Length</span> > <span class="number">10</span> 
+            ? <span class="variable">text</span>.<span class="function">Substring</span>(<span class="number">0</span>, <span class="number">10</span>) 
+            : <span class="variable">text</span>;
+
+        <span class="comment">// 7. Contains "C#"</span>
+        <span class="keyword">bool</span> <span class="variable">containsCSharp</span> = <span class="variable">text</span>.<span class="function">Contains</span>(<span class="string">"C#"</span>);
+
+        <span class="comment">// Display results</span>
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"\n--- Text Analysis ---"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Characters: {<span class="variable">charCount</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Words: {<span class="variable">wordCount</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Vowels: {<span class="variable">vowelCount</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Uppercase: {<span class="variable">upper</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Lowercase: {<span class="variable">lower</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"First 10 chars: {<span class="variable">first10</span>}"</span>);
+        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Contains \"C#\": {<span class="variable">containsCSharp</span>}"</span>);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== KEY TAKEAWAY ===== -->
+                <div class="card bg-info bg-opacity-10 mb-4" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p>
+                            Strings are everywhere in C#. Remember these key points:
+                            <br><br>
+                            ✅ Strings are <strong>immutable</strong> - every change creates a new string<br>
+                            ✅ Use <strong>string interpolation</strong> (<code>$"..."</code>) for clean formatting<br>
+                            ✅ Use <strong>StringBuilder</strong> when modifying strings many times<br>
+                            ✅ Master the common methods: <code>Length</code>, <code>Substring</code>, <code>Split</code>, 
+                            <code>Replace</code>, <code>Contains</code>, <code>Trim</code><br>
+                            ✅ Always check for <strong>null</strong> or <strong>empty</strong> strings before using them
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== NAVIGATION ===== -->
+                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
                     <a href="/CSharpFundamentals/07-ArraysAndCollections" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
@@ -107,6 +593,8 @@ string result2 = $"Name: {"John"}, Age: {25}";</code></pre>
                 </div>
             </div>
         </div>
+
+        <!-- ===== SIDEBAR ===== -->
         <div class="col-lg-3">
             @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
         </div>
@@ -181,6 +669,27 @@ string result2 = $"Name: {"John"}, Age: {25}";</code></pre>
 
         .language-csharp .property {
             color: #80cbc4;
+        }
+
+        pre.small {
+            font-size: 0.75rem;
+            padding: 8px !important;
+            margin: 0 !important;
+        }
+
+        /* Fix sidebar to stay in place while scrolling */
+        .sidebar-nav {
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        @@media (max-width: 768px) {
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 }

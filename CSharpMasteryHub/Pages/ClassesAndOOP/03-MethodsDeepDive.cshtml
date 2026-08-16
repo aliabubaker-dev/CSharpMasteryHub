@@ -4,281 +4,1157 @@
     ViewData["Title"] = "Methods Deep Dive in C#";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Methods Deep Dive</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Methods Deep Dive in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 3 of 11</span>
-                </div>
-
-                <h2>Understanding Methods</h2>
-                <p>
-                    Methods are blocks of code that perform specific tasks. They help organize code,
-                    promote reuse, and make programs more maintainable.
-                </p>
-
-                <h2>Method Syntax</h2>
-                <pre><code>// Basic method structure
-[access_modifier] [static] return_type MethodName(parameters)
-{
-    // Method body
-    return value; // if return_type is not void
-}</code></pre>
-
-                <h3>Method Examples</h3>
-                <pre><code>public class Calculator
-{
-    // Method with return value
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-    
-    // Void method (no return)
-    public void DisplayResult(int result)
-    {
-        Console.WriteLine($"Result: {result}");
-    }
-    
-    // Static method
-    public static double Pi()
-    {
-        return 3.14159;
-    }
-}</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Method Parameters</h2>
-
-                <h3>Value Parameters</h3>
-                <pre><code>public void ChangeValue(int number)
-{
-    number = 100; // Only affects local copy
-}</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h3>Reference Parameters (ref)</h3>
-                <pre><code>public void ChangeValue(ref int number)
-{
-    number = 100; // Affects original variable
-}
-
-// Usage
-int x = 5;
-ChangeValue(ref x); // x becomes 100</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h3>Output Parameters (out)</h3>
-                <pre><code>public bool TryDivide(int a, int b, out int result)
-{
-    if (b == 0)
-    {
-        result = 0;
-        return false;
-    }
-    result = a / b;
-    return true;
-}
-
-// Usage
-if (TryDivide(10, 2, out int quotient))
-{
-    Console.WriteLine($"Quotient: {quotient}");
-}</code></pre>
-
-                <h3>Optional Parameters</h3>
-                <pre><code>public void Greet(string name, string greeting = "Hello")
-{
-    Console.WriteLine($"{greeting}, {name}!");
-}
-
-// Usage
-Greet("John");        // Hello, John!
-Greet("Jane", "Hi");  // Hi, Jane!</code></pre>
-
-                <h3>Params Keyword</h3>
-                <pre><code>public int Sum(params int[] numbers)
-{
-    int total = 0;
-    foreach (int num in numbers)
-        total += num;
-    return total;
-}
-
-// Usage
-int result = Sum(1, 2, 3, 4, 5); // returns 15</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Method Overloading</h2>
-                <pre><code>public class MathOperations
-{
-    // Same method name, different parameters
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-    
-    public double Add(double a, double b)
-    {
-        return a + b;
-    }
-    
-    public int Add(int a, int b, int c)
-    {
-        return a + b + c;
-    }
-}</code></pre>
-
-                <h2>Expression-Bodied Methods</h2>
-                <pre><code>public class Math
-{
-    // Single expression method
-    public int Add(int a, int b) => a + b;
-    
-    public bool IsEven(int number) => number % 2 == 0;
-}</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Complete Example</h2>
-                <pre><code>using System;
-
-public class StudentManager
-{
-    // Fields
-    private List<string> students = new List<string>();
-    
-    // Add student
-    public void AddStudent(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Name cannot be empty");
-        students.Add(name);
-        Console.WriteLine($"Student '{name}' added.");
-    }
-    
-    // Remove student
-    public bool RemoveStudent(string name)
-    {
-        if (students.Remove(name))
-        {
-            Console.WriteLine($"Student '{name}' removed.");
-            return true;
-        }
-        Console.WriteLine($"Student '{name}' not found.");
-        return false;
-    }
-    
-    // Find student
-    public bool FindStudent(string name, out int index)
-    {
-        index = students.IndexOf(name);
-        return index >= 0;
-    }
-    
-    // Get student at index
-    public string GetStudent(int index)
-    {
-        if (index < 0 || index >= students.Count)
-            throw new ArgumentOutOfRangeException("Invalid index");
-        return students[index];
-    }
-    
-    // Get all students
-    public string[] GetAllStudents() => students.ToArray();
-    
-    // Get count
-    public int Count => students.Count;
-    
-    // Clear all
-    public void Clear() => students.Clear();
-}
-
-class Program
-{
-    static void Main()
-    {
-        StudentManager manager = new StudentManager();
-        
-        manager.AddStudent("Alice");
-        manager.AddStudent("Bob");
-        manager.AddStudent("Charlie");
-        
-        if (manager.FindStudent("Bob", out int index))
-            Console.WriteLine($"Bob found at index {index}");
-        
-        Console.WriteLine($"Total students: {manager.Count}");
-        
-        foreach (string student in manager.GetAllStudents())
-            Console.WriteLine($"- {student}");
-    }
-}</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practices</h5>
-                        <ul class="mb-0">
-                            <li>Keep methods focused and single-purpose</li>
-                            <li>Use meaningful method names</li>
-                            <li>Validate parameters</li>
-                            <li>Document complex methods with comments</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p class="card-text">Methods are the building blocks of C# programs. Mastering different parameter types and overloading enables flexible and reusable code.</p>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a class "InventoryManager" with methods:</p>
-                        <ol>
-                            <li>AddItem with name, quantity, and optional price</li>
-                            <li>RemoveItem with name and optional quantity</li>
-                            <li>FindItem that returns item info</li>
-                            <li>GetTotalValue method</li>
-                            <li>DisplayInventory with formatting</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Methods Deep Dive</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Methods Deep Dive
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        How to Make Your Classes Do Things
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-graduation-cap me-2"></i>Intermediate
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-primary fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 3 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/02-FieldsAndProperties" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/04-Constructors" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-cogs fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- Introduction -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-rocket fa-3x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Making Your Classes Do Things</h2>
+                                    <p class="fs-5">
+                                        In Lesson 1, we learned about classes. In Lesson 2, we learned about storing data.
+                                        Now let's learn <strong>how to make our classes do things</strong> using <strong class="text-success">Methods</strong>!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Think of it like this:</strong>
+                                        <ul class="mb-0">
+                                            <li><strong>Fields/Properties</strong> = What a class <strong>has</strong> (data)</li>
+                                            <li><strong>Methods</strong> = What a class <strong>does</strong> (actions)</li>
+                                        </ul>
+                                    </div>
+                                    <p class="mt-3">
+                                        <strong>Why are methods useful?</strong> They help you organize your code, reuse logic,
+                                        and make your programs easier to understand and maintain.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: What is a Method? -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Step 1: What is a Method?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">A <strong>method</strong> is a block of code that performs a specific task.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-cog text-primary me-2"></i>Method Parts</h5>
+                                                <p>A method has several parts:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// [1] [2]  [3]  [4]       [5]</span>
+<span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    <span class="keyword">return</span> a + b;  <span class="comment">// [6]</span>
+}</code></pre>
+                                                </div>
+                                                <ul>
+                                                    <li><strong>[1] public</strong> - Who can use it</li>
+                                                    <li><strong>[2] int</strong> - What it returns (or <code>void</code> if nothing)</li>
+                                                    <li><strong>[3] Add</strong> - Name of the method</li>
+                                                    <li><strong>[4] (int a, int b)</strong> - Parameters (inputs)</li>
+                                                    <li><strong>[5] { }</strong> - Code block (the action)</li>
+                                                    <li><strong>[6] return</strong> - Gives back a result</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>Using a Method</h5>
+                                                <p>You <strong>call</strong> a method by using its name and giving it inputs:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Calculator</span> calc = <span class="keyword">new</span> <span class="class">Calculator</span>();
+<span class="keyword">int</span> result = calc.<span class="function">Add</span>(<span class="number">5</span>, <span class="number">3</span>);  <span class="comment">// result = 8</span>
+
+Console.WriteLine(result);  <span class="comment">// Output: 8</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Think of it like:</strong> A method is like a <strong>recipe</strong>.
+                                                    You give it ingredients (parameters), it does something, and gives you a result.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 2: Types of Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Step 2: Types of Methods</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-undo-alt text-success me-2"></i>Methods with Return Values</h5>
+                                                <p>These methods <strong>give back</strong> a result:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    <span class="keyword">return</span> a + b;  <span class="comment">// Returns a number</span>
+}
+
+<span class="keyword">public</span> <span class="keyword">string</span> <span class="function">GetName</span>()
+{
+    <span class="keyword">return</span> <span class="string">"John"</span>;  <span class="comment">// Returns text</span>
+}
+
+<span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">IsValid</span>(<span class="keyword">int</span> age)
+{
+    <span class="keyword">return</span> age > <span class="number">0</span>;  <span class="comment">// Returns true/false</span>
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-example me-2"></i>
+                                                    <strong>Example:</strong> <code>calculator.Add(5, 3)</code> gives you <code>8</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-warning me-2"></i>Void Methods (No Return)</h5>
+                                                <p>These methods <strong>do something</strong> but don't give back a result:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SayHello</span>()
+{
+    Console.WriteLine(<span class="string">"Hello!"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SaveToFile</span>(<span class="keyword">string</span> data)
+{
+    <span class="comment">// Code to save data</span>
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-example me-2"></i>
+                                                    <strong>Example:</strong> <code>printer.Print("Hello")</code> - it prints, but gives nothing back
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-info">void = "empty" in Latin</span>
+                                                    <span class="badge bg-secondary ms-2">No <code>return</code> needed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3: Method Parameters -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <h2 class="display-6 fw-bold border-bottom pb-3">
+                            <i class="fas fa-3 text-primary me-3"></i>Step 3: Method Parameters (Inputs)
+                        </h2>
+
+                        <p class="fs-5">Parameters are the <strong>inputs</strong> you give to a method.</p>
+
+                        <div class="row g-4">
+                            <!-- Value Parameters -->
+                            <div class="col-lg-6">
+                                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; overflow: hidden;">
+                                    <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                        <h5 class="mb-0"><i class="fas fa-copy me-2"></i>Value Parameters</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>What:</strong> Passes a <strong>copy</strong> of the data</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ChangeValue</span>(<span class="keyword">int</span> number)
+{
+    number = <span class="number">100</span>;  <span class="comment">// Only changes the copy</span>
+}
+
+<span class="comment">// Usage:</span>
+<span class="keyword">int</span> x = <span class="number">5</span>;
+<span class="function">ChangeValue</span>(x);
+Console.WriteLine(x);  <span class="comment">// Still 5! (not changed)</span></code></pre>
+                                        </div>
+                                        <div class="alert alert-info mt-2">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Like:</strong> Making a photocopy - changing the copy doesn't affect the original
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reference Parameters (ref) -->
+                            <div class="col-lg-6">
+                                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; overflow: hidden;">
+                                    <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                        <h5 class="mb-0"><i class="fas fa-link me-2"></i>Reference Parameters (ref)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>What:</strong> Passes a <strong>reference</strong> to the data</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ChangeValue</span>(<span class="keyword">ref</span> <span class="keyword">int</span> number)
+{
+    number = <span class="number">100</span>;  <span class="comment">// Changes the original</span>
+}
+
+<span class="comment">// Usage:</span>
+<span class="keyword">int</span> x = <span class="number">5</span>;
+<span class="function">ChangeValue</span>(<span class="keyword">ref</span> x);
+Console.WriteLine(x);  <span class="comment">// Now 100! (changed)</span></code></pre>
+                                        </div>
+                                        <div class="alert alert-warning mt-2">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>Like:</strong> Giving someone your phone - they can change it
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Output Parameters (out) -->
+                            <div class="col-lg-6">
+                                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; overflow: hidden;">
+                                    <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                        <h5 class="mb-0"><i class="fas fa-sign-out-alt me-2"></i>Output Parameters (out)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>What:</strong> Returns multiple values from a method</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">TryDivide</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">out</span> <span class="keyword">int</span> result)
+{
+    <span class="keyword">if</span> (b == <span class="number">0</span>)
+    {
+        result = <span class="number">0</span>;
+        <span class="keyword">return</span> <span class="keyword">false</span>;  <span class="comment">// Failed</span>
+    }
+    result = a / b;
+    <span class="keyword">return</span> <span class="keyword">true</span>;   <span class="comment">// Success</span>
+}
+
+<span class="comment">// Usage:</span>
+<span class="keyword">if</span> (<span class="function">TryDivide</span>(<span class="number">10</span>, <span class="number">2</span>, <span class="keyword">out</span> <span class="keyword">int</span> quotient))
+{
+    Console.WriteLine(<span class="string">$"Result: {quotient}"</span>);  <span class="comment">// Result: 5</span>
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-2">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>Like:</strong> A vending machine - it gives you a drink and tells you if it worked
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Optional Parameters -->
+                            <div class="col-lg-6">
+                                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; overflow: hidden;">
+                                    <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                        <h5 class="mb-0"><i class="fas fa-optional me-2"></i>Optional Parameters</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>What:</strong> Parameters with default values</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Greet</span>(<span class="keyword">string</span> name, <span class="keyword">string</span> greeting = <span class="string">"Hello"</span>)
+{
+    Console.WriteLine(<span class="string">$"{greeting}, {name}!"</span>);
+}
+
+<span class="comment">// Usage:</span>
+<span class="function">Greet</span>(<span class="string">"John"</span>);           <span class="comment">// Hello, John!</span>
+<span class="function">Greet</span>(<span class="string">"Jane"</span>, <span class="string">"Hi"</span>);    <span class="comment">// Hi, Jane!</span></code></pre>
+                                        </div>
+                                        <div class="alert alert-info mt-2">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>Flexibility:</strong> You can call the method with or without the optional parameter
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 4: Params Keyword -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Step 4: The Params Keyword</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">The <strong>params</strong> keyword lets you pass any number of parameters.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-ellipsis-h text-primary me-2"></i>What is Params?</h5>
+                                                <p>It allows a method to accept any number of arguments:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Sum</span>(<span class="keyword">params</span> <span class="keyword">int</span>[] numbers)
+{
+    <span class="keyword">int</span> total = <span class="number">0</span>;
+    <span class="keyword">foreach</span> (<span class="keyword">int</span> num <span class="keyword">in</span> numbers)
+        total += num;
+    <span class="keyword">return</span> total;
+}
+
+<span class="comment">// Usage - pass ANY number!</span>
+<span class="keyword">int</span> result1 = <span class="function">Sum</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);       <span class="comment">// 6</span>
+<span class="keyword">int</span> result2 = <span class="function">Sum</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);  <span class="comment">// 15</span>
+<span class="keyword">int</span> result3 = <span class="function">Sum</span>();              <span class="comment">// 0 (empty)</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>When to Use Params</h5>
+                                                <ul>
+                                                    <li>✅ When you don't know how many items you'll get</li>
+                                                    <li>✅ For utility methods like <code>Sum</code>, <code>Average</code>, <code>Max</code></li>
+                                                    <li>✅ When the input is optional</li>
+                                                </ul>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Important:</strong> You can only use <strong>one</strong> <code>params</code> parameter, and it must be the <strong>last</strong> parameter.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 5: Method Overloading -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: Method Overloading</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Overloading</strong> means having multiple methods with the <strong>same name</strong> but <strong>different parameters</strong>.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Overloaded Methods</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MathOperations</span>
+{
+    <span class="comment">// Version 1: Two integers</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="comment">// Version 2: Two doubles</span>
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="function">Add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b)
+    {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="comment">// Version 3: Three integers</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)
+    {
+        <span class="keyword">return</span> a + b + c;
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>Using Overloaded Methods</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">MathOperations</span> math = <span class="keyword">new</span> <span class="class">MathOperations</span>();
+
+<span class="comment">// C# automatically picks the right one!</span>
+<span class="keyword">int</span> result1 = math.<span class="function">Add</span>(<span class="number">5</span>, <span class="number">3</span>);        <span class="comment">// Uses int version</span>
+<span class="keyword">double</span> result2 = math.<span class="function">Add</span>(<span class="number">5.5</span>, <span class="number">3.2</span>);  <span class="comment">// Uses double version</span>
+<span class="keyword">int</span> result3 = math.<span class="function">Add</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>);     <span class="comment">// Uses three-parameter version</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Why overloading?</strong> It makes your class <strong>flexible</strong> and <strong>easy to use</strong>.
+                                                    Users can call the same method name with different inputs.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 6: Static vs Instance Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Step 6: Static vs Instance Methods</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-cube text-success me-2"></i>Instance Methods</h5>
+                                                <p><strong>What:</strong> Belong to an <strong>object</strong> (need an instance)</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="comment">// Instance method</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SayHello</span>()
+    {
+        Console.WriteLine(<span class="string">$"Hello, I'm {Name}"</span>);
+    }
+}
+
+<span class="comment">// Usage - need an object!</span>
+<span class="class">Person</span> p = <span class="keyword">new</span> <span class="class">Person</span> { Name = <span class="string">"John"</span> };
+p.<span class="function">SayHello</span>();  <span class="comment">// ✅ Works</span></code></pre>
+                                                </div>
+                                                <p class="mt-2"><span class="badge bg-info">Each object has its own copy</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-cubes text-warning me-2"></i>Static Methods</h5>
+                                                <p><strong>What:</strong> Belong to the <strong>class itself</strong> (no object needed)</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MathHelper</span>
+{
+    <span class="comment">// Static method</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    {
+        <span class="keyword">return</span> a + b;
+    }
+}
+
+<span class="comment">// Usage - no object needed!</span>
+<span class="keyword">int</span> result = <span class="class">MathHelper</span>.<span class="function">Add</span>(<span class="number">5</span>, <span class="number">3</span>);  <span class="comment">// ✅ Works without creating an object</span></code></pre>
+                                                </div>
+                                                <p class="mt-2"><span class="badge bg-warning text-dark">Shared by all objects</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-lightbulb me-2"></i>
+                                    <strong>When to use static:</strong> Utility methods like <code>Math.Sqrt()</code>, <code>Convert.ToInt32()</code>,
+                                    or methods that don't need object data.
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 7: Expression-Bodied Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Step 7: Expression-Bodied Methods (Shortcut)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">For <strong>simple methods</strong> that only have one line, you can use a shortcut.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-long-arrow-alt-right text-warning me-2"></i>Regular Method (Long Way)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">IsEven</span>(<span class="keyword">int</span> number)
+{
+    <span class="keyword">return</span> number % <span class="number">2</span> == <span class="number">0</span>;
+}</code></pre>
+                                                </div>
+                                                <p class="text-warning">⚠️ Lot of code for simple logic!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-bolt text-success me-2"></i>Expression-Bodied (Short Way)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Use =&gt; (arrow) for single line methods</span>
+<span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) => a + b;
+
+<span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">IsEven</span>(<span class="keyword">int</span> number) => number % <span class="number">2</span> == <span class="number">0</span>;
+
+<span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Print</span>(<span class="keyword">string</span> msg) => Console.WriteLine(msg);</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Benefits:</strong> Shorter, cleaner, easier to read
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 8: Real-World Example -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Real-World Example: Student Manager</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a complete <strong>StudentManager</strong> class with all types of methods:</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h5><i class="fas fa-file-code text-primary me-2"></i>StudentManager.cs</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Collections.Generic;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">StudentManager</span>
+{
+    <span class="comment">// Private field to store students</span>
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt; students = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+    
+    <span class="comment">// 1. Add a student (void method)</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddStudent</span>(<span class="keyword">string</span> name)
+    {
+        <span class="comment">// Validate input</span>
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(name))
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(<span class="string">"Name cannot be empty!"</span>);
+        
+        students.<span class="function">Add</span>(name);
+        Console.WriteLine(<span class="string">$"✅ Student '{name}' added successfully."</span>);
+    }
+    
+    <span class="comment">// 2. Remove a student (returns bool)</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">RemoveStudent</span>(<span class="keyword">string</span> name)
+    {
+        <span class="keyword">if</span> (students.<span class="function">Remove</span>(name))
+        {
+            Console.WriteLine(<span class="string">$"❌ Student '{name}' removed."</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        Console.WriteLine(<span class="string">$"⚠️ Student '{name}' not found."</span>);
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// 3. Find a student (using out parameter)</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">FindStudent</span>(<span class="keyword">string</span> name, <span class="keyword">out</span> <span class="keyword">int</span> index)
+    {
+        index = students.<span class="function">IndexOf</span>(name);
+        <span class="keyword">return</span> index >= <span class="number">0</span>;
+    }
+    
+    <span class="comment">// 4. Get student at index (with validation)</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> <span class="function">GetStudent</span>(<span class="keyword">int</span> index)
+    {
+        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index >= students.Count)
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentOutOfRangeException</span>(<span class="string">"Invalid index!"</span>);
+        <span class="keyword">return</span> students[index];
+    }
+    
+    <span class="comment">// 5. Get all students (returns array)</span>
+    <span class="keyword">public</span> <span class="keyword">string</span>[] <span class="function">GetAllStudents</span>() => students.<span class="function">ToArray</span>();
+    
+    <span class="comment">// 6. Get count (read-only property)</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> Count => students.Count;
+    
+    <span class="comment">// 7. Clear all (void method)</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Clear</span>() => students.<span class="function">Clear</span>();
+    
+    <span class="comment">// 8. Display all students</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayAll</span>()
+    {
+        <span class="keyword">if</span> (students.Count == <span class="number">0</span>)
+        {
+            Console.WriteLine(<span class="string">"📭 No students in the list."</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        Console.WriteLine(<span class="string">$"\n📚 Students ({Count} total):"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; students.Count; i++)
+        {
+            Console.WriteLine(<span class="string">$"  {i + 1}. {students[i]}"</span>);
+        }
+        Console.WriteLine();
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h5><i class="fas fa-play text-success me-2"></i>Program.cs (Using the Manager)</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="keyword">using</span> System;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🎓 STUDENT MANAGEMENT SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
+        
+        <span class="comment">// Create manager</span>
+        <span class="class">StudentManager</span> manager = <span class="keyword">new</span> <span class="class">StudentManager</span>();
+        
+        <span class="comment">// Add students</span>
+        manager.<span class="function">AddStudent</span>(<span class="string">"Alice"</span>);
+        manager.<span class="function">AddStudent</span>(<span class="string">"Bob"</span>);
+        manager.<span class="function">AddStudent</span>(<span class="string">"Charlie"</span>);
+        manager.<span class="function">AddStudent</span>(<span class="string">"Diana"</span>);
+        
+        <span class="comment">// Display all</span>
+        manager.<span class="function">DisplayAll</span>();
+        
+        <span class="comment">// Find a student using out parameter</span>
+        <span class="keyword">if</span> (manager.<span class="function">FindStudent</span>(<span class="string">"Bob"</span>, <span class="keyword">out</span> <span class="keyword">int</span> index))
+        {
+            Console.WriteLine(<span class="string">$"✅ Bob found at position {index + 1}"</span>);
+        }
+        
+        <span class="comment">// Remove a student</span>
+        manager.<span class="function">RemoveStudent</span>(<span class="string">"Charlie"</span>);
+        manager.<span class="function">RemoveStudent</span>(<span class="string">"Unknown"</span>);  <span class="comment">// This will show "not found"</span>
+        
+        Console.WriteLine();
+        manager.<span class="function">DisplayAll</span>();
+        
+        <span class="comment">// Get a specific student</span>
+        <span class="keyword">try</span>
+        {
+            <span class="keyword">string</span> student = manager.<span class="function">GetStudent</span>(<span class="number">0</span>);
+            Console.WriteLine(<span class="string">$"👤 First student: {student}"</span>);
+            
+            <span class="comment">// This will throw an error</span>
+            <span class="keyword">string</span> invalid = manager.<span class="function">GetStudent</span>(<span class="number">99</span>);
+        }
+        <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
+        {
+            Console.WriteLine(<span class="string">$"❌ Error: {ex.Message}"</span>);
+        }
+        
+        Console.WriteLine(<span class="string">$"\n📊 Total students: {manager.Count}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>What this shows:</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>Void</strong> methods (AddStudent, DisplayAll)</li>
+                                                <li>✅ <strong>Return</strong> methods (GetStudent, GetAllStudents)</li>
+                                                <li>✅ <strong>out</strong> parameter (FindStudent)</li>
+                                                <li>✅ <strong>Validation</strong> (checking invalid inputs)</li>
+                                                <li>✅ <strong>Expression-bodied</strong> method (GetAllStudents)</li>
+                                                <li>✅ <strong>Read-only</strong> property (Count)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Summary / Key Points -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>What You Learned Today</h3>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-cog fa-3x mb-2"></i>
+                                        <h5>Methods</h5>
+                                        <p>Actions your class can do</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>Parameters</h5>
+                                        <p>Inputs for methods</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-copy fa-3x mb-2"></i>
+                                        <h5>Overloading</h5>
+                                        <p>Same name, different inputs</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-bolt fa-3x mb-2"></i>
+                                        <h5>Static</h5>
+                                        <p>Methods without objects</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise -->
+                    <div class="card border-0 shadow-lg mt-5" data-aos="zoom-in" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                            <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create an Inventory Manager</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5>Your Task:</h5>
+                            <p>Create an <code>InventoryManager</code> class with the following:</p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
+                                            <ol>
+                                                <li>
+                                                    <strong>AddItem</strong> - Add an item with name and quantity
+                                                    <ul>
+                                                        <li>Optional price parameter (default 0)</li>
+                                                        <li>Validate that name is not empty</li>
+                                                        <li>Validate quantity is positive</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>RemoveItem</strong> - Remove item by name
+                                                    <ul>
+                                                        <li>Returns true if removed</li>
+                                                        <li>Returns false if not found</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>FindItem</strong> - Find item by name
+                                                    <ul>
+                                                        <li>Uses <code>out</code> parameter to return quantity</li>
+                                                        <li>Returns true if found</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6><i class="fas fa-code text-success me-2"></i>More Requirements:</h6>
+                                            <ol start="4">
+                                                <li>
+                                                    <strong>UpdateQuantity</strong> - Update quantity by name
+                                                    <ul>
+                                                        <li>New quantity must be positive</li>
+                                                        <li>Returns true if updated</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>GetTotalValue</strong> - Calculate total value of all items
+                                                    <ul>
+                                                        <li>Uses price * quantity for each item</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>DisplayInventory</strong> - Show all items with formatting</li>
+                                                <li><strong>Count</strong> - Read-only property for item count</li>
+                                            </ol>
+                                            <div class="mt-2">
+                                                <span class="badge bg-warning text-dark">💡 Use the StudentManager as reference!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                <i class="fas fa-eye me-2"></i> Show Solution
+                            </button>
+
+                            <div id="solution" style="display: none; margin-top: 20px;">
+                                <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                    <div class="code-block">
+                                        <pre><code class="language-csharp"><span class="comment">// InventoryManager.cs</span>
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Collections.Generic;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">InventoryManager</span>
+{
+    <span class="comment">// Store items with their data</span>
+    <span class="keyword">private</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, (<span class="keyword">int</span> quantity, <span class="keyword">decimal</span> price)&gt; items = 
+        <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, (<span class="keyword">int</span>, <span class="keyword">decimal</span>)&gt;();
+    
+    <span class="comment">// 1. Add item</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddItem</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> quantity, <span class="keyword">decimal</span> price = <span class="number">0</span>)
+    {
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(name))
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(<span class="string">"Name cannot be empty!"</span>);
+        <span class="keyword">if</span> (quantity &lt;= <span class="number">0</span>)
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(<span class="string">"Quantity must be positive!"</span>);
+        <span class="keyword">if</span> (price &lt; <span class="number">0</span>)
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(<span class="string">"Price cannot be negative!"</span>);
+        
+        items[name] = (quantity, price);
+        Console.WriteLine(<span class="string">$"✅ Added: {name} (Qty: {quantity}, Price: ${price:F2})"</span>);
+    }
+    
+    <span class="comment">// 2. Remove item</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">RemoveItem</span>(<span class="keyword">string</span> name)
+    {
+        <span class="keyword">if</span> (items.<span class="function">Remove</span>(name))
+        {
+            Console.WriteLine(<span class="string">$"❌ Removed: {name}"</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        Console.WriteLine(<span class="string">$"⚠️ Item '{name}' not found."</span>);
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// 3. Find item</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">FindItem</span>(<span class="keyword">string</span> name, <span class="keyword">out</span> <span class="keyword">int</span> quantity, <span class="keyword">out</span> <span class="keyword">decimal</span> price)
+    {
+        <span class="keyword">if</span> (items.<span class="function">TryGetValue</span>(name, <span class="keyword">out</span> <span class="keyword">var</span> item))
+        {
+            quantity = item.quantity;
+            price = item.price;
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        quantity = <span class="number">0</span>;
+        price = <span class="number">0</span>;
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// 4. Update quantity</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">UpdateQuantity</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> newQuantity)
+    {
+        <span class="keyword">if</span> (newQuantity &lt;= <span class="number">0</span>)
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">ArgumentException</span>(<span class="string">"Quantity must be positive!"</span>);
+        
+        <span class="keyword">if</span> (items.<span class="function">ContainsKey</span>(name))
+        {
+            <span class="keyword">var</span> (quantity, price) = items[name];
+            items[name] = (newQuantity, price);
+            Console.WriteLine(<span class="string">$"🔄 Updated: {name} (Qty: {quantity} → {newQuantity})"</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        Console.WriteLine(<span class="string">$"⚠️ Item '{name}' not found."</span>);
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// 5. Get total value</span>
+    <span class="keyword">public</span> <span class="keyword">decimal</span> <span class="function">GetTotalValue</span>()
+    {
+        <span class="keyword">decimal</span> total = <span class="number">0</span>;
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> kvp <span class="keyword">in</span> items)
+        {
+            total += kvp.Value.quantity * kvp.Value.price;
+        }
+        <span class="keyword">return</span> total;
+    }
+    
+    <span class="comment">// 6. Display inventory</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayInventory</span>()
+    {
+        <span class="keyword">if</span> (items.Count == <span class="number">0</span>)
+        {
+            Console.WriteLine(<span class="string">"📭 Inventory is empty."</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        Console.WriteLine(<span class="string">$"\n📦 INVENTORY ({Count} items):"</span>);
+        Console.WriteLine(<span class="string">$"{"Item",-20} {"Qty",-6} {"Price",-10} {"Value",-10}"</span>);
+        Console.WriteLine(<span class="string">$"{"────",-20} {"───",-6} {"─────",-10} {"─────",-10}"</span>);
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> kvp <span class="keyword">in</span> items)
+        {
+            <span class="keyword">string</span> name = kvp.Key;
+            <span class="keyword">int</span> qty = kvp.Value.quantity;
+            <span class="keyword">decimal</span> price = kvp.Value.price;
+            <span class="keyword">decimal</span> value = qty * price;
+            
+            Console.WriteLine(<span class="string">$"{name,-20} {qty,-6} ${price,-9:F2} ${value,-9:F2}"</span>);
+        }
+        Console.WriteLine(<span class="string">$"\n💰 Total Inventory Value: ${GetTotalValue():F2}\n"</span>);
+    }
+    
+    <span class="comment">// 7. Count property</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> Count => items.Count;
+}
+
+<span class="comment">// Program.cs</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"📦 INVENTORY MANAGEMENT SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
+        
+        <span class="class">InventoryManager</span> inventory = <span class="keyword">new</span> <span class="class">InventoryManager</span>();
+        
+        <span class="comment">// Add items</span>
+        inventory.<span class="function">AddItem</span>(<span class="string">"Laptop"</span>, <span class="number">5</span>, <span class="number">999.99m</span>);
+        inventory.<span class="function">AddItem</span>(<span class="string">"Mouse"</span>, <span class="number">20</span>, <span class="number">25.50m</span>);
+        inventory.<span class="function">AddItem</span>(<span class="string">"Keyboard"</span>, <span class="number">15</span>, <span class="number">45.00m</span>);
+        inventory.<span class="function">AddItem</span>(<span class="string">"Monitor"</span>, <span class="number">3</span>, <span class="number">299.99m</span>);
+        
+        Console.WriteLine();
+        inventory.<span class="function">DisplayInventory</span>();
+        
+        <span class="comment">// Update quantity</span>
+        inventory.<span class="function">UpdateQuantity</span>(<span class="string">"Mouse"</span>, <span class="number">30</span>);
+        
+        <span class="comment">// Find an item</span>
+        <span class="keyword">if</span> (inventory.<span class="function">FindItem</span>(<span class="string">"Laptop"</span>, <span class="keyword">out</span> <span class="keyword">int</span> qty, <span class="keyword">out</span> <span class="keyword">decimal</span> price))
+        {
+            Console.WriteLine(<span class="string">$"🔍 Found: Laptop (Qty: {qty}, Price: ${price:F2})"</span>);
+        }
+        
+        <span class="comment">// Remove an item</span>
+        inventory.<span class="function">RemoveItem</span>(<span class="string">"Monitor"</span>);
+        
+        Console.WriteLine();
+        inventory.<span class="function">DisplayInventory</span>();
+        
+        Console.WriteLine(<span class="string">$"📊 Total items: {inventory.Count}"</span>);
+        Console.WriteLine(<span class="string">$"💰 Total value: ${inventory.GetTotalValue():F2}"</span>);
+    }
+}</code></pre>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-success fs-6">✅ Solution Complete!</span>
+                                        <span class="badge bg-info fs-6 ms-2">You've used all types of methods: void, return, out, params, overloaded, and static!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/02-FieldsAndProperties" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/04-Constructors" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson3")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

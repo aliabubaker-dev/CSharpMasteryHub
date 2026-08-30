@@ -1,7 +1,7 @@
 ﻿@page
 @model InheritanceModel
 @{
-    ViewData["Title"] = "Inheritance in C#";
+    ViewData["Title"] = "Inheritance in C# - Master Guide";
 }
 
 <div class="container-fluid px-0">
@@ -18,17 +18,17 @@
                         </ol>
                     </nav>
                     <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                        Inheritance
+                        Inheritance Master Guide
                     </h1>
                     <p class="lead text-white-50 fs-4 mt-3">
-                        Reusing Code Like a Family Tree
+                        Become a Master of Code Reuse and Hierarchy
                     </p>
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
-                            <i class="fas fa-graduation-cap me-2"></i>Intermediate
+                            <i class="fas fa-graduation-cap me-2"></i>Intermediate to Advanced
                         </span>
                         <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
-                            <i class="fas fa-clock me-2"></i>25 min read
+                            <i class="fas fa-clock me-2"></i>35 min read
                         </span>
                         <span class="badge bg-primary fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-book me-2"></i>Lesson 6 of 11
@@ -56,39 +56,79 @@
                                     <i class="fas fa-rocket fa-3x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h2 class="fw-bold text-primary">Passing Down Properties Like a Family</h2>
+                                    <h2 class="fw-bold text-primary">The Foundation of Code Reuse</h2>
                                     <p class="fs-5">
-                                        In previous lessons, we learned about classes and encapsulation. Now let's learn
-                                        <strong>how to reuse code</strong> using <strong class="text-success">Inheritance</strong>!
+                                        <strong>Inheritance</strong> is one of the most powerful features in C#.
+                                        It allows you to create a <strong>hierarchy</strong> of classes where children
+                                        <strong>inherit</strong> everything from their parents.
                                     </p>
                                     <div class="alert alert-success mt-3">
                                         <i class="fas fa-lightbulb me-2"></i>
-                                        <strong>Think of it like a family:</strong>
+                                        <strong>Real-World Analogy:</strong>
                                         <ul class="mb-0">
-                                            <li><strong>Parent Class</strong> = The parent (passes down traits)</li>
-                                            <li><strong>Child Class</strong> = The child (inherits traits from parent)</li>
-                                            <li>Children <strong>inherit</strong> everything from their parents</li>
-                                            <li>Children can also <strong>add</strong> their own unique traits</li>
+                                            <li><strong>Parent Class</strong> = A blueprint for "Vehicle" (has wheels, engine, can move)</li>
+                                            <li><strong>Child Class</strong> = "Car" (inherits everything from Vehicle, adds doors, radio)</li>
+                                            <li><strong>Grandchild</strong> = "SportsCar" (inherits from Car, adds turbo, spoiler)</li>
+                                            <li>Each level <strong>adds</strong> more specific features</li>
                                         </ul>
                                     </div>
-                                    <p class="mt-3">
-                                        <strong>Why is inheritance useful?</strong> It lets you <strong>reuse code</strong>,
-                                        <strong>save time</strong>, and create <strong>organized</strong> programs.
-                                        You write code once in the parent, and all children get it automatically!
-                                    </p>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div class="card bg-white">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-tools fa-2x text-primary"></i>
+                                                    <h6>Code Reuse</h6>
+                                                    <small>Write once, use many times</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-white">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-sitemap fa-2x text-success"></i>
+                                                    <h6>Organization</h6>
+                                                    <small>Logical class hierarchy</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-white">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-expand fa-2x text-warning"></i>
+                                                    <h6>Extensibility</h6>
+                                                    <small>Easy to add new features</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 1: What is Inheritance? -->
+                    <!-- Part 1: Understanding Inheritance Deeply -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Step 1: What is Inheritance?</h3>
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: Understanding Inheritance Deeply</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5"><strong>Inheritance</strong> is when one class gets all the properties and methods from another class.</p>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-question-circle text-primary me-2"></i>What Exactly is Inheritance?</h5>
+                                                <p>Inheritance is a mechanism where a <strong>child class</strong> receives all the members (fields, properties, methods) from its <strong>parent class</strong>. The child can then:</p>
+                                                <ul>
+                                                    <li>✅ <strong>Use</strong> everything from the parent (reuse code)</li>
+                                                    <li>✅ <strong>Add</strong> its own new members</li>
+                                                    <li>✅ <strong>Override</strong> (change) parent's behavior</li>
+                                                    <li>✅ <strong>Extend</strong> the parent's functionality</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -101,32 +141,42 @@
     <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
     <span class="keyword">public</span> <span class="keyword">int</span> Age { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Eat</span>()
-    {
-        Console.WriteLine(<span class="string">$"{Name} is eating..."</span>);
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Eat</span>() 
+    { 
+        Console.WriteLine(<span class="string">$"{Name} is eating"</span>); 
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Sleep</span>() 
+    { 
+        Console.WriteLine(<span class="string">$"{Name} is sleeping"</span>); 
     }
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-primary">Parent</span> Passes down traits</p>
+                                                <p><span class="badge bg-primary">Parent</span> Has 4 members: Name, Age, Eat(), Sleep()</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Child Class (Derived)</h5>
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Child Class</h5>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>  <span class="comment">// : means inherits</span>
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>  <span class="comment">// Inherits from Animal</span>
 {
-    <span class="keyword">public</span> <span class="keyword">string</span> Breed { <span class="function">get</span>; <span class="function">set</span>; }  <span class="comment">// Own trait</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Breed { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Bark</span>()
-    {
-        Console.WriteLine(<span class="string">$"{Name} says Woof!"</span>);
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Bark</span>() 
+    { 
+        Console.WriteLine(<span class="string">$"{Name} says Woof!"</span>); 
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Fetch</span>() 
+    { 
+        Console.WriteLine(<span class="string">$"{Name} is fetching!"</span>); 
     }
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-success">Child</span> Gets everything from parent + own traits</p>
+                                                <p><span class="badge bg-success">Child</span> Has 6 members: Inherits 4 + adds 2 new ones!</p>
                                             </div>
                                         </div>
                                     </div>
@@ -134,142 +184,87 @@
 
                                 <div class="alert alert-info mt-3">
                                     <i class="fas fa-check-circle me-2"></i>
-                                    <strong>Result:</strong> Dog has <strong>Name</strong>, <strong>Age</strong>, <strong>Eat()</strong> (inherited)
-                                    AND <strong>Breed</strong>, <strong>Bark()</strong> (its own)!
+                                    <strong>Key Insight:</strong> The Dog class automatically has <strong>Name</strong>, <strong>Age</strong>,
+                                    <strong>Eat()</strong>, and <strong>Sleep()</strong> without writing any code for them!
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Step 2: The "is-a" Relationship -->
+                    <!-- Part 2: The 'base' Keyword - Calling the Parent -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Step 2: The "is-a" Relationship</h3>
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: The 'base' Keyword - Parent Connection</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5">Inheritance means the child <strong>IS A</strong> type of the parent.</p>
-
-                                <div class="row g-3">
-                                    <div class="col-lg-4">
-                                        <div class="card text-center h-100">
-                                            <div class="card-body">
-                                                <i class="fas fa-dog fa-3x text-primary"></i>
-                                                <h5 class="mt-2">Dog</h5>
-                                                <p class="text-success">IS A</p>
-                                                <i class="fas fa-paw fa-2x text-warning"></i>
-                                                <h5>Animal</h5>
-                                                <small class="text-muted">A dog is a type of animal</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="card text-center h-100">
-                                            <div class="card-body">
-                                                <i class="fas fa-car fa-3x text-primary"></i>
-                                                <h5 class="mt-2">Car</h5>
-                                                <p class="text-success">IS A</p>
-                                                <i class="fas fa-truck fa-2x text-warning"></i>
-                                                <h5>Vehicle</h5>
-                                                <small class="text-muted">A car is a type of vehicle</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="card text-center h-100">
-                                            <div class="card-body">
-                                                <i class="fas fa-user-tie fa-3x text-primary"></i>
-                                                <h5 class="mt-2">Manager</h5>
-                                                <p class="text-success">IS A</p>
-                                                <i class="fas fa-user fa-2x text-warning"></i>
-                                                <h5>Employee</h5>
-                                                <small class="text-muted">A manager is a type of employee</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="alert alert-warning mt-3">
-                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                    <strong>Remember:</strong> If you can say "X IS A Y", then inheritance makes sense!
-                                    <br>
-                                    Example: "A Dog IS AN Animal" ✅ | "A Dog IS A Car" ❌
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Step 3: Base Keyword - Calling the Parent -->
-                    <section class="mb-5" data-aos="fade-up">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Step 3: The 'base' Keyword - Calling the Parent</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <p class="fs-5">The <strong>base</strong> keyword lets you call the parent's constructor or methods.</p>
+                                <p class="fs-5">The <strong>base</strong> keyword is like a phone line to your parent class. It lets you:</p>
+                                <ul>
+                                    <li>✅ Call the <strong>parent's constructor</strong> (initialize parent data)</li>
+                                    <li>✅ Call the <strong>parent's methods</strong> (reuse parent logic)</li>
+                                    <li>✅ Access <strong>protected</strong> members</li>
+                                </ul>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>Parent Constructor</h5>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Calling Parent Constructor</h5>
                                                 <div class="code-block small">
                                                     <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span>
 {
     <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Age { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Animal</span>(<span class="keyword">string</span> name)
+    <span class="keyword">public</span> <span class="function">Animal</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age)
     {
         Name = name;
+        Age = age;
+        Console.WriteLine(<span class="string">"Animal created"</span>);
     }
-}</code></pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-link text-success me-2"></i>Child Uses 'base'</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
 {
     <span class="keyword">public</span> <span class="keyword">string</span> Breed { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Dog</span>(<span class="keyword">string</span> name, <span class="keyword">string</span> breed) 
-        : <span class="function">base</span>(name)  <span class="comment">// ✅ Calls parent constructor</span>
+    <span class="keyword">public</span> <span class="function">Dog</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">string</span> breed) 
+        : <span class="function">base</span>(name, age)  <span class="comment">// ✅ Parent constructor runs first</span>
     {
         Breed = breed;
+        Console.WriteLine(<span class="string">"Dog created"</span>);
     }
 }</code></pre>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="alert alert-info mt-3">
-                                    <i class="fas fa-lightbulb me-2"></i>
-                                    <strong>Why use base?</strong> It makes sure the parent is properly set up before the child adds its own data.
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Step 4: Virtual and Override -->
-                    <section class="mb-5" data-aos="fade-up">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Step 4: Virtual & Override - Changing Behavior</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <p class="fs-5"><strong>Virtual</strong> allows a child to <strong>override</strong> (change) the parent's method.</p>
-
-                                <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>Parent with Virtual</h5>
+                                                <h5><i class="fas fa-play text-success me-2"></i>What Happens</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Dog</span> dog = <span class="keyword">new</span> <span class="class">Dog</span>(<span class="string">"Rex"</span>, <span class="number">3</span>, <span class="string">"Lab"</span>);
+
+<span class="comment">// Output:</span>
+<span class="comment">// "Animal created"  ← Parent constructor</span>
+<span class="comment">// "Dog created"     ← Child constructor</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-lightbulb me-2"></i>
+                                                    <strong>Why this matters:</strong> The parent must be properly initialized before the child adds its own data.
+                                                    Like building a house - you need the foundation (parent) before adding the roof (child)!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-link text-warning me-2"></i>Using 'base' to Call Parent Methods</h5>
                                                 <div class="code-block small">
                                                     <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span>
 {
@@ -277,56 +272,18 @@
     {
         Console.WriteLine(<span class="string">"Animal makes a sound"</span>);
     }
-}</code></pre>
-                                                </div>
-                                                <p><span class="badge bg-info">virtual</span> Means child can change this</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Child with Override</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
 {
     <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>()
     {
-        Console.WriteLine(<span class="string">"Dog barks: Woof!"</span>);
+        <span class="function">base</span>.<span class="function">MakeSound</span>();  <span class="comment">// ✅ First, do parent's version</span>
+        Console.WriteLine(<span class="string">"Dog barks: Woof!"</span>);  <span class="comment">// Then add extra</span>
     }
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-success">override</span> Changes the parent's method</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-play text-primary me-2"></i>What Happens?</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="class">Animal</span> a = <span class="keyword">new</span> <span class="class">Animal</span>();
-a.<span class="function">MakeSound</span>();  <span class="comment">// "Animal makes a sound"</span>
-
-<span class="class">Dog</span> d = <span class="keyword">new</span> <span class="class">Dog</span>();
-d.<span class="function">MakeSound</span>();  <span class="comment">// "Dog barks: Woof!"</span></code></pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-exclamation-triangle text-warning me-2"></i>Key Points</h5>
-                                                <ul>
-                                                    <li>✅ <strong>virtual</strong> = "You can change me"</li>
-                                                    <li>✅ <strong>override</strong> = "I'm changing you"</li>
-                                                    <li>✅ Child can <strong>change</strong> parent's behavior</li>
-                                                    <li>✅ Child can also use <code>base.MakeSound()</code></li>
-                                                </ul>
+                                                <p class="mt-2"><span class="badge bg-info">base.MakeSound()</span> Let's you reuse parent logic before adding your own</p>
                                             </div>
                                         </div>
                                     </div>
@@ -335,28 +292,186 @@ d.<span class="function">MakeSound</span>();  <span class="comment">// "Dog bark
                         </div>
                     </section>
 
-                    <!-- Step 5: Protected Members -->
+                    <!-- Part 3: Virtual, Override, and New -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: Protected - Family Only</h3>
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: Virtual, Override, and New - Method Behavior Control</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5"><strong>Protected</strong> means only the class and its children can access it.</p>
+                                <p class="fs-5">C# gives you three ways to control how methods behave in inheritance:</p>
+
+                                <div class="row g-3">
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-check-circle fa-2x text-primary"></i>
+                                                <h5 class="mt-2">virtual</h5>
+                                                <p><strong>Parent says:</strong> "You can change me"</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Start</span>()
+{
+    Console.WriteLine(<span class="string">"Starting..."</span>);
+}</code></pre>
+                                                </div>
+                                                <small class="text-muted">✅ Parent allows change</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-edit fa-2x text-success"></i>
+                                                <h5 class="mt-2">override</h5>
+                                                <p><strong>Child says:</strong> "I'm changing you"</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Start</span>()
+{
+    Console.WriteLine(<span class="string">"Car starts..."</span>);
+}</code></pre>
+                                                </div>
+                                                <small class="text-muted">✅ Child changes behavior</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-plus-circle fa-2x text-warning"></i>
+                                                <h5 class="mt-2">new</h5>
+                                                <p><strong>Child says:</strong> "I'll do my own thing"</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">new</span> <span class="keyword">void</span> <span class="function">Start</span>()
+{
+    Console.WriteLine(<span class="string">"New way..."</span>);
+}</code></pre>
+                                                </div>
+                                                <small class="text-muted">🔨 Child hides parent version</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>When to use each:</strong>
+                                    <ul>
+                                        <li><strong>virtual</strong> - When you want children to be able to change behavior</li>
+                                        <li><strong>override</strong> - When you want to completely change parent's behavior</li>
+                                        <li><strong>new</strong> - When you want to hide parent's version (rarely used)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Part 4: Abstract Classes -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: Abstract Classes - Blueprint for Children</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Abstract classes</strong> are incomplete classes that cannot be instantiated. They serve as a <strong>template</strong> for other classes.</p>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>Parent with Protected</h5>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Abstract Class</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Color { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="comment">// Abstract method - no body</span>
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="function">GetArea</span>();
+    
+    <span class="comment">// Regular method - has body</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayColor</span>()
+    {
+        Console.WriteLine(<span class="string">$"Color: {Color}"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Child Must Implement</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Circle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> Radius { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="function">GetArea</span>()
+    {
+        <span class="keyword">return</span> Math.PI * Radius * Radius;
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Rectangle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> Width { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">double</span> Height { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="function">GetArea</span>()
+    {
+        <span class="keyword">return</span> Width * Height;
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Important Rules:</strong>
+                                    <ul>
+                                        <li>❌ Cannot create an instance of an abstract class: <code>new Shape()</code> is illegal</li>
+                                        <li>✅ Abstract methods MUST be implemented by children (like a contract)</li>
+                                        <li>✅ Abstract classes can have regular methods too (with bodies)</li>
+                                        <li>✅ Children can add their own properties and methods</li>
+                                    </ul>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Real-World Example:</strong> "Shape" is abstract - you can't create just a "Shape".
+                                        But you CAN create a "Circle", "Rectangle", or "Triangle" which are all shapes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Part 5: Protected Members -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: Protected Members - Family Access</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Protected</strong> is the perfect balance between private and public.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Protected Example</h5>
                                                 <div class="code-block small">
                                                     <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
 {
-    <span class="keyword">protected</span> <span class="keyword">string</span> SSN;  <span class="comment">// ✅ Family only</span>
-    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">protected</span> <span class="keyword">string</span> SSN { <span class="function">get</span>; <span class="function">set</span>; }  <span class="comment">// Only family</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }       <span class="comment">// Everyone</span>
+    <span class="keyword">private</span> <span class="keyword">string</span> Password { <span class="function">get</span>; <span class="function">set</span>; }  <span class="comment">// Only this class</span>
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-warning text-dark">protected</span> Like a family secret</p>
                                             </div>
                                         </div>
                                     </div>
@@ -367,76 +482,157 @@ d.<span class="function">MakeSound</span>();  <span class="comment">// "Dog bark
                                                 <div class="code-block small">
                                                     <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Employee</span> : <span class="class">Person</span>
 {
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ShowSSN</span>()
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ShowInfo</span>()
     {
-        Console.WriteLine(SSN);  <span class="comment">// ✅ Can access protected!</span>
+        Console.WriteLine(Name);  <span class="comment">// ✅ Public</span>
+        Console.WriteLine(SSN);    <span class="comment">// ✅ Protected (allowed!)</span>
+        <span class="comment">// Console.WriteLine(Password); // ❌ Private (not allowed)</span>
     }
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-success">Child</span> Can see protected members</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="alert alert-info mt-3">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    <strong>Access Levels Summary:</strong>
-                                    <ul>
-                                        <li><strong>public</strong> = Everyone</li>
-                                        <li><strong>private</strong> = Only this class</li>
-                                        <li><strong>protected</strong> = This class + children</li>
-                                    </ul>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-globe fa-2x text-primary"></i>
+                                                <h5 class="mt-2">public</h5>
+                                                <p>🌍 Everyone</p>
+                                                <small>Like your name</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-users fa-2x text-warning"></i>
+                                                <h5 class="mt-2">protected</h5>
+                                                <p>👨‍👩‍👧‍👦 Family Only</p>
+                                                <small>Like family secrets</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-lock fa-2x text-danger"></i>
+                                                <h5 class="mt-2">private</h5>
+                                                <p>🔒 Just You</p>
+                                                <small>Like your password</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Step 6: Inheritance Hierarchy -->
+                    <!-- Part 6: Sealed Classes -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: Sealed Classes - The Final Stop</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Sealed</strong> classes cannot be inherited. They are the end of the line.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Sealed Class</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="class">SecuritySystem</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> EncryptionKey { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Encrypt</span>(<span class="keyword">string</span> data)
+    {
+        Console.WriteLine(<span class="string">$"Encrypting: {data}"</span>);
+    }
+}
+
+<span class="comment">// ✅ This class cannot be inherited</span>
+<span class="comment">// public class MySecurity : SecuritySystem { } // ❌ Error!</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>When to Use Sealed</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Security</strong> - Prevent changing sensitive code</li>
+                                                    <li>✅ <strong>Performance</strong> - Slight performance benefit</li>
+                                                    <li>✅ <strong>Design</strong> - Class is complete, no need for changes</li>
+                                                    <li>✅ <strong>Protection</strong> - Prevent misuse of your class</li>
+                                                </ul>
+                                                <div class="alert alert-info mt-2">
+                                                    <i class="fas fa-example me-2"></i>
+                                                    <strong>Example:</strong> The <code>string</code> class in C# is sealed - you cannot inherit from it!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Part 7: Inheritance Hierarchy -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Step 6: Inheritance Hierarchy (Family Tree)</h3>
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Building Inheritance Hierarchies</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5">You can create a <strong>chain</strong> of inheritance - like a family tree!</p>
+                                <p class="fs-5">You can create <strong>chains</strong> of inheritance - a family tree of classes!</p>
 
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="card bg-light">
-                                            <div class="card-body text-center">
-                                                <h5>Animal Kingdom Hierarchy</h5>
-                                                <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
-                                                    <div class="p-3 bg-primary text-white rounded">
-                                                        <strong>Animal</strong> (Parent)
-                                                    </div>
-                                                    <i class="fas fa-arrow-down fa-2x"></i>
-                                                    <div class="d-flex gap-3 flex-wrap">
-                                                        <div class="p-3 bg-success text-white rounded">
-                                                            <strong>Mammal</strong>
-                                                        </div>
-                                                        <div class="p-3 bg-warning text-dark rounded">
-                                                            <strong>Bird</strong>
-                                                        </div>
-                                                        <div class="p-3 bg-info text-white rounded">
-                                                            <strong>Fish</strong>
-                                                        </div>
-                                                    </div>
-                                                    <i class="fas fa-arrow-down fa-2x"></i>
-                                                    <div class="d-flex gap-3 flex-wrap">
-                                                        <div class="p-3 bg-secondary text-white rounded">
-                                                            <strong>Dog</strong>
-                                                        </div>
-                                                        <div class="p-3 bg-secondary text-white rounded">
-                                                            <strong>Cat</strong>
-                                                        </div>
-                                                        <div class="p-3 bg-secondary text-white rounded">
-                                                            <strong>Eagle</strong>
-                                                        </div>
-                                                        <div class="p-3 bg-secondary text-white rounded">
-                                                            <strong>Salmon</strong>
-                                                        </div>
-                                                    </div>
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-sitemap text-primary me-2"></i>Example Hierarchy: Vehicle System</h5>
+                                        <div class="text-center">
+                                            <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                                                <div class="p-3 bg-primary text-white rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-car fa-2x"></i><br>
+                                                    <strong>Vehicle</strong>
+                                                    <small class="d-block">(Base)</small>
+                                                </div>
+                                            </div>
+                                            <i class="fas fa-arrow-down fa-2x my-2"></i>
+                                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                                <div class="p-3 bg-success text-white rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-car-side fa-2x"></i><br>
+                                                    <strong>Car</strong>
+                                                    <small class="d-block">+ Doors</small>
+                                                </div>
+                                                <div class="p-3 bg-warning text-dark rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-motorcycle fa-2x"></i><br>
+                                                    <strong>Motorcycle</strong>
+                                                    <small class="d-block">+ HasSidecar</small>
+                                                </div>
+                                                <div class="p-3 bg-info text-white rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-truck fa-2x"></i><br>
+                                                    <strong>Truck</strong>
+                                                    <small class="d-block">+ Capacity</small>
+                                                </div>
+                                            </div>
+                                            <i class="fas fa-arrow-down fa-2x my-2"></i>
+                                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                                <div class="p-3 bg-secondary text-white rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-racing-car fa-2x"></i><br>
+                                                    <strong>SportsCar</strong>
+                                                    <small class="d-block">+ Turbo, TopSpeed</small>
+                                                </div>
+                                                <div class="p-3 bg-secondary text-white rounded" style="min-width: 120px;">
+                                                    <i class="fas fa-truck-monster fa-2x"></i><br>
+                                                    <strong>MonsterTruck</strong>
+                                                    <small class="d-block">+ LiftHeight</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -447,11 +643,24 @@ d.<span class="function">MakeSound</span>();  <span class="comment">// "Dog bark
                                     <div class="col-lg-6">
                                         <div class="card bg-light">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>Example Code</h5>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Code for This Hierarchy</h5>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span> { <span class="keyword">public</span> <span class="keyword">string</span> Name; }
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Mammal</span> : <span class="class">Animal</span> { <span class="keyword">public</span> <span class="keyword">int</span> Legs; }
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Mammal</span> { <span class="keyword">public</span> <span class="keyword">string</span> Breed; }</code></pre>
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Vehicle</span> 
+{ 
+    <span class="keyword">public</span> <span class="keyword">string</span> Make { <span class="function">get</span>; <span class="function">set</span>; } 
+    <span class="keyword">public</span> <span class="keyword">string</span> Model { <span class="function">get</span>; <span class="function">set</span>; } 
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Car</span> : <span class="class">Vehicle</span> 
+{ 
+    <span class="keyword">public</span> <span class="keyword">int</span> Doors { <span class="function">get</span>; <span class="function">set</span>; } 
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">SportsCar</span> : <span class="class">Car</span> 
+{ 
+    <span class="keyword">public</span> <span class="keyword">bool</span> HasTurbo { <span class="function">get</span>; <span class="function">set</span>; } 
+    <span class="keyword">public</span> <span class="keyword">int</span> TopSpeed { <span class="function">get</span>; <span class="function">set</span>; } 
+}</code></pre>
                                                 </div>
                                             </div>
                                         </div>
@@ -459,17 +668,19 @@ d.<span class="function">MakeSound</span>();  <span class="comment">// "Dog bark
                                     <div class="col-lg-6">
                                         <div class="card bg-light">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>What Dog Inherits</h5>
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>What SportsCar Inherits</h5>
                                                 <ul>
-                                                    <li>✅ <strong>From Animal:</strong> Name</li>
-                                                    <li>✅ <strong>From Mammal:</strong> Legs</li>
-                                                    <li>✅ <strong>Its own:</strong> Breed</li>
+                                                    <li>✅ <strong>From Vehicle:</strong> Make, Model</li>
+                                                    <li>✅ <strong>From Car:</strong> Doors</li>
+                                                    <li>✅ <strong>Its own:</strong> HasTurbo, TopSpeed</li>
                                                 </ul>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="class">Dog</span> d = <span class="keyword">new</span> <span class="class">Dog</span>();
-d.Name = <span class="string">"Rex"</span>;   <span class="comment">// From Animal</span>
-d.Legs = <span class="number">4</span>;      <span class="comment">// From Mammal</span>
-d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span></code></pre>
+                                                    <pre><code class="language-csharp"><span class="class">SportsCar</span> sc = <span class="keyword">new</span> <span class="class">SportsCar</span>();
+sc.Make = <span class="string">"Ferrari"</span>;    <span class="comment">// From Vehicle</span>
+sc.Model = <span class="string">"F8"</span>;       <span class="comment">// From Vehicle</span>
+sc.Doors = <span class="number">2</span>;           <span class="comment">// From Car</span>
+sc.HasTurbo = <span class="keyword">true</span>;    <span class="comment">// SportsCar own</span>
+sc.TopSpeed = <span class="number">340</span>;      <span class="comment">// SportsCar own</span></code></pre>
                                                 </div>
                                             </div>
                                         </div>
@@ -479,166 +690,295 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                         </div>
                     </section>
 
-                    <!-- Step 7: Sealed Classes -->
+                    <!-- Part 8: Constructors in Inheritance -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Step 7: Sealed Classes - The End of the Line</h3>
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Part 8: Constructors in Inheritance</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5"><strong>Sealed</strong> classes cannot be inherited. They are the final class in the hierarchy.</p>
+                                <p class="fs-5">Constructors in inheritance follow a <strong>specific order</strong> - parents always come first!</p>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>Sealed Class</h5>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Constructor Execution Order</h5>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="class">FinalClass</span>
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Grandparent</span>
 {
-    <span class="keyword">public</span> <span class="keyword">string</span> Data { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="function">Grandparent</span>() 
+    { 
+        Console.WriteLine(<span class="string">"1. Grandparent"</span>); 
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Parent</span> : <span class="class">Grandparent</span>
+{
+    <span class="keyword">public</span> <span class="function">Parent</span>() 
+    { 
+        Console.WriteLine(<span class="string">"2. Parent"</span>); 
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Child</span> : <span class="class">Parent</span>
+{
+    <span class="keyword">public</span> <span class="function">Child</span>() 
+    { 
+        Console.WriteLine(<span class="string">"3. Child"</span>); 
+    }
 }</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-danger">sealed</span> No one can inherit from this</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>This Will Fail</h5>
+                                                <h5><i class="fas fa-play text-success me-2"></i>When You Create a Child</h5>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// ❌ ERROR! Cannot inherit from sealed</span>
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Child</span> : <span class="class">FinalClass</span>
-{
-    <span class="comment">// This causes a compiler error!</span>
-}</code></pre>
+                                                    <pre><code class="language-csharp"><span class="class">Child</span> c = <span class="keyword">new</span> <span class="class">Child</span>();
+
+<span class="comment">// Output:</span>
+<span class="comment">// 1. Grandparent  ← First!</span>
+<span class="comment">// 2. Parent       ← Second!</span>
+<span class="comment">// 3. Child        ← Last!</span></code></pre>
                                                 </div>
-                                                <p><span class="badge bg-danger">❌</span> Compiler error!</p>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-lightbulb me-2"></i>
+                                                    <strong>Why this order?</strong> The parent must be fully built before the child can use it.
+                                                    Like building a house: Foundation → Walls → Roof
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="alert alert-warning mt-3">
-                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                    <strong>When to use sealed:</strong> When you want to <strong>prevent</strong> any further inheritance.
-                                    This protects your class from being changed by others.
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Step 8: Real-World Example -->
+                    <!-- Part 9: Real-World Complete Example -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Real-World Example: Employee System</h3>
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-9 me-2"></i>Part 9: Complete Real-World Example - E-Commerce System</h3>
                             </div>
                             <div class="card-body p-4">
-                                <p class="fs-5">Let's build a complete <strong>Employee</strong> inheritance system:</p>
+                                <p class="fs-5">Let's build a complete <strong>E-Commerce Product</strong> system using inheritance:</p>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-sitemap text-primary me-2"></i>Product Hierarchy</h5>
+                                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                                    <div class="p-2 bg-primary text-white rounded">Product (Base)</div>
+                                                    <i class="fas fa-arrow-right fa-2x"></i>
+                                                    <div class="p-2 bg-success text-white rounded">Electronics</div>
+                                                    <div class="p-2 bg-warning text-dark rounded">Clothing</div>
+                                                    <div class="p-2 bg-info text-white rounded">Food</div>
+                                                    <i class="fas fa-arrow-right fa-2x"></i>
+                                                    <div class="p-2 bg-secondary text-white rounded">Laptop</div>
+                                                    <div class="p-2 bg-secondary text-white rounded">Phone</div>
+                                                    <div class="p-2 bg-secondary text-white rounded">Shirt</div>
+                                                    <div class="p-2 bg-secondary text-white rounded">Snack</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <h5><i class="fas fa-file-code text-primary me-2"></i>Employee (Parent)</h5>
                                         <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Employee</span>
+                                            <pre><code class="language-csharp"><span class="comment">// Base Class - Product</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Product</span>
 {
+    <span class="keyword">public</span> <span class="keyword">int</span> Id { <span class="function">get</span>; <span class="function">set</span>; }
     <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
-    <span class="keyword">public</span> <span class="keyword">decimal</span> Salary { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Price { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Employee</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> salary)
+    <span class="keyword">public</span> <span class="function">Product</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price)
     {
+        Id = <span class="function">GenerateId</span>();
         Name = name;
-        Salary = salary;
+        Price = price;
     }
     
-    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Work</span>()
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> _nextId = <span class="number">1000</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">GenerateId</span>() => ++_nextId;
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
     {
-        Console.WriteLine(<span class="string">$"{Name} is working..."</span>);
+        Console.WriteLine(<span class="string">$"Product: {Name} (${Price})"</span>);
     }
-}</code></pre>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5><i class="fas fa-file-code text-primary me-2"></i>Manager (Child)</h5>
-                                        <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Manager</span> : <span class="class">Employee</span>
+    
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">string</span> <span class="function">GetCategory</span>();
+}
+
+<span class="comment">// Level 2 - Electronics</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Electronics</span> : <span class="class">Product</span>
 {
-    <span class="keyword">public</span> <span class="keyword">int</span> TeamSize { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Brand { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> WarrantyMonths { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Manager</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> salary, <span class="keyword">int</span> team)
-        : <span class="function">base</span>(name, salary)
+    <span class="keyword">public</span> <span class="function">Electronics</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">string</span> brand, <span class="keyword">int</span> warranty)
+        : <span class="function">base</span>(name, price)
     {
-        TeamSize = team;
+        Brand = brand;
+        WarrantyMonths = warranty;
     }
     
-    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Work</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
     {
-        Console.WriteLine(<span class="string">$"{Name} is managing a team of {TeamSize}..."</span>);
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"Brand: {Brand}, Warranty: {WarrantyMonths} months"</span>);
     }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Hire</span>()
-    {
-        TeamSize++;
-        Console.WriteLine(<span class="string">$"{Name} hired someone. Team is now {TeamSize}."</span>);
-    }
-}</code></pre>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5><i class="fas fa-file-code text-primary me-2"></i>Developer (Child)</h5>
-                                        <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Developer</span> : <span class="class">Employee</span>
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">GetCategory</span>() => <span class="string">"Electronics"</span>;
+}
+
+<span class="comment">// Level 3 - Laptop</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Laptop</span> : <span class="class">Electronics</span>
 {
-    <span class="keyword">public</span> <span class="keyword">string</span> Language { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Processor { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> RamGB { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Developer</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> salary, <span class="keyword">string</span> lang)
-        : <span class="function">base</span>(name, salary)
+    <span class="keyword">public</span> <span class="function">Laptop</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">string</span> brand, 
+              <span class="keyword">int</span> warranty, <span class="keyword">string</span> processor, <span class="keyword">int</span> ram)
+        : <span class="function">base</span>(name, price, brand, warranty)
     {
-        Language = lang;
+        Processor = processor;
+        RamGB = ram;
     }
     
-    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Work</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
     {
-        Console.WriteLine(<span class="string">$"{Name} is coding in {Language}..."</span>);
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"Processor: {Processor}, RAM: {RamGB}GB"</span>);
     }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Debug</span>()
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">InstallSoftware</span>(<span class="keyword">string</span> software)
     {
-        Console.WriteLine(<span class="string">$"{Name} is debugging code..."</span>);
+        Console.WriteLine(<span class="string">$"Installing {software} on {Name}..."</span>);
+    }
+}
+
+<span class="comment">// Level 3 - Phone</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Phone</span> : <span class="class">Electronics</span>
+{
+    <span class="keyword">public</span> <span class="keyword">bool</span> Has5G { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> ScreenSize { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Phone</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">string</span> brand, 
+             <span class="keyword">int</span> warranty, <span class="keyword">bool</span> has5G, <span class="keyword">string</span> screen)
+        : <span class="function">base</span>(name, price, brand, warranty)
+    {
+        Has5G = has5G;
+        ScreenSize = screen;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"5G: {(Has5G ? "Yes" : "No")}, Screen: {ScreenSize}\""</span>);
     }
 }</code></pre>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <h5><i class="fas fa-play text-success me-2"></i>Program.cs</h5>
                                         <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="keyword">class</span> <span class="class">Program</span>
+                                            <pre><code class="language-csharp"><span class="comment">// Clothing Class</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Clothing</span> : <span class="class">Product</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Size { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Material { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Clothing</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">string</span> size, <span class="keyword">string</span> material)
+        : <span class="function">base</span>(name, price)
+    {
+        Size = size;
+        Material = material;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"Size: {Size}, Material: {Material}"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">GetCategory</span>() => <span class="string">"Clothing"</span>;
+}
+
+<span class="comment">// Shirt - derived from Clothing</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Shirt</span> : <span class="class">Clothing</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Color { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">bool</span> HasPocket { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Shirt</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">string</span> size, 
+             <span class="keyword">string</span> material, <span class="keyword">string</span> color, <span class="keyword">bool</span> pocket)
+        : <span class="function">base</span>(name, price, size, material)
+    {
+        Color = color;
+        HasPocket = pocket;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"Color: {Color}, Pocket: {(HasPocket ? "Yes" : "No")}"</span>);
+    }
+}
+
+<span class="comment">// Program.cs - Using the system</span>
+<span class="keyword">class</span> <span class="class">Program</span>
 {
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
     {
-        <span class="class">Employee</span> emp = <span class="keyword">new</span> <span class="class">Employee</span>(<span class="string">"John"</span>, <span class="number">50000</span>);
-        <span class="class">Manager</span> mgr = <span class="keyword">new</span> <span class="class">Manager</span>(<span class="string">"Jane"</span>, <span class="number">70000</span>, <span class="number">5</span>);
-        <span class="class">Developer</span> dev = <span class="keyword">new</span> <span class="class">Developer</span>(<span class="string">"Bob"</span>, <span class="number">60000</span>, <span class="string">"C#"</span>);
+        Console.WriteLine(<span class="string">"🛒 E-COMMERCE PRODUCT SYSTEM\n"</span>);
         
-        emp.<span class="function">Work</span>();  <span class="comment">// "John is working..."</span>
-        mgr.<span class="function">Work</span>();  <span class="comment">// "Jane is managing..."</span>
-        dev.<span class="function">Work</span>();  <span class="comment">// "Bob is coding in C#..."</span>
+        <span class="comment">// Create products from different levels</span>
+        <span class="class">Laptop</span> laptop = <span class="keyword">new</span> <span class="class">Laptop</span>(<span class="string">"Gaming Laptop"</span>, <span class="number">1200.00m</span>, 
+            <span class="string">"Dell"</span>, <span class="number">24</span>, <span class="string">"Intel i7"</span>, <span class="number">16</span>);
+            
+        <span class="class">Phone</span> phone = <span class="keyword">new</span> <span class="class">Phone</span>(<span class="string">"Smart Phone"</span>, <span class="number">800.00m</span>, 
+            <span class="string">"Apple"</span>, <span class="number">12</span>, <span class="keyword">true</span>, <span class="string">"6.1"</span>);
+            
+        <span class="class">Shirt</span> shirt = <span class="keyword">new</span> <span class="class">Shirt</span>(<span class="string">"Casual Shirt"</span>, <span class="number">29.99m</span>, 
+            <span class="string">"L"</span>, <span class="string">"Cotton"</span>, <span class="string">"Blue"</span>, <span class="keyword">true</span>);
         
-        mgr.<span class="function">Hire</span>();  <span class="comment">// Manager-specific method</span>
-        dev.<span class="function">Debug</span>();  <span class="comment">// Developer-specific method</span>
+        <span class="comment">// Display all products</span>
+        Console.WriteLine(<span class="string">"📱 ELECTRONICS:"</span>);
+        laptop.<span class="function">DisplayInfo</span>();
+        laptop.<span class="function">InstallSoftware</span>(<span class="string">"Visual Studio"</span>);
+        
+        Console.WriteLine(<span class="string">"\n📱 PHONE:"</span>);
+        phone.<span class="function">DisplayInfo</span>();
+        
+        Console.WriteLine(<span class="string">"\n👕 CLOTHING:"</span>);
+        shirt.<span class="function">DisplayInfo</span>();
+        
+        <span class="comment">// Demonstrating polymorphism</span>
+        Console.WriteLine(<span class="string">"\n🔄 Polymorphism Demonstration:"</span>);
+        <span class="class">Product</span>[] products = { laptop, phone, shirt };
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> product <span class="keyword">in</span> products)
+        {
+            Console.WriteLine(<span class="string">$"Product: {product.Name} (Category: {product.GetCategory()})"</span>);
+        }
     }
 }</code></pre>
                                         </div>
                                         <div class="alert alert-success mt-3">
                                             <i class="fas fa-check-circle me-2"></i>
-                                            <strong>What this shows:</strong>
+                                            <strong>What this complete example shows:</strong>
                                             <ul class="mb-0">
-                                                <li>✅ <strong>Inheritance</strong> - Employee → Manager, Developer</li>
-                                                <li>✅ <strong>base</strong> - Calling parent constructor</li>
-                                                <li>✅ <strong>virtual/override</strong> - Changing Work() behavior</li>
-                                                <li>✅ <strong>Child-specific</strong> - Hire() and Debug() methods</li>
+                                                <li>✅ <strong>Abstract Base Class</strong> - Product with abstract method</li>
+                                                <li>✅ <strong>Multi-level Inheritance</strong> - Product → Electronics → Laptop</li>
+                                                <li>✅ <strong>Virtual/Override</strong> - Each level customizes DisplayInfo()</li>
+                                                <li>✅ <strong>base Keyword</strong> - Children call parent's DisplayInfo()</li>
+                                                <li>✅ <strong>Polymorphism</strong> - Treating all products as Product</li>
+                                                <li>✅ <strong>Child-Specific Methods</strong> - InstallSoftware() only for Laptop</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -650,34 +990,64 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                     <!-- Summary / Key Points -->
                     <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
                         <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>What You Learned Today</h3>
-                            <div class="row mt-3">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>Mastery Summary - What You Now Know</h3>
+                            <div class="row mt-4">
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-sitemap fa-3x mb-2"></i>
                                         <h5>Inheritance</h5>
-                                        <p>Child gets parent's traits</p>
+                                        <small>Child gets parent's traits</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-link fa-3x mb-2"></i>
-                                        <h5>base</h5>
-                                        <p>Call parent's constructor</p>
+                                        <h5>base Keyword</h5>
+                                        <small>Call parent's members</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-edit fa-3x mb-2"></i>
                                         <h5>virtual/override</h5>
-                                        <p>Change parent's behavior</p>
+                                        <small>Change parent's behavior</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-file-alt fa-3x mb-2"></i>
+                                        <h5>abstract</h5>
+                                        <small>Blueprint for children</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-users fa-3x mb-2"></i>
+                                        <h5>protected</h5>
+                                        <small>Family-only access</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-lock fa-3x mb-2"></i>
-                                        <h5>protected</h5>
-                                        <p>Family-only access</p>
+                                        <h5>sealed</h5>
+                                        <small>No more inheritance</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-layer-group fa-3x mb-2"></i>
+                                        <h5>Hierarchy</h5>
+                                        <small>Multi-level inheritance</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-cubes fa-3x mb-2"></i>
+                                        <h5>Polymorphism</h5>
+                                        <small>Treat children as parents</small>
                                     </div>
                                 </div>
                             </div>
@@ -687,11 +1057,11 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                     <!-- Exercise -->
                     <div class="card border-0 shadow-lg mt-5" data-aos="zoom-in" style="border-radius: 20px; overflow: hidden;">
                         <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                            <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercise: Vehicle Inheritance System</h3>
+                            <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Mastery Exercise: Complete Zoo Management System</h3>
                         </div>
                         <div class="card-body p-4">
                             <h5>Your Task:</h5>
-                            <p>Create an inheritance hierarchy for <strong>Vehicles</strong>:</p>
+                            <p>Create a complete <strong>Zoo Management System</strong> using all inheritance concepts:</p>
 
                             <div class="row">
                                 <div class="col-lg-6">
@@ -700,19 +1070,28 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                                             <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
                                             <ol>
                                                 <li>
-                                                    <strong>Base Class: Vehicle</strong>
+                                                    <strong>Abstract Base: Animal</strong>
                                                     <ul>
-                                                        <li>Properties: Make, Model, Year</li>
-                                                        <li>Method: Start() - virtual</li>
-                                                        <li>Constructor: Takes Make, Model, Year</li>
+                                                        <li>Properties: Name, Age, Weight</li>
+                                                        <li>Abstract Method: MakeSound()</li>
+                                                        <li>Virtual Method: Eat()</li>
+                                                        <li>Constructor: Takes Name, Age, Weight</li>
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <strong>Derived: Car</strong>
+                                                    <strong>Derived: Mammal</strong>
                                                     <ul>
-                                                        <li>Property: Doors (int)</li>
-                                                        <li>Override: Start() - custom message</li>
-                                                        <li>Method: Honk()</li>
+                                                        <li>Property: FurColor</li>
+                                                        <li>Property: HasTail (bool)</li>
+                                                        <li>Override: MakeSound()</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>Derived: Bird</strong>
+                                                    <ul>
+                                                        <li>Property: WingSpan</li>
+                                                        <li>Property: CanFly (bool)</li>
+                                                        <li>Override: MakeSound()</li>
                                                     </ul>
                                                 </li>
                                             </ol>
@@ -723,27 +1102,35 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                                     <div class="card bg-light">
                                         <div class="card-body">
                                             <h6><i class="fas fa-code text-success me-2"></i>More Requirements:</h6>
-                                            <ol start="3">
+                                            <ol start="4">
                                                 <li>
-                                                    <strong>Derived: Motorcycle</strong>
+                                                    <strong>Derived from Mammal: Lion</strong>
                                                     <ul>
-                                                        <li>Property: HasSidecar (bool)</li>
-                                                        <li>Override: Start() - custom message</li>
-                                                        <li>Method: Wheelie()</li>
+                                                        <li>Property: PrideSize</li>
+                                                        <li>Method: Hunt()</li>
+                                                        <li>Override: MakeSound() - "Roar!"</li>
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <strong>Derived: Truck</strong>
+                                                    <strong>Derived from Mammal: Elephant</strong>
                                                     <ul>
-                                                        <li>Property: Capacity (double)</li>
-                                                        <li>Override: Start() - custom message</li>
-                                                        <li>Method: Load()</li>
+                                                        <li>Property: TrunkLength</li>
+                                                        <li>Method: SprayWater()</li>
+                                                        <li>Override: MakeSound() - "Trumpet!"</li>
                                                     </ul>
                                                 </li>
-                                                <li><strong>Program.cs:</strong> Create and test all vehicles</li>
+                                                <li>
+                                                    <strong>Derived from Bird: Eagle</strong>
+                                                    <ul>
+                                                        <li>Property: HuntingRange</li>
+                                                        <li>Method: Hunt()</li>
+                                                        <li>Override: MakeSound() - "Scream!"</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>Program.cs:</strong> Create 4+ animals, display info, demonstrate polymorphism</li>
                                             </ol>
                                             <div class="mt-2">
-                                                <span class="badge bg-warning text-dark">💡 Use the Employee example as reference!</span>
+                                                <span class="badge bg-warning text-dark">💡 Use the E-Commerce example as reference!</span>
                                             </div>
                                         </div>
                                     </div>
@@ -751,100 +1138,174 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
                             </div>
 
                             <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
-                                <i class="fas fa-eye me-2"></i> Show Solution
+                                <i class="fas fa-eye me-2"></i> Show Complete Solution
                             </button>
 
                             <div id="solution" style="display: none; margin-top: 20px;">
                                 <div class="p-3 rounded border" style="background: #1e1e2e;">
                                     <div class="code-block">
-                                        <pre><code class="language-csharp"><span class="comment">// Vehicle.cs</span>
+                                        <pre><code class="language-csharp"><span class="comment">// ========== ZOO MANAGEMENT SYSTEM ==========</span>
+<span class="comment">// Animal.cs - Abstract Base Class</span>
 <span class="keyword">using</span> System;
 
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Vehicle</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Animal</span>
 {
-    <span class="keyword">public</span> <span class="keyword">string</span> Make { <span class="function">get</span>; <span class="function">set</span>; }
-    <span class="keyword">public</span> <span class="keyword">string</span> Model { <span class="function">get</span>; <span class="function">set</span>; }
-    <span class="keyword">public</span> <span class="keyword">int</span> Year { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Age { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">double</span> Weight { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Vehicle</span>(<span class="keyword">string</span> make, <span class="keyword">string</span> model, <span class="keyword">int</span> year)
+    <span class="keyword">public</span> <span class="function">Animal</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight)
     {
-        Make = make;
-        Model = model;
-        Year = year;
+        Name = name;
+        Age = age;
+        Weight = weight;
     }
     
-    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Start</span>()
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">string</span> <span class="function">MakeSound</span>();  <span class="comment">// Must be implemented</span>
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Eat</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model} is starting..."</span>);
+        Console.WriteLine(<span class="string">$"{Name} is eating..."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🐾 {Name} (Age: {Age}, Weight: {Weight}kg)"</span>);
+        Console.WriteLine(<span class="string">$"   Sound: {MakeSound()}"</span>);
     }
 }
 
-<span class="comment">// Car.cs</span>
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Car</span> : <span class="class">Vehicle</span>
+<span class="comment">// Mammal.cs - Derived from Animal</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Mammal</span> : <span class="class">Animal</span>
 {
-    <span class="keyword">public</span> <span class="keyword">int</span> Doors { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> FurColor { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">bool</span> HasTail { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Car</span>(<span class="keyword">string</span> make, <span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">int</span> doors)
-        : <span class="function">base</span>(make, model, year)
+    <span class="keyword">public</span> <span class="function">Mammal</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight, <span class="keyword">string</span> fur, <span class="keyword">bool</span> tail)
+        : <span class="function">base</span>(name, age, weight)
     {
-        Doors = doors;
+        FurColor = fur;
+        HasTail = tail;
     }
     
-    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Start</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model} car starts with key!"</span>);
+        <span class="keyword">return</span> <span class="string">"Generic mammal sound"</span>;
     }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Honk</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model}: Beep beep!"</span>);
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"   Fur: {FurColor}, Tail: {(HasTail ? "Yes" : "No")}"</span>);
     }
 }
 
-<span class="comment">// Motorcycle.cs</span>
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Motorcycle</span> : <span class="class">Vehicle</span>
+<span class="comment">// Bird.cs - Derived from Animal</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Bird</span> : <span class="class">Animal</span>
 {
-    <span class="keyword">public</span> <span class="keyword">bool</span> HasSidecar { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">double</span> WingSpan { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">bool</span> CanFly { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Motorcycle</span>(<span class="keyword">string</span> make, <span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">bool</span> sidecar)
-        : <span class="function">base</span>(make, model, year)
+    <span class="keyword">public</span> <span class="function">Bird</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight, <span class="keyword">double</span> wingSpan, <span class="keyword">bool</span> canFly)
+        : <span class="function">base</span>(name, age, weight)
     {
-        HasSidecar = sidecar;
+        WingSpan = wingSpan;
+        CanFly = canFly;
     }
     
-    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Start</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model} motorcycle revs up!"</span>);
+        <span class="keyword">return</span> <span class="string">"Generic bird chirp"</span>;
     }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Wheelie</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model} pops a wheelie!"</span>);
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"   WingSpan: {WingSpan}m, Can Fly: {(CanFly ? "Yes" : "No")}"</span>);
     }
 }
 
-<span class="comment">// Truck.cs</span>
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Truck</span> : <span class="class">Vehicle</span>
+<span class="comment">// Lion.cs - Derived from Mammal</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Lion</span> : <span class="class">Mammal</span>
 {
-    <span class="keyword">public</span> <span class="keyword">double</span> Capacity { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> PrideSize { <span class="function">get</span>; <span class="function">set</span>; }
     
-    <span class="keyword">public</span> <span class="function">Truck</span>(<span class="keyword">string</span> make, <span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">double</span> capacity)
-        : <span class="function">base</span>(make, model, year)
+    <span class="keyword">public</span> <span class="function">Lion</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight, <span class="keyword">string</span> fur, <span class="keyword">bool</span> tail, <span class="keyword">int</span> pride)
+        : <span class="function">base</span>(name, age, weight, fur, tail)
     {
-        Capacity = capacity;
+        PrideSize = pride;
     }
     
-    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Start</span>()
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>()
     {
-        Console.WriteLine(<span class="string">$"{Make} {Model} truck roars to life!"</span>);
+        <span class="keyword">return</span> <span class="string">"🦁 ROAR!"</span>;
     }
     
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Load</span>(<span class="keyword">double</span> weight)
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Hunt</span>()
     {
-        <span class="keyword">if</span> (weight <= Capacity)
-            Console.WriteLine(<span class="string">$"Loaded {weight} tons into {Make} {Model}"</span>);
-        <span class="keyword">else</span>
-            Console.WriteLine(<span class="string">$"❌ Too heavy! Max capacity is {Capacity} tons"</span>);
+        Console.WriteLine(<span class="string">$"🦁 {Name} is hunting with {PrideSize} other lions..."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"   Pride Size: {PrideSize} lions"</span>);
+    }
+}
+
+<span class="comment">// Elephant.cs - Derived from Mammal</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Elephant</span> : <span class="class">Mammal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> TrunkLength { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Elephant</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight, <span class="keyword">string</span> fur, <span class="keyword">bool</span> tail, <span class="keyword">double</span> trunk)
+        : <span class="function">base</span>(name, age, weight, fur, tail)
+    {
+        TrunkLength = trunk;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>()
+    {
+        <span class="keyword">return</span> <span class="string">"🐘 TRUMPET!"</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SprayWater</span>()
+    {
+        Console.WriteLine(<span class="string">$"🐘 {Name} is spraying water with its {TrunkLength}m trunk!"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"   Trunk Length: {TrunkLength}m"</span>);
+    }
+}
+
+<span class="comment">// Eagle.cs - Derived from Bird</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Eagle</span> : <span class="class">Bird</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> HuntingRange { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Eagle</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">double</span> weight, <span class="keyword">double</span> wingSpan, <span class="keyword">bool</span> canFly, <span class="keyword">double</span> range)
+        : <span class="function">base</span>(name, age, weight, wingSpan, canFly)
+    {
+        HuntingRange = range;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>()
+    {
+        <span class="keyword">return</span> <span class="string">"🦅 SCREAM!"</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Hunt</span>()
+    {
+        Console.WriteLine(<span class="string">$"🦅 {Name} is hunting with a range of {HuntingRange}km!"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        <span class="function">base</span>.<span class="function">DisplayInfo</span>();
+        Console.WriteLine(<span class="string">$"   Hunting Range: {HuntingRange}km"</span>);
     }
 }
 
@@ -853,29 +1314,47 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
 {
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
     {
-        Console.WriteLine(<span class="string">"🚗 VEHICLE INHERITANCE DEMO\n"</span>);
+        Console.WriteLine(<span class="string">"🦁 ZOO MANAGEMENT SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
         
-        <span class="class">Car</span> car = <span class="keyword">new</span> <span class="class">Car</span>(<span class="string">"Toyota"</span>, <span class="string">"Camry"</span>, <span class="number">2022</span>, <span class="number">4</span>);
-        <span class="class">Motorcycle</span> bike = <span class="keyword">new</span> <span class="class">Motorcycle</span>(<span class="string">"Harley"</span>, <span class="string">"Sportster"</span>, <span class="number">2021</span>, <span class="keyword">false</span>);
-        <span class="class">Truck</span> truck = <span class="keyword">new</span> <span class="class">Truck</span>(<span class="string">"Ford"</span>, <span class="string">"F-150"</span>, <span class="number">2023</span>, <span class="number">1.5</span>);
+        <span class="comment">// Create animals</span>
+        <span class="class">Lion</span> simba = <span class="keyword">new</span> <span class="class">Lion</span>(<span class="string">"Simba"</span>, <span class="number">5</span>, <span class="number">190.5</span>, <span class="string">"Golden"</span>, <span class="keyword">true</span>, <span class="number">8</span>);
+        <span class="class">Elephant</span> dumbo = <span class="keyword">new</span> <span class="class">Elephant</span>(<span class="string">"Dumbo"</span>, <span class="number">12</span>, <span class="number">5000.0</span>, <span class="string">"Gray"</span>, <span class="keyword">true</span>, <span class="number">2.5</span>);
+        <span class="class">Eagle</span> eddie = <span class="keyword">new</span> <span class="class">Eagle</span>(<span class="string">"Eddie"</span>, <span class="number">3</span>, <span class="number">6.2</span>, <span class="number">2.1</span>, <span class="keyword">true</span>, <span class="number">50.0</span>);
         
-        car.<span class="function">Start</span>();    <span class="comment">// Overridden</span>
-        car.<span class="function">Honk</span>();     <span class="comment">// Car-specific</span>
+        <span class="comment">// Display all animals</span>
+        Console.WriteLine(<span class="string">"📋 ANIMAL PROFILES:\n"</span>);
+        simba.<span class="function">DisplayInfo</span>();
+        simba.<span class="function">Hunt</span>();
+        simba.<span class="function">Eat</span>();
+        
         Console.WriteLine();
+        dumbo.<span class="function">DisplayInfo</span>();
+        dumbo.<span class="function">SprayWater</span>();
         
-        bike.<span class="function">Start</span>();   <span class="comment">// Overridden</span>
-        bike.<span class="function">Wheelie</span>();  <span class="comment">// Motorcycle-specific</span>
         Console.WriteLine();
+        eddie.<span class="function">DisplayInfo</span>();
+        eddie.<span class="function">Hunt</span>();
         
-        truck.<span class="function">Start</span>();   <span class="comment">// Overridden</span>
-        truck.<span class="function">Load</span>(<span class="number">1.0</span>);  <span class="comment">// Truck-specific</span>
-        truck.<span class="function">Load</span>(<span class="number">2.0</span>);  <span class="comment">// Too heavy!</span>
+        <span class="comment">// Polymorphism - treating all as Animal</span>
+        Console.WriteLine(<span class="string">"\n🔄 POLYMORPHISM DEMONSTRATION:"</span>);
+        <span class="class">Animal</span>[] animals = { simba, dumbo, eddie };
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> animal <span class="keyword">in</span> animals)
+        {
+            Console.WriteLine(<span class="string">$"{animal.Name} says: {animal.MakeSound()}"</span>);
+        }
+        
+        <span class="comment">// Protected access demonstration</span>
+        Console.WriteLine(<span class="string">"\n🔒 PROTECTED MEMBERS:"</span>);
+        Console.WriteLine(<span class="string">$"Simba's fur color (protected field in Mammal): {simba.FurColor}"</span>);
+        Console.WriteLine(<span class="string">$"Eddie's wing span (protected field in Bird): {eddie.WingSpan}m"</span>);
     }
 }</code></pre>
                                     </div>
                                     <div class="mt-3">
-                                        <span class="badge bg-success fs-6">✅ Solution Complete!</span>
-                                        <span class="badge bg-info fs-6 ms-2">You've used inheritance: base, virtual, override, and child-specific methods!</span>
+                                        <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                        <span class="badge bg-info fs-6 ms-2">All inheritance concepts used: abstract, virtual, override, base, protected, sealed, hierarchy, and polymorphism!</span>
                                     </div>
                                 </div>
                             </div>
@@ -937,64 +1416,95 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
             position: relative;
             overflow: hidden;
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            pointer-events: none;
-        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
 
         /* Code Block Styling */
         .code-block {
             position: relative;
         }
 
-        .code-block pre {
-            background: #1e1e2e !important;
-            color: #cdd6f4 !important;
-            padding: 1.2rem;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            border-left: 6px solid #89b4fa;
-            margin: 0;
-        }
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
 
-        .code-block.small pre {
-            font-size: 0.75rem;
-            padding: 0.8rem;
-        }
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
 
-        .code-block code {
-            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
-            line-height: 1.6;
-        }
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
 
         /* Visual Studio-like color scheme */
-        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
-        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
-        .language-csharp .string { color: #c3e88d !important; }
-        .language-csharp .number { color: #f78c6c !important; }
-        .language-csharp .function { color: #82aaff !important; }
-        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
-        .language-csharp .property { color: #80cbc4 !important; }
-        .language-csharp .variable { color: #eeffff !important; }
-        .language-csharp .operator { color: #89ddff !important; }
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
 
         /* Card hover effects */
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card:hover:not(.bg-light) {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
 
         /* Badge styling */
         .badge {
@@ -1007,41 +1517,52 @@ d.Breed = <span class="string">"Lab"</span>;  <span class="comment">// Own</span
             border: none;
             transition: all 0.3s;
         }
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
 
         .btn-outline-primary {
             border-radius: 50px;
             transition: all 0.3s;
         }
-        .btn-outline-primary:hover {
-            transform: scale(1.05);
-        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
 
         /* Solution animation */
         #solution {
             animation: fadeSlide 0.5s ease;
         }
         @@keyframes fadeSlide {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* List styling */
         .bg-light ul {
             padding-left: 1.5rem;
         }
-        .bg-light ul li {
-            margin-bottom: 0.3rem;
-        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
 
         /* Responsive adjustments */
         @@media (max-width: 768px) {
             .display-2 {
                 font-size: 2.5rem;
             }
+
             .display-6 {
                 font-size: 1.5rem;
             }

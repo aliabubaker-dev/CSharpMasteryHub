@@ -4,336 +4,940 @@
     ViewData["Title"] = "Encapsulation in C#";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Encapsulation</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Encapsulation in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 5 of 11</span>
-                </div>
-
-                <h2>What is Encapsulation?</h2>
-                <p>
-                    Encapsulation is a fundamental principle of object-oriented programming that bundles data
-                    and methods together while restricting direct access to internal details. It's about
-                    hiding implementation details and exposing only what's necessary.
-                </p>
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Real-World Analogy</h5>
-                        <p class="card-text">A car's steering wheel and pedals are the public interface. The engine, transmission, and fuel injection system are encapsulated - you don't need to know how they work to drive the car.</p>
-                    </div>
-                </div>
-
-                <h2>Access Modifiers</h2>
-
-                <table class="table table-bordered mb-4">
-                    <thead>
-                        <tr>
-                            <th>Modifier</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>public</strong></td>
-                            <td>Accessible from anywhere</td>
-                        </tr>
-                        <tr>
-                            <td><strong>private</strong></td>
-                            <td>Accessible only within the same class</td>
-                        </tr>
-                        <tr>
-                            <td><strong>protected</strong></td>
-                            <td>Accessible within same class and derived classes</td>
-                        </tr>
-                        <tr>
-                            <td><strong>internal</strong></td>
-                            <td>Accessible within the same assembly</td>
-                        </tr>
-                        <tr>
-                            <td><strong>protected internal</strong></td>
-                            <td>Accessible within same assembly or derived classes</td>
-                        </tr>
-                        <tr>
-                            <td><strong>private protected</strong></td>
-                            <td>Accessible within same class or derived classes in same assembly</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h2>Encapsulation Example</h2>
-                <pre><code>public class BankAccount
-{
-    // Private fields - hidden from outside
-    private decimal balance;
-    private string accountNumber;
-    private DateTime lastTransactionDate;
-    private List<Transaction> transactions = new List<Transaction>();
-    
-    // Public properties - controlled access
-    public decimal Balance 
-    { 
-        get { return balance; }
-        private set { balance = value; }
-    }
-    
-    public string AccountNumber
-    {
-        get { return accountNumber; }
-        private set { accountNumber = value; }
-    }
-    
-    // Read-only property
-    public int TransactionCount => transactions.Count;
-    
-    // Constructor
-    public BankAccount(string accountNumber, decimal initialBalance)
-    {
-        this.accountNumber = accountNumber;
-        this.balance = initialBalance;
-        this.lastTransactionDate = DateTime.Now;
-    }
-    
-    // Public methods - expose behavior
-    public void Deposit(decimal amount)
-    {
-        if (amount <= 0)
-            throw new ArgumentException("Deposit amount must be positive");
-        
-        balance += amount;
-        AddTransaction("Deposit", amount);
-    }
-    
-    public bool Withdraw(decimal amount)
-    {
-        if (amount <= 0)
-            throw new ArgumentException("Withdrawal amount must be positive");
-            
-        if (amount > balance)
-            return false;
-            
-        balance -= amount;
-        AddTransaction("Withdrawal", amount);
-        return true;
-    }
-    
-    public Transaction[] GetRecentTransactions(int count)
-    {
-        return transactions
-            .OrderByDescending(t => t.Date)
-            .Take(count)
-            .ToArray();
-    }
-    
-    // Private method - internal behavior
-    private void AddTransaction(string type, decimal amount)
-    {
-        transactions.Add(new Transaction
-        {
-            Type = type,
-            Amount = amount,
-            Date = DateTime.Now
-        });
-    }
-}</code></pre>
-
-                <h2>Property Access Control</h2>
-                <pre><code>public class Product
-{
-    private decimal price;
-    
-    // Public get, private set
-    public decimal Price 
-    { 
-        get { return price; }
-        private set 
-        {
-            if (value < 0)
-                throw new ArgumentException("Price cannot be negative");
-            price = value;
-        }
-    }
-    
-    // Public get, protected set
-    public string Category { get; protected set; }
-    
-    // Public get, init set (C# 9+)
-    public int Id { get; init; }
-}</code></pre>
-
-                <h2>Complete Example</h2>
-                <pre><code>using System;
-
-public class EmployeeManagement
-{
-    // Private fields
-    private string employeeId;
-    private string name;
-    private decimal salary;
-    private string department;
-    private DateTime hireDate;
-    private List<PerformanceReview> reviews = new List<PerformanceReview>();
-    
-    // Public properties with validation
-    public string EmployeeId 
-    { 
-        get { return employeeId; }
-        private set 
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Employee ID cannot be empty");
-            employeeId = value;
-        }
-    }
-    
-    public string Name
-    {
-        get { return name; }
-        set 
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Name cannot be empty");
-            name = value;
-        }
-    }
-    
-    public decimal Salary
-    {
-        get { return salary; }
-        set 
-        {
-            if (value < 0)
-                throw new ArgumentException("Salary cannot be negative");
-            salary = value;
-        }
-    }
-    
-    public string Department
-    {
-        get { return department; }
-        set { department = value ?? "Unassigned"; }
-    }
-    
-    public int YearsOfService => (DateTime.Now - hireDate).Days / 365;
-    
-    public int ReviewCount => reviews.Count;
-    
-    // Constructor
-    public EmployeeManagement(string employeeId, string name, decimal salary)
-    {
-        EmployeeId = employeeId;
-        Name = name;
-        Salary = salary;
-        hireDate = DateTime.Now;
-        Department = "Unassigned";
-    }
-    
-    // Public methods
-    public void GiveRaise(decimal percentage)
-    {
-        if (percentage <= 0)
-            throw new ArgumentException("Percentage must be positive");
-        
-        salary *= (1 + percentage / 100);
-    }
-    
-    public void AddReview(string comments, int rating)
-    {
-        if (rating < 1 || rating > 5)
-            throw new ArgumentException("Rating must be between 1 and 5");
-        
-        reviews.Add(new PerformanceReview
-        {
-            Date = DateTime.Now,
-            Comments = comments,
-            Rating = rating
-        });
-    }
-    
-    public PerformanceReview GetLatestReview()
-    {
-        return reviews.OrderByDescending(r => r.Date).FirstOrDefault();
-    }
-    
-    public double GetAverageRating()
-    {
-        if (reviews.Count == 0)
-            return 0;
-        return reviews.Average(r => r.Rating);
-    }
-}
-
-public class PerformanceReview
-{
-    public DateTime Date { get; set; }
-    public string Comments { get; set; }
-    public int Rating { get; set; }
-}
-
-class Program
-{
-    static void Main()
-    {
-        EmployeeManagement emp = new EmployeeManagement("EMP001", "John Doe", 50000);
-        emp.Department = "IT";
-        emp.GiveRaise(10);
-        emp.AddReview("Excellent performance", 5);
-        
-        Console.WriteLine($"Employee: {emp.Name}");
-        Console.WriteLine($"Years of service: {emp.YearsOfService}");
-        Console.WriteLine($"Current salary: {emp.Salary:C}");
-        Console.WriteLine($"Average rating: {emp.GetAverageRating():F1}");
-    }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p class="card-text">Encapsulation is about protecting data and hiding implementation details. It makes code more maintainable, flexible, and secure.</p>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a class "Course" with:</p>
-                        <ol>
-                            <li>Private fields for all data</li>
-                            <li>Public properties with validation</li>
-                            <li>Methods to add/remove students</li>
-                            <li>Method to calculate average grade</li>
-                            <li>Private methods for internal calculations</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Encapsulation</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Encapsulation
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Protecting Your Data Like a Bank Vault
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-graduation-cap me-2"></i>Intermediate
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-primary fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 5 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/04-Constructors" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-shield-alt fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- Introduction -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-rocket fa-3x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Keeping Your Data Safe</h2>
+                                    <p class="fs-5">
+                                        In previous lessons, we learned about classes, data, methods, and constructors.
+                                        Now let's learn <strong>how to protect your data</strong> using <strong class="text-success">Encapsulation</strong>!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Think of it like this:</strong>
+                                        <ul class="mb-0">
+                                            <li><strong>Encapsulation</strong> = Keeping your data <strong>private</strong> and <strong>safe</strong></li>
+                                            <li>Like a <strong>bank vault</strong> - you can only access it through proper channels</li>
+                                            <li>Like a <strong>car</strong> - you use the steering wheel, not the engine directly</li>
+                                        </ul>
+                                    </div>
+                                    <p class="mt-3">
+                                        <strong>Why is encapsulation important?</strong> It <strong>protects</strong> your data from being
+                                        changed incorrectly. It makes your code <strong>safer</strong>, <strong>easier to maintain</strong>,
+                                        and <strong>more professional</strong>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: What is Encapsulation? -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Step 1: What is Encapsulation?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Encapsulation</strong> means hiding the internal details of a class and only showing what's necessary.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Without Encapsulation (BAD)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Age;  <span class="comment">// Anyone can change this!</span>
+}
+
+<span class="comment">// ❌ Problem: Anyone can set bad data</span>
+<span class="class">Person</span> p = <span class="keyword">new</span> <span class="class">Person</span>();
+p.Age = -<span class="number">5</span>;  <span class="comment">// This is wrong but allowed!</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-danger mt-2">
+                                                    <i class="fas fa-times-circle me-2"></i>
+                                                    <strong>Problem:</strong> Data is <strong>not protected</strong>. Anyone can put bad values!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>With Encapsulation (GOOD)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
+{
+    <span class="keyword">private</span> <span class="keyword">int</span> age;  <span class="comment">// ✅ Hidden!</span>
+    
+    <span class="keyword">public</span> <span class="keyword">int</span> Age  <span class="comment">// ✅ Controlled access</span>
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> age; }
+        <span class="function">set</span> 
+        { 
+            <span class="keyword">if</span> (value > <span class="number">0</span> &amp;&amp; value &lt; <span class="number">120</span>) 
+                age = value; 
+        }
+    }
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Solution:</strong> Data is <strong>protected</strong>! Only valid values are allowed.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 2: Access Modifiers -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Step 2: Access Modifiers - Who Can See What?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Access modifiers control <strong>who</strong> can see and use different parts of your class.</p>
+
+                                <div class="row g-3">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card text-center h-100" style="border-left: 4px solid #4facfe;">
+                                            <div class="card-body">
+                                                <i class="fas fa-globe fa-2x text-primary"></i>
+                                                <h5 class="mt-2">public</h5>
+                                                <p>✅ Anyone can see it</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">string</span> Name;</code></pre>
+                                                </div>
+                                                <small class="text-muted">Like your name - everyone knows it</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card text-center h-100" style="border-left: 4px solid #f093fb;">
+                                            <div class="card-body">
+                                                <i class="fas fa-eye-slash fa-2x text-danger"></i>
+                                                <h5 class="mt-2">private</h5>
+                                                <p>✅ Only this class can see it</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private</span> <span class="keyword">string</span> password;</code></pre>
+                                                </div>
+                                                <small class="text-muted">Like your password - only you know it</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card text-center h-100" style="border-left: 4px solid #43e97b;">
+                                            <div class="card-body">
+                                                <i class="fas fa-shield-alt fa-2x text-info"></i>
+                                                <h5 class="mt-2">protected</h5>
+                                                <p>✅ Class and children can see it</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">protected</span> <span class="keyword">string</span> baseData;</code></pre>
+                                                </div>
+                                                <small class="text-muted">Like family secrets - only family knows</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-lightbulb me-2"></i>
+                                    <strong>Golden Rule:</strong> Make things <strong>private</strong> by default. Only make them <strong>public</strong> if you really need to!
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 3: Private Fields -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Step 3: Private Fields - The Data Storage</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Private fields</strong> store your data safely where nobody else can touch them.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Private Fields Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Student</span>
+{
+    <span class="comment">// ✅ Private - only this class can see</span>
+    <span class="keyword">private</span> <span class="keyword">string</span> name;
+    <span class="keyword">private</span> <span class="keyword">int</span> age;
+    <span class="keyword">private</span> <span class="keyword">double</span> gpa;
+    
+    <span class="comment">// ✅ Public - everyone can see</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> StudentId;
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Why Use Private Fields?</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Protection</strong> - Nobody can change your data directly</li>
+                                                    <li>✅ <strong>Safety</strong> - Prevents bad data from getting in</li>
+                                                    <li>✅ <strong>Control</strong> - You decide how data is accessed</li>
+                                                </ul>
+                                                <div class="code-block small mt-2">
+                                                    <pre><code class="language-csharp"><span class="comment">// ❌ Cannot access private fields</span>
+<span class="class">Student</span> s = <span class="keyword">new</span> <span class="class">Student</span>();
+<span class="comment">// s.name = "John";  // ERROR! Private!</span>
+
+<span class="comment">// ✅ Can access public fields</span>
+s.StudentId = <span class="string">"S123"</span>;  <span class="comment">// Works!</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 4: Public Properties -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Step 4: Public Properties - The Controlled Door</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Public properties</strong> are like a door with a security guard - they control access to your private data.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Property with Validation</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Product</span>
+{
+    <span class="keyword">private</span> <span class="keyword">decimal</span> price;  <span class="comment">// Hidden data</span>
+    
+    <span class="comment">// Public property with validation</span>
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Price
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> price; }
+        <span class="function">set</span> 
+        { 
+            <span class="keyword">if</span> (value >= <span class="number">0</span>)  <span class="comment">// ✅ Check!</span>
+                price = value; 
+        }
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>Using Properties</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Product</span> p = <span class="keyword">new</span> <span class="class">Product</span>();
+
+<span class="comment">// ✅ Property validates the data</span>
+p.Price = <span class="number">25.50m</span>;  <span class="comment">// Works!</span>
+p.Price = -<span class="number">10.00m</span>; <span class="comment">// ❌ Ignored (price stays 25.50)</span>
+
+Console.WriteLine(p.Price);  <span class="comment">// 25.50</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Benefits:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ <strong>Validation</strong> - Check data before saving</li>
+                                                        <li>✅ <strong>Protection</strong> - Keep data safe</li>
+                                                        <li>✅ <strong>Flexibility</strong> - Change how data works later</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 5: Different Property Access Levels -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: Different Access Levels</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">You can control <strong>who can read</strong> and <strong>who can write</strong> each property.</p>
+
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-eye text-primary me-2"></i>Read-Only</h5>
+                                                <p>Everyone can <strong>read</strong>, only the class can <strong>change</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">BankAccount</span>
+{
+    <span class="keyword">private</span> <span class="keyword">decimal</span> balance;
+    
+    <span class="comment">// ✅ Everyone can read the balance</span>
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Balance
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> balance; }
+        <span class="keyword">private</span> <span class="function">set</span> { balance = value; }  <span class="comment">// Only class can change</span>
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-lock text-warning me-2"></i>Init-Only (C# 9+)</h5>
+                                                <p>Set <strong>only when created</strong>, never change again</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
+{
+    <span class="comment">// ✅ Can be set when created</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> Id { <span class="function">get</span>; <span class="function">init</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+}
+
+<span class="comment">// Usage</span>
+<span class="class">Person</span> p = <span class="keyword">new</span> <span class="class">Person</span> { Id = <span class="number">1</span>, Name = <span class="string">"John"</span> };
+<span class="comment">// p.Id = 2;  // ❌ ERROR! Cannot change after creation</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 6: Private Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Step 6: Private Methods - Internal Helpers</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Private methods</strong> are helper methods that only your class can use.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Private Method Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Calculator</span>
+{
+    <span class="comment">// ✅ Public - everyone can use</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    {
+        <span class="keyword">return</span> <span class="function">InternalAdd</span>(a, b);  <span class="comment">// Calls private method</span>
+    }
+    
+    <span class="comment">// ✅ Private - only this class can use</span>
+    <span class="keyword">private</span> <span class="keyword">int</span> <span class="function">InternalAdd</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    {
+        <span class="keyword">return</span> a + b + <span class="number">1</span>;  <span class="comment">// Internal logic</span>
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Why Private Methods?</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Hide complexity</strong> - Keep internal logic hidden</li>
+                                                    <li>✅ <strong>Organize code</strong> - Break big tasks into small parts</li>
+                                                    <li>✅ <strong>Reuse</strong> - Use the same helper in multiple places</li>
+                                                </ul>
+                                                <div class="alert alert-info mt-2">
+                                                    <i class="fas fa-example me-2"></i>
+                                                    <strong>Example:</strong> A <code>CalculateDiscount()</code> method that only the class needs to use.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Step 7: Real-World Example -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Real-World Example: Employee Management</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a complete <strong>Employee</strong> class with encapsulation:</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h5><i class="fas fa-file-code text-primary me-2"></i>Employee.cs</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="keyword">using</span> System;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Employee</span>
+{
+    <span class="comment">// ✅ Private fields - hidden data</span>
+    <span class="keyword">private</span> <span class="keyword">string</span> name;
+    <span class="keyword">private</span> <span class="keyword">decimal</span> salary;
+    <span class="keyword">private</span> <span class="keyword">int</span> yearsOfService;
+    
+    <span class="comment">// ✅ Public properties - controlled access</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> name; }
+        <span class="function">set</span> 
+        { 
+            <span class="keyword">if</span> (!<span class="keyword">string</span>.IsNullOrWhiteSpace(value))
+                name = value; 
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Salary
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> salary; }
+        <span class="keyword">private</span> <span class="function">set</span>  <span class="comment">// ✅ Only class can change salary</span>
+        { 
+            <span class="keyword">if</span> (value >= <span class="number">0</span>) salary = value; 
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">int</span> YearsOfService
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> yearsOfService; }
+        <span class="keyword">private</span> <span class="function">set</span> { yearsOfService = value; }
+    }
+    
+    <span class="comment">// ✅ Read-only property</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> EmployeeLevel
+    {
+        <span class="function">get</span> 
+        {
+            <span class="keyword">if</span> (yearsOfService < <span class="number">2</span>) <span class="keyword">return</span> <span class="string">"Junior"</span>;
+            <span class="keyword">if</span> (yearsOfService < <span class="number">5</span>) <span class="keyword">return</span> <span class="string">"Mid"</span>;
+            <span class="keyword">return</span> <span class="string">"Senior"</span>;
+        }
+    }
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> <span class="function">Employee</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> salary, <span class="keyword">int</span> years)
+    {
+        Name = name;
+        Salary = salary;
+        YearsOfService = years;
+    }
+    
+    <span class="comment">// ✅ Public methods - what the employee can do</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">GiveRaise</span>(<span class="keyword">decimal</span> percentage)
+    {
+        <span class="keyword">if</span> (percentage > <span class="number">0</span>)
+            Salary += Salary * (percentage / <span class="number">100</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"Name: {Name}"</span>);
+        Console.WriteLine(<span class="string">$"Salary: ${Salary}"</span>);
+        Console.WriteLine(<span class="string">$"Level: {EmployeeLevel}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h5><i class="fas fa-play text-success me-2"></i>Program.cs</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="keyword">using</span> System;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Create employee</span>
+        <span class="class">Employee</span> emp = <span class="keyword">new</span> <span class="class">Employee</span>(<span class="string">"John Doe"</span>, <span class="number">50000.00m</span>, <span class="number">3</span>);
+        
+        <span class="comment">// ✅ Can read public data</span>
+        Console.WriteLine(<span class="string">$"Name: {emp.Name}"</span>);
+        Console.WriteLine(<span class="string">$"Level: {emp.EmployeeLevel}"</span>);
+        
+        <span class="comment">// ✅ Can change through public methods</span>
+        emp.<span class="function">GiveRaise</span>(<span class="number">10</span>);  <span class="comment">// 10% raise</span>
+        
+        emp.<span class="function">DisplayInfo</span>();
+        
+        <span class="comment">// ❌ Cannot access private data directly</span>
+        <span class="comment">// emp.salary = 60000;  // ERROR! Private</span>
+        <span class="comment">// emp.yearsOfService = 5;  // ERROR! Private</span>
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>What encapsulation does:</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>Private fields</strong> - Data is hidden and safe</li>
+                                                <li>✅ <strong>Public properties</strong> - Controlled access with validation</li>
+                                                <li>✅ <strong>Private setters</strong> - Only the class can change certain data</li>
+                                                <li>✅ <strong>Read-only properties</strong> - Calculate values when needed</li>
+                                                <li>✅ <strong>Public methods</strong> - Safe ways to change data</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Summary / Key Points -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>What You Learned Today</h3>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-lock fa-3x mb-2"></i>
+                                        <h5>Encapsulation</h5>
+                                        <p>Protecting your data</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-eye-slash fa-3x mb-2"></i>
+                                        <h5>Private</h5>
+                                        <p>Hidden data & methods</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-globe fa-3x mb-2"></i>
+                                        <h5>Public</h5>
+                                        <p>Controlled access</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-shield-alt fa-3x mb-2"></i>
+                                        <h5>Validation</h5>
+                                        <p>Keep data correct</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise -->
+                    <div class="card border-0 shadow-lg mt-5" data-aos="zoom-in" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                            <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercise: Create a Course Class</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5>Your Task:</h5>
+                            <p>Create a <code>Course</code> class with proper encapsulation:</p>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
+                                            <ol>
+                                                <li>
+                                                    <strong>Private fields:</strong>
+                                                    <ul>
+                                                        <li><code>courseName</code> (string)</li>
+                                                        <li><code>maxStudents</code> (int)</li>
+                                                        <li><code>currentStudents</code> (int)</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>Public properties:</strong>
+                                                    <ul>
+                                                        <li><code>CourseName</code> - cannot be empty</li>
+                                                        <li><code>MaxStudents</code> - must be 1-50</li>
+                                                        <li><code>CurrentStudents</code> - read-only</li>
+                                                        <li><code>SeatsAvailable</code> - read-only (calculated)</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6><i class="fas fa-code text-success me-2"></i>More Requirements:</h6>
+                                            <ol start="3">
+                                                <li>
+                                                    <strong>Public methods:</strong>
+                                                    <ul>
+                                                        <li><code>AddStudent()</code> - increases currentStudents</li>
+                                                        <li><code>RemoveStudent()</code> - decreases currentStudents</li>
+                                                        <li><code>DisplayInfo()</code> - shows course details</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>Validation:</strong>
+                                                    <ul>
+                                                        <li>Can't add more than MaxStudents</li>
+                                                        <li>Can't remove if no students</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                            <div class="mt-2">
+                                                <span class="badge bg-warning text-dark">💡 Use the Employee class as reference!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                <i class="fas fa-eye me-2"></i> Show Solution
+                            </button>
+
+                            <div id="solution" style="display: none; margin-top: 20px;">
+                                <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                    <div class="code-block">
+                                        <pre><code class="language-csharp"><span class="comment">// Course.cs</span>
+<span class="keyword">using</span> System;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Course</span>
+{
+    <span class="comment">// Private fields</span>
+    <span class="keyword">private</span> <span class="keyword">string</span> courseName;
+    <span class="keyword">private</span> <span class="keyword">int</span> maxStudents;
+    <span class="keyword">private</span> <span class="keyword">int</span> currentStudents;
+    
+    <span class="comment">// Public properties with validation</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> CourseName
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> courseName; }
+        <span class="function">set</span> 
+        { 
+            <span class="keyword">if</span> (!<span class="keyword">string</span>.IsNullOrWhiteSpace(value))
+                courseName = value; 
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">int</span> MaxStudents
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> maxStudents; }
+        <span class="function">set</span> 
+        { 
+            <span class="keyword">if</span> (value >= <span class="number">1</span> &amp;&amp; value <= <span class="number">50</span>)
+                maxStudents = value; 
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">int</span> CurrentStudents
+    {
+        <span class="function">get</span> { <span class="keyword">return</span> currentStudents; }
+        <span class="keyword">private</span> <span class="function">set</span> { currentStudents = value; }  <span class="comment">// ✅ Only class can change</span>
+    }
+    
+    <span class="comment">// ✅ Read-only property</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> SeatsAvailable => MaxStudents - CurrentStudents;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> <span class="function">Course</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> max)
+    {
+        CourseName = name;
+        MaxStudents = max;
+        CurrentStudents = <span class="number">0</span>;
+    }
+    
+    <span class="comment">// Public methods</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddStudent</span>()
+    {
+        <span class="keyword">if</span> (CurrentStudents >= MaxStudents)
+        {
+            Console.WriteLine(<span class="string">"❌ Course is full!"</span>);
+            <span class="keyword">return</span>;
+        }
+        CurrentStudents++;
+        Console.WriteLine(<span class="string">$"✅ Student added. {SeatsAvailable} seats left."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">RemoveStudent</span>()
+    {
+        <span class="keyword">if</span> (CurrentStudents <= <span class="number">0</span>)
+        {
+            Console.WriteLine(<span class="string">"❌ No students to remove!"</span>);
+            <span class="keyword">return</span>;
+        }
+        CurrentStudents--;
+        Console.WriteLine(<span class="string">$"❌ Student removed. {SeatsAvailable} seats left."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"📚 Course: {CourseName}"</span>);
+        Console.WriteLine(<span class="string">$"   Students: {CurrentStudents}/{MaxStudents}"</span>);
+        Console.WriteLine(<span class="string">$"   Seats Available: {SeatsAvailable}"</span>);
+    }
+}
+
+<span class="comment">// Program.cs</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="class">Course</span> course = <span class="keyword">new</span> <span class="class">Course</span>(<span class="string">"C# Programming"</span>, <span class="number">3</span>);
+        
+        course.<span class="function">AddStudent</span>();  <span class="comment">// ✅ Added</span>
+        course.<span class="function">AddStudent</span>();  <span class="comment">// ✅ Added</span>
+        course.<span class="function">AddStudent</span>();  <span class="comment">// ✅ Added</span>
+        course.<span class="function">AddStudent</span>();  <span class="comment">// ❌ Course is full!</span>
+        
+        course.<span class="function">DisplayInfo</span>();
+        
+        course.<span class="function">RemoveStudent</span>();  <span class="comment">// ✅ Removed</span>
+        course.<span class="function">RemoveStudent</span>();  <span class="comment">// ✅ Removed</span>
+        course.<span class="function">RemoveStudent</span>();  <span class="comment">// ✅ Removed</span>
+        course.<span class="function">RemoveStudent</span>();  <span class="comment">// ❌ No students!</span>
+    }
+}</code></pre>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-success fs-6">✅ Solution Complete!</span>
+                                        <span class="badge bg-info fs-6 ms-2">You've used encapsulation: private fields, public properties with validation, and controlled methods!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/04-Constructors" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson5")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

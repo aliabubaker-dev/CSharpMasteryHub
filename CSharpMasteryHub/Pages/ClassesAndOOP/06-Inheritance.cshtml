@@ -191,6 +191,310 @@
                         </div>
                     </section>
 
+
+                    <!-- Add this section after the Introduction and before Part 1 -->
+                    <!-- UML DIAGRAM SECTION - Design First, Code Second -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-project-diagram me-2"></i>🎯 Design First, Code Second - UML for Inheritance</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-lightbulb me-2"></i>
+                                    <strong>Professional Secret:</strong> Before writing ANY code, professional developers design their inheritance hierarchy using <strong>UML Diagrams</strong>. This saves time, prevents mistakes, and makes your code better!
+                                </div>
+
+                                <!-- Part 0A: What is UML? -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-question-circle text-primary me-2"></i>What is UML?</h5>
+                                                <p><strong>UML (Unified Modeling Language)</strong> is a visual way to design software. Think of it like an <strong>architect's blueprint</strong> for your code.</p>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4">
+                                                        <div class="text-center p-2 bg-white rounded">
+                                                            <i class="fas fa-home fa-2x text-primary"></i>
+                                                            <p class="mb-0"><strong>House</strong></p>
+                                                            <small>Blueprint → House</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center p-2 bg-white rounded">
+                                                            <i class="fas fa-code fa-2x text-success"></i>
+                                                            <p class="mb-0"><strong>Software</strong></p>
+                                                            <small>UML Diagram → Code</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center p-2 bg-white rounded">
+                                                            <i class="fas fa-sitemap fa-2x text-warning"></i>
+                                                            <p class="mb-0"><strong>Inheritance</strong></p>
+                                                            <small>UML shows parent/child</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 0B: Software Ideas Modeler -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-download text-primary me-2"></i>Software Ideas Modeler</h5>
+                                                <p><strong>Software Ideas Modeler</strong> is a professional UML tool that's perfect for learning inheritance.</p>
+                                                <p>https://www.softwareideas.net/Download/3845/software-ideas-modeler-15-55-setup-</p>
+                                                <div class="alert alert-success">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Why use it?</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ <strong>Free version</strong> available for learning</li>
+                                                        <li>✅ <strong>Easy to use</strong> - drag and drop</li>
+                                                        <li>✅ <strong>Generates C# code</strong> automatically</li>
+                                                        <li>✅ <strong>Shows inheritance</strong> with clear arrows</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-info">📥 Download: www.softwareideasmodeler.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-symbols text-primary me-2"></i>UML Inheritance Symbols</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th>Symbol</th>
+                                                                <th>Meaning</th>
+                                                                <th>In C#</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-center"><strong>▷</strong> (Triangle Arrow)</td>
+                                                                <td>Inheritance</td>
+                                                                <td><code>class Child : Parent</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><span style="font-style: italic; color: #c792ea;">Class Name</span></td>
+                                                                <td>Abstract Class</td>
+                                                                <td><code>abstract class</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><span style="text-decoration: line-through;">Method</span></td>
+                                                                <td>Abstract Method</td>
+                                                                <td><code>abstract void Method()</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><span style="text-decoration: underline;">Method</span></td>
+                                                                <td>Virtual Method</td>
+                                                                <td><code>virtual void Method()</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><strong>+</strong> (Plus)</td>
+                                                                <td>Public</td>
+                                                                <td><code>public</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><strong>#</strong> (Hash)</td>
+                                                                <td>Protected</td>
+                                                                <td><code>protected</code></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-center"><strong>-</strong> (Minus)</td>
+                                                                <td>Private</td>
+                                                                <td><code>private</code></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 0C: Step-by-Step UML Diagram -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-step-forward text-primary me-2"></i>Step-by-Step: Create Your First UML Inheritance Diagram</h5>
+                                                <p>Let's design the <strong>Animal → Mammal → Dog</strong> inheritance hierarchy in Software Ideas Modeler:</p>
+
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-4">
+                                                        <div class="card text-center h-100" style="background: #1e1e2e; color: #cdd6f4;">
+                                                            <div class="card-body">
+                                                                <h6 style="color: #ffcb6b;">Step 1: Add Animal Class</h6>
+                                                                <pre style="text-align: left; font-size: 0.75rem; color: #cdd6f4; background: transparent; border: none; padding: 0;">
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #ffcb6b;">|        <strong>Animal</strong>            |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #676e95; font-style: italic;">| - name : string           |</span>
+<span style="color: #676e95; font-style: italic;">| - age : int               |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #82aaff; text-decoration: underline;">| + Eat() : void            |</span>
+<span style="color: #f78c6c; text-decoration: underline; font-style: italic;">| + MakeSound() : string    |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span></pre>
+                                                                <small style="color: #676e95;">Abstract class (italic name)</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="card text-center h-100" style="background: #1e1e2e; color: #cdd6f4;">
+                                                            <div class="card-body">
+                                                                <h6 style="color: #ffcb6b;">Step 2: Add Mammal Class</h6>
+                                                                <pre style="text-align: left; font-size: 0.75rem; color: #cdd6f4; background: transparent; border: none; padding: 0;">
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #ffcb6b;">|        <strong>Mammal</strong>            |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #676e95; font-style: italic;">| - furColor : string       |</span>
+<span style="color: #676e95; font-style: italic;">| - hasTail : bool          |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #82aaff; text-decoration: underline;">| + MakeSound() : string    |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+      ▲
+      │ <span style="color: #89ddff;">▷ (Inheritance)</span>
+      │
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #ffcb6b;">|        <strong>Animal</strong>            |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span></pre>
+                                                                <small style="color: #676e95;">Connect with inheritance arrow</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="card text-center h-100" style="background: #1e1e2e; color: #cdd6f4;">
+                                                            <div class="card-body">
+                                                                <h6 style="color: #ffcb6b;">Step 3: Add Dog Class</h6>
+                                                                <pre style="text-align: left; font-size: 0.75rem; color: #cdd6f4; background: transparent; border: none; padding: 0;">
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #ffcb6b;">|         <strong>Dog</strong>              |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #676e95; font-style: italic;">| - breed : string          |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #82aaff; text-decoration: underline;">| + MakeSound() : string    |</span>
+<span style="color: #82aaff; text-decoration: underline;">| + Bark() : void           |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span>
+      ▲
+      │ <span style="color: #89ddff;">▷</span>
+      │
+<span style="color: #ffcb6b;">+---------------------------+</span>
+<span style="color: #ffcb6b;">|        <strong>Mammal</strong>            |</span>
+<span style="color: #ffcb6b;">+---------------------------+</span></pre>
+                                                                <small style="color: #676e95;">Dog inherits from Mammal</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="alert alert-success mt-3">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Now you have a complete inheritance diagram!</strong> 
+                                                    Software Ideas Modeler can automatically generate C# code from this diagram.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 0D: Code Generation -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Generated C# Code</h5>
+                                                <p>Software Ideas Modeler generates this code from your UML diagram:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Animal.cs - Generated from UML</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Animal</span>
+{
+    <span class="keyword">private</span> <span class="keyword">string</span> name;
+    <span class="keyword">private</span> <span class="keyword">int</span> age;
+    
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Age { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Eat</span>() { }
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">string</span> <span class="function">MakeSound</span>();
+}
+
+<span class="comment">// Mammal.cs - Generated from UML</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Mammal</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">private</span> <span class="keyword">string</span> furColor;
+    <span class="keyword">private</span> <span class="keyword">bool</span> hasTail;
+    
+    <span class="keyword">public</span> <span class="keyword">string</span> FurColor { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">bool</span> HasTail { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">MakeSound</span>() { }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>Why Design with UML First?</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Visual Planning</strong> - See the whole inheritance tree</li>
+                                                    <li>✅ <strong>Catch Errors Early</strong> - Fix design issues before coding</li>
+                                                    <li>✅ <strong>Save Time</strong> - Generate code automatically</li>
+                                                    <li>✅ <strong>Team Communication</strong> - Share your design with others</li>
+                                                    <li>✅ <strong>Documentation</strong> - The diagram IS your documentation</li>
+                                                </ul>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Professional Workflow:</strong>
+                                                    <ol class="mb-0">
+                                                        <li>📐 <strong>Design</strong> in UML (Software Ideas Modeler)</li>
+                                                        <li>⚙️ <strong>Generate</strong> C# code from the diagram</li>
+                                                        <li>✏️ <strong>Add</strong> business logic to the generated code</li>
+                                                        <li>🧪 <strong>Test</strong> and refine your code</li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 0E: UML Exercise -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-pencil-alt me-2"></i>🎯 UML Exercise: Design a Vehicle System</h5>
+                                                <p>Using Software Ideas Modeler, create a UML diagram for:</p>
+                                                <ul>
+                                                    <li><strong>Vehicle</strong> (abstract) - Make, Model, Year, Start()</li>
+                                                    <li><strong>Car</strong> - Doors, TrunkSize, override Start()</li>
+                                                    <li><strong>Motorcycle</strong> - HasSidecar, override Start()</li>
+                                                    <li><strong>SportsCar</strong> (from Car) - TopSpeed, HasTurbo</li>
+                                                </ul>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-white text-dark">📥 Generate C# code from your diagram</span>
+                                                    <span class="badge bg-white text-dark ms-2">💡 Show your diagram to your team</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
                     <!-- Part 2: The 'base' Keyword - Calling the Parent -->
                     <section class="mb-5" data-aos="fade-up">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
@@ -1567,5 +1871,85 @@ sc.TopSpeed = <span class="number">340</span>;      <span class="comment">// Spo
                 font-size: 1.5rem;
             }
         }
+
+        /* UML Diagram specific styles */
+        .uml-diagram {
+            font-family: 'Consolas', 'JetBrains Mono', monospace;
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 6px solid #89b4fa;
+        }
+
+        .uml-class {
+            border: 2px solid #ffcb6b;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 180px;
+            display: inline-block;
+        }
+
+        .uml-class-name {
+            text-align: center;
+            font-weight: bold;
+            color: #ffcb6b;
+            border-bottom: 1px solid #ffcb6b;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .uml-class-fields {
+            color: #676e95;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .uml-class-methods {
+            color: #82aaff;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a4e;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+
+        .uml-abstract {
+            font-style: italic;
+        }
+
+        .uml-arrow {
+            color: #89ddff;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        /* Software Ideas Modeler specific styles */
+        .sim-install-steps {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+            .sim-install-steps ol {
+                margin-bottom: 0;
+            }
+
+            .sim-install-steps li {
+                margin-bottom: 5px;
+            }
     </style>
+
+    <script>
+        // Add this to your existing script section
+        function toggleUmlDiagram() {
+            var diagram = document.getElementById('umlDiagram');
+            if (diagram.style.display === 'none') {
+                diagram.style.display = 'block';
+                diagram.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                diagram.style.display = 'none';
+            }
+        }
+    </script>
 }

@@ -1,103 +1,942 @@
 @page
 @model CSharpMasteryHub.Pages.WindowsForms.ControlsBasicsModel
 @{
-    ViewData["Title"] = "Controls Basics";
+    ViewData["Title"] = "Controls Basics - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
-                    <li class="breadcrumb-item active">Controls Basics</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Controls Basics</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-success">Beginner</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 2 of 7</span>
-                </div>
-
-                <p>Controls are the visual building blocks of a form. Drag them from the Toolbox onto the design surface.</p>
-
-                <h2>The essentials</h2>
-                <div class="table-responsive mb-4">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Control</th>
-                                <th>Use for</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Label</td><td>Static text</td></tr>
-                            <tr><td>TextBox</td><td>Single-line text input</td></tr>
-                            <tr><td>Button</td><td>Triggers an action on click</td></tr>
-                            <tr><td>ComboBox</td><td>Dropdown selection</td></tr>
-                            <tr><td>CheckBox / RadioButton</td><td>Boolean / mutually-exclusive choices</td></tr>
-                            <tr><td>DataGridView</td><td>Tabular data display and editing</td></tr>
-                            <tr><td>ListBox</td><td>Scrollable list of items</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2>Naming controls properly</h2>
-                <p>
-                    In the Properties panel, always rename controls from the default
-                    (<code>textBox1</code>) to something meaningful before writing code:
-                </p>
-                <pre><code>txtFirstName   (TextBox)
-txtLastName    (TextBox)
-btnSave        (Button)
-cmbCourse      (ComboBox)
-dgvStudents    (DataGridView)</code></pre>
-                <p>The prefix convention (<code>txt</code>, <code>btn</code>, <code>cmb</code>, <code>dgv</code>) makes code much easier to read.</p>
-
-                <h2>Reading control values in code</h2>
-                <pre><code>string firstName = txtFirstName.Text;
-string lastName = txtLastName.Text;
-bool isActive = chkActive.Checked;
-string? selectedCourse = cmbCourse.SelectedItem?.ToString();</code></pre>
-
-                <h2>Setting control values in code</h2>
-                <pre><code>txtFirstName.Text = "Ali";
-lblStatus.Text = "Saved successfully";
-lblStatus.ForeColor = Color.Green;</code></pre>
-
-                <h2>Anchoring and docking</h2>
-                <p>
-                    Use the <strong>Anchor</strong> property to keep a control's distance
-                    fixed from an edge as the form resizes, and <strong>Dock</strong> to make
-                    a control fill an edge or the whole parent (common for a DataGridView
-                    filling the form body).
-                </p>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Controls are the building blocks of WinForms. Use meaningful names with prefixes for better code readability.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/WindowsForms" style="color: rgba(255,255,255,0.7);">Windows Forms</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Controls Basics</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);">
+                        Controls Basics 🧩
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Building Your User Interface - One Piece at a Time
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 2 of 7
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/WindowsForms/03-EventHandling" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-puzzle-piece fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(102, 126, 234, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Let's Build Your User Interface! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn about <strong>controls</strong> - the building blocks
+                                        of Windows Forms applications. Controls are like <strong>furniture</strong> for your app's window!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Understand what controls are and why they matter</li>
+                                            <li>✅ Use the most common controls (Label, TextBox, Button, etc.)</li>
+                                            <li>✅ Name controls properly (so your code makes sense)</li>
+                                            <li>✅ Read and set control values in code</li>
+                                            <li>✅ Make controls resize properly with Anchor and Dock</li>
+                                            <li>✅ Feel confident building your first user interface!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📦 Part 1: What Are Controls? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>What Are Controls?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Controls are the <strong>interactive elements</strong>
+                                    on your form. They let users interact with your application - like buttons, textboxes, labels, and more!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-home text-primary me-2"></i>🏠 Real-World Analogy</h5>
+                                                <p><strong>Think of Controls like furniture in a house:</strong></p>
+                                                <ul>
+                                                    <li>🏷️ <strong>Label</strong> = A sign on the wall (displays text)</li>
+                                                    <li>✏️ <strong>TextBox</strong> = A notepad (user writes text)</li>
+                                                    <li>🔘 <strong>Button</strong> = A doorbell (user presses it)</li>
+                                                    <li>📋 <strong>ListBox</strong> = A menu (shows options)</li>
+                                                    <li>✅ <strong>CheckBox</strong> = A light switch (on/off)</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Result:</strong> A functional, interactive app!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-toolbox text-success me-2"></i>📦 Where to Find Controls</h5>
+                                                <p>Controls are in the <strong>Toolbox</strong>:</p>
+                                                <ul>
+                                                    <li>🔹 Open <strong>View → Toolbox</strong> (or press <kbd>Ctrl + Alt + X</kbd>)</li>
+                                                    <li>🔹 Controls are organized in groups (Common Controls, Containers, etc.)</li>
+                                                    <li>🔹 Just drag and drop any control onto your form!</li>
+                                                </ul>
+                                                <div class="card bg-info text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>Pro Tip:</strong> If you don't see the Toolbox,
+                                                        click the <strong>Toolbox</strong> tab on the left side of Visual Studio!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the control break up with the form?
+                                        Because it needed more space! (Anchor and Dock jokes are coming later 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 2: The Most Common Controls -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>The Most Common Controls</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Control</th>
+                                                <th>Icon</th>
+                                                <th>Use For</th>
+                                                <th>Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Label</strong></td>
+                                                <td><i class="fas fa-tag text-primary"></i></td>
+                                                <td>Display static text</td>
+                                                <td>"Enter your name:"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>TextBox</strong></td>
+                                                <td><i class="fas fa-edit text-success"></i></td>
+                                                <td>User text input</td>
+                                                <td>Name, email, password</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Button</strong></td>
+                                                <td><i class="fas fa-square text-warning"></i></td>
+                                                <td>Trigger actions</td>
+                                                <td>"Save", "Cancel", "Submit"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ComboBox</strong></td>
+                                                <td><i class="fas fa-caret-square-down text-info"></i></td>
+                                                <td>Dropdown selection</td>
+                                                <td>Choose a country, city</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>CheckBox</strong></td>
+                                                <td><i class="fas fa-check-square text-danger"></i></td>
+                                                <td>Yes/No choices</td>
+                                                <td>"I agree to terms"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>RadioButton</strong></td>
+                                                <td><i class="fas fa-dot-circle text-primary"></i></td>
+                                                <td>Choose one option</td>
+                                                <td>Male / Female / Other</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ListBox</strong></td>
+                                                <td><i class="fas fa-list text-success"></i></td>
+                                                <td>Scrollable list</td>
+                                                <td>List of students</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DataGridView</strong></td>
+                                                <td><i class="fas fa-table text-info"></i></td>
+                                                <td>Tabular data</td>
+                                                <td>Customer list, orders</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Fact:</strong> There are over 50 controls in WinForms!
+                                        But you'll only need about 10-15 for most applications. The rest are for special cases!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ✏️ Part 3: Adding and Configuring Controls -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Adding and Configuring Controls</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-plus-circle text-success me-2"></i>✅ How to Add a Control</h5>
+                                                <p><strong>Two ways to add controls:</strong></p>
+                                                <ol>
+                                                    <li><strong>Drag and Drop</strong> - Click a control in Toolbox and drag it onto your form</li>
+                                                    <li><strong>Double-click</strong> - Double-click a control in Toolbox and it appears on the form</li>
+                                                </ol>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Tip:</strong> After adding a control, use the <strong>Properties</strong> window
+                                                    to change its appearance and behavior!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-sliders-h text-primary me-2"></i>🔧 Common Properties</h5>
+                                                <p>Here are the most useful properties to change:</p>
+                                                <ul>
+                                                    <li><strong>Name</strong> - What you'll use in code (e.g., <code>txtFirstName</code>)</li>
+                                                    <li><strong>Text</strong> - What users see (e.g., "Enter Name")</li>
+                                                    <li><strong>BackColor</strong> - Background color</li>
+                                                    <li><strong>ForeColor</strong> - Text color</li>
+                                                    <li><strong>Font</strong> - Font style and size</li>
+                                                    <li><strong>Enabled</strong> - Can users interact with it?</li>
+                                                    <li><strong>Visible</strong> - Is it shown on the form?</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Pro Tip:</strong> Always change the <strong>Name</strong> property first!
+                                        It's like giving your pet a name - you'll need it to call them later! 🐶
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Part 4: Naming Controls Properly -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Naming Controls Properly</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-tag me-2"></i>
+                                    <strong>Why Naming Matters:</strong> Good names make your code <strong>readable</strong>
+                                    and <strong>maintainable</strong>. Bad names make you (and your team) confused!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Names</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// What does "textBox1" mean?</span>
+<span class="keyword">string</span> name = textBox1.Text;  <span class="comment">// ??</span>
+<span class="keyword">string</span> age = textBox2.Text;   <span class="comment">// ??</span></code></pre>
+                                                </div>
+                                                <p class="text-danger">😵 You'll forget what these are for in 5 minutes!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Names</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Clear! Meaningful!</span>
+<span class="keyword">string</span> name = txtFirstName.Text;
+<span class="keyword">string</span> age = txtAge.Text;
+<span class="keyword">bool</span> active = chkIsActive.Checked;</code></pre>
+                                                </div>
+                                                <p class="text-success">😊 You'll know exactly what each control does!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Prefix</th>
+                                                <th>Control Type</th>
+                                                <th>Example Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td><strong>txt</strong></td><td>TextBox</td><td><code>txtName</code></td></tr>
+                                            <tr><td><strong>btn</strong></td><td>Button</td><td><code>btnSave</code></td></tr>
+                                            <tr><td><strong>lbl</strong></td><td>Label</td><td><code>lblTitle</code></td></tr>
+                                            <tr><td><strong>cmb</strong></td><td>ComboBox</td><td><code>cmbCountry</code></td></tr>
+                                            <tr><td><strong>chk</strong></td><td>CheckBox</td><td><code>chkAgree</code></td></tr>
+                                            <tr><td><strong>rad</strong></td><td>RadioButton</td><td><code>radMale</code></td></tr>
+                                            <tr><td><strong>lst</strong></td><td>ListBox</td><td><code>lstStudents</code></td></tr>
+                                            <tr><td><strong>dgv</strong></td><td>DataGridView</td><td><code>dgvCustomers</code></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the developer name their control "textBox1"?
+                                        Because they wanted to confuse their future self! (Don't do this! 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 💻 Part 5: Using Controls in Code -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Using Controls in Code</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-arrow-right text-primary me-2"></i>📖 Reading Values</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Get text from a TextBox</span>
+<span class="keyword">string</span> name = txtName.Text;
+
+<span class="comment">// Get checkbox state</span>
+<span class="keyword">bool</span> isActive = chkActive.Checked;
+
+<span class="comment">// Get selected ComboBox item</span>
+<span class="keyword">string</span> course = cmbCourse.SelectedItem?.ToString();</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">.Text</span> <span class="badge bg-success">.Checked</span> <span class="badge bg-info">.SelectedItem</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-arrow-left text-success me-2"></i>✏️ Setting Values</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Set text in a TextBox</span>
+txtName.Text = <span class="string">"John"</span>;
+
+<span class="comment">// Change label text</span>
+lblStatus.Text = <span class="string">"Saved!"</span>;
+
+<span class="comment">// Change color</span>
+lblStatus.ForeColor = Color.Green;
+
+<span class="comment">// Enable/disable a button</span>
+btnSave.Enabled = <span class="keyword">false</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">.Text</span> <span class="badge bg-success">.ForeColor</span> <span class="badge bg-warning text-dark">.Enabled</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Pro Tip:</strong> Always validate user input before using it!
+                                        <br>
+                                        <code>if (string.IsNullOrWhiteSpace(txtName.Text)) { ... }</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📐 Part 6: Anchoring and Docking -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Anchoring and Docking - Making Controls Resize</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-anchor text-primary me-2"></i>⚓ Anchor</h5>
+                                                <p><strong>What it does:</strong> Keeps a control at a fixed distance from form edges.</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// In Properties window</span>
+<span class="comment">// Anchor: Top, Bottom, Left, Right</span>
+<span class="comment">// Choose which edges to "stick" to</span>
+
+<span class="comment">// Example: Stick to bottom-right</span>
+btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">Top</span> <span class="badge bg-success">Bottom</span> <span class="badge bg-info">Left</span> <span class="badge bg-warning text-dark">Right</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-ship text-success me-2"></i>🚢 Dock</h5>
+                                                <p><strong>What it does:</strong> Makes a control fill an entire edge or the whole form.</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// In Properties window</span>
+<span class="comment">// Dock: Top, Bottom, Left, Right, Fill</span>
+
+<span class="comment">// Example: DataGridView fills the form</span>
+dgvData.Dock = DockStyle.Fill;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">Fill</span> <span class="badge bg-success">Top</span> <span class="badge bg-info">Bottom</span> <span class="badge bg-warning text-dark">Left/Right</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ When to Use Each</h5>
+                                                <ul>
+                                                    <li><strong>Anchor</strong> - For buttons, labels, small controls</li>
+                                                    <li><strong>Dock</strong> - For DataGridView, large panels, toolbars</li>
+                                                    <li><strong>Both</strong> - Can be used together!</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Tip:</strong> Preview how controls behave by resizing the form in the designer!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-example text-primary me-2"></i>💡 Common Patterns</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Button at bottom-right (OK/Cancel)</span>
+btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+<span class="comment">// Top toolbar</span>
+toolStrip1.Dock = DockStyle.Top;
+
+<span class="comment">// DataGridView fills rest</span>
+dgvData.Dock = DockStyle.Fill;
+
+<span class="comment">// Status bar at bottom</span>
+statusStrip1.Dock = DockStyle.Bottom;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the control float? Because it didn't have any anchors!
+                                        (Okay, that was a sinking feeling 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 7: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Create a simple registration form using WinForms controls!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Create a new WinForms project</strong>
+                                                        <ul>
+                                                            <li>Name it "RegistrationForm"</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Add these controls:</strong>
+                                                        <ul>
+                                                            <li>📝 Labels for "First Name", "Last Name", "Email"</li>
+                                                            <li>✏️ TextBoxes for each field (name them properly)</li>
+                                                            <li>✅ A CheckBox for "Agree to Terms"</li>
+                                                            <li>🔘 A Button for "Register"</li>
+                                                            <li>📋 A ListBox to show registered users</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Configure Properties:</strong>
+                                                        <ul>
+                                                            <li>Give each control a meaningful name (txtFirstName, etc.)</li>
+                                                            <li>Set the form title to "Registration Form"</li>
+                                                            <li>Arrange controls nicely on the form</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Add a click event to the button</strong>
+                                                        <ul>
+                                                            <li>Double-click the button to create the event</li>
+                                                            <li>Add code to display the entered info</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to add and configure controls</li>
+                                                    <li>✅ How to name controls properly</li>
+                                                    <li>✅ How to read values from controls</li>
+                                                    <li>✅ How to display information in a ListBox</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A working registration form that displays user information!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== Registration Form =====</span>
+
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">RegistrationForm</span> : <span class="class">Form</span>
+{
+    <span class="comment">// 📝 List to store registered users</span>
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt; users = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="function">RegistrationForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+    }
+    
+    <span class="comment">// 🔘 Register Button Click Event</span>
+    <span class="keyword">private void</span> <span class="function">btnRegister_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="comment">// 🤔 Validate inputs using If/Else</span>
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtFirstName.Text))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter first name!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtLastName.Text))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter last name!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtEmail.Text))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter email!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">if</span> (!chkAgree.Checked)
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please agree to terms!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="comment">// ✅ All validated - save user</span>
+        <span class="keyword">string</span> fullName = <span class="string">$"{txtFirstName.Text} {txtLastName.Text}"</span>;
+        <span class="keyword">string</span> userInfo = <span class="string">$"👤 {fullName} ({txtEmail.Text})"</span>;
+        
+        <span class="comment">// 📋 Add to ListBox</span>
+        lstUsers.Items.Add(userInfo);
+        users.Add(userInfo);
+        
+        <span class="comment">// 💬 Show success message</span>
+        lblStatus.Text = <span class="string">$"✅ {fullName} registered successfully!"</span>;
+        lblStatus.ForeColor = Color.Green;
+        
+        <span class="comment">// 🧹 Clear form</span>
+        txtFirstName.Clear();
+        txtLastName.Clear();
+        txtEmail.Clear();
+        chkAgree.Checked = <span class="keyword">false</span>;
+        txtFirstName.Focus();  <span class="comment">// Set focus to first field</span>
+        
+        <span class="comment">// 🔢 Show total users</span>
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Total registered users: {lstUsers.Items.Count}"</span>, 
+                          <span class="string">"Registration Complete"</span>);
+    }
+    
+    <span class="comment">// 🧹 Clear all users</span>
+    <span class="keyword">private void</span> <span class="function">btnClearAll_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (lstUsers.Items.Count == <span class="number">0</span>)
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"No users to clear!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">if</span> (<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Clear all users?"</span>, <span class="string">"Confirm"</span>,
+                          <span class="class">MessageBoxButtons</span>.YesNo) == <span class="class">DialogResult</span>.Yes)
+        {
+            lstUsers.Items.Clear();
+            users.Clear();
+            lblStatus.Text = <span class="string">"🗑️ All users cleared"</span>;
+            lblStatus.ForeColor = Color.Red;
+        }
+    }
+    
+    <span class="comment">// 📊 Display total users count</span>
+    <span class="keyword">private void</span> <span class="function">btnCountUsers_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Total users: {lstUsers.Items.Count}"</span>, 
+                          <span class="string">"User Count"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a registration form with controls, validation, and events!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-puzzle-piece fa-3x mb-2"></i>
+                                        <h5>Controls</h5>
+                                        <small>Labels, TextBoxes, Buttons</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-tag fa-3x mb-2"></i>
+                                        <h5>Naming</h5>
+                                        <small>txt, btn, cmb prefixes</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>Code</h5>
+                                        <small>Reading and setting values</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-ship fa-3x mb-2"></i>
+                                        <h5>Anchor/Dock</h5>
+                                        <small>Resize behavior</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to build your own WinForms user interfaces!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/WindowsForms/03-EventHandling" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "WindowsForms_Lesson2")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.03);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

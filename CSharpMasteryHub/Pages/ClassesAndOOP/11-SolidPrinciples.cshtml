@@ -1,561 +1,1192 @@
 ﻿@page
 @model SolidPrinciplesModel
 @{
-    ViewData["Title"] = "SOLID Principles in C#";
+    ViewData["Title"] = "SOLID Principles in C# - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">SOLID Principles</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">SOLID Principles in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">30 min read</span>
-                    <span class="badge bg-primary">Lesson 11 of 11</span>
-                </div>
-
-                <h2>What are SOLID Principles?</h2>
-                <p>
-                    SOLID is an acronym for five design principles that help create maintainable, scalable,
-                    and robust object-oriented software. These principles were introduced by Robert C. Martin.
-                </p>
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>SOLID Acronym</h5>
-                        <ul class="mb-0">
-                            <li><strong>S</strong> - Single Responsibility Principle</li>
-                            <li><strong>O</strong> - Open/Closed Principle</li>
-                            <li><strong>L</strong> - Liskov Substitution Principle</li>
-                            <li><strong>I</strong> - Interface Segregation Principle</li>
-                            <li><strong>D</strong> - Dependency Inversion Principle</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h2>1. Single Responsibility Principle (SRP)</h2>
-                <p>A class should have only one reason to change (one responsibility).</p>
-
-                <h3>❌ Bad Example - Violating SRP</h3>
-                <pre><code>public class Employee
-{
-    public string Name { get; set; }
-    public decimal Salary { get; set; }
-    public string Email { get; set; }
-    
-    // Business logic
-    public decimal CalculateBonus()
-    {
-        return Salary * 0.1m;
-    }
-    
-    // Data access logic
-    public void SaveToDatabase()
-    {
-        // Save employee to database
-    }
-    
-    // Email logic
-    public void SendEmail()
-    {
-        // Send email to employee
-    }
-}</code></pre>
-
-                <h3>✅ Good Example - Following SRP</h3>
-                <pre><code>// Employee class - only responsible for employee data
-public class Employee
-{
-    public string Name { get; set; }
-    public decimal Salary { get; set; }
-    public string Email { get; set; }
-}
-
-// Bonus calculator - responsible for bonus calculation
-public class BonusCalculator
-{
-    public decimal CalculateBonus(Employee employee)
-    {
-        return employee.Salary * 0.1m;
-    }
-}
-
-// Employee repository - responsible for data access
-public class EmployeeRepository
-{
-    public void Save(Employee employee)
-    {
-        // Save employee to database
-    }
-}
-
-// Email service - responsible for email operations
-public class EmailService
-{
-    public void SendEmail(Employee employee, string message)
-    {
-        // Send email to employee
-    }
-}</code></pre>
-
-                <h2>2. Open/Closed Principle (OCP)</h2>
-                <p>Software entities should be open for extension but closed for modification.</p>
-
-                <h3>❌ Bad Example - Violating OCP</h3>
-                <pre><code>public class ShapeCalculator
-{
-    public double CalculateArea(object shape)
-    {
-        if (shape is Circle circle)
-            return Math.PI * circle.Radius * circle.Radius;
-        else if (shape is Rectangle rectangle)
-            return rectangle.Width * rectangle.Height;
-        else if (shape is Triangle triangle)
-            return triangle.Base * triangle.Height / 2;
-        // Adding new shapes requires modifying this method
-        return 0;
-    }
-}</code></pre>
-
-                <h3>✅ Good Example - Following OCP</h3>
-                <pre><code>// Abstract base class
-public abstract class Shape
-{
-    public abstract double CalculateArea();
-}
-
-// Individual shape classes
-public class Circle : Shape
-{
-    public double Radius { get; set; }
-    
-    public override double CalculateArea()
-    {
-        return Math.PI * Radius * Radius;
-    }
-}
-
-public class Rectangle : Shape
-{
-    public double Width { get; set; }
-    public double Height { get; set; }
-    
-    public override double CalculateArea()
-    {
-        return Width * Height;
-    }
-}
-
-public class Triangle : Shape
-{
-    public double Base { get; set; }
-    public double Height { get; set; }
-    
-    public override double CalculateArea()
-    {
-        return Base * Height / 2;
-    }
-}
-
-// New shapes can be added without modifying existing code</code></pre>
-
-                <h2>3. Liskov Substitution Principle (LSP)</h2>
-                <p>Objects of a derived class should be able to replace objects of the base class without affecting the program.</p>
-
-                <h3>❌ Bad Example - Violating LSP</h3>
-                <pre><code>public class Rectangle
-{
-    public virtual int Width { get; set; }
-    public virtual int Height { get; set; }
-}
-
-public class Square : Rectangle
-{
-    public override int Width 
-    { 
-        get { return base.Width; }
-        set { base.Width = value; base.Height = value; }
-    }
-    
-    public override int Height 
-    { 
-        get { return base.Height; }
-        set { base.Width = value; base.Height = value; }
-    }
-}</code></pre>
-
-                <h3>✅ Good Example - Following LSP</h3>
-                <pre><code>// Abstract base class
-public abstract class Shape
-{
-    public abstract int GetArea();
-}
-
-// Separate classes for different shapes
-public class Rectangle : Shape
-{
-    public int Width { get; set; }
-    public int Height { get; set; }
-    
-    public override int GetArea()
-    {
-        return Width * Height;
-    }
-}
-
-public class Square : Shape
-{
-    public int Side { get; set; }
-    
-    public override int GetArea()
-    {
-        return Side * Side;
-    }
-}</code></pre>
-
-                <h2>4. Interface Segregation Principle (ISP)</h2>
-                <p>Clients should not be forced to depend on interfaces they don't use.</p>
-
-                <h3>❌ Bad Example - Violating ISP</h3>
-                <pre><code>public interface IWorker
-{
-    void Work();
-    void Eat();
-    void Sleep();
-}
-
-public class HumanWorker : IWorker
-{
-    public void Work() { /* Work */ }
-    public void Eat() { /* Eat */ }
-    public void Sleep() { /* Sleep */ }
-}
-
-public class RobotWorker : IWorker
-{
-    public void Work() { /* Work */ }
-    public void Eat() { /* Robots don't eat! */ }
-    public void Sleep() { /* Robots don't sleep! */ }
-}</code></pre>
-
-                <h3>✅ Good Example - Following ISP</h3>
-                <pre><code>public interface IWorkable
-{
-    void Work();
-}
-
-public interface IEatable
-{
-    void Eat();
-}
-
-public interface ISleepable
-{
-    void Sleep();
-}
-
-public class HumanWorker : IWorkable, IEatable, ISleepable
-{
-    public void Work() { /* Work */ }
-    public void Eat() { /* Eat */ }
-    public void Sleep() { /* Sleep */ }
-}
-
-public class RobotWorker : IWorkable
-{
-    public void Work() { /* Work */ }
-}</code></pre>
-
-                <h2>5. Dependency Inversion Principle (DIP)</h2>
-                <p>High-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
-
-                <h3>❌ Bad Example - Violating DIP</h3>
-                <pre><code>public class EmailSender
-{
-    public void SendEmail(string message)
-    {
-        Console.WriteLine($"Sending email: {message}");
-    }
-}
-
-public class NotificationService
-{
-    private EmailSender emailSender = new EmailSender();
-    
-    public void Notify(string message)
-    {
-        emailSender.SendEmail(message);
-    }
-}</code></pre>
-
-                <h3>✅ Good Example - Following DIP</h3>
-                <pre><code>// Abstraction
-public interface IMessageService
-{
-    void SendMessage(string message);
-}
-
-// Low-level module
-public class EmailService : IMessageService
-{
-    public void SendMessage(string message)
-    {
-        Console.WriteLine($"Sending email: {message}");
-    }
-}
-
-public class SMSService : IMessageService
-{
-    public void SendMessage(string message)
-    {
-        Console.WriteLine($"Sending SMS: {message}");
-    }
-}
-
-// High-level module depends on abstraction
-public class NotificationService
-{
-    private readonly IMessageService messageService;
-    
-    public NotificationService(IMessageService messageService)
-    {
-        this.messageService = messageService;
-    }
-    
-    public void Notify(string message)
-    {
-        messageService.SendMessage(message);
-    }
-}</code></pre>
-
-                <h2>Complete Example - All SOLID Principles Applied</h2>
-                <pre><code>using System;
-using System.Collections.Generic;
-
-// 1. SRP - Each class has single responsibility
-// 2. OCP - Open for extension, closed for modification
-// 3. LSP - Derived classes can substitute base classes
-// 4. ISP - Segregated interfaces
-// 5. DIP - Dependency inversion
-
-// Interfaces (ISP)
-public interface IEmployee
-{
-    string Name { get; }
-    decimal Salary { get; }
-}
-
-public interface IWorkable
-{
-    void Work();
-}
-
-public interface IPayable
-{
-    void CalculatePay();
-}
-
-public interface IReportable
-{
-    string GenerateReport();
-}
-
-// Abstract base class (OCP)
-public abstract class Employee : IEmployee, IWorkable, IPayable, IReportable
-{
-    public string Name { get; set; }
-    public decimal Salary { get; set; }
-    
-    public Employee(string name, decimal salary)
-    {
-        Name = name;
-        Salary = salary;
-    }
-    
-    public abstract void Work();
-    public abstract void CalculatePay();
-    public abstract string GenerateReport();
-}
-
-// Derived classes (LSP)
-public class Developer : Employee
-{
-    public Developer(string name, decimal salary) : base(name, salary) { }
-    
-    public override void Work()
-    {
-        Console.WriteLine($"{Name} is writing code");
-    }
-    
-    public override void CalculatePay()
-    {
-        Console.WriteLine($"{Name} is paid ${Salary:0.00}");
-    }
-    
-    public override string GenerateReport()
-    {
-        return $"Developer: {Name} - Salary: ${Salary:0.00}";
-    }
-}
-
-public class Manager : Employee
-{
-    public Manager(string name, decimal salary) : base(name, salary) { }
-    
-    public override void Work()
-    {
-        Console.WriteLine($"{Name} is managing team");
-    }
-    
-    public override void CalculatePay()
-    {
-        Console.WriteLine($"{Name} is paid ${Salary:0.00} with bonus");
-    }
-    
-    public override string GenerateReport()
-    {
-        return $"Manager: {Name} - Salary: ${Salary:0.00}";
-    }
-}
-
-// Services following DIP
-public interface IEmployeeRepository
-{
-    void Add(Employee employee);
-    IEnumerable<Employee> GetAll();
-}
-
-public interface IPayrollProcessor
-{
-    void ProcessPayroll(IEnumerable<Employee> employees);
-}
-
-public interface IReportGenerator
-{
-    void GenerateReports(IEnumerable<Employee> employees);
-}
-
-// Implementations
-public class EmployeeRepository : IEmployeeRepository
-{
-    private List<Employee> employees = new List<Employee>();
-    
-    public void Add(Employee employee)
-    {
-        employees.Add(employee);
-    }
-    
-    public IEnumerable<Employee> GetAll()
-    {
-        return employees;
-    }
-}
-
-public class PayrollProcessor : IPayrollProcessor
-{
-    public void ProcessPayroll(IEnumerable<Employee> employees)
-    {
-        Console.WriteLine("\n=== PAYROLL PROCESSING ===");
-        foreach (var employee in employees)
-        {
-            employee.CalculatePay();
-        }
-    }
-}
-
-public class ReportGenerator : IReportGenerator
-{
-    public void GenerateReports(IEnumerable<Employee> employees)
-    {
-        Console.WriteLine("\n=== EMPLOYEE REPORTS ===");
-        foreach (var employee in employees)
-        {
-            Console.WriteLine(employee.GenerateReport());
-        }
-    }
-}
-
-// Main application
-class Program
-{
-    static void Main()
-    {
-        // Dependency injection
-        IEmployeeRepository repository = new EmployeeRepository();
-        IPayrollProcessor payroll = new PayrollProcessor();
-        IReportGenerator reportGenerator = new ReportGenerator();
-        
-        // Add employees
-        repository.Add(new Developer("John Doe", 5000));
-        repository.Add(new Developer("Jane Smith", 4500));
-        repository.Add(new Manager("Bob Johnson", 7000));
-        
-        // Get all employees
-        var employees = repository.GetAll();
-        
-        // Work
-        Console.WriteLine("=== WORK ACTIVITIES ===");
-        foreach (var employee in employees)
-        {
-            employee.Work();
-        }
-        
-        // Process payroll
-        payroll.ProcessPayroll(employees);
-        
-        // Generate reports
-        reportGenerator.GenerateReports(employees);
-    }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <ul class="mb-0">
-                            <li>SOLID principles create maintainable and scalable code</li>
-                            <li>Each principle addresses a specific design problem</li>
-                            <li>Applying SOLID leads to better software architecture</li>
-                            <li>These principles complement each other</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Apply SOLID principles to create a system for:</p>
-                        <ol>
-                            <li>A library management system</li>
-                            <li>Apply all 5 SOLID principles</li>
-                            <li>Include interfaces, abstract classes, and services</li>
-                            <li>Use dependency injection</li>
-                            <li>Write unit tests for the system</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">SOLID Principles</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        SOLID Principles 🧱
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        The Secret to Clean, Professional Code
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>30 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 11 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/10-Generics" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP" class="btn btn-primary-custom">
-                        Back to Section <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-cubes fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Hey There! Ready to Learn SOLID Principles? 🏗️</h2>
+                                    <p class="fs-5">
+                                        <strong>SOLID</strong> is a set of <strong>5 design principles</strong> that help you write
+                                        <strong>clean, maintainable, and professional</strong> code. It's like the
+                                        <strong>golden rules</strong> of building great software!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Why SOLID Matters:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>🏗️ <strong>Easy to maintain</strong> - Change code without breaking things</li>
+                                            <li>🧩 <strong>Easy to extend</strong> - Add new features without touching old code</li>
+                                            <li>👥 <strong>Team-friendly</strong> - Multiple developers can work together</li>
+                                            <li>🐛 <strong>Fewer bugs</strong> - Clean code = fewer problems</li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary p-2">🎯 After this lesson, you'll be able to:</span>
+                                        <ul class="mt-2">
+                                            <li>✅ Understand all 5 SOLID principles</li>
+                                            <li>✅ Spot bad code that violates SOLID</li>
+                                            <li>✅ Write clean, professional code</li>
+                                            <li>✅ Build applications that are easy to maintain</li>
+                                            <li>✅ Impress your team with your coding skills!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What are SOLID Principles? -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: What are SOLID Principles?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> SOLID is an acronym for 5 principles that make your code better!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-list text-primary me-2"></i>📝 The SOLID Acronym</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th>Letter</th>
+                                                                <th>Principle</th>
+                                                                <th>Simple Meaning</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>S</strong></td>
+                                                                <td>Single Responsibility</td>
+                                                                <td>One job per class</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>O</strong></td>
+                                                                <td>Open/Closed</td>
+                                                                <td>Add new stuff, don't change old stuff</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>L</strong></td>
+                                                                <td>Liskov Substitution</td>
+                                                                <td>Children should act like their parents</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>I</strong></td>
+                                                                <td>Interface Segregation</td>
+                                                                <td>Don't force things they don't need</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>D</strong></td>
+                                                                <td>Dependency Inversion</td>
+                                                                <td>Depend on ideas, not specific things</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the SOLID principles break up?
+                                        Because they couldn't agree on how to build a house! (Okay, I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 2: S - Single Responsibility Principle -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: S - Single Responsibility Principle</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>What It Means:</strong> A class should have <strong>one job</strong> - and do it well!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Example</h5>
+                                                <p><strong>One class doing EVERYTHING:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Employee</span>
+{
+    <span class="comment">// 1. Stores data</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="comment">// 2. Calculates bonus</span>
+    <span class="keyword">public</span> <span class="keyword">decimal</span> <span class="function">CalcBonus</span>() => Salary * <span class="number">0.1m</span>;
+    
+    <span class="comment">// 3. Saves to database</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Save</span>() { }
+    
+    <span class="comment">// 4. Sends emails</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SendEmail</span>() { }
+}</code></pre>
+                                                </div>
+                                                <p class="text-danger">⚠️ Four responsibilities in one class!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Example</h5>
+                                                <p><strong>Each class has ONE job:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Job 1: Store data</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Employee</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+}
+
+<span class="comment">// Job 2: Calculate bonus</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">BonusCalculator</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> <span class="function">Calc</span>(<span class="class">Employee</span> e) => e.Salary * <span class="number">0.1m</span>;
+}
+
+<span class="comment">// Job 3: Save data</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">EmployeeRepo</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Save</span>(<span class="class">Employee</span> e) { }
+}</code></pre>
+                                                </div>
+                                                <p class="text-success">✅ Each class has ONE responsibility!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong> If you need to change a class for different reasons, it has too many responsibilities!
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-2">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the class get fired? Because it couldn't handle all its responsibilities!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔓 Part 3: O - Open/Closed Principle -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: O - Open/Closed Principle</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>What It Means:</strong> Open for <strong>extension</strong>, closed for <strong>modification</strong>.
+                                    Add new features without changing existing code!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Example</h5>
+                                                <p><strong>Must change existing code to add new shapes:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">AreaCalculator</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="function">Area</span>(<span class="keyword">object</span> shape)
+    {
+        <span class="keyword">if</span> (shape <span class="keyword">is</span> <span class="class">Circle</span> c)
+            <span class="keyword">return</span> Math.PI * c.Radius * c.Radius;
+        <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">is</span> <span class="class">Rectangle</span> r)
+            <span class="keyword">return</span> r.Width * r.Height;
+        <span class="comment">// Adding new shapes requires changing THIS method!</span>
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Example</h5>
+                                                <p><strong>Add new shapes without changing existing code:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Base class - open for extension</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="function">Area</span>();
+}
+
+<span class="comment">// Each shape in its own class</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Circle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="function">Area</span>() => Math.PI * Radius * Radius;
+}</code></pre>
+                                                </div>
+                                                <p class="text-success">✅ Add new shapes by creating new classes!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔄 Part 4: L - Liskov Substitution Principle -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: L - Liskov Substitution Principle</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>What It Means:</strong> A child class should be able to <strong>replace</strong> its parent class without breaking things!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Example</h5>
+                                                <p><strong>Square breaking Rectangle behavior:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Rectangle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">int</span> Width { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">int</span> Height { <span class="function">get</span>; <span class="function">set</span>; }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Square</span> : <span class="class">Rectangle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">int</span> Width
+    {
+        <span class="function">set</span> { <span class="function">base</span>.Width = value; <span class="function">base</span>.Height = value; }
+    }
+}</code></pre>
+                                                </div>
+                                                <p class="text-danger">⚠️ Square changes both width AND height!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Example</h5>
+                                                <p><strong>Separate classes for different shapes:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="function">Area</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Rectangle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Width { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Height { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">int</span> <span class="function">Area</span>() => Width * Height;
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Square</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Side { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">int</span> <span class="function">Area</span>() => Side * Side;
+}</code></pre>
+                                                </div>
+                                                <p class="text-success">✅ Each shape is separate and works correctly!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong> If a child class changes behavior in unexpected ways, it violates LSP!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎯 Part 5: I - Interface Segregation Principle -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: I - Interface Segregation Principle</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>What It Means:</strong> Don't force a class to implement methods it doesn't need!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Example</h5>
+                                                <p><strong>One big interface with everything:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IWorker</span>
+{
+    <span class="keyword">void</span> <span class="function">Work</span>();
+    <span class="keyword">void</span> <span class="function">Eat</span>();
+    <span class="keyword">void</span> <span class="function">Sleep</span>();
+}
+
+<span class="comment">// Robot forced to Eat and Sleep!</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Robot</span> : <span class="class">IWorker</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Work</span>() { }
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Eat</span>() { } <span class="comment">// Robots don't eat!</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Sleep</span>() { } <span class="comment">// Robots don't sleep!</span>
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Example</h5>
+                                                <p><strong>Small, focused interfaces:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IWorkable</span>
+{
+    <span class="keyword">void</span> <span class="function">Work</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IEatable</span>
+{
+    <span class="keyword">void</span> <span class="function">Eat</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">ISleepable</span>
+{
+    <span class="keyword">void</span> <span class="function">Sleep</span>();
+}
+
+<span class="comment">// Robot only implements what it needs</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Robot</span> : <span class="class">IWorkable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Work</span>() { }
+}</code></pre>
+                                                </div>
+                                                <p class="text-success">✅ Each class implements only what it needs!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 6: D - Dependency Inversion Principle -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: D - Dependency Inversion Principle</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>What It Means:</strong> Depend on <strong>abstractions</strong> (interfaces), not <strong>concrete things</strong> (specific classes)!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-times-circle text-danger me-2"></i>❌ Bad Example</h5>
+                                                <p><strong>High-level class depends on low-level class:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">EmailSender</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Send</span>(<span class="keyword">string</span> msg) { }
+}
+
+<span class="comment">// ❌ Depends on specific EmailSender</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Notification</span>
+{
+    <span class="keyword">private</span> <span class="class">EmailSender</span> sender = <span class="keyword">new</span> <span class="class">EmailSender</span>();
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Notify</span>() => sender.<span class="function">Send</span>(<span class="string">"Hi"</span>);
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Good Example</h5>
+                                                <p><strong>Depend on abstraction (interface):</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IMessageSender</span>
+{
+    <span class="keyword">void</span> <span class="function">Send</span>(<span class="keyword">string</span> msg);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">EmailSender</span> : <span class="class">IMessageSender</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Send</span>(<span class="keyword">string</span> msg) { }
+}
+
+<span class="comment">// ✅ Depends on interface, not concrete class</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Notification</span>
+{
+    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="class">IMessageSender</span> sender;
+    
+    <span class="keyword">public</span> <span class="function">Notification</span>(<span class="class">IMessageSender</span> sender) =>
+        <span class="keyword">this</span>.sender = sender;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Notify</span>() => sender.<span class="function">Send</span>(<span class="string">"Hi"</span>);
+}</code></pre>
+                                                </div>
+                                                <p class="text-success">✅ Can switch to SMS, Push, etc. without changing Notification!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong> High-level modules should depend on abstractions, not concrete implementations!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🌍 Part 7: Complete Real-World Example -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Complete Real-World Example - Library System 📚</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a <strong>Library Management System</strong> using all SOLID principles!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== SOLID Library System =====</span>
+
+<span class="comment">// 1. SRP - Each class has one job</span>
+<span class="comment">// 2. OCP - Add new book types easily</span>
+<span class="comment">// 3. LSP - All books work the same way</span>
+
+<span class="comment">// Interfaces (ISP - small, focused)</span>
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IBook</span>
+{
+    <span class="keyword">string</span> Title { <span class="function">get</span>; }
+    <span class="keyword">string</span> Author { <span class="function">get</span>; }
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IBorrowable</span>
+{
+    <span class="keyword">void</span> <span class="function">Borrow</span>();
+    <span class="keyword">void</span> <span class="function">Return</span>();
+    <span class="keyword">bool</span> IsAvailable { <span class="function">get</span>; }
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPrintable</span>
+{
+    <span class="keyword">void</span> <span class="function">Print</span>();
+}
+
+<span class="comment">// Abstract base class (OCP - open for extension)</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Book</span> : <span class="class">IBook</span>, <span class="class">IBorrowable</span>, <span class="class">IPrintable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Title { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Author { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">bool</span> IsAvailable { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Book</span>(<span class="keyword">string</span> title, <span class="keyword">string</span> author)
+    {
+        Title = title;
+        Author = author;
+        IsAvailable = <span class="keyword">true</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Borrow</span>()
+    {
+        <span class="keyword">if</span> (!IsAvailable)
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="class">Exception</span>(<span class="string">"Book already borrowed"</span>);
+        IsAvailable = <span class="keyword">false</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Return</span>() => IsAvailable = <span class="keyword">true</span>;
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">Print</span>();
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Different book types (LSP - substitutable)</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">PhysicalBook</span> : <span class="class">Book</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Pages { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">PhysicalBook</span>(<span class="keyword">string</span> title, <span class="keyword">string</span> author, <span class="keyword">int</span> pages)
+        : <span class="function">base</span>(title, author) => Pages = pages;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Print</span>() =>
+        Console.WriteLine(<span class="string">$"📖 Physical: {Title} by {Author} ({Pages} pages)"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">EBook</span> : <span class="class">Book</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> FileSize { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">EBook</span>(<span class="keyword">string</span> title, <span class="keyword">string</span> author, <span class="keyword">string</span> size)
+        : <span class="function">base</span>(title, author) => FileSize = size;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Print</span>() =>
+        Console.WriteLine(<span class="string">$"📱 E-Book: {Title} by {Author} ({FileSize} MB)"</span>);
+}
+
+<span class="comment">// Services (DIP - depend on abstractions)</span>
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">ILibrary</span>
+{
+    <span class="keyword">void</span> <span class="function">AddBook</span>(<span class="class">Book</span> book);
+    <span class="keyword">void</span> <span class="function">DisplayAll</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Library</span> : <span class="class">ILibrary</span>
+{
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="class">Book</span>&gt; books = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">Book</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddBook</span>(<span class="class">Book</span> book) => books.<span class="function">Add</span>(book);
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayAll</span>()
+    {
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> book <span class="keyword">in</span> books)
+            book.<span class="function">Print</span>();
+    }
+}
+
+<span class="comment">// Program (DIP - uses abstractions)</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="class">ILibrary</span> library = <span class="keyword">new</span> <span class="class">Library</span>();
+        
+        library.<span class="function">AddBook</span>(<span class="keyword">new</span> <span class="class">PhysicalBook</span>(<span class="string">"C# Guide"</span>, <span class="string">"John Doe"</span>, <span class="number">500</span>));
+        library.<span class="function">AddBook</span>(<span class="keyword">new</span> <span class="class">EBook</span>(<span class="string">"Clean Code"</span>, <span class="string">"Robert Martin"</span>, <span class="string">"2.5"</span>));
+        
+        library.<span class="function">DisplayAll</span>();
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 All SOLID principles applied!</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>SRP</strong> - Each class has one job</li>
+                                                <li>✅ <strong>OCP</strong> - Add new book types easily</li>
+                                                <li>✅ <strong>LSP</strong> - All books work the same way</li>
+                                                <li>✅ <strong>ISP</strong> - Small, focused interfaces</li>
+                                                <li>✅ <strong>DIP</strong> - Depend on abstractions</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Library Joke:</strong> Why did the book join a gym? To get more abs! (Get it? Abs-tractions? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 8: Exercise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Part 8: Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What You're Building:</strong> A <strong>Payment Processing System</strong> using SOLID principles!
+                                    <br>
+                                    Support multiple payment methods (Credit Card, PayPal, Crypto) with clean design.
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle text-primary me-2"></i>💳 About This Application</h5>
+                                        <p>This is a <strong>Payment System</strong> like:</p>
+                                        <ul>
+                                            <li>💳 <strong>Stripe</strong> - Credit card payments</li>
+                                            <li>💸 <strong>PayPal</strong> - Digital wallets</li>
+                                            <li>🪙 <strong>Coinbase</strong> - Crypto payments</li>
+                                        </ul>
+                                        <p>You'll build it using SOLID principles:</p>
+                                        <ul>
+                                            <li>✅ Each payment method is its own class</li>
+                                            <li>✅ Easy to add new payment methods</li>
+                                            <li>✅ Clean, testable code</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Interfaces:</strong>
+                                                        <ul>
+                                                            <li>IPayment - Process()</li>
+                                                            <li>IRefundable - Refund()</li>
+                                                            <li>IReceiptable - GetReceipt()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Abstract Class: Payment</strong>
+                                                        <ul>
+                                                            <li>Amount property</li>
+                                                            <li>Implement IPayment</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived Classes:</strong>
+                                                        <ul>
+                                                            <li>CreditCardPayment</li>
+                                                            <li>PayPalPayment</li>
+                                                            <li>CryptoPayment</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Service: PaymentProcessor</strong>
+                                                        <ul>
+                                                            <li>Accepts any IPayment</li>
+                                                            <li>Processes and generates receipt</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 SOLID Applied:</h6>
+                                                <ul>
+                                                    <li>✅ <strong>SRP</strong> - Each class has one job</li>
+                                                    <li>✅ <strong>OCP</strong> - Add new payment types easily</li>
+                                                    <li>✅ <strong>LSP</strong> - All payments work the same</li>
+                                                    <li>✅ <strong>ISP</strong> - Small, focused interfaces</li>
+                                                    <li>✅ <strong>DIP</strong> - Depend on IPayment interface</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A flexible payment system that follows all SOLID principles!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Solution (Try it yourself first!)
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== SOLID PAYMENT SYSTEM =====</span>
+
+<span class="comment">// 1. ISP - Small, focused interfaces</span>
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPayment</span>
+{
+    <span class="keyword">decimal</span> Amount { <span class="function">get</span>; }
+    <span class="keyword">void</span> <span class="function">Process</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IRefundable</span>
+{
+    <span class="keyword">void</span> <span class="function">Refund</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IReceiptable</span>
+{
+    <span class="keyword">string</span> <span class="function">GetReceipt</span>();
+}
+
+<span class="comment">// 2. Abstract base class (OCP - open for extension)</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Payment</span> : <span class="class">IPayment</span>, <span class="class">IReceiptable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Amount { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">protected</span> <span class="keyword">string</span> TransactionId { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Payment</span>(<span class="keyword">decimal</span> amount) => Amount = amount;
+    
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">Process</span>();
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">string</span> <span class="function">GetReceipt</span>() =>
+        <span class="string">$"Transaction: {TransactionId}\nAmount: ${Amount:F2}"</span>;
+}
+
+<span class="comment">// 3. Payment implementations (LSP - substitutable)</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">CreditCardPayment</span> : <span class="class">Payment</span>, <span class="class">IRefundable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> CardNumber { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">CreditCardPayment</span>(<span class="keyword">decimal</span> amount, <span class="keyword">string</span> card)
+        : <span class="function">base</span>(amount) => CardNumber = card;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>()
+    {
+        TransactionId = <span class="string">$"CC-{DateTime.Now.Ticks}"</span>;
+        Console.WriteLine(<span class="string">$"💳 Charging ${Amount:F2} to card ending in {CardNumber[^4..]}"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Refund</span>() =>
+        Console.WriteLine(<span class="string">$"🔄 Refunding ${Amount:F2} to card"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">PayPalPayment</span> : <span class="class">Payment</span>, <span class="class">IRefundable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Email { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">PayPalPayment</span>(<span class="keyword">decimal</span> amount, <span class="keyword">string</span> email)
+        : <span class="function">base</span>(amount) => Email = email;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>()
+    {
+        TransactionId = <span class="string">$"PP-{DateTime.Now.Ticks}"</span>;
+        Console.WriteLine(<span class="string">$"💸 Sending ${Amount:F2} to {Email}"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Refund</span>() =>
+        Console.WriteLine(<span class="string">$"🔄 Refunding ${Amount:F2} to {Email}"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">CryptoPayment</span> : <span class="class">Payment</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> WalletAddress { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">CryptoPayment</span>(<span class="keyword">decimal</span> amount, <span class="keyword">string</span> wallet)
+        : <span class="function">base</span>(amount) => WalletAddress = wallet;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>()
+    {
+        TransactionId = <span class="string">$"CR-{DateTime.Now.Ticks}"</span>;
+        Console.WriteLine(<span class="string">$"🪙 Sending ${Amount:F2} worth of crypto to {WalletAddress[^8..]}"</span>);
+    }
+}
+
+<span class="comment">// 4. Service (SRP - single responsibility)</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">PaymentProcessor</span>
+{
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="class">IPayment</span>&gt; payments = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="class">IPayment</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddPayment</span>(<span class="class">IPayment</span> payment) => payments.<span class="function">Add</span>(payment);
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ProcessAll</span>()
+    {
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> payment <span class="keyword">in</span> payments)
+        {
+            payment.<span class="function">Process</span>();
+            <span class="keyword">if</span> (payment <span class="keyword">is</span> <span class="class">IReceiptable</span> receipt)
+                Console.WriteLine(receipt.<span class="function">GetReceipt</span>());
+            Console.WriteLine();
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">decimal</span> <span class="function">GetTotal</span>() =>
+        payments.<span class="function">Sum</span>(p => p.Amount);
+}
+
+<span class="comment">// 5. Program (DIP - depends on abstractions)</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"💳 PAYMENT SYSTEM\n"</span>);
+        
+        <span class="class">PaymentProcessor</span> processor = <span class="keyword">new</span> <span class="class">PaymentProcessor</span>();
+        
+        <span class="comment">// Add different payments</span>
+        processor.<span class="function">AddPayment</span>(<span class="keyword">new</span> <span class="class">CreditCardPayment</span>(<span class="number">100.00m</span>, <span class="string">"1234-5678-9012-3456"</span>));
+        processor.<span class="function">AddPayment</span>(<span class="keyword">new</span> <span class="class">PayPalPayment</span>(<span class="number">75.00m</span>, <span class="string">"user@email.com"</span>));
+        processor.<span class="function">AddPayment</span>(<span class="keyword">new</span> <span class="class">CryptoPayment</span>(<span class="number">50.00m</span>, <span class="string">"0x1234...5678"</span>));
+        
+        <span class="comment">// Process all</span>
+        processor.<span class="function">ProcessAll</span>();
+        
+        Console.WriteLine(<span class="string">$"💰 Total: ${processor.GetTotal():F2}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a payment system using all 5 SOLID principles!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <h2 class="text-warning">S</h2>
+                                        <h5>Single Responsibility</h5>
+                                        <small>One job per class</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <h2 class="text-warning">O</h2>
+                                        <h5>Open/Closed</h5>
+                                        <small>Extend, don't modify</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <h2 class="text-warning">L</h2>
+                                        <h5>Liskov Substitution</h5>
+                                        <small>Children replace parents</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h2 class="text-warning">I</h2>
+                                        <h5>Interface Segregation</h5>
+                                        <small>Don't force unneeded methods</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h2 class="text-warning">D</h2>
+                                        <h5>Dependency Inversion</h5>
+                                        <small>Depend on abstractions</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-book fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Library System! 📚</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-credit-card fa-3x mb-2"></i>
+                                        <h5>Payment System</h5>
+                                        <small>SOLID in action! 💳</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-trophy fa-3x mb-2"></i>
+                                        <h5>Professional Code</h5>
+                                        <small>You're a pro now! 🏆</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/10-Generics" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
+
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson11")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

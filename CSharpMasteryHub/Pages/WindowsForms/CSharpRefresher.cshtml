@@ -1,486 +1,742 @@
 ﻿@page
 @model CSharpMasteryHub.Pages.WindowsForms.CSharpRefresherModel
 @{
-    ViewData["Title"] = "C# Refresher for Windows Forms";
+    ViewData["Title"] = "C# Refresher for Windows Forms - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
-                    <li class="breadcrumb-item active">C# Refresher</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content refresher-lesson" data-aos="fade-up" data-aos-duration="800">
-                <div class="refresher-header d-flex align-items-center gap-3 mb-4 flex-wrap">
-                    <span class="badge bg-warning text-dark p-2 px-3 rounded-pill"><i class="fas fa-sync-alt me-1"></i> Refresher</span>
-                    <span class="badge bg-info text-dark p-2 px-3 rounded-pill"><i class="far fa-clock me-1"></i> 15 min read</span>
-                    <span class="badge bg-primary p-2 px-3 rounded-pill">Essential syntax</span>
-                </div>
-
-                <h1 class="display-5 fw-bold mb-3">C# Essentials for Windows Forms <i class="fas fa-code text-primary ms-2"></i></h1>
-                <p class="lead mb-4">
-                    If you're new to C# or need a quick refresh on arrays, lists, conditionals, and loops —
-                    this guide is for you. We'll cover the core syntax you'll use daily in WinForms development.
-                </p>
-
-                <!-- ===== ARRAYS ===== -->
-                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-primary" data-aos="fade-right" data-aos-delay="100">
-                    <h3 class="h4 fw-bold"><i class="fas fa-layer-group text-primary me-2"></i>Arrays</h3>
-                    <p class="text-muted">Fixed-size collections of the same type.</p>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold text-primary">What is an Array?</h6>
-                        <p>
-                            An array is like a list of items that are all the same type. Think of it like a box with
-                            numbered slots. Each slot holds one item, and you can access it by its number (index).
-                            <strong>Arrays have a fixed size</strong> - once you create one, you cannot add or remove items.
-                        </p>
-                    </div>
-
-                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
-                        <pre><code class="language-csharp"><span class="comment">// ===== DECLARING AN ARRAY =====</span>
-<span class="comment">// Method 1: Create empty array with size</span>
-<span class="keyword">string</span>[] <span class="variable">names</span> = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">3</span>];  <span class="comment">// Creates array with 3 empty slots</span>
-<span class="variable">names</span>[<span class="number">0</span>] = <span class="string">"Alice"</span>;          <span class="comment">// Put "Alice" in slot 0</span>
-<span class="variable">names</span>[<span class="number">1</span>] = <span class="string">"Bob"</span>;              <span class="comment">// Put "Bob" in slot 1</span>
-<span class="variable">names</span>[<span class="number">2</span>] = <span class="string">"Charlie"</span>;          <span class="comment">// Put "Charlie" in slot 2</span>
-
-<span class="comment">// Method 2: Create and fill in one line</span>
-<span class="keyword">int</span>[] <span class="variable">scores</span> = { <span class="number">95</span>, <span class="number">88</span>, <span class="number">76</span>, <span class="number">92</span> };  <span class="comment">// 4 items - size is automatic</span>
-
-<span class="comment">// ===== USING ARRAYS IN WINFORMS =====</span>
-<span class="comment">// Example: Populate a ComboBox with array items</span>
-<span class="keyword">string</span>[] <span class="variable">departments</span> = { <span class="string">"IT"</span>, <span class="string">"HR"</span>, <span class="string">"Finance"</span>, <span class="string">"Marketing"</span> };
-<span class="variable">cmbDepartment</span>.<span class="property">Items</span>.<span class="function">AddRange</span>(<span class="variable">departments</span>);
-
-<span class="comment">// ===== IMPORTANT: Array Properties =====</span>
-<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">scores</span>.<span class="property">Length</span>;  <span class="comment">// Gets the number of items (4)</span>
-<span class="keyword">int</span> <span class="variable">first</span> = <span class="variable">scores</span>[<span class="number">0</span>];         <span class="comment">// Gets the first item (95)</span>
-<span class="keyword">int</span> <span class="variable">last</span> = <span class="variable">scores</span>[<span class="variable">scores</span>.<span class="property">Length</span> - <span class="number">1</span>]; <span class="comment">// Gets the last item (92)</span>
-
-<span class="comment">// ===== LOOPING THROUGH AN ARRAY =====</span>
-<span class="keyword">foreach</span> (<span class="keyword">int</span> <span class="variable">score</span> <span class="keyword">in</span> <span class="variable">scores</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">score</span>);  <span class="comment">// Prints: 95, 88, 76, 92</span>
-}</code></pre>
-                    </div>
-
-                    <div class="winforms-tip p-3 bg-primary bg-opacity-10 rounded-3 mt-2">
-                        <i class="fas fa-lightbulb text-warning me-2"></i>
-                        <strong>WinForms Tip:</strong> Arrays are great for storing fixed lists like menu items,
-                        dropdown options, or days of the week. Use <code>Array.Length</code> to know how many items you have.
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="badge bg-primary me-1">fixed size</span>
-                        <span class="badge bg-secondary me-1">zero-indexed</span>
-                        <span class="badge bg-info text-dark">Array.Length</span>
-                        <span class="badge bg-success">foreach</span>
-                    </div>
-                </div>
-
-                <!-- ===== LISTS ===== -->
-                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-success" data-aos="fade-left" data-aos-delay="200">
-                    <h3 class="h4 fw-bold"><i class="fas fa-list-ul text-success me-2"></i>Lists (List&lt;T&gt;)</h3>
-                    <p class="text-muted">Dynamic collections that grow as needed.</p>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold text-success">What is a List?</h6>
-                        <p>
-                            A List is like an array but <strong>it can grow and shrink</strong>. You can add, remove,
-                            and insert items at any time. This makes Lists more flexible than arrays for most WinForms applications.
-                            <strong>Lists are the most commonly used collection</strong> in professional C# development.
-                        </p>
-                    </div>
-
-                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
-                        <pre><code class="language-csharp"><span class="comment">// ===== CREATING A LIST =====</span>
-<span class="comment">// Create an empty list of strings</span>
-<span class="keyword">var</span> <span class="variable">students</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
-
-<span class="comment">// Add items to the list</span>
-<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"Maria"</span>);    <span class="comment">// Index 0</span>
-<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"James"</span>);    <span class="comment">// Index 1</span>
-<span class="variable">students</span>.<span class="function">Add</span>(<span class="string">"Sophia"</span>);   <span class="comment">// Index 2</span>
-
-<span class="comment">// ===== LIST PROPERTIES AND METHODS =====</span>
-<span class="keyword">int</span> <span class="variable">count</span> = <span class="variable">students</span>.<span class="property">Count</span>;              <span class="comment">// 3</span>
-<span class="keyword">string</span> <span class="variable">first</span> = <span class="variable">students</span>[<span class="number">0</span>];                 <span class="comment">// "Maria"</span>
-<span class="variable">students</span>.<span class="function">Remove</span>(<span class="string">"James"</span>);                 <span class="comment">// Removes "James"</span>
-<span class="variable">students</span>.<span class="function">Insert</span>(<span class="number">1</span>, <span class="string">"Ahmed"</span>);               <span class="comment">// Inserts "Ahmed" at index 1</span>
-<span class="keyword">bool</span> <span class="variable">hasMaria</span> = <span class="variable">students</span>.<span class="function">Contains</span>(<span class="string">"Maria"</span>); <span class="comment">// true</span>
-
-<span class="comment">// ===== USING LISTS IN WINFORMS =====</span>
-<span class="comment">// Example: Store and display customer names in a ListBox</span>
-<span class="keyword">var</span> <span class="variable">customerNames</span> = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
-<span class="variable">customerNames</span>.<span class="function">Add</span>(<span class="string">"John Smith"</span>);
-<span class="variable">customerNames</span>.<span class="function">Add</span>(<span class="string">"Jane Doe"</span>);
-<span class="variable">customerNames</span>.<span class="function">Add</span>(<span class="string">"Bob Wilson"</span>);
-<span class="variable">lstCustomers</span>.<span class="property">DataSource</span> = <span class="variable">customerNames</span>;  <span class="comment">// Bind to ListBox</span>
-
-<span class="comment">// ===== LOOPING THROUGH A LIST =====</span>
-<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">student</span> <span class="keyword">in</span> <span class="variable">students</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">student</span>);
-}</code></pre>
-                    </div>
-
-                    <div class="winforms-tip p-3 bg-success bg-opacity-10 rounded-3 mt-2">
-                        <i class="fas fa-lightbulb text-warning me-2"></i>
-                        <strong>WinForms Tip:</strong> Lists are perfect for dynamic data like search results,
-                        shopping carts, or data from a database. Use <code>List.Count</code> to check if there are items.
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="badge bg-success me-1">dynamic size</span>
-                        <span class="badge bg-secondary me-1">List&lt;T&gt;</span>
-                        <span class="badge bg-info text-dark">.Add() .Remove()</span>
-                        <span class="badge bg-primary">.Count</span>
-                    </div>
-                </div>
-
-                <!-- ===== IF / ELSE ===== -->
-                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-warning" data-aos="fade-right" data-aos-delay="300">
-                    <h3 class="h4 fw-bold"><i class="fas fa-code-branch text-warning me-2"></i>If / Else Statements</h3>
-                    <p class="text-muted">Make decisions based on conditions.</p>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold text-warning">What are If/Else Statements?</h6>
-                        <p>
-                            If/Else statements let your program make decisions. Think of it like a fork in the road:
-                            <strong>"If this is true, go left, else go right."</strong> You'll use If/Else constantly
-                            in WinForms for validation, conditional logic, and controlling the flow of your app.
-                        </p>
-                    </div>
-
-                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
-                        <pre><code class="language-csharp"><span class="comment">// ===== BASIC IF/ELSE =====</span>
-<span class="keyword">int</span> <span class="variable">age</span> = <span class="number">20</span>;
-
-<span class="keyword">if</span> (<span class="variable">age</span> &gt;= <span class="number">18</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are an adult."</span>);
-}
-<span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">age</span> &gt;= <span class="number">13</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are a teenager."</span>);
-}
-<span class="keyword">else</span>
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"You are a child."</span>);
-}
-
-<span class="comment">// ===== USING IF/ELSE IN WINFORMS =====</span>
-<span class="comment">// Example 1: Validate a textbox before saving</span>
-<span class="keyword">private void</span> <span class="function">btnSave_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="function">IsNullOrWhiteSpace</span>(<span class="variable">txtName</span>.<span class="property">Text</span>))
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a name."</span>, <span class="string">"Validation"</span>);
-        <span class="keyword">return</span>;  <span class="comment">// Stop the method</span>
-    }
-    <span class="comment">// Save the data...</span>
-}
-
-<span class="comment">// Example 2: Enable/Disable a button based on checkbox</span>
-<span class="keyword">private void</span> <span class="function">chkAgree_CheckedChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="keyword">if</span> (<span class="variable">chkAgree</span>.<span class="property">Checked</span>)
-    {
-        <span class="variable">btnSubmit</span>.<span class="property">Enabled</span> = <span class="keyword">true</span>;
-        <span class="variable">lblStatus</span>.<span class="property">Text</span> = <span class="string">"You agreed to the terms."</span>;
-    }
-    <span class="keyword">else</span>
-    {
-        <span class="variable">btnSubmit</span>.<span class="property">Enabled</span> = <span class="keyword">false</span>;
-        <span class="variable">lblStatus</span>.<span class="property">Text</span> = <span class="string">"Please agree to continue."</span>;
-    }
-}</code></pre>
-                    </div>
-
-                    <div class="winforms-tip p-3 bg-warning bg-opacity-10 rounded-3 mt-2">
-                        <i class="fas fa-lightbulb text-warning me-2"></i>
-                        <strong>WinForms Tip:</strong> Use If/Else for validation before saving, checking user permissions,
-                        and controlling which controls are visible/enabled.
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="badge bg-warning text-dark me-1">condition</span>
-                        <span class="badge bg-secondary me-1">else if</span>
-                        <span class="badge bg-info text-dark">&& ||</span>
-                        <span class="badge bg-success">validation</span>
-                    </div>
-                </div>
-
-                <!-- ===== SWITCH ===== -->
-                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-danger" data-aos="fade-left" data-aos-delay="400">
-                    <h3 class="h4 fw-bold"><i class="fas fa-arrow-right text-danger me-2"></i>Switch Case</h3>
-                    <p class="text-muted">Clean alternative to multiple if-else statements.</p>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold text-danger">What is a Switch?</h6>
-                        <p>
-                            A Switch is like a "choose your own adventure" statement. It checks a value and
-                            executes the matching case. <strong>Use Switch when you have many possible values</strong>
-                            for a single variable - it's cleaner than multiple If/Else statements.
-                        </p>
-                    </div>
-
-                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
-                        <pre><code class="language-csharp"><span class="comment">// ===== BASIC SWITCH =====</span>
-<span class="keyword">string</span> <span class="variable">role</span> = <span class="string">"Admin"</span>;
-
-<span class="keyword">switch</span> (<span class="variable">role</span>)
-{
-    <span class="keyword">case</span> <span class="string">"Admin"</span>:
-        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Full access"</span>);
-        <span class="keyword">break</span>;
-    <span class="keyword">case</span> <span class="string">"Editor"</span>:
-        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Can edit content"</span>);
-        <span class="keyword">break</span>;
-    <span class="keyword">case</span> <span class="string">"Viewer"</span>:
-        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Read-only"</span>);
-        <span class="keyword">break</span>;
-    <span class="keyword">default</span>:
-        <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Unknown role"</span>);
-        <span class="keyword">break</span>;
-}
-
-<span class="comment">// ===== USING SWITCH IN WINFORMS =====</span>
-<span class="comment">// Example: Handle different menu item clicks</span>
-<span class="keyword">private void</span> <span class="function">HandleMenuItem</span>(<span class="keyword">string</span> <span class="variable">menuName</span>)
-{
-    <span class="keyword">switch</span> (<span class="variable">menuName</span>)
-    {
-        <span class="keyword">case</span> <span class="string">"New"</span>:
-            <span class="function">CreateNewDocument</span>();
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="string">"Open"</span>:
-            <span class="function">OpenDocument</span>();
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="string">"Save"</span>:
-            <span class="function">SaveDocument</span>();
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="string">"Exit"</span>:
-            <span class="class">Application</span>.<span class="function">Exit</span>();
-            <span class="keyword">break</span>;
-        <span class="keyword">default</span>:
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Unknown menu item"</span>);
-            <span class="keyword">break</span>;
-    }
-}</code></pre>
-                    </div>
-
-                    <div class="winforms-tip p-3 bg-danger bg-opacity-10 rounded-3 mt-2">
-                        <i class="fas fa-lightbulb text-warning me-2"></i>
-                        <strong>WinForms Tip:</strong> Switch is perfect for handling menu clicks, button actions,
-                        or processing different file types. Always include a <code>default</code> case for safety!
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="badge bg-danger me-1">switch</span>
-                        <span class="badge bg-secondary me-1">case</span>
-                        <span class="badge bg-info text-dark">default</span>
-                        <span class="badge bg-primary">break</span>
-                    </div>
-                </div>
-
-                <!-- ===== LOOPS ===== -->
-                <div class="refresher-card p-4 mb-4 rounded-4 bg-white shadow-sm border-start border-4 border-info" data-aos="fade-right" data-aos-delay="500">
-                    <h3 class="h4 fw-bold"><i class="fas fa-sync text-info me-2"></i>Loops</h3>
-                    <p class="text-muted">Repeat code blocks efficiently.</p>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold text-info">What are Loops?</h6>
-                        <p>
-                            Loops let you repeat code multiple times. Think of it like playing a song on repeat:
-                            <strong>"Do this action until I tell you to stop."</strong> You'll use loops constantly
-                            in WinForms for processing lists, populating controls, and handling data.
-                        </p>
-                    </div>
-
-                    <div class="code-block bg-dark p-3 rounded-3 mb-2">
-                        <pre><code class="language-csharp"><span class="comment">// ===== FOR LOOP =====</span>
-<span class="comment">// Use when you know exactly how many times to loop</span>
-<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="number">5</span>; <span class="variable">i</span>++)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Iteration {<span class="variable">i</span>}"</span>);  <span class="comment">// Prints 0,1,2,3,4</span>
-}
-
-<span class="comment">// ===== WHILE LOOP =====</span>
-<span class="comment">// Use when you don't know how many times to loop</span>
-<span class="keyword">int</span> <span class="variable">counter</span> = <span class="number">0</span>;
-<span class="keyword">while</span> (<span class="variable">counter</span> &lt; <span class="number">3</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">$"Counter: {<span class="variable">counter</span>}"</span>);
-    <span class="variable">counter</span>++;  <span class="comment">// Don't forget to increment!</span>
-}
-
-<span class="comment">// ===== FOREACH LOOP =====</span>
-<span class="comment">// Use when iterating through collections (most common)</span>
-<span class="keyword">string</span>[] <span class="variable">colors</span> = { <span class="string">"Red"</span>, <span class="string">"Green"</span>, <span class="string">"Blue"</span> };
-<span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="variable">color</span> <span class="keyword">in</span> <span class="variable">colors</span>)
-{
-    <span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="variable">color</span>);
-}
-
-<span class="comment">// ===== USING LOOPS IN WINFORMS =====</span>
-<span class="comment">// Example 1: Populate a ComboBox with numbers</span>
-<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">1</span>; <span class="variable">i</span> &lt;= <span class="number">100</span>; <span class="variable">i</span>++)
-{
-    <span class="variable">cmbNumbers</span>.<span class="property">Items</span>.<span class="function">Add</span>(<span class="variable">i</span>);
-}
-
-<span class="comment">// Example 2: Loop through all controls on a form</span>
-<span class="keyword">foreach</span> (<span class="class">Control</span> <span class="variable">ctrl</span> <span class="keyword">in</span> <span class="variable">this</span>.<span class="property">Controls</span>)
-{
-    <span class="keyword">if</span> (<span class="variable">ctrl</span> <span class="keyword">is</span> <span class="class">TextBox</span>)
-    {
-        <span class="variable">ctrl</span>.<span class="property">Text</span> = <span class="string">""</span>;  <span class="comment">// Clear all textboxes</span>
-    }
-}
-
-<span class="comment">// Example 3: Process items from a ListBox</span>
-<span class="keyword">for</span> (<span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>; <span class="variable">i</span> &lt; <span class="variable">lstItems</span>.<span class="property">Items</span>.<span class="property">Count</span>; <span class="variable">i</span>++)
-{
-    <span class="keyword">string</span> <span class="variable">item</span> = <span class="variable">lstItems</span>.<span class="property">Items</span>[<span class="variable">i</span>].<span class="function">ToString</span>();
-    <span class="function">ProcessItem</span>(<span class="variable">item</span>);
-}</code></pre>
-                    </div>
-
-                    <div class="winforms-tip p-3 bg-info bg-opacity-10 rounded-3 mt-2">
-                        <i class="fas fa-lightbulb text-warning me-2"></i>
-                        <strong>WinForms Tip:</strong> Use <code>foreach</code> when you just need to read items.
-                        Use <code>for</code> when you need the index number. Use <code>while</code> when the loop
-                        condition depends on user input or changing data.
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="badge bg-info text-dark me-1">for</span>
-                        <span class="badge bg-secondary me-1">while</span>
-                        <span class="badge bg-primary">foreach</span>
-                        <span class="badge bg-success">break</span>
-                        <span class="badge bg-warning text-dark">continue</span>
-                    </div>
-                </div>
-
-                <!-- ===== SUMMARY ===== -->
-                <div class="refresher-summary p-4 rounded-4 bg-primary bg-opacity-10 border border-primary" data-aos="fade-up" data-aos-delay="600">
-                    <h4 class="fw-bold"><i class="fas fa-lightbulb text-warning me-2"></i>Summary: Which One to Use?</h4>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-layer-group text-primary me-2"></i>
-                                <strong>Arrays</strong> – When you know the size and it won't change
-                            </div>
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-list-ul text-success me-2"></i>
-                                <strong>Lists</strong> – When the size can change (most common)
-                            </div>
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-code-branch text-warning me-2"></i>
-                                <strong>If/Else</strong> – For making decisions (2-3 conditions)
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-arrow-right text-danger me-2"></i>
-                                <strong>Switch</strong> – For many conditions on one variable
-                            </div>
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-sync text-info me-2"></i>
-                                <strong>For</strong> – When you know the count
-                            </div>
-                            <div class="p-2 bg-white rounded-2 mb-2">
-                                <i class="fas fa-sync text-info me-2"></i>
-                                <strong>Foreach</strong> – For collections (most common)
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3 mb-0 text-muted small">
-                        <i class="fas fa-info-circle me-1"></i> You'll use these daily in WinForms — from handling button clicks to populating grids and processing data.
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/WindowsForms" style="color: rgba(255,255,255,0.7);">Windows Forms</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">C# Refresher</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);">
+                        C# Essentials 🚀
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        The Foundation You Need for Windows Forms
                     </p>
-                </div>
-
-                <!-- ===== QUICK REFERENCE TABLE ===== -->
-                <div class="quick-reference mt-4" data-aos="fade-up" data-aos-delay="700">
-                    <h4 class="fw-bold"><i class="fas fa-table text-info me-2"></i>Quick Reference</h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Topic</th>
-                                    <th>When to Use</th>
-                                    <th>WinForms Example</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Array</strong></td>
-                                    <td>Fixed list of items</td>
-                                    <td>Store months, days, menu items</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>List</strong></td>
-                                    <td>Dynamic data that changes</td>
-                                    <td>Customer list, search results</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>If/Else</strong></td>
-                                    <td>Decision making</td>
-                                    <td>Validation, permissions</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Switch</strong></td>
-                                    <td>Multiple values</td>
-                                    <td>Menu clicks, file types</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>For</strong></td>
-                                    <td>Known number of iterations</td>
-                                    <td>Populate a combo box</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Foreach</strong></td>
-                                    <td>Iterate collections</td>
-                                    <td>Process all controls on a form</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>15 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Refresher
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between flex-wrap gap-2">
-                    <a href="/WindowsForms" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Back to Windows Forms
-                    </a>
-                    <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-primary-custom">
-                        Start WinForms Lessons <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-code fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(102, 126, 234, 0.2);"></i>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ===== SIDEBAR ===== -->
-        <div class="col-lg-3">
-            <div class="sidebar-nav">
-                <h5 class="mb-3"><i class="fas fa-list me-2"></i>Windows Forms</h5>
-                <nav class="nav flex-column">
-                    <a class="nav-link" href="/WindowsForms"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Overview</a>
-                    <a class="nav-link active" href="/WindowsForms/CSharpRefresher"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>C# Refresher</a>
-                    <a class="nav-link" href="/WindowsForms/01-CreatingWinFormsProject"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Creating a WinForms Project</a>
-                    <a class="nav-link" href="/WindowsForms/02-ControlsBasics"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Controls Basics</a>
-                    <a class="nav-link" href="/WindowsForms/03-EventHandling"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Event Handling</a>
-                    <a class="nav-link" href="/WindowsForms/04-MenusAndDialogs"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Menus & Dialogs</a>
-                    <a class="nav-link" href="/WindowsForms/05-DataBinding"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Data Binding</a>
-                    <a class="nav-link" href="/WindowsForms/06-MultiFormApps"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>Multi-Form Apps</a>
-                    <a class="nav-link" href="/WindowsForms/07-CrudProjectWalkthrough"><i class="fas fa-chevron-right me-2" style="font-size: 10px;"></i>CRUD Walkthrough</a>
-                </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Welcome to Your C# Refresher! 🎯</h2>
+                                    <p class="fs-5">
+                                        Before we dive into Windows Forms, let's make sure you're comfortable with the
+                                        <strong>most important C# concepts</strong> you'll use every day. Don't worry -
+                                        we'll keep it <strong>simple and fun</strong>!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>What You'll Learn:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>📦 <strong>Arrays</strong> - Fixed lists of items</li>
+                                            <li>📋 <strong>Lists</strong> - Flexible, growable collections</li>
+                                            <li>🤔 <strong>If/Else</strong> - Making decisions</li>
+                                            <li>🔄 <strong>Switch</strong> - Multiple choices</li>
+                                            <li>🔁 <strong>Loops</strong> - Repeating actions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📦 Part 1: Arrays -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-layer-group me-2"></i>1. Arrays - The Fixed Box</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What's an Array?</strong> An array is like a <strong>box with numbered slots</strong>.
+                                    Each slot holds one item, and you can only put items of the same type.
+                                    <strong>The box has a fixed size</strong> - you can't add or remove slots!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Creating Arrays</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Method 1: Create empty slots</span>
+<span class="keyword">string</span>[] names = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">3</span>];  <span class="comment">// 3 empty slots</span>
+names[<span class="number">0</span>] = <span class="string">"Alice"</span>;  <span class="comment">// Fill slot 0</span>
+names[<span class="number">1</span>] = <span class="string">"Bob"</span>;    <span class="comment">// Fill slot 1</span>
+
+<span class="comment">// Method 2: Create and fill in one line</span>
+<span class="keyword">int</span>[] scores = { <span class="number">95</span>, <span class="number">88</span>, <span class="number">76</span> };  <span class="comment">// 3 items</span></code></pre>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-primary">Array.Length</span>
+                                                    <span class="badge bg-secondary">zero-indexed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using Arrays in WinForms</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Populate a ComboBox with array items</span>
+<span class="keyword">string</span>[] departments = { <span class="string">"IT"</span>, <span class="string">"HR"</span>, <span class="string">"Finance"</span> };
+cmbDepartment.Items.AddRange(departments);</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use:</strong> Fixed lists like days of the week, menu items, or options that never change.
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">fixed size</span>
+                                                    <span class="badge bg-info text-dark">same type</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the array break up with the list?
+                                        Because it couldn't commit to growing! (Get it? Arrays can't grow? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📋 Part 2: Lists -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-list-ul me-2"></i>2. Lists - The Growable Box</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What's a List?</strong> A List is like an array that <strong>can grow and shrink</strong>!
+                                    You can add, remove, and insert items anytime.
+                                    <strong>Lists are the most common collection</strong> in professional C# development.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Creating Lists</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Create an empty list</span>
+<span class="keyword">var</span> students = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+
+<span class="comment">// Add items</span>
+students.Add(<span class="string">"Maria"</span>);   <span class="comment">// Index 0</span>
+students.Add(<span class="string">"James"</span>);   <span class="comment">// Index 1</span>
+
+<span class="comment">// Remove an item</span>
+students.Remove(<span class="string">"James"</span>);
+
+<span class="comment">// Check count</span>
+<span class="keyword">int</span> count = students.Count;  <span class="comment">// 1</span></code></pre>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">.Add()</span>
+                                                    <span class="badge bg-danger">.Remove()</span>
+                                                    <span class="badge bg-info text-dark">.Count</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using Lists in WinForms</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Store customer names dynamically</span>
+<span class="keyword">var</span> customers = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+customers.Add(<span class="string">"John"</span>);
+customers.Add(<span class="string">"Jane"</span>);
+
+<span class="comment">// Bind to a ListBox</span>
+lstCustomers.DataSource = customers;</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use:</strong> Dynamic data like search results, shopping carts, or database records.
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">dynamic size</span>
+                                                    <span class="badge bg-primary">List&lt;T&gt;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-info text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Pro Tip:</strong> Lists are like a <strong>magic bag</strong> - you can keep adding things,
+                                        and it never gets full! Just remember to use <code>.Count</code> to check how many items you have.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🤔 Part 3: If/Else -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-code-branch me-2"></i>3. If/Else - Making Decisions</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What's If/Else?</strong> It's like a <strong>fork in the road</strong>!
+                                    "If this is true, go left. Else, go right."
+                                    <strong>You'll use If/Else constantly</strong> for validation and controlling your app's flow.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Basic If/Else</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">int</span> age = <span class="number">20</span>;
+
+<span class="keyword">if</span> (age >= <span class="number">18</span>)
+{
+    Console.WriteLine(<span class="string">"Adult"</span>);
+}
+<span class="keyword">else</span> <span class="keyword">if</span> (age >= <span class="number">13</span>)
+{
+    Console.WriteLine(<span class="string">"Teenager"</span>);
+}
+<span class="keyword">else</span>
+{
+    Console.WriteLine(<span class="string">"Child"</span>);
+}</code></pre>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-primary">if</span>
+                                                    <span class="badge bg-warning text-dark">else if</span>
+                                                    <span class="badge bg-secondary">else</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using If/Else in WinForms</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Validate a textbox before saving</span>
+<span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtName.Text))
+{
+    MessageBox.Show(<span class="string">"Please enter a name."</span>);
+    <span class="keyword">return</span>;
+}
+<span class="comment">// Save the data...</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use:</strong> Validation, checking permissions, controlling what's visible/enabled.
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">validation</span>
+                                                    <span class="badge bg-danger">user input</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the developer use If/Else?
+                                        Because they couldn't decide which way to go! (Okay, that was a bad one 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔄 Part 4: Switch -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-arrows-alt-h me-2"></i>4. Switch - Choose Your Adventure</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What's a Switch?</strong> It's like a <strong>"choose your own adventure"</strong> statement!
+                                    It checks a value and runs the matching case.
+                                    <strong>Use Switch when you have many possible values</strong> for one variable.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Basic Switch</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">string</span> role = <span class="string">"Admin"</span>;
+
+<span class="keyword">switch</span> (role)
+{
+    <span class="keyword">case</span> <span class="string">"Admin"</span>:
+        Console.WriteLine(<span class="string">"Full access"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Editor"</span>:
+        Console.WriteLine(<span class="string">"Can edit"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        Console.WriteLine(<span class="string">"Unknown role"</span>);
+        <span class="keyword">break</span>;
+}</code></pre>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-primary">case</span>
+                                                    <span class="badge bg-success">default</span>
+                                                    <span class="badge bg-warning text-dark">break</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using Switch in WinForms</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Handle menu item clicks</span>
+<span class="keyword">switch</span> (menuName)
+{
+    <span class="keyword">case</span> <span class="string">"New"</span>: CreateDocument(); <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Open"</span>: OpenDocument(); <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Exit"</span>: Application.Exit(); <span class="keyword">break</span>;
+    <span class="keyword">default</span>: MessageBox.Show(<span class="string">"Unknown"</span>); <span class="keyword">break</span>;
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use:</strong> Menu clicks, file types, status codes, or any time you have 3+ options.
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">multiple options</span>
+                                                    <span class="badge bg-info text-dark">clean code</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Pro Tip:</strong> Always include a <code>default</code> case in your switch.
+                                        It's like having a backup plan when nothing else matches!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔁 Part 5: Loops -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-sync me-2"></i>5. Loops - Repeat After Me</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What are Loops?</strong> Loops let you repeat code multiple times.
+                                    Think of it like <strong>playing a song on repeat</strong> - "Do this action until I tell you to stop."
+                                    <strong>You'll use loops constantly</strong> for processing lists and populating controls.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Three Types of Loops</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 🔹 For - when you know the count</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++)
+    Console.WriteLine(i);  <span class="comment">// 0,1,2,3,4</span>
+
+<span class="comment">// 🔹 While - when condition changes</span>
+<span class="keyword">int</span> count = <span class="number">0</span>;
+<span class="keyword">while</span> (count < <span class="number">3</span>) { count++; }
+
+<span class="comment">// 🔹 Foreach - for collections (most common)</span>
+<span class="keyword">foreach</span> (<span class="keyword">string</span> name <span class="keyword">in</span> names)
+    Console.WriteLine(name);</code></pre>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-primary">for</span>
+                                                    <span class="badge bg-success">foreach</span>
+                                                    <span class="badge bg-warning text-dark">while</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using Loops in WinForms</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Populate a ComboBox with 1-100</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">100</span>; i++)
+    cmbNumbers.Items.Add(i);
+
+<span class="comment">// Clear all TextBoxes</span>
+<span class="keyword">foreach</span> (Control ctrl <span class="keyword">in</span> this.Controls)
+    <span class="keyword">if</span> (ctrl <span class="keyword">is</span> TextBox) ctrl.Text = <span class="string">""</span>;</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use:</strong>
+                                                    <br><strong>For</strong> - Known count (populate numbers)
+                                                    <br><strong>Foreach</strong> - Collections (processing all controls)
+                                                    <br><strong>While</strong> - Unknown count (waiting for user input)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the loop break up with the condition?
+                                        Because it needed space! (Get it? Break? Space? ...Okay, I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📊 Part 6: Quick Comparison -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <div class="card-body p-4">
+                                <h3 class="fw-bold text-white"><i class="fas fa-table me-2"></i>Quick Comparison - When to Use What</h3>
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-bordered" style="color: white; background: rgba(255,255,255,0.1);">
+                                        <thead>
+                                            <tr>
+                                                <th>Topic</th>
+                                                <th>When to Use</th>
+                                                <th>WinForms Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Array</strong></td>
+                                                <td>Fixed list that won't change</td>
+                                                <td>Days of week, months</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>List</strong></td>
+                                                <td>Dynamic data that changes</td>
+                                                <td>Customer list, search results</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>If/Else</strong></td>
+                                                <td>2-3 decisions</td>
+                                                <td>Validation, permissions</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Switch</strong></td>
+                                                <td>3+ decisions on one variable</td>
+                                                <td>Menu clicks, file types</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>For</strong></td>
+                                                <td>Known number of repeats</td>
+                                                <td>Populate a combo box</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Foreach</strong></td>
+                                                <td>Iterate collections</td>
+                                                <td>Process all controls</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 7: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Create a simple WinForms app that manages a list of students!
+                                    <br>
+                                    You'll practice arrays, lists, if/else, and loops all together.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Form Controls:</strong>
+                                                        <ul>
+                                                            <li>TextBox for student name</li>
+                                                            <li>Button to add student</li>
+                                                            <li>ListBox to show all students</li>
+                                                            <li>Button to remove selected</li>
+                                                            <li>Label to show total count</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Logic (using what you learned):</strong>
+                                                        <ul>
+                                                            <li>Use a List&lt;string&gt; to store students</li>
+                                                            <li>If/Else to validate name isn't empty</li>
+                                                            <li>Foreach loop to display all students</li>
+                                                            <li>Count to show total students</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Practice:</h6>
+                                                <ul>
+                                                    <li>✅ <strong>List</strong> - Store student names dynamically</li>
+                                                    <li>✅ <strong>If/Else</strong> - Validate input</li>
+                                                    <li>✅ <strong>Foreach</strong> - Display all students</li>
+                                                    <li>✅ <strong>Count</strong> - Show total students</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A working student management system using all the concepts you've learned!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== STUDENT MANAGEMENT APP =====</span>
+<span class="comment">// This form uses lists, if/else, loops, and more!</span>
+
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">StudentForm</span> : <span class="class">Form</span>
+{
+    <span class="comment">// 📋 List to store students</span>
+    <span class="keyword">private</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt; students = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="function">StudentForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+        <span class="function">UpdateStudentList</span>();  <span class="comment">// Show students</span>
+    }
+    
+    <span class="comment">// ➕ Add Student Button</span>
+    <span class="keyword">private void</span> <span class="function">btnAdd_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">string</span> name = txtName.Text.Trim();
+        
+        <span class="comment">// 🤔 If/Else validation</span>
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(name))
+        {
+            MessageBox.Show(<span class="string">"Please enter a name!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="comment">// ✅ Add to list</span>
+        students.Add(name);
+        txtName.Clear();
+        <span class="function">UpdateStudentList</span>();
+    }
+    
+    <span class="comment">// ➖ Remove Student Button</span>
+    <span class="keyword">private void</span> <span class="function">btnRemove_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (lstStudents.SelectedIndex < <span class="number">0</span>)
+        {
+            MessageBox.Show(<span class="string">"Please select a student!"</span>);
+            <span class="keyword">return</span>;
+        }
+        
+        students.RemoveAt(lstStudents.SelectedIndex);
+        <span class="function">UpdateStudentList</span>();
+    }
+    
+    <span class="comment">// 🔁 Update the ListBox and Count</span>
+    <span class="keyword">private void</span> <span class="function">UpdateStudentList</span>()
+    {
+        <span class="comment">// 🔁 Foreach loop to add items</span>
+        lstStudents.Items.Clear();
+        <span class="keyword">foreach</span> (<span class="keyword">string</span> student <span class="keyword">in</span> students)
+        {
+            lstStudents.Items.Add(student);
+        }
+        
+        <span class="comment">// Show total count</span>
+        lblCount.Text = <span class="string">$"Total Students: {students.Count}"</span>;
+    }
+    
+    <span class="comment">// 🔁 For loop example - add 5 sample students</span>
+    <span class="keyword">private void</span> <span class="function">btnAddSamples_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">string</span>[] sampleNames = { <span class="string">"Alice"</span>, <span class="string">"Bob"</span>, <span class="string">"Charlie"</span>, <span class="string">"Diana"</span>, <span class="string">"Eve"</span> };
+        
+        <span class="comment">// 🔁 For loop through the array</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < sampleNames.Length; i++)
+        {
+            students.Add(sampleNames[i]);
+        }
+        <span class="function">UpdateStudentList</span>();
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've used arrays, lists, if/else, for, and foreach loops!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-layer-group fa-3x mb-2"></i>
+                                        <h5>Arrays</h5>
+                                        <small>Fixed boxes</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-list-ul fa-3x mb-2"></i>
+                                        <h5>Lists</h5>
+                                        <small>Growable boxes</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-code-branch fa-3x mb-2"></i>
+                                        <h5>If/Else</h5>
+                                        <small>Decisions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrows-alt-h fa-3x mb-2"></i>
+                                        <h5>Switch</h5>
+                                        <small>Many choices</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-sync fa-3x mb-2"></i>
+                                        <h5>Loops</h5>
+                                        <small>Repeat actions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Ready!</h5>
+                                        <small>For WinForms!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to start building Windows Forms applications!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/WindowsForms" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Windows Forms
+                        </a>
+                        <a href="/WindowsForms/01-CreatingWinFormsProject" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
             </div>
         </div>
     </div>
@@ -490,115 +746,185 @@
 
 @section Scripts {
     <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS
             if (typeof AOS !== 'undefined') {
                 AOS.init({
                     once: true,
-                    offset: 40,
-                    duration: 600
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
                 });
             }
-
-            // Optional: add a little "copy" interaction for code blocks
-            document.querySelectorAll('.code-block pre code').forEach(block => {
-                block.style.cursor = 'default';
-            });
         });
     </script>
 
     <style>
-        /* ===== REFRESHER PAGE STYLES ===== */
-        .refresher-lesson .refresher-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 16px !important;
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
         }
 
-            .refresher-lesson .refresher-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 12px 30px rgba(0,0,0,0.08) !important;
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.03);
+                border-radius: 50%;
+                pointer-events: none;
             }
 
-        .refresher-lesson .code-block {
-            background: #1a1a2e !important;
-            border-radius: 12px;
-            overflow-x: auto;
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
         }
 
-            .refresher-lesson .code-block pre {
-                background: transparent !important;
-                padding: 0 !important;
-                margin: 0 !important;
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
             }
 
-            .refresher-lesson .code-block code {
-                font-family: 'JetBrains Mono', 'Consolas', monospace;
-                font-size: 0.9rem;
-                color: #e4e4e4;
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
                 line-height: 1.6;
             }
 
-        /* Syntax colors (light on dark) */
+        /* Visual Studio-like color scheme */
         .language-csharp .keyword {
-            color: #c792ea;
+            color: #c792ea !important;
             font-weight: 600;
         }
 
         .language-csharp .comment {
-            color: #676e95;
+            color: #676e95 !important;
             font-style: italic;
         }
 
         .language-csharp .string {
-            color: #c3e88d;
+            color: #c3e88d !important;
         }
 
         .language-csharp .number {
-            color: #f78c6c;
+            color: #f78c6c !important;
         }
 
         .language-csharp .function {
-            color: #82aaff;
-        }
-
-        .language-csharp .variable {
-            color: #eeffff;
+            color: #82aaff !important;
         }
 
         .language-csharp .class {
-            color: #ffcb6b;
+            color: #ffcb6b !important;
+            font-weight: 600;
         }
 
         .language-csharp .property {
-            color: #80cbc4;
+            color: #80cbc4 !important;
         }
 
-        .refresher-summary {
-            border-left: 4px solid var(--primary-color) !important;
+        .language-csharp .variable {
+            color: #eeffff !important;
         }
 
-        .refresher-header .badge {
-            font-size: 0.85rem;
-            font-weight: 500;
+        .language-csharp .operator {
+            color: #89ddff !important;
         }
 
-        .winforms-tip {
-            border-left: 3px solid #FFC107;
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .quick-reference table th {
-            background-color: #1a1a2e !important;
-            color: #fff !important;
-        }
-
-        /* Responsive tweaks */
-        @@media (max-width: 768px) {
-            .refresher-lesson .refresher-card {
-                padding: 1.25rem !important;
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
             }
 
-            .refresher-lesson .code-block code {
-                font-size: 0.8rem;
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
             }
         }
     </style>

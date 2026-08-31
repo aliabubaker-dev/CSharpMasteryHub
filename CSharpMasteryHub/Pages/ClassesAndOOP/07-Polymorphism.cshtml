@@ -1,304 +1,1170 @@
 ﻿@page
 @model PolymorphismModel
 @{
-    ViewData["Title"] = "Polymorphism in C#";
+    ViewData["Title"] = "Polymorphism in C# - Learn Like a Pro (The Easy Way)";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Polymorphism</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Polymorphism in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 7 of 11</span>
-                </div>
-
-                <h2>What is Polymorphism?</h2>
-                <p>
-                    Polymorphism means "many forms". It allows objects of different types to be treated as objects
-                    of a common base type, with the correct method being called based on the actual object type.
-                </p>
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
-                        <p class="card-text">Polymorphism enables you to write code that works with a base class, but the actual behavior comes from the derived class.</p>
-                    </div>
-                </div>
-
-                <h2>Virtual and Override</h2>
-                <pre><code>public class Animal
-{
-    public virtual void MakeSound()
-    {
-        Console.WriteLine("Animal makes a sound");
-    }
-}
-
-public class Dog : Animal
-{
-    public override void MakeSound()
-    {
-        Console.WriteLine("Dog barks: Woof!");
-    }
-}
-
-public class Cat : Animal
-{
-    public override void MakeSound()
-    {
-        Console.WriteLine("Cat meows: Meow!");
-    }
-}</code></pre>
-
-                <h2>Using Polymorphism</h2>
-                <pre><code>Animal animal1 = new Dog();
-Animal animal2 = new Cat();
-
-animal1.MakeSound(); // Output: Dog barks: Woof!
-animal2.MakeSound(); // Output: Cat meows: Meow!
-
-// Collection of animals
-List<Animal> animals = new List<Animal>
-{
-    new Dog(),
-    new Cat(),
-    new Dog()
-};
-
-foreach (Animal animal in animals)
-{
-    animal.MakeSound(); // Each animal makes its own sound
-}</code></pre>
-
-                <h2>Abstract Methods</h2>
-                <pre><code>public abstract class Shape
-{
-    public abstract double GetArea();
-    public abstract double GetPerimeter();
-    
-    // Concrete method
-    public void DisplayInfo()
-    {
-        Console.WriteLine($"Area: {GetArea():F2}");
-        Console.WriteLine($"Perimeter: {GetPerimeter():F2}");
-    }
-}
-
-public class Circle : Shape
-{
-    public double Radius { get; set; }
-    
-    public Circle(double radius)
-    {
-        Radius = radius;
-    }
-    
-    public override double GetArea()
-    {
-        return Math.PI * Radius * Radius;
-    }
-    
-    public override double GetPerimeter()
-    {
-        return 2 * Math.PI * Radius;
-    }
-}</code></pre>
-
-                <h2>Interface Implementation</h2>
-                <pre><code>public interface IPrintable
-{
-    void Print();
-}
-
-public interface ISerializable
-{
-    string Serialize();
-}
-
-public class Document : IPrintable, ISerializable
-{
-    public string Content { get; set; }
-    
-    public void Print()
-    {
-        Console.WriteLine($"Printing: {Content}");
-    }
-    
-    public string Serialize()
-    {
-        return $"Document: {Content}";
-    }
-}</code></pre>
-
-                <h2>Method Overloading (Compile-time Polymorphism)</h2>
-                <pre><code>public class Calculator
-{
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-    
-    public double Add(double a, double b)
-    {
-        return a + b;
-    }
-    
-    public int Add(int a, int b, int c)
-    {
-        return a + b + c;
-    }
-}</code></pre>
-
-                <h2>Complete Example</h2>
-                <pre><code>using System;
-
-// Abstract base class
-public abstract class Employee
-{
-    public string Name { get; set; }
-    public int EmployeeId { get; set; }
-    
-    public Employee(string name, int employeeId)
-    {
-        Name = name;
-        EmployeeId = employeeId;
-    }
-    
-    public abstract decimal CalculateSalary();
-    public abstract void DisplayInfo();
-}
-
-// Derived class 1
-public class FullTimeEmployee : Employee
-{
-    public decimal MonthlySalary { get; set; }
-    public decimal Bonus { get; set; }
-    
-    public FullTimeEmployee(string name, int employeeId, decimal monthlySalary, decimal bonus)
-        : base(name, employeeId)
-    {
-        MonthlySalary = monthlySalary;
-        Bonus = bonus;
-    }
-    
-    public override decimal CalculateSalary()
-    {
-        return MonthlySalary + Bonus;
-    }
-    
-    public override void DisplayInfo()
-    {
-        Console.WriteLine($"Full-Time Employee: {Name}");
-        Console.WriteLine($"ID: {EmployeeId}");
-        Console.WriteLine($"Monthly Salary: {MonthlySalary:C}");
-        Console.WriteLine($"Bonus: {Bonus:C}");
-        Console.WriteLine($"Total: {CalculateSalary():C}");
-    }
-}
-
-// Derived class 2
-public class ContractEmployee : Employee
-{
-    public decimal HourlyRate { get; set; }
-    public int HoursWorked { get; set; }
-    
-    public ContractEmployee(string name, int employeeId, decimal hourlyRate, int hoursWorked)
-        : base(name, employeeId)
-    {
-        HourlyRate = hourlyRate;
-        HoursWorked = hoursWorked;
-    }
-    
-    public override decimal CalculateSalary()
-    {
-        return HourlyRate * HoursWorked;
-    }
-    
-    public override void DisplayInfo()
-    {
-        Console.WriteLine($"Contract Employee: {Name}");
-        Console.WriteLine($"ID: {EmployeeId}");
-        Console.WriteLine($"Hourly Rate: {HourlyRate:C}");
-        Console.WriteLine($"Hours Worked: {HoursWorked}");
-        Console.WriteLine($"Total: {CalculateSalary():C}");
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        // Polymorphic collection
-        List<Employee> employees = new List<Employee>
-        {
-            new FullTimeEmployee("John Doe", 1001, 5000, 1000),
-            new ContractEmployee("Jane Smith", 1002, 50, 160),
-            new FullTimeEmployee("Bob Johnson", 1003, 4500, 500)
-        };
-        
-        // Process all employees polymorphically
-        foreach (Employee emp in employees)
-        {
-            emp.DisplayInfo();
-            Console.WriteLine();
-        }
-        
-        // Method that works with any Employee
-        ProcessEmployee(new FullTimeEmployee("Alice", 1004, 6000, 2000));
-    }
-    
-    static void ProcessEmployee(Employee emp)
-    {
-        Console.WriteLine($"Processing {emp.Name}:");
-        Console.WriteLine($"Salary: {emp.CalculateSalary():C}");
-    }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p class="card-text">Polymorphism enables flexible, extensible code where objects of different types can be treated uniformly while maintaining their unique behavior.</p>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a polymorphic system for:</p>
-                        <ol>
-                            <li>Base class: Account (abstract)</li>
-                            <li>Derived: SavingsAccount, CheckingAccount, InvestmentAccount</li>
-                            <li>Each with different interest calculation</li>
-                            <li>Method to process transactions polymorphically</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Polymorphism</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Polymorphism 🎭
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        One Name, Many Forms (It's Easier Than It Sounds!)
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 7 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-mask fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Hey There! Ready to Learn Polymorphism? 🎭</h2>
+                                    <p class="fs-5">
+                                        <strong>Polymorphism</strong> sounds like a big fancy word, but it's actually
+                                        <strong>super simple</strong>! It just means "many forms" - one thing that can
+                                        act in different ways.
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Quick Question:</strong> Have you ever used a <strong>remote control</strong>
+                                        that works for different TV brands? You press "Volume Up" and it works on any TV,
+                                        but each TV does it differently. That's <strong>polymorphism</strong>!
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary p-2">🎯 After this lesson, you'll be able to:</span>
+                                        <ul class="mt-2">
+                                            <li>✅ Explain polymorphism like a pro (but in simple words)</li>
+                                            <li>✅ Use virtual and override (it's not scary!)</li>
+                                            <li>✅ Work with abstract classes and methods</li>
+                                            <li>✅ Use interfaces (like contracts)</li>
+                                            <li>✅ Build flexible, reusable code</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What is Polymorphism? (Super Simple) -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: What is Polymorphism? (The Easy Way)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Polymorphism means <strong>"many forms"</strong>.
+                                    It lets you use one name for many different things.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-remote text-primary me-2"></i>🎮 The Remote Control Analogy</h5>
+                                                <p>Imagine you have a <strong>universal remote</strong>:</p>
+                                                <ul>
+                                                    <li>📺 Press <strong>Volume Up</strong> on a Samsung TV → Volume goes up</li>
+                                                    <li>📺 Press <strong>Volume Up</strong> on a Sony TV → Volume goes up differently</li>
+                                                    <li>📺 Press <strong>Volume Up</strong> on a LG TV → Volume goes up again</li>
+                                                </ul>
+                                                <p class="mt-2"><strong>Same command</strong> (Volume Up), <strong>different results</strong> depending on the TV!</p>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>That's Polymorphism:</strong> Same method name, different behavior!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Time!</h5>
+                                                <p><strong>Parent Class:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">MakeSound</span>()
+    {
+        Console.WriteLine(<span class="string">"Some sound"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <p class="mt-2"><strong>Child Classes:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>()
+    {
+        Console.WriteLine(<span class="string">"🐕 Woof!"</span>);
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Cat</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>()
+    {
+        Console.WriteLine(<span class="string">"🐱 Meow!"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-star me-2"></i>
+                                                    <strong>🎉 Same method name (MakeSound), different results!</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the polymorphic function break up with the regular function?
+                                        Because it wanted to see other forms! (I'll show myself out 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎭 Part 2: The Two Types of Polymorphism -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: The Two Types of Polymorphism</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-clock text-primary me-2"></i>⏰ Type 1: Compile-Time (Static)</h5>
+                                                <p><strong>What:</strong> Happens when the code is compiled</p>
+                                                <p><strong>Also called:</strong> Method Overloading</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MathHelper</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)  <span class="comment">// Version 1</span>
+    {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="function">Add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b)  <span class="comment">// Version 2</span>
+    {
+        <span class="keyword">return</span> a + b;
+    }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">Same method name, different parameters</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-primary me-2"></i>🎯 Type 2: Run-Time (Dynamic)</h5>
+                                                <p><strong>What:</strong> Happens when the program runs</p>
+                                                <p><strong>Also called:</strong> Method Overriding</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Speak</span>() { }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Speak</span>()  <span class="comment">// Changes at runtime</span>
+    {
+        Console.WriteLine(<span class="string">"Woof!"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">Same method name, different behavior</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong>
+                                        <ul class="mb-0">
+                                            <li><strong>Overloading</strong> = Same name, different parameters (compile-time)</li>
+                                            <li><strong>Overriding</strong> = Same name, same parameters, different behavior (run-time)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 3: Virtual and Override - The Dynamic Duo -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: Virtual and Override - The Dynamic Duo</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-check-circle fa-2x text-primary"></i>
+                                                <h5 class="mt-2">virtual</h5>
+                                                <p><strong>Parent says:</strong> "You can change me"</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Play</span>()
+{
+    Console.WriteLine(<span class="string">"Playing..."</span>);
+}</code></pre>
+                                                </div>
+                                                <small>Parent gives permission</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-edit fa-2x text-success"></i>
+                                                <h5 class="mt-2">override</h5>
+                                                <p><strong>Child says:</strong> "I'll do it my way!"</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Play</span>()
+{
+    Console.WriteLine(<span class="string">"Playing guitar!"</span>);
+}</code></pre>
+                                                </div>
+                                                <small>Child changes behavior</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card text-center h-100">
+                                            <div class="card-body">
+                                                <i class="fas fa-question-circle fa-2x text-warning"></i>
+                                                <h5 class="mt-2">Why Do This?</h5>
+                                                <ul class="text-start">
+                                                    <li>✅ Make different objects act differently</li>
+                                                    <li>✅ Customize behavior without changing parent</li>
+                                                    <li>✅ Create flexible, reusable code</li>
+                                                </ul>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Animal</span> a = <span class="keyword">new</span> <span class="class">Dog</span>();
+a.<span class="function">Play</span>();  <span class="comment">// "Playing guitar!"</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light mt-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-example text-primary me-2"></i>🎯 Real Example</h5>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">double</span> <span class="function">GetArea</span>() => <span class="number">0</span>;
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Circle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> Radius;
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="function">GetArea</span>() => Math.PI * Radius * Radius;
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Rectangle</span> : <span class="class">Shape</span>
+{
+    <span class="keyword">public</span> <span class="keyword">double</span> Width, Height;
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="function">GetArea</span>() => Width * Height;
+}</code></pre>
+                                        </div>
+                                        <p class="mt-2"><span class="badge bg-success">🎉 Each shape calculates area differently!</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🏗️ Part 4: Abstract Classes - The Blueprint -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: Abstract Classes - The "Must Follow" Rules</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-file-contract me-2"></i>
+                                    <strong>What are Abstract Classes?</strong> They're like a <strong>contract</strong>
+                                    that says "If you want to be my child, you MUST do these things!"
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Abstract Class</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Animal</span>
+{
+    <span class="comment">// MUST be implemented by children</span>
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">MakeSound</span>();
+    
+    <span class="comment">// Already implemented</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Eat</span>()
+    {
+        Console.WriteLine(<span class="string">"Eating..."</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Child MUST Implement</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>()  <span class="comment">// ✅ Must do this!</span>
+    {
+        Console.WriteLine(<span class="string">"Woof!"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Remember:</strong> You CANNOT create an abstract class directly:
+                                                    <br>
+                                                    <code>Animal a = new Animal();</code> ❌ (Error!)
+                                                    <br>
+                                                    <code>Animal a = new Dog();</code> ✅ (Works!)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the abstract class break up with the concrete class?
+                                        Because it couldn't commit to a specific implementation! (Okay, that was a programmer joke 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🤝 Part 5: Interfaces - The "I Can Do This" Promise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: Interfaces - The "I Can Do This" Promise</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-handshake me-2"></i>
+                                    <strong>What are Interfaces?</strong> They're like a <strong>job description</strong>
+                                    that says "If you want this job, you MUST know these skills!"
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Interface</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPlayable</span>
+{
+    <span class="keyword">void</span> <span class="function">Play</span>();  <span class="comment">// No implementation</span>
+    <span class="keyword">void</span> <span class="function">Stop</span>();   <span class="comment">// Just the contract</span>
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">No code, just rules!</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Class MUST Implement</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MusicPlayer</span> : <span class="class">IPlayable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Play</span>()  <span class="comment">// ✅ Must implement</span>
+    {
+        Console.WriteLine(<span class="string">"🎵 Playing music"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Stop</span>()  <span class="comment">// ✅ Must implement</span>
+    {
+        Console.WriteLine(<span class="string">"⏹️ Music stopped"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-question-circle text-primary me-2"></i>🤔 Abstract vs Interface</h5>
+                                                <table class="table table-bordered table-sm">
+                                                    <thead class="table-primary">
+                                                        <tr>
+                                                            <th>Abstract Class</th>
+                                                            <th>Interface</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Can have code</td>
+                                                            <td>No code allowed</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Can have fields</td>
+                                                            <td>Only methods & properties</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>One parent only</td>
+                                                            <td>Many interfaces</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>"IS A" relationship</td>
+                                                            <td>"CAN DO" relationship</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-example text-success me-2"></i>💡 Real Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IAnimal</span>
+{
+    <span class="keyword">void</span> <span class="function">MakeSound</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPet</span>
+{
+    <span class="keyword">void</span> <span class="function">Play</span>();
+}
+
+<span class="comment">// A Dog is an Animal and can be a Pet</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">IAnimal</span>, <span class="class">IPet</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">MakeSound</span>() => Console.WriteLine(<span class="string">"Woof!"</span>);
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Play</span>() => Console.WriteLine(<span class="string">"🐕 Playing fetch!"</span>);
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎯 Part 6: Polymorphism in Action -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: Polymorphism in Action</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's see how polymorphism works in real code!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Base class</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="function">Animal</span>(<span class="keyword">string</span> name) => Name = name;
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">MakeSound</span>() { }
+}
+
+<span class="comment">// Children</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Dog</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="function">Dog</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name) { }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>() => 
+        Console.WriteLine(<span class="string">$"{Name} says: Woof!"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Cat</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="function">Cat</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name) { }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>() => 
+        Console.WriteLine(<span class="string">$"{Name} says: Meow!"</span>);
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Cow</span> : <span class="class">Animal</span>
+{
+    <span class="keyword">public</span> <span class="function">Cow</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name) { }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">MakeSound</span>() => 
+        Console.WriteLine(<span class="string">$"{Name} says: Moo!"</span>);
+}
+
+<span class="comment">// Program - Using polymorphism</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🐾 Polymorphism in Action!\n"</span>);
+        
+        <span class="comment">// ✅ All treated as Animal, but each acts differently</span>
+        <span class="class">Animal</span>[] animals = 
+        {
+            <span class="keyword">new</span> <span class="class">Dog</span>(<span class="string">"Rex"</span>),
+            <span class="keyword">new</span> <span class="class">Cat</span>(<span class="string">"Whiskers"</span>),
+            <span class="keyword">new</span> <span class="class">Cow</span>(<span class="string">"Bessie"</span>)
+        };
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> animal <span class="keyword">in</span> animals)
+        {
+            animal.<span class="function">MakeSound</span>();  <span class="comment">// Different sounds!</span>
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 Output:</strong>
+                                            <pre class="mt-2" style="background: #f8f9fa; padding: 10px; border-radius: 8px;">
+Rex says: Woof!
+Whiskers says: Meow!
+Bessie says: Moo!</pre>
+                                            <p class="mt-2"><span class="badge bg-success">✅ Same method call (MakeSound), different results!</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🌍 Part 7: Real-World Example - Payment System -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Real-World Example - Payment System 💳</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a <strong>Payment System</strong> where different payment methods work differently!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Base Payment Class</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Payment</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Amount { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="function">Payment</span>(<span class="keyword">decimal</span> amount) => Amount = amount;
+    
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">Process</span>();
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">Receipt</span>() => 
+        Console.WriteLine(<span class="string">$"💵 Payment of ${Amount} processed"</span>);
+}
+
+<span class="comment">// Credit Card Payment</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">CreditCardPayment</span> : <span class="class">Payment</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> CardNumber { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="function">CreditCardPayment</span>(<span class="keyword">decimal</span> amount, <span class="keyword">string</span> number) 
+        : <span class="function">base</span>(amount) => CardNumber = number;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>() =>
+        Console.WriteLine(<span class="string">$"💳 Charging ${Amount} to card ending in {CardNumber[^4..]}"</span>);
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// PayPal Payment</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">PayPalPayment</span> : <span class="class">Payment</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Email { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="function">PayPalPayment</span>(<span class="keyword">decimal</span> amount, <span class="keyword">string</span> email) 
+        : <span class="function">base</span>(amount) => Email = email;
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>() =>
+        Console.WriteLine(<span class="string">$"💳 PayPal: Sending ${Amount} to {Email}"</span>);
+}
+
+<span class="comment">// Cash Payment</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">CashPayment</span> : <span class="class">Payment</span>
+{
+    <span class="keyword">public</span> <span class="function">CashPayment</span>(<span class="keyword">decimal</span> amount) : <span class="function">base</span>(amount) { }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Process</span>() =>
+        Console.WriteLine(<span class="string">$"💵 Accepting ${Amount} in cash"</span>);
+}
+
+<span class="comment">// Program.cs</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"💳 PAYMENT SYSTEM\n"</span>);
+        
+        <span class="class">Payment</span>[] payments = 
+        {
+            <span class="keyword">new</span> <span class="class">CreditCardPayment</span>(<span class="number">100.00m</span>, <span class="string">"1234-5678-9012-3456"</span>),
+            <span class="keyword">new</span> <span class="class">PayPalPayment</span>(<span class="number">75.00m</span>, <span class="string">"user@email.com"</span>),
+            <span class="keyword">new</span> <span class="class">CashPayment</span>(<span class="number">50.00m</span>)
+        };
+        
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> payment <span class="keyword">in</span> payments)
+        {
+            payment.<span class="function">Process</span>();    <span class="comment">// Each processes differently!</span>
+            payment.<span class="function">Receipt</span>();    <span class="comment">// Same but works for all</span>
+            Console.WriteLine();
+        }
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Payment Joke:</strong> Why did the credit card break up with PayPal?
+                                        Because it couldn't handle the transaction! (I promise this is my last one... maybe 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 8: Exercise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Part 8: Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What You're Building:</strong> A <strong>Vehicle Rental System</strong> for a car rental company!
+                                    <br>
+                                    Different vehicles (Car, Motorcycle, Truck) all have rental calculations but each does it differently.
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle text-primary me-2"></i>🚗 About This Application</h5>
+                                        <p>This is a <strong>Vehicle Rental System</strong> like:</p>
+                                        <ul>
+                                            <li>🚗 <strong>Enterprise</strong> - Rent cars for business</li>
+                                            <li>🏍️ <strong>Zipcar</strong> - Rent cars by the hour</li>
+                                            <li>🚚 <strong>U-Haul</strong> - Rent trucks for moving</li>
+                                        </ul>
+                                        <p>Each vehicle type has a <strong>different rental calculation</strong>:</p>
+                                        <ul>
+                                            <li>✅ Car: Base rate + daily fee</li>
+                                            <li>✅ Motorcycle: Base rate + mileage fee</li>
+                                            <li>✅ Truck: Base rate + weight fee</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Base Class: Vehicle</strong> (abstract)
+                                                        <ul>
+                                                            <li>Properties: Model, Year</li>
+                                                            <li>Abstract Method: CalculateRental()</li>
+                                                            <li>Virtual Method: DisplayInfo()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: Car</strong>
+                                                        <ul>
+                                                            <li>Property: DailyRate</li>
+                                                            <li>Override: CalculateRental()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: Motorcycle</strong>
+                                                        <ul>
+                                                            <li>Property: MileageRate</li>
+                                                            <li>Override: CalculateRental()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: Truck</strong>
+                                                        <ul>
+                                                            <li>Property: WeightRate</li>
+                                                            <li>Override: CalculateRental()</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 How This Organizes Your Code</h6>
+                                                <ul>
+                                                    <li>✅ <strong>Common code</strong> (Model, Year) goes in Vehicle</li>
+                                                    <li>✅ <strong>Special code</strong> (rates) goes in each child</li>
+                                                    <li>✅ <strong>Different calculations</strong> use override</li>
+                                                    <li>✅ <strong>Easy to add</strong> new vehicle types later</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A flexible rental system that's easy to expand!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>🎯 Goal:</strong> Build a working vehicle rental system using polymorphism -
+                                    just like real rental companies use!
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Solution (Try it yourself first!)
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== VEHICLE RENTAL SYSTEM =====</span>
+<span class="comment">// This is a real-world vehicle rental system</span>
+<span class="comment">// It shows polymorphism in action</span>
+
+<span class="comment">// Base Vehicle Class</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Vehicle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Model { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Year { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Days { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Vehicle</span>(<span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">int</span> days)
+    {
+        Model = model;
+        Year = year;
+        Days = days;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">decimal</span> <span class="function">CalculateRental</span>();
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🚗 {Year} {Model}"</span>);
+        Console.WriteLine(<span class="string">$"   Days: {Days}"</span>);
+        Console.WriteLine(<span class="string">$"   Total: ${CalculateRental():F2}"</span>);
+    }
+}
+
+<span class="comment">// Car - Daily rate rental</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Car</span> : <span class="class">Vehicle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> DailyRate { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Car</span>(<span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">int</span> days, <span class="keyword">decimal</span> rate)
+        : <span class="function">base</span>(model, year, days)
+    {
+        DailyRate = rate;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">decimal</span> <span class="function">CalculateRental</span>()
+    {
+        <span class="keyword">return</span> DailyRate * Days;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🚗 Car: {Year} {Model}"</span>);
+        Console.WriteLine(<span class="string">$"   Daily Rate: ${DailyRate:F2}"</span>);
+        Console.WriteLine(<span class="string">$"   Days: {Days}"</span>);
+        Console.WriteLine(<span class="string">$"   Total: ${CalculateRental():F2}"</span>);
+    }
+}
+
+<span class="comment">// Motorcycle - Mileage-based rental</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Motorcycle</span> : <span class="class">Vehicle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> MileageRate { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Miles { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Motorcycle</span>(<span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">int</span> days, 
+                      <span class="keyword">decimal</span> rate, <span class="keyword">int</span> miles)
+        : <span class="function">base</span>(model, year, days)
+    {
+        MileageRate = rate;
+        Miles = miles;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">decimal</span> <span class="function">CalculateRental</span>()
+    {
+        <span class="keyword">return</span> MileageRate * Miles + <span class="number">20.00m</span>;  <span class="comment">// Base fee + mileage</span>
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🏍️ Motorcycle: {Year} {Model}"</span>);
+        Console.WriteLine(<span class="string">$"   Mileage Rate: ${MileageRate:F2}/mile"</span>);
+        Console.WriteLine(<span class="string">$"   Miles: {Miles}"</span>);
+        Console.WriteLine(<span class="string">$"   Total: ${CalculateRental():F2}"</span>);
+    }
+}
+
+<span class="comment">// Truck - Weight-based rental</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Truck</span> : <span class="class">Vehicle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">decimal</span> WeightRate { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">double</span> Weight { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Truck</span>(<span class="keyword">string</span> model, <span class="keyword">int</span> year, <span class="keyword">int</span> days, 
+                 <span class="keyword">decimal</span> rate, <span class="keyword">double</span> weight)
+        : <span class="function">base</span>(model, year, days)
+    {
+        WeightRate = rate;
+        Weight = weight;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">decimal</span> <span class="function">CalculateRental</span>()
+    {
+        <span class="keyword">return</span> WeightRate * (<span class="keyword">decimal</span>)Weight * Days;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🚚 Truck: {Year} {Model}"</span>);
+        Console.WriteLine(<span class="string">$"   Weight Rate: ${WeightRate:F2}/ton"</span>);
+        Console.WriteLine(<span class="string">$"   Weight: {Weight} tons"</span>);
+        Console.WriteLine(<span class="string">$"   Days: {Days}"</span>);
+        Console.WriteLine(<span class="string">$"   Total: ${CalculateRental():F2}"</span>);
+    }
+}
+
+<span class="comment">// Program.cs - Rental System</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🚗 VEHICLE RENTAL SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
+        
+        <span class="comment">// Create different vehicles</span>
+        <span class="class">Vehicle</span>[] vehicles = 
+        {
+            <span class="keyword">new</span> <span class="class">Car</span>(<span class="string">"Toyota Camry"</span>, <span class="number">2022</span>, <span class="number">3</span>, <span class="number">45.00m</span>),
+            <span class="keyword">new</span> <span class="class">Motorcycle</span>(<span class="string">"Harley Sportster"</span>, <span class="number">2021</span>, <span class="number">2</span>, <span class="number">0.50m</span>, <span class="number">100</span>),
+            <span class="keyword">new</span> <span class="class">Truck</span>(<span class="string">"Ford F-150"</span>, <span class="number">2023</span>, <span class="number">4</span>, <span class="number">30.00m</span>, <span class="number">2.5</span>)
+        };
+        
+        <span class="comment">// Process each vehicle polymorphically</span>
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> vehicle <span class="keyword">in</span> vehicles)
+        {
+            vehicle.<span class="function">DisplayInfo</span>();  <span class="comment">// Each shows different info!</span>
+            Console.WriteLine();
+        }
+        
+        <span class="comment">// Show polymorphism in action</span>
+        Console.WriteLine(<span class="string">"🔄 Demonstrating Polymorphism:"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> vehicle <span class="keyword">in</span> vehicles)
+        {
+            Console.WriteLine(<span class="string">$"{vehicle.Model} rental: ${vehicle.CalculateRental():F2}"</span>);
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a real rental system using polymorphism!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-mask fa-3x mb-2"></i>
+                                        <h5>Polymorphism</h5>
+                                        <small>One name, many forms</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-edit fa-3x mb-2"></i>
+                                        <h5>virtual/override</h5>
+                                        <small>Change behavior</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-file-contract fa-3x mb-2"></i>
+                                        <h5>Abstract</h5>
+                                        <small>Must-follow rules</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-handshake fa-3x mb-2"></i>
+                                        <h5>Interfaces</h5>
+                                        <small>I can do this</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-clock fa-3x mb-2"></i>
+                                        <h5>Overloading</h5>
+                                        <small>Compile-time</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-play fa-3x mb-2"></i>
+                                        <h5>Overriding</h5>
+                                        <small>Run-time</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-car fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Vehicle Rental! 🚗</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/06-Inheritance" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson7")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

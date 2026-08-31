@@ -1,107 +1,1016 @@
 @page
 @model CSharpMasteryHub.Pages.WindowsForms.EventHandlingModel
 @{
-    ViewData["Title"] = "Event Handling";
+    ViewData["Title"] = "Event Handling - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
-                    <li class="breadcrumb-item active">Event Handling</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Event Handling</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 3 of 7</span>
-                </div>
-
-                <p>
-                    WinForms apps are event-driven: code runs in response to things the user
-                    does — clicking a button, typing in a textbox, closing the form.
-                </p>
-
-                <h2>Wiring up a Click event</h2>
-                <p>Double-click a button in the designer and Visual Studio generates the handler and wires it up automatically:</p>
-                <pre><code>private void btnSave_Click(object sender, EventArgs e)
-{
-    MessageBox.Show("Saved!");
-}</code></pre>
-
-                <h2>What's happening behind the scenes</h2>
-                <p>In <code>Form1.Designer.cs</code>, this line connects the event to the handler:</p>
-                <pre><code>this.btnSave.Click += new System.EventHandler(this.btnSave_Click);</code></pre>
-
-                <h2>Common events you'll use constantly</h2>
-                <div class="table-responsive mb-4">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Event</th>
-                                <th>Fires when</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Click</td><td>Button/control is clicked</td></tr>
-                            <tr><td>Load</td><td>The form first loads — great place to populate a grid or dropdown</td></tr>
-                            <tr><td>TextChanged</td><td>Text in a TextBox changes — useful for live validation</td></tr>
-                            <tr><td>SelectedIndexChanged</td><td>A ComboBox/ListBox selection changes</td></tr>
-                            <tr><td>FormClosing</td><td>The form is about to close — good for "unsaved changes?" prompts</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2>Example: Form Load populating a ComboBox</h2>
-                <pre><code>private void Form1_Load(object sender, EventArgs e)
-{
-    cmbCourse.Items.AddRange(new object[] { "Math", "Science", "History" });
-    cmbCourse.SelectedIndex = 0;
-}</code></pre>
-
-                <h2>Example: simple validation on TextChanged</h2>
-                <pre><code>private void txtEmail_TextChanged(object sender, EventArgs e)
-{
-    btnSave.Enabled = txtEmail.Text.Contains("@@");
-}</code></pre>
-
-                <h2>Preventing a form from closing</h2>
-                <pre><code>private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-{
-    var result = MessageBox.Show("Discard unsaved changes?", "Confirm",
-        MessageBoxButtons.YesNo);
-
-    if (result == DialogResult.No)
-        e.Cancel = true;
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>WinForms is event-driven. Events fire in response to user actions, and you handle them to make your app interactive.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/WindowsForms" style="color: rgba(255,255,255,0.7);">Windows Forms</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Event Handling</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);">
+                        Event Handling ⚡
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Making Your App Respond to User Actions
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 3 of 7
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/WindowsForms/02-ControlsBasics" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-bolt fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(102, 126, 234, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Let's Make Your App Interactive! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn about <strong>events</strong> - the magic that makes 
+                                        your app <strong>respond</strong> when users click, type, or do anything!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Understand what events are and why they matter</li>
+                                            <li>✅ Handle button clicks (the most common event)</li>
+                                            <li>✅ Use Form Load to setup your app</li>
+                                            <li>✅ Validate user input in real-time</li>
+                                            <li>✅ Handle form closing (confirm unsaved changes)</li>
+                                            <li>✅ Understand the event-driven programming model</li>
+                                            <li>✅ Feel confident making your apps interactive!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ⚡ Part 1: What Are Events? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>What Are Events?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Events are like <strong>"notifications"</strong> 
+                                    that your app sends when something happens. You write code that <strong>"listens"</strong> 
+                                    for these notifications and <strong>responds</strong> to them!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-bell text-primary me-2"></i>🔔 Real-World Analogy</h5>
+                                                <p><strong>Think of events like a doorbell:</strong></p>
+                                                <ul>
+                                                    <li>🚪 <strong>The Doorbell</strong> = The event (something happened)</li>
+                                                    <li>👂 <strong>You Listening</strong> = The event handler (waiting for it)</li>
+                                                    <li>🚶 <strong>Opening the Door</strong> = The response (what you do)</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>In WinForms:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>🖱️ <strong>Button Click</strong> = "Someone pressed the button!"</li>
+                                                        <li>⌨️ <strong>Text Changed</strong> = "Someone typed something!"</li>
+                                                        <li>🪟 <strong>Form Load</strong> = "The form just opened!"</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Time!</h5>
+                                                <p><strong>Basic Event Handler:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">btnClickMe_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// This code runs when the button is clicked!</span>
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"You clicked me!"</span>);
+}</code></pre>
+                                                </div>
+                                                <p><strong>Explanation:</strong></p>
+                                                <ul>
+                                                    <li><strong>sender</strong> - Which control triggered the event</li>
+                                                    <li><strong>EventArgs</strong> - Additional information about the event</li>
+                                                    <li><strong>Inside { }</strong> - Your code that runs!</li>
+                                                </ul>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-laugh-beam me-2"></i>
+                                                        <strong>😂 Fun Fact:</strong> Events are so common that 
+                                                        most developers don't even think about them - they just know 
+                                                        "double-click the button and write code"!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔌 Part 2: How Events Work -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>How Events Work</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 The Event Pattern</h5>
+                                                <p><strong>Three things happen with every event:</strong></p>
+                                                <ol>
+                                                    <li><strong>Event happens</strong> - User clicks, types, etc.</li>
+                                                    <li><strong>Event fires</strong> - The control says "Hey, someone did something!"</li>
+                                                    <li><strong>Handler runs</strong> - Your code executes in response</li>
+                                                </ol>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1. Event is defined in the control</span>
+<span class="keyword">public event</span> <span class="class">EventHandler</span> Click;
+
+<span class="comment">// 2. Event is raised (fired)</span>
+<span class="keyword">if</span> (<span class="function">Click</span> != <span class="keyword">null</span>)
+    <span class="function">Click</span>(<span class="keyword">this</span>, <span class="class">EventArgs</span>.Empty);
+
+<span class="comment">// 3. Your handler responds</span>
+<span class="keyword">private void</span> <span class="function">btn_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Your code here</span>
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-link text-success me-2"></i>🔗 Wiring Up Events</h5>
+                                                <p><strong>Two ways to connect events:</strong></p>
+                                                <ol>
+                                                    <li><strong>Designer (Easy)</strong> - Double-click the control</li>
+                                                    <li><strong>Code (Manual)</strong> - Write the connection yourself</li>
+                                                </ol>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Manual wiring (in Form1.cs)</span>
+<span class="keyword">public</span> <span class="function">Form1</span>()
+{
+    <span class="function">InitializeComponent</span>();
+    btnSave.Click += <span class="keyword">new</span> <span class="class">EventHandler</span>(<span class="function">btnSave_Click</span>);
+}
+
+<span class="comment">// Or even shorter (modern C#)</span>
+<span class="keyword">public</span> <span class="function">Form1</span>()
+{
+    <span class="function">InitializeComponent</span>();
+    btnSave.Click += <span class="function">btnSave_Click</span>;
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">✨</span> Visual Studio does this for you automatically when you double-click!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Pro Tip:</strong> You can wire multiple events to the same handler!
+                                        <br>
+                                        <code>btnSave.Click += btnSave_Click; btnCancel.Click += btnSave_Click;</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎯 Part 3: The Most Common Events -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>The Most Common Events</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Event</th>
+                                                <th>When It Happens</th>
+                                                <th>Common Control</th>
+                                                <th>Example Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Click</strong></td>
+                                                <td>User clicks the control</td>
+                                                <td>Button, Label</td>
+                                                <td>Save, Submit, Cancel</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Load</strong></td>
+                                                <td>Form first appears</td>
+                                                <td>Form</td>
+                                                <td>Load data, setup controls</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>TextChanged</strong></td>
+                                                <td>Text in TextBox changes</td>
+                                                <td>TextBox</td>
+                                                <td>Real-time validation</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>SelectedIndexChanged</strong></td>
+                                                <td>User changes selection</td>
+                                                <td>ComboBox, ListBox</td>
+                                                <td>Update other controls</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>FormClosing</strong></td>
+                                                <td>Form is about to close</td>
+                                                <td>Form</td>
+                                                <td>Confirm unsaved changes</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>MouseHover</strong></td>
+                                                <td>Mouse hovers over control</td>
+                                                <td>Any control</td>
+                                                <td>Show tooltip, highlight</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>KeyPress</strong></td>
+                                                <td>User presses a key</td>
+                                                <td>TextBox</td>
+                                                <td>Filter input (numbers only)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Fact:</strong> The most common event in WinForms is <strong>Click</strong> - 
+                                        it's the "Hello World" of events! You'll use it more than any other.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Part 4: Form Load Event -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Form Load - Setting Up Your App</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What is Form Load?</strong> The <code>Load</code> event fires <strong>once</strong> 
+                                    when the form first appears. It's the perfect place to <strong>setup</strong> your app!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Basic Form Load</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">Form1_Load</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Populate a ComboBox</span>
+    cmbDepartment.Items.AddRange(<span class="keyword">new</span> <span class="keyword">string</span>[] 
+        { <span class="string">"IT"</span>, <span class="string">"HR"</span>, <span class="string">"Finance"</span> });
+    cmbDepartment.SelectedIndex = <span class="number">0</span>;
+    
+    <span class="comment">// Set default values</span>
+    txtDate.Text = DateTime.Now.ToShortDateString();
+    lblStatus.Text = <span class="string">"Ready"</span>;
+    
+    <span class="comment">// Disable button until ready</span>
+    btnSave.Enabled = <span class="keyword">false</span>;
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Setup Tasks</h5>
+                                                <ul>
+                                                    <li>📋 <strong>Load data</strong> from database</li>
+                                                    <li>📊 <strong>Populate dropdowns</strong> with options</li>
+                                                    <li>📅 <strong>Set default values</strong> (today's date, etc.)</li>
+                                                    <li>🎨 <strong>Configure UI</strong> (enable/disable controls)</li>
+                                                    <li>🔍 <strong>Set focus</strong> to the first field</li>
+                                                </ul>
+                                                <div class="card bg-info text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>Pro Tip:</strong> Always use Form Load instead of the constructor 
+                                                        for UI setup. The form is fully ready by then!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the form load? 
+                                        Because it had a lot to process! (Bad pun, I know 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔍 Part 5: TextChanged - Real-time Validation -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>TextChanged - Real-time Validation</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-sync me-2"></i>
+                                    <strong>What is TextChanged?</strong> This event fires <strong>every time</strong> 
+                                    the user types or changes text in a TextBox. It's great for <strong>real-time validation</strong>!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Example: Email Validation</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">txtEmail_TextChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Check if email contains '@'</span>
+    <span class="keyword">bool</span> isValid = txtEmail.Text.Contains(<span class="string">"@"</span>);
+    
+    <span class="comment">// Update UI based on validation</span>
+    btnSave.Enabled = isValid;
+    lblEmailStatus.Text = isValid ? <span class="string">"✅ Valid email"</span> : <span class="string">"❌ Invalid email"</span>;
+    lblEmailStatus.ForeColor = isValid ? Color.Green : Color.Red;
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Uses</h5>
+                                                <ul>
+                                                    <li>✉️ <strong>Email validation</strong> - Check for @ symbol</li>
+                                                    <li>📱 <strong>Phone number</strong> - Format as you type</li>
+                                                    <li>🔑 <strong>Password strength</strong> - Show strength indicator</li>
+                                                    <li>📊 <strong>Search</strong> - Filter results as user types</li>
+                                                    <li>📝 <strong>Character count</strong> - Show remaining characters</li>
+                                                </ul>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                                        <strong>Warning:</strong> TextChanged fires on EVERY key press - 
+                                                        keep your code fast and simple!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📋 Part 6: SelectedIndexChanged -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>SelectedIndexChanged - Reacting to Choices</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-list me-2"></i>
+                                    <strong>What is SelectedIndexChanged?</strong> This event fires when the user 
+                                    <strong>selects something</strong> from a ComboBox or ListBox. Perfect for updating 
+                                    other controls based on the selection!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Example: Product Selection</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">cmbProducts_SelectedIndexChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Get selected product</span>
+    <span class="keyword">string</span> product = cmbProducts.SelectedItem?.ToString();
+    
+    <span class="keyword">if</span> (product == <span class="keyword">null</span>) <span class="keyword">return</span>;
+    
+    <span class="comment">// Update other controls based on selection</span>
+    <span class="keyword">switch</span> (product)
+    {
+        <span class="keyword">case</span> <span class="string">"Laptop"</span>:
+            txtPrice.Text = <span class="string">"999.99"</span>;
+            txtDescription.Text = <span class="string">"High-performance laptop"</span>;
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="string">"Mouse"</span>:
+            txtPrice.Text = <span class="string">"29.99"</span>;
+            txtDescription.Text = <span class="string">"Wireless mouse"</span>;
+            <span class="keyword">break</span>;
+        <span class="keyword">default</span>:
+            txtPrice.Text = <span class="string">"0.00"</span>;
+            txtDescription.Text = <span class="string">"Unknown product"</span>;
+            <span class="keyword">break</span>;
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Uses</h5>
+                                                <ul>
+                                                    <li>🛒 <strong>Product selection</strong> - Show price/description</li>
+                                                    <li>🏙️ <strong>Country/City</strong> - Update city dropdown when country changes</li>
+                                                    <li>📊 <strong>Filter data</strong> - Show different data based on selection</li>
+                                                    <li>👤 <strong>User profile</strong> - Load user details when selected</li>
+                                                </ul>
+                                                <div class="card bg-info text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>Pro Tip:</strong> Always check if <code>SelectedItem</code> is null 
+                                                        before using it - it might be empty!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🚪 Part 7: FormClosing - Confirming Exit -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>FormClosing - Confirming Exit</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-door-open me-2"></i>
+                                    <strong>What is FormClosing?</strong> This event fires when the user tries to 
+                                    <strong>close the form</strong>. It's your chance to ask "Are you sure?" or 
+                                    save unsaved changes!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Confirm Before Closing</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">Form1_FormClosing</span>(<span class="keyword">object</span> sender, <span class="class">FormClosingEventArgs</span> e)
+{
+    <span class="comment">// Ask user if they want to close</span>
+    <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(
+        <span class="string">"Are you sure you want to exit?"</span>,
+        <span class="string">"Confirm Exit"</span>,
+        <span class="class">MessageBoxButtons</span>.YesNo,
+        <span class="class">MessageBoxIcon</span>.Question
+    );
+    
+    <span class="comment">// Cancel closing if user clicks No</span>
+    <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.No)
+    {
+        e.Cancel = <span class="keyword">true</span>;  <span class="comment">// ⛔ Stop the form from closing</span>
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Uses</h5>
+                                                <ul>
+                                                    <li>💾 <strong>Save unsaved changes</strong> - "Save before closing?"</li>
+                                                    <li>🔒 <strong>Confirm exit</strong> - "Are you sure?"</li>
+                                                    <li>📋 <strong>Clean up</strong> - Close database connections</li>
+                                                    <li>📊 <strong>Save state</strong> - Remember window position</li>
+                                                </ul>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                                        <strong>Important:</strong> If you set <code>e.Cancel = true</code>, 
+                                                        the form <strong>won't close</strong>!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the form refuse to close? 
+                                        Because it had too many open tabs! (Get it? Tabs? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 8: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Create a login form with multiple event handlers!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li><strong>Create a new WinForms project</strong>
+                                                        <ul>
+                                                            <li>Name it "LoginForm"</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>Add these controls:</strong>
+                                                        <ul>
+                                                            <li>📝 Labels for "Username" and "Password"</li>
+                                                            <li>✏️ TextBoxes for each (txtUsername, txtPassword)</li>
+                                                            <li>🔘 A Button for "Login"</li>
+                                                            <li>🏷️ A Label for status messages</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>Add these event handlers:</strong>
+                                                        <ul>
+                                                            <li>🔄 <strong>Form Load</strong> - Set focus to username</li>
+                                                            <li>✏️ <strong>TextChanged</strong> - Enable Login button when both fields filled</li>
+                                                            <li>🔘 <strong>Click</strong> - Validate and show success/error</li>
+                                                            <li>🚪 <strong>FormClosing</strong> - Confirm exit</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to handle multiple events</li>
+                                                    <li>✅ How to validate user input</li>
+                                                    <li>✅ How to enable/disable controls based on input</li>
+                                                    <li>✅ How to confirm before closing</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A working login form with multiple event handlers!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== LOGIN FORM =====</span>
+
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">LoginForm</span> : <span class="class">Form</span>
+{
+    <span class="comment">// 🔒 Dummy credentials for validation</span>
+    <span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> VALID_USERNAME = <span class="string">"admin"</span>;
+    <span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> VALID_PASSWORD = <span class="string">"1234"</span>;
+    
+    <span class="keyword">public</span> <span class="function">LoginForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+    }
+    
+    <span class="comment">// 🔄 Form Load - Setup the form</span>
+    <span class="keyword">private void</span> <span class="function">LoginForm_Load</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="comment">// Set focus to username field</span>
+        txtUsername.Focus();
+        btnLogin.Enabled = <span class="keyword">false</span>;
+        lblStatus.Text = <span class="string">"Enter your credentials"</span>;
+        lblStatus.ForeColor = Color.Blue;
+    }
+    
+    <span class="comment">// ✏️ TextChanged - Real-time validation</span>
+    <span class="keyword">private void</span> <span class="function">txtUsername_TextChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="function">CheckLoginButton</span>();
+    }
+    
+    <span class="keyword">private void</span> <span class="function">txtPassword_TextChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="function">CheckLoginButton</span>();
+    }
+    
+    <span class="keyword">private void</span> <span class="function">CheckLoginButton</span>()
+    {
+        <span class="comment">// Enable Login button only if both fields have text</span>
+        <span class="keyword">bool</span> hasUsername = !<span class="keyword">string</span>.IsNullOrWhiteSpace(txtUsername.Text);
+        <span class="keyword">bool</span> hasPassword = !<span class="keyword">string</span>.IsNullOrWhiteSpace(txtPassword.Text);
+        
+        btnLogin.Enabled = hasUsername &amp;&amp; hasPassword;
+        
+        <span class="keyword">if</span> (btnLogin.Enabled)
+        {
+            lblStatus.Text = <span class="string">"Ready to login"</span>;
+            lblStatus.ForeColor = Color.Green;
+        }
+        <span class="keyword">else</span>
+        {
+            lblStatus.Text = <span class="string">"Please fill in all fields"</span>;
+            lblStatus.ForeColor = Color.Red;
+        }
+    }
+    
+    <span class="comment">// 🔘 Login Button Click</span>
+    <span class="keyword">private void</span> <span class="function">btnLogin_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="comment">// Get user input</span>
+        <span class="keyword">string</span> username = txtUsername.Text;
+        <span class="keyword">string</span> password = txtPassword.Text;
+        
+        <span class="comment">// 🔒 Validate credentials</span>
+        <span class="keyword">if</span> (username == VALID_USERNAME &amp;&amp; password == VALID_PASSWORD)
+        {
+            <span class="comment">// ✅ Success</span>
+            lblStatus.Text = <span class="string">"✅ Login successful!"</span>;
+            lblStatus.ForeColor = Color.Green;
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Welcome, {username}!"</span>, <span class="string">"Success"</span>);
+            
+            <span class="comment">// Optional: Open main form here</span>
+            <span class="comment">// MainForm main = new MainForm();</span>
+            <span class="comment">// main.Show();</span>
+            <span class="comment">// this.Hide();</span>
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="comment">// ❌ Error</span>
+            lblStatus.Text = <span class="string">"❌ Invalid username or password!"</span>;
+            lblStatus.ForeColor = Color.Red;
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Invalid credentials. Please try again."</span>, 
+                <span class="string">"Login Failed"</span>, <span class="class">MessageBoxButtons</span>.OK, 
+                <span class="class">MessageBoxIcon</span>.Error);
+            
+            <span class="comment">// Clear and refocus</span>
+            txtPassword.Clear();
+            txtUsername.Focus();
+        }
+    }
+    
+    <span class="comment">// 🚪 Form Closing - Confirm exit</span>
+    <span class="keyword">private void</span> <span class="function">LoginForm_FormClosing</span>(<span class="keyword">object</span> sender, <span class="class">FormClosingEventArgs</span> e)
+    {
+        <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(
+            <span class="string">"Are you sure you want to exit the application?"</span>,
+            <span class="string">"Confirm Exit"</span>,
+            <span class="class">MessageBoxButtons</span>.YesNo,
+            <span class="class">MessageBoxIcon</span>.Question
+        );
+        
+        <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.No)
+        {
+            e.Cancel = <span class="keyword">true</span>;  <span class="comment">// ⛔ Don't close</span>
+        }
+    }
+    
+    <span class="comment">// 🔄 Optional: Reset button</span>
+    <span class="keyword">private void</span> <span class="function">btnReset_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        txtUsername.Clear();
+        txtPassword.Clear();
+        txtUsername.Focus();
+        btnLogin.Enabled = <span class="keyword">false</span>;
+        lblStatus.Text = <span class="string">"Fields cleared. Enter credentials."</span>;
+        lblStatus.ForeColor = Color.Blue;
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a login form with multiple event handlers!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-bolt fa-3x mb-2"></i>
+                                        <h5>Events</h5>
+                                        <small>Notifications</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-link fa-3x mb-2"></i>
+                                        <h5>Wiring</h5>
+                                        <small>Connecting events</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-rocket fa-3x mb-2"></i>
+                                        <h5>Load</h5>
+                                        <small>Setup your app</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Validation</h5>
+                                        <small>Real-time checking</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-list fa-3x mb-2"></i>
+                                        <h5>SelectedIndexChanged</h5>
+                                        <small>React to choices</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-door-open fa-3x mb-2"></i>
+                                        <h5>FormClosing</h5>
+                                        <small>Confirm exit</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-lock fa-3x mb-2"></i>
+                                        <h5>Login Example</h5>
+                                        <small>Real-world app</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-trophy fa-3x mb-2"></i>
+                                        <h5>Ready!</h5>
+                                        <small>For any app!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to make any WinForms application interactive with events!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/WindowsForms/02-ControlsBasics" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "WindowsForms_Lesson3")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

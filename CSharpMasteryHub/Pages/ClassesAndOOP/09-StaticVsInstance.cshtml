@@ -1,380 +1,1054 @@
 ﻿@page
 @model StaticVsInstanceModel
 @{
-    ViewData["Title"] = "Static vs Instance Members in C#";
+    ViewData["Title"] = "Static vs Instance Members - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Static vs Instance</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Static vs Instance Members in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 9 of 11</span>
-                </div>
-
-                <h2>Understanding Static vs Instance</h2>
-                <p>
-                    In C#, members (fields, properties, methods, etc.) can be either static or instance-based.
-                    Understanding the difference is crucial for proper object-oriented design.
-                </p>
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
-                        <ul class="mb-0">
-                            <li><strong>Instance members</strong> belong to each object instance</li>
-                            <li><strong>Static members</strong> belong to the class itself, shared by all instances</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h2>Instance Members</h2>
-                <pre><code>public class Person
-{
-    // Instance fields - each object has its own copy
-    public string Name { get; set; }
-    public int Age { get; set; }
-    
-    // Instance method - operates on object state
-    public void Introduce()
-    {
-        Console.WriteLine($"Hi, I'm {Name} and I'm {Age} years old.");
-    }
-}
-
-// Usage - must create instance
-Person person = new Person();
-person.Name = "John";
-person.Age = 25;
-person.Introduce();</code></pre>
-
-                <h2>Static Members</h2>
-                <pre><code>public class MathUtils
-{
-    // Static field - shared across all instances
-    public static double Pi = 3.14159;
-    
-    // Static method - called on class, not instance
-    public static double CalculateCircleArea(double radius)
-    {
-        return Pi * radius * radius;
-    }
-    
-    // Static property
-    public static string Version { get; } = "1.0.0";
-}
-
-// Usage - no instance needed
-double area = MathUtils.CalculateCircleArea(5);
-Console.WriteLine($"Area: {area}");
-Console.WriteLine($"Version: {MathUtils.Version}");</code></pre>
-
-                <h2>Static Constructor</h2>
-                <pre><code>public class DatabaseConfig
-{
-    public static string ConnectionString { get; private set; }
-    public static int Timeout { get; private set; }
-    
-    // Static constructor - called once before class is used
-    static DatabaseConfig()
-    {
-        ConnectionString = "Server=localhost;Database=MyDB;";
-        Timeout = 30;
-        Console.WriteLine("Database configuration initialized");
-    }
-}</code></pre>
-
-                <h2>Static Classes</h2>
-                <pre><code>// Static class - cannot be instantiated
-public static class FileHelper
-{
-    // All members must be static
-    public static void WriteToFile(string path, string content)
-    {
-        File.WriteAllText(path, content);
-    }
-    
-    public static string ReadFromFile(string path)
-    {
-        return File.ReadAllText(path);
-    }
-    
-    public static bool FileExists(string path)
-    {
-        return File.Exists(path);
-    }
-}
-
-// Usage
-FileHelper.WriteToFile("data.txt", "Hello World!");
-string content = FileHelper.ReadFromFile("data.txt");</code></pre>
-
-                <h2>When to Use Static vs Instance</h2>
-                <table class="table table-bordered mb-4">
-                    <thead>
-                        <tr>
-                            <th>Use Static When</th>
-                            <th>Use Instance When</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Utility/helper functions</td>
-                            <td>Data that belongs to each object</td>
-                        </tr>
-                        <tr>
-                            <td>Shared data across instances</td>
-                            <td>Object-specific behavior</td>
-                        </tr>
-                        <tr>
-                            <td>Constants and configuration</td>
-                            <td>State that can vary per object</td>
-                        </tr>
-                        <tr>
-                            <td>Factory methods</td>
-                            <td>Encapsulated object logic</td>
-                        </tr>
-                        <tr>
-                            <td>No need for object state</td>
-                            <td>Need to maintain object state</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h2>Static vs Instance - Complete Example</h2>
-                <pre><code>using System;
-
-public class BankAccount
-{
-    // Static members
-    private static int lastAccountNumber = 1000;
-    private static double interestRate = 0.05;
-    private static int totalAccounts = 0;
-    
-    // Static property
-    public static double InterestRate
-    {
-        get { return interestRate; }
-        set 
-        {
-            if (value < 0)
-                throw new ArgumentException("Interest rate cannot be negative");
-            interestRate = value;
-        }
-    }
-    
-    // Static method
-    public static int GetTotalAccounts()
-    {
-        return totalAccounts;
-    }
-    
-    public static void SetInterestRate(double rate)
-    {
-        InterestRate = rate;
-    }
-    
-    // Instance members
-    public string AccountNumber { get; private set; }
-    public string OwnerName { get; set; }
-    public decimal Balance { get; private set; }
-    public DateTime CreatedDate { get; private set; }
-    
-    // Instance constructor
-    public BankAccount(string ownerName, decimal initialDeposit)
-    {
-        if (string.IsNullOrWhiteSpace(ownerName))
-            throw new ArgumentException("Owner name cannot be empty");
-        
-        if (initialDeposit < 0)
-            throw new ArgumentException("Initial deposit cannot be negative");
-        
-        AccountNumber = GenerateAccountNumber();
-        OwnerName = ownerName;
-        Balance = initialDeposit;
-        CreatedDate = DateTime.Now;
-        totalAccounts++;
-    }
-    
-    // Static method to generate account number
-    private static string GenerateAccountNumber()
-    {
-        lastAccountNumber++;
-        return "ACC" + lastAccountNumber.ToString("D6");
-    }
-    
-    // Instance methods
-    public void Deposit(decimal amount)
-    {
-        if (amount <= 0)
-            throw new ArgumentException("Deposit amount must be positive");
-        Balance += amount;
-    }
-    
-    public bool Withdraw(decimal amount)
-    {
-        if (amount <= 0)
-            throw new ArgumentException("Withdrawal amount must be positive");
-            
-        if (amount > Balance)
-            return false;
-            
-        Balance -= amount;
-        return true;
-    }
-    
-    public void ApplyInterest()
-    {
-        decimal interest = Balance * (decimal)interestRate;
-        Balance += interest;
-        Console.WriteLine($"Interest applied: {interest:C}");
-    }
-    
-    public void DisplayInfo()
-    {
-        Console.WriteLine($"Account: {AccountNumber}");
-        Console.WriteLine($"Owner: {OwnerName}");
-        Console.WriteLine($"Balance: {Balance:C}");
-        Console.WriteLine($"Created: {CreatedDate:d}");
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        // Using static members
-        Console.WriteLine($"Interest Rate: {BankAccount.InterestRate:P}");
-        BankAccount.SetInterestRate(0.075);
-        Console.WriteLine($"New Interest Rate: {BankAccount.InterestRate:P}");
-        
-        // Creating instances
-        BankAccount account1 = new BankAccount("John Doe", 1000);
-        BankAccount account2 = new BankAccount("Jane Smith", 2000);
-        
-        // Using instance members
-        account1.Deposit(500);
-        account2.Withdraw(500);
-        account1.ApplyInterest();
-        
-        // Display information
-        Console.WriteLine("\n=== ACCOUNT 1 ===");
-        account1.DisplayInfo();
-        
-        Console.WriteLine("\n=== ACCOUNT 2 ===");
-        account2.DisplayInfo();
-        
-        // Static member
-        Console.WriteLine($"\nTotal Accounts: {BankAccount.GetTotalAccounts()}");
-    }
-}</code></pre>
-
-                <h2>Static Methods vs Instance Methods</h2>
-                <pre><code>public class Calculator
-{
-    // Static method - doesn't need instance state
-    public static int Add(int a, int b)
-    {
-        return a + b;
-    }
-    
-    // Static method - utility function
-    public static bool IsEven(int number)
-    {
-        return number % 2 == 0;
-    }
-    
-    // Instance method - needs instance state
-    private int result;
-    
-    public void AddToResult(int value)
-    {
-        result += value;
-    }
-    
-    public int GetResult()
-    {
-        return result;
-    }
-}</code></pre>
-
-                <h2>Thread Safety with Static Members</h2>
-                <pre><code>public class Counter
-{
-    private static int count = 0;
-    private static readonly object lockObject = new object();
-    
-    // Thread-safe static method
-    public static int Increment()
-    {
-        lock (lockObject)
-        {
-            count++;
-            return count;
-        }
-    }
-    
-    public static int GetCount()
-    {
-        lock (lockObject)
-        {
-            return count;
-        }
-    }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <ul class="mb-0">
-                            <li>Static members belong to the class, not instances</li>
-                            <li>Instance members belong to each object</li>
-                            <li>Use static for utility methods and shared data</li>
-                            <li>Use instance for object-specific data and behavior</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a class "ProductManager" with:</p>
-                        <ol>
-                            <li>Static field: totalProducts</li>
-                            <li>Static method: GetTotalProducts()</li>
-                            <li>Static method: ResetInventory()</li>
-                            <li>Instance properties: Id, Name, Price, Quantity</li>
-                            <li>Instance methods: AddStock, RemoveStock</li>
-                            <li>Static constructor to initialize default values</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Static vs Instance</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Static vs Instance ⚡
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Shared vs Personal - What Belongs to Everyone vs Each Person?
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 9 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/10-Generics" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-users fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Hey There! Ready to Learn Static vs Instance? 🎯</h2>
+                                    <p class="fs-5">
+                                        <strong>Static</strong> and <strong>Instance</strong> are two types of members in C#.
+                                        It's like the difference between <strong>something shared by everyone</strong> vs
+                                        <strong>something that belongs to just one person</strong>.
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Quick Question:</strong> Think about a <strong>school</strong>!
+                                        <ul class="mb-0 mt-2">
+                                            <li>🏫 <strong>School Name</strong> is SHARED by everyone (static)</li>
+                                            <li>👨‍🎓 <strong>Student Name</strong> belongs to each student (instance)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary p-2">🎯 After this lesson, you'll be able to:</span>
+                                        <ul class="mt-2">
+                                            <li>✅ Explain static vs instance like a pro</li>
+                                            <li>✅ Use static members (shared stuff)</li>
+                                            <li>✅ Use instance members (personal stuff)</li>
+                                            <li>✅ Know when to use each</li>
+                                            <li>✅ Build better, cleaner code</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What's the Difference? (Super Simple) -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: What's the Difference? (The Easy Way)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-users text-primary me-2"></i>👥 Static - Shared by Everyone</h5>
+                                                <p><strong>Static</strong> members belong to the <strong>class itself</strong>, not to any specific object.</p>
+                                                <ul>
+                                                    <li>✅ <strong>One copy</strong> shared by all</li>
+                                                    <li>✅ Accessed through the <strong>class name</strong></li>
+                                                    <li>✅ Like a <strong>school name</strong> - everyone uses the same one</li>
+                                                </ul>
+                                                <div class="alert alert-primary mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Example:</strong> <code>Math.PI</code> - everyone uses the same Pi!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-user text-success me-2"></i>👤 Instance - Personal to Each</h5>
+                                                <p><strong>Instance</strong> members belong to <strong>each object</strong> individually.</p>
+                                                <ul>
+                                                    <li>✅ <strong>Separate copies</strong> for each object</li>
+                                                    <li>✅ Accessed through an <strong>object variable</strong></li>
+                                                    <li>✅ Like a <strong>student name</strong> - each student has their own</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Example:</strong> <code>person.Name</code> - each person has their own name!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong>
+                                        <ul class="mb-0">
+                                            <li><strong>Static</strong> = <strong>Class</strong> level (one for all)</li>
+                                            <li><strong>Instance</strong> = <strong>Object</strong> level (one per object)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the static method break up with the instance method?
+                                        Because it couldn't handle the personal space! (Okay, I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 2: Instance Members - Personal Stuff -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: Instance Members - Personal Stuff</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Instance members</strong> are like <strong>personal belongings</strong> - each object has its own copy.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Instance Fields</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Person</span>
+{
+    <span class="comment">// Each person has their own Name and Age</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Age { <span class="function">get</span>; <span class="function">set</span>; }
+}</code></pre>
+                                                </div>
+                                                <p>Each <strong>Person</strong> object has its <strong>own</strong> Name and Age!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 Using Instance Members</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Create two people</span>
+<span class="class">Person</span> person1 = <span class="keyword">new</span> <span class="class">Person</span>();
+person1.Name = <span class="string">"Alice"</span>;
+person1.Age = <span class="number">25</span>;
+
+<span class="class">Person</span> person2 = <span class="keyword">new</span> <span class="class">Person</span>();
+person2.Name = <span class="string">"Bob"</span>;
+person2.Age = <span class="number">30</span>;
+
+<span class="comment">// Each has their own values!</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> person1 and person2 have <strong>different</strong> values</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>Key Point:</strong> You MUST create an object to use instance members!
+                                    <br>
+                                    <code>Person p = new Person();</code> → <code>p.Name</code> works ✅
+                                    <br>
+                                    <code>Person.Name</code> doesn't work ❌ (needs an object)
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🏢 Part 3: Static Members - Shared Stuff -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: Static Members - Shared Stuff</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5"><strong>Static members</strong> are like <strong>shared resources</strong> - one copy for everyone.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Static Fields</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">School</span>
+{
+    <span class="comment">// Shared by ALL students</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> SchoolName = <span class="string">"C# Academy"</span>;
+    
+    <span class="comment">// Each student has their own</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> StudentName { <span class="function">get</span>; <span class="function">set</span>; }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">One SchoolName</span> for ALL students!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 Using Static Members</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// ✅ Access through class name</span>
+Console.WriteLine(<span class="class">School</span>.SchoolName);  <span class="comment">// "C# Academy"</span>
+
+<span class="comment">// ❌ Can't access through object</span>
+<span class="class">School</span> s = <span class="keyword">new</span> <span class="class">School</span>();
+<span class="comment">// s.SchoolName doesn't work!</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Remember:</strong> Static members use the <strong>class name</strong>, not an object!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light mt-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-question-circle text-primary me-2"></i>📊 Static vs Instance - Visual Comparison</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead class="table-primary">
+                                                    <tr>
+                                                        <th>Feature</th>
+                                                        <th>Static</th>
+                                                        <th>Instance</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Belongs to</strong></td>
+                                                        <td>Class</td>
+                                                        <td>Object</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>How many copies</strong></td>
+                                                        <td>One (shared)</td>
+                                                        <td>Many (one per object)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>How to access</strong></td>
+                                                        <td><code>ClassName.Member</code></td>
+                                                        <td><code>object.Member</code></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Example</strong></td>
+                                                        <td><code>Math.PI</code></td>
+                                                        <td><code>person.Name</code></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔧 Part 4: Static Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: Static Methods - Utility Functions</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Static Method Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MathHelper</span>
+{
+    <span class="comment">// Static method - no object needed</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="comment">// Instance method - needs an object</span>
+    <span class="keyword">private</span> <span class="keyword">int</span> result;
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddToResult</span>(<span class="keyword">int</span> value)
+    {
+        result += value;
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using Static Methods</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// ✅ No object needed!</span>
+<span class="keyword">int</span> sum = <span class="class">MathHelper</span>.<span class="function">Add</span>(<span class="number">5</span>, <span class="number">3</span>);
+Console.WriteLine(sum);  <span class="comment">// 8</span>
+
+<span class="comment">// ❌ Need an object for instance method</span>
+<span class="class">MathHelper</span> helper = <span class="keyword">new</span> <span class="class">MathHelper</span>();
+helper.<span class="function">AddToResult</span>(<span class="number">10</span>);</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use static methods:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ Utility functions (like <code>Math.Sqrt()</code>)</li>
+                                                        <li>✅ No object data needed</li>
+                                                        <li>✅ Helper methods</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🏗️ Part 5: Static Constructor -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: Static Constructor - One-Time Setup</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-clock me-2"></i>
+                                    <strong>What's a Static Constructor?</strong> It runs <strong>ONCE</strong> when the class is first used.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Static Constructor</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Config</span>
+{
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> AppName;
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> Version;
+    
+    <span class="comment">// Runs ONCE when class is first used</span>
+    <span class="keyword">static</span> <span class="function">Config</span>()
+    {
+        AppName = <span class="string">"MyApp"</span>;
+        Version = <span class="string">"1.0.0"</span>;
+        Console.WriteLine(<span class="string">"⚙️ Config loaded!"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 When It Runs</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Static constructor runs HERE</span>
+Console.WriteLine(<span class="class">Config</span>.AppName);  <span class="comment">// "MyApp"</span>
+
+<span class="comment">// Static constructor already ran</span>
+Console.WriteLine(<span class="class">Config</span>.Version);  <span class="comment">// "1.0.0"</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Key Points:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ Runs <strong>ONCE</strong> (not every time)</li>
+                                                        <li>✅ No parameters allowed</li>
+                                                        <li>✅ Used for <strong>one-time setup</strong></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🚫 Part 6: Static Classes -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: Static Classes - Pure Utility</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-box me-2"></i>
+                                    <strong>What's a Static Class?</strong> A class that <strong>cannot be created</strong> - it's just a container for static members!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Static Class</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="class">FileHelper</span>
+{
+    <span class="comment">// All members MUST be static</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">WriteFile</span>(<span class="keyword">string</span> path)
+    {
+        Console.WriteLine(<span class="string">$"Writing to {path}"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-danger">🚫</span> Cannot create <code>FileHelper</code> objects!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Using Static Class</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// ✅ Use directly through class name</span>
+<span class="class">FileHelper</span>.<span class="function">WriteFile</span>(<span class="string">"data.txt"</span>);
+
+<span class="comment">// ❌ Can't do this:</span>
+<span class="comment">// FileHelper helper = new FileHelper();</span></code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>When to use static classes:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ <strong>Math</strong> - <code>Math.Sqrt()</code></li>
+                                                        <li>✅ <strong>File helpers</strong> - <code>File.ReadAllText()</code></li>
+                                                        <li>✅ <strong>Convert</strong> - <code>Convert.ToInt32()</code></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🌍 Part 7: Real-World Example - Bank System -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Real-World Example - Bank System 💰</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a <strong>Bank System</strong> showing static and instance members!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Bank System - Static vs Instance</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Bank</span>
+{
+    <span class="comment">// 🔵 STATIC - Shared by all accounts</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> BankName = <span class="string">"C# National Bank"</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> totalAccounts = <span class="number">0</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> interestRate = <span class="number">0.05</span>;
+    
+    <span class="comment">// 🟢 INSTANCE - Belongs to each account</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> AccountNumber { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Owner { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Balance { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="comment">// Static method - shared functionality</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">GetTotalAccounts</span>() => totalAccounts;
+    
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">SetInterestRate</span>(<span class="keyword">double</span> rate)
+    {
+        <span class="keyword">if</span> (rate >= <span class="number">0</span>) interestRate = rate;
+    }
+    
+    <span class="comment">// Constructor - creates new account</span>
+    <span class="keyword">public</span> <span class="function">Bank</span>(<span class="keyword">string</span> owner, <span class="keyword">decimal</span> initial)
+    {
+        Owner = owner;
+        Balance = initial;
+        AccountNumber = <span class="function">GenerateAccountNumber</span>();
+        totalAccounts++;
+    }</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp">    <span class="comment">// Private static method</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">string</span> <span class="function">GenerateAccountNumber</span>()
+    {
+        <span class="keyword">return</span> <span class="string">$"ACC-{DateTime.Now.Year}-{totalAccounts + 1:D4}"</span>;
+    }
+    
+    <span class="comment">// Instance methods - per account</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Deposit</span>(<span class="keyword">decimal</span> amount)
+    {
+        <span class="keyword">if</span> (amount > <span class="number">0</span>) Balance += amount;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">Withdraw</span>(<span class="keyword">decimal</span> amount)
+    {
+        <span class="keyword">if</span> (amount > <span class="number">0</span> &amp;&amp; amount <= Balance)
+        {
+            Balance -= amount;
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">ApplyInterest</span>()
+    {
+        Balance += Balance * (<span class="keyword">decimal</span>)interestRate;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🏦 {BankName}"</span>);
+        Console.WriteLine(<span class="string">$"📋 Account: {AccountNumber}"</span>);
+        Console.WriteLine(<span class="string">$"👤 Owner: {Owner}"</span>);
+        Console.WriteLine(<span class="string">$"💰 Balance: ${Balance:F2}"</span>);
+        Console.WriteLine(<span class="string">$"📊 Total Accounts: {GetTotalAccounts()}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Program.cs - Testing the Bank</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🏦 WELCOME TO THE BANK\n"</span>);
+        
+        <span class="comment">// Static members - shared</span>
+        Console.WriteLine(<span class="string">$"🏛️ Bank Name: {Bank.BankName}"</span>);
+        Console.WriteLine(<span class="string">$"📊 Interest Rate: 5%\n"</span>);
+        
+        <span class="comment">// Create accounts - instance</span>
+        <span class="class">Bank</span> account1 = <span class="keyword">new</span> <span class="class">Bank</span>(<span class="string">"John Doe"</span>, <span class="number">1000.00m</span>);
+        <span class="class">Bank</span> account2 = <span class="keyword">new</span> <span class="class">Bank</span>(<span class="string">"Jane Smith"</span>, <span class="number">2000.00m</span>);
+        
+        <span class="comment">// Instance operations</span>
+        account1.<span class="function">Deposit</span>(<span class="number">500.00m</span>);
+        account2.<span class="function">Withdraw</span>(<span class="number">200.00m</span>);
+        account1.<span class="function">ApplyInterest</span>();
+        
+        <span class="comment">// Display info</span>
+        account1.<span class="function">DisplayInfo</span>();
+        Console.WriteLine();
+        account2.<span class="function">DisplayInfo</span>();
+        
+        <span class="comment">// Static members - shared</span>
+        Console.WriteLine(<span class="string">$"\n📊 Total Accounts: {Bank.GetTotalAccounts()}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 What this shows:</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>Static:</strong> BankName, totalAccounts, interestRate (shared)</li>
+                                                <li>✅ <strong>Instance:</strong> AccountNumber, Owner, Balance (personal)</li>
+                                                <li>✅ <strong>Static Methods:</strong> GetTotalAccounts(), SetInterestRate()</li>
+                                                <li>✅ <strong>Instance Methods:</strong> Deposit(), Withdraw(), ApplyInterest()</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Bank Joke:</strong> Why did the static variable break up with the instance variable?
+                                        Because it couldn't handle the personal space! (Okay, I'll stop now 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 8: Exercise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Part 8: Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What You're Building:</strong> A <strong>Product Inventory System</strong> for a store!
+                                    <br>
+                                    Track products and inventory with both shared and personal data.
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle text-primary me-2"></i>🛒 About This Application</h5>
+                                        <p>This is a <strong>Store Inventory System</strong> like:</p>
+                                        <ul>
+                                            <li>🏪 <strong>Walmart</strong> - Track thousands of products</li>
+                                            <li>📦 <strong>Amazon</strong> - Manage inventory across warehouses</li>
+                                            <li>🛍️ <strong>Local Store</strong> - Track stock and sales</li>
+                                        </ul>
+                                        <p>Each product has <strong>personal data</strong> (name, price) and <strong>shared data</strong> (store name, total products):</p>
+                                        <ul>
+                                            <li>✅ All products share the same <strong>Store Name</strong></li>
+                                            <li>✅ Each product has its own <strong>Name, Price, Quantity</strong></li>
+                                            <li>✅ Track <strong>Total Products</strong> in the system</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Class: Product</strong>
+                                                        <ul>
+                                                            <li>🟢 <strong>Instance</strong> - Id, Name, Price, Quantity</li>
+                                                            <li>🔵 <strong>Static</strong> - StoreName, totalProducts</li>
+                                                            <li>🔵 <strong>Static Method</strong> - GetTotalProducts()</li>
+                                                            <li>🟢 <strong>Instance Method</strong> - AddStock(), RemoveStock()</li>
+                                                            <li>🟢 <strong>Instance Method</strong> - DisplayInfo()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Program.cs:</strong>
+                                                        <ul>
+                                                            <li>Create 3+ products</li>
+                                                            <li>Add/remove stock</li>
+                                                            <li>Display product info</li>
+                                                            <li>Show total products</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You're Learning:</h6>
+                                                <ul>
+                                                    <li>✅ <strong>Static</strong> = Store Name, Total Products (shared)</li>
+                                                    <li>✅ <strong>Instance</strong> = Product details (personal)</li>
+                                                    <li>✅ <strong>Static Method</strong> = Get total products</li>
+                                                    <li>✅ <strong>Instance Method</strong> = Manage each product</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A complete inventory system with both shared and personal data!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Solution (Try it yourself first!)
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== PRODUCT INVENTORY SYSTEM =====</span>
+<span class="comment">// This shows static vs instance members in action</span>
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Product</span>
+{
+    <span class="comment">// 🔵 STATIC MEMBERS - Shared by all products</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> StoreName = <span class="string">"C# Superstore"</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> totalProducts = <span class="number">0</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> nextId = <span class="number">1000</span>;
+    
+    <span class="comment">// 🟢 INSTANCE MEMBERS - Belongs to each product</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> Id { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Price { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Quantity { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="comment">// 🔵 Static method - shared functionality</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">GetTotalProducts</span>() => totalProducts;
+    
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">ResetInventory</span>()
+    {
+        totalProducts = <span class="number">0</span>;
+        nextId = <span class="number">1000</span>;
+        Console.WriteLine(<span class="string">"🔄 Inventory reset!"</span>);
+    }
+    
+    <span class="comment">// 🟢 Constructor - creates new product</span>
+    <span class="keyword">public</span> <span class="function">Product</span>(<span class="keyword">string</span> name, <span class="keyword">decimal</span> price, <span class="keyword">int</span> quantity)
+    {
+        Name = name;
+        Price = price;
+        Quantity = quantity;
+        Id = <span class="function">GenerateId</span>();
+        totalProducts++;
+    }
+    
+    <span class="comment">// 🔵 Private static helper</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="function">GenerateId</span>() => ++nextId;
+    
+    <span class="comment">// 🟢 Instance methods - per product</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AddStock</span>(<span class="keyword">int</span> amount)
+    {
+        <span class="keyword">if</span> (amount > <span class="number">0</span>) Quantity += amount;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">RemoveStock</span>(<span class="keyword">int</span> amount)
+    {
+        <span class="keyword">if</span> (amount > <span class="number">0</span> &amp;&amp; amount <= Quantity)
+        {
+            Quantity -= amount;
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">decimal</span> <span class="function">GetTotalValue</span>() => Price * Quantity;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🏪 {StoreName} - Product #{Id}"</span>);
+        Console.WriteLine(<span class="string">$"📦 {Name}"</span>);
+        Console.WriteLine(<span class="string">$"💰 ${Price:F2}"</span>);
+        Console.WriteLine(<span class="string">$"📊 Quantity: {Quantity}"</span>);
+        Console.WriteLine(<span class="string">$"💵 Total Value: ${GetTotalValue():F2}"</span>);
+        Console.WriteLine();
+    }
+}
+
+<span class="comment">// Program.cs - Inventory System</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"📦 PRODUCT INVENTORY SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
+        
+        <span class="comment">// Static member - store name</span>
+        Console.WriteLine(<span class="string">$"🏪 Store: {Product.StoreName}\n"</span>);
+        
+        <span class="comment">// Create products (instance)</span>
+        <span class="class">Product</span> product1 = <span class="keyword">new</span> <span class="class">Product</span>(<span class="string">"Laptop"</span>, <span class="number">999.99m</span>, <span class="number">5</span>);
+        <span class="class">Product</span> product2 = <span class="keyword">new</span> <span class="class">Product</span>(<span class="string">"Mouse"</span>, <span class="number">25.50m</span>, <span class="number">20</span>);
+        <span class="class">Product</span> product3 = <span class="keyword">new</span> <span class="class">Product</span>(<span class="string">"Keyboard"</span>, <span class="number">45.00m</span>, <span class="number">15</span>);
+        
+        <span class="comment">// Instance operations</span>
+        product1.<span class="function">AddStock</span>(<span class="number">2</span>);   <span class="comment">// Add 2 more laptops</span>
+        product2.<span class="function">RemoveStock</span>(<span class="number">5</span>);  <span class="comment">// Sell 5 mice</span>
+        
+        <span class="comment">// Display all products</span>
+        product1.<span class="function">DisplayInfo</span>();
+        product2.<span class="function">DisplayInfo</span>();
+        product3.<span class="function">DisplayInfo</span>();
+        
+        <span class="comment">// Static method - total products</span>
+        Console.WriteLine(<span class="string">$"📊 Total Products: {Product.GetTotalProducts()}"</span>);
+        Console.WriteLine(<span class="string">$"🏪 Store: {Product.StoreName}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a real inventory system using static and instance members!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-users fa-3x mb-2"></i>
+                                        <h5>Static</h5>
+                                        <small>Shared by everyone</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-user fa-3x mb-2"></i>
+                                        <h5>Instance</h5>
+                                        <small>Personal to each</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-tools fa-3x mb-2"></i>
+                                        <h5>Static Methods</h5>
+                                        <small>Utility functions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-box fa-3x mb-2"></i>
+                                        <h5>Static Classes</h5>
+                                        <small>Pure containers</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-bank fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Bank System! 💰</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-shop fa-3x mb-2"></i>
+                                        <h5>Inventory System</h5>
+                                        <small>Store Example! 🛒</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-lightbulb fa-3x mb-2"></i>
+                                        <h5>Smart Choice</h5>
+                                        <small>Static vs Instance</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/08-AbstractionInterfaces" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/10-Generics" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson9")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

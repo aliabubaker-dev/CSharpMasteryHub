@@ -394,8 +394,8 @@
                                                 <div class="code-block small">
                                                     <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">txtEmail_TextChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
 {
-    <span class="comment">// Check if email contains '@'</span>
-    <span class="keyword">bool</span> isValid = txtEmail.Text.Contains(<span class="string">"@"</span>);
+    <span class="comment">// Check if email contains '@@'</span>
+    <span class="keyword">bool</span> isValid = txtEmail.Text.Contains(<span class="string">"@@"</span>);
     
     <span class="comment">// Update UI based on validation</span>
     btnSave.Enabled = isValid;
@@ -411,7 +411,7 @@
                                             <div class="card-body">
                                                 <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Uses</h5>
                                                 <ul>
-                                                    <li>✉️ <strong>Email validation</strong> - Check for @ symbol</li>
+                                                    <li>✉️ <strong>Email validation</strong> - Check for @@ symbol</li>
                                                     <li>📱 <strong>Phone number</strong> - Format as you type</li>
                                                     <li>🔑 <strong>Password strength</strong> - Show strength indicator</li>
                                                     <li>📊 <strong>Search</strong> - Filter results as user types</li>
@@ -990,7 +990,7 @@
         #solution {
             animation: fadeSlide 0.5s ease;
         }
-        @keyframes fadeSlide {
+        @@keyframes fadeSlide {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
@@ -1004,7 +1004,7 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @@media (max-width: 768px) {
             .display-2 {
                 font-size: 2.5rem;
             }

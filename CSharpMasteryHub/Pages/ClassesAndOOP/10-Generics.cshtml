@@ -1,386 +1,1020 @@
 ﻿@page
 @model GenericsModel
 @{
-    ViewData["Title"] = "Generics in C#";
+    ViewData["Title"] = "Generics in C# - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Generics</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Generics in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 10 of 11</span>
-                </div>
-
-                <h2>What are Generics?</h2>
-                <p>
-                    Generics allow you to define classes, methods, and structures with type parameters.
-                    They enable code reuse with type safety, eliminating the need for type casting and reducing runtime errors.
-                </p>
-
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Key Concept</h5>
-                        <p class="card-text">Generics let you write code that works with any data type while maintaining type safety. Instead of using object or casting, you specify the type when using the generic.</p>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Generics</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Generics 📦
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        One Size Fits All - But Safely!
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 10 of 11
+                        </span>
                     </div>
                 </div>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-boxes fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <h2>Generic Classes</h2>
-                <pre><code>// Generic class with type parameter T
-public class Box<T>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Hey There! Ready to Learn Generics? 📦</h2>
+                                    <p class="fs-5">
+                                        <strong>Generics</strong> sounds fancy, but it's actually <strong>super simple</strong>!
+                                        It lets you write code that works with <strong>any type</strong> of data,
+                                        while keeping everything <strong>safe</strong> and <strong>organized</strong>.
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Quick Question:</strong> Have you ever used a <strong>container</strong>?
+                                        <ul class="mb-0 mt-2">
+                                            <li>📦 A box can hold <strong>books</strong>, <strong>toys</strong>, or <strong>clothes</strong></li>
+                                            <li>📦 The box is the <strong>same</strong> - what's inside <strong>changes</strong></li>
+                                            <li>📦 That's exactly what <strong>Generics</strong> do!</li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary p-2">🎯 After this lesson, you'll be able to:</span>
+                                        <ul class="mt-2">
+                                            <li>✅ Explain generics like a pro (but in simple words)</li>
+                                            <li>✅ Create generic classes (reusable containers)</li>
+                                            <li>✅ Use generic methods (flexible functions)</li>
+                                            <li>✅ Add constraints (rules for what types can be used)</li>
+                                            <li>✅ Master generic collections (List, Dictionary)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What are Generics? (Super Simple) -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: What are Generics? (The Easy Way)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Generics let you write code that works with <strong>any type</strong> of data,
+                                    but still keeps everything <strong>type-safe</strong> (no mistakes!).
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-box text-primary me-2"></i>📦 The Box Analogy</h5>
+                                                <p>Think of a <strong>generic class</strong> as a box:</p>
+                                                <ul>
+                                                    <li>📦 The <strong>box</strong> is the same shape (the class)</li>
+                                                    <li>📦 You can put <strong>books</strong> in it (strings)</li>
+                                                    <li>📦 You can put <strong>toys</strong> in it (integers)</li>
+                                                    <li>📦 You can put <strong>clothes</strong> in it (custom objects)</li>
+                                                    <li>📦 The box <strong>remembers</strong> what's inside!</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>That's Generics:</strong> One box, many types!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Time!</h5>
+                                                <p><strong>Generic Class:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 📦 A Box that can hold ANY type</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Box</span>&lt;T&gt;  <span class="comment">// T = Type placeholder</span>
 {
-    private T item;
+    <span class="keyword">private</span> T item;  <span class="comment">// Can be any type!</span>
     
-    public void Store(T value)
-    {
-        item = value;
-    }
-    
-    public T Retrieve()
-    {
-        return item;
-    }
-}
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Store</span>(T value) => item = value;
+    <span class="keyword">public</span> T <span class="function">Retrieve</span>() => item;
+}</code></pre>
+                                                </div>
+                                                <p><strong>Using the Box:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Box for numbers</span>
+<span class="class">Box</span>&lt;<span class="keyword">int</span>&gt; intBox = <span class="keyword">new</span> <span class="class">Box</span>&lt;<span class="keyword">int</span>&gt;();
+intBox.<span class="function">Store</span>(<span class="number">42</span>);
+<span class="keyword">int</span> value = intBox.<span class="function">Retrieve</span>();  <span class="comment">// Safe! No casting!</span>
 
-// Usage
-Box<int> intBox = new Box<int>();
-intBox.Store(42);
-int value = intBox.Retrieve();
+<span class="comment">// Box for text</span>
+<span class="class">Box</span>&lt;<span class="keyword">string</span>&gt; strBox = <span class="keyword">new</span> <span class="class">Box</span>&lt;<span class="keyword">string</span>&gt;();
+strBox.<span class="function">Store</span>(<span class="string">"Hello!"</span>);</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-star me-2"></i>
+                                                    <strong>🎉 Same class, different types!</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-Box<string> stringBox = new Box<string>();
-stringBox.Store("Hello World");
-string text = stringBox.Retrieve();</code></pre>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the generic class break up with the specific type?
+                                        Because it wanted to see other types! (Okay, I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-                <h2>Generic Methods</h2>
-                <pre><code>public class Utilities
+                    <!-- 🧩 Part 2: Generic Classes - The Reusable Container -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: Generic Classes - The Reusable Container</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">A <strong>generic class</strong> uses a placeholder type (like <code>T</code>) that you fill in later.</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Generic Class Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 📦 A generic storage class</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Storage</span>&lt;T&gt;
 {
-    // Generic method
-    public T Max<T>(T a, T b) where T : IComparable<T>
-    {
-        return a.CompareTo(b) > 0 ? a : b;
-    }
+    <span class="keyword">private</span> <span class="class">List</span>&lt;T&gt; items = <span class="keyword">new</span> <span class="class">List</span>&lt;T&gt;();
     
-    public T Min<T>(T a, T b) where T : IComparable<T>
-    {
-        return a.CompareTo(b) < 0 ? a : b;
-    }
-    
-    public void Swap<T>(ref T a, ref T b)
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Add</span>(T item) => items.<span class="function">Add</span>(item);
+    <span class="keyword">public</span> T <span class="function">Get</span>(<span class="keyword">int</span> index) => items[index];
+    <span class="keyword">public</span> <span class="keyword">int</span> Count => items.Count;
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using It</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Storage for numbers</span>
+<span class="class">Storage</span>&lt;<span class="keyword">int</span>&gt; numStore = <span class="keyword">new</span> <span class="class">Storage</span>&lt;<span class="keyword">int</span>&gt;();
+numStore.<span class="function">Add</span>(<span class="number">5</span>);
+numStore.<span class="function">Add</span>(<span class="number">10</span>);
+
+<span class="comment">// Storage for names</span>
+<span class="class">Storage</span>&lt;<span class="keyword">string</span>&gt; nameStore = <span class="keyword">new</span> <span class="class">Storage</span>&lt;<span class="keyword">string</span>&gt;();
+nameStore.<span class="function">Add</span>(<span class="string">"Alice"</span>);
+nameStore.<span class="function">Add</span>(<span class="string">"Bob"</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> One class, many types!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <strong>Why Use Generic Classes?</strong>
+                                    <ul class="mb-0">
+                                        <li>✅ <strong>Reusable</strong> - Write once, use with any type</li>
+                                        <li>✅ <strong>Type-Safe</strong> - No casting errors</li>
+                                        <li>✅ <strong>Clean</strong> - No messy <code>object</code> code</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🛠️ Part 3: Generic Methods -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: Generic Methods - Flexible Functions</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">A <strong>generic method</strong> can work with different types, even if the class isn't generic!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Generic Method</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Helper</span>
+{
+    <span class="comment">// 🔄 Swaps any two values</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Swap</span>&lt;T&gt;(<span class="keyword">ref</span> T a, <span class="keyword">ref</span> T b)
     {
         T temp = a;
         a = b;
         b = temp;
     }
-}
-
-// Usage
-Utilities utils = new Utilities();
-int max = utils.Max(10, 20); // Returns 20
-string maxString = utils.Max("Apple", "Banana");
-int x = 5, y = 10;
-utils.Swap(ref x, ref y);</code></pre>
-
-                <h2>Generic Constraints</h2>
-                <pre><code>public class GenericClass<T>
-    where T : class, new()        // T must be a class with default constructor
-{
-    public T CreateInstance()
-    {
-        return new T();
-    }
-}
-
-public class Processor<T> where T : IComparable<T>
-{
-    public T GetMax(T a, T b)
-    {
-        return a.CompareTo(b) > 0 ? a : b;
-    }
-}
-
-public class Repository<T> where T : Entity
-{
-    public T GetById(int id)
-    {
-        // T must inherit from Entity
-        return null; // Implementation
-    }
-}
-
-public class Entity
-{
-    public int Id { get; set; }
-}</code></pre>
-
-                <h2>Generic Interfaces</h2>
-                <pre><code>// Generic interface
-public interface IRepository<T>
-{
-    void Add(T item);
-    T GetById(int id);
-    IEnumerable<T> GetAll();
-    void Update(T item);
-    void Delete(T item);
-}
-
-// Implementation
-public class Repository<T> : IRepository<T> where T : Entity
-{
-    private List<T> items = new List<T>();
     
-    public void Add(T item)
+    <span class="comment">// 📏 Returns the bigger of two</span>
+    <span class="keyword">public</span> T <span class="function">Max</span>&lt;T&gt;(T a, T b) <span class="keyword">where</span> T : <span class="class">IComparable</span>&lt;T&gt;
     {
-        items.Add(item);
-    }
-    
-    public T GetById(int id)
-    {
-        return items.FirstOrDefault(x => x.Id == id);
-    }
-    
-    public IEnumerable<T> GetAll()
-    {
-        return items;
-    }
-    
-    public void Update(T item)
-    {
-        var existing = GetById(item.Id);
-        if (existing != null)
-        {
-            items.Remove(existing);
-            items.Add(item);
-        }
-    }
-    
-    public void Delete(T item)
-    {
-        items.Remove(item);
+        <span class="keyword">return</span> a.<span class="function">CompareTo</span>(b) > <span class="number">0</span> ? a : b;
     }
 }</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using It</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Helper</span> helper = <span class="keyword">new</span> <span class="class">Helper</span>();
 
-                <h2>Multiple Type Parameters</h2>
-                <pre><code>public class Pair<TKey, TValue>
+<span class="comment">// Swap integers</span>
+<span class="keyword">int</span> x = <span class="number">5</span>, y = <span class="number">10</span>;
+helper.<span class="function">Swap</span>(<span class="keyword">ref</span> x, <span class="keyword">ref</span> y);
+<span class="comment">// x=10, y=5</span>
+
+<span class="comment">// Swap strings</span>
+<span class="keyword">string</span> a = <span class="string">"Hello"</span>, b = <span class="string">"World"</span>;
+helper.<span class="function">Swap</span>(<span class="keyword">ref</span> a, <span class="keyword">ref</span> b);
+
+<span class="comment">// Get max</span>
+<span class="keyword">int</span> max = helper.<span class="function">Max</span>(<span class="number">5</span>, <span class="number">10</span>);  <span class="comment">// 10</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Same method, different types!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Remember:</strong> The <code>&lt;T&gt;</code> after the method name tells C# "This method uses generics!"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔒 Part 4: Generic Constraints - Setting Rules -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: Generic Constraints - Setting Rules</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-rules me-2"></i>
+                                    <strong>What are Constraints?</strong> They're <strong>rules</strong> about what types can be used with your generic!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Constraints Examples</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 🚫 T must be a class (reference type)</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Processor</span>&lt;T&gt; <span class="keyword">where</span> T : <span class="keyword">class</span>
 {
-    public TKey Key { get; set; }
-    public TValue Value { get; set; }
-    
-    public Pair(TKey key, TValue value)
-    {
-        Key = key;
-        Value = value;
-    }
-    
-    public override string ToString()
-    {
-        return $"{Key}: {Value}";
-    }
+    <span class="keyword">public</span> T <span class="function">Process</span>(T item) => item;
 }
 
-// Usage
-Pair<string, int> pair1 = new Pair<string, int>("Age", 25);
-Pair<int, string> pair2 = new Pair<int, string>(1, "One");</code></pre>
-
-                <h2>Generic Collections</h2>
-                <pre><code>using System.Collections.Generic;
-
-// List<T>
-List<string> names = new List<string>();
-names.Add("Alice");
-names.Add("Bob");
-string firstName = names[0];
-
-// Dictionary<TKey, TValue>
-Dictionary<string, int> ages = new Dictionary<string, int>();
-ages.Add("Alice", 25);
-ages.Add("Bob", 30);
-int aliceAge = ages["Alice"];
-
-// Queue<T>
-Queue<int> queue = new Queue<int>();
-queue.Enqueue(1);
-queue.Enqueue(2);
-int first = queue.Dequeue();
-
-// Stack<T>
-Stack<int> stack = new Stack<int>();
-stack.Push(1);
-stack.Push(2);
-int last = stack.Pop();</code></pre>
-
-                <h2>Complete Example</h2>
-                <pre><code>using System;
-using System.Collections.Generic;
-
-// Generic class with constraints
-public class DataStore<T> where T : new()
+<span class="comment">// ✅ T must have a default constructor</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Creator</span>&lt;T&gt; <span class="keyword">where</span> T : <span class="keyword">new</span>()
 {
-    private List<T> items = new List<T>();
-    private static int instanceCount = 0;
+    <span class="keyword">public</span> T <span class="function">Create</span>() => <span class="keyword">new</span> T();
+}
+
+<span class="comment">// 📊 T must be comparable</span>
+<span class="keyword">public</span> T <span class="function">Max</span>&lt;T&gt;(T a, T b) <span class="keyword">where</span> T : <span class="class">IComparable</span>&lt;T&gt;
+{
+    <span class="keyword">return</span> a.<span class="function">CompareTo</span>(b) > <span class="number">0</span> ? a : b;
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Why Constraints?</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Safety</strong> - Only valid types can be used</li>
+                                                    <li>✅ <strong>Features</strong> - Access methods like <code>CompareTo()</code></li>
+                                                    <li>✅ <strong>Clarity</strong> - Other developers know what's allowed</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Common Constraints:</strong>
+                                                    <ul class="mb-0">
+                                                        <li><code>where T : class</code> - T must be a class</li>
+                                                        <li><code>where T : struct</code> - T must be a struct</li>
+                                                        <li><code>where T : new()</code> - T must have a default constructor</li>
+                                                        <li><code>where T : SomeClass</code> - T must inherit from SomeClass</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📦 Part 5: Generic Collections -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: Generic Collections - The Most Common Generics</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">C# has <strong>built-in generic collections</strong> that you'll use every day!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-list text-primary me-2"></i>📝 List&lt;T&gt; - A Flexible List</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">List</span>&lt;<span class="keyword">string</span>&gt; names = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>&gt;();
+names.<span class="function">Add</span>(<span class="string">"Alice"</span>);
+names.<span class="function">Add</span>(<span class="string">"Bob"</span>);
+<span class="keyword">string</span> first = names[<span class="number">0</span>];</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">List</span> Like an array that can grow and shrink</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-book text-primary me-2"></i>📝 Dictionary&lt;TKey, TValue&gt;</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; ages = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt;();
+ages.<span class="function">Add</span>(<span class="string">"Alice"</span>, <span class="number">25</span>);
+ages.<span class="function">Add</span>(<span class="string">"Bob"</span>, <span class="number">30</span>);
+<span class="keyword">int</span> age = ages[<span class="string">"Alice"</span>];  <span class="comment">// 25</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">Dictionary</span> Key-Value pairs (like a real dictionary)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>Other Useful Collections</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 🚶 Queue - First In, First Out</span>
+<span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt; line = <span class="keyword">new</span> <span class="class">Queue</span>&lt;<span class="keyword">string</span>&gt;();
+line.<span class="function">Enqueue</span>(<span class="string">"Person1"</span>);
+line.<span class="function">Enqueue</span>(<span class="string">"Person2"</span>);
+<span class="keyword">string</span> next = line.<span class="function">Dequeue</span>();  <span class="comment">// "Person1"</span>
+
+<span class="comment">// 📚 Stack - Last In, First Out</span>
+<span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt; stack = <span class="keyword">new</span> <span class="class">Stack</span>&lt;<span class="keyword">string</span>&gt;();
+stack.<span class="function">Push</span>(<span class="string">"First"</span>);
+stack.<span class="function">Push</span>(<span class="string">"Second"</span>);
+<span class="keyword">string</span> last = stack.<span class="function">Pop</span>();  <span class="comment">// "Second"</span></code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Benefits of Generic Collections</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Type-Safe</strong> - No casting needed</li>
+                                                    <li>✅ <strong>Fast</strong> - No boxing/unboxing</li>
+                                                    <li>✅ <strong>Clean</strong> - Easy to read and use</li>
+                                                    <li>✅ <strong>Powerful</strong> - Built-in methods (Sort, Find, etc.)</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-star me-2"></i>
+                                                    <strong>Pro Tip:</strong> Always use <strong>generic collections</strong> instead of non-generic ones like <code>ArrayList</code>!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🌍 Part 6: Real-World Example - Online Store -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: Real-World Example - Online Store 🛒</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build an <strong>Online Store</strong> with generics!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// 🛒 Generic Shopping Cart</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">ShoppingCart</span>&lt;T&gt;  <span class="comment">// T = Product type</span>
+{
+    <span class="keyword">private</span> <span class="class">List</span>&lt;T&gt; items = <span class="keyword">new</span> <span class="class">List</span>&lt;T&gt;();
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> cartCount = <span class="number">0</span>;
     
-    public DataStore()
+    <span class="keyword">public</span> <span class="function">ShoppingCart</span>() => cartCount++;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Add</span>(T item) => items.<span class="function">Add</span>(item);
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Remove</span>(T item) => items.<span class="function">Remove</span>(item);
+    <span class="keyword">public</span> <span class="keyword">int</span> Count => items.Count;
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> TotalCarts => cartCount;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Display</span>()
     {
-        instanceCount++;
-    }
-    
-    public void Add(T item)
-    {
-        items.Add(item);
-    }
-    
-    public T GetAt(int index)
-    {
-        if (index < 0 || index >= items.Count)
-            throw new IndexOutOfRangeException();
-        return items[index];
-    }
-    
-    public int Count => items.Count;
-    
-    public static int InstanceCount => instanceCount;
-    
-    public void Process(Func<T, bool> predicate)
-    {
-        foreach (var item in items.Where(predicate))
+        Console.WriteLine(<span class="string">$"📦 Cart has {Count} items:"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> items)
         {
-            Console.WriteLine($"Processing: {item}");
+            Console.WriteLine(<span class="string">$"   • {item}"</span>);
         }
     }
-    
-    public DataStore<TResult> Map<TResult>(Func<T, TResult> mapper) where TResult : new()
+}
+
+<span class="comment">// 🎮 Product classes</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Product</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Price { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">ToString</span>() => <span class="string">$"{Name} (${Price})"</span>;
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">DigitalProduct</span> : <span class="class">Product</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> DownloadLink { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">ToString</span>() => 
+        <span class="string">$"{Name} (Digital, ${Price})"</span>;
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Program.cs - Shopping System</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
     {
-        DataStore<TResult> result = new DataStore<TResult>();
-        foreach (var item in items)
+        Console.WriteLine(<span class="string">"🛒 ONLINE STORE\n"</span>);
+        
+        <span class="comment">// 📦 Create products</span>
+        <span class="class">Product</span> laptop = <span class="keyword">new</span> <span class="class">Product</span> 
+        { 
+            Name = <span class="string">"Gaming Laptop"</span>, 
+            Price = <span class="number">999.99m</span> 
+        };
+        
+        <span class="class">DigitalProduct</span> ebook = <span class="keyword">new</span> <span class="class">DigitalProduct</span>
         {
-            result.Add(mapper(item));
-        }
-        return result;
-    }
-}
-
-// Generic class with inheritance
-public class Product
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-    
-    public override string ToString()
-    {
-        return $"{Name} - {Price:C}";
-    }
-}
-
-public class OrderItem
-{
-    public int ProductId { get; set; }
-    public int Quantity { get; set; }
-    public decimal Total { get; set; }
-    
-    public override string ToString()
-    {
-        return $"Product {ProductId}: {Quantity} x {Total:C}";
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        // Create data store
-        DataStore<Product> productStore = new DataStore<Product>();
+            Name = <span class="string">"C# Guide"</span>,
+            Price = <span class="number">29.99m</span>,
+            DownloadLink = <span class="string">"https://example.com/book"</span>
+        };
         
-        // Add products
-        productStore.Add(new Product { Id = 1, Name = "Laptop", Price = 999.99m });
-        productStore.Add(new Product { Id = 2, Name = "Mouse", Price = 29.99m });
-        productStore.Add(new Product { Id = 3, Name = "Keyboard", Price = 79.99m });
+        <span class="comment">// 🛒 Generic shopping carts</span>
+        <span class="class">ShoppingCart</span>&lt;<span class="class">Product</span>&gt; cart1 = <span class="keyword">new</span> <span class="class">ShoppingCart</span>&lt;<span class="class">Product</span>&gt;();
+        cart1.<span class="function">Add</span>(laptop);
+        cart1.<span class="function">Add</span>(ebook);
         
-        Console.WriteLine($"Products: {productStore.Count}");
+        <span class="class">ShoppingCart</span>&lt;<span class="keyword">string</span>&gt; wishlist = <span class="keyword">new</span> <span class="class">ShoppingCart</span>&lt;<span class="keyword">string</span>&gt;();
+        wishlist.<span class="function">Add</span>(<span class="string">"New Headphones"</span>);
+        wishlist.<span class="function">Add</span>(<span class="string">"Wireless Charger"</span>);
         
-        // Get specific product
-        Product product = productStore.GetAt(0);
-        Console.WriteLine($"First product: {product}");
+        <span class="comment">// 📊 Display</span>
+        Console.WriteLine(<span class="string">"📦 PRODUCT CART:"</span>);
+        cart1.<span class="function">Display</span>();
         
-        // Process products
-        productStore.Process(p => p.Price > 50);
+        Console.WriteLine(<span class="string">"\n💭 WISHLIST:"</span>);
+        wishlist.<span class="function">Display</span>();
         
-        // Map to order items
-        DataStore<OrderItem> orderStore = productStore.Map(p => new OrderItem
-        {
-            ProductId = p.Id,
-            Quantity = 1,
-            Total = p.Price
-        });
-        
-        Console.WriteLine($"Order items: {orderStore.Count}");
-        Console.WriteLine($"DataStore instances: {DataStore<Product>.InstanceCount}");
+        Console.WriteLine(<span class="string">$"\n📊 Total Carts: {ShoppingCart&lt;Product&gt;.TotalCarts}"</span>);
     }
 }</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 What this shows:</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>Generic Class</strong> - ShoppingCart works with any type</li>
+                                                <li>✅ <strong>Type Safety</strong> - Product cart vs String wishlist</li>
+                                                <li>✅ <strong>Static Members</strong> - TotalCarts tracks all carts</li>
+                                                <li>✅ <strong>Inheritance</strong> - DigitalProduct inherits from Product</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <h2>Generic Delegates</h2>
-                <pre><code>// Action<T> - no return value
-Action<string> print = (s) => Console.WriteLine(s);
-print("Hello");
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Shopping Joke:</strong> Why did the generic shopping cart break up with the specific product?
+                                        Because it couldn't handle the type of commitment! (Okay, that was a stretch 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-// Func<T, TResult> - returns value
-Func<int, int, int> add = (a, b) => a + b;
-int sum = add(5, 3);
+                    <!-- 🎮 Part 7: Exercise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What You're Building:</strong> A <strong>Cache System</strong> for storing any type of data!
+                                    <br>
+                                    Like a temporary storage that can hold anything.
+                                </div>
 
-// Predicate<T> - returns bool
-Predicate<int> isEven = (n) => n % 2 == 0;
-bool even = isEven(4);</code></pre>
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle text-primary me-2"></i>🗄️ About This Application</h5>
+                                        <p>This is a <strong>Cache System</strong> used in:</p>
+                                        <ul>
+                                            <li>🌐 <strong>Web Browsers</strong> - Store web pages</li>
+                                            <li>📱 <strong>Apps</strong> - Store user preferences</li>
+                                            <li>💾 <strong>Databases</strong> - Store query results</li>
+                                        </ul>
+                                        <p>You'll create a generic cache that can store <strong>any type</strong> of data:</p>
+                                        <ul>
+                                            <li>✅ Store <strong>numbers</strong>, <strong>text</strong>, or <strong>objects</strong></li>
+                                            <li>✅ Check if data is <strong>cached</strong></li>
+                                            <li>✅ <strong>Remove</strong> data when needed</li>
+                                            <li>✅ Count how many items are cached</li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <ul class="mb-0">
-                            <li>Generics provide type safety without sacrificing flexibility</li>
-                            <li>Use constraints to restrict generic types</li>
-                            <li>Generic collections are preferred over non-generic</li>
-                            <li>Generics improve code reuse and maintainability</li>
-                        </ul>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Generic Class: Cache&lt;T&gt;</strong>
+                                                        <ul>
+                                                            <li>Private field: Dictionary&lt;string, T&gt; (key = cache key)</li>
+                                                            <li>Method: Add(string key, T value)</li>
+                                                            <li>Method: Get(string key) - returns T</li>
+                                                            <li>Method: Remove(string key) - returns bool</li>
+                                                            <li>Method: Clear() - removes all</li>
+                                                            <li>Property: Count - returns number of items</li>
+                                                            <li>Property: Contains(string key) - returns bool</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Program.cs:</strong>
+                                                        <ul>
+                                                            <li>Create Cache&lt;int&gt;, Cache&lt;string&gt;, Cache&lt;Product&gt;</li>
+                                                            <li>Add data to each</li>
+                                                            <li>Retrieve and display data</li>
+                                                            <li>Show cache statistics</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You're Learning:</h6>
+                                                <ul>
+                                                    <li>✅ <strong>Generic Class</strong> - Cache works with ANY type</li>
+                                                    <li>✅ <strong>Type Safety</strong> - No casting needed</li>
+                                                    <li>✅ <strong>Dictionary</strong> - Store by key</li>
+                                                    <li>✅ <strong>Reusable</strong> - One class, many uses</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A powerful cache system that stores ANY type of data!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Solution (Try it yourself first!)
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== CACHE SYSTEM =====</span>
+<span class="comment">// A generic cache that can store ANY type</span>
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Cache</span>&lt;T&gt;
+{
+    <span class="keyword">private</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, T&gt; data = <span class="keyword">new</span> <span class="class">Dictionary</span>&lt;<span class="keyword">string</span>, T&gt;();
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> cacheCount = <span class="number">0</span>;
+    
+    <span class="keyword">public</span> <span class="function">Cache</span>() => cacheCount++;
+    
+    <span class="comment">// Add or update</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Add</span>(<span class="keyword">string</span> key, T value)
+    {
+        data[key] = value;
+        Console.WriteLine(<span class="string">$"✅ Added: {key} → {value}"</span>);
+    }
+    
+    <span class="comment">// Get value by key</span>
+    <span class="keyword">public</span> T <span class="function">Get</span>(<span class="keyword">string</span> key)
+    {
+        <span class="keyword">if</span> (data.<span class="function">ContainsKey</span>(key))
+        {
+            Console.WriteLine(<span class="string">$"📤 Retrieved: {key} → {data[key]}"</span>);
+            <span class="keyword">return</span> data[key];
+        }
+        Console.WriteLine(<span class="string">$"❌ Key '{key}' not found"</span>);
+        <span class="keyword">return</span> <span class="keyword">default</span>(T);
+    }
+    
+    <span class="comment">// Remove by key</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">Remove</span>(<span class="keyword">string</span> key)
+    {
+        <span class="keyword">if</span> (data.<span class="function">Remove</span>(key))
+        {
+            Console.WriteLine(<span class="string">$"🗑️ Removed: {key}"</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        Console.WriteLine(<span class="string">$"❌ Key '{key}' not found"</span>);
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// Clear all data</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Clear</span>()
+    {
+        data.<span class="function">Clear</span>();
+        Console.WriteLine(<span class="string">"🧹 Cache cleared"</span>);
+    }
+    
+    <span class="comment">// Properties</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> Count => data.Count;
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="function">Contains</span>(<span class="keyword">string</span> key) => data.<span class="function">ContainsKey</span>(key);
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> TotalCaches => cacheCount;
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">DisplayAll</span>()
+    {
+        Console.WriteLine(<span class="string">$"📋 Cache has {Count} items:"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> kvp <span class="keyword">in</span> data)
+        {
+            Console.WriteLine(<span class="string">$"   • {kvp.Key}: {kvp.Value}"</span>);
+        }
+    }
+}
+
+<span class="comment">// Simple Product class for testing</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Product</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">decimal</span> Price { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="function">ToString</span>() => <span class="string">$"{Name} (${Price})"</span>;
+}
+
+<span class="comment">// Program.cs - Testing the Cache</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🗄️ CACHE SYSTEM\n"</span>);
+        
+        <span class="comment">// 📦 Cache for numbers</span>
+        <span class="class">Cache</span>&lt;<span class="keyword">int</span>&gt; numCache = <span class="keyword">new</span> <span class="class">Cache</span>&lt;<span class="keyword">int</span>&gt;();
+        numCache.<span class="function">Add</span>(<span class="string">"age"</span>, <span class="number">25</span>);
+        numCache.<span class="function">Add</span>(<span class="string">"score"</span>, <span class="number">100</span>);
+        
+        <span class="comment">// 📦 Cache for text</span>
+        <span class="class">Cache</span>&lt;<span class="keyword">string</span>&gt; textCache = <span class="keyword">new</span> <span class="class">Cache</span>&lt;<span class="keyword">string</span>&gt;();
+        textCache.<span class="function">Add</span>(<span class="string">"name"</span>, <span class="string">"Alice"</span>);
+        textCache.<span class="function">Add</span>(<span class="string">"city"</span>, <span class="string">"New York"</span>);
+        
+        <span class="comment">// 📦 Cache for products</span>
+        <span class="class">Cache</span>&lt;<span class="class">Product</span>&gt; productCache = <span class="keyword">new</span> <span class="class">Cache</span>&lt;<span class="class">Product</span>&gt;();
+        productCache.<span class="function">Add</span>(<span class="string">"laptop"</span>, <span class="keyword">new</span> <span class="class">Product</span> { Name = <span class="string">"Gaming Laptop"</span>, Price = <span class="number">999.99m</span> });
+        
+        Console.WriteLine();
+        
+        <span class="comment">// 🔍 Retrieve data</span>
+        <span class="keyword">int</span> age = numCache.<span class="function">Get</span>(<span class="string">"age"</span>);
+        <span class="keyword">string</span> name = textCache.<span class="function">Get</span>(<span class="string">"name"</span>);
+        <span class="class">Product</span> laptop = productCache.<span class="function">Get</span>(<span class="string">"laptop"</span>);
+        
+        Console.WriteLine();
+        
+        <span class="comment">// 📊 Display all caches</span>
+        Console.WriteLine(<span class="string">"📊 CACHE STATISTICS:"</span>);
+        Console.WriteLine(<span class="string">$"Total Caches: {Cache&lt;int&gt;.TotalCaches}"</span>);
+        
+        Console.WriteLine(<span class="string">"\n🔢 Number Cache:"</span>);
+        numCache.<span class="function">DisplayAll</span>();
+        
+        Console.WriteLine(<span class="string">"\n📝 Text Cache:"</span>);
+        textCache.<span class="function">DisplayAll</span>();
+        
+        Console.WriteLine(<span class="string">"\n📦 Product Cache:"</span>);
+        productCache.<span class="function">DisplayAll</span>();
+        
+        <span class="comment">// 🗑️ Remove and check</span>
+        Console.WriteLine(<span class="string">"\n🗑️ Removing 'score':"</span>);
+        numCache.<span class="function">Remove</span>(<span class="string">"score"</span>);
+        Console.WriteLine(<span class="string">$"Contains 'score'? {numCache.Contains("score")}"</span>);
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a real cache system using generics!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-boxes fa-3x mb-2"></i>
+                                        <h5>Generics</h5>
+                                        <small>Work with any type</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-box fa-3x mb-2"></i>
+                                        <h5>Generic Classes</h5>
+                                        <small>Reusable containers</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-tools fa-3x mb-2"></i>
+                                        <h5>Generic Methods</h5>
+                                        <small>Flexible functions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-rules fa-3x mb-2"></i>
+                                        <h5>Constraints</h5>
+                                        <small>Rules for types</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-list fa-3x mb-2"></i>
+                                        <h5>Generic Collections</h5>
+                                        <small>List, Dictionary</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-shopping-cart fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Online Store! 🛒</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Cache System</h5>
+                                        <small>Store anything!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a generic class "Cache<T>" with:</p>
-                        <ol>
-                            <li>Generic type parameter T</li>
-                            <li>Methods: Add, Get, Remove, Clear</li>
-                            <li>Properties: Count, Contains</li>
-                            <li>Generic method to filter items</li>
-                            <li>Implement IDisposable interface</li>
-                        </ol>
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/09-StaticVsInstance" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/11-SolidPrinciples" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
-                </div>
 
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/09-StaticVsInstance" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/11-SolidPrinciples" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
+                </div> <!-- end lesson-content -->
             </div>
-        </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson10")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Custom gradient backgrounds */
+        .bg-gradient-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+}

@@ -1,366 +1,1178 @@
 ﻿@page
 @model AbstractionInterfacesModel
 @{
-    ViewData["Title"] = "Abstraction and Interfaces in C#";
+    ViewData["Title"] = "Abstraction & Interfaces - Learn Like a Pro (The Easy Way)";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/ClassesAndOOP">Classes and OOP</a></li>
-                    <li class="breadcrumb-item active">Abstraction & Interfaces</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Abstraction and Interfaces in C#</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-danger">Advanced</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 8 of 11</span>
-                </div>
-
-                <h2>Understanding Abstraction</h2>
-                <p>
-                    Abstraction is the process of hiding implementation details and showing only essential features.
-                    In C#, abstraction is achieved through abstract classes and interfaces.
-                </p>
-
-                <h2>Abstract Classes</h2>
-                <pre><code>public abstract class Shape
-{
-    // Abstract method - no implementation
-    public abstract double GetArea();
-    
-    // Abstract method - no implementation
-    public abstract double GetPerimeter();
-    
-    // Concrete method - has implementation
-    public void DisplayInfo()
-    {
-        Console.WriteLine($"Area: {GetArea():F2}");
-        Console.WriteLine($"Perimeter: {GetPerimeter():F2}");
-    }
-}
-
-public class Rectangle : Shape
-{
-    public double Width { get; set; }
-    public double Height { get; set; }
-    
-    public Rectangle(double width, double height)
-    {
-        Width = width;
-        Height = height;
-    }
-    
-    public override double GetArea()
-    {
-        return Width * Height;
-    }
-    
-    public override double GetPerimeter()
-    {
-        return 2 * (Width + Height);
-    }
-}</code></pre>
-
-                <h2>Interfaces</h2>
-                <pre><code>public interface IShape
-{
-    double GetArea();
-    double GetPerimeter();
-}
-
-public interface IPrintable
-{
-    void Print();
-}
-
-public interface ISerializable
-{
-    string Serialize();
-    void Deserialize(string data);
-}
-
-public class Circle : IShape, IPrintable
-{
-    public double Radius { get; set; }
-    
-    public Circle(double radius)
-    {
-        Radius = radius;
-    }
-    
-    public double GetArea()
-    {
-        return Math.PI * Radius * Radius;
-    }
-    
-    public double GetPerimeter()
-    {
-        return 2 * Math.PI * Radius;
-    }
-    
-    public void Print()
-    {
-        Console.WriteLine($"Circle: Radius={Radius:F2}");
-    }
-}</code></pre>
-
-                <h2>Abstract Class vs Interface</h2>
-                <table class="table table-bordered mb-4">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Abstract Class</th>
-                            <th>Interface</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Inheritance</td>
-                            <td>Single inheritance only</td>
-                            <td>Multiple implementation</td>
-                        </tr>
-                        <tr>
-                            <td>Members</td>
-                            <td>Fields, properties, methods</td>
-                            <td>Methods, properties, events</td>
-                        </tr>
-                        <tr>
-                            <td>Implementation</td>
-                            <td>Can have implementation</td>
-                            <td>No implementation (default interface methods in C# 8+)</td>
-                        </tr>
-                        <tr>
-                            <td>Access Modifiers</td>
-                            <td>All access modifiers allowed</td>
-                            <td>Only public (implied)</td>
-                        </tr>
-                        <tr>
-                            <td>Purpose</td>
-                            <td>Provide common base implementation</td>
-                            <td>Define contract for multiple types</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h2>Default Interface Methods (C# 8+)</h2>
-                <pre><code>public interface ILogger
-{
-    void Log(string message);
-    
-    // Default implementation
-    void LogError(string error)
-    {
-        Log($"ERROR: {error}");
-    }
-    
-    void LogWarning(string warning)
-    {
-        Log($"WARNING: {warning}");
-    }
-}</code></pre>
-
-                <h2>Complete Example</h2>
-                <pre><code>using System;
-
-// Interfaces
-public interface IPayable
-{
-    decimal CalculatePay();
-}
-
-public interface IReportable
-{
-    string GetReport();
-}
-
-public interface IIdentifiable
-{
-    int Id { get; }
-    string Name { get; }
-}
-
-// Abstract base class
-public abstract class Employee : IIdentifiable, IPayable
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public DateTime HireDate { get; set; }
-    
-    public Employee(int id, string name)
-    {
-        Id = id;
-        Name = name;
-        HireDate = DateTime.Now;
-    }
-    
-    public abstract decimal CalculatePay();
-    
-    public virtual string GetReport()
-    {
-        return $"Employee: {Name} (ID: {Id})";
-    }
-}
-
-// Derived classes
-public class SalariedEmployee : Employee, IReportable
-{
-    public decimal MonthlySalary { get; set; }
-    
-    public SalariedEmployee(int id, string name, decimal monthlySalary) 
-        : base(id, name)
-    {
-        MonthlySalary = monthlySalary;
-    }
-    
-    public override decimal CalculatePay()
-    {
-        return MonthlySalary;
-    }
-    
-    public override string GetReport()
-    {
-        return $"{base.GetReport()} - Salaried: {MonthlySalary:C}";
-    }
-}
-
-public class HourlyEmployee : Employee, IReportable
-{
-    public decimal HourlyRate { get; set; }
-    public int HoursWorked { get; set; }
-    
-    public HourlyEmployee(int id, string name, decimal hourlyRate) 
-        : base(id, name)
-    {
-        HourlyRate = hourlyRate;
-        HoursWorked = 0;
-    }
-    
-    public override decimal CalculatePay()
-    {
-        return HourlyRate * HoursWorked;
-    }
-    
-    public override string GetReport()
-    {
-        return $"{base.GetReport()} - Hourly: {HourlyRate:C}/hr, {HoursWorked}hrs";
-    }
-}
-
-public class CommissionEmployee : Employee, IReportable
-{
-    public decimal SalesAmount { get; set; }
-    public decimal CommissionRate { get; set; }
-    
-    public CommissionEmployee(int id, string name, decimal commissionRate)
-        : base(id, name)
-    {
-        CommissionRate = commissionRate;
-        SalesAmount = 0;
-    }
-    
-    public override decimal CalculatePay()
-    {
-        return SalesAmount * CommissionRate;
-    }
-    
-    public override string GetReport()
-    {
-        return $"{base.GetReport()} - Commission: {CommissionRate:P} of {SalesAmount:C}";
-    }
-}
-
-// Service class working with interfaces
-public class PayrollSystem
-{
-    public void ProcessPayments(IPayable[] employees)
-    {
-        decimal total = 0;
-        foreach (var employee in employees)
-        {
-            decimal pay = employee.CalculatePay();
-            total += pay;
-            Console.WriteLine($"Payment: {pay:C}");
-        }
-        Console.WriteLine($"Total payments: {total:C}");
-    }
-    
-    public void PrintReports(IReportable[] reportables)
-    {
-        foreach (var reportable in reportables)
-        {
-            Console.WriteLine(reportable.GetReport());
-        }
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        // Create employees
-        var employees = new Employee[]
-        {
-            new SalariedEmployee(1, "John Doe", 5000),
-            new HourlyEmployee(2, "Jane Smith", 25) 
-            { 
-                HoursWorked = 160 
-            },
-            new CommissionEmployee(3, "Bob Johnson", 0.1m)
-            {
-                SalesAmount = 10000
-            }
-        };
-        
-        // Process payroll
-        PayrollSystem payroll = new PayrollSystem();
-        payroll.ProcessPayments(employees);
-        
-        Console.WriteLine("\n=== REPORTS ===");
-        payroll.PrintReports(employees);
-    }
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p class="card-text">Abstraction through abstract classes and interfaces enables flexible, loosely coupled designs that are easy to extend and maintain.</p>
-                    </div>
-                </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Exercise</h5>
-                        <p>Create a system with:</p>
-                        <ol>
-                            <li>IStorage interface with Save/Load methods</li>
-                            <li>Abstract DataProcessor class</li>
-                            <li>Multiple data types implementing interfaces</li>
-                            <li>Service that works with interfaces</li>
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.8);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/ClassesAndOOP" style="color: rgba(255,255,255,0.8);">Classes and OOP</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Abstraction & Interfaces</li>
                         </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        Abstraction & Interfaces 🎯
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Show Only What's Important (It's Easier Than You Think!)
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 8 of 11
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/ClassesAndOOP/07-Polymorphism" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/ClassesAndOOP/09-StaticVsInstance" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left">
+                    <i class="fas fa-ghost fa-8x text-white" style="opacity: 0.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Hey There! Ready to Learn About Abstraction? 🎭</h2>
+                                    <p class="fs-5">
+                                        <strong>Abstraction</strong> and <strong>Interfaces</strong> might sound complicated,
+                                        but they're actually <strong>super useful</strong>! They help you hide the complicated stuff
+                                        and show only what's important.
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Quick Question:</strong> Have you ever used a <strong>TV remote</strong>?
+                                        You press the volume button, but you don't need to know how the TV works inside.
+                                        That's <strong>abstraction</strong> - hiding the complicated stuff!
+                                    </div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary p-2">🎯 After this lesson, you'll be able to:</span>
+                                        <ul class="mt-2">
+                                            <li>✅ Explain abstraction like a pro (but in simple words)</li>
+                                            <li>✅ Create abstract classes (the "must follow" rules)</li>
+                                            <li>✅ Use interfaces (the "I promise to do this" contracts)</li>
+                                            <li>✅ Know when to use abstract vs interface</li>
+                                            <li>✅ Build flexible, clean code</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What is Abstraction? (Super Simple) -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Part 1: What is Abstraction? (The Easy Way)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Abstraction means <strong>"hide the details, show the big picture"</strong>.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-remote text-primary me-2"></i>🎮 The Remote Control Analogy</h5>
+                                                <p>Think about your <strong>TV remote</strong>:</p>
+                                                <ul>
+                                                    <li>📺 You see <strong>buttons</strong> (the interface)</li>
+                                                    <li>📺 You <strong>don't see</strong> the circuits inside</li>
+                                                    <li>📺 You <strong>don't need</strong> to know how it works</li>
+                                                    <li>📺 Just press the button and it <strong>works</strong></li>
+                                                </ul>
+                                                <p class="mt-2"><strong>You only see what's important</strong> - the buttons!</p>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>That's Abstraction:</strong> Hiding complexity, showing simplicity!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Time!</h5>
+                                                <p><strong>Abstract Class:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">RemoteControl</span>
+{
+    <span class="comment">// You MUST implement these</span>
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">VolumeUp</span>();
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">VolumeDown</span>();
+}</code></pre>
+                                                </div>
+                                                <p><strong>Child Class - TV Remote:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">TVRemote</span> : <span class="class">RemoteControl</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">VolumeUp</span>()
+    {
+        <span class="comment">// TV specific code</span>
+    }
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-star me-2"></i>
+                                                    <strong>🎉 You hide the details, show only the important stuff!</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the abstract class break up with the concrete class?
+                                        Because it couldn't commit to a specific implementation! (Okay, that was a programmer joke 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 2: Abstract Classes - The "Must Follow" Rules -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Part 2: Abstract Classes - The "Must Follow" Rules</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-file-contract me-2"></i>
+                                    <strong>What's an Abstract Class?</strong> It's like a <strong>parent</strong> that says
+                                    "If you want to be my child, you MUST do these things!"
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Abstract Class Rules</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Vehicle</span>
+{
+    <span class="comment">// ✅ MUST be implemented by children</span>
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">Start</span>();
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">Stop</span>();
+    
+    <span class="comment">// ✅ Already implemented - children get this for free</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Honk</span>()
+    {
+        Console.WriteLine(<span class="string">"Beep beep!"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">📌</span> Abstract methods = NO body (just the rule)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Child MUST Implement</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Car</span> : <span class="class">Vehicle</span>
+{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Start</span>()  <span class="comment">// ✅ Must do this!</span>
+    {
+        Console.WriteLine(<span class="string">"🚗 Car engine starts..."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">Stop</span>()   <span class="comment">// ✅ Must do this!</span>
+    {
+        Console.WriteLine(<span class="string">"🛑 Car stops..."</span>);
+    }
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>Remember:</strong> You CANNOT create an abstract class directly:
+                                                    <br>
+                                                    <code>Vehicle v = new Vehicle();</code> ❌ (Error!)
+                                                    <br>
+                                                    <code>Vehicle v = new Car();</code> ✅ (Works!)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light mt-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-question-circle text-primary me-2"></i>🤔 When to Use Abstract Classes?</h5>
+                                        <ul>
+                                            <li>✅ When classes <strong>share common code</strong></li>
+                                            <li>✅ When classes are <strong>related</strong> (is-a relationship)</li>
+                                            <li>✅ When you want to <strong>enforce rules</strong> for children</li>
+                                            <li>✅ When you have <strong>some implemented methods</strong> to share</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🤝 Part 3: Interfaces - The "I Promise" Contract -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Part 3: Interfaces - The "I Promise" Contract</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-handshake me-2"></i>
+                                    <strong>What's an Interface?</strong> It's like a <strong>job description</strong>
+                                    that says "If you want this job, you MUST know these skills!"
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Interface (The Contract)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPlayable</span>
+{
+    <span class="keyword">void</span> <span class="function">Play</span>();   <span class="comment">// No implementation</span>
+    <span class="keyword">void</span> <span class="function">Pause</span>();  <span class="comment">// Just the rule</span>
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">📌</span> Interfaces have <strong>NO code</strong> - just rules!</p>
+                                                <p><span class="badge bg-info">📌</span> Methods are <strong>public</strong> by default</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Class MUST Implement</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">MusicPlayer</span> : <span class="class">IPlayable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Play</span>()  <span class="comment">// ✅ Must implement!</span>
+    {
+        Console.WriteLine(<span class="string">"🎵 Playing music..."</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Pause</span>()  <span class="comment">// ✅ Must implement!</span>
+    {
+        Console.WriteLine(<span class="string">"⏸️ Music paused..."</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-plus-circle text-success me-2"></i>✅ A Class Can Implement MANY Interfaces</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IPlayable</span> { <span class="keyword">void</span> <span class="function">Play</span>(); }
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IRecordable</span> { <span class="keyword">void</span> <span class="function">Record</span>(); }
+
+<span class="comment">// ✅ One class, TWO interfaces!</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">SmartDevice</span> : <span class="class">IPlayable</span>, <span class="class">IRecordable</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Play</span>() { }
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Record</span>() { }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-question-circle text-primary me-2"></i>🤔 When to Use Interfaces?</h5>
+                                                <ul>
+                                                    <li>✅ When classes are <strong>unrelated</strong> but share behavior</li>
+                                                    <li>✅ When you want to <strong>define capabilities</strong> ("can do")</li>
+                                                    <li>✅ When you need <strong>multiple capabilities</strong> (can do many things)</li>
+                                                    <li>✅ When creating <strong>plugins</strong> or <strong>extensions</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the interface break up with the class?
+                                        Because it couldn't commit to a specific implementation! (Okay, that's enough programmer jokes 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📊 Part 4: Abstract Class vs Interface - The Big Decision -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Part 4: Abstract Class vs Interface - Which One to Use?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>This is a BIG question in programming:</strong> When do I use an abstract class vs an interface?
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th>Feature</th>
+                                                <th>Abstract Class</th>
+                                                <th>Interface</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>What it is</strong></td>
+                                                <td>Partial blueprint (has some code)</td>
+                                                <td>Complete contract (no code)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Can have code</strong></td>
+                                                <td>✅ Yes (methods with bodies)</td>
+                                                <td>❌ No (just method names)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Can have fields</strong></td>
+                                                <td>✅ Yes</td>
+                                                <td>❌ No (just properties)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Inheritance</strong></td>
+                                                <td>One parent only</td>
+                                                <td>Many interfaces</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Relationship</strong></td>
+                                                <td>"IS A" (is a type of)</td>
+                                                <td>"CAN DO" (has ability)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-success text-white h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle me-2"></i>Use Abstract Class When:</h5>
+                                                <ul>
+                                                    <li>✅ Classes share <strong>common code</strong></li>
+                                                    <li>✅ Classes are <strong>related</strong> (Animal → Dog, Cat)</li>
+                                                    <li>✅ You want to <strong>share implementation</strong></li>
+                                                    <li>✅ You need <strong>fields</strong> or <strong>constructors</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-info text-white h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle me-2"></i>Use Interface When:</h5>
+                                                <ul>
+                                                    <li>✅ Classes are <strong>unrelated</strong> but share behavior</li>
+                                                    <li>✅ You just need <strong>capabilities</strong> (Fly, Swim)</li>
+                                                    <li>✅ You need <strong>multiple behaviors</strong></li>
+                                                    <li>✅ You're building <strong>plugins</strong> or <strong>APIs</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light mt-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-lightbulb text-warning me-2"></i>💡 Quick Rule of Thumb</h5>
+                                        <p class="mb-0">
+                                            <strong>If you can say "IS A" →</strong> Use Abstract Class (Dog IS A Animal)
+                                            <br>
+                                            <strong>If you can say "CAN DO" →</strong> Use Interface (Dog CAN RUN, Dog CAN SWIM)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 5: Real-World Example - Game Characters -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Part 5: Real-World Example - Game Characters 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="fs-5">Let's build a <strong>Game Character System</strong> using abstraction and interfaces!</p>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// 🔥 Interfaces - Capabilities</span>
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IAttack</span>
+{
+    <span class="keyword">void</span> <span class="function">Attack</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IDefend</span>
+{
+    <span class="keyword">void</span> <span class="function">Defend</span>();
+}
+
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IHeal</span>
+{
+    <span class="keyword">void</span> <span class="function">Heal</span>();
+}
+
+<span class="comment">// 🎯 Abstract Class - Base Character</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">Character</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">int</span> Health { <span class="function">get</span>; <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Character</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> health)
+    {
+        Name = name;
+        Health = health;
+    }
+    
+    <span class="comment">// ✅ MUST be implemented</span>
+    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>();
+}</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// 🦸 Warrior - Implements multiple interfaces</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Warrior</span> : <span class="class">Character</span>, <span class="class">IAttack</span>, <span class="class">IDefend</span>
+{
+    <span class="keyword">public</span> <span class="function">Warrior</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name, <span class="number">100</span>) { }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"⚔️ Warrior: {Name} (HP: {Health})"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Attack</span>() => 
+        Console.WriteLine(<span class="string">$"⚔️ {Name} swings sword!"</span>);
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Defend</span>() => 
+        Console.WriteLine(<span class="string">$"🛡️ {Name} raises shield!"</span>);
+}
+
+<span class="comment">"> // 🧙 Mage - Different set of capabilities</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Mage</span> : <span class="class">Character</span>, <span class="class">IAttack</span>, <span class="class">IHeal</span>
+{
+    <span class="keyword">public</span> <span class="function">Mage</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name, <span class="number">80</span>) { }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🔮 Mage: {Name} (HP: {Health})"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Attack</span>() => 
+        Console.WriteLine(<span class="string">$"🔮 {Name} casts fireball!"</span>);
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Heal</span>() => 
+        Console.WriteLine(<span class="string">$"💚 {Name} casts healing spell!"</span>);
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// Program.cs - Using the System</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"⚔️ GAME CHARACTER SYSTEM\n"</span>);
+        
+        <span class="comment">// Create characters</span>
+        <span class="class">Warrior</span> warrior = <span class="keyword">new</span> <span class="class">Warrior</span>(<span class="string">"Conan"</span>);
+        <span class="class">Mage</span> mage = <span class="keyword">new</span> <span class="class">Mage</span>(<span class="string">"Merlin"</span>);
+        
+        <span class="comment">// Display info</span>
+        warrior.<span class="function">DisplayInfo</span>();
+        mage.<span class="function">DisplayInfo</span>();
+        
+        Console.WriteLine();
+        
+        <span class="comment">// Use capabilities (Interfaces)</span>
+        warrior.<span class="function">Attack</span>();  <span class="comment">// Swings sword</span>
+        warrior.<span class="function">Defend</span>();  <span class="comment">// Raises shield</span>
+        
+        mage.<span class="function">Attack</span>();    <span class="comment">// Casts fireball</span>
+        mage.<span class="function">Heal</span>();      <span class="comment">// Healing spell</span>
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-3">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 What this shows:</strong>
+                                            <ul class="mb-0">
+                                                <li>✅ <strong>Abstract Class</strong> - Character (common code)</li>
+                                                <li>✅ <strong>Interfaces</strong> - Attack, Defend, Heal (capabilities)</li>
+                                                <li>✅ <strong>Multiple Interfaces</strong> - Warrior has Attack + Defend</li>
+                                                <li>✅ <strong>Different Capabilities</strong> - Mage has Attack + Heal</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🧩 Part 6: Default Interface Methods (C# 8+) -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Part 6: Default Interface Methods (C# 8+)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>New Feature:</strong> Since C# 8, interfaces can have <strong>default implementations</strong>!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Interface with Default Methods</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">ILogger</span>
+{
+    <span class="comment">// ✅ Must be implemented</span>
+    <span class="keyword">void</span> <span class="function">Log</span>(<span class="keyword">string</span> message);
+    
+    <span class="comment">// ✅ Default implementation</span>
+    <span class="keyword">void</span> <span class="function">LogError</span>(<span class="keyword">string</span> error)
+    {
+        Console.WriteLine(<span class="string">$"ERROR: {error}"</span>);
+    }
+}</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Using Default Methods</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">public</span> <span class="keyword">class</span> <span class="class">ConsoleLogger</span> : <span class="class">ILogger</span>
+{
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">Log</span>(<span class="keyword">string</span> message)
+    {
+        Console.WriteLine(message);
+    }
+    
+    <span class="comment">// No need to implement LogError!</span>
+    <span class="comment">// It gets the default version for free</span>
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Benefits:</strong>
+                                                    <ul class="mb-0">
+                                                        <li>✅ Add new methods <strong>without breaking</strong> existing code</li>
+                                                        <li>✅ Provide <strong>default behavior</strong> for common cases</li>
+                                                        <li>✅ Upgrade interfaces <strong>safely</strong></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 7: Exercise -->
+                    <section class="mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Part 7: Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>What You're Building:</strong> A <strong>Smart Home Device System</strong> for controlling smart devices!
+                                    <br>
+                                    Different devices (Lights, Thermostat, Security Camera) all have common features but work differently.
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle text-primary me-2"></i>🏠 About This Application</h5>
+                                        <p>This is a <strong>Smart Home System</strong> like:</p>
+                                        <ul>
+                                            <li>💡 <strong>Philips Hue</strong> - Smart lights</li>
+                                            <li>🌡️ <strong>Nest</strong> - Smart thermostat</li>
+                                            <li>📹 <strong>Ring</strong> - Security cameras</li>
+                                        </ul>
+                                        <p>Each device has <strong>common features</strong> but <strong>different implementations</strong>:</p>
+                                        <ul>
+                                            <li>✅ All devices have a Name and Status</li>
+                                            <li>✅ All devices can TurnOn() and TurnOff()</li>
+                                            <li>✅ Lights can AdjustBrightness()</li>
+                                            <li>✅ Thermostat can SetTemperature()</li>
+                                            <li>✅ Camera can StartRecording()</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Interface: IDevice</strong>
+                                                        <ul>
+                                                            <li>Methods: TurnOn(), TurnOff()</li>
+                                                            <li>Property: Status (string)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Abstract Class: SmartDevice</strong>
+                                                        <ul>
+                                                            <li>Properties: Name, Status</li>
+                                                            <li>Implement IDevice</li>
+                                                            <li>Virtual: DisplayInfo()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: Light</strong>
+                                                        <ul>
+                                                            <li>Property: Brightness (int)</li>
+                                                            <li>Method: AdjustBrightness()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: Thermostat</strong>
+                                                        <ul>
+                                                            <li>Property: Temperature (int)</li>
+                                                            <li>Method: SetTemperature()</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Derived: SecurityCamera</strong>
+                                                        <ul>
+                                                            <li>Property: IsRecording (bool)</li>
+                                                            <li>Method: StartRecording()</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 How This Uses Abstraction:</h6>
+                                                <ul>
+                                                    <li>✅ <strong>Interface</strong> - Defines what devices CAN DO</li>
+                                                    <li>✅ <strong>Abstract Class</strong> - Provides common code</li>
+                                                    <li>✅ <strong>Override</strong> - Each device behaves differently</li>
+                                                    <li>✅ <strong>Polymorphism</strong> - Treat all devices as IDevice</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A flexible smart home system that's easy to expand!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>🎯 Goal:</strong> Build a working smart home system using abstraction and interfaces -
+                                    just like real smart home companies use!
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Solution (Try it yourself first!)
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== SMART HOME SYSTEM =====</span>
+<span class="comment">// This shows abstraction and interfaces in action</span>
+
+<span class="comment">// Interface - What devices CAN DO</span>
+<span class="keyword">public</span> <span class="keyword">interface</span> <span class="class">IDevice</span>
+{
+    <span class="keyword">void</span> <span class="function">TurnOn</span>();
+    <span class="keyword">void</span> <span class="function">TurnOff</span>();
+    <span class="keyword">string</span> Status { <span class="function">get</span>; }
+}
+
+<span class="comment">// Abstract Class - Common code for all devices</span>
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="class">SmartDevice</span> : <span class="class">IDevice</span>
+{
+    <span class="keyword">public</span> <span class="keyword">string</span> Name { <span class="function">get</span>; <span class="function">set</span>; }
+    <span class="keyword">public</span> <span class="keyword">string</span> Status { <span class="function">get</span>; <span class="keyword">protected</span> <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">SmartDevice</span>(<span class="keyword">string</span> name)
+    {
+        Name = name;
+        Status = <span class="string">"Off"</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">TurnOn</span>()
+    {
+        Status = <span class="string">"On"</span>;
+        Console.WriteLine(<span class="string">$"🟢 {Name} turned ON"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">TurnOff</span>()
+    {
+        Status = <span class="string">"Off"</span>;
+        Console.WriteLine(<span class="string">$"🔴 {Name} turned OFF"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"📱 {Name}: {Status}"</span>);
+    }
+}
+
+<span class="comment">// Light - Can adjust brightness</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Light</span> : <span class="class">SmartDevice</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Brightness { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Light</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name)
+    {
+        Brightness = <span class="number">50</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">AdjustBrightness</span>(<span class="keyword">int</span> level)
+    {
+        Brightness = Math.Clamp(level, <span class="number">0</span>, <span class="number">100</span>);
+        Console.WriteLine(<span class="string">$"💡 {Name} brightness: {Brightness}%"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"💡 {Name}: {Status} (Brightness: {Brightness}%)"</span>);
+    }
+}
+
+<span class="comment">// Thermostat - Can set temperature</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">Thermostat</span> : <span class="class">SmartDevice</span>
+{
+    <span class="keyword">public</span> <span class="keyword">int</span> Temperature { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">Thermostat</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name)
+    {
+        Temperature = <span class="number">21</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">SetTemperature</span>(<span class="keyword">int</span> temp)
+    {
+        Temperature = temp;
+        Console.WriteLine(<span class="string">$"🌡️ {Name} temperature set to {Temperature}°C"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"🌡️ {Name}: {Status} (Temperature: {Temperature}°C)"</span>);
+    }
+}
+
+<span class="comment">// SecurityCamera - Can record</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">SecurityCamera</span> : <span class="class">SmartDevice</span>
+{
+    <span class="keyword">public</span> <span class="keyword">bool</span> IsRecording { <span class="function">get</span>; <span class="keyword">private</span> <span class="function">set</span>; }
+    
+    <span class="keyword">public</span> <span class="function">SecurityCamera</span>(<span class="keyword">string</span> name) : <span class="function">base</span>(name)
+    {
+        IsRecording = <span class="keyword">false</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">StartRecording</span>()
+    {
+        IsRecording = <span class="keyword">true</span>;
+        Console.WriteLine(<span class="string">$"📹 {Name} started recording!"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="function">StopRecording</span>()
+    {
+        IsRecording = <span class="keyword">false</span>;
+        Console.WriteLine(<span class="string">$"📹 {Name} stopped recording!"</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="function">DisplayInfo</span>()
+    {
+        Console.WriteLine(<span class="string">$"📹 {Name}: {Status} (Recording: {(IsRecording ? "Yes" : "No")})"</span>);
+    }
+}
+
+<span class="comment">// Program.cs - Smart Home System</span>
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        Console.WriteLine(<span class="string">"🏠 SMART HOME SYSTEM"</span>);
+        Console.WriteLine(<span class="string">"═══════════════════════════════════\n"</span>);
+        
+        <span class="comment">// Create devices</span>
+        <span class="class">Light</span> light = <span class="keyword">new</span> <span class="class">Light</span>(<span class="string">"Living Room Light"</span>);
+        <span class="class">Thermostat</span> thermostat = <span class="keyword">new</span> <span class="class">Thermostat</span>(<span class="string">"Main Thermostat"</span>);
+        <span class="class">SecurityCamera</span> camera = <span class="keyword">new</span> <span class="class">SecurityCamera</span>(<span class="string">"Front Door Camera"</span>);
+        
+        <span class="comment">// Control devices</span>
+        Console.WriteLine(<span class="string">"📋 DEVICE CONTROL:\n"</span>);
+        
+        light.<span class="function">TurnOn</span>();
+        light.<span class="function">AdjustBrightness</span>(<span class="number">75</span>);
+        light.<span class="function">DisplayInfo</span>();
+        
+        Console.WriteLine();
+        
+        thermostat.<span class="function">TurnOn</span>();
+        thermostat.<span class="function">SetTemperature</span>(<span class="number">24</span>);
+        thermostat.<span class="function">DisplayInfo</span>();
+        
+        Console.WriteLine();
+        
+        camera.<span class="function">TurnOn</span>();
+        camera.<span class="function">StartRecording</span>();
+        camera.<span class="function">DisplayInfo</span>();
+        
+        Console.WriteLine();
+        Console.WriteLine(<span class="string">"🔄 POLYMORPHISM DEMONSTRATION:"</span>);
+        
+        <span class="comment">// Treat all as IDevice</span>
+        <span class="class">IDevice</span>[] devices = { light, thermostat, camera };
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> device <span class="keyword">in</span> devices)
+        {
+            Console.WriteLine(<span class="string">$"Device: {device.Status}"</span>);
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a real smart home system using abstraction and interfaces!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden;">
+                        <div class="card-body p-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-ghost fa-3x mb-2"></i>
+                                        <h5>Abstraction</h5>
+                                        <small>Hide details, show what's important</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-file-contract fa-3x mb-2"></i>
+                                        <h5>Abstract Class</h5>
+                                        <small>"Must follow" rules</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-handshake fa-3x mb-2"></i>
+                                        <h5>Interfaces</h5>
+                                        <small>"I promise to do this"</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-home fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Smart Home System! 🏠</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-code-branch fa-3x mb-2"></i>
+                                        <h5>IS A vs CAN DO</h5>
+                                        <small>Abstract = IS A</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-plus-circle fa-3x mb-2"></i>
+                                        <h5>Multiple Interfaces</h5>
+                                        <small>One class, many abilities</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-shield-alt fa-3x mb-2"></i>
+                                        <h5>Encapsulation</h5>
+                                        <small>Protect your code</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/ClassesAndOOP/07-Polymorphism" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/ClassesAndOOP/09-StaticVsInstance" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "ClassesAndOOP_Lesson8")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

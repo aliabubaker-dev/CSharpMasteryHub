@@ -496,121 +496,531 @@ Help
                         </div>
                     </section>
 
-                    <!-- 🖨️ Part 5: PrintDialog - The Complete Guide -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: PrintDialog - Print Like a Pro</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-print me-2"></i>
-                                    <strong>What is PrintDialog?</strong> It lets users choose print settings and print documents.
-                                    Professional apps need this!
-                                </div>
 
-                                <div class="card bg-light mb-3">
-                                    <div class="card-body">
-                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find PrintDialog</h5>
-                                        <ol>
-                                            <li>Open the <strong>Toolbox</strong></li>
-                                            <li>Find the <strong>"Dialogs"</strong> section</li>
-                                            <li>You'll see <strong>PrintDialog</strong> - it looks like a printer</li>
-                                            <li>Also find <strong>PrintDocument</strong> - you need both!</li>
-                                            <li>Drag both to the component tray</li>
-                                        </ol>
-                                        <div class="alert alert-warning mt-2">
-                                            <i class="fas fa-exclamation-triangle me-2"></i>
-                                            <strong>Important:</strong> PrintDialog works with PrintDocument - they're a team!
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card bg-light">
-                                    <div class="card-body">
-                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use PrintDialog</h5>
-                                        <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="comment">// ===== PRINT DIALOG - COMPLETE GUIDE =====</span>
-<span class="comment">// Step 1: Add these two components to your form:</span>
-<span class="comment">// - PrintDialog (from Dialogs section)</span>
-<span class="comment">// - PrintDocument (from Dialogs section)</span>
-<span class="comment">// They appear in the component tray below your form</span>
 
-<span class="comment">// Step 2: In the properties of PrintDocument, set:</span>
-<span class="comment">// - DocumentName: "MyDocument"</span>
-<span class="comment">// - OriginAtMargins: True</span>
 
-<span class="comment">// Step 3: Create the PrintDocument_PrintPage event</span>
-<span class="comment">// Double-click PrintDocument in the tray → creates event handler</span>
 
-<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
-{
-    <span class="comment">// This is where you draw what to print</span>
-    <span class="comment">// e.Graphics is like a canvas you can draw on</span>
-    
-    <span class="comment">// 👉 Set up the font and format</span>
-    <span class="keyword">using</span> (<span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>))
-    {
-        <span class="comment">// 👉 Draw the text on the page</span>
-        <span class="comment">// Parameters: text, font, brush, x position, y position</span>
-        e.Graphics.DrawString(txtContent.Text, printFont, 
-            <span class="class">Brushes</span>.Black, 
-            e.MarginBounds.Left, e.MarginBounds.Top);
-    }
-    
-    <span class="comment">// 👉 Tell the printer there are no more pages</span>
-    e.HasMorePages = <span class="keyword">false</span>;
-}
 
-<span class="comment">// Step 4: Create the Print menu item click event</span>
-<span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="comment">// 📌 STEP 1: Check if there's something to print</span>
-    <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtContent.Text))
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Nothing to print - the textbox is empty!"</span>);
-        <span class="keyword">return</span>;
-    }
-    
-    <span class="comment">// 📌 STEP 2: Set up the PrintDialog</span>
-    <span class="comment">// We'll use the one you dragged to the tray</span>
-    printDialog1.Document = printDocument1;  <span class="comment">// 👈 Connect them</span>
-    printDialog1.AllowSelection = <span class="keyword">true</span>;
-    printDialog1.AllowSomePages = <span class="keyword">true</span>;
-    printDialog1.ShowHelp = <span class="keyword">true</span>;
-    
-    <span class="comment">// 📌 STEP 3: Show the PrintDialog</span>
-    <span class="comment">// The user chooses printer, number of copies, etc.</span>
-    <span class="keyword">if</span> (printDialog1.ShowDialog() == <span class="class">DialogResult</span>.OK)
-    {
-        <span class="keyword">try</span>
-        {
-            <span class="comment">// 🎉 User clicked "Print" - send to printer!</span>
-            printDocument1.Print();
-            lblStatus.Text = <span class="string">"🖨️ Document sent to printer"</span>;
-            lblStatus.ForeColor = Color.Green;
-        }
-        <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-        {
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Print error: {ex.Message}"</span>, <span class="string">"Error"</span>,
-                <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
-        }
-    }
-}</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card bg-warning text-dark mt-3">
-                                    <div class="card-body">
-                                        <i class="fas fa-laugh-beam me-2"></i>
-                                        <strong>😂 Joke:</strong> Why did the printer stop working? Because it ran out of paper AND patience!
-                                        (Always test print with a PDF printer first!)
-                                    </div>
-                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== PRINT DIALOG - MASTER GUIDE ===== -->
+<!-- Each step has MAXIMUM 4 LINES OF CODE to keep it simple and focused -->
+
+<div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+    <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+        <h3 class="mb-0"><i class="fas fa-print me-2"></i>Step 5: PrintDialog - Print Like a Pro</h3>
+    </div>
+    <div class="card-body p-4">
+
+        <!-- ===== WHAT IS PRINTDIALOG? ===== -->
+        <div class="alert alert-info">
+            <i class="fas fa-question-circle me-2"></i>
+            <strong>What is PrintDialog?</strong> It's the window that appears when you click "Print" in any app. 
+            It lets users choose:
+            <ul class="mb-0 mt-2">
+                <li>🖨️ Which printer to use</li>
+                <li>📄 How many copies to print</li>
+                <li>📋 Which pages to print</li>
+                <li>⚙️ Other print settings</li>
+            </ul>
+        </div>
+
+        <!-- ===== PART 1: FINDING THE TOOLS ===== -->
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <h5><i class="fas fa-search text-primary me-2"></i>Step 1: Find PrintDialog in Toolbox</h5>
+                <ol>
+                    <li>Open <strong>Toolbox</strong> (View → Toolbox or Ctrl+Alt+X)</li>
+                    <li>Find the <strong>"Dialogs"</strong> section</li>
+                    <li>You'll see two important tools:
+                        <ul>
+                            <li><strong>PrintDialog</strong> - The popup window (looks like a printer)</li>
+                            <li><strong>PrintDocument</strong> - The actual printing engine</li>
+                        </ul>
+                    </li>
+                    <li>Drag <strong>BOTH</strong> to the component tray (gray area below form)</li>
+                </ol>
+                <div class="alert alert-warning mt-2">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>🔑 KEY POINT:</strong> PrintDialog is just the WINDOW. PrintDocument does the ACTUAL PRINTING. They work as a team!
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PART 2: THE FOUR STEP PROCESS ===== -->
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <h5><i class="fas fa-steps text-primary me-2"></i>The 4-Step Printing Process</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <h1 class="text-primary">1</h1>
+                                <h6>Show PrintDialog</h6>
+                                <small>Let user choose settings</small>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <h1 class="text-success">2</h1>
+                                <h6>Connect to PrintDocument</h6>
+                                <small>Tell it what to print</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <h1 class="text-warning">3</h1>
+                                <h6>Create PrintPage Event</h6>
+                                <small>Draw what to print</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <h1 class="text-danger">4</h1>
+                                <h6>Call Print()</h6>
+                                <small>Send to printer!</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PART 3: STEP 1 - SHOW PRINTDIALOG ===== -->
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <h5><i class="fas fa-1 text-primary me-2"></i>Step 1: Show the PrintDialog</h5>
+                <p>This code goes in your menu click event (File → Print).</p>
+                <div class="code-block">
+                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Show the PrintDialog window</span>
+<span class="class">PrintDialog</span> printDialog1 = <span class="keyword">new</span> <span class="class">PrintDialog</span>();
+
+<span class="comment">// 2️⃣ Connect it to your PrintDocument</span>
+printDialog1.Document = printDocument1;
+
+<span class="comment">// 3️⃣ Show the window and check if user clicked OK</span>
+<span class="keyword">if</span> (printDialog1.ShowDialog() == <span class="class">DialogResult</span>.OK) { }</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">📌</span> <strong>What happens here?</strong> The user sees the print dialog, chooses settings, and clicks OK.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 4: STEP 2 - THE PRINT PAGE EVENT ===== -->
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-2 text-success me-2"></i>Step 2: Create the PrintPage Event</h5>
+                                                <p>Double-click <strong>PrintDocument</strong> in the component tray → this creates the event.</p>
+                                                <div class="code-block">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ The event that fires when printing starts</span>
+<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
+{
+    <span class="comment">// 2️⃣ e.Graphics = The "canvas" to draw on</span>
+    <span class="comment">// 3️⃣ e.MarginBounds = The printable area</span>
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">🔑</span> <strong>Key Concepts:</strong></p>
+                                                <ul>
+                                                    <li><strong>e.Graphics</strong> - The drawing surface (like a canvas)</li>
+                                                    <li><strong>e.MarginBounds</strong> - The area where you can print (inside margins)</li>
+                                                    <li><strong>e.HasMorePages</strong> - Set to false for one page, true for multiple</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 5: DRAWING BASICS ===== -->
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-3 text-warning me-2"></i>Step 3: Drawing on the Canvas</h5>
+                                                <p>Inside the PrintPage event, you draw what you want to print:</p>
+                                                <div class="code-block">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create a font for the text</span>
+<span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>);
+
+<span class="comment">// 2️⃣ Draw text on the page</span>
+e.Graphics.DrawString(txtContent.Text, printFont, Brushes.Black, 
+    e.MarginBounds.Left, e.MarginBounds.Top);
+
+<span class="comment">// 3️⃣ Tell printer it's the only page</span>
+e.HasMorePages = <span class="keyword">false</span>;</code></pre>
+                                                </div>
+                                                <div class="alert alert-info mt-2">
+                                                    <i class="fas fa-lightbulb me-2"></i>
+                                                    <strong>💡 Tip:</strong> e.Graphics has many drawing methods:
+                                                    <ul class="mb-0">
+                                                        <li><code>DrawString()</code> - Draw text</li>
+                                                        <li><code>DrawLine()</code> - Draw lines</li>
+                                                        <li><code>DrawRectangle()</code> - Draw rectangles</li>
+                                                        <li><code>DrawImage()</code> - Draw pictures</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 6: COMPLETE PRINTING CODE ===== -->
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-4 text-danger me-2"></i>Step 4: Complete Printing Code</h5>
+                                                <p>Put it all together - this is the FULL code you need:</p>
+                                                <div class="code-block">
+                                                    <pre><code class="language-csharp"><span class="comment">// 📌 Menu Click Event - Shows the dialog</span>
+<span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="class">PrintDialog</span> printDialog1 = <span class="keyword">new</span> <span class="class">PrintDialog</span>();
+    printDialog1.Document = printDocument1;
+    <span class="keyword">if</span> (printDialog1.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        printDocument1.Print();  <span class="comment">// 🖨️ Start printing!</span>
+}
+
+<span class="comment">// 📌 PrintPage Event - Draws the content</span>
+<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
+{
+    <span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>);
+    e.Graphics.DrawString(txtContent.Text, printFont, Brushes.Black,
+        e.MarginBounds.Left, e.MarginBounds.Top);
+    e.HasMorePages = <span class="keyword">false</span>;
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> That's it! Just 8 lines of code (4 + 4) for a complete printing system!</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 7: PRINTING A TABLE ===== -->
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-table text-primary me-2"></i>🎯 Printing a Table - Step by Step</h5>
+                                                <p>Let's print a table with student data. Each step has MAX 4 lines of code!</p>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="card">
+                                                            <div class="card-header bg-primary text-white">
+                                                                <strong>Step 1: Setup the Data</strong>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="code-block">
+                                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create a list of students</span>
+<span class="keyword">var</span> students = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>[]&gt;();
+
+<span class="comment">// 2️⃣ Add sample data (Name, Age, Grade)</span>
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Alice"</span>, <span class="string">"20"</span>, <span class="string">"A"</span> });
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Bob"</span>, <span class="string">"22"</span>, <span class="string">"B"</span> });
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Charlie"</span>, <span class="string">"21"</span>, <span class="string">"A+"</span> });</code></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="card">
+                                                            <div class="card-header bg-success text-white">
+                                                                <strong>Step 2: Draw the Table</strong>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="code-block">
+                                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Draw headers</span>
+e.Graphics.DrawString(<span class="string">"Name"</span>, printFont, Brushes.Black, <span class="number">50</span>, y);
+e.Graphics.DrawString(<span class="string">"Age"</span>, printFont, Brushes.Black, <span class="number">150</span>, y);
+e.Graphics.DrawString(<span class="string">"Grade"</span>, printFont, Brushes.Black, <span class="number">250</span>, y);
+
+<span class="comment">// 2️⃣ Draw each row of data</span>
+<span class="keyword">foreach</span> (<span class="keyword">var</span> student <span class="keyword">in</span> students)
+{
+    y += <span class="number">30</span>;
+    e.Graphics.DrawString(student[<span class="number">0</span>], printFont, Brushes.Black, <span class="number">50</span>, y);
+    e.Graphics.DrawString(student[<span class="number">1</span>], printFont, Brushes.Black, <span class="number">150</span>, y);
+    e.Graphics.DrawString(student[<span class="number">2</span>], printFont, Brushes.Black, <span class="number">250</span>, y);
+}</code></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 8: COMPLETE TABLE PRINTING EXAMPLE ===== -->
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Complete Table Printing Code</h5>
+                                                <p>Here's the FULL code to print a beautiful table:</p>
+                                                <div class="code-block">
+                                                    <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE TABLE PRINTING =====</span>
+<span class="comment">// Each section has MAX 4 lines of code</span>
+
+<span class="comment">// 📌 1. Data Setup (4 lines)</span>
+<span class="keyword">var</span> students = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>[]&gt;();
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Alice"</span>, <span class="string">"20"</span>, <span class="string">"A"</span> });
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Bob"</span>, <span class="string">"22"</span>, <span class="string">"B"</span> });
+students.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"Charlie"</span>, <span class="string">"21"</span>, <span class="string">"A+"</span> });
+
+<span class="comment">// 📌 2. Menu Click (4 lines)</span>
+<span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="class">PrintDialog</span> pd = <span class="keyword">new</span> <span class="class">PrintDialog</span>();
+    pd.Document = printDocument1;
+    <span class="keyword">if</span> (pd.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        printDocument1.Print();
+}
+
+<span class="comment">// 📌 3. PrintPage Event - Header (4 lines)</span>
+<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
+{
+    <span class="class">Font</span> titleFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">16</span>, <span class="class">FontStyle</span>.Bold);
+    <span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>);
+    e.Graphics.DrawString(<span class="string">"Student Report"</span>, titleFont, Brushes.Black, <span class="number">50</span>, <span class="number">30</span>);
+    <span class="keyword">int</span> y = <span class="number">80</span>;
+
+    <span class="comment">// 📌 4. PrintPage Event - Headers (4 lines)</span>
+    e.Graphics.DrawString(<span class="string">"Name"</span>, printFont, Brushes.Black, <span class="number">50</span>, y);
+    e.Graphics.DrawString(<span class="string">"Age"</span>, printFont, Brushes.Black, <span class="number">150</span>, y);
+    e.Graphics.DrawString(<span class="string">"Grade"</span>, printFont, Brushes.Black, <span class="number">250</span>, y);
+    y += <span class="number">30</span>;
+
+    <span class="comment">// 📌 5. PrintPage Event - Draw Line (4 lines)</span>
+    e.Graphics.DrawLine(<span class="class">Pens</span>.Black, <span class="number">40</span>, y - <span class="number">10</span>, <span class="number">350</span>, y - <span class="number">10</span>);
+    e.Graphics.DrawLine(<span class="class">Pens</span>.Black, <span class="number">40</span>, y + <span class="number">10</span>, <span class="number">350</span>, y + <span class="number">10</span>);
+    
+    <span class="comment">// 📌 6. PrintPage Event - Data Rows (4 lines per row)</span>
+    <span class="keyword">foreach</span> (<span class="keyword">var</span> student <span class="keyword">in</span> students)
+    {
+        e.Graphics.DrawString(student[<span class="number">0</span>], printFont, Brushes.Black, <span class="number">50</span>, y);
+        e.Graphics.DrawString(student[<span class="number">1</span>], printFont, Brushes.Black, <span class="number">150</span>, y);
+        e.Graphics.DrawString(student[<span class="number">2</span>], printFont, Brushes.Black, <span class="number">250</span>, y);
+        y += <span class="number">30</span>;
+    }
+
+    <span class="comment">// 📌 7. PrintPage Event - Footer (4 lines)</span>
+    e.Graphics.DrawLine(<span class="class">Pens</span>.Black, <span class="number">40</span>, y, <span class="number">350</span>, y);
+    <span class="class">Font</span> footerFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">10</span>, <span class="class">FontStyle</span>.Italic);
+    e.Graphics.DrawString(<span class="string">$"Printed on {DateTime.Now.ToShortDateString()}"</span>, footerFont, Brushes.Gray, <span class="number">50</span>, y + <span class="number">10</span>);
+    e.HasMorePages = <span class="keyword">false</span>;
+}</code></pre>
+                                                </div>
+                                                <div class="alert alert-success mt-3">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>🎉 Result:</strong> A beautifully printed table with headers, lines, data, and a footer!
+                                                    <br>
+                                                    <small>Every section has MAX 4 lines of code - easy to understand and modify!</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 9: EXERCISE ===== -->
+                                        <div class="card bg-light mt-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-pencil-alt text-primary me-2"></i>🎯 Exercise: Print a Product Inventory Table</h5>
+                                                <div class="alert alert-success">
+                                                    <i class="fas fa-rocket me-2"></i>
+                                                    <strong>Your Challenge:</strong> Create a product inventory table and print it!
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h6><i class="fas fa-list text-primary me-2"></i>Step 1: Create the Data</h6>
+                                                                <p><strong>MAX 4 lines per code block!</strong></p>
+                                                                <div class="code-block">
+                                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create product list</span>
+<span class="keyword">var</span> products = <span class="keyword">new</span> <span class="class">List</span>&lt;<span class="keyword">string</span>[]&gt;();
+
+<span class="comment">// 2️⃣ Add products (ID, Name, Price, Stock)</span>
+products.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"101"</span>, <span class="string">"Laptop"</span>, <span class="string">"999.99"</span>, <span class="string">"5"</span> });
+products.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"102"</span>, <span class="string">"Mouse"</span>, <span class="string">"29.99"</span>, <span class="string">"20"</span> });
+products.Add(<span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"103"</span>, <span class="string">"Keyboard"</span>, <span class="string">"49.99"</span>, <span class="string">"15"</span> });</code></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h6><i class="fas fa-code text-success me-2"></i>Step 2: Print the Table</h6>
+                                                                <p><strong>MAX 4 lines per code block!</strong></p>
+                                                                <div class="code-block">
+                                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Headers: ID, Name, Price, Stock</span>
+e.Graphics.DrawString(<span class="string">"ID"</span>, printFont, Brushes.Black, <span class="number">30</span>, y);
+e.Graphics.DrawString(<span class="string">"Name"</span>, printFont, Brushes.Black, <span class="number">100</span>, y);
+e.Graphics.DrawString(<span class="string">"Price"</span>, printFont, Brushes.Black, <span class="number">230</span>, y);
+e.Graphics.DrawString(<span class="string">"Stock"</span>, printFont, Brushes.Black, <span class="number">330</span>, y);
+
+<span class="comment">// 2️⃣ Data rows (4 lines per row)</span>
+<span class="keyword">foreach</span> (<span class="keyword">var</span> p <span class="keyword">in</span> products)
+{
+    e.Graphics.DrawString(p[<span class="number">0</span>], printFont, Brushes.Black, <span class="number">30</span>, y);
+    e.Graphics.DrawString(p[<span class="number">1</span>], printFont, Brushes.Black, <span class="number">100</span>, y);
+    e.Graphics.DrawString(p[<span class="number">2</span>], printFont, Brushes.Black, <span class="number">230</span>, y);
+    e.Graphics.DrawString(p[<span class="number">3</span>], printFont, Brushes.Black, <span class="number">330</span>, y);
+    y += <span class="number">30</span>;
+}</code></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-lightbulb me-2"></i>
+                                                    <strong>💡 Extra Challenge:</strong> Add a total row at the bottom!
+                                                    <br>
+                                                    <small>Use <code>products.Sum(p => Convert.ToDecimal(p[2]))</code> to calculate total value</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== PART 10: KEY TAKEAWAYS ===== -->
+                                        <div class="card bg-success text-white mt-3">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-key me-2"></i>🔑 Key Takeaways - PrintDialog Mastery</h5>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>1</h2>
+                                                            <p>PrintDialog = Window<br><small>Shows settings to user</small></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>2</h2>
+                                                            <p>PrintDocument = Engine<br><small>Actually does the printing</small></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>3</h2>
+                                                            <p>e.Graphics = Canvas<br><small>Draw everything here</small></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>4</h2>
+                                                            <p>DrawString() = Text<br><small>Print text on page</small></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>5</h2>
+                                                            <p>DrawLine() = Lines<br><small>Draw borders, lines</small></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="text-center">
+                                                            <h2>6</h2>
+                                                            <p>HasMorePages = false<br><small>One page done!</small></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ===== JOKE ===== -->
+                                        <div class="card bg-warning text-dark mt-3">
+                                            <div class="card-body">
+                                                <i class="fas fa-laugh-beam me-2"></i>
+                                                <strong>😂 Fun Joke:</strong> Why did the printer break up with the computer?
+                                                Because it had too many paper issues! (Get it? Paper issues vs parent issues? ...I'll stop 😅)
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <!-- 🎨 Part 6: ColorDialog - Choose Colors -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="600">

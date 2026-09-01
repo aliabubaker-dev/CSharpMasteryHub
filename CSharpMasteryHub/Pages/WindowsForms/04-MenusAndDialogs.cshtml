@@ -1,7 +1,7 @@
 @page
 @model CSharpMasteryHub.Pages.WindowsForms.MenusAndDialogsModel
 @{
-    ViewData["Title"] = "Menus & Dialogs - Learn Like a Pro";
+    ViewData["Title"] = "Menus & Dialogs - Zero to Hero Guide";
 }
 
 <div class="container-fluid px-0">
@@ -21,14 +21,14 @@
                         Menus & Dialogs 📋
                     </h1>
                     <p class="lead text-white-50 fs-4 mt-3">
-                        Professional Navigation and User Interaction
+                        From Zero to Hero - Master Every Dialog!
                     </p>
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-smile me-2"></i>Beginner Friendly
                         </span>
                         <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
-                            <i class="fas fa-clock me-2"></i>20 min read
+                            <i class="fas fa-clock me-2"></i>35 min read
                         </span>
                         <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-book me-2"></i>Lesson 4 of 7
@@ -56,56 +56,66 @@
                                     <i class="fas fa-smile-wink fa-3x text-warning"></i>
                                 </div>
                                 <div>
-                                    <h2 class="fw-bold text-primary">Let's Make Your App Professional! 🎯</h2>
+                                    <h2 class="fw-bold text-primary">Welcome to the Menus & Dialogs Master Class! 🎯</h2>
                                     <p class="fs-5">
-                                        In this lesson, you'll learn about <strong>Menus and Dialogs</strong> - the
-                                        professional way to organize your app and interact with users!
+                                        In this lesson, you'll learn EVERYTHING about <strong>Menus and Dialogs</strong> -
+                                        from finding them in the toolbox to using them like a pro!
                                     </p>
                                     <div class="alert alert-success mt-3">
                                         <i class="fas fa-lightbulb me-2"></i>
                                         <strong>By the end of this lesson, you'll be able to:</strong>
                                         <ul class="mb-0 mt-2">
-                                            <li>✅ Create professional menus (File, Edit, Help)</li>
-                                            <li>✅ Add menu items with shortcuts (Ctrl+S, Ctrl+O)</li>
-                                            <li>✅ Use common dialogs (Open File, Save File, Print)</li>
+                                            <li>✅ Find and add MenuStrip from the Toolbox</li>
+                                            <li>✅ Create professional menus with shortcuts (Ctrl+S, Ctrl+O)</li>
+                                            <li>✅ Use OpenFileDialog - step by step</li>
+                                            <li>✅ Use SaveFileDialog - step by step</li>
+                                            <li>✅ Use PrintDialog - step by step</li>
+                                            <li>✅ Use ColorDialog - step by step</li>
+                                            <li>✅ Use FontDialog - step by step</li>
+                                            <li>✅ Use FolderBrowserDialog - step by step</li>
                                             <li>✅ Create custom dialogs (About, Settings)</li>
-                                            <li>✅ Show message boxes with different icons</li>
-                                            <li>✅ Build a professional-looking application!</li>
+                                            <li>✅ Build a complete text editor with ALL dialogs!</li>
                                         </ul>
+                                    </div>
+                                    <div class="alert alert-warning mt-2">
+                                        <i class="fas fa-star me-2"></i>
+                                        <strong>Important:</strong> I'll show you EXACTLY where to find each dialog in the Toolbox
+                                        and EXACTLY where to put your code. Follow along step by step!
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 📋 Part 1: What Are Menus? -->
+                    <!-- 📋 Part 1: Adding a MenuStrip -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
                             <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>What Are Menus?</h3>
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Step 1: Adding a MenuStrip</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
                                     <i class="fas fa-question-circle me-2"></i>
-                                    <strong>In Simple Words:</strong> Menus are like <strong>restaurant menus</strong>
-                                    for your app - they show users what they can do and help them find features quickly!
+                                    <strong>What is a MenuStrip?</strong> It's the bar at the top of your app with File, Edit, Help, etc.
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-utensils text-primary me-2"></i>🍽️ Real-World Analogy</h5>
-                                                <p><strong>Think of menus like a restaurant menu:</strong></p>
-                                                <ul>
-                                                    <li>📋 <strong>Menu Bar</strong> = The menu categories (Appetizers, Main Course, Desserts)</li>
-                                                    <li>📄 <strong>Menu Items</strong> = The actual dishes (File → Open, File → Save)</li>
-                                                    <li>⌨️ <strong>Shortcuts</strong> = "Today's Special" (Ctrl+S, Ctrl+O)</li>
-                                                    <li>🔀 <strong>Submenus</strong> = Sub-categories (Edit → Find → Find Next)</li>
-                                                </ul>
-                                                <div class="alert alert-success mt-2">
-                                                    <i class="fas fa-check-circle me-2"></i>
-                                                    <strong>Result:</strong> Users can easily find what they need!
+                                                <h5><i class="fas fa-search text-primary me-2"></i>🔍 How to Find It</h5>
+                                                <ol>
+                                                    <li>Open your form in the <strong>Designer</strong> (the visual editor)</li>
+                                                    <li>Look on the left side for the <strong>Toolbox</strong> tab</li>
+                                                    <li>If you don't see it, click <strong>View → Toolbox</strong> or press <kbd>Ctrl + Alt + X</kbd></li>
+                                                    <li>In the Toolbox, find the <strong>"Menus & Toolbars"</strong> section</li>
+                                                    <li>You'll see <strong>MenuStrip</strong> - that's what you need!</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Found it?</strong> Now drag MenuStrip onto your form!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,9 +123,86 @@
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Common Menu Structure</h5>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Creating Your First Menu</h5>
+                                                <p>After dragging MenuStrip, you'll see <strong>"Type Here"</strong> boxes:</p>
+                                                <ol>
+                                                    <li>Click the first "Type Here" and type <strong>&amp;File</strong></li>
+                                                    <li>Click the next "Type Here" and type <strong>&amp;Edit</strong></li>
+                                                    <li>Click the next "Type Here" and type <strong>&amp;Help</strong></li>
+                                                    <li>Now click below "File" and type <strong>&amp;New</strong></li>
+                                                    <li>Press Enter, type <strong>&amp;Open</strong></li>
+                                                    <li>Press Enter, type <strong>&amp;Save</strong></li>
+                                                    <li>Press Enter, type <strong>-</strong> (this creates a separator line)</li>
+                                                    <li>Press Enter, type <strong>E&amp;xit</strong></li>
+                                                </ol>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>Pro Tip:</strong> The <strong>&amp;</strong> creates an access key (Alt+F for File, Alt+E for Edit).
+                                                        The letter after & is underlined and can be pressed with Alt.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-info text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Fact:</strong> The &amp; is called an "ampersand" - it's been used in menus since the 1980s!
+                                        It's the old-school way to add keyboard shortcuts!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🖱️ Part 2: Adding Shortcuts -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Step 2: Adding Keyboard Shortcuts</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-keyboard me-2"></i>
+                                    <strong>What are Shortcuts?</strong> Keyboard combinations like Ctrl+S, Ctrl+O that users love!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 How to Add Shortcuts</h5>
+                                                <ol>
+                                                    <li>Click on a menu item (like <strong>New</strong> under File)</li>
+                                                    <li>Look at the <strong>Properties</strong> window (usually bottom-right)</li>
+                                                    <li>Find the <strong>ShortcutKeys</strong> property</li>
+                                                    <li>Click the dropdown and select <strong>Ctrl + N</strong></li>
+                                                    <li>
+                                                        Do the same for other items:
+                                                        <ul>
+                                                            <li>Open → Ctrl + O</li>
+                                                            <li>Save → Ctrl + S</li>
+                                                            <li>Exit → Alt + F4</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Result:</strong> Users can now press Ctrl+N, Ctrl+O, Ctrl+S!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Complete Menu Code</h5>
+                                                <p>When you're done, your menu structure looks like this:</p>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// Typical menu structure in Windows apps</span>
+                                                    <pre><code class="language-csharp"><span class="comment">// Menu structure in Designer</span>
 File
     ├── New        (Ctrl+N)
     ├── Open       (Ctrl+O)
@@ -132,9 +219,9 @@ Edit
     └── Paste      (Ctrl+V)
 
 Help
-    └── About</code></pre>
+    └── About      (Alt+H, A)</code></pre>
                                                 </div>
-                                                <p><span class="badge bg-primary">📌</span> Every professional app has menus!</p>
+                                                <p><span class="badge bg-primary">📌</span> Every professional app has these menus!</p>
                                             </div>
                                         </div>
                                     </div>
@@ -143,205 +230,373 @@ Help
                                 <div class="card bg-warning text-dark mt-3">
                                     <div class="card-body">
                                         <i class="fas fa-laugh-beam me-2"></i>
-                                        <strong>😂 Fun Joke:</strong> Why did the menu go to the doctor?
-                                        Because it had too many items! (Get it? Menu items? ...I'll stop 😅)
+                                        <strong>😂 Joke:</strong> Why did the developer use Ctrl+S so much? Because they had short-term memory loss!
+                                        (We all do it - save often!)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 🛠️ Part 2: Creating a Menu -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Creating a Menu</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Step-by-Step</h5>
-                                                <ol>
-                                                    <li><strong>Add MenuStrip</strong> - From Toolbox, drag <code>MenuStrip</code> to your form</li>
-                                                    <li><strong>Add Top-Level Menus</strong> - Type "File", "Edit", "Help"</li>
-                                                    <li><strong>Add Menu Items</strong> - Click the arrow and type item names</li>
-                                                    <li><strong>Add Separators</strong> - Type a dash "-" to add a line</li>
-                                                    <li><strong>Add Shortcuts</strong> - In Properties, set <code>ShortcutKeys</code></li>
-                                                </ol>
-                                                <div class="card bg-info text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-lightbulb me-2"></i>
-                                                        <strong>Pro Tip:</strong> Type "&amp;File" to make Alt+F work (the &amp; underlines the F)!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Example: File Menu</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// Creating a menu in code</span>
-<span class="class">MenuStrip</span> menuStrip = <span class="keyword">new</span> <span class="class">MenuStrip</span>();
-
-<span class="comment">// Create File menu</span>
-<span class="class">ToolStripMenuItem</span> fileMenu = <span class="keyword">new</span> <span class="class">ToolStripMenuItem</span>(<span class="string">"&amp;File"</span>);
-<span class="class">ToolStripMenuItem</span> newItem = <span class="keyword">new</span> <span class="class">ToolStripMenuItem</span>(<span class="string">"&amp;New"</span>, <span class="keyword">null</span>, <span class="function">New_Click</span>);
-newItem.ShortcutKeys = Keys.Control | Keys.N;
-
-fileMenu.DropDownItems.Add(newItem);
-menuStrip.Items.Add(fileMenu);
-<span class="keyword">this</span>.MainMenuStrip = menuStrip;</code></pre>
-                                                </div>
-                                                <p><span class="badge bg-success">✨</span> Designer is easier - just type the menu names!</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card bg-warning text-dark mt-3">
-                                    <div class="card-body">
-                                        <i class="fas fa-lightbulb me-2"></i>
-                                        <strong>Pro Tip:</strong> Use <strong>&amp;</strong> before a letter to create an access key (Alt+Letter).
-                                        Example: "&amp;File" = Alt+F opens the File menu!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 🖥️ Part 3: Common Dialogs -->
+                    <!-- 📂 Part 3: OpenFileDialog - The Complete Guide -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
                             <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Common Dialogs</h3>
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Step 3: OpenFileDialog - From Zero to Hero</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
-                                    <i class="fas fa-question-circle me-2"></i>
-                                    <strong>What are Dialogs?</strong> Dialogs are <strong>pop-up windows</strong>
-                                    that help users perform specific tasks like opening files, saving files, or choosing colors.
+                                    <i class="fas fa-folder-open me-2"></i>
+                                    <strong>What is OpenFileDialog?</strong> It lets users choose a file to open. You'll use this in EVERY application!
                                 </div>
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>Dialog</th>
-                                                <th>What It Does</th>
-                                                <th>How to Use</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>OpenFileDialog</strong></td>
-                                                <td>User chooses a file to open</td>
-                                                <td>File → Open</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>SaveFileDialog</strong></td>
-                                                <td>User chooses where to save</td>
-                                                <td>File → Save As</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>FolderBrowserDialog</strong></td>
-                                                <td>User chooses a folder</td>
-                                                <td>Tools → Options</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>ColorDialog</strong></td>
-                                                <td>User picks a color</td>
-                                                <td>Format → Color</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>FontDialog</strong></td>
-                                                <td>User picks a font</td>
-                                                <td>Format → Font</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PrintDialog</strong></td>
-                                                <td>User chooses print options</td>
-                                                <td>File → Print</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>MessageBox</strong></td>
-                                                <td>Shows messages to users</td>
-                                                <td>Anywhere!</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- Part 3A: Finding OpenFileDialog -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find OpenFileDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong> (View → Toolbox or Ctrl+Alt+X)</li>
+                                            <li>Find the <strong>"Dialogs"</strong> section (scroll down if needed)</li>
+                                            <li>You'll see <strong>OpenFileDialog</strong> - it looks like a folder icon</li>
+                                            <li><strong>Important:</strong> Unlike buttons, you DON'T drag this to the form!</li>
+                                            <li><strong>Instead:</strong> Drag it to the <strong>component tray</strong> - the gray area below your form</li>
+                                            <li>It will appear as a small icon below the form</li>
+                                        </ol>
+                                        <div class="alert alert-warning mt-2">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>Common Mistake:</strong> Many beginners try to drag dialogs onto the form.
+                                            They go in the COMPONENT TRAY (the gray area below the form)!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 3B: Using OpenFileDialog -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use OpenFileDialog</h5>
+                                        <p><strong>Step 1:</strong> Double-click the "Open" menu item to create the click event</p>
+                                        <p><strong>Step 2:</strong> Write this code:</p>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== OPEN FILE DIALOG - COMPLETE GUIDE =====</span>
+<span class="comment">// This code goes in your Form.cs file</span>
+
+<span class="keyword">private void</span> <span class="function">openToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 📌 STEP 1: Create a new OpenFileDialog</span>
+    <span class="comment">// This creates the dialog object in memory</span>
+    <span class="keyword">using</span> (<span class="class">OpenFileDialog</span> openFileDialog = <span class="keyword">new</span> <span class="class">OpenFileDialog</span>())
+    {
+        <span class="comment">// 📌 STEP 2: Configure the dialog</span>
+        <span class="comment">// These settings control what the user sees</span>
+        
+        <span class="comment">// 👉 Title: What shows at the top of the dialog</span>
+        openFileDialog.Title = <span class="string">"Select a file to open"</span>;
+        
+        <span class="comment">// 👉 Filter: What file types to show</span>
+        <span class="comment">// Format: "Description|*.extension|Description2|*.ext2"</span>
+        openFileDialog.Filter = <span class="string">"Text Files (*.txt)|*.txt|"</span> +
+                               <span class="string">"All Files (*.*)|*.*"</span>;
+        
+        <span class="comment">// 👉 FilterIndex: Which filter is selected by default (1-based)</span>
+        openFileDialog.FilterIndex = <span class="number">1</span>;  <span class="comment">// Shows "Text Files" first</span>
+        
+        <span class="comment">// 👉 RestoreDirectory: Remember the last folder the user was in</span>
+        openFileDialog.RestoreDirectory = <span class="keyword">true</span>;
+        
+        <span class="comment">// 👉 Multiselect: Allow user to select multiple files</span>
+        openFileDialog.Multiselect = <span class="keyword">false</span>;  <span class="comment">// Only one file at a time</span>
+        
+        <span class="comment">// 👉 InitialDirectory: Where to start looking</span>
+        openFileDialog.InitialDirectory = <span class="class">Environment</span>.<span class="function">GetFolderPath</span>(
+            <span class="class">Environment</span>.<span class="property">SpecialFolder</span>.MyDocuments);
+        
+        <span class="comment">// 📌 STEP 3: Show the dialog and check result</span>
+        <span class="comment">// ShowDialog() shows the window and waits for user action</span>
+        <span class="keyword">if</span> (openFileDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        {
+            <span class="comment">// 🎉 User clicked "Open" - now do something with the file</span>
+            
+            <span class="comment">// 👉 Get the selected file path</span>
+            <span class="keyword">string</span> filePath = openFileDialog.FileName;
+            
+            <span class="comment">// 👉 Get just the file name (without the path)</span>
+            <span class="keyword">string</span> fileName = <span class="class">Path</span>.<span class="function">GetFileName</span>(filePath);
+            
+            <span class="comment">// 👉 Read the file content</span>
+            <span class="keyword">try</span>
+            {
+                <span class="keyword">string</span> content = <span class="class">File</span>.<span class="function">ReadAllText</span>(filePath);
+                
+                <span class="comment">// 👉 Display the content in your textbox</span>
+                txtContent.Text = content;
+                
+                <span class="comment">// 👉 Update status</span>
+                lblStatus.Text = <span class="string">$"📂 Loaded: {fileName}"</span>;
+                lblStatus.ForeColor = Color.Green;
+            }
+            <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
+            {
+                <span class="comment">// 😱 Something went wrong - show error message</span>
+                <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                    <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+            }
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="comment">// 🚫 User clicked "Cancel" - do nothing</span>
+            lblStatus.Text = <span class="string">"Open cancelled"</span>;
+            lblStatus.ForeColor = Color.Blue;
+        }
+    }
+    <span class="comment">// The 'using' block automatically disposes the dialog</span>
+}</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="card bg-success text-white mt-3">
                                     <div class="card-body">
                                         <i class="fas fa-laugh-beam me-2"></i>
-                                        <strong>😂 Fun Fact:</strong> The most used dialog in WinForms is the <strong>MessageBox</strong> -
-                                        it's the "Are you sure?" king!
+                                        <strong>😂 Joke:</strong> Why did the developer open a file? Because they wanted to read something!
+                                        (Bad pun, I know - but you'll remember OpenFileDialog now!)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 📂 Part 4: Open File Dialog -->
+                    <!-- 💾 Part 4: SaveFileDialog - The Complete Guide -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
                             <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Open File Dialog - Let Users Choose Files</h3>
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Step 4: SaveFileDialog - From Zero to Hero</h3>
                             </div>
                             <div class="card-body p-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Using OpenFileDialog</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">openToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+                                <div class="alert alert-info">
+                                    <i class="fas fa-save me-2"></i>
+                                    <strong>What is SaveFileDialog?</strong> It lets users choose where to save a file. Essential for EVERY app!
+                                </div>
+
+                                <!-- Part 4A: Finding SaveFileDialog -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find SaveFileDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong> (View → Toolbox or Ctrl+Alt+X)</li>
+                                            <li>Find the <strong>"Dialogs"</strong> section</li>
+                                            <li>You'll see <strong>SaveFileDialog</strong> - it looks like a floppy disk icon</li>
+                                            <li><strong>Again:</strong> Drag it to the <strong>component tray</strong> (gray area below form)</li>
+                                        </ol>
+                                        <div class="alert alert-info mt-2">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>Note:</strong> You can also create these dialogs in code without dragging them.
+                                            Both ways work! We'll show you both methods.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Part 4B: Using SaveFileDialog -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use SaveFileDialog</h5>
+                                        <p><strong>Method 1:</strong> Using the one you dragged to the tray</p>
+                                        <p><strong>Method 2:</strong> Creating it in code (recommended for beginners)</p>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== SAVE FILE DIALOG - COMPLETE GUIDE =====</span>
+<span class="comment">// This code goes in your Form.cs file</span>
+
+<span class="keyword">private void</span> <span class="function">saveToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
 {
-    <span class="comment">// Create and configure the dialog</span>
-    <span class="keyword">using</span> (<span class="class">OpenFileDialog</span> openFileDialog = <span class="keyword">new</span> <span class="class">OpenFileDialog</span>())
+    <span class="comment">// 📌 STEP 1: Check if there's anything to save</span>
+    <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtContent.Text))
     {
-        openFileDialog.Title = <span class="string">"Select a file to open"</span>;
-        openFileDialog.Filter = <span class="string">"Text Files (*.txt)|*.txt|All Files (*.*)|*.*"</span>;
-        openFileDialog.FilterIndex = <span class="number">1</span>;
-        openFileDialog.RestoreDirectory = <span class="keyword">true</span>;
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Nothing to save - the textbox is empty!"</span>, 
+            <span class="string">"Warning"</span>, <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Warning);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// 📌 STEP 2: Create a new SaveFileDialog</span>
+    <span class="keyword">using</span> (<span class="class">SaveFileDialog</span> saveFileDialog = <span class="keyword">new</span> <span class="class">SaveFileDialog</span>())
+    {
+        <span class="comment">// 📌 STEP 3: Configure the dialog</span>
         
-        <span class="comment">// Show the dialog and check if user clicked OK</span>
-        <span class="keyword">if</span> (openFileDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        <span class="comment">// 👉 Title: What shows at the top</span>
+        saveFileDialog.Title = <span class="string">"Save your work"</span>;
+        
+        <span class="comment">// 👉 Filter: What file types to show</span>
+        saveFileDialog.Filter = <span class="string">"Text Files (*.txt)|*.txt|"</span> +
+                               <span class="string">"CSV Files (*.csv)|*.csv|"</span> +
+                               <span class="string">"All Files (*.*)|*.*"</span>;
+        
+        <span class="comment">// 👉 DefaultExt: What extension to add if user doesn't type one</span>
+        saveFileDialog.DefaultExt = <span class="string">"txt"</span>;
+        
+        <span class="comment">// 👉 AddExtension: Automatically add extension</span>
+        saveFileDialog.AddExtension = <span class="keyword">true</span>;
+        
+        <span class="comment">// 👉 OverwritePrompt: Ask if user wants to overwrite existing file</span>
+        saveFileDialog.OverwritePrompt = <span class="keyword">true</span>;
+        
+        <span class="comment">// 👉 InitialDirectory: Where to start</span>
+        saveFileDialog.InitialDirectory = <span class="class">Environment</span>.<span class="function">GetFolderPath</span>(
+            <span class="class">Environment</span>.<span class="property">SpecialFolder</span>.MyDocuments);
+        
+        <span class="comment">// 👉 FileName: Default file name (optional)</span>
+        saveFileDialog.FileName = <span class="string">"MyDocument"</span>;
+        
+        <span class="comment">// 📌 STEP 4: Show the dialog and check result</span>
+        <span class="keyword">if</span> (saveFileDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
         {
-            <span class="comment">// Read the selected file</span>
-            <span class="keyword">string</span> content = <span class="class">File</span>.<span class="function">ReadAllText</span>(openFileDialog.FileName);
-            txtContent.Text = content;
-            lblStatus.Text = <span class="string">$"Loaded: {openFileDialog.FileName}"</span>;
+            <span class="comment">// 🎉 User clicked "Save" - now save the file</span>
+            
+            <span class="comment">// 👉 Get the chosen file path</span>
+            <span class="keyword">string</span> filePath = saveFileDialog.FileName;
+            
+            <span class="comment">// 👉 Save the content</span>
+            <span class="keyword">try</span>
+            {
+                <span class="class">File</span>.<span class="function">WriteAllText</span>(filePath, txtContent.Text);
+                
+                <span class="comment">// 👉 Update status</span>
+                <span class="keyword">string</span> fileName = <span class="class">Path</span>.<span class="function">GetFileName</span>(filePath);
+                lblStatus.Text = <span class="string">$"💾 Saved: {fileName}"</span>;
+                lblStatus.ForeColor = Color.Green;
+                
+                <span class="comment">// 👉 Show success message</span>
+                <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"File saved successfully!"</span>, <span class="string">"Success"</span>,
+                    <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Information);
+            }
+            <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
+            {
+                <span class="comment">// 😱 Error saving</span>
+                <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                    <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+            }
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="comment">// 🚫 User clicked "Cancel"</span>
+            lblStatus.Text = <span class="string">"Save cancelled"</span>;
+            lblStatus.ForeColor = Color.Blue;
         }
     }
 }</code></pre>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Properties</h5>
-                                                <ul>
-                                                    <li><strong>Filter</strong> - What files to show (e.g., "*.txt")</li>
-                                                    <li><strong>Title</strong> - Dialog window title</li>
-                                                    <li><strong>FileName</strong> - The selected file path</li>
-                                                    <li><strong>RestoreDirectory</strong> - Remember last folder</li>
-                                                    <li><strong>Multiselect</strong> - Allow selecting multiple files</li>
-                                                </ul>
-                                                <div class="card bg-info text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-lightbulb me-2"></i>
-                                                        <strong>Pro Tip:</strong> Always use <code>using</code> with file dialogs
-                                                        to ensure resources are properly disposed!
-                                                    </div>
-                                                </div>
-                                            </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the developer save the file? Because they had commitment issues!
+                                        (Ctrl+S is the most pressed key combination in programming!)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🖨️ Part 5: PrintDialog - The Complete Guide -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: PrintDialog - Print Like a Pro</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-print me-2"></i>
+                                    <strong>What is PrintDialog?</strong> It lets users choose print settings and print documents.
+                                    Professional apps need this!
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find PrintDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong></li>
+                                            <li>Find the <strong>"Dialogs"</strong> section</li>
+                                            <li>You'll see <strong>PrintDialog</strong> - it looks like a printer</li>
+                                            <li>Also find <strong>PrintDocument</strong> - you need both!</li>
+                                            <li>Drag both to the component tray</li>
+                                        </ol>
+                                        <div class="alert alert-warning mt-2">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>Important:</strong> PrintDialog works with PrintDocument - they're a team!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use PrintDialog</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== PRINT DIALOG - COMPLETE GUIDE =====</span>
+<span class="comment">// Step 1: Add these two components to your form:</span>
+<span class="comment">// - PrintDialog (from Dialogs section)</span>
+<span class="comment">// - PrintDocument (from Dialogs section)</span>
+<span class="comment">// They appear in the component tray below your form</span>
+
+<span class="comment">// Step 2: In the properties of PrintDocument, set:</span>
+<span class="comment">// - DocumentName: "MyDocument"</span>
+<span class="comment">// - OriginAtMargins: True</span>
+
+<span class="comment">// Step 3: Create the PrintDocument_PrintPage event</span>
+<span class="comment">// Double-click PrintDocument in the tray → creates event handler</span>
+
+<span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
+{
+    <span class="comment">// This is where you draw what to print</span>
+    <span class="comment">// e.Graphics is like a canvas you can draw on</span>
+    
+    <span class="comment">// 👉 Set up the font and format</span>
+    <span class="keyword">using</span> (<span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>))
+    {
+        <span class="comment">// 👉 Draw the text on the page</span>
+        <span class="comment">// Parameters: text, font, brush, x position, y position</span>
+        e.Graphics.DrawString(txtContent.Text, printFont, 
+            <span class="class">Brushes</span>.Black, 
+            e.MarginBounds.Left, e.MarginBounds.Top);
+    }
+    
+    <span class="comment">// 👉 Tell the printer there are no more pages</span>
+    e.HasMorePages = <span class="keyword">false</span>;
+}
+
+<span class="comment">// Step 4: Create the Print menu item click event</span>
+<span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 📌 STEP 1: Check if there's something to print</span>
+    <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtContent.Text))
+    {
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Nothing to print - the textbox is empty!"</span>);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="comment">// 📌 STEP 2: Set up the PrintDialog</span>
+    <span class="comment">// We'll use the one you dragged to the tray</span>
+    printDialog1.Document = printDocument1;  <span class="comment">// 👈 Connect them</span>
+    printDialog1.AllowSelection = <span class="keyword">true</span>;
+    printDialog1.AllowSomePages = <span class="keyword">true</span>;
+    printDialog1.ShowHelp = <span class="keyword">true</span>;
+    
+    <span class="comment">// 📌 STEP 3: Show the PrintDialog</span>
+    <span class="comment">// The user chooses printer, number of copies, etc.</span>
+    <span class="keyword">if</span> (printDialog1.ShowDialog() == <span class="class">DialogResult</span>.OK)
+    {
+        <span class="keyword">try</span>
+        {
+            <span class="comment">// 🎉 User clicked "Print" - send to printer!</span>
+            printDocument1.Print();
+            lblStatus.Text = <span class="string">"🖨️ Document sent to printer"</span>;
+            lblStatus.ForeColor = Color.Green;
+        }
+        <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Print error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+        }
+    }
+}</code></pre>
                                         </div>
                                     </div>
                                 </div>
@@ -349,177 +604,238 @@ menuStrip.Items.Add(fileMenu);
                                 <div class="card bg-warning text-dark mt-3">
                                     <div class="card-body">
                                         <i class="fas fa-laugh-beam me-2"></i>
-                                        <strong>😂 Joke:</strong> Why did the file open?
-                                        Because it heard there was a dialog! (Bad pun, I know 😅)
+                                        <strong>😂 Joke:</strong> Why did the printer stop working? Because it ran out of paper AND patience!
+                                        (Always test print with a PDF printer first!)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 💾 Part 5: Save File Dialog -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Save File Dialog - Save User Data</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Using SaveFileDialog</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">private void</span> <span class="function">saveToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="keyword">using</span> (<span class="class">SaveFileDialog</span> saveFileDialog = <span class="keyword">new</span> <span class="class">SaveFileDialog</span>())
-    {
-        saveFileDialog.Title = <span class="string">"Save your work"</span>;
-        saveFileDialog.Filter = <span class="string">"Text Files (*.txt)|*.txt|All Files (*.*)|*.*"</span>;
-        saveFileDialog.DefaultExt = <span class="string">"txt"</span>;
-        
-        <span class="keyword">if</span> (saveFileDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
-        {
-            <span class="comment">// Save the content</span>
-            <span class="class">File</span>.<span class="function">WriteAllText</span>(saveFileDialog.FileName, txtContent.Text);
-            lblStatus.Text = <span class="string">$"Saved: {saveFileDialog.FileName}"</span>;
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"File saved successfully!"</span>, <span class="string">"Success"</span>);
-        }
-    }
-}</code></pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Common Properties</h5>
-                                                <ul>
-                                                    <li><strong>Filter</strong> - File types to show</li>
-                                                    <li><strong>DefaultExt</strong> - Default file extension</li>
-                                                    <li><strong>FileName</strong> - The chosen file path</li>
-                                                    <li><strong>OverwritePrompt</strong> - Ask before overwriting</li>
-                                                    <li><strong>AddExtension</strong> - Add extension automatically</li>
-                                                </ul>
-                                                <div class="card bg-warning text-dark mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-exclamation-triangle me-2"></i>
-                                                        <strong>Warning:</strong> Always check if the user clicked OK before saving!
-                                                        Use <code>if (saveFileDialog.ShowDialog() == DialogResult.OK)</code>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 💬 Part 6: MessageBox - The "Are You Sure?" King -->
+                    <!-- 🎨 Part 6: ColorDialog - Choose Colors -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
                             <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>MessageBox - The "Are You Sure?" King</h3>
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Step 6: ColorDialog - Pick Colors Like a Pro</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
-                                    <i class="fas fa-comment me-2"></i>
-                                    <strong>What is MessageBox?</strong> The most common dialog - it <strong>shows messages</strong>
-                                    to users and can ask for <strong>simple input</strong> (Yes/No, OK/Cancel).
+                                    <i class="fas fa-palette me-2"></i>
+                                    <strong>What is ColorDialog?</strong> It lets users choose colors from a palette.
+                                    Great for customization!
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 MessageBox Examples</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// Simple message</span>
-<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Hello World!"</span>);
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find ColorDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong></li>
+                                            <li>Find the <strong>"Dialogs"</strong> section</li>
+                                            <li>You'll see <strong>ColorDialog</strong> - it's a color palette icon</li>
+                                            <li>Drag it to the component tray</li>
+                                        </ol>
+                                    </div>
+                                </div>
 
-<span class="comment">// With title</span>
-<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Data saved!"</span>, <span class="string">"Success"</span>);
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use ColorDialog</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== COLOR DIALOG - COMPLETE GUIDE =====</span>
 
-<span class="comment">// With icon</span>
-<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"An error occurred"</span>, <span class="string">"Error"</span>, 
-    <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
-
-<span class="comment">// Ask Yes/No question</span>
-<span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Are you sure?"</span>, 
-    <span class="string">"Confirm"</span>, <span class="class">MessageBoxButtons</span>.YesNo);
-
-<span class="keyword">if</span> (result == <span class="class">DialogResult</span>.Yes)
+<span class="keyword">private void</span> <span class="function">colorToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
 {
-    <span class="comment">// User clicked Yes</span>
+    <span class="comment">// 📌 STEP 1: Create a ColorDialog</span>
+    <span class="keyword">using</span> (<span class="class">ColorDialog</span> colorDialog = <span class="keyword">new</span> <span class="class">ColorDialog</span>())
+    {
+        <span class="comment">// 📌 STEP 2: Configure it</span>
+        colorDialog.FullOpen = <span class="keyword">true</span>;  <span class="comment">// Show the full color palette</span>
+        colorDialog.AnyColor = <span class="keyword">true</span>;   <span class="comment">// Allow any color</span>
+        
+        <span class="comment">// 👉 Set the starting color (current text color)</span>
+        colorDialog.Color = txtContent.ForeColor;
+        
+        <span class="comment">// 📌 STEP 3: Show the dialog</span>
+        <span class="keyword">if</span> (colorDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        {
+            <span class="comment">// 🎉 User chose a color - apply it!</span>
+            txtContent.ForeColor = colorDialog.Color;
+            lblStatus.Text = <span class="string">$"🎨 Color changed to {colorDialog.Color.Name}"</span>;
+            lblStatus.ForeColor = colorDialog.Color;
+        }
+    }
 }</code></pre>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ MessageBox Options</h5>
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered table-sm">
-                                                        <thead class="table-dark">
-                                                            <tr>
-                                                                <th>Buttons</th>
-                                                                <th>Icons</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>OK</td>
-                                                                <td>Information</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>OKCancel</td>
-                                                                <td>Warning</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>YesNo</td>
-                                                                <td>Error</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>YesNoCancel</td>
-                                                                <td>Question</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>AbortRetryIgnore</td>
-                                                                <td>Exclamation</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="card bg-success text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-laugh-beam me-2"></i>
-                                                        <strong>😂 Fun Fact:</strong> MessageBox is so common that
-                                                        some developers use it for debugging instead of Console.WriteLine!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the developer choose blue? Because they were feeling blue!
+                                        (Or maybe they just like the color!)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 🎨 Part 7: Custom Dialogs -->
+                    <!-- ✏️ Part 7: FontDialog - Choose Fonts -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
                             <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Custom Dialogs - Your Own Pop-ups</h3>
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Step 7: FontDialog - Choose Fonts Like a Pro</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-font me-2"></i>
+                                    <strong>What is FontDialog?</strong> It lets users choose font family, size, and style.
+                                    Essential for text editors!
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find FontDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong></li>
+                                            <li>Find the <strong>"Dialogs"</strong> section</li>
+                                            <li>You'll see <strong>FontDialog</strong> - it's a font icon</li>
+                                            <li>Drag it to the component tray</li>
+                                        </ol>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use FontDialog</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== FONT DIALOG - COMPLETE GUIDE =====</span>
+
+<span class="keyword">private void</span> <span class="function">fontToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 📌 STEP 1: Create a FontDialog</span>
+    <span class="keyword">using</span> (<span class="class">FontDialog</span> fontDialog = <span class="keyword">new</span> <span class="class">FontDialog</span>())
+    {
+        <span class="comment">// 📌 STEP 2: Configure it</span>
+        fontDialog.ShowColor = <span class="keyword">true</span>;  <span class="comment">// Also show color picker</span>
+        fontDialog.AllowVectorFonts = <span class="keyword">true</span>;
+        fontDialog.ShowEffects = <span class="keyword">true</span>;
+        
+        <span class="comment">// 👉 Set the starting font (current text font)</span>
+        fontDialog.Font = txtContent.Font;
+        fontDialog.Color = txtContent.ForeColor;
+        
+        <span class="comment">// 📌 STEP 3: Show the dialog</span>
+        <span class="keyword">if</span> (fontDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        {
+            <span class="comment">// 🎉 User chose a font - apply it!</span>
+            txtContent.Font = fontDialog.Font;
+            txtContent.ForeColor = fontDialog.Color;
+            
+            lblStatus.Text = <span class="string">$"✏️ Font changed to {fontDialog.Font.Name} ({fontDialog.Font.Size}pt)"</span>;
+            lblStatus.ForeColor = Color.Green;
+        }
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the developer choose Comic Sans? Because they wanted to get fired!
+                                        (Pro tip: NEVER use Comic Sans in a professional app!)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📁 Part 8: FolderBrowserDialog -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Step 8: FolderBrowserDialog - Choose Folders</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-folder me-2"></i>
+                                    <strong>What is FolderBrowserDialog?</strong> It lets users choose a folder instead of a file.
+                                    Great for "Save to folder" features!
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-search text-primary me-2"></i>🔍 Where to Find FolderBrowserDialog</h5>
+                                        <ol>
+                                            <li>Open the <strong>Toolbox</strong></li>
+                                            <li>Find the <strong>"Dialogs"</strong> section</li>
+                                            <li>You'll see <strong>FolderBrowserDialog</strong> - it's a folder icon</li>
+                                            <li>Drag it to the component tray</li>
+                                        </ol>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-code text-primary me-2"></i>💻 How to Use FolderBrowserDialog</h5>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== FOLDER BROWSER DIALOG - COMPLETE GUIDE =====</span>
+
+<span class="keyword">private void</span> <span class="function">folderToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 📌 STEP 1: Create a FolderBrowserDialog</span>
+    <span class="keyword">using</span> (<span class="class">FolderBrowserDialog</span> folderDialog = <span class="keyword">new</span> <span class="class">FolderBrowserDialog</span>())
+    {
+        <span class="comment">// 📌 STEP 2: Configure it</span>
+        folderDialog.Description = <span class="string">"Select a folder to save your files"</span>;
+        folderDialog.ShowNewFolderButton = <span class="keyword">true</span>;
+        folderDialog.RootFolder = <span class="class">Environment</span>.<span class="property">SpecialFolder</span>.MyComputer;
+        folderDialog.SelectedPath = <span class="class">Environment</span>.<span class="function">GetFolderPath</span>(
+            <span class="class">Environment</span>.<span class="property">SpecialFolder</span>.MyDocuments);
+        
+        <span class="comment">// 📌 STEP 3: Show the dialog</span>
+        <span class="keyword">if</span> (folderDialog.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        {
+            <span class="comment">// 🎉 User chose a folder</span>
+            <span class="keyword">string</span> selectedFolder = folderDialog.SelectedPath;
+            
+            <span class="comment">// 👉 Show the selected path</span>
+            lblStatus.Text = <span class="string">$"📁 Selected folder: {selectedFolder}"</span>;
+            lblStatus.ForeColor = Color.Green;
+            
+            <span class="comment">// 👉 You can now use this folder to save files</span>
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"You selected:\n{selectedFolder}"</span>, 
+                <span class="string">"Folder Selected"</span>);
+        }
+    }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the developer choose the folder? Because they wanted to organize their life!
+                                        (We all need to organize our files!)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎨 Part 9: Custom Dialogs -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="900">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-9 me-2"></i>Step 9: Custom Dialogs - Your Own Pop-ups</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
                                     <i class="fas fa-paint-brush me-2"></i>
-                                    <strong>What are Custom Dialogs?</strong> Sometimes you need <strong>your own dialog</strong>
-                                    with specific controls - like a "Settings" or "About" window.
+                                    <strong>What are Custom Dialogs?</strong> Sometimes you need your own dialog with specific controls - like an "About" or "Settings" window.
                                 </div>
 
                                 <div class="row">
@@ -528,40 +844,67 @@ menuStrip.Items.Add(fileMenu);
                                             <div class="card-body">
                                                 <h5><i class="fas fa-code text-primary me-2"></i>📝 Creating a Custom Dialog</h5>
                                                 <ol>
-                                                    <li><strong>Add a new form</strong> (Project → Add Windows Form)</li>
-                                                    <li><strong>Name it</strong> "AboutBox" or "SettingsForm"</li>
-                                                    <li><strong>Design it</strong> with labels, buttons, etc.</li>
-                                                    <li><strong>Show it</strong> from your main form</li>
+                                                    <li>
+                                                        <strong>Add a new form</strong>
+                                                        <ul>
+                                                            <li>Right-click project → Add → Windows Form</li>
+                                                            <li>Name it "AboutBox" or "SettingsForm"</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Design it</strong>
+                                                        <ul>
+                                                            <li>Add labels, picture boxes, buttons</li>
+                                                            <li>Set FormBorderStyle = FixedDialog</li>
+                                                            <li>Set MinimizeBox = false</li>
+                                                            <li>Set MaximizeBox = false</li>
+                                                            <li>Set StartPosition = CenterParent</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Add a button with DialogResult</strong>
+                                                        <ul>
+                                                            <li>Add an "OK" button</li>
+                                                            <li>Set its DialogResult property to OK</li>
+                                                        </ul>
+                                                    </li>
                                                 </ol>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// Showing a custom dialog</span>
-<span class="keyword">private void</span> <span class="function">aboutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="class">AboutBox</span> aboutBox = <span class="keyword">new</span> <span class="class">AboutBox</span>();
-    aboutBox.ShowDialog();  <span class="comment">// Shows as a modal dialog</span>
-}</code></pre>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Dialog Properties</h5>
-                                                <ul>
-                                                    <li><strong>FormBorderStyle</strong> - FixedDialog (can't resize)</li>
-                                                    <li><strong>MinimizeBox</strong> - false (no minimize button)</li>
-                                                    <li><strong>MaximizeBox</strong> - false (no maximize button)</li>
-                                                    <li><strong>ShowInTaskbar</strong> - false (doesn't appear in taskbar)</li>
-                                                    <li><strong>StartPosition</strong> - CenterParent (appears centered)</li>
-                                                </ul>
-                                                <div class="card bg-info text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-lightbulb me-2"></i>
-                                                        <strong>Pro Tip:</strong> Set <code>DialogResult</code> on buttons
-                                                        so you know which button was clicked!
-                                                    </div>
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using the Custom Dialog</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// ===== ABOUT BOX - CUSTOM DIALOG =====</span>
+
+<span class="comment">// AboutBox.cs - The dialog form</span>
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">AboutBox</span> : <span class="class">Form</span>
+{
+    <span class="keyword">public</span> <span class="function">AboutBox</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+        
+        <span class="comment">// Set the text in the labels</span>
+        lblAppName.Text = <span class="string">"My Awesome App"</span>;
+        lblVersion.Text = <span class="string">"Version 1.0.0"</span>;
+        lblDescription.Text = <span class="string">"Built with C# and WinForms"</span>;
+        lblCopyright.Text = <span class="string">"© 2024 My Company"</span>;
+    }
+}
+
+<span class="comment">// MainForm.cs - Show the dialog</span>
+<span class="keyword">private void</span> <span class="function">aboutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// Create and show the About Box</span>
+    <span class="keyword">using</span> (<span class="class">AboutBox</span> aboutBox = <span class="keyword">new</span> <span class="class">AboutBox</span>())
+    {
+        aboutBox.ShowDialog();  <span class="comment">// Shows as modal dialog</span>
+    }
+}</code></pre>
                                                 </div>
+                                                <p><span class="badge bg-success">✅</span> Users click About → See your custom dialog!</p>
                                             </div>
                                         </div>
                                     </div>
@@ -571,88 +914,78 @@ menuStrip.Items.Add(fileMenu);
                                     <div class="card-body">
                                         <i class="fas fa-laugh-beam me-2"></i>
                                         <strong>😂 Joke:</strong> Why did the custom dialog break up with the main form?
-                                        Because it needed its own space! (Get it? Dialog box? ...I'll stop 😅)
+                                        Because it needed its own space! (I'll show myself out 😅)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 🎮 Part 8: Exercise -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                    <!-- 🎮 Part 10: Complete Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="1000">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>🎯 Master Exercise: Build a Complete Text Editor</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-success">
                                     <i class="fas fa-rocket me-2"></i>
-                                    <strong>Your Challenge:</strong> Create a text editor with menus and dialogs!
+                                    <strong>Your Challenge:</strong> Build a complete text editor with ALL dialogs!
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="card bg-light">
                                             <div class="card-body">
-                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
-                                                <ol>
-                                                    <li>
-                                                        <strong>Create a new WinForms project</strong>
+                                                <h6><i class="fas fa-list text-primary me-2"></i>What You'll Build:</h6>
+                                                <div class="row">
+                                                    <div class="col-md-6">
                                                         <ul>
-                                                            <li>Name it "SimpleTextEditor"</li>
+                                                            <li>
+                                                                <strong>MenuStrip with:</strong>
+                                                                <ul>
+                                                                    <li>📂 File → New, Open, Save, Save As, Print, Exit</li>
+                                                                    <li>✏️ Edit → Cut, Copy, Paste, Select All</li>
+                                                                    <li>🎨 Format → Font, Color</li>
+                                                                    <li>📁 Tools → Choose Folder</li>
+                                                                    <li>❓ Help → About</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <strong>TextBox:</strong>
+                                                                <ul>
+                                                                    <li>Dock = Fill</li>
+                                                                    <li>Multiline = true</li>
+                                                                    <li>ScrollBars = Both</li>
+                                                                    <li>WordWrap = true</li>
+                                                                </ul>
+                                                            </li>
                                                         </ul>
-                                                    </li>
-                                                    <li>
-                                                        <strong>Add a MenuStrip with:</strong>
+                                                    </div>
+                                                    <div class="col-md-6">
                                                         <ul>
-                                                            <li>📂 File → New, Open, Save, Exit</li>
-                                                            <li>✏️ Edit → Cut, Copy, Paste</li>
-                                                            <li>❓ Help → About</li>
+                                                            <li>
+                                                                <strong>StatusStrip:</strong>
+                                                                <ul>
+                                                                    <li>Show file name</li>
+                                                                    <li>Show word count</li>
+                                                                    <li>Show character count</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <strong>All Dialogs:</strong>
+                                                                <ul>
+                                                                    <li>OpenFileDialog</li>
+                                                                    <li>SaveFileDialog</li>
+                                                                    <li>PrintDialog</li>
+                                                                    <li>PrintDocument</li>
+                                                                    <li>ColorDialog</li>
+                                                                    <li>FontDialog</li>
+                                                                    <li>FolderBrowserDialog</li>
+                                                                    <li>Custom About Dialog</li>
+                                                                </ul>
+                                                            </li>
                                                         </ul>
-                                                    </li>
-                                                    <li>
-                                                        <strong>Add a TextBox</strong>
-                                                        <ul>
-                                                            <li>Dock = Fill</li>
-                                                            <li>Multiline = true</li>
-                                                            <li>ScrollBars = Both</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <strong>Add a StatusStrip</strong>
-                                                        <ul>
-                                                            <li>Show word count, file name, etc.</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <strong>Implement all menu items</strong>
-                                                        <ul>
-                                                            <li>New: Clear the textbox</li>
-                                                            <li>Open: Use OpenFileDialog</li>
-                                                            <li>Save: Use SaveFileDialog</li>
-                                                            <li>Exit: Confirm with MessageBox</li>
-                                                            <li>About: Custom About dialog</li>
-                                                        </ul>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light">
-                                            <div class="card-body">
-                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
-                                                <ul>
-                                                    <li>✅ How to create professional menus</li>
-                                                    <li>✅ How to use OpenFileDialog and SaveFileDialog</li>
-                                                    <li>✅ How to create custom dialogs</li>
-                                                    <li>✅ How to use MessageBox for confirmations</li>
-                                                    <li>✅ How to build a complete, working application</li>
-                                                </ul>
-                                                <div class="card bg-success text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-check-circle me-2"></i>
-                                                        <strong>Result:</strong> A fully functional text editor with menus and dialogs!
                                                     </div>
                                                 </div>
                                             </div>
@@ -667,7 +1000,9 @@ menuStrip.Items.Add(fileMenu);
                                 <div id="solution" style="display: none; margin-top: 20px;">
                                     <div class="p-3 rounded border" style="background: #1e1e2e;">
                                         <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="comment">// ===== SIMPLE TEXT EDITOR =====</span>
+                                            <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE TEXT EDITOR WITH ALL DIALOGS =====</span>
+<span class="comment">// This is a fully functional text editor</span>
+<span class="comment">// that uses EVERY dialog we learned</span>
 
 <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">MainForm</span> : <span class="class">Form</span>
 {
@@ -680,8 +1015,9 @@ menuStrip.Items.Add(fileMenu);
         <span class="function">UpdateStatus</span>();
     }
     
-    <span class="comment">// 📂 FILE MENU</span>
+    <span class="comment">// ===== 📂 FILE MENU =====</span>
     
+    <span class="comment">// ✅ New Document</span>
     <span class="keyword">private void</span> <span class="function">newToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
         <span class="keyword">if</span> (<span class="function">CheckSaveChanges</span>())
@@ -693,14 +1029,16 @@ menuStrip.Items.Add(fileMenu);
         }
     }
     
+    <span class="comment">// ✅ Open File (OpenFileDialog)</span>
     <span class="keyword">private void</span> <span class="function">openToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
         <span class="keyword">if</span> (!<span class="function">CheckSaveChanges</span>()) <span class="keyword">return</span>;
         
         <span class="keyword">using</span> (<span class="class">OpenFileDialog</span> openDlg = <span class="keyword">new</span> <span class="class">OpenFileDialog</span>())
         {
-            openDlg.Filter = <span class="string">"Text Files (*.txt)|*.txt|All Files (*.*)|*.*"</span>;
             openDlg.Title = <span class="string">"Open a text file"</span>;
+            openDlg.Filter = <span class="string">"Text Files (*.txt)|*.txt|All Files (*.*)|*.*"</span>;
+            openDlg.RestoreDirectory = <span class="keyword">true</span>;
             
             <span class="keyword">if</span> (openDlg.ShowDialog() == <span class="class">DialogResult</span>.OK)
             {
@@ -713,13 +1051,14 @@ menuStrip.Items.Add(fileMenu);
                 }
                 <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
                 {
-                    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error opening file: {ex.Message}"</span>, 
-                        <span class="string">"Error"</span>, <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+                    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                        <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
                 }
             }
         }
     }
     
+    <span class="comment">// ✅ Save File (SaveFileDialog)</span>
     <span class="keyword">private void</span> <span class="function">saveToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
         <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(currentFileName))
@@ -727,17 +1066,18 @@ menuStrip.Items.Add(fileMenu);
             <span class="function">saveAsToolStripMenuItem_Click</span>(sender, e);
             <span class="keyword">return</span>;
         }
-        
         <span class="function">SaveFile</span>(currentFileName);
     }
     
+    <span class="comment">// ✅ Save As (SaveFileDialog)</span>
     <span class="keyword">private void</span> <span class="function">saveAsToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
         <span class="keyword">using</span> (<span class="class">SaveFileDialog</span> saveDlg = <span class="keyword">new</span> <span class="class">SaveFileDialog</span>())
         {
+            saveDlg.Title = <span class="string">"Save your file"</span>;
             saveDlg.Filter = <span class="string">"Text Files (*.txt)|*.txt|All Files (*.*)|*.*"</span>;
             saveDlg.DefaultExt = <span class="string">"txt"</span>;
-            saveDlg.Title = <span class="string">"Save your file"</span>;
+            saveDlg.OverwritePrompt = <span class="keyword">true</span>;
             
             <span class="keyword">if</span> (saveDlg.ShowDialog() == <span class="class">DialogResult</span>.OK)
             {
@@ -755,21 +1095,63 @@ menuStrip.Items.Add(fileMenu);
             <span class="class">File</span>.<span class="function">WriteAllText</span>(fileName, txtContent.Text);
             hasChanges = <span class="keyword">false</span>;
             <span class="function">UpdateStatus</span>();
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"File saved successfully!"</span>, <span class="string">"Success"</span>);
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"File saved successfully!"</span>, <span class="string">"Success"</span>,
+                <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Information);
         }
         <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
         {
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error saving file: {ex.Message}"</span>, 
-                <span class="string">"Error"</span>, <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
         }
     }
     
+    <span class="comment">// ✅ Print (PrintDialog + PrintDocument)</span>
+    <span class="keyword">private void</span> <span class="function">printToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtContent.Text))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Nothing to print!"</span>, <span class="string">"Warning"</span>,
+                <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Warning);
+            <span class="keyword">return</span>;
+        }
+        
+        printDialog1.Document = printDocument1;
+        
+        <span class="keyword">if</span> (printDialog1.ShowDialog() == <span class="class">DialogResult</span>.OK)
+        {
+            <span class="keyword">try</span>
+            {
+                printDocument1.Print();
+                lblStatus.Text = <span class="string">"🖨️ Document sent to printer"</span>;
+                lblStatus.ForeColor = Color.Green;
+            }
+            <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
+            {
+                <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Print error: {ex.Message}"</span>, <span class="string">"Error"</span>,
+                    <span class="class">MessageBoxButtons</span>.OK, <span class="class">MessageBoxIcon</span>.Error);
+            }
+        }
+    }
+    
+    <span class="comment">// ✅ PrintDocument event</span>
+    <span class="keyword">private void</span> <span class="function">printDocument1_PrintPage</span>(<span class="keyword">object</span> sender, <span class="class">PrintPageEventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="class">Font</span> printFont = <span class="keyword">new</span> <span class="class">Font</span>(<span class="string">"Arial"</span>, <span class="number">12</span>))
+        {
+            e.Graphics.DrawString(txtContent.Text, printFont, 
+                <span class="class">Brushes</span>.Black, 
+                e.MarginBounds.Left, e.MarginBounds.Top);
+        }
+        e.HasMorePages = <span class="keyword">false</span>;
+    }
+    
+    <span class="comment">// ✅ Exit</span>
     <span class="keyword">private void</span> <span class="function">exitToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
         <span class="function">Close</span>();
     }
     
-    <span class="comment">// ✏️ EDIT MENU</span>
+    <span class="comment">// ===== ✏️ EDIT MENU =====</span>
     
     <span class="keyword">private void</span> <span class="function">cutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
@@ -800,15 +1182,77 @@ menuStrip.Items.Add(fileMenu);
         }
     }
     
-    <span class="comment">// ❓ HELP MENU</span>
-    
-    <span class="keyword">private void</span> <span class="function">aboutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    <span class="keyword">private void</span> <span class="function">selectAllToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
-        <span class="class">AboutBox</span> about = <span class="keyword">new</span> <span class="class">AboutBox</span>();
-        about.ShowDialog();
+        txtContent.SelectAll();
     }
     
-    <span class="comment">// 📊 STATUS AND HELPERS</span>
+    <span class="comment">// ===== 🎨 FORMAT MENU =====</span>
+    
+    <span class="comment">// ✅ Font Dialog</span>
+    <span class="keyword">private void</span> <span class="function">fontToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="class">FontDialog</span> fontDlg = <span class="keyword">new</span> <span class="class">FontDialog</span>())
+        {
+            fontDlg.Font = txtContent.Font;
+            fontDlg.Color = txtContent.ForeColor;
+            fontDlg.ShowColor = <span class="keyword">true</span>;
+            
+            <span class="keyword">if</span> (fontDlg.ShowDialog() == <span class="class">DialogResult</span>.OK)
+            {
+                txtContent.Font = fontDlg.Font;
+                txtContent.ForeColor = fontDlg.Color;
+                <span class="function">UpdateStatus</span>();
+            }
+        }
+    }
+    
+    <span class="comment">// ✅ Color Dialog</span>
+    <span class="keyword">private void</span> <span class="function">colorToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="class">ColorDialog</span> colorDlg = <span class="keyword">new</span> <span class="class">ColorDialog</span>())
+        {
+            colorDlg.Color = txtContent.ForeColor;
+            colorDlg.FullOpen = <span class="keyword">true</span>;
+            
+            <span class="keyword">if</span> (colorDlg.ShowDialog() == <span class="class">DialogResult</span>.OK)
+            {
+                txtContent.ForeColor = colorDlg.Color;
+                <span class="function">UpdateStatus</span>();
+            }
+        }
+    }
+    
+    <span class="comment">// ===== 📁 TOOLS MENU =====</span>
+    
+    <span class="comment">// ✅ FolderBrowserDialog</span>
+    <span class="keyword">private void</span> <span class="function">folderToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="class">FolderBrowserDialog</span> folderDlg = <span class="keyword">new</span> <span class="class">FolderBrowserDialog</span>())
+        {
+            folderDlg.Description = <span class="string">"Select a folder"</span>;
+            folderDlg.ShowNewFolderButton = <span class="keyword">true</span>;
+            
+            <span class="keyword">if</span> (folderDlg.ShowDialog() == <span class="class">DialogResult</span>.OK)
+            {
+                lblStatus.Text = <span class="string">$"📁 Selected: {folderDlg.SelectedPath}"</span>;
+                lblStatus.ForeColor = Color.Green;
+            }
+        }
+    }
+    
+    <span class="comment">// ===== ❓ HELP MENU =====</span>
+    
+    <span class="comment">// ✅ Custom About Dialog</span>
+    <span class="keyword">private void</span> <span class="function">aboutToolStripMenuItem_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="class">AboutBox</span> aboutBox = <span class="keyword">new</span> <span class="class">AboutBox</span>())
+        {
+            aboutBox.ShowDialog();
+        }
+    }
+    
+    <span class="comment">// ===== 📊 STATUS BAR =====</span>
     
     <span class="keyword">private void</span> <span class="function">txtContent_TextChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
     {
@@ -818,23 +1262,30 @@ menuStrip.Items.Add(fileMenu);
     
     <span class="keyword">private void</span> <span class="function">UpdateStatus</span>()
     {
-        <span class="keyword">int</span> wordCount = txtContent.Text.<span class="function">Split</span>(<span class="keyword">new</span> <span class="keyword">char</span>[] { <span class="string">' '</span>, <span class="string">'\n'</span>, <span class="string">'\r'</span> }, 
+        <span class="comment">// Word count</span>
+        <span class="keyword">int</span> wordCount = txtContent.Text.<span class="function">Split</span>(
+            <span class="keyword">new</span> <span class="keyword">char</span>[] { <span class="string">' '</span>, <span class="string">'\n'</span>, <span class="string">'\r'</span> },
             <span class="class">StringSplitOptions</span>.RemoveEmptyEntries).Length;
         
-        <span class="keyword">string</span> fileName = <span class="keyword">string</span>.IsNullOrWhiteSpace(currentFileName) ? 
+        <span class="comment">// File name</span>
+        <span class="keyword">string</span> fileName = <span class="keyword">string</span>.IsNullOrWhiteSpace(currentFileName) ?
             <span class="string">"Untitled"</span> : <span class="class">Path</span>.<span class="function">GetFileName</span>(currentFileName);
         
+        <span class="comment">// Modified marker</span>
         <span class="keyword">string</span> modified = hasChanges ? <span class="string">" *"</span> : <span class="string">""</span>;
         
-        lblStatus.Text = <span class="string">$"📄 {fileName}{modified} | 📊 Words: {wordCount} | 📝 Characters: {txtContent.Text.Length}"</span>;
+        <span class="comment">// Update status bar</span>
+        lblStatus.Text = <span class="string">$"📄 {fileName}{modified} | 📊 Words: {wordCount} | 📝 Chars: {txtContent.Text.Length}"</span>;
     }
+    
+    <span class="comment">// ===== 🚪 FORM CLOSING =====</span>
     
     <span class="keyword">private bool</span> <span class="function">CheckSaveChanges</span>()
     {
         <span class="keyword">if</span> (!hasChanges) <span class="keyword">return</span> <span class="keyword">true</span>;
         
         <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(
-            <span class="string">"Do you want to save changes before closing?"</span>,
+            <span class="string">"Do you want to save changes?"</span>,
             <span class="string">"Unsaved Changes"</span>,
             <span class="class">MessageBoxButtons</span>.YesNoCancel,
             <span class="class">MessageBoxIcon</span>.Warning
@@ -843,19 +1294,15 @@ menuStrip.Items.Add(fileMenu);
         <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.Yes)
         {
             <span class="function">saveToolStripMenuItem_Click</span>(<span class="keyword">this</span>, <span class="class">EventArgs</span>.Empty);
-            <span class="keyword">return</span> !hasChanges;  <span class="comment">// Return true if saved</span>
+            <span class="keyword">return</span> !hasChanges;
         }
         <span class="keyword">else</span> <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.No)
         {
-            <span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">// Discard changes</span>
+            <span class="keyword">return</span> <span class="keyword">true</span>;
         }
-        <span class="keyword">else</span>
-        {
-            <span class="keyword">return</span> <span class="keyword">false</span>;  <span class="comment">// Cancel - don't continue</span>
-        }
+        <span class="keyword">return</span> <span class="keyword">false</span>;
     }
     
-    <span class="comment">// 🚪 Form Closing</span>
     <span class="keyword">private void</span> <span class="function">MainForm_FormClosing</span>(<span class="keyword">object</span> sender, <span class="class">FormClosingEventArgs</span> e)
     {
         <span class="keyword">if</span> (!<span class="function">CheckSaveChanges</span>())
@@ -866,27 +1313,24 @@ menuStrip.Items.Add(fileMenu);
 }
 
 <span class="comment">// ===== ABOUT BOX (Custom Dialog) =====</span>
+
 <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">AboutBox</span> : <span class="class">Form</span>
 {
     <span class="keyword">public</span> <span class="function">AboutBox</span>()
     {
         <span class="function">InitializeComponent</span>();
         
-        lblAppName.Text = <span class="string">"Simple Text Editor"</span>;
+        <span class="comment">// Set the text in the labels</span>
+        lblAppName.Text = <span class="string">"My Awesome Text Editor"</span>;
         lblVersion.Text = <span class="string">"Version 1.0.0"</span>;
-        lblDescription.Text = <span class="string">"A simple text editor built with WinForms"</span>;
+        lblDescription.Text = <span class="string">"Built with C# and WinForms\nusing all dialogs and menus"</span>;
         lblCopyright.Text = <span class="string">"© 2024 C# Mastery Hub"</span>;
-    }
-    
-    <span class="keyword">private void</span> <span class="function">btnOK_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="function">Close</span>();
     }
 }</code></pre>
                                         </div>
                                         <div class="mt-3">
                                             <span class="badge bg-success fs-6">✅ Complete Solution!</span>
-                                            <span class="badge bg-info fs-6 ms-2">You've built a professional text editor with menus and dialogs!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a professional text editor using ALL dialogs!</span>
                                         </div>
                                     </div>
                                 </div>
@@ -897,62 +1341,69 @@ menuStrip.Items.Add(fileMenu);
                     <!-- 📝 Summary -->
                     <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
                         <div class="card-body p-5">
-                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 Mastery Summary - What You Learned Today!</h3>
                             <div class="row mt-4">
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-bars fa-3x mb-2"></i>
                                         <h5>Menus</h5>
-                                        <small>Professional navigation</small>
+                                        <small>File, Edit, Help</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-folder-open fa-3x mb-2"></i>
-                                        <h5>Open Dialog</h5>
+                                        <h5>OpenFileDialog</h5>
                                         <small>Open files</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-save fa-3x mb-2"></i>
-                                        <h5>Save Dialog</h5>
+                                        <h5>SaveFileDialog</h5>
                                         <small>Save files</small>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <i class="fas fa-comment fa-3x mb-2"></i>
-                                        <h5>MessageBox</h5>
-                                        <small>User interaction</small>
+                                        <i class="fas fa-print fa-3x mb-2"></i>
+                                        <h5>PrintDialog</h5>
+                                        <small>Print documents</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-palette fa-3x mb-2"></i>
+                                        <h5>ColorDialog</h5>
+                                        <small>Choose colors</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-font fa-3x mb-2"></i>
+                                        <h5>FontDialog</h5>
+                                        <small>Choose fonts</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-folder fa-3x mb-2"></i>
+                                        <h5>FolderBrowserDialog</h5>
+                                        <small>Choose folders</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="text-center">
                                         <i class="fas fa-paint-brush fa-3x mb-2"></i>
                                         <h5>Custom Dialogs</h5>
-                                        <small>Your own pop-ups</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-keyboard fa-3x mb-2"></i>
-                                        <h5>Shortcuts</h5>
-                                        <small>Ctrl+S, Ctrl+O</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-file-alt fa-3x mb-2"></i>
-                                        <h5>Text Editor</h5>
-                                        <small>Real app example</small>
+                                        <small>About, Settings</small>
                                     </div>
                                 </div>
                             </div>
                             <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
-                                🎯 You're now ready to build professional Windows applications with menus and dialogs!
+                                🎯 You're now a MASTER of Menus and Dialogs in WinForms!
                             </p>
                         </div>
                     </div>
@@ -1012,64 +1463,95 @@ menuStrip.Items.Add(fileMenu);
             position: relative;
             overflow: hidden;
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
-            pointer-events: none;
-        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.03);
+                border-radius: 50%;
+                pointer-events: none;
+            }
 
         /* Code Block Styling */
         .code-block {
             position: relative;
         }
 
-        .code-block pre {
-            background: #1e1e2e !important;
-            color: #cdd6f4 !important;
-            padding: 1.2rem;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            border-left: 6px solid #89b4fa;
-            margin: 0;
-        }
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
 
-        .code-block.small pre {
-            font-size: 0.75rem;
-            padding: 0.8rem;
-        }
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
 
-        .code-block code {
-            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
-            line-height: 1.6;
-        }
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
 
         /* Visual Studio-like color scheme */
-        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
-        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
-        .language-csharp .string { color: #c3e88d !important; }
-        .language-csharp .number { color: #f78c6c !important; }
-        .language-csharp .function { color: #82aaff !important; }
-        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
-        .language-csharp .property { color: #80cbc4 !important; }
-        .language-csharp .variable { color: #eeffff !important; }
-        .language-csharp .operator { color: #89ddff !important; }
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
 
         /* Card hover effects */
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card:hover:not(.bg-light) {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
 
         /* Badge styling */
         .badge {
@@ -1082,41 +1564,52 @@ menuStrip.Items.Add(fileMenu);
             border: none;
             transition: all 0.3s;
         }
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
 
         .btn-outline-primary {
             border-radius: 50px;
             transition: all 0.3s;
         }
-        .btn-outline-primary:hover {
-            transform: scale(1.05);
-        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
 
         /* Solution animation */
         #solution {
             animation: fadeSlide 0.5s ease;
         }
         @@keyframes fadeSlide {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* List styling */
         .bg-light ul {
             padding-left: 1.5rem;
         }
-        .bg-light ul li {
-            margin-bottom: 0.3rem;
-        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
 
         /* Responsive adjustments */
         @@media (max-width: 768px) {
             .display-2 {
                 font-size: 2.5rem;
             }
+
             .display-6 {
                 font-size: 1.5rem;
             }

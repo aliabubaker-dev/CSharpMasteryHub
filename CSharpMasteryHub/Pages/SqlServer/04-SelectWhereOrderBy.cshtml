@@ -1,77 +1,826 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.SelectWhereOrderByModel
 @{
-    ViewData["Title"] = "SELECT, WHERE, ORDER BY";
+    ViewData["Title"] = "SELECT, WHERE, ORDER BY - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">SELECT, WHERE, ORDER BY</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">SELECT with WHERE and ORDER BY</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 4 of 10</span>
-                </div>
-
-                <h2>SELECT — reading data</h2>
-                <pre><code>SELECT * FROM Students;
-SELECT StudentId, FirstName, LastName FROM Students;</code></pre>
-
-                <h2>WHERE — filtering</h2>
-                <pre><code>SELECT * FROM Students
-WHERE LastName = 'Ahmed';
-
-SELECT * FROM Students
-WHERE YEAR(EnrolledOn) = 2024;
-
-SELECT * FROM Students
-WHERE Email LIKE '%@@%';</code></pre>
-
-
-                <h2>ORDER BY — sorting</h2>
-                <pre><code>SELECT * FROM Students
-ORDER BY LastName ASC;
-
-SELECT * FROM Students
-ORDER BY EnrolledOn DESC;</code></pre>
-
-                <h2>WHERE + ORDER BY together</h2>
-                <pre><code>SELECT * FROM Students
-WHERE LastName = 'Ahmed'
-ORDER BY FirstName;</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>SELECT retrieves data, WHERE filters it, and ORDER BY sorts it. These are the most used SQL operations.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">SELECT, WHERE, ORDER BY</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        SELECT, WHERE, ORDER BY 🔍
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Find, Filter, and Sort Your Data - Two Ways!
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 4 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/SqlServer/05-Joins" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-search fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Find, Filter, and Sort Your Data! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn the <strong>most important SQL commands</strong>:
+                                        <strong>SELECT</strong> (get data), <strong>WHERE</strong> (filter data), and
+                                        <strong>ORDER BY</strong> (sort data). You'll learn <strong>TWO ways</strong> to do this!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ SELECT data from tables (get what you need)</li>
+                                            <li>✅ Filter data with WHERE (find specific records)</li>
+                                            <li>✅ Sort data with ORDER BY (organize your results)</li>
+                                            <li>✅ Use the SSMS visual designer (right-click menus)</li>
+                                            <li>✅ Write SQL queries (the professional way)</li>
+                                            <li>✅ Build real-world queries for any application!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: SELECT - Getting Your Data -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-eye me-2"></i>Part 1: SELECT - Getting Your Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What is SELECT?</strong> It's how you <strong>ask</strong> the database for data.
+                                    Like saying "Show me all students" or "Show me just the names."
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-mouse-pointer text-primary me-2"></i>🖱️ Method 1: Visual (SSMS)</h5>
+                                                <ol>
+                                                    <li>Right-click your table → <strong>Select Top 1000 Rows</strong></li>
+                                                    <li>This automatically generates the SELECT query</li>
+                                                    <li>You can modify the query in the query window</li>
+                                                    <li>Press <kbd>F5</kbd> to see the results</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ No typing needed!</strong> Right-click and see data instantly!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Method 2: SQL Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get everything from the table</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;
+
+<span class="comment">-- Get only specific columns</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span> 
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;
+
+<span class="comment">-- Get unique values only</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">DISTINCT</span> <span style="color: #82aaff;">City</span> 
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Key Points:</strong></p>
+                                                <ul>
+                                                    <li><code>*</code> = All columns</li>
+                                                    <li><code>DISTINCT</code> = Unique values only</li>
+                                                    <li>Always end with a semicolon <code>;</code></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the SELECT * FROM Students return nothing?
+                                        Because the students were all hiding! (Bad database joke 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔍 Part 2: WHERE - Filtering Your Data -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-filter me-2"></i>Part 2: WHERE - Filtering Your Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What is WHERE?</strong> It's like asking "Show me ONLY the students who..."
+                                    It filters your data based on conditions.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-mouse-pointer text-primary me-2"></i>🖱️ Visual Way (Filter with Right-Click)</h5>
+                                                <ol>
+                                                    <li>Right-click your table → <strong>Select Top 1000 Rows</strong></li>
+                                                    <li>In the query window, find <code>WHERE</code> clause</li>
+                                                    <li>Type your condition, e.g., <code>WHERE LastName = 'Smith'</code></li>
+                                                    <li>Press <kbd>F5</kbd> to see filtered results</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>💡 Pro Tip:</strong> You can also right-click a value in the results grid
+                                                        and select "Filter by Selection"!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Way</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Exact match</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">LastName</span> = <span style="color: #c3e88d;">'Smith'</span>;
+
+<span class="comment">-- Greater than</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">18</span>;
+
+<span class="comment">-- Like - find patterns</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Email</span> <span style="color: #ffcb6b;">LIKE</span> <span style="color: #c3e88d;">'%@@%'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Common WHERE Operators:</strong></p>
+                                                <ul>
+                                                    <li><code>=</code> Equal to</li>
+                                                    <li><code>></code> Greater than</li>
+                                                    <li><code><</code> Less than</li>
+                                                    <li><code>LIKE</code> Pattern matching</li>
+                                                    <li><code>IN</code> List of values</li>
+                                                    <li><code>BETWEEN</code> Range of values</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Operator</th>
+                                                <th>What It Does</th>
+                                                <th>Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>=</strong></td>
+                                                <td>Equal to</td>
+                                                <td><code>WHERE Age = 25</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>></strong></td>
+                                                <td>Greater than</td>
+                                                <td><code>WHERE Age > 18</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong><</strong></td>
+                                                <td>Less than</td>
+                                                <td><code>WHERE Age < 30</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>LIKE</strong></td>
+                                                <td>Pattern matching</td>
+                                                <td><code>WHERE Name LIKE 'J%'</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>IN</strong></td>
+                                                <td>List of values</td>
+                                                <td><code>WHERE City IN ('NYC', 'LA')</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>BETWEEN</strong></td>
+                                                <td>Range</td>
+                                                <td><code>WHERE Age BETWEEN 18 AND 25</code></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Use <code>WHERE</code> to filter data BEFORE you sort it.
+                                        It's faster and more efficient!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📊 Part 3: ORDER BY - Sorting Your Data -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-sort me-2"></i>Part 3: ORDER BY - Sorting Your Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What is ORDER BY?</strong> It sorts your results. Like putting names in alphabetical order
+                                    or numbers from smallest to largest.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-mouse-pointer text-primary me-2"></i>🖱️ Visual Way (Sort with Right-Click)</h5>
+                                                <ol>
+                                                    <li>Run a SELECT query to see results</li>
+                                                    <li>Click any column header in the results grid</li>
+                                                    <li>Click again to sort descending</li>
+                                                    <li>Or add <code>ORDER BY</code> to your query</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ Easy!</strong> Just click the column header to sort!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Way</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Sort A-Z (ascending)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>;
+
+<span class="comment">-- Sort Z-A (descending)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">DESC</span>;
+
+<span class="comment">-- Multiple columns</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>, <span style="color: #82aaff;">FirstName</span> <span style="color: #ffcb6b;">ASC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Key Points:</strong></p>
+                                                <ul>
+                                                    <li><code>ASC</code> = Ascending (A-Z, 1-10) - default</li>
+                                                    <li><code>DESC</code> = Descending (Z-A, 10-1)</li>
+                                                    <li>Can sort by multiple columns</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the developer sort their data?
+                                        Because they wanted to get their affairs in order! (I'll show myself out 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 4: Putting It All Together -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-link me-2"></i>Part 4: SELECT + WHERE + ORDER BY Together</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>Master Combination:</strong> Use all three together for powerful queries!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Complete Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Find all students in a city, sorted by name</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">City</span>, <span style="color: #82aaff;">Age</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>;
+
+<span class="comment">-- Adult students with high GPA, sorted by GPA</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">GPA</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">18</span> <span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">3.5</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">DESC</span>;
+
+<span class="comment">-- Top 5 oldest students</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">TOP</span> <span style="color: #f78c6c;">5</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">DESC</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Real-World Examples</h5>
+                                                <ul>
+                                                    <li><strong>E-Commerce:</strong> "Show me all products under $50, sorted by price"</li>
+                                                    <li><strong>CRM:</strong> "Find all customers from New York, sorted by name"</li>
+                                                    <li><strong>School:</strong> "Show all students with GPA > 3.0, sorted by GPA"</li>
+                                                    <li><strong>HR:</strong> "Find all employees hired after 2020, sorted by hire date"</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>🎯 Result:</strong> Exactly what you need, when you need it!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Always use <code>WHERE</code> before <code>ORDER BY</code>.
+                                        Filter first, then sort. It's more efficient!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 5: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Practice SELECT, WHERE, and ORDER BY with real data!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Set up sample data</strong>
+                                                        <ul>
+                                                            <li>Create a "Products" table</li>
+                                                            <li>Columns: ProductId, Name, Category, Price, Stock</li>
+                                                            <li>Insert 5-10 sample products</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Write queries using BOTH methods:</strong>
+                                                        <ul>
+                                                            <li>🖱️ Visual: Right-click → Select Top 1000 Rows</li>
+                                                            <li>💻 Code: Write SQL queries</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Find:</strong>
+                                                        <ul>
+                                                            <li>All products under $50</li>
+                                                            <li>All products in "Electronics" category</li>
+                                                            <li>Products with stock > 10, sorted by price</li>
+                                                            <li>Top 5 most expensive products</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to SELECT data</li>
+                                                    <li>✅ How to filter with WHERE</li>
+                                                    <li>✅ How to sort with ORDER BY</li>
+                                                    <li>✅ How to combine all three</li>
+                                                    <li>✅ How to use the visual designer</li>
+                                                    <li>✅ How to write SQL queries</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> You'll master SELECT, WHERE, and ORDER BY!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== PRODUCTS TABLE - COMPLETE EXAMPLE =====</span>
+
+<span class="comment">-- Step 1: Create the Products table</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Products</span> (
+    <span style="color: #82aaff;">ProductId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Name</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Category</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">Price</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">10</span>,<span style="color: #f78c6c;">2</span>),
+    <span style="color: #82aaff;">Stock</span> <span style="color: #f78c6c;">INT</span>
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- Step 2: Insert sample products</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Products</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Category</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Stock</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'Laptop'</span>, <span style="color: #c3e88d;">'Electronics'</span>, <span style="color: #f78c6c;">999.99</span>, <span style="color: #f78c6c;">10</span>),
+    (<span style="color: #c3e88d;">'Mouse'</span>, <span style="color: #c3e88d;">'Electronics'</span>, <span style="color: #f78c6c;">25.50</span>, <span style="color: #f78c6c;">50</span>),
+    (<span style="color: #c3e88d;">'Keyboard'</span>, <span style="color: #c3e88d;">'Electronics'</span>, <span style="color: #f78c6c;">45.00</span>, <span style="color: #f78c6c;">30</span>),
+    (<span style="color: #c3e88d;">'Monitor'</span>, <span style="color: #c3e88d;">'Electronics'</span>, <span style="color: #f78c6c;">299.99</span>, <span style="color: #f78c6c;">15</span>),
+    (<span style="color: #c3e88d;">'Desk'</span>, <span style="color: #c3e88d;">'Furniture'</span>, <span style="color: #f78c6c;">199.99</span>, <span style="color: #f78c6c;">5</span>),
+    (<span style="color: #c3e88d;">'Chair'</span>, <span style="color: #c3e88d;">'Furniture'</span>, <span style="color: #f78c6c;">149.99</span>, <span style="color: #f78c6c;">8</span>);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- Step 3: Practice Queries</span>
+
+<span class="comment">-- 1️⃣ All products under $50</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;"><</span> <span style="color: #f78c6c;">50</span>;
+
+<span class="comment">-- 2️⃣ All Electronics products</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Electronics'</span>;
+
+<span class="comment">-- 3️⃣ Products with stock > 10, sorted by price</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Stock</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">10</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;">ASC</span>;
+
+<span class="comment">-- 4️⃣ Top 5 most expensive products</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">TOP</span> <span style="color: #f78c6c;">5</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;">DESC</span>;
+
+<span class="comment">-- 5️⃣ Furniture products, sorted by price</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Furniture'</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;">DESC</span>;
+
+<span class="comment">-- 6️⃣ Products with 'Lap' in the name</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Name</span> <span style="color: #ffcb6b;">LIKE</span> <span style="color: #c3e88d;">'%Lap%'</span>;</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've mastered SELECT, WHERE, and ORDER BY!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-eye fa-3x mb-2"></i>
+                                        <h5>SELECT</h5>
+                                        <small>Get your data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-filter fa-3x mb-2"></i>
+                                        <h5>WHERE</h5>
+                                        <small>Filter your data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-sort fa-3x mb-2"></i>
+                                        <h5>ORDER BY</h5>
+                                        <small>Sort your data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-mouse-pointer fa-3x mb-2"></i>
+                                        <h5>Visual Way</h5>
+                                        <small>Right-click menus</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>SQL Code</h5>
+                                        <small>Write queries</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-list fa-3x mb-2"></i>
+                                        <h5>Real Examples</h5>
+                                        <small>Products table</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Master!</h5>
+                                        <small>Both ways!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now a master of finding, filtering, and sorting data!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/05-Joins" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson4")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

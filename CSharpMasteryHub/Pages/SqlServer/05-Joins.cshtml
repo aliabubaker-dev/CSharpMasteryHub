@@ -28,7 +28,7 @@
                             <i class="fas fa-smile me-2"></i>Beginner Friendly
                         </span>
                         <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
-                            <i class="fas fa-clock me-2"></i>35 min read
+                            <i class="fas fa-clock me-2"></i>30 min read
                         </span>
                         <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-book me-2"></i>Lesson 5 of 13
@@ -488,111 +488,52 @@
                         </div>
                     </section>
 
-                    <!-- 📊 Part 7: Self JOIN -->
+                    <!-- 📊 Part 7: Joining Multiple Tables -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
                         <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
                             <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>SELF JOIN - Join a Table to Itself</h3>
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>Joining Multiple Tables (3+)</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
-                                    <i class="fas fa-user-circle me-2"></i>
-                                    <strong>What it does:</strong> Joins a table with itself - useful for hierarchical data like employees and managers.
+                                    <i class="fas fa-plus-circle me-2"></i>
+                                    <strong>What it does:</strong> Combines data from 3 or more tables to answer complex questions.
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-sitemap text-primary me-2"></i>🏢 Employee Hierarchy Example</h5>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-sql"><span class="comment">-- Employee table with ManagerId</span>
-<span style="color: #82aaff;">Employees</span>
-+----+--------+-----------+
-| ID | Name   | ManagerId |
-+----+--------+-----------+
-| 1  | Alice  | NULL      | <span class="comment">-- CEO</span>
-| 2  | Bob    | 1         | <span class="comment">-- Reports to Alice</span>
-| 3  | Charlie| 1         | <span class="comment">-- Reports to Alice</span>
-| 4  | Diana  | 2         | <span class="comment">-- Reports to Bob</span>
-+----+--------+-----------+</code></pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-light h-100">
-                                                <div class="card-body">
-                                                    <h5><i class="fas fa-code text-primary me-2"></i>💻 SELF JOIN Code</h5>
-                                                    <div class="code-block small">
-                                                        <pre><code class="language-sql"><span class="comment">-- Find each employee and their manager</span>
-<span style="color: #ffcb6b;">SELECT</span> 
-    <span style="color: #82aaff;">e.Name</span> <span style="color: #ffcb6b;">AS</span> <span style="color: #82aaff;">Employee</span>,
-    <span style="color: #82aaff;">m.Name</span> <span style="color: #ffcb6b;">AS</span> <span style="color: #82aaff;">Manager</span>
-<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Employees</span> <span style="color: #82aaff;">e</span>
-<span style="color: #ffcb6b;">LEFT JOIN</span> <span style="color: #82aaff;">Employees</span> <span style="color: #82aaff;">m</span>
-    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">e.ManagerId</span> = <span style="color: #82aaff;">m.Id</span>;
-
-<span class="comment">-- Result: Employee  Manager</span>
-<span class="comment">-- Alice    NULL</span>
-<span class="comment">-- Bob      Alice</span>
-<span class="comment">-- Charlie  Alice</span>
-<span class="comment">-- Diana    Bob</span></code></pre>
-                                                    </div>
-                                                    <p><span class="badge bg-primary">📌</span> <strong>When to use:</strong> Hierarchical data like org charts, category trees, or family relationships.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- 📊 Part 8: Joining Multiple Tables -->
-                        <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
-                            <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                                <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                    <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Joining Multiple Tables (3+)</h3>
-                                </div>
-                                <div class="card-body p-4">
-                                    <div class="alert alert-info">
-                                        <i class="fas fa-plus-circle me-2"></i>
-                                        <strong>What it does:</strong> Combines data from 3 or more tables to answer complex questions.
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card bg-light h-100">
-                                                <div class="card-body">
-                                                    <h5><i class="fas fa-diagram-project text-primary me-2"></i>📊 3-Table Join Diagram</h5>
-                                                    <div class="text-center">
-                                                        <div style="background: #1a1a2e; padding: 20px; border-radius: 12px; color: white;">
-                                                            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-                                                                <div style="border: 2px solid #4facfe; padding: 8px 12px; border-radius: 8px;">
-                                                                    Students
-                                                                </div>
-                                                                <span style="color: #89ddff;">🔗</span>
-                                                                <div style="border: 2px solid #43e97b; padding: 8px 12px; border-radius: 8px;">
-                                                                    Enrollments
-                                                                </div>
-                                                                <span style="color: #89ddff;">🔗</span>
-                                                                <div style="border: 2px solid #f093fb; padding: 8px 12px; border-radius: 8px;">
-                                                                    Courses
-                                                                </div>
+                                                <h5><i class="fas fa-diagram-project text-primary me-2"></i>📊 3-Table Join Diagram</h5>
+                                                <div class="text-center">
+                                                    <div style="background: #1a1a2e; padding: 20px; border-radius: 12px; color: white;">
+                                                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                                                            <div style="border: 2px solid #4facfe; padding: 8px 12px; border-radius: 8px;">
+                                                                Students
                                                             </div>
-                                                            <div style="margin-top: 10px; padding: 10px; background: #2a2a4e; border-radius: 8px; font-size: 12px;">
-                                                                <span style="color: #c3e88d;">Students have Enrollments → Enrollments are for Courses</span>
+                                                            <span style="color: #89ddff;">🔗</span>
+                                                            <div style="border: 2px solid #43e97b; padding: 8px 12px; border-radius: 8px;">
+                                                                Enrollments
                                                             </div>
+                                                            <span style="color: #89ddff;">🔗</span>
+                                                            <div style="border: 2px solid #f093fb; padding: 8px 12px; border-radius: 8px;">
+                                                                Courses
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-top: 10px; padding: 10px; background: #2a2a4e; border-radius: 8px; font-size: 12px;">
+                                                            <span style="color: #c3e88d;">Students have Enrollments → Enrollments are for Courses</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-light h-100">
-                                                <div class="card-body">
-                                                    <h5><i class="fas fa-code text-primary me-2"></i>💻 3-Table Join Code</h5>
-                                                    <div class="code-block small">
-                                                        <pre><code class="language-sql"><span class="comment">-- Show students with their courses</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 3-Table Join Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Show students with their courses</span>
 <span style="color: #ffcb6b;">SELECT</span> 
     <span style="color: #82aaff;">s.FirstName</span>,
     <span style="color: #82aaff;">s.LastName</span>,
@@ -606,154 +547,148 @@
 <span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">s.LastName</span>;
 
 <span class="comment">-- Add more tables: Departments, Instructors, etc.</span></code></pre>
-                                                    </div>
-                                                    <p><span class="badge bg-primary">📌</span> <strong>Order matters:</strong> Start with the main table, then add related tables.</p>
                                                 </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Order matters:</strong> Start with the main table, then add related tables.</p>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="card bg-success text-white mt-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-lightbulb me-2"></i>
-                                            <strong>💡 Pro Tip:</strong> When joining multiple tables, think of it as a <strong>chain</strong>.
-                                            Each join connects two tables, forming a chain from your starting point to your final data.
-                                        </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> When joining multiple tables, think of it as a <strong>chain</strong>.
+                                        Each join connects two tables, forming a chain from your starting point to your final data.
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        <!-- 📊 Part 9: Join Comparison Table -->
-                        <section class="mb-5" data-aos="fade-up" data-aos-delay="900">
-                            <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                                <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                    <h3 class="mb-0"><i class="fas fa-8 me-2"></i>Quick Reference: Which Join to Use?</h3>
+                    <!-- 📊 Part 8: Join Comparison Table -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>Quick Reference: Which Join to Use?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Join Type</th>
+                                                <th>What It Returns</th>
+                                                <th>Real-World Example</th>
+                                                <th>When to Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="badge bg-primary">INNER</span></td>
+                                                <td>Only matching rows</td>
+                                                <td>Students with courses</td>
+                                                <td>When you only want records that exist in both tables</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-warning">LEFT</span></td>
+                                                <td>All rows from left, matches from right</td>
+                                                <td>All students, with courses if they have any</td>
+                                                <td><strong>Most common!</strong> When you want all records from your main table</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-info">RIGHT</span></td>
+                                                <td>All rows from right, matches from left</td>
+                                                <td>All courses, with students if any</td>
+                                                <td>When you want all records from the right table</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-danger">FULL</span></td>
+                                                <td>All rows from both tables</td>
+                                                <td>All students AND all courses</td>
+                                                <td>When you need everything from both tables</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-secondary">CROSS</span></td>
+                                                <td>Every combination</td>
+                                                <td>All students paired with all courses</td>
+                                                <td>Generating all possible combinations</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="card-body p-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    <th>Join Type</th>
-                                                    <th>What It Returns</th>
-                                                    <th>Real-World Example</th>
-                                                    <th>When to Use</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="badge bg-primary">INNER</span></td>
-                                                    <td>Only matching rows</td>
-                                                    <td>Students with courses</td>
-                                                    <td>When you only want records that exist in both tables</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="badge bg-warning">LEFT</span></td>
-                                                    <td>All rows from left, matches from right</td>
-                                                    <td>All students, with courses if they have any</td>
-                                                    <td><strong>Most common!</strong> When you want all records from your main table</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="badge bg-info">RIGHT</span></td>
-                                                    <td>All rows from right, matches from left</td>
-                                                    <td>All courses, with students if any</td>
-                                                    <td>When you want all records from the right table</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="badge bg-danger">FULL</span></td>
-                                                    <td>All rows from both tables</td>
-                                                    <td>All students AND all courses</td>
-                                                    <td>When you need everything from both tables</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="badge bg-secondary">CROSS</span></td>
-                                                    <td>Every combination</td>
-                                                    <td>All students paired with all courses</td>
-                                                    <td>Generating all possible combinations</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="badge bg-success">SELF</span></td>
-                                                    <td>Table joined to itself</td>
-                                                    <td>Employee → Manager hierarchy</td>
-                                                    <td>Hierarchical data</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
 
-                                    <div class="card bg-warning text-dark mt-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-star me-2"></i>
-                                            <strong>💡 The 80/20 Rule:</strong>
-                                            <br>80% of your joins will be <strong>INNER JOIN</strong> and <strong>LEFT JOIN</strong>.
-                                            Master these two and you'll handle most real-world scenarios!
-                                        </div>
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-star me-2"></i>
+                                        <strong>💡 The 80/20 Rule:</strong>
+                                        <br>80% of your joins will be <strong>INNER JOIN</strong> and <strong>LEFT JOIN</strong>.
+                                        Master these two and you'll handle most real-world scenarios!
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        <!-- 🎮 Part 10: Exercise -->
-                        <section class="mb-5" data-aos="fade-up" data-aos-delay="1000">
-                            <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                                <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                    <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Master Exercise: Sales Database</h3>
+                    <!-- 🎮 Part 9: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="900">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Master Exercise: Sales Database</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Build a complete sales database and practice ALL join types!
                                 </div>
-                                <div class="card-body p-4">
-                                    <div class="alert alert-success">
-                                        <i class="fas fa-rocket me-2"></i>
-                                        <strong>Your Challenge:</strong> Build a complete sales database and practice ALL join types!
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="card bg-light">
-                                                <div class="card-body">
-                                                    <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <h6 class="text-primary">1. Create Tables</h6>
-                                                            <ul>
-                                                                <li><strong>Customers</strong> (CustomerId, Name, City)</li>
-                                                                <li><strong>Products</strong> (ProductId, Name, Price)</li>
-                                                                <li><strong>Orders</strong> (OrderId, CustomerId, OrderDate)</li>
-                                                                <li><strong>OrderItems</strong> (OrderItemId, OrderId, ProductId, Quantity)</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h6 class="text-success">2. Insert Data</h6>
-                                                            <ul>
-                                                                <li>5 customers (some with no orders)</li>
-                                                                <li>8 products</li>
-                                                                <li>10 orders</li>
-                                                                <li>15 order items</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h6 class="text-warning">3. Write Queries</h6>
-                                                            <ul>
-                                                                <li>INNER: Customers with orders</li>
-                                                                <li>LEFT: All customers + orders</li>
-                                                                <li>RIGHT: All products + order items</li>
-                                                                <li>FULL: All customers + all products</li>
-                                                                <li>4-table join: Customer → Order → OrderItem → Product</li>
-                                                            </ul>
-                                                        </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Requirements:</h6>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h6 class="text-primary">1. Create Tables</h6>
+                                                        <ul>
+                                                            <li><strong>Customers</strong> (CustomerId, Name, City)</li>
+                                                            <li><strong>Products</strong> (ProductId, Name, Price)</li>
+                                                            <li><strong>Orders</strong> (OrderId, CustomerId, OrderDate)</li>
+                                                            <li><strong>OrderItems</strong> (OrderItemId, OrderId, ProductId, Quantity)</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h6 class="text-success">2. Insert Data</h6>
+                                                        <ul>
+                                                            <li>5 customers (some with no orders)</li>
+                                                            <li>8 products</li>
+                                                            <li>10 orders</li>
+                                                            <li>15 order items</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h6 class="text-warning">3. Write Queries</h6>
+                                                        <ul>
+                                                            <li>INNER: Customers with orders</li>
+                                                            <li>LEFT: All customers + orders</li>
+                                                            <li>RIGHT: All products + order items</li>
+                                                            <li>FULL: All customers + all products</li>
+                                                            <li>4-table join: Customer → Order → OrderItem → Product</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
-                                        <i class="fas fa-eye me-2"></i> Show Complete Solution
-                                    </button>
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Solution
+                                </button>
 
-                                    <div id="solution" style="display: none; margin-top: 20px;">
-                                        <div class="p-3 rounded border" style="background: #1e1e2e;">
-                                            <div class="code-block">
-                                                <pre><code class="language-sql"><span class="comment">-- ===== SALES DATABASE - COMPLETE SOLUTION =====</span>
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== SALES DATABASE - COMPLETE SOLUTION =====</span>
 
 <span class="comment">-- 1️⃣ CREATE TABLES</span>
 <span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Customers</span> (
@@ -860,282 +795,263 @@
 <span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>
 <span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">OrderItems</span> <span style="color: #82aaff;">oi</span> <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">oi.OrderId</span> = <span style="color: #82aaff;">o.OrderId</span>
 <span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Products</span> <span style="color: #82aaff;">p</span> <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">p.ProductId</span> = <span style="color: #82aaff;">oi.ProductId</span>
-<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">o.OrderDate</span>;
-
-<span class="comment">-- 🔹 SELF JOIN: Bonus - Customers in same city</span>
-<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c1.Name</span> <span style="color: #ffcb6b;">AS</span> <span style="color: #82aaff;">Customer1</span>, <span style="color: #82aaff;">c2.Name</span> <span style="color: #ffcb6b;">AS</span> <span style="color: #82aaff;">Customer2</span>, <span style="color: #82aaff;">c1.City</span>
-<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c1</span>
-<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c2</span> 
-    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">c1.City</span> = <span style="color: #82aaff;">c2.City</span> <span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">c1.CustomerId</span> < <span style="color: #82aaff;">c2.CustomerId</span>
-<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">c1.City</span>;</code></pre>
-                                            </div>
-                                            <div class="mt-3">
-                                                <span class="badge bg-success fs-6">✅ Complete Solution!</span>
-                                                <span class="badge bg-info fs-6 ms-2">You've mastered ALL join types!</span>
-                                            </div>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">o.OrderDate</span>;</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've mastered ALL join types!</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        <!-- 📝 Summary -->
-                        <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
-                            <div class="card-body p-5">
-                                <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 Mastery Summary - All Join Types</h3>
-                                <div class="row mt-4">
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-primary fs-1">INNER</span>
-                                            <p>Only matches</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-warning fs-1">LEFT</span>
-                                            <p>All left + matches</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-info fs-1">RIGHT</span>
-                                            <p>All right + matches</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-danger fs-1">FULL</span>
-                                            <p>All from both</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-secondary fs-1">CROSS</span>
-                                            <p>All combos</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="text-center">
-                                            <span class="badge bg-success fs-1">SELF</span>
-                                            <p>Table to itself</p>
-                                        </div>
+                    <!-- 📝 Quick Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 You've Mastered SQL Joins!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <span class="badge bg-primary fs-1">INNER</span>
+                                        <p>Only matches</p>
                                     </div>
                                 </div>
-                                <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
-                                    🎯 You're now a MASTER of SQL Joins - one of the most important skills in database development!
-                                </p>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <span class="badge bg-warning fs-1">LEFT</span>
+                                        <p>All left + matches</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <span class="badge bg-info fs-1">RIGHT</span>
+                                        <p>All right + matches</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <span class="badge bg-danger fs-1">FULL</span>
+                                        <p>All from both</p>
+                                    </div>
+                                </div>
                             </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to work with any database using joins!
+                            </p>
                         </div>
+                    </div>
 
-                        <!-- Navigation -->
-                        <div class="mt-5 d-flex flex-wrap justify-content-between">
-                            <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
-                                <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                            </a>
-                            <a href="/SqlServer/06-InsertUpdateDelete" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
-                                Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/06-InsertUpdateDelete" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
 
-                    </div> <!-- end lesson-content -->
-                </div>
+                </div> <!-- end lesson-content -->
+            </div>
 
-                <!-- Sidebar -->
-                <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
-                    @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
-                </div>
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
             </div>
         </div>
     </div>
+</div>
 
-    @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson5")
+@await Html.PartialAsync("_QuizButton", "SqlServer_Lesson5")
 
-    @section Scripts {
-        <script>
-            // Toggle solution visibility
-            function toggleSolution() {
-                var solution = document.getElementById('solution');
-                if (solution.style.display === 'none') {
-                    solution.style.display = 'block';
-                    solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    solution.style.display = 'none';
-                }
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
             }
 
-            // Initialize AOS animations
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof AOS !== 'undefined') {
-                    AOS.init({
-                        once: true,
-                        offset: 60,
-                        duration: 700,
-                        easing: 'ease-out'
-                    });
-                }
-            });
-        </script>
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
 
-        <style>
-            /* Hero Section - SQL Server Theme */
-            .hero-section {
-                position: relative;
-                overflow: hidden;
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
             }
 
-                .hero-section::before {
-                    content: '';
-                    position: absolute;
-                    top: -50%;
-                    right: -10%;
-                    width: 500px;
-                    height: 500px;
-                    background: rgba(0, 123, 255, 0.05);
-                    border-radius: 50%;
-                    pointer-events: none;
-                }
-
-            /* Code Block Styling - SQL Syntax */
-            .code-block {
-                position: relative;
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
             }
 
-                .code-block pre {
-                    background: #1a1a2e !important;
-                    color: #cdd6f4 !important;
-                    padding: 1.2rem;
-                    border-radius: 12px;
-                    overflow-x: auto;
-                    font-size: 0.85rem;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-                    border-left: 6px solid #0f3460;
-                    margin: 0;
-                }
-
-                .code-block.small pre {
-                    font-size: 0.75rem;
-                    padding: 0.8rem;
-                }
-
-                .code-block code {
-                    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
-                    line-height: 1.6;
-                }
-
-            /* SQL Syntax Colors */
-            .language-sql .keyword {
-                color: #c792ea !important;
-                font-weight: 600;
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
             }
 
-            .language-sql .comment {
-                color: #676e95 !important;
-                font-style: italic;
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
             }
 
-            .language-sql .string {
-                color: #c3e88d !important;
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
             }
 
-            .language-sql .number {
-                color: #f78c6c !important;
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
             }
 
-            .language-sql .function {
-                color: #82aaff !important;
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
             }
 
-            .language-sql .class {
-                color: #ffcb6b !important;
-                font-weight: 600;
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
             }
 
-            .language-sql .property {
-                color: #80cbc4 !important;
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
             }
 
-            .language-sql .variable {
-                color: #eeffff !important;
+            .display-6 {
+                font-size: 1.5rem;
             }
-
-            .language-sql .operator {
-                color: #89ddff !important;
-            }
-
-            /* Card hover effects */
-            .card {
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-
-                .card:hover:not(.bg-light) {
-                    transform: translateY(-5px);
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-                }
-
-            /* Badge styling */
-            .badge {
-                letter-spacing: 0.4px;
-            }
-
-            /* Button styling - SQL Server Theme */
-            .btn-primary {
-                background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
-                border: none;
-                transition: all 0.3s;
-            }
-
-                .btn-primary:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
-                }
-
-            .btn-outline-primary {
-                border-radius: 50px;
-                transition: all 0.3s;
-                color: #0f3460;
-                border-color: #0f3460;
-            }
-
-                .btn-outline-primary:hover {
-                    transform: scale(1.05);
-                    background: #0f3460;
-                    color: white;
-                }
-
-            /* Solution animation */
-            #solution {
-                animation: fadeSlide 0.5s ease;
-            }
-            @@keyframes fadeSlide {
-                0% {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            /* List styling */
-            .bg-light ul {
-                padding-left: 1.5rem;
-            }
-
-                .bg-light ul li {
-                    margin-bottom: 0.3rem;
-                }
-
-            /* Responsive adjustments */
-            @@media (max-width: 768px) {
-                .display-2 {
-                    font-size: 2.5rem;
-                }
-
-                .display-6 {
-                    font-size: 1.5rem;
-                }
-            }
-        </style>
-    }
+        }
+    </style>
+}

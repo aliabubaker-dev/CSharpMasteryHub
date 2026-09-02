@@ -1,0 +1,789 @@
+﻿@page
+@model CSharpMasteryHub.Pages.SqlServer.FreeSqlServerSetupModel
+@{
+    ViewData["Title"] = "Free SQL Server Setup - Aiven Cloud";
+}
+
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - Cloud Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Free SQL Server Setup</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);">
+                        Free SQL Server ☁️
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Create a Free Cloud Database & Connect to Visual Studio
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Bonus Lesson
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-cloud fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(102, 126, 234, 0.2);"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Get Your FREE Cloud Database! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn how to create a <strong>FREE</strong> SQL Server database
+                                        in the cloud using <strong>Aiven</strong> and connect it to Visual Studio.
+                                        <strong>No credit card required!</strong>
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Why Aiven?</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ <strong>100% FREE</strong> - No credit card needed</li>
+                                            <li>✅ <strong>Cloud-based</strong> - Access from anywhere</li>
+                                            <li>✅ <strong>5GB storage</strong> - Enough for learning</li>
+                                            <li>✅ <strong>Works with SSMS</strong> - Same tool you already learned</li>
+                                            <li>✅ <strong>Connects to Visual Studio</strong> - Build real apps!</li>
+                                        </ul>
+                                    </div>
+                                    <div class="alert alert-warning mt-2">
+                                        <i class="fas fa-star me-2"></i>
+                                        <strong>💡 Why This Matters:</strong> You don't need to install SQL Server locally!
+                                        A cloud database works from anywhere and is perfect for learning.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What is Aiven? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-cloud me-2"></i>What is Aiven?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Aiven is a <strong>cloud platform</strong> that gives you
+                                    free databases. Think of it like renting a database server in the cloud
+                                    <strong>for FREE</strong> instead of installing it on your computer.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ What You Get For Free</h5>
+                                                <ul>
+                                                    <li>📊 <strong>5 GB</strong> storage space</li>
+                                                    <li>🔗 <strong>Public IP</strong> - Access from anywhere</li>
+                                                    <li>🛡️ <strong>SSL Security</strong> - Your data is safe</li>
+                                                    <li>📈 <strong>Monitoring</strong> - See how your database performs</li>
+                                                    <li>💾 <strong>Backups</strong> - Automatic backups included</li>
+                                                    <li>🌐 <strong>24/7 Availability</strong> - Always online</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-laptop text-primary me-2"></i>💻 Who Uses Aiven?</h5>
+                                                <ul>
+                                                    <li>🎓 <strong>Students</strong> - Learning SQL</li>
+                                                    <li>👨‍💻 <strong>Developers</strong> - Testing apps</li>
+                                                    <li>🏢 <strong>Startups</strong> - Building MVPs</li>
+                                                    <li>📱 <strong>Mobile Apps</strong> - Backend databases</li>
+                                                    <li>🌐 <strong>Web Apps</strong> - Production databases</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>💡 Pro Tip:</strong> Aiven is used by thousands of
+                                                        developers worldwide because it's free and reliable!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the developer choose Aiven?
+                                        Because they wanted to have their data in the cloud... without paying for rain! 😅
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🛠️ Part 2: Step-by-Step Setup -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-steps me-2"></i>Step-by-Step: Create Your Free Database</h3>
+                            </div>
+                            <div class="card-body p-4">
+
+                                <!-- Step 1 -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-primary me-2">STEP 1</span> <i class="fas fa-user-plus text-primary me-2"></i> Create a Free Aiven Account</h5>
+                                        <ol>
+                                            <li>Go to <strong>aiven.io</strong> (opens in new tab)</li>
+                                            <li>Click <strong>"Start Free"</strong> or <strong>"Sign Up"</strong></li>
+                                            <li>Choose <strong>"Sign up with Google"</strong> or enter your email</li>
+                                            <li>Create a password</li>
+                                            <li>Check your email and verify your account</li>
+                                        </ol>
+                                        <div class="alert alert-success mt-2">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>✅ Done!</strong> You now have a free Aiven account.
+                                            <br>
+                                            <small>No credit card required for the free tier!</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-success me-2">STEP 2</span> <i class="fas fa-database text-success me-2"></i> Create Your Database</h5>
+                                        <ol>
+                                            <li>In the Aiven dashboard, click <strong>"Create Service"</strong></li>
+                                            <li>Select <strong>"Microsoft SQL Server"</strong> as the service type</li>
+                                            <li>Choose the <strong>"Startup"</strong> plan (it's FREE!)</li>
+                                            <li>Pick a cloud provider and region (choose one near you)</li>
+                                            <li>Give your database a name (like "MyFirstDB")</li>
+                                            <li>Click <strong>"Create Service"</strong></li>
+                                        </ol>
+                                        <div class="alert alert-info mt-2">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>⏱️ Wait a moment...</strong> It takes 2-3 minutes for your database to be ready.
+                                            Grab a coffee! ☕
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-warning text-dark me-2">STEP 3</span> <i class="fas fa-key text-warning me-2"></i> Get Your Connection Details</h5>
+                                        <ol>
+                                            <li>When the service is ready, click on it</li>
+                                            <li>Go to the <strong>"Connection Information"</strong> tab</li>
+                                            <li>
+                                                You'll see:
+                                                <ul>
+                                                    <li><strong>Host:</strong> Like "your-database.aivencloud.com"</li>
+                                                    <li><strong>Port:</strong> Usually 5432</li>
+                                                    <li><strong>Database Name:</strong> "defaultdb"</li>
+                                                    <li><strong>Username:</strong> "avnadmin"</li>
+                                                    <li><strong>Password:</strong> (the one you set)</li>
+                                                </ul>
+                                            </li>
+                                            <li>Click <strong>"Download CA Certificate"</strong> for security</li>
+                                        </ol>
+                                        <div class="alert alert-danger mt-2">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>⚠️ IMPORTANT:</strong> Save your connection details somewhere safe!
+                                            You'll need them to connect from SSMS and Visual Studio.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-info me-2">STEP 4</span> <i class="fas fa-plug text-info me-2"></i> Connect from SSMS</h5>
+                                        <ol>
+                                            <li>Open <strong>SSMS</strong> (SQL Server Management Studio)</li>
+                                            <li>In the Server Name field, enter your <strong>Host</strong> from Aiven</li>
+                                            <li>Select <strong>"SQL Server Authentication"</strong></li>
+                                            <li>Enter <strong>Username</strong> and <strong>Password</strong> from Aiven</li>
+                                            <li>Click <strong>Connect</strong></li>
+                                        </ol>
+                                        <div class="code-block small">
+                                            <pre><code class="language-sql"><span class="comment">/* Connection Example */</span>
+<span style="color: #82aaff;">Server:</span> <span style="color: #c3e88d;">my-database.aivencloud.com</span>
+<span style="color: #82aaff;">Port:</span> <span style="color: #f78c6c;">5432</span>
+<span style="color: #82aaff;">Authentication:</span> <span style="color: #c3e88d;">SQL Server Authentication</span>
+<span style="color: #82aaff;">Username:</span> <span style="color: #c3e88d;">avnadmin</span>
+<span style="color: #82aaff;">Password:</span> <span style="color: #c3e88d;">YourPassword</span></code></pre>
+                                        </div>
+                                        <div class="alert alert-success mt-2">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <strong>🎉 Connected!</strong> You can now run SQL queries on your cloud database!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 3: Connect to Visual Studio -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-code me-2"></i>Connect to Visual Studio</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Why Connect to Visual Studio?</strong> You'll use this database in your C# apps!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Connection String</h5>
+                                                <p>This is the <strong>magic string</strong> that connects your C# app to the database:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Your Connection String</span>
+<span style="color: #c3e88d;">"Server=my-database.aivencloud.com,5432;"</span> +
+<span style="color: #c3e88d;">"Database=defaultdb;"</span> +
+<span style="color: #c3e88d;">"User Id=avnadmin;"</span> +
+<span style="color: #c3e88d;">"Password=YourPassword;"</span> +
+<span style="color: #c3e88d;">"TrustServerCertificate=True;"</span> +
+<span style="color: #c3e88d;">"Encrypt=True;"</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> Keep this string - you'll use it in every C# project!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Step-by-Step</h5>
+                                                <ol>
+                                                    <li>Open your C# project in Visual Studio</li>
+                                                    <li>Go to <strong>Tools → Connect to Database</strong></li>
+                                                    <li>Select <strong>Microsoft SQL Server</strong></li>
+                                                    <li>Paste your connection string</li>
+                                                    <li>Test the connection</li>
+                                                    <li>✅ Connected!</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>🎉 You're ready!</strong> You can now use this database in your C# apps!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Store your connection string in <code>appsettings.json</code>
+                                        or <code>App.config</code> so you can change it easily!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 4: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Set up your free Aiven database and connect from SSMS!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Create Aiven Account</strong>
+                                                        <ul>
+                                                            <li>Go to aiven.io</li>
+                                                            <li>Sign up for free</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Create Database</strong>
+                                                        <ul>
+                                                            <li>Choose Microsoft SQL Server</li>
+                                                            <li>Select Startup plan (FREE)</li>
+                                                            <li>Name it "MyFirstCloudDB"</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Get Connection Details</strong>
+                                                        <ul>
+                                                            <li>Copy Host, Port, Username</li>
+                                                            <li>Save your password</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Connect from SSMS</strong>
+                                                        <ul>
+                                                            <li>Open SSMS</li>
+                                                            <li>Enter connection details</li>
+                                                            <li>Connect successfully</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Run a Test Query</strong>
+                                                        <ul>
+                                                            <li>Write <code>SELECT @@VERSION;</code></li>
+                                                            <li>Press F5 to run it</li>
+                                                            <li>See your cloud database version!</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 Test Queries to Try:</h6>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Test 1: Check version</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">@@VERSION</span>;
+
+<span class="comment">-- Test 2: Create a table</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">TestTable</span> (
+    <span style="color: #82aaff;">Id</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Name</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>)
+);
+
+<span class="comment">-- Test 3: Insert data</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">TestTable</span> (<span style="color: #82aaff;">Name</span>)
+<span style="color: #ffcb6b;">VALUES</span> (<span style="color: #c3e88d;">'Alice'</span>), (<span style="color: #c3e88d;">'Bob'</span>);
+
+<span class="comment">-- Test 4: View data</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">TestTable</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Connection Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== CONNECT TO AIVEN FROM C# =====</span>
+<span class="comment">// Full working example for your C# application</span>
+
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> Microsoft.Data.SqlClient;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class">CloudDatabaseExample</span>
+{
+    <span class="comment">// Your Aiven connection string</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">string</span> connectionString = 
+        <span class="string">"Server=your-database.aivencloud.com,5432;"</span> +
+        <span class="string">"Database=defaultdb;"</span> +
+        <span class="string">"User Id=avnadmin;"</span> +
+        <span class="string">"Password=YourPassword;"</span> +
+        <span class="string">"TrustServerCertificate=True;"</span> +
+        <span class="string">"Encrypt=True;"</span>;
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// 1️⃣ Connect to the database</span>
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+        {
+            conn.<span class="function">Open</span>();
+            Console.WriteLine(<span class="string">"✅ Connected to Aiven cloud database!"</span>);
+            
+            <span class="comment">// 2️⃣ Run a query</span>
+            <span class="keyword">string</span> query = <span class="string">"SELECT @@VERSION"</span>;
+            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+            {
+                <span class="keyword">string</span> version = cmd.<span class="function">ExecuteScalar</span>().<span class="function">ToString</span>();
+                Console.WriteLine(<span class="string">$"📌 SQL Server Version: {version}"</span>);
+            }
+        }
+    }
+    
+    <span class="comment">// 3️⃣ Example: Get data from a table</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">GetStudents</span>()
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+        {
+            conn.<span class="function">Open</span>();
+            <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students"</span>;
+            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+            {
+                <span class="keyword">using</span> (<span class="keyword">var</span> reader = cmd.<span class="function">ExecuteReader</span>())
+                {
+                    <span class="keyword">while</span> (reader.<span class="function">Read</span>())
+                    {
+                        Console.WriteLine(<span class="string">$"Name: {reader["Name"]}"</span>);
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete C# Code!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You can now use your free cloud database in C#!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-cloud fa-3x mb-2"></i>
+                                        <h5>Aiven</h5>
+                                        <small>Free cloud database</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Create Database</h5>
+                                        <small>5GB free storage</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-plug fa-3x mb-2"></i>
+                                        <h5>SSMS Connection</h5>
+                                        <small>Connect from anywhere</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>Visual Studio</h5>
+                                        <small>Build C# apps</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-link fa-3x mb-2"></i>
+                                        <h5>Connection String</h5>
+                                        <small>Your magic key</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-shield-alt fa-3x mb-2"></i>
+                                        <h5>SSL Security</h5>
+                                        <small>Your data is safe</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Ready!</h5>
+                                        <small>For real C# projects!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You now have a FREE cloud database ready for your C# applications!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/10-Transactions" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Back to Section <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_QuizButton", "SqlServer_Lesson11")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(255,255,255,0.03);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1e1e2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #89b4fa;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

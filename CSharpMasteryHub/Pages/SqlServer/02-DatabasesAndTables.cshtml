@@ -1,88 +1,876 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.DatabasesAndTablesModel
 @{
-    ViewData["Title"] = "Databases and Tables";
+    ViewData["Title"] = "Databases and Tables - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">Databases and Tables</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Databases and Tables</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-success">Beginner</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 2 of 10</span>
-                </div>
-
-                <p>A database is a container for related tables. A table stores rows of structured data in columns.</p>
-
-                <h2>Creating a database</h2>
-                <pre><code>CREATE DATABASE SchoolDB;
-GO
-USE SchoolDB;
-GO</code></pre>
-
-                <h2>Creating a table</h2>
-                <pre><code>CREATE TABLE Students (
-    StudentId   INT IDENTITY(1,1) PRIMARY KEY,
-    FirstName   NVARCHAR(50)  NOT NULL,
-    LastName    NVARCHAR(50)  NOT NULL,
-    Email       NVARCHAR(100) NOT NULL UNIQUE,
-    EnrolledOn  DATE          NOT NULL DEFAULT GETDATE()
-);</code></pre>
-
-                <p>Breaking this down:</p>
-                <ul>
-                    <li><code>IDENTITY(1,1)</code> — auto-increments starting at 1, by 1 each row.</li>
-                    <li><code>PRIMARY KEY</code> — uniquely identifies each row.</li>
-                    <li><code>NOT NULL</code> — the column is required.</li>
-                    <li><code>UNIQUE</code> — no two rows can share this value.</li>
-                    <li><code>DEFAULT GETDATE()</code> — auto-fills today's date if not supplied.</li>
-                </ul>
-
-                <h2>Viewing table structure</h2>
-                <pre><code>EXEC sp_help 'Students';</code></pre>
-
-                <h2>Dropping a table (careful!)</h2>
-                <pre><code>DROP TABLE Students;</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Tables are the foundation of SQL databases. A well-designed table with proper constraints ensures data integrity.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Databases and Tables</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        Databases & Tables 🗄️
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        The Foundation of Every Data-Driven Application
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 2 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="card border-primary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt text-primary me-2"></i>Try it yourself</h5>
-                        <p>Create a <code>Courses</code> table with <code>CourseId</code>, <code>Title</code>, and <code>Credits</code> columns.</p>
-                    </div>
-                </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer/01-InstallingSqlServerSsms" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-table fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Welcome to the World of Databases! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn about <strong>Databases and Tables</strong> -
+                                        the <strong>foundation</strong> of every data-driven application.
+                                        Think of a database as a <strong>digital filing cabinet</strong> and tables as the drawers!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Understand what databases and tables are</li>
+                                            <li>✅ Create your first database</li>
+                                            <li>✅ Create tables with proper columns</li>
+                                            <li>✅ Understand primary keys and constraints</li>
+                                            <li>✅ Connect to a database from C#</li>
+                                            <li>✅ Run simple SQL queries from C#</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What is a Database? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-database me-2"></i>What is a Database?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> A database is a <strong>digital filing cabinet</strong>
+                                    where you store and organize your data. It's like a giant Excel spreadsheet on steroids!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-cabinet-filing text-primary me-2"></i>📁 Real-World Analogy</h5>
+                                                <p><strong>Think of a database like a filing cabinet:</strong></p>
+                                                <ul>
+                                                    <li>🏢 <strong>The Database</strong> = The entire filing cabinet</li>
+                                                    <li>📂 <strong>Tables</strong> = The drawers (Students, Courses, Teachers)</li>
+                                                    <li>📄 <strong>Rows</strong> = The files in each drawer (each student)</li>
+                                                    <li>🏷️ <strong>Columns</strong> = The information on each file (Name, Age, Email)</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Result:</strong> Organized, searchable data!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 In Code</h5>
+                                                <p><strong>Creating a database:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Create your first database</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">SchoolDB</span>;
+
+<span class="comment">-- Switch to it</span>
+<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">SchoolDB</span>;
+
+<span class="comment">-- Now you can create tables!</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Command:</strong> <code>CREATE DATABASE</code> + Name</p>
+                                                <p><span class="badge bg-success">📌</span> <strong>Tip:</strong> Always use <code>USE</code> to switch to your database</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the database break up with the spreadsheet?
+                                        Because it couldn't handle the relationship! (Get it? Relationships? Tables? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📊 Part 2: What is a Table? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-table me-2"></i>What is a Table?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> A table is where you <strong>store</strong> your data.
+                                    It has <strong>columns</strong> (types of data) and <strong>rows</strong> (the actual data).
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-eye text-primary me-2"></i>👀 What a Table Looks Like</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>StudentId</th>
+                                                                <th>FirstName</th>
+                                                                <th>LastName</th>
+                                                                <th>Email</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>John</td>
+                                                                <td>Doe</td>
+                                                                <td>john@email.com</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Jane</td>
+                                                                <td>Smith</td>
+                                                                <td>jane@email.com</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Ali</td>
+                                                                <td>Hassan</td>
+                                                                <td>ali@email.com</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Columns:</strong> StudentId, FirstName, LastName, Email</p>
+                                                <p><span class="badge bg-success">📌</span> <strong>Rows:</strong> Each student is one row</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Creating a Table</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Create a Students table</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Students</span> (
+    <span style="color: #82aaff;">StudentId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">FirstName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">LastName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Email</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">NOT NULL UNIQUE</span>
+);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">📌</span> <strong>Understanding the code:</strong></p>
+                                                <ul>
+                                                    <li><code>IDENTITY(1,1)</code> = Auto-number (1,2,3...)</li>
+                                                    <li><code>PRIMARY KEY</code> = Unique ID for each row</li>
+                                                    <li><code>NOT NULL</code> = Must fill this column</li>
+                                                    <li><code>UNIQUE</code> = No duplicate emails</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Always have a <code>PRIMARY KEY</code> in every table.
+                                        It's like each person having a unique ID card!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔑 Part 3: Primary Keys and Constraints -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-key me-2"></i>Primary Keys and Constraints</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What are Constraints?</strong> They're <strong>rules</strong> that keep your data clean and correct!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Types of Constraints</h5>
+                                                <ul>
+                                                    <li><strong>PRIMARY KEY</strong> - Unique ID for each row</li>
+                                                    <li><strong>NOT NULL</strong> - Column cannot be empty</li>
+                                                    <li><strong>UNIQUE</strong> - No duplicate values</li>
+                                                    <li><strong>DEFAULT</strong> - Set a default value</li>
+                                                    <li><strong>CHECK</strong> - Validate the data</li>
+                                                    <li><strong>FOREIGN KEY</strong> - Link to another table</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>💡 Example:</strong> <code>CHECK (Age >= 18)</code>
+                                                        means you can't add a student under 18!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Constraints in Action</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Create with ALL constraints</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Courses</span> (
+    <span style="color: #82aaff;">CourseId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Title</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Credits</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">NOT NULL</span> <span style="color: #ffcb6b;">CHECK</span> (Credits <span style="color: #ffcb6b;">BETWEEN</span> <span style="color: #f78c6c;">1</span> <span style="color: #ffcb6b;">AND</span> <span style="color: #f78c6c;">6</span>),
+    <span style="color: #82aaff;">CreatedDate</span> <span style="color: #f78c6c;">DATE</span> <span style="color: #ffcb6b;">DEFAULT</span> <span style="color: #82aaff;">GETDATE</span>()
+);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>This ensures:</strong></p>
+                                                <ul>
+                                                    <li>✅ Every course has a unique ID</li>
+                                                    <li>✅ Title is always filled in</li>
+                                                    <li>✅ Credits are between 1-6</li>
+                                                    <li>✅ CreatedDate is automatically today</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the NOT NULL constraint break up with the column?
+                                        Because it couldn't handle the empty space! (I'll show myself out 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 4: Connecting to Database from C# -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-code me-2"></i>Connect to Database from C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-plug me-2"></i>
+                                    <strong>Why This Matters:</strong> This is how your C# apps talk to the database!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Connection String</h5>
+                                                <p>The <strong>magic string</strong> that connects C# to SQL Server:</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// SQL Server Connection String</span>
+<span style="color: #c3e88d;">"Server=localhost;"</span> +
+<span style="color: #c3e88d;">"Database=SchoolDB;"</span> +
+<span style="color: #c3e88d;">"Trusted_Connection=True;"</span> +
+<span style="color: #c3e88d;">"TrustServerCertificate=True;"</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Parts:</strong></p>
+                                                <ul>
+                                                    <li><strong>Server</strong> = Where your SQL Server is</li>
+                                                    <li><strong>Database</strong> = Which database to use</li>
+                                                    <li><strong>Trusted_Connection</strong> = Use Windows login</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Complete C# Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Full working C# example</span>
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> Microsoft.Data.SqlClient;
+
+<span class="keyword">class</span> <span class="class">Program</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// 1️⃣ Connection string</span>
+        <span class="keyword">string</span> connString = <span class="string">"Server=localhost;"</span> +
+                           <span class="string">"Database=SchoolDB;"</span> +
+                           <span class="string">"Trusted_Connection=True;"</span>;
+        
+        <span class="comment">// 2️⃣ Connect and query</span>
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        {
+            conn.<span class="function">Open</span>();
+            Console.WriteLine(<span class="string">"✅ Connected to database!"</span>);
+            
+            <span class="comment">// 3️⃣ Query data</span>
+            <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students"</span>;
+            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+            {
+                <span class="keyword">using</span> (<span class="keyword">var</span> reader = cmd.<span class="function">ExecuteReader</span>())
+                {
+                    <span class="keyword">while</span> (reader.<span class="function">Read</span>())
+                    {
+                        Console.WriteLine(<span class="string">$"Name: {reader["FirstName"]}"</span>);
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> This connects and reads data from your database!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Always use <code>using</code> statements for database connections.
+                                        They automatically close the connection, even if there's an error!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 5: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Create a complete database and table, then connect from C#!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Create a Database</strong>
+                                                        <ul>
+                                                            <li>Name it "LibraryDB"</li>
+                                                            <li>Use SSMS or SQL query</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Create a Table</strong>
+                                                        <ul>
+                                                            <li>Table name: Books</li>
+                                                            <li>Columns: BookId (PK), Title, Author, Year</li>
+                                                            <li>Add constraints: NOT NULL, CHECK (Year > 1900)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Insert Some Data</strong>
+                                                        <ul>
+                                                            <li>Add 3-4 books</li>
+                                                            <li>Use INSERT INTO command</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Connect from C#</strong>
+                                                        <ul>
+                                                            <li>Write C# code to read the data</li>
+                                                            <li>Display the books in the console</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to create a database</li>
+                                                    <li>✅ How to design a table</li>
+                                                    <li>✅ How to add constraints</li>
+                                                    <li>✅ How to insert data</li>
+                                                    <li>✅ How to read data from C#</li>
+                                                    <li>✅ Build a complete data system!</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A complete database with a C# connection!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== SQL SCRIPT - LIBRARY DATABASE =====</span>
+
+<span class="comment">-- 1️⃣ Create Database</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">LibraryDB</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- 2️⃣ Switch to it</span>
+<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">LibraryDB</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- 3️⃣ Create Books Table</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Books</span> (
+    <span style="color: #82aaff;">BookId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Title</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">200</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Author</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Year</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">NOT NULL</span> <span style="color: #ffcb6b;">CHECK</span> (Year <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">1900</span>)
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- 4️⃣ Insert Sample Books</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Books</span> (<span style="color: #82aaff;">Title</span>, <span style="color: #82aaff;">Author</span>, <span style="color: #82aaff;">Year</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'C# Programming'</span>, <span style="color: #c3e88d;">'John Doe'</span>, <span style="color: #f78c6c;">2020</span>),
+    (<span style="color: #c3e88d;">'Clean Code'</span>, <span style="color: #c3e88d;">'Robert Martin'</span>, <span style="color: #f78c6c;">2008</span>),
+    (<span style="color: #c3e88d;">'Design Patterns'</span>, <span style="color: #c3e88d;">'Erich Gamma'</span>, <span style="color: #f78c6c;">1994</span>);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- 5️⃣ View the data</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Books</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- ===== C# CODE - READ FROM DATABASE =====</span>
+
+<span class="comment">// Complete C# program to read the Library database</span>
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> Microsoft.Data.SqlClient;
+
+<span class="keyword">class</span> <span class="class">LibraryApp</span>
+{
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="function">Main</span>()
+    {
+        <span class="comment">// Connection string</span>
+        <span class="keyword">string</span> connString = <span class="string">"Server=localhost;"</span> +
+                           <span class="string">"Database=LibraryDB;"</span> +
+                           <span class="string">"Trusted_Connection=True;"</span> +
+                           <span class="string">"TrustServerCertificate=True;"</span>;
+        
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        {
+            conn.<span class="function">Open</span>();
+            Console.WriteLine(<span class="string">"📚 LIBRARY BOOKS\n"</span>);
+            
+            <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Books ORDER BY Year"</span>;
+            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+            {
+                <span class="keyword">using</span> (<span class="keyword">var</span> reader = cmd.<span class="function">ExecuteReader</span>())
+                {
+                    <span class="keyword">while</span> (reader.<span class="function">Read</span>())
+                    {
+                        Console.WriteLine(<span class="string">$"📖 {reader["Title"]}"</span>);
+                        Console.WriteLine(<span class="string">$"   Author: {reader["Author"]}"</span>);
+                        Console.WriteLine(<span class="string">$"   Year: {reader["Year"]}"</span>);
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a complete database and connected from C#!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Database</h5>
+                                        <small>Digital filing cabinet</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-table fa-3x mb-2"></i>
+                                        <h5>Tables</h5>
+                                        <small>Store your data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-key fa-3x mb-2"></i>
+                                        <h5>Primary Key</h5>
+                                        <small>Unique identifier</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-link fa-3x mb-2"></i>
+                                        <h5>Constraints</h5>
+                                        <small>Keep data clean</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>C# Connection</h5>
+                                        <small>Talk to database</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Library System 📚</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Ready!</h5>
+                                        <small>For more SQL!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to build database-driven applications!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/01-InstallingSqlServerSsms" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson2")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* C# Syntax Colors */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

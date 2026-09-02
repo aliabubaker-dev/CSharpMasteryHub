@@ -1,83 +1,794 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.JoinsModel
 @{
-    ViewData["Title"] = "Joins";
+    ViewData["Title"] = "Joins - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">Joins</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Joins</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 5 of 10</span>
-                </div>
-
-                <p>Joins combine rows from two or more tables based on a related column.</p>
-
-                <h2>INNER JOIN — only matching rows</h2>
-                <pre><code>SELECT s.FirstName, s.LastName, e.CourseId
-FROM Students s
-INNER JOIN Enrollments e ON e.StudentId = s.StudentId;</code></pre>
-
-                <h2>LEFT JOIN — all rows from the left table, matched or not</h2>
-                <pre><code>SELECT s.FirstName, e.CourseId
-FROM Students s
-LEFT JOIN Enrollments e ON e.StudentId = s.StudentId;
--- students with no enrollments show CourseId as NULL</code></pre>
-
-                <h2>RIGHT JOIN and FULL JOIN</h2>
-                <p>
-                    <code>RIGHT JOIN</code> is the mirror of <code>LEFT JOIN</code>.
-                    <code>FULL JOIN</code> returns all rows from both sides, matched where possible.
-                </p>
-
-                <h2>Joining three tables</h2>
-                <pre><code>SELECT s.FirstName, c.Title
-FROM Students s
-INNER JOIN Enrollments e ON e.StudentId = s.StudentId
-INNER JOIN Courses c ON c.CourseId = e.CourseId;</code></pre>
-
-                <h2>Rule of thumb</h2>
-                <p>
-                    Use <code>INNER JOIN</code> when you only want records that exist on both
-                    sides. Use <code>LEFT JOIN</code> when you want everything from your main
-                    table even if there's no match — very common for reports ("show all
-                    students, including ones with zero enrollments").
-                </p>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Joins are essential for relational databases. INNER JOIN returns only matching rows, LEFT JOIN returns all rows from the left table.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Joins</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        Joins 🔗
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Connect Tables Visually - Zero Typing Required!
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 5 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/SqlServer/06-InsertUpdateDelete" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-link fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Connect Tables Without Writing Code! 🎯</h2>
+                                    <p class="fs-5">
+                                        <strong>Joins</strong> are how you combine data from multiple tables.
+                                        The best part? <strong>You can do it visually</strong> using SSMS Query Designer
+                                        - <strong>zero typing required</strong>!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Join tables using the visual Query Designer (drag & drop)</li>
+                                            <li>✅ Understand INNER JOIN, LEFT JOIN, RIGHT JOIN</li>
+                                            <li>✅ Join 3 or more tables visually</li>
+                                            <li>✅ See the SQL code that SSMS generates automatically</li>
+                                            <li>✅ Write SQL joins (for when you need to)</li>
+                                            <li>✅ Build real-world reports with joined data</li>
+                                        </ul>
+                                    </div>
+                                    <div class="alert alert-warning mt-2">
+                                        <i class="fas fa-star me-2"></i>
+                                        <strong>💡 The Visual Way:</strong> You can join tables by <strong>dragging and dropping</strong>
+                                        columns in SSMS - no typing needed!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: Understanding Joins -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-question-circle me-2"></i>Part 1: What are Joins?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Joins are how you <strong>connect</strong> tables together.
+                                    Like putting two puzzle pieces together using a matching column.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-puzzle-piece text-primary me-2"></i>🧩 The Puzzle Analogy</h5>
+                                                <p><strong>Think of tables like puzzle pieces:</strong></p>
+                                                <ul>
+                                                    <li>📋 <strong>Students Table</strong> = Has StudentId, Name</li>
+                                                    <li>📋 <strong>Enrollments Table</strong> = Has StudentId, CourseId</li>
+                                                    <li>📋 <strong>Courses Table</strong> = Has CourseId, Title</li>
+                                                    <li>🔗 <strong>JOIN</strong> = Connect them using matching IDs</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>Result:</strong> You see students WITH their courses!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Visual Example</h5>
+                                                <p><strong>Tables we'll use:</strong></p>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead class="table-dark">
+                                                            <tr><th>StudentId</th><th>FirstName</th></tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr><td>1</td><td>John</td></tr>
+                                                            <tr><td>2</td><td>Jane</td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead class="table-dark">
+                                                            <tr><th>EnrollmentId</th><th>StudentId</th><th>CourseId</th></tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr><td>1</td><td>1</td><td>101</td></tr>
+                                                            <tr><td>2</td><td>1</td><td>102</td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <p><span class="badge bg-success">🔗</span> Join them on <strong>StudentId</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the tables break up?
+                                        Because they couldn't find a common column! (Database jokes are the best 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🖱️ Part 2: The Visual Way - Query Designer -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-mouse-pointer me-2"></i>Part 2: The Visual Way - Query Designer</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>Zero Typing Required!</strong> Use SSMS Query Designer to join tables visually.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-steps text-primary me-2"></i>📝 Step-by-Step</h5>
+                                                <ol>
+                                                    <li>In SSMS, click <strong>New Query</strong></li>
+                                                    <li>Right-click in the query window → <strong>Design Query in Editor</strong></li>
+                                                    <li>
+                                                        In the <strong>Add Table</strong> dialog:
+                                                        <ul>
+                                                            <li>Select your tables (Students, Enrollments, Courses)</li>
+                                                            <li>Click <strong>Add</strong> for each</li>
+                                                            <li>Click <strong>Close</strong></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>You'll see tables with checkboxes for columns</li>
+                                                    <li><strong>DRAG</strong> a column from one table to the matching column in another table</li>
+                                                    <li>A line appears connecting them = JOIN!</li>
+                                                    <li>Check the columns you want to see</li>
+                                                    <li>Click <strong>Execute</strong> to see results</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ No typing!</strong> Just click, drag, and check boxes!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-eye text-primary me-2"></i>👀 What You'll See</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">/* Visual Designer View */</span>
+<span style="color: #ffcb6b;">+------------------+     +----------------------+</span>
+<span style="color: #ffcb6b;">|    Students      |     |    Enrollments       |</span>
+<span style="color: #ffcb6b;">+------------------+     +----------------------+</span>
+<span style="color: #82aaff;">| ✔ StudentId      |=====|    StudentId         |</span>
+<span style="color: #82aaff;">| ✔ FirstName      |     | ✔ CourseId          |</span>
+<span style="color: #82aaff;">|   LastName       |     +----------------------+</span>
+<span style="color: #82aaff;">|   Email          |</span>
+<span style="color: #ffcb6b;">+------------------+</span>
+
+<span style="color: #ffcb6b;">+----------------------+</span>
+<span style="color: #ffcb6b;">|      Courses         |</span>
+<span style="color: #ffcb6b;">+----------------------+</span>
+<span style="color: #82aaff;">| ✔ CourseId          |</span>
+<span style="color: #82aaff;">| ✔ Title             |</span>
+<span style="color: #ffcb6b;">+----------------------+</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> The line between tables = your JOIN!</p>
+                                                <p><span class="badge bg-success">✅</span> Checked columns = What you'll see in results</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> When you drag a column, SSMS automatically figures out the JOIN type.
+                                        You can double-click the line to change it (INNER, LEFT, RIGHT, FULL)!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 3: Types of Joins -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-list me-2"></i>Part 3: Types of Joins</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Which Join to Use?</strong> It depends on what data you want back!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>INNER JOIN</h5>
+                                                <p><strong>What it does:</strong> Only shows rows that match in BOTH tables</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- INNER JOIN - Visual Way</span>
+<span class="comment">-- Drag columns to connect</span>
+<span class="comment">-- Double-click line → INNER JOIN</span>
+
+<span class="comment">-- SQL Code Generated</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">s.FirstName</span>, <span style="color: #82aaff;">c.Title</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span> <span style="color: #82aaff;">s</span>
+<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Enrollments</span> <span style="color: #82aaff;">e</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">e.StudentId</span> = <span style="color: #82aaff;">s.StudentId</span>
+<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Courses</span> <span style="color: #82aaff;">c</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">c.CourseId</span> = <span style="color: #82aaff;">e.CourseId</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Only students with enrollments show up</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-arrow-left text-warning me-2"></i>LEFT JOIN</h5>
+                                                <p><strong>What it does:</strong> Shows ALL rows from the LEFT table, matching rows from the right</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- LEFT JOIN - Visual Way</span>
+<span class="comment">-- Drag columns to connect</span>
+<span class="comment">-- Double-click line → LEFT JOIN</span>
+
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">s.FirstName</span>, <span style="color: #82aaff;">c.Title</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span> <span style="color: #82aaff;">s</span>
+<span style="color: #ffcb6b;">LEFT JOIN</span> <span style="color: #82aaff;">Enrollments</span> <span style="color: #82aaff;">e</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">e.StudentId</span> = <span style="color: #82aaff;">s.StudentId</span>
+<span style="color: #ffcb6b;">LEFT JOIN</span> <span style="color: #82aaff;">Courses</span> <span style="color: #82aaff;">c</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">c.CourseId</span> = <span style="color: #82aaff;">e.CourseId</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-warning">📌</span> ALL students show up, even if they have no courses</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-arrow-right text-info me-2"></i>RIGHT JOIN</h5>
+                                                <p><strong>What it does:</strong> Shows ALL rows from the RIGHT table</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- RIGHT JOIN</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">s.FirstName</span>, <span style="color: #82aaff;">c.Title</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span> <span style="color: #82aaff;">s</span>
+<span style="color: #ffcb6b;">RIGHT JOIN</span> <span style="color: #82aaff;">Enrollments</span> <span style="color: #82aaff;">e</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">e.StudentId</span> = <span style="color: #82aaff;">s.StudentId</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-arrows-alt-h text-danger me-2"></i>FULL JOIN</h5>
+                                                <p><strong>What it does:</strong> Shows ALL rows from BOTH tables</p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- FULL JOIN</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">s.FirstName</span>, <span style="color: #82aaff;">e.CourseId</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span> <span style="color: #82aaff;">s</span>
+<span style="color: #ffcb6b;">FULL JOIN</span> <span style="color: #82aaff;">Enrollments</span> <span style="color: #82aaff;">e</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">e.StudentId</span> = <span style="color: #82aaff;">s.StudentId</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the INNER JOIN break up with the LEFT JOIN?
+                                        Because it was too exclusive! (Okay, I'll stop now 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 4: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Use the visual Query Designer to join tables!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Create Tables</strong>
+                                                        <ul>
+                                                            <li>Customers (CustomerId, Name, City)</li>
+                                                            <li>Orders (OrderId, CustomerId, Product, Amount)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Insert Sample Data</strong>
+                                                        <ul>
+                                                            <li>Add 5 customers</li>
+                                                            <li>Add 8 orders (some customers have multiple)</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Use Query Designer (Visual Way)</strong>
+                                                        <ul>
+                                                            <li>Right-click → Design Query in Editor</li>
+                                                            <li>Add both tables</li>
+                                                            <li>Drag CustomerId to CustomerId</li>
+                                                            <li>Check columns: Name, City, Product, Amount</li>
+                                                            <li>Execute to see results</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Try Different Joins</strong>
+                                                        <ul>
+                                                            <li>Double-click the join line</li>
+                                                            <li>Change to LEFT JOIN</li>
+                                                            <li>See what changes!</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to use Query Designer</li>
+                                                    <li>✅ How to drag columns to join</li>
+                                                    <li>✅ How to change join types</li>
+                                                    <li>✅ How to select columns</li>
+                                                    <li>✅ How to see generated SQL</li>
+                                                    <li>✅ Visual joins = No typing!</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> You'll master joins visually!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== CUSTOMERS AND ORDERS - JOIN EXAMPLE =====</span>
+<span class="comment">-- Step 1: Create Tables</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Customers</span> (
+    <span style="color: #82aaff;">CustomerId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Name</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">City</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>)
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Orders</span> (
+    <span style="color: #82aaff;">OrderId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">CustomerId</span> <span style="color: #f78c6c;">INT</span>,
+    <span style="color: #82aaff;">Product</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">Amount</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">10</span>,<span style="color: #f78c6c;">2</span>),
+    <span style="color: #ffcb6b;">FOREIGN KEY</span> (<span style="color: #82aaff;">CustomerId</span>) <span style="color: #ffcb6b;">REFERENCES</span> <span style="color: #82aaff;">Customers</span>(<span style="color: #82aaff;">CustomerId</span>)
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- Step 2: Insert Sample Data</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Customers</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">City</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'Alice'</span>, <span style="color: #c3e88d;">'New York'</span>),
+    (<span style="color: #c3e88d;">'Bob'</span>, <span style="color: #c3e88d;">'Los Angeles'</span>),
+    (<span style="color: #c3e88d;">'Charlie'</span>, <span style="color: #c3e88d;">'Chicago'</span>),
+    (<span style="color: #c3e88d;">'Diana'</span>, <span style="color: #c3e88d;">'Miami'</span>),
+    (<span style="color: #c3e88d;">'Eve'</span>, <span style="color: #c3e88d;">'Seattle'</span>);
+<span style="color: #ffcb6b;">GO</span>
+
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Orders</span> (<span style="color: #82aaff;">CustomerId</span>, <span style="color: #82aaff;">Product</span>, <span style="color: #82aaff;">Amount</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #f78c6c;">1</span>, <span style="color: #c3e88d;">'Laptop'</span>, <span style="color: #f78c6c;">999.99</span>),
+    (<span style="color: #f78c6c;">1</span>, <span style="color: #c3e88d;">'Mouse'</span>, <span style="color: #f78c6c;">25.50</span>),
+    (<span style="color: #f78c6c;">2</span>, <span style="color: #c3e88d;">'Keyboard'</span>, <span style="color: #f78c6c;">45.00</span>),
+    (<span style="color: #f78c6c;">3</span>, <span style="color: #c3e88d;">'Monitor'</span>, <span style="color: #f78c6c;">299.99</span>),
+    (<span style="color: #f78c6c;">3</span>, <span style="color: #c3e88d;">'Desk'</span>, <span style="color: #f78c6c;">199.99</span>),
+    (<span style="color: #f78c6c;">5</span>, <span style="color: #c3e88d;">'Chair'</span>, <span style="color: #f78c6c;">149.99</span>);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- ===== VISUAL WAY (Query Designer) =====</span>
+<span class="comment">-- 1. Click New Query</span>
+<span class="comment">-- 2. Right-click → Design Query in Editor</span>
+<span class="comment">-- 3. Add Customers and Orders tables</span>
+<span class="comment">-- 4. DRAG CustomerId from Customers to CustomerId in Orders</span>
+<span class="comment">-- 5. Check columns: Name, City, Product, Amount</span>
+<span class="comment">-- 6. Click Execute (or press F5)</span>
+<span class="comment">-- 7. Double-click the join line to change type</span>
+
+<span class="comment">-- ===== SQL CODE GENERATED =====</span>
+
+<span class="comment">-- INNER JOIN (shows only customers with orders)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">c.City</span>, <span style="color: #82aaff;">o.Product</span>, <span style="color: #82aaff;">o.Amount</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c</span>
+<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>;
+
+<span class="comment">-- LEFT JOIN (shows ALL customers, with orders if they have any)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">c.City</span>, <span style="color: #82aaff;">o.Product</span>, <span style="color: #82aaff;">o.Amount</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c</span>
+<span style="color: #ffcb6b;">LEFT JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>;
+
+<span class="comment">-- RIGHT JOIN (shows ALL orders, with customer info if available)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">c.City</span>, <span style="color: #82aaff;">o.Product</span>, <span style="color: #82aaff;">o.Amount</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c</span>
+<span style="color: #ffcb6b;">RIGHT JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>;
+
+<span class="comment">-- FULL JOIN (shows ALL customers and ALL orders)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">c.City</span>, <span style="color: #82aaff;">o.Product</span>, <span style="color: #82aaff;">o.Amount</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c</span>
+<span style="color: #ffcb6b;">FULL JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> 
+    <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>;
+
+<span class="comment">-- ===== JOINING 3 TABLES =====</span>
+<span class="comment">-- If you have a Products table too, join them all!</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">c.Name</span>, <span style="color: #82aaff;">p.ProductName</span>, <span style="color: #82aaff;">o.Quantity</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Customers</span> <span style="color: #82aaff;">c</span>
+<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Orders</span> <span style="color: #82aaff;">o</span> <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">o.CustomerId</span> = <span style="color: #82aaff;">c.CustomerId</span>
+<span style="color: #ffcb6b;">INNER JOIN</span> <span style="color: #82aaff;">Products</span> <span style="color: #82aaff;">p</span> <span style="color: #ffcb6b;">ON</span> <span style="color: #82aaff;">p.ProductId</span> = <span style="color: #82aaff;">o.ProductId</span>;</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've mastered joins - visually AND with code!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-link fa-3x mb-2"></i>
+                                        <h5>Joins</h5>
+                                        <small>Connect tables</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>INNER JOIN</h5>
+                                        <small>Matching rows only</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-arrow-left fa-3x mb-2"></i>
+                                        <h5>LEFT JOIN</h5>
+                                        <small>All left table rows</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-mouse-pointer fa-3x mb-2"></i>
+                                        <h5>Visual Way</h5>
+                                        <small>Drag & drop</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>SQL Code</h5>
+                                        <small>Generated automatically</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Real Example</h5>
+                                        <small>Customers & Orders</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Master!</h5>
+                                        <small>Both ways!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now a master of joining tables - visually and with code!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/06-InsertUpdateDelete" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson5")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

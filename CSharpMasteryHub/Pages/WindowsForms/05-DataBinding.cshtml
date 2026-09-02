@@ -1,104 +1,837 @@
 @page
 @model CSharpMasteryHub.Pages.WindowsForms.DataBindingModel
 @{
-    ViewData["Title"] = "Data Binding";
+    ViewData["Title"] = "Data Binding - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/WindowsForms">Windows Forms</a></li>
-                    <li class="breadcrumb-item active">Data Binding</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Data Binding</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 5 of 7</span>
-                </div>
-
-                <p>
-                    Data binding connects controls directly to data so they display and
-                    update automatically, instead of manually copying values in and out.
-                </p>
-
-                <h2>Binding a DataGridView to a DataTable</h2>
-                <pre><code>using Microsoft.Data.SqlClient;
-using System.Data;
-
-private void LoadStudents()
-{
-    using var connection = new SqlConnection(connectionString);
-    var adapter = new SqlDataAdapter("SELECT StudentId, FirstName, LastName, Email FROM Students", connection);
-
-    var table = new DataTable();
-    adapter.Fill(table);
-
-    dgvStudents.DataSource = table;
-}</code></pre>
-                <p>That's it — the grid populates itself with columns and rows automatically.</p>
-
-                <h2>Binding a ComboBox to a lookup table</h2>
-                <pre><code>private void LoadCourses()
-{
-    using var connection = new SqlConnection(connectionString);
-    var adapter = new SqlDataAdapter("SELECT CourseId, Title FROM Courses", connection);
-
-    var table = new DataTable();
-    adapter.Fill(table);
-
-    cmbCourse.DataSource = table;
-    cmbCourse.DisplayMember = "Title";   // what the user sees
-    cmbCourse.ValueMember = "CourseId";  // what you read in code
-}
-
-// Later:
-int selectedCourseId = (int)cmbCourse.SelectedValue!;</code></pre>
-
-                <h2>Reacting to a grid row selection</h2>
-                <pre><code>private void dgvStudents_SelectionChanged(object sender, EventArgs e)
-{
-    if (dgvStudents.CurrentRow == null) return;
-
-    txtFirstName.Text = dgvStudents.CurrentRow.Cells["FirstName"].Value?.ToString();
-    txtLastName.Text = dgvStudents.CurrentRow.Cells["LastName"].Value?.ToString();
-}</code></pre>
-
-                <h2>Binding a form to a single object (BindingSource)</h2>
-                <pre><code>var student = new Student { FirstName = "Ali", LastName = "Hassan" };
-var bindingSource = new BindingSource { DataSource = student };
-
-txtFirstName.DataBindings.Add("Text", bindingSource, "FirstName");
-txtLastName.DataBindings.Add("Text", bindingSource, "LastName");</code></pre>
-                <p>Now changes in the textbox flow directly into the <code>student</code> object.</p>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Data binding connects controls to data automatically, reducing manual code and keeping your UI synchronized with your data.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/WindowsForms" style="color: rgba(255,255,255,0.7);">Windows Forms</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Data Binding</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);">
+                        Data Binding 🔗
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Connect Your App to Data - Automatically!
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>25 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 5 of 7
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/WindowsForms/06-MultiFormApps" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-link fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(102, 126, 234, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Welcome to Data Binding! 🎯</h2>
+                                    <p class="fs-5">
+                                        <strong>Data Binding</strong> is like having a <strong>magic link</strong>
+                                        between your controls and your data. When data changes, your controls
+                                        update automatically. No more manual copying!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>What You'll Learn:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ What Data Binding is (in simple words)</li>
+                                            <li>✅ How to bind a DataGridView to a DataTable</li>
+                                            <li>✅ How to bind a ComboBox to lookup data</li>
+                                            <li>✅ How to react when a user selects a row</li>
+                                            <li>✅ How to bind a form to a single object</li>
+                                            <li>✅ Build a complete CRUD application!</li>
+                                        </ul>
+                                    </div>
+                                    <div class="alert alert-warning mt-2">
+                                        <i class="fas fa-star me-2"></i>
+                                        <strong>💡 The Magic:</strong> Instead of writing <code>txtName.Text = student.Name</code>
+                                        every time, Data Binding does it for you automatically!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: What is Data Binding? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>What is Data Binding?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> Data Binding is like a <strong>"live connection"</strong>
+                                    between your controls (like TextBoxes, ComboBoxes) and your data (like a database table).
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>❌ Without Data Binding (Hard Way)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Load data manually</span>
+<span class="class">Student</span> student = <span class="function">GetStudent</span>(<span class="number">1</span>);
+txtName.Text = student.Name;
+txtAge.Text = student.Age.ToString();
+
+<span class="comment">// Save data manually</span>
+student.Name = txtName.Text;
+student.Age = <span class="keyword">int</span>.<span class="function">Parse</span>(txtAge.Text);
+<span class="function">SaveStudent</span>(student);</code></pre>
+                                                </div>
+                                                <p class="text-danger">😫 So much manual work!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ With Data Binding (Easy Way)</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Bind once - it stays connected!</span>
+txtName.DataBindings.Add(<span class="string">"Text"</span>, student, <span class="string">"Name"</span>);
+txtAge.DataBindings.Add(<span class="string">"Text"</span>, student, <span class="string">"Age"</span>);
+
+<span class="comment">// Changes happen automatically!</span>
+<span class="comment">// No need to copy data manually!</span></code></pre>
+                                                </div>
+                                                <p class="text-success">😊 Much easier! Data Binding does the work!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the developer use Data Binding?
+                                        Because they were tired of manual labor! (Get it? Manual vs Automatic? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔗 Part 2: Binding a DataGridView -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Binding a DataGridView - Show Data in a Table</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-table me-2"></i>
+                                    <strong>What's happening?</strong> We load data from a database into a DataTable,
+                                    then connect it to a DataGridView. The grid <strong>automatically</strong> creates columns and rows!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 The Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Load data from database</span>
+<span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+{
+    <span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(
+        <span class="string">"SELECT Id, Name, Age FROM Students"</span>, conn);
+    
+    <span class="class">DataTable</span> table = <span class="keyword">new</span> <span class="class">DataTable</span>();
+    adapter.<span class="function">Fill</span>(table);
+    
+    <span class="comment">// 2️⃣ Bind to DataGridView</span>
+    dataGridView1.DataSource = table;
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">🎉</span> That's it! The grid shows all your data!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Why This is Awesome</h5>
+                                                <ul>
+                                                    <li>✅ <strong>No manual columns</strong> - DataGridView creates them automatically</li>
+                                                    <li>✅ <strong>No manual rows</strong> - All data appears automatically</li>
+                                                    <li>✅ <strong>Live updates</strong> - Change the DataTable, the grid updates</li>
+                                                    <li>✅ <strong>User friendly</strong> - Users can sort, resize columns</li>
+                                                </ul>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>💡 Real World:</strong> This is how every data-driven app works!
+                                                    Customer lists, product catalogs, order history - all use DataGridView!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📋 Part 3: Binding a ComboBox -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Binding a ComboBox - Lookup Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-list me-2"></i>
+                                    <strong>What's happening?</strong> We load a list of items (like courses, departments)
+                                    and bind them to a ComboBox. The user sees one value, but we get the ID!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 The Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Load lookup data</span>
+<span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+{
+    <span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(
+        <span class="string">"SELECT CourseId, Title FROM Courses"</span>, conn);
+    
+    <span class="class">DataTable</span> courses = <span class="keyword">new</span> <span class="class">DataTable</span>();
+    adapter.<span class="function">Fill</span>(courses);
+    
+    <span class="comment">// 2️⃣ Bind to ComboBox</span>
+    cmbCourse.DataSource = courses;
+    cmbCourse.DisplayMember = <span class="string">"Title"</span>;   <span class="comment">// What user sees</span>
+    cmbCourse.ValueMember = <span class="string">"CourseId"</span>;  <span class="comment">// What we get</span>
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">🎉</span> Users see "Math", we get "1"!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using the Selection</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Get the selected ID</span>
+<span class="keyword">int</span> courseId = (<span class="keyword">int</span>)cmbCourse.SelectedValue;
+
+<span class="comment">// Get the selected text</span>
+<span class="keyword">string</span> courseName = cmbCourse.Text;
+
+<span class="comment">// Use it in a query</span>
+<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"You selected: {courseName} (ID: {courseId})"</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-info">📌</span> <strong>DisplayMember</strong> = What user sees (friendly name)</p>
+                                                <p><span class="badge bg-info">📌</span> <strong>ValueMember</strong> = What you get in code (ID)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Always use ValueMember to get the ID,
+                                        not the index or text. It's more reliable!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔄 Part 4: Reacting to Selection -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Reacting to a Grid Row Selection</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-mouse-pointer me-2"></i>
+                                    <strong>What's happening?</strong> When a user clicks a row in the DataGridView,
+                                    we show the details in TextBoxes. This is the "Master-Detail" pattern!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 The Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Create the SelectionChanged event</span>
+<span class="comment">// Double-click DataGridView → Events → SelectionChanged</span>
+
+<span class="keyword">private void</span> <span class="function">dgvStudents_SelectionChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+    
+    <span class="comment">// Show data in textboxes</span>
+    txtName.Text = dgvStudents.CurrentRow.Cells[<span class="string">"Name"</span>].Value?.ToString();
+    txtAge.Text = dgvStudents.CurrentRow.Cells[<span class="string">"Age"</span>].Value?.ToString();
+}</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">🎉</span> Click a row → TextBoxes update instantly!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ Why This is Useful</h5>
+                                                <ul>
+                                                    <li>✅ <strong>Master-Detail</strong> - Show list on top, details below</li>
+                                                    <li>✅ <strong>User-friendly</strong> - Click to see more information</li>
+                                                    <li>✅ <strong>Real-world</strong> - Used in every CRM, ERP, and management app</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-example me-2"></i>
+                                                        <strong>Real Example:</strong>
+                                                        Customer list on top → when you click a customer, their orders appear below.
+                                                        That's the Master-Detail pattern!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the row break up with the grid?
+                                        Because it got selected! (Bad pun, I know 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📦 Part 5: Binding to a Single Object -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Binding to a Single Object (BindingSource)</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-user me-2"></i>
+                                    <strong>What's happening?</strong> Instead of a table, we bind to a <strong>single object</strong>
+                                    (like a Student). Changes in the TextBox automatically update the object!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 The Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create a student object</span>
+<span class="class">Student</span> student = <span class="keyword">new</span> <span class="class">Student</span> { 
+    Name = <span class="string">"Ali"</span>, 
+    Age = <span class="number">25</span> 
+};
+
+<span class="comment">// 2️⃣ Create a BindingSource</span>
+<span class="class">BindingSource</span> bs = <span class="keyword">new</span> <span class="class">BindingSource</span>();
+bs.DataSource = student;
+
+<span class="comment">// 3️⃣ Bind TextBoxes to the object</span>
+txtName.DataBindings.Add(<span class="string">"Text"</span>, bs, <span class="string">"Name"</span>);
+txtAge.DataBindings.Add(<span class="string">"Text"</span>, bs, <span class="string">"Age"</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">🎉</span> Type in TextBox → student object updates automatically!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>🎯 Using the Bound Object</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// When user clicks Save</span>
+<span class="keyword">private void</span> <span class="function">btnSave_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// ✅ No need to read from TextBox!</span>
+    <span class="comment">// The student object is already updated!</span>
+    <span class="function">SaveToDatabase</span>(student);
+    
+    <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Saved!"</span>);
+}</code></pre>
+                                                </div>
+                                                <p>
+                                                    <span class="badge bg-info">📌</span> <strong>Key Point:</strong> You don't need to read from TextBoxes -
+                                                    the object is automatically updated!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Why This is Powerful:</strong>
+                                        <ul class="mb-0">
+                                            <li>✅ No manual <code>txtName.Text</code> reading</li>
+                                            <li>✅ Object always stays in sync with UI</li>
+                                            <li>✅ Cleaner code - less typing!</li>
+                                            <li>✅ Easy to save - just save the object</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 6: Complete Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Build a complete Student Management System with Data Binding!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>What You'll Build:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Form Design:</strong>
+                                                        <ul>
+                                                            <li>📋 DataGridView to show students</li>
+                                                            <li>📝 TextBoxes for Name, Age, Email</li>
+                                                            <li>📊 ComboBox for Course selection</li>
+                                                            <li>🔘 Buttons: Add, Update, Delete</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Data Binding:</strong>
+                                                        <ul>
+                                                            <li>DataGridView bound to DataTable</li>
+                                                            <li>ComboBox bound to Courses</li>
+                                                            <li>TextBoxes show selected student details</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ DataGridView binding</li>
+                                                    <li>✅ ComboBox binding (DisplayMember/ValueMember)</li>
+                                                    <li>✅ SelectionChanged event handling</li>
+                                                    <li>✅ Insert, Update, Delete with Data Binding</li>
+                                                    <li>✅ Complete CRUD application!</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> A full student management system with data binding!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== STUDENT MANAGEMENT SYSTEM =====</span>
+<span class="comment">// Complete CRUD with Data Binding</span>
+
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">StudentForm</span> : <span class="class">Form</span>
+{
+    <span class="keyword">private</span> <span class="class">DataTable</span> studentsTable;
+    <span class="keyword">private</span> <span class="keyword">string</span> connectionString = <span class="string">"YourConnectionString"</span>;
+    
+    <span class="keyword">public</span> <span class="function">StudentForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+        <span class="function">LoadStudents</span>();
+        <span class="function">LoadCourses</span>();
+    }
+    
+    <span class="comment">// 📋 LOAD STUDENTS</span>
+    <span class="keyword">private void</span> <span class="function">LoadStudents</span>()
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+        {
+            <span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(
+                <span class="string">"SELECT StudentId, Name, Age, CourseId FROM Students"</span>, conn);
+            
+            studentsTable = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(studentsTable);
+            dgvStudents.DataSource = studentsTable;
+        }
+    }
+    
+    <span class="comment">// 📋 LOAD COURSES</span>
+    <span class="keyword">private void</span> <span class="function">LoadCourses</span>()
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+        {
+            <span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(
+                <span class="string">"SELECT CourseId, Title FROM Courses"</span>, conn);
+            
+            <span class="class">DataTable</span> courses = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(courses);
+            
+            cmbCourse.DataSource = courses;
+            cmbCourse.DisplayMember = <span class="string">"Title"</span>;
+            cmbCourse.ValueMember = <span class="string">"CourseId"</span>;
+        }
+    }
+    
+    <span class="comment">// 🔄 ROW SELECTION - Show details</span>
+    <span class="keyword">private void</span> <span class="function">dgvStudents_SelectionChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        <span class="keyword">var</span> row = dgvStudents.CurrentRow;
+        txtName.Text = row.Cells[<span class="string">"Name"</span>].Value?.ToString();
+        txtAge.Text = row.Cells[<span class="string">"Age"</span>].Value?.ToString();
+        cmbCourse.SelectedValue = row.Cells[<span class="string">"CourseId"</span>].Value;
+    }
+    
+    <span class="comment">// ➕ ADD STUDENT</span>
+    <span class="keyword">private void</span> <span class="function">btnAdd_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="class">DataRow</span> newRow = studentsTable.NewRow();
+        newRow[<span class="string">"Name"</span>] = txtName.Text;
+        newRow[<span class="string">"Age"</span>] = <span class="keyword">int</span>.<span class="function">Parse</span>(txtAge.Text);
+        newRow[<span class="string">"CourseId"</span>] = cmbCourse.SelectedValue;
+        studentsTable.Rows.Add(newRow);
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student added!"</span>);
+    }
+    
+    <span class="comment">// 🗑️ DELETE STUDENT</span>
+    <span class="keyword">private void</span> <span class="function">btnDelete_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        <span class="class">DataRow</span> row = ((<span class="class">DataRowView</span>)dgvStudents.CurrentRow.DataBoundItem).Row;
+        studentsTable.Rows.Remove(row);
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student deleted!"</span>);
+    }
+    
+    <span class="comment">// 💾 UPDATE STUDENT</span>
+    <span class="keyword">private void</span> <span class="function">btnUpdate_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        <span class="class">DataRow</span> row = ((<span class="class">DataRowView</span>)dgvStudents.CurrentRow.DataBoundItem).Row;
+        row[<span class="string">"Name"</span>] = txtName.Text;
+        row[<span class="string">"Age"</span>] = <span class="keyword">int</span>.<span class="function">Parse</span>(txtAge.Text);
+        row[<span class="string">"CourseId"</span>] = cmbCourse.SelectedValue;
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student updated!"</span>);
+    }
+    
+    <span class="comment">// 💾 SAVE TO DATABASE</span>
+    <span class="keyword">private void</span> <span class="function">btnSaveToDB_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+        {
+            <span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(
+                <span class="string">"SELECT StudentId, Name, Age, CourseId FROM Students"</span>, conn);
+            
+            <span class="keyword">var</span> builder = <span class="keyword">new</span> <span class="class">SqlCommandBuilder</span>(adapter);
+            adapter.<span class="function">Update</span>(studentsTable);
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Saved to database!"</span>);
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've built a complete CRUD app with Data Binding!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-link fa-3x mb-2"></i>
+                                        <h5>Data Binding</h5>
+                                        <small>Live connection</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-table fa-3x mb-2"></i>
+                                        <h5>DataGridView</h5>
+                                        <small>Show data tables</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-list fa-3x mb-2"></i>
+                                        <h5>ComboBox</h5>
+                                        <small>Lookup data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-user fa-3x mb-2"></i>
+                                        <h5>Object Binding</h5>
+                                        <small>Single objects</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-mouse-pointer fa-3x mb-2"></i>
+                                        <h5>Selection Events</h5>
+                                        <small>React to clicks</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>CRUD Operations</h5>
+                                        <small>Add, Update, Delete</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-trophy fa-3x mb-2"></i>
+                                        <h5>Real App</h5>
+                                        <small>Student Management</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to build data-driven Windows Forms applications!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/WindowsForms/04-MenusAndDialogs" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/WindowsForms/06-MultiFormApps" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "WindowsForms_Lesson5")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            position: relative;
+        }
+
+        .code-block pre {
+            background: #1e1e2e !important;
+            color: #cdd6f4 !important;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border-left: 6px solid #89b4fa;
+            margin: 0;
+        }
+
+        .code-block.small pre {
+            font-size: 0.75rem;
+            padding: 0.8rem;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* Visual Studio-like color scheme */
+        .language-csharp .keyword { color: #c792ea !important; font-weight: 600; }
+        .language-csharp .comment { color: #676e95 !important; font-style: italic; }
+        .language-csharp .string { color: #c3e88d !important; }
+        .language-csharp .number { color: #f78c6c !important; }
+        .language-csharp .function { color: #82aaff !important; }
+        .language-csharp .class { color: #ffcb6b !important; font-weight: 600; }
+        .language-csharp .property { color: #80cbc4 !important; }
+        .language-csharp .variable { color: #eeffff !important; }
+        .language-csharp .operator { color: #89ddff !important; }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover:not(.bg-light) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+        .bg-light ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

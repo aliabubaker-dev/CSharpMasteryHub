@@ -1,85 +1,869 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.InstallingSqlServerSsmsModel
 @{
-    ViewData["Title"] = "SSMS Interface Tour";
+    ViewData["Title"] = "SSMS Interface Tour - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">SSMS Interface Tour</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">SSMS Interface Tour</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-success">Beginner</span>
-                    <span class="badge bg-info text-dark">15 min read</span>
-                    <span class="badge bg-primary">Lesson 1 of 10</span>
-                </div>
-
-                <p>
-                    If you haven't installed SQL Server Express and SSMS yet, do that first in
-                    the <a href="/GettingStarted/03-InstallingSqlExpressSsms">Getting Started module</a>.
-                    This lesson tours the interface you'll live in for the rest of this course.
-                </p>
-
-                <h2>Object Explorer (left panel)</h2>
-                <p>
-                    This tree shows every server you're connected to, and under each server:
-                    <strong>Databases</strong>, <strong>Security</strong>, <strong>Server Objects</strong>,
-                    and more. Expand <em>Databases &rarr; System Databases</em> to see the four
-                    built-in databases SQL Server needs to operate.
-                </p>
-
-                <h2>New Query window</h2>
-                <p>
-                    Click <strong>New Query</strong> in the toolbar. This opens a blank editor
-                    connected to whichever database is selected in the dropdown above it —
-                    always double-check this dropdown before running anything.
-                </p>
-
-                <h2>Executing queries</h2>
-                <p>
-                    Type a query and press <kbd>F5</kbd> or click <strong>Execute</strong>.
-                    Results appear in the grid below. Try this right now:
-                </p>
-                <pre><code>SELECT @@VERSION;</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <h2>Creating your first database</h2>
-                <pre><code>CREATE DATABASE SchoolDB;</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-                <p>Right-click <strong>Databases</strong> in Object Explorer and choose Refresh to see it appear.</p>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>SSMS is your primary tool for managing SQL Server. The Object Explorer and Query windows are where you'll spend most of your time.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">SSMS Interface Tour</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        SSMS Interface Tour 🗄️
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Your Gateway to the World of Databases
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>15 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 1 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
-                    </a>
-                    <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-database fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Welcome to the World of Databases! 🎯</h2>
+                                    <p class="fs-5">
+                                        <strong>SQL Server Management Studio (SSMS)</strong> is your <strong>control center</strong>
+                                        for working with databases. Think of it like the <strong>dashboard</strong> of a car -
+                                        everything you need is right there!
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Understand what SSMS is and why it matters</li>
+                                            <li>✅ Navigate the Object Explorer like a pro</li>
+                                            <li>✅ Write and run your first SQL query</li>
+                                            <li>✅ Create your first database</li>
+                                            <li>✅ Understand the history of SQL and databases</li>
+                                            <li>✅ Know which database to choose for your C# projects</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: The History of SQL -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-history me-2"></i>Where Did SQL Come From?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-timeline text-primary me-2"></i>📜 The Story of SQL</h5>
+                                                <div class="row">
+                                                    <div class="col-md-3 text-center">
+                                                        <div class="card" style="background: #1a1a2e; color: white;">
+                                                            <div class="card-body">
+                                                                <h3 class="text-warning">1970</h3>
+                                                                <p class="small">Dr. Edgar Codd<br>invents the<br><strong>Relational Model</strong></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 text-center">
+                                                        <div class="card" style="background: #0f3460; color: white;">
+                                                            <div class="card-body">
+                                                                <h3 class="text-info">1974</h3>
+                                                                <p class="small">IBM creates<br><strong>SEQUEL</strong><br>(later renamed SQL)</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 text-center">
+                                                        <div class="card" style="background: #1a1a2e; color: white;">
+                                                            <div class="card-body">
+                                                                <h3 class="text-success">1989</h3>
+                                                                <p class="small">Microsoft launches<br><strong>SQL Server</strong><br>with Sybase</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 text-center">
+                                                        <div class="card" style="background: #0f3460; color: white;">
+                                                            <div class="card-body">
+                                                                <h3 class="text-danger">Today</h3>
+                                                                <p class="small">SQL is the<br><strong>#1 language</strong><br>for databases worldwide</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="alert alert-info mt-3">
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    <strong>Did You Know?</strong> SQL (Structured Query Language) was originally called SEQUEL
+                                                    (Structured English Query Language). It was created by IBM in the 1970s and has been
+                                                    the standard for databases ever since!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the SQL developer break up with their database?
+                                        Because they couldn't commit! (Get it? Commit? Transactions? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🗄️ Part 2: Database Comparison -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-balance-scale me-2"></i>Which Database Should You Use?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Big Question:</strong> With so many databases, which one is best for your C# projects?
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Database</th>
+                                                <th>Best For</th>
+                                                <th>Used By</th>
+                                                <th>C# Integration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>SQL Server</strong></td>
+                                                <td>Enterprise, .NET apps</td>
+                                                <td>Microsoft, Fortune 500</td>
+                                                <td>✅ Best (built-in)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>MySQL</strong></td>
+                                                <td>Web apps, startups</td>
+                                                <td>Facebook, Uber</td>
+                                                <td>✅ Good (NuGet)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>PostgreSQL</strong></td>
+                                                <td>Advanced features</td>
+                                                <td>Apple, Reddit</td>
+                                                <td>✅ Good (NuGet)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>SQLite</strong></td>
+                                                <td>Mobile, small apps</td>
+                                                <td>Android, iOS</td>
+                                                <td>✅ Excellent</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>For C# Developers:</strong>
+                                        <strong>SQL Server</strong> is the BEST choice because:
+                                        <ul class="mb-0">
+                                            <li>✅ Built-in support in Visual Studio</li>
+                                            <li>✅ Seamless integration with .NET</li>
+                                            <li>✅ Used by 90% of enterprise companies</li>
+                                            <li>✅ SSMS is the best management tool</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Joke:</strong> Why did the MySQL developer switch to SQL Server?
+                                        Because they wanted to be "enterprise" level! (And they heard SSMS has better colors! 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🖥️ Part 3: What is SSMS? -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-desktop me-2"></i>What is SSMS?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>In Simple Words:</strong> SSMS is the <strong>Swiss Army knife</strong> for SQL Server.
+                                    It's where you create, manage, and query your databases.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-check-circle text-success me-2"></i>✅ What SSMS Does</h5>
+                                                <ul>
+                                                    <li>📋 <strong>Object Explorer</strong> - See all your databases</li>
+                                                    <li>✏️ <strong>Query Editor</strong> - Write and run SQL</li>
+                                                    <li>📊 <strong>Results Grid</strong> - See your data</li>
+                                                    <li>🔧 <strong>Properties</strong> - Configure everything</li>
+                                                    <li>📈 <strong>Performance Reports</strong> - Monitor your databases</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-tools text-primary me-2"></i>🔧 How to Open SSMS</h5>
+                                                <ol>
+                                                    <li>Click the <strong>Windows Start</strong> button</li>
+                                                    <li>Type <strong>"SQL Server Management Studio"</strong></li>
+                                                    <li>Click the app to open it</li>
+                                                    <li>In the connection dialog, click <strong>Connect</strong></li>
+                                                    <li>🎉 You're in!</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>💡 Pro Tip:</strong> If you see "localhost" or "."
+                                                        in the Server Name box, you're connected to your local SQL Server!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🏗️ Part 4: Object Explorer Tour -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-sitemap me-2"></i>Object Explorer Tour</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-eye me-2"></i>
+                                    <strong>What is Object Explorer?</strong> It's the <strong>file explorer</strong> for your databases.
+                                    Everything is organized in a tree structure.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-folder-open text-primary me-2"></i>📁 What You'll See</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">/* Object Explorer Tree */</span>
+<span style="color: #ffcb6b;">🗄️ Server Name</span>
+   ├── <span style="color: #82aaff;">📂 Databases</span>
+   │   ├── <span style="color: #c3e88d;">System Databases</span>
+   │   │   ├── master
+   │   │   ├── model
+   │   │   ├── msdb
+   │   │   └── tempdb
+   │   └── <span style="color: #c3e88d;">Your Databases</span>
+   │       └── SchoolDB
+   ├── <span style="color: #82aaff;">🔒 Security</span>
+   │   ├── Logins
+   │   └── Users
+   └── <span style="color: #82aaff;">⚙️ Server Objects</span>
+       ├── Backup Devices
+       └── Linked Servers</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Expand Databases</strong> to see all your databases</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-search text-success me-2"></i>🔍 How to Explore</h5>
+                                                <ol>
+                                                    <li><strong>Click the +</strong> next to any folder to expand it</li>
+                                                    <li><strong>Right-click</strong> items to see what you can do</li>
+                                                    <li>
+                                                        <strong>Find System Databases</strong> - These are built-in:
+                                                        <ul>
+                                                            <li><strong>master</strong> - Controls everything</li>
+                                                            <li><strong>tempdb</strong> - Temporary storage</li>
+                                                            <li><strong>msdb</strong> - Jobs and schedules</li>
+                                                            <li><strong>model</strong> - Template for new databases</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <div class="alert alert-warning mt-2">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <strong>⚠️ Warning:</strong> Don't delete system databases!
+                                                    They're like the engine of your car - you need them to run!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ✏️ Part 5: Query Window -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-code me-2"></i>The Query Window - Your Workspace</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-pencil-alt me-2"></i>
+                                    <strong>What is the Query Window?</strong> It's where you <strong>write and run</strong> your SQL commands.
+                                    Think of it like a <strong>notepad</strong> where you write instructions for your database.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 How to Open a Query Window</h5>
+                                                <ol>
+                                                    <li>Click <strong>New Query</strong> in the toolbar</li>
+                                                    <li>Or press <kbd>Ctrl + N</kbd></li>
+                                                    <li>A blank editor appears</li>
+                                                    <li>Check the database dropdown above</li>
+                                                </ol>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                                        <strong>⚠️ Important:</strong> Always check which database is selected
+                                                        in the dropdown before running queries!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-play text-success me-2"></i>▶️ Running Queries</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Write your SQL here</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">@@VERSION</span>;
+
+<span class="comment">-- Press F5 or click Execute</span>
+<span class="comment">-- Results appear in the grid below</span></code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">⌨️</span> <kbd>F5</kbd> = Execute</p>
+                                                <p><span class="badge bg-success">📊</span> Results show in the grid below</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Fact:</strong> The most used keyboard shortcut in SSMS is F5.
+                                        It's like the "make it happen" button!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🗄️ Part 6: Create Your First Database -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create Your First Database</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Let's Do It!</strong> Follow these steps to create your first database:
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>📝 Step 1: Write the Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Create a database named SchoolDB</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">SchoolDB</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Command:</strong> <code>CREATE DATABASE</code> + DatabaseName</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-sync text-success me-2"></i>🔄 Step 2: Refresh</h5>
+                                                <ol>
+                                                    <li>Right-click <strong>Databases</strong> in Object Explorer</li>
+                                                    <li>Click <strong>Refresh</strong></li>
+                                                    <li>Your new database appears!</li>
+                                                    <li>Expand it to see what's inside</li>
+                                                </ol>
+                                                <div class="alert alert-success mt-2">
+                                                    <i class="fas fa-check-circle me-2"></i>
+                                                    <strong>🎉 Congratulations!</strong> You just created your first database!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Creating a database is like buying a new notebook.
+                                        It's empty right now, but you can fill it with data later!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 7: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Explore SSMS and create a database!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Open SSMS</strong>
+                                                        <ul>
+                                                            <li>Find it in your Start menu</li>
+                                                            <li>Connect to your local server</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Explore Object Explorer</strong>
+                                                        <ul>
+                                                            <li>Expand Databases</li>
+                                                            <li>Look at System Databases</li>
+                                                            <li>Find master, tempdb, msdb, model</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Open a New Query</strong>
+                                                        <ul>
+                                                            <li>Click New Query in toolbar</li>
+                                                            <li>Write <code>SELECT @@VERSION;</code></li>
+                                                            <li>Press F5 to run it</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Create a Database</strong>
+                                                        <ul>
+                                                            <li>Write <code>CREATE DATABASE MyFirstDB;</code></li>
+                                                            <li>Press F5 to run it</li>
+                                                            <li>Refresh Object Explorer</li>
+                                                            <li>See your new database!</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to navigate SSMS</li>
+                                                    <li>✅ How to write and run SQL</li>
+                                                    <li>✅ How to create a database</li>
+                                                    <li>✅ How to refresh Object Explorer</li>
+                                                    <li>✅ How to find system databases</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> You'll have created your first database and learned to use SSMS!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== SSMS EXPLORATION =====</span>
+<span class="comment">-- All the SQL commands you need!</span>
+
+<span class="comment">-- 1️⃣ Check your SQL Server version</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">@@VERSION</span>;
+
+<span class="comment">-- 2️⃣ Create your first database</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">MyFirstDB</span>;
+
+<span class="comment">-- 3️⃣ Switch to your new database</span>
+<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">MyFirstDB</span>;
+
+<span class="comment">-- 4️⃣ Create a simple table</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Students</span> (
+    <span style="color: #82aaff;">Id</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Name</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">Age</span> <span style="color: #f78c6c;">INT</span>
+);
+
+<span class="comment">-- 5️⃣ Insert some data</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Students</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Age</span>)
+<span style="color: #ffcb6b;">VALUES</span> (<span style="color: #c3e88d;">'Alice'</span>, <span style="color: #f78c6c;">20</span>),
+       (<span style="color: #c3e88d;">'Bob'</span>, <span style="color: #f78c6c;">22</span>),
+       (<span style="color: #c3e88d;">'Charlie'</span>, <span style="color: #f78c6c;">21</span>);
+
+<span class="comment">-- 6️⃣ View your data</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;
+
+<span class="comment">-- 7️⃣ View all databases on your server</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">name</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">sys</span>.<span style="color: #82aaff;">databases</span>;
+
+<span class="comment">-- 8️⃣ Drop (delete) a database (be careful!)</span>
+<span style="color: #ffcb6b;">DROP DATABASE</span> <span style="color: #82aaff;">MyFirstDB</span>;</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've learned to use SSMS and create databases!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-history fa-3x mb-2"></i>
+                                        <h5>SQL History</h5>
+                                        <small>From 1970 to today</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-balance-scale fa-3x mb-2"></i>
+                                        <h5>Database Comparison</h5>
+                                        <small>Which one to use?</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-desktop fa-3x mb-2"></i>
+                                        <h5>SSMS Interface</h5>
+                                        <small>Object Explorer & Query</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Create Database</h5>
+                                        <small>Your first database!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-folder-open fa-3x mb-2"></i>
+                                        <h5>System Databases</h5>
+                                        <small>master, tempdb, msdb, model</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-play fa-3x mb-2"></i>
+                                        <h5>Run Queries</h5>
+                                        <small>F5 to execute</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Ready!</h5>
+                                        <small>For more SQL lessons!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now ready to work with SQL Server and SSMS!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                        </a>
+                        <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson1")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

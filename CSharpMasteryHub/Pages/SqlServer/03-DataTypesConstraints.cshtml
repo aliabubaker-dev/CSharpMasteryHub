@@ -1,94 +1,862 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.DataTypesConstraintsModel
 @{
-    ViewData["Title"] = "Data Types & Constraints";
+    ViewData["Title"] = "Data Types & Constraints - Learn Like a Pro";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">Data Types & Constraints</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">Data Types &amp; Constraints</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 3 of 10</span>
-                </div>
-
-                <h2>Common data types</h2>
-                <div class="table-responsive mb-4">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Use for</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>INT / BIGINT</td><td>Whole numbers</td></tr>
-                            <tr><td>DECIMAL(p,s)</td><td>Exact money/decimal values, e.g. DECIMAL(10,2)</td></tr>
-                            <tr><td>NVARCHAR(n)</td><td>Variable-length text (Unicode) — use this for names, emails, etc.</td></tr>
-                            <tr><td>DATE / DATETIME2</td><td>Dates and timestamps</td></tr>
-                            <tr><td>BIT</td><td>Boolean (0 or 1)</td></tr>
-                            <tr><td>UNIQUEIDENTIFIER</td><td>GUIDs</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2>Constraints</h2>
-                <pre><code>CREATE TABLE Courses (
-    CourseId    INT IDENTITY PRIMARY KEY,
-    Title       NVARCHAR(100) NOT NULL,
-    Credits     INT NOT NULL CHECK (Credits BETWEEN 1 AND 6),
-    DeptCode    NVARCHAR(10) NOT NULL,
-    CONSTRAINT FK_Courses_Dept FOREIGN KEY (DeptCode)
-        REFERENCES Departments(DeptCode)
-);</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <ul>
-                    <li><strong>CHECK</strong> — restricts values to a valid range or condition.</li>
-                    <li><strong>FOREIGN KEY</strong> — enforces that a value must exist in another table (referential integrity).</li>
-                    <li><strong>NOT NULL / UNIQUE</strong> — covered in the previous lesson.</li>
-                </ul>
-
-                <h2>Adding a constraint after the fact</h2>
-                <pre><code>ALTER TABLE Courses
-ADD CONSTRAINT CK_Credits_Positive CHECK (Credits > 0);</code></pre>
-                @await Html.PartialAsync("_TryInDotnetFiddle", "Run this code")
-
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Choosing the right data type and adding constraints ensures data integrity and prevents invalid data from entering your database.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">Data Types & Constraints</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        Data Types & Constraints 🛡️
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Two Ways to Learn: Visual Designer + SQL Code
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>20 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 3 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-shield-alt fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Main Content -->
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Two Ways to Master Data Types & Constraints! 🎯</h2>
+                                    <p class="fs-5">
+                                        In this lesson, you'll learn <strong>two ways</strong> to work with data types and constraints:
+                                        <strong>1. The Visual Way</strong> (using SSMS right-click menus) and
+                                        <strong>2. The Code Way</strong> (writing SQL). <strong>Real pros know BOTH!</strong>
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>By the end of this lesson, you'll be able to:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ Choose the right data type for your columns</li>
+                                            <li>✅ Add constraints using SSMS Designer (right-click)</li>
+                                            <li>✅ Add constraints using SQL code</li>
+                                            <li>✅ Create tables with proper data types</li>
+                                            <li>✅ Understand when to use each method</li>
+                                            <li>✅ Build professional-grade databases!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 📚 Part 1: Data Types -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-database me-2"></i>Part 1: Data Types - Choosing the Right Box</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What are Data Types?</strong> They tell SQL Server what <strong>kind of data</strong> can go in each column.
+                                    Like choosing the right box for different items!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-mouse-pointer text-primary me-2"></i>🖱️ Method 1: Visual (SSMS Designer)</h5>
+                                                <ol>
+                                                    <li>In Object Explorer, right-click <strong>Tables</strong> → <strong>New Table</strong></li>
+                                                    <li>
+                                                        In the designer, for each column:
+                                                        <ul>
+                                                            <li>Type the <strong>Column Name</strong></li>
+                                                            <li>Choose <strong>Data Type</strong> from dropdown</li>
+                                                            <li>Check <strong>Allow Nulls</strong> or uncheck it</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Press <kbd>Ctrl + S</kbd> to save, name your table</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ No SQL needed!</strong> Everything with mouse clicks!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Method 2: SQL Code</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Create table with data types</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Students</span> (
+    <span style="color: #82aaff;">StudentId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>),
+    <span style="color: #82aaff;">FirstName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">LastName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">Age</span> <span style="color: #f78c6c;">INT</span>,
+    <span style="color: #82aaff;">GPA</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">3</span>,<span style="color: #f78c6c;">2</span>),
+    <span style="color: #82aaff;">EnrolledDate</span> <span style="color: #f78c6c;">DATE</span>,
+    <span style="color: #82aaff;">IsActive</span> <span style="color: #f78c6c;">BIT</span>
+);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Key Data Types:</strong></p>
+                                                <ul>
+                                                    <li><code>INT</code> = Whole numbers (1, 2, 3)</li>
+                                                    <li><code>NVARCHAR</code> = Text (names, emails)</li>
+                                                    <li><code>DECIMAL</code> = Numbers with decimals (money)</li>
+                                                    <li><code>DATE</code> = Dates</li>
+                                                    <li><code>BIT</code> = True/False (0 or 1)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Data Type</th>
+                                                <th>What It Stores</th>
+                                                <th>Example</th>
+                                                <th>When to Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>INT</strong></td>
+                                                <td>Whole numbers</td>
+                                                <td>25, 1000, -5</td>
+                                                <td>Age, quantity, ID</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DECIMAL(10,2)</strong></td>
+                                                <td>Numbers with decimals</td>
+                                                <td>99.99, 15.50</td>
+                                                <td>Money, GPA, prices</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>NVARCHAR(50)</strong></td>
+                                                <td>Text (variable length)</td>
+                                                <td>"John", "Smith"</td>
+                                                <td>Names, emails, addresses</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DATE</strong></td>
+                                                <td>Dates only</td>
+                                                <td>2024-01-15</td>
+                                                <td>Birthday, enrollment date</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>BIT</strong></td>
+                                                <td>True/False</td>
+                                                <td>0 or 1</td>
+                                                <td>Active, paid, confirmed</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the INT break up with the NVARCHAR?
+                                        Because it couldn't handle the text messages! (Get it? Text? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🔒 Part 2: Constraints -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-lock me-2"></i>Part 2: Constraints - The Rules</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>What are Constraints?</strong> They're <strong>rules</strong> that keep your data clean and correct.
+                                    Like a bouncer at a club - only valid data gets in!
+                                </div>
+
+                                <!-- PRIMARY KEY -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-key text-warning me-2"></i>🔑 PRIMARY KEY</h5>
+                                        <p><strong>What it does:</strong> Uniquely identifies each row (like an ID card)</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-success text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-mouse-pointer me-2"></i>Visual Way</h6>
+                                                        <ol>
+                                                            <li>Open table in designer</li>
+                                                            <li>Right-click the column</li>
+                                                            <li>Select <strong>Set Primary Key</strong></li>
+                                                            <li>A key icon appears! 🔑</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-primary text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-code me-2"></i>Code Way</h6>
+                                                        <div class="code-block small">
+                                                            <pre><code class="language-sql"><span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Students</span> (
+    <span style="color: #82aaff;">StudentId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">PRIMARY KEY</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>)
+);</code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- NOT NULL -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-ban text-danger me-2"></i>🚫 NOT NULL</h5>
+                                        <p><strong>What it does:</strong> Column cannot be empty (must have a value)</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-success text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-mouse-pointer me-2"></i>Visual Way</h6>
+                                                        <ol>
+                                                            <li>Open table in designer</li>
+                                                            <li>Uncheck <strong>"Allow Nulls"</strong> box</li>
+                                                            <li>Column becomes required!</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-primary text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-code me-2"></i>Code Way</h6>
+                                                        <div class="code-block small">
+                                                            <pre><code class="language-sql"><span style="color: #82aaff;">FirstName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>) <span style="color: #ffcb6b;">NOT NULL</span></code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- UNIQUE -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-fingerprint text-info me-2"></i>🆔 UNIQUE</h5>
+                                        <p><strong>What it does:</strong> No duplicate values allowed (like fingerprints)</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-success text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-mouse-pointer me-2"></i>Visual Way</h6>
+                                                        <ol>
+                                                            <li>Open table in designer</li>
+                                                            <li>Right-click column → <strong>Indexes/Keys</strong></li>
+                                                            <li>Click <strong>Add</strong> → Set <strong>Type = Unique Key</strong></li>
+                                                            <li>In the grid, set <strong>Columns</strong> to your column</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-primary text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-code me-2"></i>Code Way</h6>
+                                                        <div class="code-block small">
+                                                            <pre><code class="language-sql"><span style="color: #82aaff;">Email</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">UNIQUE</span></code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CHECK -->
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-check-circle text-success me-2"></i>✅ CHECK</h5>
+                                        <p><strong>What it does:</strong> Validates data against a condition</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-success text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-mouse-pointer me-2"></i>Visual Way</h6>
+                                                        <ol>
+                                                            <li>Open table in designer</li>
+                                                            <li>Right-click → <strong>Check Constraints</strong></li>
+                                                            <li>Click <strong>Add</strong></li>
+                                                            <li>Type expression: <code>Age >= 18</code></li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-primary text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-code me-2"></i>Code Way</h6>
+                                                        <div class="code-block small">
+                                                            <pre><code class="language-sql"><span style="color: #82aaff;">Age</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">CHECK</span> (<span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">18</span>)</code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FOREIGN KEY -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-link text-primary me-2"></i>🔗 FOREIGN KEY</h5>
+                                        <p><strong>What it does:</strong> Links to another table (like a relationship)</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-success text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-mouse-pointer me-2"></i>Visual Way</h6>
+                                                        <ol>
+                                                            <li>Open table in designer</li>
+                                                            <li>Right-click → <strong>Relationships</strong></li>
+                                                            <li>Click <strong>Add</strong></li>
+                                                            <li>Choose <strong>Tables and Columns Specification</strong></li>
+                                                            <li>Select the parent table and column</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-primary text-white">
+                                                    <div class="card-body">
+                                                        <h6><i class="fas fa-code me-2"></i>Code Way</h6>
+                                                        <div class="code-block small">
+                                                            <pre><code class="language-sql"><span style="color: #82aaff;">DeptCode</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">10</span>),
+<span style="color: #ffcb6b;">CONSTRAINT</span> <span style="color: #82aaff;">FK_Students_Dept</span> 
+    <span style="color: #ffcb6b;">FOREIGN KEY</span> (<span style="color: #82aaff;">DeptCode</span>) 
+    <span style="color: #ffcb6b;">REFERENCES</span> <span style="color: #82aaff;">Departments</span>(<span style="color: #82aaff;">DeptCode</span>)</code></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the FOREIGN KEY break up with the PRIMARY KEY?
+                                        Because it was too dependent on it! (Relationship jokes are the best 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ⚡ Part 3: Adding Constraints After Table Creation -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Part 3: Adding Constraints Later</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-tools me-2"></i>
+                                    <strong>Good News:</strong> You don't need to plan everything upfront!
+                                    You can add constraints to existing tables.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-mouse-pointer text-primary me-2"></i>🖱️ Visual Way</h5>
+                                                <ol>
+                                                    <li>Right-click your table → <strong>Design</strong></li>
+                                                    <li>Right-click in designer → <strong>Check Constraints</strong></li>
+                                                    <li>Click <strong>Add</strong> → Type your expression</li>
+                                                    <li>Click <strong>Close</strong> → Save the table</li>
+                                                    <li>✅ Constraint added!</li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ No SQL needed!</strong> Just right-click and add!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Code Way</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Add CHECK constraint to existing table</span>
+<span style="color: #ffcb6b;">ALTER TABLE</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ADD CONSTRAINT</span> <span style="color: #82aaff;">CK_Students_Age</span>
+<span style="color: #ffcb6b;">CHECK</span> (<span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">18</span>);
+
+<span class="comment">-- Add UNIQUE constraint</span>
+<span style="color: #ffcb6b;">ALTER TABLE</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ADD CONSTRAINT</span> <span style="color: #82aaff;">UQ_Students_Email</span>
+<span style="color: #ffcb6b;">UNIQUE</span> (<span style="color: #82aaff;">Email</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Why this is useful:</strong> You can add rules to existing data without deleting anything!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Pro Tip:</strong> Always name your constraints (like <code>CK_Students_Age</code>)
+                                        so you can easily identify them later!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 Part 4: Exercise -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Let's Practice! 🎮</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <strong>Your Challenge:</strong> Create a Books table using BOTH visual and code methods!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-list text-primary me-2"></i>Your Mission:</h6>
+                                                <ol>
+                                                    <li>
+                                                        <strong>Using SSMS Designer (Visual Way)</strong>
+                                                        <ul>
+                                                            <li>Create a new table called "Books"</li>
+                                                            <li>Add columns: BookId, Title, Author, Year, Price</li>
+                                                            <li>Set BookId as PRIMARY KEY</li>
+                                                            <li>Set Title NOT NULL</li>
+                                                            <li>Add CHECK constraint: Year >= 1900</li>
+                                                            <li>Add CHECK constraint: Price > 0</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Using SQL (Code Way)</strong>
+                                                        <ul>
+                                                            <li>Write the SQL to create the same table</li>
+                                                            <li>Include all constraints</li>
+                                                            <li>Run the query to create it</li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-code text-success me-2"></i>💡 What You'll Learn:</h6>
+                                                <ul>
+                                                    <li>✅ How to use SSMS Designer</li>
+                                                    <li>✅ How to write SQL for tables</li>
+                                                    <li>✅ How to add PRIMARY KEY</li>
+                                                    <li>✅ How to add NOT NULL</li>
+                                                    <li>✅ How to add CHECK constraints</li>
+                                                    <li>✅ Both ways to become a pro!</li>
+                                                </ul>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>Result:</strong> You'll master BOTH methods!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" onclick="toggleSolution()" style="border-radius: 50px; padding: 12px 30px;">
+                                    <i class="fas fa-eye me-2"></i> Show Complete Code
+                                </button>
+
+                                <div id="solution" style="display: none; margin-top: 20px;">
+                                    <div class="p-3 rounded border" style="background: #1e1e2e;">
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== BOOKS TABLE - COMPLETE EXAMPLE =====</span>
+
+<span class="comment">-- Way 1: Visual Designer Steps</span>
+<span class="comment">-- 1. Right-click Tables → New Table</span>
+<span class="comment">-- 2. Add columns:</span>
+<span class="comment">--    BookId: INT (uncheck Allow Nulls, set as Primary Key)</span>
+<span class="comment">--    Title: NVARCHAR(200) (uncheck Allow Nulls)</span>
+<span class="comment">--    Author: NVARCHAR(100) (check Allow Nulls)</span>
+<span class="comment">--    Year: INT (check Allow Nulls)</span>
+<span class="comment">--    Price: DECIMAL(10,2) (check Allow Nulls)</span>
+<span class="comment">-- 3. Right-click → Check Constraints → Add</span>
+<span class="comment">--    Expression: Year >= 1900</span>
+<span class="comment">--    Expression: Price > 0</span>
+<span class="comment">-- 4. Press Ctrl+S, name it "Books"</span>
+
+<span class="comment">-- Way 2: SQL Code</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Books</span> (
+    <span style="color: #82aaff;">BookId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Title</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">200</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Author</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>),
+    <span style="color: #82aaff;">Year</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">CHECK</span> (<span style="color: #82aaff;">Year</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">1900</span>),
+    <span style="color: #82aaff;">Price</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">10</span>,<span style="color: #f78c6c;">2</span>) <span style="color: #ffcb6b;">CHECK</span> (<span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">0</span>)
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- Insert some sample books</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Books</span> (<span style="color: #82aaff;">Title</span>, <span style="color: #82aaff;">Author</span>, <span style="color: #82aaff;">Year</span>, <span style="color: #82aaff;">Price</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'C# Programming'</span>, <span style="color: #c3e88d;">'John Doe'</span>, <span style="color: #f78c6c;">2020</span>, <span style="color: #f78c6c;">49.99</span>),
+    (<span style="color: #c3e88d;">'Clean Code'</span>, <span style="color: #c3e88d;">'Robert Martin'</span>, <span style="color: #f78c6c;">2008</span>, <span style="color: #f78c6c;">39.99</span>);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- View the data</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Books</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- Adding constraints later (if needed)</span>
+<span style="color: #ffcb6b;">ALTER TABLE</span> <span style="color: #82aaff;">Books</span>
+<span style="color: #ffcb6b;">ADD CONSTRAINT</span> <span style="color: #82aaff;">CK_Books_Year</span>
+<span style="color: #ffcb6b;">CHECK</span> (<span style="color: #82aaff;">Year</span> <span style="color: #ffcb6b;">>=</span> <span style="color: #f78c6c;">1900</span>);</code></pre>
+                                        </div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-success fs-6">✅ Complete Solution!</span>
+                                            <span class="badge bg-info fs-6 ms-2">You've learned BOTH ways to work with data types and constraints!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-database fa-3x mb-2"></i>
+                                        <h5>Data Types</h5>
+                                        <small>INT, NVARCHAR, DATE</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-key fa-3x mb-2"></i>
+                                        <h5>PRIMARY KEY</h5>
+                                        <small>Unique IDs</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-ban fa-3x mb-2"></i>
+                                        <h5>NOT NULL</h5>
+                                        <small>Required columns</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>CHECK</h5>
+                                        <small>Validate data</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-mouse-pointer fa-3x mb-2"></i>
+                                        <h5>Visual Way</h5>
+                                        <small>SSMS Designer</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-code fa-3x mb-2"></i>
+                                        <h5>Code Way</h5>
+                                        <small>SQL Queries</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-check-circle fa-3x mb-2"></i>
+                                        <h5>Master!</h5>
+                                        <small>Both ways!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now a master of data types and constraints - using BOTH visual and code methods!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/02-DatabasesAndTables" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/04-SelectWhereOrderBy" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson3")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

@@ -1,11 +1,11 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.SelectWhereOrderByModel
 @{
-    ViewData["Title"] = "SELECT, WHERE, ORDER BY - C# Zero to Hero";
+    ViewData["Title"] = "SELECT, WHERE, ORDER BY - Master Guide";
 }
 
 <div class="container-fluid px-0">
-    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <!-- 🎨 Hero Section -->
     <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
         <div class="container">
             <div class="row align-items-center">
@@ -21,14 +21,14 @@
                         SELECT, WHERE, ORDER BY 🔍
                     </h1>
                     <p class="lead text-white-50 fs-4 mt-3">
-                        Using SQL in C# - From Zero to Hero
+                        Master SQL in SSMS → Then Use in C# - Zero to Hero
                     </p>
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-smile me-2"></i>Beginner Friendly
                         </span>
                         <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
-                            <i class="fas fa-clock me-2"></i>35 min read
+                            <i class="fas fa-clock me-2"></i>45 min read
                         </span>
                         <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
                             <i class="fas fa-book me-2"></i>Lesson 4 of 13
@@ -45,7 +45,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
-                <!-- Main Content -->
                 <div class="lesson-content">
 
                     <!-- 🎉 Welcome Section -->
@@ -56,20 +55,18 @@
                                     <i class="fas fa-smile-wink fa-3x text-warning"></i>
                                 </div>
                                 <div>
-                                    <h2 class="fw-bold text-primary">SQL in C# - Zero to Hero! 🎯</h2>
+                                    <h2 class="fw-bold text-primary">Master SQL Commands in 2 Steps! 🎯</h2>
                                     <p class="fs-5">
-                                        In this lesson, you'll learn how to use <strong>SELECT, WHERE, and ORDER BY</strong>
-                                        in your C# applications. We'll build a complete WinForms app step by step!
+                                        <strong>PART 1:</strong> Learn SELECT, WHERE, ORDER BY in <strong>SSMS</strong> (SQL Server Management Studio)<br>
+                                        <strong>PART 2:</strong> Use SELECT, WHERE, ORDER BY in <strong>C#</strong> (Visual Studio)
                                     </p>
                                     <div class="alert alert-success mt-3">
                                         <i class="fas fa-lightbulb me-2"></i>
-                                        <strong>What You'll Build:</strong>
+                                        <strong>Why Two Steps?</strong>
                                         <ul class="mb-0 mt-2">
-                                            <li>✅ A WinForms app that connects to a database</li>
-                                            <li>✅ Use SELECT to display data</li>
-                                            <li>✅ Use WHERE to filter data</li>
-                                            <li>✅ Use ORDER BY to sort data</li>
-                                            <li>✅ 3 exercises: Easy, Medium, Hard</li>
+                                            <li>✅ First learn <strong>what</strong> the commands do in SSMS</li>
+                                            <li>✅ Then learn <strong>how</strong> to use them in C# code</li>
+                                            <li>✅ This way you understand <strong>both</strong> sides!</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -77,72 +74,71 @@
                         </div>
                     </div>
 
-                    <!-- 📚 Part 1: Setting Up Your Project -->
+                    <!-- ============================================ -->
+                    <!-- ===== PART 1: SSMS - SQL SERVER MANAGEMENT STUDIO ===== -->
+                    <!-- ============================================ -->
+
+                    <div class="card border-0 shadow-lg mb-5" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold"><i class="fas fa-server me-2"></i>PART 1 - SQL Server Management Studio (SSMS)</h2>
+                            <p class="lead">Learn SQL Commands in SSMS First!</p>
+                        </div>
+                    </div>
+
+                    <!-- SSMS: Setup Database -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>Step 1: Create Your WinForms Project</h3>
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>SSMS Step 1: Create Our Sample Database</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
                                     <i class="fas fa-question-circle me-2"></i>
-                                    <strong>Let's Start!</strong> Follow these steps to create your project:
+                                    <strong>First, let's create a database and table to practice with.</strong>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-folder-open text-primary me-2"></i>📁 Step 1: Create Project</h5>
-                                                <ol>
-                                                    <li>Open <strong>Visual Studio</strong></li>
-                                                    <li>Click <strong>"Create a new project"</strong></li>
-                                                    <li>Search for <strong>"Windows Forms App"</strong></li>
-                                                    <li>Name it <strong>"StudentManagerApp"</strong></li>
-                                                    <li>Click <strong>Create</strong></li>
-                                                </ol>
-                                                <div class="card bg-success text-white mt-2">
-                                                    <div class="card-body">
-                                                        <i class="fas fa-check-circle me-2"></i>
-                                                        <strong>✅ Project created!</strong> Now let's add the database.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card bg-light h-100">
-                                            <div class="card-body">
-                                                <h5><i class="fas fa-database text-primary me-2"></i>🗄️ Step 2: Create Database</h5>
-                                                <p>Run this SQL in SSMS:</p>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-sql"><span class="comment">-- Create Students database</span>
-<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">StudentDB</span>;
+                                    <div class="col-lg-12">
+                                        <p><strong>Open SSMS and run this SQL:</strong></p>
+                                        <div class="code-block">
+                                            <pre><code class="language-sql"><span class="comment">-- ===== CREATE DATABASE =====</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">SchoolDB</span>;
 <span style="color: #ffcb6b;">GO</span>
 
-<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">StudentDB</span>;
+<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">SchoolDB</span>;
 <span style="color: #ffcb6b;">GO</span>
 
-<span class="comment">-- Create Students table</span>
+<span class="comment">-- ===== CREATE STUDENTS TABLE =====</span>
 <span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Students</span> (
     <span style="color: #82aaff;">StudentId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
     <span style="color: #82aaff;">FirstName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
     <span style="color: #82aaff;">LastName</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
     <span style="color: #82aaff;">Age</span> <span style="color: #f78c6c;">INT</span>,
-    <span style="color: #82aaff;">City</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>)
+    <span style="color: #82aaff;">City</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>),
+    <span style="color: #82aaff;">GPA</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">3</span>,<span style="color: #f78c6c;">2</span>),
+    <span style="color: #82aaff;">EnrolledDate</span> <span style="color: #f78c6c;">DATE</span>
 );
 <span style="color: #ffcb6b;">GO</span>
 
-<span class="comment">-- Insert sample data</span>
-<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Students</span> (<span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">Age</span>, <span style="color: #82aaff;">City</span>)
+<span class="comment">-- ===== INSERT SAMPLE DATA =====</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Students</span> (<span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">Age</span>, <span style="color: #82aaff;">City</span>, <span style="color: #82aaff;">GPA</span>, <span style="color: #82aaff;">EnrolledDate</span>)
 <span style="color: #ffcb6b;">VALUES</span> 
-    (<span style="color: #c3e88d;">'John'</span>, <span style="color: #c3e88d;">'Doe'</span>, <span style="color: #f78c6c;">20</span>, <span style="color: #c3e88d;">'New York'</span>),
-    (<span style="color: #c3e88d;">'Jane'</span>, <span style="color: #c3e88d;">'Smith'</span>, <span style="color: #f78c6c;">22</span>, <span style="color: #c3e88d;">'Boston'</span>),
-    (<span style="color: #c3e88d;">'Bob'</span>, <span style="color: #c3e88d;">'Johnson'</span>, <span style="color: #f78c6c;">19</span>, <span style="color: #c3e88d;">'Chicago'</span>),
-    (<span style="color: #c3e88d;">'Alice'</span>, <span style="color: #c3e88d;">'Williams'</span>, <span style="color: #f78c6c;">21</span>, <span style="color: #c3e88d;">'New York'</span>),
-    (<span style="color: #c3e88d;">'Charlie'</span>, <span style="color: #c3e88d;">'Brown'</span>, <span style="color: #f78c6c;">23</span>, <span style="color: #c3e88d;">'Boston'</span>);
+    (<span style="color: #c3e88d;">'John'</span>, <span style="color: #c3e88d;">'Doe'</span>, <span style="color: #f78c6c;">20</span>, <span style="color: #c3e88d;">'New York'</span>, <span style="color: #f78c6c;">3.8</span>, <span style="color: #c3e88d;">'2024-01-15'</span>),
+    (<span style="color: #c3e88d;">'Jane'</span>, <span style="color: #c3e88d;">'Smith'</span>, <span style="color: #f78c6c;">22</span>, <span style="color: #c3e88d;">'Boston'</span>, <span style="color: #f78c6c;">3.5</span>, <span style="color: #c3e88d;">'2024-02-20'</span>),
+    (<span style="color: #c3e88d;">'Bob'</span>, <span style="color: #c3e88d;">'Johnson'</span>, <span style="color: #f78c6c;">19</span>, <span style="color: #c3e88d;">'Chicago'</span>, <span style="color: #f78c6c;">2.9</span>, <span style="color: #c3e88d;">'2024-03-10'</span>),
+    (<span style="color: #c3e88d;">'Alice'</span>, <span style="color: #c3e88d;">'Williams'</span>, <span style="color: #f78c6c;">21</span>, <span style="color: #c3e88d;">'New York'</span>, <span style="color: #f78c6c;">4.0</span>, <span style="color: #c3e88d;">'2024-01-05'</span>),
+    (<span style="color: #c3e88d;">'Charlie'</span>, <span style="color: #c3e88d;">'Brown'</span>, <span style="color: #f78c6c;">23</span>, <span style="color: #c3e88d;">'Boston'</span>, <span style="color: #f78c6c;">3.2</span>, <span style="color: #c3e88d;">'2024-04-01'</span>),
+    (<span style="color: #c3e88d;">'Diana'</span>, <span style="color: #c3e88d;">'Miller'</span>, <span style="color: #f78c6c;">20</span>, <span style="color: #c3e88d;">'Chicago'</span>, <span style="color: #f78c6c;">3.9</span>, <span style="color: #c3e88d;">'2024-02-14'</span>),
+    (<span style="color: #c3e88d;">'Eve'</span>, <span style="color: #c3e88d;">'Davis'</span>, <span style="color: #f78c6c;">22</span>, <span style="color: #c3e88d;">'New York'</span>, <span style="color: #f78c6c;">3.1</span>, <span style="color: #c3e88d;">'2024-03-20'</span>),
+    (<span style="color: #c3e88d;">'Frank'</span>, <span style="color: #c3e88d;">'Wilson'</span>, <span style="color: #f78c6c;">21</span>, <span style="color: #c3e88d;">'Boston'</span>, <span style="color: #f78c6c;">2.7</span>, <span style="color: #c3e88d;">'2024-01-30'</span>),
+    (<span style="color: #c3e88d;">'Grace'</span>, <span style="color: #c3e88d;">'Moore'</span>, <span style="color: #f78c6c;">18</span>, <span style="color: #c3e88d;">'Chicago'</span>, <span style="color: #f78c6c;">3.6</span>, <span style="color: #c3e88d;">'2024-04-15'</span>),
+    (<span style="color: #c3e88d;">'Henry'</span>, <span style="color: #c3e88d;">'Taylor'</span>, <span style="color: #f78c6c;">24</span>, <span style="color: #c3e88d;">'New York'</span>, <span style="color: #f78c6c;">3.3</span>, <span style="color: #c3e88d;">'2024-02-28'</span>);
 <span style="color: #ffcb6b;">GO</span></code></pre>
-                                                </div>
+                                        </div>
+                                        <div class="card bg-success text-white mt-3">
+                                            <div class="card-body">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <strong>✅ Done!</strong> You now have 10 students in your database. Let's start querying!
                                             </div>
                                         </div>
                                     </div>
@@ -151,982 +147,1130 @@
                                 <div class="card bg-warning text-dark mt-3">
                                     <div class="card-body">
                                         <i class="fas fa-laugh-beam me-2"></i>
-                                        <strong>😂 Fun Joke:</strong> Why did the developer create a Student database?
-                                        Because they wanted to keep track of their grades... and their students! 😅
+                                        <strong>😂 Fun Joke:</strong> Why did the SQL developer name their database "SchoolDB"? Because they wanted to teach it a lesson! 😅
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 🖥️ Part 2: Design Your WinForms App -->
+                    <!-- SSMS: SELECT -->
                     <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>Step 2: Design Your WinForms App</h3>
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>SSMS Step 2: SELECT - Getting Your Data</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
-                                    <i class="fas fa-paint-brush me-2"></i>
-                                    <strong>Design Time!</strong> Let's build the user interface:
+                                    <i class="fas fa-eye me-2"></i>
+                                    <strong>SELECT:</strong> This is how you <strong>ask</strong> the database for data. Like saying "Show me all students!"
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-object-group text-primary me-2"></i>🎨 Form Controls</h5>
-                                                <p>Add these controls to your form:</p>
-                                                <ul>
-                                                    <li><strong>DataGridView</strong> - To show student data</li>
-                                                    <li><strong>TextBox</strong> - For City filter (txtCity)</li>
-                                                    <li><strong>TextBox</strong> - For Age filter (txtAge)</li>
-                                                    <li><strong>Button</strong> - Load All Students (btnLoadAll)</li>
-                                                    <li><strong>Button</strong> - Filter by City (btnFilterCity)</li>
-                                                    <li><strong>Button</strong> - Filter by Age (btnFilterAge)</li>
-                                                    <li><strong>Button</strong> - Sort by Name (btnSortByName)</li>
-                                                    <li><strong>Label</strong> - For status messages (lblStatus)</li>
-                                                </ul>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Basic SELECT</h5>
+                                                <p><strong>Type this in SSMS and press F5:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get ALL columns from ALL students</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> All 10 students with all columns!</p>
+                                                <p><span class="badge bg-primary">📌</span> <code>*</code> means "all columns"</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Setting Up the Connection</h5>
-                                                <p>Add this using statement at the top:</p>
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 SELECT Specific Columns</h5>
+                                                <p><strong>Get only first name, last name, and age:</strong></p>
                                                 <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="keyword">using</span> System.Data;
-<span class="keyword">using</span> System.Data.SqlClient;</code></pre>
+                                                    <pre><code class="language-sql"><span class="comment">-- Get specific columns only</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">Age</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
                                                 </div>
-                                                <p>Add this connection string:</p>
-                                                <div class="code-block small">
-                                                    <pre><code class="language-csharp"><span class="comment">// Your connection string</span>
-<span class="keyword">private</span> <span class="keyword">string</span> connectionString = 
-    <span class="string">"Server=localhost;"</span> +
-    <span class="string">"Database=StudentDB;"</span> +
-    <span class="string">"Trusted_Connection=True;"</span> +
-    <span class="string">"TrustServerCertificate=True;"</span>;</code></pre>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> Only 3 columns shown!</p>
+                                                <div class="card bg-warning text-dark mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-lightbulb me-2"></i>
+                                                        <strong>💡 Why this is useful:</strong> Less data = faster results!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
 
-                    <!-- 📊 Part 3: SELECT - Reading Data -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>Step 3: SELECT - Reading Data</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-eye me-2"></i>
-                                    <strong>SELECT:</strong> This command gets data from the database. Like saying "Show me all students!"
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 SELECT DISTINCT</h5>
+                                                <p><strong>Get unique cities only:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get unique cities (no duplicates)</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">DISTINCT</span> <span style="color: #82aaff;">City</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> New York, Boston, Chicago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 SELECT TOP</h5>
+                                                <p><strong>Get only top 3 students:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get only 3 students</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">TOP</span> <span style="color: #f78c6c;">3</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> First 3 students only!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 SELECT AS (Alias)</h5>
+                                                <p><strong>Rename columns in results:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Rename columns</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span> <span style="color: #ffcb6b;">AS</span> <span style="color: #82aaff;">[First Name]</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> Column shows as "First Name"</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="code-block">
-                                    <pre><code class="language-csharp"><span class="comment">// ===== LOAD ALL STUDENTS =====</span>
-<span class="comment">// This method uses SELECT to get ALL students</span>
-
-<span class="keyword">private void</span> <span class="function">LoadAllStudents</span>()
-{
-    <span class="keyword">try</span>
-    {
-        <span class="comment">// 1️⃣ Create a connection to the database</span>
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// 2️⃣ Write your SELECT query</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City FROM Students"</span>;
-            
-            <span class="comment">// 3️⃣ Create a DataAdapter to fill the DataTable</span>
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-            {
-                <span class="comment">// 4️⃣ Fill the DataTable</span>
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                
-                <span class="comment">// 5️⃣ Show the data in the DataGridView</span>
-                dgvStudents.DataSource = dt;
-                
-                <span class="comment">// 6️⃣ Update status</span>
-                lblStatus.Text = <span class="string">$"✅ Loaded {dt.Rows.Count} students"</span>;
-                lblStatus.ForeColor = Color.Green;
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}</code></pre>
-                                </div>
                                 <div class="card bg-success text-white mt-3">
                                     <div class="card-body">
-                                        <i class="fas fa-check-circle me-2"></i>
-                                        <strong>✅ What this does:</strong> Gets ALL students from the database and shows them in the grid!
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the SELECT command go to the gym? Because it wanted to get in shape! (Get it? SELECT *? ...I'll stop 😅)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 🔍 Part 4: WHERE - Filtering Data -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>Step 4: WHERE - Filtering Data</h3>
+                    <!-- SSMS: WHERE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>SSMS Step 3: WHERE - Filtering Your Data</h3>
                             </div>
                             <div class="card-body p-4">
                                 <div class="alert alert-info">
                                     <i class="fas fa-filter me-2"></i>
-                                    <strong>WHERE:</strong> This command filters data. Like saying "Show me ONLY students from New York!"
+                                    <strong>WHERE:</strong> This is how you <strong>filter</strong> data. Like saying "Show me ONLY students from New York!"
                                 </div>
 
-                                <div class="code-block">
-                                    <pre><code class="language-csharp"><span class="comment">// ===== FILTER BY CITY =====</span>
-<span class="comment">// This method uses WHERE to filter students by city</span>
-
-<span class="keyword">private void</span> <span class="function">FilterByCity</span>(<span class="keyword">string</span> city)
-{
-    <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(city))
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a city name!"</span>);
-        <span class="keyword">return</span>;
-    }
-    
-    <span class="keyword">try</span>
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// 1️⃣ SELECT with WHERE clause</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students WHERE City = @@City"</span>;
-            
-            <span class="comment">// 2️⃣ Create command with parameter (prevents SQL injection)</span>
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
-                
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    
-                    dgvStudents.DataSource = dt;
-                    
-                    lblStatus.Text = <span class="string">$"🔍 Found {dt.Rows.Count} students in {city}"</span>;
-                    lblStatus.ForeColor = Color.Blue;
-                }
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}
-
-<span class="comment">// ===== FILTER BY AGE =====</span>
-<span class="comment">// This method uses WHERE to filter students older than a certain age</span>
-
-<span class="keyword">private void</span> <span class="function">FilterByAge</span>(<span class="keyword">int</span> minAge)
-{
-    <span class="keyword">if</span> (minAge <= <span class="number">0</span>)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a valid age!"</span>);
-        <span class="keyword">return</span>;
-    }
-    
-    <span class="keyword">try</span>
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// WHERE with greater than operator</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students WHERE Age >= @@MinAge"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@MinAge"</span>, minAge);
-                
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    
-                    dgvStudents.DataSource = dt;
-                    
-                    lblStatus.Text = <span class="string">$"🔍 Found {dt.Rows.Count} students older than {minAge}"</span>;
-                    lblStatus.ForeColor = Color.Blue;
-                }
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}</code></pre>
-                                </div>
-                                <div class="card bg-success text-white mt-3">
-                                    <div class="card-body">
-                                        <i class="fas fa-check-circle me-2"></i>
-                                        <strong>✅ What this does:</strong> Filters students based on city or age using WHERE!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 📊 Part 5: ORDER BY - Sorting Data -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #0f3460;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>Step 5: ORDER BY - Sorting Data</h3>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-sort me-2"></i>
-                                    <strong>ORDER BY:</strong> This command sorts your data. Like saying "Show me students sorted by name!"
-                                </div>
-
-                                <div class="code-block">
-                                    <pre><code class="language-csharp"><span class="comment">// ===== SORT BY NAME =====</span>
-<span class="comment">// This method uses ORDER BY to sort students by last name</span>
-
-<span class="keyword">private void</span> <span class="function">SortByName</span>()
-{
-    <span class="keyword">try</span>
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// 1️⃣ SELECT with ORDER BY clause</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students ORDER BY LastName ASC"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-            {
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                
-                dgvStudents.DataSource = dt;
-                
-                lblStatus.Text = <span class="string">$"📊 Sorted by Last Name (A-Z)"</span>;
-                lblStatus.ForeColor = Color.Green;
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}
-
-<span class="comment">// ===== SORT BY AGE (Descending) =====</span>
-<span class="comment">// This method uses ORDER BY to sort students by age (oldest first)</span>
-
-<span class="keyword">private void</span> <span class="function">SortByAgeDescending</span>()
-{
-    <span class="keyword">try</span>
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// ORDER BY with DESC (descending)</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students ORDER BY Age DESC"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-            {
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                
-                dgvStudents.DataSource = dt;
-                
-                lblStatus.Text = <span class="string">$"📊 Sorted by Age (Oldest First)"</span>;
-                lblStatus.ForeColor = Color.Green;
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}
-
-<span class="comment">// ===== COMBINED: WHERE + ORDER BY =====</span>
-<span class="comment">// This method filters AND sorts at the same time</span>
-
-<span class="keyword">private void</span> <span class="function">FilterAndSort</span>(<span class="keyword">string</span> city)
-{
-    <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(city))
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a city!"</span>);
-        <span class="keyword">return</span>;
-    }
-    
-    <span class="keyword">try</span>
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="comment">// WHERE + ORDER BY together</span>
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students WHERE City = @@City "</span> +
-                          <span class="string">"ORDER BY LastName ASC"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
-                
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    
-                    dgvStudents.DataSource = dt;
-                    
-                    lblStatus.Text = <span class="string">$"🔍 Found {dt.Rows.Count} students in {city} (Sorted by Name)"</span>;
-                    lblStatus.ForeColor = Color.Blue;
-                }
-            }
-        }
-    }
-    <span class="keyword">catch</span> (<span class="class">Exception</span> ex)
-    {
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"Error: {ex.Message}"</span>, <span class="string">"Database Error"</span>);
-    }
-}</code></pre>
-                                </div>
-                                <div class="card bg-success text-white mt-3">
-                                    <div class="card-body">
-                                        <i class="fas fa-check-circle me-2"></i>
-                                        <strong>✅ What this does:</strong> Sorts data using ORDER BY and combines with WHERE!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 🎮 Part 6: Exercises -->
-                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
-                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
-                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercises: From Easy to Hard 🎮</h3>
-                            </div>
-                            <div class="card-body p-4">
-
-                                <!-- Easy Exercise -->
-                                <div class="card bg-light mb-4">
-                                    <div class="card-body">
-                                        <h5><span class="badge bg-success me-2">EASY</span> Exercise 1: Basic SELECT</h5>
-                                        <p><strong>Task:</strong> Write a C# method to display all products from a Products table.</p>
-                                        <div class="code-block small">
-                                            <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create a Products table in your database</span>
-<span class="comment">// 2️⃣ Write a method called LoadAllProducts()</span>
-<span class="comment">// 3️⃣ Use SELECT * FROM Products</span>
-<span class="comment">// 4️⃣ Display results in a DataGridView</span>
-
-<span class="keyword">private void</span> <span class="function">LoadAllProducts</span>()
-{
-    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-    {
-        <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Products"</span>;
-        <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-        {
-            <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-            adapter.<span class="function">Fill</span>(dt);
-            dgvProducts.DataSource = dt;
-        }
-    }
-}</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Medium Exercise -->
-                                <div class="card bg-light mb-4">
-                                    <div class="card-body">
-                                        <h5><span class="badge bg-warning text-dark me-2">MEDIUM</span> Exercise 2: WHERE + ORDER BY</h5>
-                                        <p><strong>Task:</strong> Create a WinForms app that searches employees by department and sorts by name.</p>
-                                        <div class="code-block small">
-                                            <pre><code class="language-csharp"><span class="comment">// 1️⃣ Create an Employees table (EmployeeId, Name, Department, Salary)</span>
-<span class="comment">// 2️⃣ Add a TextBox for Department search</span>
-<span class="comment">// 3️⃣ Add a Button to search</span>
-<span class="comment">// 4️⃣ Use WHERE Department = @@Dept AND ORDER BY Name ASC</span>
-
-<span class="keyword">private void</span> <span class="function">btnSearch_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-{
-    <span class="keyword">string</span> dept = txtDepartment.Text;
-    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-    {
-        <span class="keyword">string</span> query = <span class="string">"SELECT Name, Department, Salary "</span> +
-                      <span class="string">"FROM Employees WHERE Department = @@Dept "</span> +
-                      <span class="string">"ORDER BY Name ASC"</span>;
-                      
-        <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-        {
-            cmd.Parameters.AddWithValue(<span class="string">"@@Dept"</span>, dept);
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-            {
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                dgvEmployees.DataSource = dt;
-            }
-        }
-    }
-}</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hard Exercise -->
-                                <div class="card bg-light">
-                                    <div class="card-body">
-                                        <h5><span class="badge bg-danger me-2">HARD</span> Exercise 3: Complete WinForms CRUD with Search</h5>
-                                        <p><strong>Task:</strong> Build a complete Student Management System with search functionality.</p>
-                                        <div class="code-block">
-                                            <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE STUDENT MANAGEMENT SYSTEM =====</span>
-<span class="comment">// Build a full WinForms app with:</span>
-<span class="comment">// 1. Display all students (SELECT)</span>
-<span class="comment">// 2. Search by name (WHERE LIKE)</span>
-<span class="comment">// 3. Filter by age range (WHERE BETWEEN)</span>
-<span class="comment">// 4. Sort by any column (ORDER BY)</span>
-<span class="comment">// 5. Add, Update, Delete students</span>
-
-<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">StudentManagementForm</span> : <span class="class">Form</span>
-{
-    <span class="keyword">private</span> <span class="keyword">string</span> connectionString = <span class="string">"Server=localhost;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;"</span>;
-    
-    <span class="keyword">public</span> <span class="function">StudentManagementForm</span>()
-    {
-        <span class="function">InitializeComponent</span>();
-        <span class="function">LoadAllStudents</span>();
-    }
-    
-    <span class="comment">// ===== SELECT - Load All Students =====</span>
-    <span class="keyword">private void</span> <span class="function">LoadAllStudents</span>()
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City FROM Students"</span>;
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-            {
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                dgvStudents.DataSource = dt;
-            }
-        }
-    }
-    
-    <span class="comment">// ===== WHERE - Search by Name =====</span>
-    <span class="keyword">private void</span> <span class="function">btnSearch_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">string</span> searchTerm = txtSearch.Text;
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students WHERE FirstName LIKE @@Search OR LastName LIKE @@Search"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@Search"</span>, <span class="string">$"%{searchTerm}%"</span>);
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    dgvStudents.DataSource = dt;
-                }
-            }
-        }
-    }
-    
-    <span class="comment">// ===== WHERE BETWEEN - Filter by Age Range =====</span>
-    <span class="keyword">private void</span> <span class="function">btnFilterAge_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">int</span> minAge = <span class="keyword">int</span>.<span class="function">Parse</span>(txtMinAge.Text);
-        <span class="keyword">int</span> maxAge = <span class="keyword">int</span>.<span class="function">Parse</span>(txtMaxAge.Text);
-        
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">"FROM Students WHERE Age BETWEEN @@MinAge AND @@MaxAge"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@MinAge"</span>, minAge);
-                cmd.Parameters.AddWithValue(<span class="string">"@@MaxAge"</span>, maxAge);
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    dgvStudents.DataSource = dt;
-                }
-            }
-        }
-    }
-    
-    <span class="comment">// ===== ORDER BY - Sort by Column =====</span>
-    <span class="keyword">private void</span> <span class="function">SortByColumn</span>(<span class="keyword">string</span> column, <span class="keyword">string</span> direction)
-    {
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">$"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">$"FROM Students ORDER BY {column} {direction}"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
-            {
-                <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                adapter.<span class="function">Fill</span>(dt);
-                dgvStudents.DataSource = dt;
-            }
-        }
-    }
-    
-    <span class="comment">// ===== ORDER BY with WHERE =====</span>
-    <span class="keyword">private void</span> <span class="function">btnSearchAndSort_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">string</span> city = txtCity.Text;
-        <span class="keyword">string</span> sortBy = cmbSortBy.SelectedItem.ToString();
-        <span class="keyword">string</span> direction = cmbDirection.SelectedItem.ToString();
-        
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">$"SELECT StudentId, FirstName, LastName, Age, City "</span> +
-                          <span class="string">$"FROM Students WHERE City = @@City "</span> +
-                          <span class="string">$"ORDER BY {sortBy} {direction}"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
-                <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
-                {
-                    <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
-                    adapter.<span class="function">Fill</span>(dt);
-                    dgvStudents.DataSource = dt;
-                }
-            }
-        }
-    }
-    
-    <span class="comment">// ===== ADD Student (INSERT) =====</span>
-    <span class="keyword">private void</span> <span class="function">btnAdd_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">string</span> firstName = txtFirstName.Text;
-        <span class="keyword">string</span> lastName = txtLastName.Text;
-        <span class="keyword">int</span> age = <span class="keyword">int</span>.<span class="function">Parse</span>(txtAge.Text);
-        <span class="keyword">string</span> city = txtCity.Text;
-        
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">"INSERT INTO Students (FirstName, LastName, Age, City) "</span> +
-                          <span class="string">"VALUES (@@FirstName, @@LastName, @@Age, @@City)"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@FirstName"</span>, firstName);
-                cmd.Parameters.AddWithValue(<span class="string">"@@LastName"</span>, lastName);
-                cmd.Parameters.AddWithValue(<span class="string">"@@Age"</span>, age);
-                cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
-                
-                conn.<span class="function">Open</span>();
-                cmd.<span class="function">ExecuteNonQuery</span>();
-            }
-        }
-        <span class="function">LoadAllStudents</span>();
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student added!"</span>);
-    }
-    
-    <span class="comment">// ===== DELETE Student =====</span>
-    <span class="keyword">private void</span> <span class="function">btnDelete_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
-        
-        <span class="keyword">int</span> studentId = (<span class="keyword">int</span>)dgvStudents.CurrentRow.Cells[<span class="string">"StudentId"</span>].Value;
-        
-        <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Delete this student?"</span>, <span class="string">"Confirm"</span>, 
-            <span class="class">MessageBoxButtons</span>.YesNo);
-            
-        <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.Yes)
-        {
-            <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-            {
-                <span class="keyword">string</span> query = <span class="string">"DELETE FROM Students WHERE StudentId = @@StudentId"</span>;
-                <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-                {
-                    cmd.Parameters.AddWithValue(<span class="string">"@@StudentId"</span>, studentId);
-                    conn.<span class="function">Open</span>();
-                    cmd.<span class="function">ExecuteNonQuery</span>();
-                }
-            }
-            <span class="function">LoadAllStudents</span>();
-            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student deleted!"</span>);
-        }
-    }
-    
-    <span class="comment">// ===== UPDATE Student =====</span>
-    <span class="keyword">private void</span> <span class="function">btnUpdate_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
-        
-        <span class="keyword">int</span> studentId = (<span class="keyword">int</span>)dgvStudents.CurrentRow.Cells[<span class="string">"StudentId"</span>].Value;
-        <span class="keyword">string</span> firstName = txtFirstName.Text;
-        <span class="keyword">string</span> lastName = txtLastName.Text;
-        <span class="keyword">int</span> age = <span class="keyword">int</span>.<span class="function">Parse</span>(txtAge.Text);
-        <span class="keyword">string</span> city = txtCity.Text;
-        
-        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
-        {
-            <span class="keyword">string</span> query = <span class="string">"UPDATE Students SET FirstName=@@FirstName, LastName=@@LastName, "</span> +
-                          <span class="string">"Age=@@Age, City=@@City WHERE StudentId=@@StudentId"</span>;
-            
-            <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
-            {
-                cmd.Parameters.AddWithValue(<span class="string">"@@StudentId"</span>, studentId);
-                cmd.Parameters.AddWithValue(<span class="string">"@@FirstName"</span>, firstName);
-                cmd.Parameters.AddWithValue(<span class="string">"@@LastName"</span>, lastName);
-                cmd.Parameters.AddWithValue(<span class="string">"@@Age"</span>, age);
-                cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
-                
-                conn.<span class="function">Open</span>();
-                cmd.<span class="function">ExecuteNonQuery</span>();
-            }
-        }
-        <span class="function">LoadAllStudents</span>();
-        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Student updated!"</span>);
-    }
-    
-    <span class="comment">// ===== SELECT ROW - Load data into textboxes =====</span>
-    <span class="keyword">private void</span> <span class="function">dgvStudents_SelectionChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
-    {
-        <span class="keyword">if</span> (dgvStudents.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
-        
-        txtFirstName.Text = dgvStudents.CurrentRow.Cells[<span class="string">"FirstName"</span>].Value?.ToString();
-        txtLastName.Text = dgvStudents.CurrentRow.Cells[<span class="string">"LastName"</span>].Value?.ToString();
-        txtAge.Text = dgvStudents.CurrentRow.Cells[<span class="string">"Age"</span>].Value?.ToString();
-        txtCity.Text = dgvStudents.CurrentRow.Cells[<span class="string">"City"</span>].Value?.ToString();
-    }
-}</code></pre>
-                                        </div>
-                                        <div class="card bg-success text-white mt-3">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
                                             <div class="card-body">
-                                                <i class="fas fa-trophy me-2"></i>
-                                                <strong>🏆 Congratulations!</strong> You've built a complete Student Management System using SELECT, WHERE, and ORDER BY!
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 WHERE - Exact Match</h5>
+                                                <p><strong>Get students from New York:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get only New York students</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> Only students from New York!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 WHERE - Greater Than</h5>
+                                                <p><strong>Get students older than 21:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Get students older than 21</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">21</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> Students with age 22, 23, 24!</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE LIKE</h5>
+                                                <p><strong>Find names starting with 'J':</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Names starting with J</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">FirstName</span> <span style="color: #ffcb6b;">LIKE</span> <span style="color: #c3e88d;">'J%'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> John, Jane</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE BETWEEN</h5>
+                                                <p><strong>Students age 20-22:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Age between 20 and 22</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">BETWEEN</span> <span style="color: #f78c6c;">20</span> <span style="color: #ffcb6b;">AND</span> <span style="color: #f78c6c;">22</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Students age 20, 21, 22</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE IN</h5>
+                                                <p><strong>Students from Boston or Chicago:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Cities in a list</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> <span style="color: #ffcb6b;">IN</span> (<span style="color: #c3e88d;">'Boston'</span>, <span style="color: #c3e88d;">'Chicago'</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> All Boston and Chicago students</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE AND (Multiple Conditions)</h5>
+                                                <p><strong>New York students with GPA > 3.5:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Two conditions</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">3.5</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> New York students with good grades!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE OR (Multiple Conditions)</h5>
+                                                <p><strong>Students from New York OR GPA > 3.8:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Either condition</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>
+<span style="color: #ffcb6b;">OR</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">3.8</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> All New York students OR students with high GPA</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the WHERE clause break up with the SELECT statement? Because it was too conditional! 😅
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 📝 Summary -->
-                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
-                        <div class="card-body p-5">
-                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 What You Learned Today!</h3>
-                            <div class="row mt-4">
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-eye fa-3x mb-2"></i>
-                                        <h5>SELECT</h5>
-                                        <small>Get data from database</small>
+                    <!-- SSMS: ORDER BY -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>SSMS Step 4: ORDER BY - Sorting Your Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-sort me-2"></i>
+                                    <strong>ORDER BY:</strong> This is how you <strong>sort</strong> your data. Like saying "Show me students sorted by name!"
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 ORDER BY - Ascending (A-Z)</h5>
+                                                <p><strong>Sort by last name alphabetically:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Sort A-Z</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Brown, Davis, Doe, Johnson, Miller, Moore, Smith, Taylor, Williams, Wilson</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 ORDER BY - Descending (Z-A)</h5>
+                                                <p><strong>Sort by age (oldest first):</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Sort Z-A</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">DESC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Oldest students first (24, 23, 22, etc.)</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-filter fa-3x mb-2"></i>
-                                        <h5>WHERE</h5>
-                                        <small>Filter your data</small>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 ORDER BY Multiple Columns</h5>
+                                                <p><strong>Sort by city then by name:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Sort by city, then name</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">City</span> <span style="color: #ffcb6b;">ASC</span>, <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Grouped by city, sorted by name</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 ORDER BY with WHERE</h5>
+                                                <p><strong>New York students, sorted by GPA:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Filter + Sort</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">DESC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Only New York students, best GPA first</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 ORDER BY Column Number</h5>
+                                                <p><strong>Sort by the 2nd column:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Sort by column position</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #f78c6c;">2</span> <span style="color: #ffcb6b;">ASC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Sorted by LastName (the 2nd column)</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-sort fa-3x mb-2"></i>
-                                        <h5>ORDER BY</h5>
-                                        <small>Sort your data</small>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the ORDER BY command go to the gym? Because it wanted to get sorted! 😅
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-code fa-3x mb-2"></i>
-                                        <h5>C# Code</h5>
-                                        <small>Connect to database</small>
+                        </div>
+                    </section>
+
+                    <!-- SSMS: Combining All Three -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>SSMS Step 5: SELECT + WHERE + ORDER BY Together</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>Master Combination:</strong> Use all three together for powerful queries!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Complete Example</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- New York students, sorted by GPA</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">FirstName</span>, <span style="color: #82aaff;">LastName</span>, <span style="color: #82aaff;">GPA</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'New York'</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">DESC</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> <strong>Result:</strong> Alice (4.0), John (3.8), Eve (3.1), Henry (3.3)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 More Examples</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Students over 20, sorted by name</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Age</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">20</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">LastName</span> <span style="color: #ffcb6b;">ASC</span>;
+
+<span class="comment">-- Boston students with GPA > 3.0, sorted by GPA</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Students</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">City</span> = <span style="color: #c3e88d;">'Boston'</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">3.0</span>
+<span style="color: #ffcb6b;">ORDER BY</span> <span style="color: #82aaff;">GPA</span> <span style="color: #ffcb6b;">DESC</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-window-maximize fa-3x mb-2"></i>
-                                        <h5>WinForms</h5>
-                                        <small>Build apps</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <i class="fas fa-trophy fa-3x mb-2"></i>
-                                        <h5>Master!</h5>
-                                        <small>3 exercises done!</small>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>💡 Remember the Order:</strong>
+                                        <ul class="mb-0">
+                                            <li>1️⃣ <strong>SELECT</strong> - What to show</li>
+                                            <li>2️⃣ <strong>FROM</strong> - Which table</li>
+                                            <li>3️⃣ <strong>WHERE</strong> - Filter first</li>
+                                            <li>4️⃣ <strong>ORDER BY</strong> - Sort last</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
-                                🎯 You're now a master of using SELECT, WHERE, and ORDER BY in C#!
-                            </p>
+                        </div>
+                    </section>
+
+                    <!-- ============================================ -->
+                    <!-- ===== PART 2: C# - VISUAL STUDIO ===== -->
+                    <!-- ============================================ -->
+
+                    <div class="card border-0 shadow-lg mb-5" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold"><i class="fas fa-code me-2"></i>PART 2 - Using SQL Commands in C# (Visual Studio)</h2>
+                            <p class="lead">Now Let's Use SELECT, WHERE, ORDER BY in C#!</p>
                         </div>
                     </div>
 
-                    <!-- Navigation -->
-                    <div class="mt-5 d-flex flex-wrap justify-content-between">
-                        <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
-                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                        </a>
-                        <a href="/SqlServer/05-Joins" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
-                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
+                    <!-- C#: Setup -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>C# Step 1: Create Your WinForms Project</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Now we'll use the same SQL commands from C#!</strong>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-folder-open text-primary me-2"></i>📁 Create Project</h5>
+                                                <ol>
+                                                    <li>Open <strong>Visual Studio</strong></li>
+                                                    <li>Click <strong>"Create a new project"</strong></li>
+                                                    <li>Search for <strong>"Windows Forms App"</strong></li>
+                                                    <li>Name it <strong>"StudentManagerCSharp"</strong></li>
+                                                    <li>Click <strong>Create</strong></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Add NuGet Package</h5>
+                                                <ol>
+                                                    <li>Right-click project → <strong>Manage NuGet Packages</strong></li>
+                                                    <li>Search for <strong>"Microsoft.Data.SqlClient"</strong></li>
+                                                    <li>Click <strong>Install</strong></li>
+                                                </ol>
+                                                <div class="card bg-success text-white mt-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-check-circle me-2"></i>
+                                                        <strong>✅ Ready!</strong> Now add the using statements:
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="code-block mt-3">
+                                    <pre><code class="language-csharp"><span class="comment">// Add these at the top of Form1.cs</span>
+<span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> Microsoft.Data.SqlClient;
+
+<span class="comment">// Add this inside your Form1 class</span>
+<span class="keyword">private</span> <span class="keyword">string</span> connectionString = 
+    <span class="string">"Server=localhost;Database=SchoolDB;Trusted_Connection=True;TrustServerCertificate=True;"</span>;</code></pre>
+                                </div>
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the C# developer love NuGet? Because it had all the packages they needed! (Get it? Packages? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: SELECT -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>C# Step 2: SELECT - Getting Data in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-eye me-2"></i>
+                                    <strong>Same SELECT command, now in C#!</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== METHOD: Load All Students =====</span>
+<span class="comment">// This uses the same SELECT command we learned in SSMS</span>
+
+<span class="keyword">private void</span> <span class="function">LoadAllStudents</span>()
+{
+    <span class="comment">// 1️⃣ The SQL query (same as in SSMS!)</span>
+    <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students"</span>;
+    
+    <span class="comment">// 2️⃣ Connect and run the query</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
+    {
+        <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+        adapter.<span class="function">Fill</span>(dt);
+        
+        <span class="comment">// 3️⃣ Show in the DataGridView</span>
+        dgvStudents.DataSource = dt;
+    }
+}</code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Same as SSMS!</strong> The SQL command is identical, just wrapped in C# code.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: WHERE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>C# Step 3: WHERE - Filtering in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-filter me-2"></i>
+                                    <strong>Same WHERE command, now in C#!</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== METHOD: Filter by City =====</span>
+<span class="comment">// Uses WHERE City = '@@City'</span>
+
+<span class="keyword">private void</span> <span class="function">FilterByCity</span>(<span class="keyword">string</span> city)
+{
+    <span class="comment">// 1️⃣ The SQL query with WHERE</span>
+    <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE City = @@City"</span>;
+    
+    <span class="comment">// 2️⃣ Connect and add the parameter</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        <span class="comment">// 3️⃣ Add the parameter value</span>
+        cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
+        
+        <span class="comment">// 4️⃣ Run the query</span>
+        <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
+        {
+            <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(dt);
+            dgvStudents.DataSource = dt;
+        }
+    }
+}</code></pre>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE with Age</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Students older than 20</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE Age > @@Age"</span>;
+cmd.Parameters.AddWithValue(<span class="string">"@@Age"</span>, <span class="number">20</span>);</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 WHERE with LIKE</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Names starting with J</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE FirstName LIKE @@Name"</span>;
+cmd.Parameters.AddWithValue(<span class="string">"@@Name"</span>, <span class="string">"J%"</span>);</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Important!</strong> Always use <strong>@@Parameters</strong> to prevent SQL injection!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: ORDER BY -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="900">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-9 me-2"></i>C# Step 4: ORDER BY - Sorting in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-sort me-2"></i>
+                                    <strong>Same ORDER BY command, now in C#!</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== METHOD: Sort by Name =====</span>
+<span class="comment">// Uses ORDER BY LastName ASC</span>
+
+<span class="keyword">private void</span> <span class="function">SortByName</span>()
+{
+    <span class="comment">// 1️⃣ The SQL query with ORDER BY</span>
+    <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students ORDER BY LastName ASC"</span>;
+    
+    <span class="comment">// 2️⃣ Run the query</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
+    {
+        <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+        adapter.<span class="function">Fill</span>(dt);
+        dgvStudents.DataSource = dt;
+    }
+}</code></pre>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 ORDER BY DESC</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Sort by age (oldest first)</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students ORDER BY Age DESC"</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>🎯 ORDER BY Multiple</h5>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="comment">// Sort by city, then name</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students ORDER BY City ASC, LastName ASC"</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Same as SSMS!</strong> The ORDER BY syntax is exactly the same.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: Combined -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-10 me-2"></i>C# Step 5: SELECT + WHERE + ORDER BY Together</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>Same combination, now in C#!</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== METHOD: Filter AND Sort =====</span>
+<span class="comment">// Uses WHERE + ORDER BY together</span>
+
+<span class="keyword">private void</span> <span class="function">FilterAndSort</span>(<span class="keyword">string</span> city)
+{
+    <span class="comment">// 1️⃣ The SQL query with WHERE and ORDER BY</span>
+    <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE City = @@City ORDER BY LastName ASC"</span>;
+    
+    <span class="comment">// 2️⃣ Connect with parameter</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connectionString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@City"</span>, city);
+        
+        <span class="comment">// 3️⃣ Run the query</span>
+        <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
+        {
+            <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(dt);
+            dgvStudents.DataSource = dt;
+        }
+    }
+}</code></pre>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-trophy me-2"></i>
+                                        <strong>🏆 Master Combination!</strong> You've now used SELECT + WHERE + ORDER BY in both SSMS and C#!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 EXERCISES -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="1100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercises: Test Your Skills!</h3>
+                            </div>
+                            <div class="card-body p-4">
+
+                                <!-- Exercise 1 -->
+                                <div class="card bg-light mb-4">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-success me-2">1</span> Easy: SELECT All Students</h5>
+                                        <p><strong>Task:</strong> Write C# code to display all students from the database.</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="comment">// SOLUTION (3 lines)</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students"</span>;
+<span class="class">DataTable</span> dt = <span class="function">GetData</span>(query);
+dgvStudents.DataSource = dt;</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 2 -->
+                                <div class="card bg-light mb-4">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-warning text-dark me-2">2</span> Medium: Filter by GPA</h5>
+                                        <p><strong>Task:</strong> Write C# code to show students with GPA > 3.5, sorted by GPA (highest first).</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="comment">// SOLUTION (3 lines)</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE GPA > @@GPA ORDER BY GPA DESC"</span>;
+<span class="class">DataTable</span> dt = <span class="function">GetData</span>(query, <span class="string">"@@GPA"</span>, <span class="number">3.5</span>);
+dgvStudents.DataSource = dt;</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 3 -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-danger me-2">3</span> Hard: Complete Search Form</h5>
+                                        <p><strong>Task:</strong> Create a WinForms form with search by city, age range, and sorting options.</p>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE SEARCH FORM =====</span>
+
+                                            <span class="keyword">private void</span> <span class="function">btnSearch_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+                                            {
+                                            <span class="comment">// Build the query dynamically</span>
+                                            <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Students WHERE 1=1"</span>;
+    
+                                            <span class="comment">// Add filters based on user input</span>
+                                            <span class="keyword">if</span> (!<span class="keyword">string</span>.IsNullOrWhiteSpace(txtCity.Text))
+                                            query += <span class="string">" AND City = '@@City'"</span>;
+    
+                                            <span class="keyword">if</span> (!<span class="keyword">string</span>.IsNullOrWhiteSpace(txtMinAge.Text))
+                                            query += <span class="string">" AND Age >= @@MinAge"</span>;
+    
+                                            <span class="keyword">if</span> (!<span class="keyword">string</span>.IsNullOrWhiteSpace(txtMaxAge.Text))
+                                            query += <span class="string">" AND Age <= @@MaxAge"</span>;
+    
+                                            <span class="comment">// Add sorting</span>
+                                            <span class="keyword">string</span> sortColumn = cmbSortBy.SelectedItem?.ToString() ?? <span class="string">"LastName"</span>;
+                                            <span class="keyword">string</span> sortDirection = cmbSortDirection.SelectedItem?.ToString() ?? <span class="string">"ASC"</span>;
+                                            query += <span class="string">$" ORDER BY {sortColumn} {sortDirection}"</span>;
+    
+                                            <span class="comment">// Execute the query</span>
+                                            dgvStudents.DataSource = <span class="function">GetData</span>(query);
+                                            }</code></pre>
+                                            </div>
+                                            <div class="card bg-success text-white mt-3">
+                                            <div class="card-body">
+                                            <i class="fas fa-trophy me-2"></i>
+                                            <strong>🏆 Congratulations!</strong> You've built a professional search form using SELECT, WHERE, and ORDER BY!
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </section>
+
+                                            <!-- 📝 Summary -->
+                                            <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                                            <div class="card-body p-5">
+                                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 Mastery Summary</h3>
+                                            <div class="row mt-4">
+                                            <div class="col-md-4">
+                                            <div class="text-center">
+                                            <span class="badge bg-primary fs-1">SELECT</span>
+                                            <p><code>SELECT * FROM Students</code></p>
+                                            <small>Get all data</small>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                            <div class="text-center">
+                                            <span class="badge bg-warning fs-1">WHERE</span>
+                                            <p><code>WHERE City = 'NY'</code></p>
+                                            <small>Filter data</small>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                            <div class="text-center">
+                                            <span class="badge bg-success fs-1">ORDER BY</span>
+                                            <p><code>ORDER BY Name ASC</code></p>
+                                            <small>Sort data</small>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                            <div class="col-md-6">
+                                            <div class="text-center">
+                                            <span class="badge bg-danger fs-4">Combined</span>
+                                            <p><code>SELECT * FROM Students WHERE City = 'NY' ORDER BY Name ASC</code></p>
+                                            <small>All 3 commands together!</small>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <div class="text-center">
+                                            <span class="badge bg-info fs-4">In C#</span>
+                                            <p><code>DataTable dt = GetData(query);</code></p>
+                                            <small>Just 1 line to run any query!</small>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                            <div class="col-md-6">
+                                            <div class="text-center">
+                                            <span class="badge bg-info fs-4">In SSMS</span>
+                                            <p><code>SELECT * FROM Students WHERE City = 'NY' ORDER BY Name ASC</code></p>
+                                            <small>Same query, same result!</small>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <div class="text-center">
+                                            <span class="badge bg-success fs-4">You Are Now a Master!</span>
+                                            <p>✅ You can use SELECT, WHERE, ORDER BY in both SSMS and C#</p>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                            🎯 You're now a master of SELECT, WHERE, and ORDER BY in SQL Server and C#!
+                                            </p>
+                                            </div>
+                                            </div>
+
+                                            <!-- Navigation -->
+                                            <div class="mt-5 d-flex flex-wrap justify-content-between">
+                                            <a href="/SqlServer/03-DataTypesConstraints" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                                        </a>
+                                        <a href="/SqlServer/05-Joins" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+
+                                </div> <!-- end lesson-content -->
+                            </div>
+
+                            <!-- Sidebar -->
+                            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                </div> <!-- end lesson-content -->
-            </div>
+                @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson4")
 
-            <!-- Sidebar -->
-            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
-                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
-            </div>
-        </div>
-    </div>
-</div>
+                @section Scripts {
+                    <script>
+                        // Toggle solution visibility
+                        function toggleSolution() {
+                            var solution = document.getElementById('solution');
+                            if (solution.style.display === 'none') {
+                                solution.style.display = 'block';
+                                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            } else {
+                                solution.style.display = 'none';
+                            }
+                        }
 
-@await Html.PartialAsync("_QuizButton", "SqlServer_Lesson4")
+                        // Initialize AOS animations
+                        document.addEventListener('DOMContentLoaded', function() {
+                            if (typeof AOS !== 'undefined') {
+                                AOS.init({
+                                    once: true,
+                                    offset: 60,
+                                    duration: 700,
+                                    easing: 'ease-out'
+                                });
+                            }
+                        });
+                    </script>
 
-@section Scripts {
-    <script>
-        // Toggle solution visibility
-        function toggleSolution() {
-            var solution = document.getElementById('solution');
-            if (solution.style.display === 'none') {
-                solution.style.display = 'block';
-                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                solution.style.display = 'none';
-            }
-        }
+                    <style>
+                        /* Hero Section */
+                        .hero-section {
+                            position: relative;
+                            overflow: hidden;
+                        }
 
-        // Initialize AOS animations
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    once: true,
-                    offset: 60,
-                    duration: 700,
-                    easing: 'ease-out'
-                });
-            }
-        });
-    </script>
+                            .hero-section::before {
+                                content: '';
+                                position: absolute;
+                                top: -50%;
+                                right: -10%;
+                                width: 500px;
+                                height: 500px;
+                                background: rgba(0, 123, 255, 0.05);
+                                border-radius: 50%;
+                                pointer-events: none;
+                            }
 
-    <style>
-        /* Hero Section - SQL Server Theme */
-        .hero-section {
-            position: relative;
-            overflow: hidden;
-        }
+                        /* Code Block Styling */
+                        .code-block {
+                            position: relative;
+                        }
 
-            .hero-section::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                right: -10%;
-                width: 500px;
-                height: 500px;
-                background: rgba(0, 123, 255, 0.05);
-                border-radius: 50%;
-                pointer-events: none;
-            }
+                            .code-block pre {
+                                background: #1a1a2e !important;
+                                color: #cdd6f4 !important;
+                                padding: 1.2rem;
+                                border-radius: 12px;
+                                overflow-x: auto;
+                                font-size: 0.85rem;
+                                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                                border-left: 6px solid #0f3460;
+                                margin: 0;
+                            }
 
-        /* Code Block Styling - SQL Syntax */
-        .code-block {
-            position: relative;
-        }
+                            .code-block.small pre {
+                                font-size: 0.75rem;
+                                padding: 0.8rem;
+                            }
 
-            .code-block pre {
-                background: #1a1a2e !important;
-                color: #cdd6f4 !important;
-                padding: 1.2rem;
-                border-radius: 12px;
-                overflow-x: auto;
-                font-size: 0.85rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-                border-left: 6px solid #0f3460;
-                margin: 0;
-            }
+                            .code-block code {
+                                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                                line-height: 1.6;
+                            }
 
-            .code-block.small pre {
-                font-size: 0.75rem;
-                padding: 0.8rem;
-            }
+                        /* SQL Syntax Colors */
+                        .language-sql .keyword {
+                            color: #c792ea !important;
+                            font-weight: 600;
+                        }
 
-            .code-block code {
-                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
-                line-height: 1.6;
-            }
+                        .language-sql .comment {
+                            color: #676e95 !important;
+                            font-style: italic;
+                        }
 
-        /* SQL Syntax Colors */
-        .language-sql .keyword {
-            color: #c792ea !important;
-            font-weight: 600;
-        }
+                        .language-sql .string {
+                            color: #c3e88d !important;
+                        }
 
-        .language-sql .comment {
-            color: #676e95 !important;
-            font-style: italic;
-        }
+                        .language-sql .number {
+                            color: #f78c6c !important;
+                        }
 
-        .language-sql .string {
-            color: #c3e88d !important;
-        }
+                        .language-sql .function {
+                            color: #82aaff !important;
+                        }
 
-        .language-sql .number {
-            color: #f78c6c !important;
-        }
+                        .language-sql .class {
+                            color: #ffcb6b !important;
+                            font-weight: 600;
+                        }
 
-        .language-sql .function {
-            color: #82aaff !important;
-        }
+                        .language-sql .property {
+                            color: #80cbc4 !important;
+                        }
 
-        .language-sql .class {
-            color: #ffcb6b !important;
-            font-weight: 600;
-        }
+                        .language-sql .variable {
+                            color: #eeffff !important;
+                        }
 
-        .language-sql .property {
-            color: #80cbc4 !important;
-        }
+                        .language-sql .operator {
+                            color: #89ddff !important;
+                        }
 
-        .language-sql .variable {
-            color: #eeffff !important;
-        }
+                        /* C# Syntax Colors */
+                        .language-csharp .keyword {
+                            color: #c792ea !important;
+                            font-weight: 600;
+                        }
 
-        .language-sql .operator {
-            color: #89ddff !important;
-        }
+                        .language-csharp .comment {
+                            color: #676e95 !important;
+                            font-style: italic;
+                        }
 
-        /* C# Syntax Colors */
-        .language-csharp .keyword {
-            color: #c792ea !important;
-            font-weight: 600;
-        }
+                        .language-csharp .string {
+                            color: #c3e88d !important;
+                        }
 
-        .language-csharp .comment {
-            color: #676e95 !important;
-            font-style: italic;
-        }
+                        .language-csharp .number {
+                            color: #f78c6c !important;
+                        }
 
-        .language-csharp .string {
-            color: #c3e88d !important;
-        }
+                        .language-csharp .function {
+                            color: #82aaff !important;
+                        }
 
-        .language-csharp .number {
-            color: #f78c6c !important;
-        }
+                        .language-csharp .class {
+                            color: #ffcb6b !important;
+                            font-weight: 600;
+                        }
 
-        .language-csharp .function {
-            color: #82aaff !important;
-        }
+                        .language-csharp .property {
+                            color: #80cbc4 !important;
+                        }
 
-        .language-csharp .class {
-            color: #ffcb6b !important;
-            font-weight: 600;
-        }
+                        .language-csharp .variable {
+                            color: #eeffff !important;
+                        }
 
-        .language-csharp .property {
-            color: #80cbc4 !important;
-        }
+                        .language-csharp .operator {
+                            color: #89ddff !important;
+                        }
 
-        .language-csharp .variable {
-            color: #eeffff !important;
-        }
+                        /* Card hover effects */
+                        .card {
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        }
 
-        .language-csharp .operator {
-            color: #89ddff !important;
-        }
+                            .card:hover:not(.bg-light) {
+                                transform: translateY(-5px);
+                                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+                            }
 
-        /* Card hover effects */
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+                        /* Badge styling */
+                        .badge {
+                            letter-spacing: 0.4px;
+                        }
 
-            .card:hover:not(.bg-light) {
-                transform: translateY(-5px);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-            }
+                        /* Button styling */
+                        .btn-primary {
+                            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+                            border: none;
+                            transition: all 0.3s;
+                        }
 
-        /* Badge styling */
-        .badge {
-            letter-spacing: 0.4px;
-        }
+                            .btn-primary:hover {
+                                transform: scale(1.05);
+                                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+                            }
 
-        /* Button styling - SQL Server Theme */
-        .btn-primary {
-            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
-            border: none;
-            transition: all 0.3s;
-        }
+                        .btn-outline-primary {
+                            border-radius: 50px;
+                            transition: all 0.3s;
+                            color: #0f3460;
+                            border-color: #0f3460;
+                        }
 
-            .btn-primary:hover {
-                transform: scale(1.05);
-                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
-            }
+                            .btn-outline-primary:hover {
+                                transform: scale(1.05);
+                                background: #0f3460;
+                                color: white;
+                            }
 
-        .btn-outline-primary {
-            border-radius: 50px;
-            transition: all 0.3s;
-            color: #0f3460;
-            border-color: #0f3460;
-        }
+                        /* Solution animation */
+                        #solution {
+                            animation: fadeSlide 0.5s ease;
+                        }
+                        @@keyframes fadeSlide {
+                            0% {
+                                opacity: 0;
+                                transform: translateY(-10px);
+                            }
 
-            .btn-outline-primary:hover {
-                transform: scale(1.05);
-                background: #0f3460;
-                color: white;
-            }
+                            100% {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        }
 
-        /* Solution animation */
-        #solution {
-            animation: fadeSlide 0.5s ease;
-        }
-        @@keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
+                        /* List styling */
+                        .bg-light ul {
+                            padding-left: 1.5rem;
+                        }
 
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+                            .bg-light ul li {
+                                margin-bottom: 0.3rem;
+                            }
 
-        /* List styling */
-        .bg-light ul {
-            padding-left: 1.5rem;
-        }
+                        /* Responsive adjustments */
+                        @@media (max-width: 768px) {
+                            .display-2 {
+                                font-size: 2.5rem;
+                            }
 
-            .bg-light ul li {
-                margin-bottom: 0.3rem;
-            }
-
-        /* Responsive adjustments */
-        @@media (max-width: 768px) {
-            .display-2 {
-                font-size: 2.5rem;
-            }
-
-            .display-6 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-}
+                            .display-6 {
+                                font-size: 1.5rem;
+                            }
+                        }
+                    </style>
+                }

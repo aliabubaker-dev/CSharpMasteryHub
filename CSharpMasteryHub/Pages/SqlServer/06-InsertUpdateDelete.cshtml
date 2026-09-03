@@ -1,84 +1,1188 @@
 @page
 @model CSharpMasteryHub.Pages.SqlServer.InsertUpdateDeleteModel
 @{
-    ViewData["Title"] = "INSERT, UPDATE, DELETE";
+    ViewData["Title"] = "INSERT, UPDATE, DELETE - Master Guide";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/SqlServer">SQL Server</a></li>
-                    <li class="breadcrumb-item active">INSERT, UPDATE, DELETE</li>
-                </ol>
-            </nav>
-
-            <div class="lesson-content">
-                <h1 class="display-4 mb-3">INSERT, UPDATE, DELETE</h1>
-                <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 6 of 10</span>
-                </div>
-
-                <h2>INSERT — adding rows</h2>
-                <pre><code>INSERT INTO Students (FirstName, LastName, Email)
-VALUES ('Ali', 'Hassan', 'ali.hassan@example.com');
-
--- Insert multiple rows at once
-INSERT INTO Students (FirstName, LastName, Email)
-VALUES
-    ('Sara', 'Ahmed', 'sara.a@example.com'),
-    ('Omar', 'Khalid', 'omar.k@example.com');</code></pre>
-
-                <h2>UPDATE — modifying rows</h2>
-                <pre><code>UPDATE Students
-SET Email = 'ali.new@example.com'
-WHERE StudentId = 1;</code></pre>
-                <p>
-                    <strong>Always include a WHERE clause on UPDATE.</strong> Without one,
-                    every row in the table gets updated.
-                </p>
-
-                <h2>DELETE — removing rows</h2>
-                <pre><code>DELETE FROM Students
-WHERE StudentId = 5;</code></pre>
-                <p>
-                    Same rule applies: <strong>always use WHERE</strong> unless you genuinely
-                    want to empty the entire table.
-                </p>
-
-                <h2>Safe practice: test with SELECT first</h2>
-                <pre><code>-- Run this first to see exactly what will be affected
-SELECT * FROM Students WHERE LastName = 'Khalid';
-
--- Then run the DELETE with the same WHERE clause
-DELETE FROM Students WHERE LastName = 'Khalid';</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p>Always use WHERE with UPDATE and DELETE. Test with SELECT first to verify what will be affected.</p>
+<div class="container-fluid px-0">
+    <!-- 🎨 Hero Section - SQL Server Theme -->
+    <div class="hero-section py-5 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-duration="1000">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background: transparent;">
+                            <li class="breadcrumb-item"><a href="/" style="color: rgba(255,255,255,0.7);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/SqlServer" style="color: rgba(255,255,255,0.7);">SQL Server</a></li>
+                            <li class="breadcrumb-item active" style="color: white;">INSERT, UPDATE, DELETE</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-2 fw-bold text-white" style="text-shadow: 0 0 30px rgba(0, 123, 255, 0.3);">
+                        INSERT, UPDATE, DELETE ✏️
+                    </h1>
+                    <p class="lead text-white-50 fs-4 mt-3">
+                        Add, Modify, and Remove Data - Zero to Hero
+                    </p>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <span class="badge bg-success fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-smile me-2"></i>Beginner Friendly
+                        </span>
+                        <span class="badge bg-info text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-clock me-2"></i>45 min read
+                        </span>
+                        <span class="badge bg-warning text-dark fs-6 px-4 py-2" style="border-radius: 50px;">
+                            <i class="fas fa-book me-2"></i>Lesson 6 of 13
+                        </span>
                     </div>
                 </div>
-
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/SqlServer/05-Joins" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
-                    </a>
-                    <a href="/SqlServer/07-StoredProcedures" class="btn btn-primary-custom">
-                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <i class="fas fa-edit fa-8x text-white" style="opacity: 0.15; text-shadow: 0 0 50px rgba(0, 123, 255, 0.2);"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="lesson-content">
+
+                    <!-- 🎉 Welcome Section -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="fade-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);">
+                        <div class="card-body p-5">
+                            <div class="d-flex align-items-start">
+                                <div class="me-4">
+                                    <i class="fas fa-smile-wink fa-3x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h2 class="fw-bold text-primary">Master INSERT, UPDATE, DELETE in 2 Steps! 🎯</h2>
+                                    <p class="fs-5">
+                                        <strong>PART 1:</strong> Learn INSERT, UPDATE, DELETE in <strong>SSMS</strong> (SQL Server Management Studio)<br>
+                                        <strong>PART 2:</strong> Use INSERT, UPDATE, DELETE in <strong>C#</strong> (Visual Studio)
+                                    </p>
+                                    <div class="alert alert-success mt-3">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        <strong>Why These Commands Matter:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>✅ <strong>INSERT</strong> - Add new data to your database</li>
+                                            <li>✅ <strong>UPDATE</strong> - Modify existing data</li>
+                                            <li>✅ <strong>DELETE</strong> - Remove data you no longer need</li>
+                                            <li>✅ Together they form <strong>CRUD</strong> (Create, Read, Update, Delete)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- ===== PART 1: SSMS - SQL SERVER MANAGEMENT STUDIO ===== -->
+                    <!-- ============================================ -->
+
+                    <div class="card border-0 shadow-lg mb-5" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold"><i class="fas fa-server me-2"></i>PART 1 - SQL Server Management Studio (SSMS)</h2>
+                            <p class="lead">Learn INSERT, UPDATE, DELETE in SSMS First!</p>
+                        </div>
+                    </div>
+
+                    <!-- SSMS: Setup Database -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-1 me-2"></i>SSMS Step 1: Create Our Sample Database</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Let's create a simple Products table to practice with.</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-sql"><span class="comment">-- ===== CREATE DATABASE =====</span>
+<span style="color: #ffcb6b;">CREATE DATABASE</span> <span style="color: #82aaff;">StoreDB</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span style="color: #ffcb6b;">USE</span> <span style="color: #82aaff;">StoreDB</span>;
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- ===== CREATE PRODUCTS TABLE =====</span>
+<span style="color: #ffcb6b;">CREATE TABLE</span> <span style="color: #82aaff;">Products</span> (
+    <span style="color: #82aaff;">ProductId</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">IDENTITY</span>(<span style="color: #f78c6c;">1</span>,<span style="color: #f78c6c;">1</span>) <span style="color: #ffcb6b;">PRIMARY KEY</span>,
+    <span style="color: #82aaff;">Name</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">100</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Price</span> <span style="color: #f78c6c;">DECIMAL</span>(<span style="color: #f78c6c;">10</span>,<span style="color: #f78c6c;">2</span>) <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Quantity</span> <span style="color: #f78c6c;">INT</span> <span style="color: #ffcb6b;">NOT NULL</span>,
+    <span style="color: #82aaff;">Category</span> <span style="color: #f78c6c;">NVARCHAR</span>(<span style="color: #f78c6c;">50</span>)
+);
+<span style="color: #ffcb6b;">GO</span>
+
+<span class="comment">-- ===== INSERT SAMPLE PRODUCTS =====</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Products</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Quantity</span>, <span style="color: #82aaff;">Category</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'Laptop'</span>, <span style="color: #f78c6c;">999.99</span>, <span style="color: #f78c6c;">10</span>, <span style="color: #c3e88d;">'Electronics'</span>),
+    (<span style="color: #c3e88d;">'Mouse'</span>, <span style="color: #f78c6c;">25.50</span>, <span style="color: #f78c6c;">50</span>, <span style="color: #c3e88d;">'Electronics'</span>),
+    (<span style="color: #c3e88d;">'Keyboard'</span>, <span style="color: #f78c6c;">45.00</span>, <span style="color: #f78c6c;">30</span>, <span style="color: #c3e88d;">'Electronics'</span>),
+    (<span style="color: #c3e88d;">'Monitor'</span>, <span style="color: #f78c6c;">299.99</span>, <span style="color: #f78c6c;">15</span>, <span style="color: #c3e88d;">'Electronics'</span>),
+    (<span style="color: #c3e88d;">'Desk'</span>, <span style="color: #f78c6c;">199.99</span>, <span style="color: #f78c6c;">5</span>, <span style="color: #c3e88d;">'Furniture'</span>),
+    (<span style="color: #c3e88d;">'Chair'</span>, <span style="color: #f78c6c;">149.99</span>, <span style="color: #f78c6c;">8</span>, <span style="color: #c3e88d;">'Furniture'</span>);
+<span style="color: #ffcb6b;">GO</span></code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Done!</strong> We have 6 products. Let's learn INSERT, UPDATE, DELETE!
+                                    </div>
+                                </div>
+
+                                <div class="card bg-warning text-dark mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the developer create a Products table? Because they wanted to keep track of their "stock" options! 😅
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SSMS: INSERT -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-2 me-2"></i>SSMS Step 2: INSERT - Adding New Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-plus-circle me-2"></i>
+                                    <strong>INSERT:</strong> This is how you <strong>add new records</strong> to your database. Like adding a new product to your store!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 INSERT - Add One Product</h5>
+                                                <p><strong>Add a single new product:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Insert one product</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Products</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Quantity</span>, <span style="color: #82aaff;">Category</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'Headphones'</span>, <span style="color: #f78c6c;">89.99</span>, <span style="color: #f78c6c;">20</span>, <span style="color: #c3e88d;">'Electronics'</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> New product added!</p>
+                                                <p><span class="badge bg-primary">📌</span> <strong>Important:</strong> Don't include <code>ProductId</code> - it auto-increments!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 INSERT - Add Multiple Products</h5>
+                                                <p><strong>Add multiple products at once:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Insert multiple products</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Products</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Quantity</span>, <span style="color: #82aaff;">Category</span>)
+<span style="color: #ffcb6b;">VALUES</span> 
+    (<span style="color: #c3e88d;">'Webcam'</span>, <span style="color: #f78c6c;">59.99</span>, <span style="color: #f78c6c;">15</span>, <span style="color: #c3e88d;">'Electronics'</span>),
+    (<span style="color: #c3e88d;">'Desk Lamp'</span>, <span style="color: #f78c6c;">35.00</span>, <span style="color: #f78c6c;">25</span>, <span style="color: #c3e88d;">'Furniture'</span>),
+    (<span style="color: #c3e88d;">'Coffee Mug'</span>, <span style="color: #f78c6c;">12.99</span>, <span style="color: #f78c6c;">100</span>, <span style="color: #c3e88d;">'Kitchen'</span>);</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> 3 new products added at once!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 INSERT - With SELECT (Copy Data)</h5>
+                                                <p><strong>Copy data from another table:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Insert from another table</span>
+<span style="color: #ffcb6b;">INSERT INTO</span> <span style="color: #82aaff;">Products</span> (<span style="color: #82aaff;">Name</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Quantity</span>, <span style="color: #82aaff;">Category</span>)
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #82aaff;">ProductName</span>, <span style="color: #82aaff;">Price</span>, <span style="color: #82aaff;">Stock</span>, <span style="color: #c3e88d;">'New'</span>
+<span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">TempProducts</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Price</span> <span style="color: #ffcb6b;">></span> <span style="color: #f78c6c;">50</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Copies only expensive products to the main table!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the INSERT command go to the party? Because it wanted to add some new records! 😅
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SSMS: UPDATE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-3 me-2"></i>SSMS Step 3: UPDATE - Modifying Existing Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-edit me-2"></i>
+                                    <strong>UPDATE:</strong> This is how you <strong>change existing data</strong>. Like updating a product's price!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 UPDATE - Change Price</h5>
+                                                <p><strong>Update a specific product's price:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Update price of Laptop</span>
+<span style="color: #ffcb6b;">UPDATE</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">SET</span> <span style="color: #82aaff;">Price</span> = <span style="color: #f78c6c;">899.99</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Name</span> = <span style="color: #c3e88d;">'Laptop'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Laptop price updated!</p>
+                                                <p><span class="badge bg-danger">⚠️</span> <strong>Always use WHERE!</strong> Without it, ALL prices change!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 UPDATE - Multiple Columns</h5>
+                                                <p><strong>Update multiple fields at once:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Update both price and quantity</span>
+<span style="color: #ffcb6b;">UPDATE</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">SET</span> 
+    <span style="color: #82aaff;">Price</span> = <span style="color: #f78c6c;">27.99</span>,
+    <span style="color: #82aaff;">Quantity</span> = <span style="color: #f78c6c;">60</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Name</span> = <span style="color: #c3e88d;">'Mouse'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Both price and quantity updated!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 UPDATE - With Calculations</h5>
+                                                <p><strong>Update using calculations:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Increase all prices by 10%</span>
+<span style="color: #ffcb6b;">UPDATE</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">SET</span> <span style="color: #82aaff;">Price</span> = <span style="color: #82aaff;">Price</span> * <span style="color: #f78c6c;">1.10</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Electronics'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> All electronics prices increased by 10%!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 UPDATE - With WHERE Conditions</h5>
+                                                <p><strong>Update with multiple conditions:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Update products with low stock</span>
+<span style="color: #ffcb6b;">UPDATE</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">SET</span> <span style="color: #82aaff;">Quantity</span> = <span style="color: #f78c6c;">20</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Quantity</span> <span style="color: #ffcb6b;"><</span> <span style="color: #f78c6c;">10</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Electronics'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Low-stock electronics restocked!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-danger text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>⚠️ WARNING!</strong> Always run <code>SELECT</code> first to see what you'll update!
+                                        <br>
+                                        <code>SELECT * FROM Products WHERE Name = 'Laptop';</code>
+                                        <br>
+                                        <span style="font-size: 0.9rem;">Then run UPDATE with the same WHERE clause!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SSMS: DELETE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-4 me-2"></i>SSMS Step 4: DELETE - Removing Data</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-trash-alt me-2"></i>
+                                    <strong>DELETE:</strong> This is how you <strong>remove data</strong> from your database. Like removing a discontinued product!
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 DELETE - Remove One Product</h5>
+                                                <p><strong>Delete a specific product:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Delete a specific product</span>
+<span style="color: #ffcb6b;">DELETE</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Name</span> = <span style="color: #c3e88d;">'Desk Lamp'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Desk Lamp removed!</p>
+                                                <p><span class="badge bg-danger">⚠️</span> <strong>Always use WHERE!</strong> Without it, ALL rows are deleted!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 DELETE - With Conditions</h5>
+                                                <p><strong>Delete products with specific criteria:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- Delete products with no stock</span>
+<span style="color: #ffcb6b;">DELETE</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Quantity</span> = <span style="color: #f78c6c;">0</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Electronics'</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> All out-of-stock electronics removed!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Safe Practice - SELECT First!</h5>
+                                                <p><strong>Always test with SELECT before DELETE:</strong></p>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-sql"><span class="comment">-- 1️⃣ First, see what will be deleted</span>
+<span style="color: #ffcb6b;">SELECT</span> <span style="color: #ffcb6b;">*</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Furniture'</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">Quantity</span> <span style="color: #ffcb6b;"><</span> <span style="color: #f78c6c;">5</span>;
+
+<span class="comment">-- 2️⃣ If correct, run DELETE</span>
+<span style="color: #ffcb6b;">DELETE</span> <span style="color: #ffcb6b;">FROM</span> <span style="color: #82aaff;">Products</span>
+<span style="color: #ffcb6b;">WHERE</span> <span style="color: #82aaff;">Category</span> = <span style="color: #c3e88d;">'Furniture'</span>
+<span style="color: #ffcb6b;">AND</span> <span style="color: #82aaff;">Quantity</span> <span style="color: #ffcb6b;"><</span> <span style="color: #f78c6c;">5</span>;</code></pre>
+                                                </div>
+                                                <p><span class="badge bg-success">✅</span> Safe! You know exactly what will be deleted!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-danger text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>⚠️ WARNING!</strong> DELETE is PERMANENT! There's no "undo" button!
+                                        <br>
+                                        <span style="font-size: 0.9rem;">Always SELECT first, then DELETE!</span>
+                                    </div>
+                                </div>
+
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-laugh-beam me-2"></i>
+                                        <strong>😂 Fun Joke:</strong> Why did the DELETE command break up with the table? Because it couldn't commit! (Get it? Commit? ...I'll stop 😅)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============================================ -->
+                    <!-- ===== PART 2: C# - VISUAL STUDIO ===== -->
+                    <!-- ============================================ -->
+
+                    <div class="card border-0 shadow-lg mb-5" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold"><i class="fas fa-code me-2"></i>PART 2 - Using INSERT, UPDATE, DELETE in C#</h2>
+                            <p class="lead">Now Let's Use These Commands in C#!</p>
+                        </div>
+                    </div>
+
+                    <!-- C#: Setup -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #4facfe;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-5 me-2"></i>C# Step 1: Create Your WinForms Project</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <strong>Same commands, now in C#!</strong>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-folder-open text-primary me-2"></i>📁 Create Project</h5>
+                                                <ol>
+                                                    <li>Open <strong>Visual Studio</strong></li>
+                                                    <li>Create <strong>Windows Forms App</strong></li>
+                                                    <li>Name it <strong>"ProductManager"</strong></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card bg-light h-100">
+                                            <div class="card-body">
+                                                <h5><i class="fas fa-code text-primary me-2"></i>💻 Add NuGet Package</h5>
+                                                <ol>
+                                                    <li>Install <strong>Microsoft.Data.SqlClient</strong></li>
+                                                    <li>Add using statements</li>
+                                                    <li>Add connection string</li>
+                                                </ol>
+                                                <div class="code-block small">
+                                                    <pre><code class="language-csharp"><span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> Microsoft.Data.SqlClient;
+
+<span class="keyword">private</span> <span class="keyword">string</span> connString = 
+    <span class="string">"Server=localhost;Database=StoreDB;Trusted_Connection=True;TrustServerCertificate=True;"</span>;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: INSERT -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #43e97b;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-6 me-2"></i>C# Step 2: INSERT in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== INSERT - Add a New Product =====</span>
+
+<span class="keyword">private void</span> <span class="function">btnAdd_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 1️⃣ Get user input</span>
+    <span class="keyword">string</span> name = txtName.Text;
+    <span class="keyword">decimal</span> price = <span class="keyword">decimal</span>.<span class="function">Parse</span>(txtPrice.Text);
+    <span class="keyword">int</span> quantity = <span class="keyword">int</span>.<span class="function">Parse</span>(txtQuantity.Text);
+    <span class="keyword">string</span> category = txtCategory.Text;
+    
+    <span class="comment">// 2️⃣ The INSERT query</span>
+    <span class="keyword">string</span> query = <span class="string">"INSERT INTO Products (Name, Price, Quantity, Category) "</span> +
+                  <span class="string">"VALUES (@@Name, @@Price, @@Quantity, @@Category)"</span>;
+    
+    <span class="comment">// 3️⃣ Run the query</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@Name"</span>, name);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Price"</span>, price);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Quantity"</span>, quantity);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Category"</span>, category);
+        
+        conn.<span class="function">Open</span>();
+        <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+        conn.<span class="function">Close</span>();
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ {rows} product added!"</span>);
+        <span class="function">LoadProducts</span>();  <span class="comment">// Refresh the list</span>
+    }
+}</code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Same as SSMS!</strong> The SQL is identical, just using parameters.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: UPDATE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="700">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-7 me-2"></i>C# Step 3: UPDATE in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== UPDATE - Modify a Product =====</span>
+
+<span class="keyword">private void</span> <span class="function">btnUpdate_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 1️⃣ Get the product ID and new values</span>
+    <span class="keyword">int</span> id = (<span class="keyword">int</span>)dgvProducts.CurrentRow.Cells[<span class="string">"ProductId"</span>].Value;
+    <span class="keyword">string</span> name = txtName.Text;
+    <span class="keyword">decimal</span> price = <span class="keyword">decimal</span>.<span class="function">Parse</span>(txtPrice.Text);
+    <span class="keyword">int</span> quantity = <span class="keyword">int</span>.<span class="function">Parse</span>(txtQuantity.Text);
+    <span class="keyword">string</span> category = txtCategory.Text;
+    
+    <span class="comment">// 2️⃣ The UPDATE query</span>
+    <span class="keyword">string</span> query = <span class="string">"UPDATE Products SET Name=@@Name, Price=@@Price, "</span> +
+                  <span class="string">"Quantity=@@Quantity, Category=@@Category WHERE ProductId=@@Id"</span>;
+    
+    <span class="comment">// 3️⃣ Run the query</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@Name"</span>, name);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Price"</span>, price);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Quantity"</span>, quantity);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Category"</span>, category);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Id"</span>, id);
+        
+        conn.<span class="function">Open</span>();
+        <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+        conn.<span class="function">Close</span>();
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ {rows} product updated!"</span>);
+        <span class="function">LoadProducts</span>();  <span class="comment">// Refresh the list</span>
+    }
+}</code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Same as SSMS!</strong> UPDATE with WHERE to target the right product.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: DELETE -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #667eea;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-8 me-2"></i>C# Step 4: DELETE in C#</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== DELETE - Remove a Product =====</span>
+
+<span class="keyword">private void</span> <span class="function">btnDelete_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="comment">// 1️⃣ Confirm with user</span>
+    <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(
+        <span class="string">"Delete this product?"</span>,
+        <span class="string">"Confirm Delete"</span>,
+        <span class="class">MessageBoxButtons</span>.YesNo,
+        <span class="class">MessageBoxIcon</span>.Warning);
+    
+    <span class="keyword">if</span> (result != <span class="class">DialogResult</span>.Yes) <span class="keyword">return</span>;
+    
+    <span class="comment">// 2️⃣ Get the product ID</span>
+    <span class="keyword">int</span> id = (<span class="keyword">int</span>)dgvProducts.CurrentRow.Cells[<span class="string">"ProductId"</span>].Value;
+    
+    <span class="comment">// 3️⃣ The DELETE query</span>
+    <span class="keyword">string</span> query = <span class="string">"DELETE FROM Products WHERE ProductId = @@Id"</span>;
+    
+    <span class="comment">// 4️⃣ Run the query</span>
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@Id"</span>, id);
+        
+        conn.<span class="function">Open</span>();
+        <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+        conn.<span class="function">Close</span>();
+        
+        <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ {rows} product deleted!"</span>);
+        <span class="function">LoadProducts</span>();  <span class="comment">// Refresh the list</span>
+    }
+}</code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>✅ Same as SSMS!</strong> DELETE with WHERE and user confirmation.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- C#: Complete CRUD -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="900">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border-left: 6px solid #f093fb;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-9 me-2"></i>C# Step 5: Complete CRUD Application</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-star me-2"></i>
+                                    <strong>CRUD = Create (INSERT), Read (SELECT), Update (UPDATE), Delete (DELETE)</strong>
+                                </div>
+
+                                <div class="code-block">
+                                    <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE PRODUCT MANAGEMENT SYSTEM =====</span>
+
+<span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="class">ProductForm</span> : <span class="class">Form</span>
+{
+    <span class="keyword">private</span> <span class="keyword">string</span> connString = <span class="string">"Server=localhost;Database=StoreDB;Trusted_Connection=True;TrustServerCertificate=True;"</span>;
+    
+    <span class="keyword">public</span> <span class="function">ProductForm</span>()
+    {
+        <span class="function">InitializeComponent</span>();
+        <span class="function">LoadProducts</span>();
+        <span class="function">ClearFields</span>();
+    }
+    
+    <span class="comment">// ===== READ - Load All Products =====</span>
+    <span class="keyword">private void</span> <span class="function">LoadProducts</span>()
+    {
+        <span class="keyword">string</span> query = <span class="string">"SELECT ProductId, Name, Price, Quantity, Category FROM Products"</span>;
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(query, conn))
+        {
+            <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(dt);
+            dgvProducts.DataSource = dt;
+            lblStatus.Text = <span class="string">$"📊 {dt.Rows.Count} products loaded"</span>;
+        }
+    }
+    
+    <span class="comment">// ===== CREATE - INSERT =====</span>
+    <span class="keyword">private void</span> <span class="function">btnAdd_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (!<span class="function">ValidateFields</span>()) <span class="keyword">return</span>;
+        
+        <span class="keyword">string</span> query = <span class="string">"INSERT INTO Products (Name, Price, Quantity, Category) "</span> +
+                      <span class="string">"VALUES (@@Name, @@Price, @@Quantity, @@Category)"</span>;
+        
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+        {
+            <span class="function">AddParameters</span>(cmd);
+            conn.<span class="function">Open</span>();
+            <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+            conn.<span class="function">Close</span>();
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ Added {rows} product!"</span>);
+            <span class="function">LoadProducts</span>();
+            <span class="function">ClearFields</span>();
+        }
+    }
+    
+    <span class="comment">// ===== UPDATE - UPDATE =====</span>
+    <span class="keyword">private void</span> <span class="function">btnUpdate_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (!<span class="function">ValidateFields</span>()) <span class="keyword">return</span>;
+        
+        <span class="keyword">int</span> id = (<span class="keyword">int</span>)dgvProducts.CurrentRow.Cells[<span class="string">"ProductId"</span>].Value;
+        <span class="keyword">string</span> query = <span class="string">"UPDATE Products SET Name=@@Name, Price=@@Price, "</span> +
+                      <span class="string">"Quantity=@@Quantity, Category=@@Category WHERE ProductId=@@Id"</span>;
+        
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+        {
+            <span class="function">AddParameters</span>(cmd);
+            cmd.Parameters.AddWithValue(<span class="string">"@@Id"</span>, id);
+            conn.<span class="function">Open</span>();
+            <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+            conn.<span class="function">Close</span>();
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ Updated {rows} product!"</span>);
+            <span class="function">LoadProducts</span>();
+            <span class="function">ClearFields</span>();
+        }
+    }
+    
+    <span class="comment">// ===== DELETE - DELETE =====</span>
+    <span class="keyword">private void</span> <span class="function">btnDelete_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (dgvProducts.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        <span class="class">DialogResult</span> result = <span class="class">MessageBox</span>.<span class="function">Show</span>(
+            <span class="string">"Delete this product?"</span>, <span class="string">"Confirm"</span>,
+            <span class="class">MessageBoxButtons</span>.YesNo, <span class="class">MessageBoxIcon</span>.Warning);
+        
+        <span class="keyword">if</span> (result == <span class="class">DialogResult</span>.No) <span class="keyword">return</span>;
+        
+        <span class="keyword">int</span> id = (<span class="keyword">int</span>)dgvProducts.CurrentRow.Cells[<span class="string">"ProductId"</span>].Value;
+        <span class="keyword">string</span> query = <span class="string">"DELETE FROM Products WHERE ProductId = @@Id"</span>;
+        
+        <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+        <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+        {
+            cmd.Parameters.AddWithValue(<span class="string">"@@Id"</span>, id);
+            conn.<span class="function">Open</span>();
+            <span class="keyword">int</span> rows = cmd.<span class="function">ExecuteNonQuery</span>();
+            conn.<span class="function">Close</span>();
+            
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">$"✅ Deleted {rows} product!"</span>);
+            <span class="function">LoadProducts</span>();
+            <span class="function">ClearFields</span>();
+        }
+    }
+    
+    <span class="comment">// ===== HELPERS =====</span>
+    <span class="keyword">private void</span> <span class="function">AddParameters</span>(<span class="class">SqlCommand</span> cmd)
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@Name"</span>, txtName.Text);
+        cmd.Parameters.AddWithValue(<span class="string">"@@Price"</span>, <span class="keyword">decimal</span>.<span class="function">Parse</span>(txtPrice.Text));
+        cmd.Parameters.AddWithValue(<span class="string">"@@Quantity"</span>, <span class="keyword">int</span>.<span class="function">Parse</span>(txtQuantity.Text));
+        cmd.Parameters.AddWithValue(<span class="string">"@@Category"</span>, txtCategory.Text);
+    }
+    
+    <span class="keyword">private bool</span> <span class="function">ValidateFields</span>()
+    {
+        <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrWhiteSpace(txtName.Text))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a name!"</span>);
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        
+        <span class="keyword">if</span> (!<span class="keyword">decimal</span>.<span class="function">TryParse</span>(txtPrice.Text, <span class="keyword">out</span> <span class="keyword">decimal</span> _))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a valid price!"</span>);
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        
+        <span class="keyword">if</span> (!<span class="keyword">int</span>.<span class="function">TryParse</span>(txtQuantity.Text, <span class="keyword">out</span> <span class="keyword">int</span> _))
+        {
+            <span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Please enter a valid quantity!"</span>);
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    
+    <span class="keyword">private void</span> <span class="function">ClearFields</span>()
+    {
+        txtName.Clear();
+        txtPrice.Clear();
+        txtQuantity.Clear();
+        txtCategory.Clear();
+    }
+    
+    <span class="comment">// ===== SELECT ROW =====</span>
+    <span class="keyword">private void</span> <span class="function">dgvProducts_SelectionChanged</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+    {
+        <span class="keyword">if</span> (dgvProducts.CurrentRow == <span class="keyword">null</span>) <span class="keyword">return</span>;
+        
+        txtName.Text = dgvProducts.CurrentRow.Cells[<span class="string">"Name"</span>].Value?.ToString();
+        txtPrice.Text = dgvProducts.CurrentRow.Cells[<span class="string">"Price"</span>].Value?.ToString();
+        txtQuantity.Text = dgvProducts.CurrentRow.Cells[<span class="string">"Quantity"</span>].Value?.ToString();
+        txtCategory.Text = dgvProducts.CurrentRow.Cells[<span class="string">"Category"</span>].Value?.ToString();
+    }
+}</code></pre>
+                                </div>
+                                <div class="card bg-success text-white mt-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-trophy me-2"></i>
+                                        <strong>🏆 Complete CRUD Application!</strong> You've built a full product management system!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 🎮 EXERCISES -->
+                    <section class="mb-5" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white; border: none;">
+                                <h3 class="mb-0"><i class="fas fa-pencil-alt me-2"></i>Exercises: Test Your Skills!</h3>
+                            </div>
+                            <div class="card-body p-4">
+
+                                <!-- Exercise 1 -->
+                                <div class="card bg-light mb-4">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-success me-2">1</span> Easy: INSERT a Product</h5>
+                                        <p><strong>Challenge:</strong> Write C# code to add a new product called "Tablet" with price 399.99, quantity 12, and category "Electronics".</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="comment">// SOLUTION (3 lines)</span>
+<span class="keyword">string</span> query = <span class="string">"INSERT INTO Products (Name, Price, Quantity, Category) VALUES (@@Name, @@Price, @@Quantity, @@Category)"</span>;
+<span class="function">ExecuteQuery</span>(query, <span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"@@Name"</span>, <span class="string">"@@Price"</span>, <span class="string">"@@Quantity"</span>, <span class="string">"@@Category"</span> }, 
+    <span class="keyword">new</span> <span class="keyword">object</span>[] { <span class="string">"Tablet"</span>, <span class="number">399.99</span>, <span class="number">12</span>, <span class="string">"Electronics"</span> });
+<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Product added!"</span>);</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 2 -->
+                                <div class="card bg-light mb-4">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-warning text-dark me-2">2</span> Medium: UPDATE Products</h5>
+                                        <p><strong>Challenge:</strong> Write C# code to increase the price of all Electronics products by 15%.</p>
+                                        <div class="code-block small">
+                                            <pre><code class="language-csharp"><span class="comment">// SOLUTION (3 lines)</span>
+<span class="keyword">string</span> query = <span class="string">"UPDATE Products SET Price = Price * 1.15 WHERE Category = @@Category"</span>;
+<span class="function">ExecuteQuery</span>(query, <span class="keyword">new</span> <span class="keyword">string</span>[] { <span class="string">"@@Category"</span> }, <span class="keyword">new</span> <span class="keyword">object</span>[] { <span class="string">"Electronics"</span> });
+<span class="class">MessageBox</span>.<span class="function">Show</span>(<span class="string">"Prices updated!"</span>);</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 3 -->
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5><span class="badge bg-danger me-2">3</span> Hard: Complete Product Management</h5>
+                                        <p><strong>Challenge:</strong> Build a WinForms app with:</p>
+                                        <ul>
+                                            <li>Add Product (INSERT)</li>
+                                            <li>Update Product (UPDATE)</li>
+                                            <li>Delete Product (DELETE)</li>
+                                            <li>Search by Category (SELECT + WHERE)</li>
+                                            <li>Sort by Price (ORDER BY)</li>
+                                        </ul>
+                                        <div class="code-block">
+                                            <pre><code class="language-csharp"><span class="comment">// ===== COMPLETE SOLUTION =====</span>
+
+<span class="keyword">private void</span> <span class="function">btnSearch_Click</span>(<span class="keyword">object</span> sender, <span class="class">EventArgs</span> e)
+{
+    <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Products "</span> +
+                  <span class="string">"WHERE Category LIKE @@Category "</span> +
+                  <span class="string">"ORDER BY Price " + (chkAsc.Checked ? "ASC" : "DESC")</span>;
+    
+    <span class="keyword">using</span> (<span class="keyword">var</span> conn = <span class="keyword">new</span> <span class="class">SqlConnection</span>(connString))
+    <span class="keyword">using</span> (<span class="keyword">var</span> cmd = <span class="keyword">new</span> <span class="class">SqlCommand</span>(query, conn))
+    {
+        cmd.Parameters.AddWithValue(<span class="string">"@@Category"</span>, <span class="string">$"%{txtSearch.Text}%"</span>);
+        <span class="keyword">using</span> (<span class="keyword">var</span> adapter = <span class="keyword">new</span> <span class="class">SqlDataAdapter</span>(cmd))
+        {
+            <span class="class">DataTable</span> dt = <span class="keyword">new</span> <span class="class">DataTable</span>();
+            adapter.<span class="function">Fill</span>(dt);
+            dgvProducts.DataSource = dt;
+            lblStatus.Text = <span class="string">$"🔍 Found {dt.Rows.Count} products"</span>;
+        }
+    }
+}</code></pre>
+                                        </div>
+                                        <div class="card bg-success text-white mt-3">
+                                            <div class="card-body">
+                                                <i class="fas fa-trophy me-2"></i>
+                                                <strong>🏆 Congratulations!</strong> You've mastered INSERT, UPDATE, DELETE, and built a complete CRUD app!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 📝 Summary -->
+                    <div class="card border-0 shadow-lg mb-5" data-aos="flip-up" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); color: white;">
+                        <div class="card-body p-5">
+                            <h3 class="fw-bold"><i class="fas fa-star me-2"></i>🎉 Mastery Summary</h3>
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-success fs-1">INSERT</span>
+                                        <p><code>INSERT INTO Table VALUES (...)</code></p>
+                                        <small>Add new data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-warning fs-1">UPDATE</span>
+                                        <p><code>UPDATE Table SET Column = Value WHERE ...</code></p>
+                                        <small>Modify data</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-danger fs-1">DELETE</span>
+                                        <p><code>DELETE FROM Table WHERE ...</code></p>
+                                        <small>Remove data</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-info fs-4">In SSMS</span>
+                                        <p>Write SQL directly</p>
+                                        <small>Learn the commands</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-primary fs-4">In C#</span>
+                                        <p><code>ExecuteNonQuery()</code></p>
+                                        <small>Use in your apps</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-center">
+                                        <span class="badge bg-success fs-4">CRUD</span>
+                                        <p>Create, Read, Update, Delete</p>
+                                        <small>Complete application!</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3 mb-0" style="color: rgba(255,255,255,0.8);">
+                                🎯 You're now a master of INSERT, UPDATE, and DELETE in SQL Server and C#!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="mt-5 d-flex flex-wrap justify-content-between">
+                        <a href="/SqlServer/05-Joins" class="btn btn-outline-primary btn-lg" data-aos="fade-right" style="border-radius: 50px; padding: 12px 30px;">
+                            <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                        </a>
+                        <a href="/SqlServer/07-StoredProcedures" class="btn btn-primary btn-lg" data-aos="fade-left" style="border-radius: 50px; padding: 12px 30px;">
+                            Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+
+                </div> <!-- end lesson-content -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block" data-aos="fade-left" data-aos-delay="600">
+                @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+            </div>
         </div>
     </div>
 </div>
 
-
 @await Html.PartialAsync("_QuizButton", "SqlServer_Lesson6")
+
+@section Scripts {
+    <script>
+        // Toggle solution visibility
+        function toggleSolution() {
+            var solution = document.getElementById('solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                solution.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    offset: 60,
+                    duration: 700,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Hero Section - SQL Server Theme */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: rgba(0, 123, 255, 0.05);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+
+        /* Code Block Styling - SQL Syntax */
+        .code-block {
+            position: relative;
+        }
+
+            .code-block pre {
+                background: #1a1a2e !important;
+                color: #cdd6f4 !important;
+                padding: 1.2rem;
+                border-radius: 12px;
+                overflow-x: auto;
+                font-size: 0.85rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                border-left: 6px solid #0f3460;
+                margin: 0;
+            }
+
+            .code-block.small pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+
+            .code-block code {
+                font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+                line-height: 1.6;
+            }
+
+        /* SQL Syntax Colors */
+        .language-sql .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-sql .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-sql .string {
+            color: #c3e88d !important;
+        }
+
+        .language-sql .number {
+            color: #f78c6c !important;
+        }
+
+        .language-sql .function {
+            color: #82aaff !important;
+        }
+
+        .language-sql .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-sql .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-sql .variable {
+            color: #eeffff !important;
+        }
+
+        .language-sql .operator {
+            color: #89ddff !important;
+        }
+
+        /* C# Syntax Colors */
+        .language-csharp .keyword {
+            color: #c792ea !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .comment {
+            color: #676e95 !important;
+            font-style: italic;
+        }
+
+        .language-csharp .string {
+            color: #c3e88d !important;
+        }
+
+        .language-csharp .number {
+            color: #f78c6c !important;
+        }
+
+        .language-csharp .function {
+            color: #82aaff !important;
+        }
+
+        .language-csharp .class {
+            color: #ffcb6b !important;
+            font-weight: 600;
+        }
+
+        .language-csharp .property {
+            color: #80cbc4 !important;
+        }
+
+        .language-csharp .variable {
+            color: #eeffff !important;
+        }
+
+        .language-csharp .operator {
+            color: #89ddff !important;
+        }
+
+        /* Card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover:not(.bg-light) {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            }
+
+        /* Badge styling */
+        .badge {
+            letter-spacing: 0.4px;
+        }
+
+        /* Button styling - SQL Server Theme */
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+            }
+
+        .btn-outline-primary {
+            border-radius: 50px;
+            transition: all 0.3s;
+            color: #0f3460;
+            border-color: #0f3460;
+        }
+
+            .btn-outline-primary:hover {
+                transform: scale(1.05);
+                background: #0f3460;
+                color: white;
+            }
+
+        /* Solution animation */
+        #solution {
+            animation: fadeSlide 0.5s ease;
+        }
+        @@keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* List styling */
+        .bg-light ul {
+            padding-left: 1.5rem;
+        }
+
+            .bg-light ul li {
+                margin-bottom: 0.3rem;
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .display-2 {
+                font-size: 2.5rem;
+            }
+
+            .display-6 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}

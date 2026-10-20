@@ -4,85 +4,560 @@
     ViewData["Title"] = "Mastering HTTP Methods";
 }
 
-<div class="container">
+<style>
+    /* Premium UI Variables */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        --code-bg: #1e1e2e;
+        --code-text: #cdd6f4;
+        --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hero Section */
+    .story-hero {
+        background: var(--primary-gradient);
+        color: white;
+        border-radius: 20px;
+        padding: 3rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    .story-hero::after {
+        content: '\f02d';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        right: -20px;
+        bottom: -40px;
+        font-size: 12rem;
+        opacity: 0.1;
+        transform: rotate(-15deg);
+    }
+    .story-hero ul { list-style: none; padding-left: 0; }
+    .story-hero li { margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .story-hero li i { width: 25px; color: #fbbf24; }
+
+    /* Modern Method Cards */
+    .method-card {
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #f3f4f6;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .method-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .method-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 6px; height: 100%;
+    }
+    .card-get::before { background: #3b82f6; }
+    .card-post::before { background: #10b981; }
+    .card-put::before { background: #f59e0b; }
+    .card-delete::before { background: #ef4444; }
+
+    .method-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .badge-get { background: #3b82f6; }
+    .badge-post { background: #10b981; }
+    .badge-put { background: #f59e0b; }
+    .badge-delete { background: #ef4444; }
+
+    /* Modern Code Blocks */
+    .modern-code-box {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 1.5rem;
+        border-radius: 12px;
+        font-family: 'Consolas', 'Fira Code', monospace;
+        font-size: 0.95rem;
+        position: relative;
+        overflow-x: auto;
+        margin-top: 1.5rem;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .modern-code-box::before {
+        content: attr(data-lang);
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #313244;
+        color: #a6adc8;
+        padding: 0.3rem 1.2rem;
+        border-bottom-left-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    /* Deep Dive Alert Boxes */
+    .deep-dive {
+        background: #f8fafc;
+        border-left: 4px solid #6366f1;
+        padding: 1.5rem;
+        border-radius: 0 12px 12px 0;
+        margin-top: 1.5rem;
+    }
+    .deep-dive h6 {
+        color: #4f46e5;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Lab Section */
+    .lab-wrapper {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 4rem 3rem;
+        margin-top: 6rem;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        border-top: 8px solid #10b981;
+        position: relative;
+    }
+    .lab-badge {
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--success-gradient);
+        color: white;
+        padding: 0.6rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 1.1rem;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        white-space: nowrap;
+        letter-spacing: 1px;
+    }
+    
+    /* Timeline Steps */
+    .timeline-step {
+        position: relative;
+        padding-left: 4rem;
+        margin-bottom: 3rem;
+    }
+    .timeline-step::before {
+        content: '';
+        position: absolute;
+        left: 1.4rem;
+        top: 2.5rem;
+        bottom: -3rem;
+        width: 3px;
+        background: #e5e7eb;
+        z-index: 1;
+    }
+    .timeline-step:last-child::before { display: none; }
+    .timeline-number {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3rem;
+        height: 3rem;
+        background: var(--primary-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        z-index: 2;
+        box-shadow: 0 0 0 6px #fff;
+    }
+    .vs-hint {
+        background: #eff6ff;
+        border: 1px dashed #60a5fa;
+        padding: 1.2rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+        color: #1e3a8a;
+    }
+    .vs-hint i { font-size: 1.2rem; }
+</style>
+
+<div class="container py-4">
     <div class="row">
         <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AspNetCoreRestApis">ASP.NET Core & REST APIs</a></li>
+                    <li class="breadcrumb-item active">HTTP Methods</li>
+                </ol>
+            </nav>
+
             <div class="lesson-content">
-                <h1 class="display-4 mb-3">Mastering HTTP Methods</h1>
+                <h1 class="display-4 fw-bold mb-3 text-dark">Mastering HTTP Methods</h1>
                 <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">25 min read</span>
-                    <span class="badge bg-primary">Lesson 4 of 10</span>
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fs-6">Intermediate</span>
+                    <span class="badge bg-info text-dark px-3 py-2 rounded-pill fs-6">30 min read</span>
+                    <span class="badge bg-primary px-3 py-2 rounded-pill fs-6">Lesson 4 of 10</span>
                 </div>
 
-                <div class="alert alert-primary">
-                    <i class="fas fa-book me-2"></i> <strong>The Library Story:</strong> Imagine you are in a library. You want to read a book (GET). You find a torn page and want to fix it (PUT). You donate a brand new book (POST). Finally, you throw away a damaged book (DELETE). In REST APIs, these actions correspond to HTTP Methods!
+                <!-- The Story -->
+                <div class="story-hero">
+                    <h4 class="mb-4 fw-bold"><i class="fas fa-book-open me-2"></i> The Library Story</h4>
+                    <p class="lead mb-3">Imagine you are the manager of a library. Your customers (the clients) can interact with your books in exactly four ways:</p>
+                    <ul>
+                        <li><i class="fas fa-search"></i> <strong>Read a book:</strong> You find it on the shelf and read it. (GET)</li>
+                        <li><i class="fas fa-plus-circle"></i> <strong>Donate a new book:</strong> You add a brand new book to the shelves. (POST)</li>
+                        <li><i class="fas fa-edit"></i> <strong>Fix a torn page:</strong> You replace the damaged page with a new one. (PUT)</li>
+                        <li><i class="fas fa-trash"></i> <strong>Throw away a ruined book:</strong> You remove it from the library forever. (DELETE)</li>
+                    </ul>
+                    <hr class="border-light opacity-50">
+                    <p class="mb-0 fs-5">In REST APIs, these 4 actions are called <strong>HTTP Methods</strong>. They are the "verbs" that tell the server exactly what you want to do with the data.</p>
                 </div>
 
-                <h2>Connecting to C#</h2>
-                <p>If you were writing a C# program for a library, you would create methods like this:</p>
-<pre><code>public Book GetBook(int id) { ... }
+                <h2 class="fw-bold mt-5 mb-3">Connecting to C#</h2>
+                <p>If you were writing a basic C# program, you would create methods like this:</p>
+                <div class="modern-code-box mb-4" data-lang="C#">
+<pre class="mb-0"><code>public Book GetBook(int id) { ... }
 public void AddBook(Book newBook) { ... }
 public void UpdateBook(int id, Book updatedBook) { ... }
 public void DeleteBook(int id) { ... }</code></pre>
-                <p>In the web world, APIs use specific HTTP verbs to represent these methods. Let's look at how they are written in ASP.NET Core.</p>
+                </div>
+                <p>In the web world, APIs use specific **HTTP attributes** to represent these methods. Let's look at each one in deep detail.</p>
 
-                <h2>The 4 Main HTTP Methods</h2>
-                
-                <h3>1. GET (Read Data)</h3>
-                <p>Used to retrieve data from the server. It should never change any data.</p>
-<pre><code>[HttpGet]
+                <h2 class="fw-bold mt-5 mb-4">The 4 Main HTTP Methods</h2>
+
+                <!-- ================= GET ================= -->
+                <div class="method-card card-get">
+                    <span class="method-badge badge-get"><i class="fas fa-download me-2"></i> 1. GET (Read Data)</span>
+                    <p class="fs-5"><strong>GET</strong> is used to retrieve data from the server. It is the most common method on the internet—every time you open a webpage or an image, your browser is sending a GET request.</p>
+                    <p><strong>Golden Rule:</strong> A GET request must <strong>never</strong> change any data on the server. It is safe, read-only, and idempotent (calling it 1 time or 100 times gives the same result).</p>
+                    
+                    <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>[HttpGet]
 public IActionResult GetAllProducts()
 {
+    // 1. Ask the database for a list of products
     var products = _db.Products.ToList();
-    return Ok(products); // Returns 200 OK with data
-}</code></pre>
-
-                <h3>2. POST (Create Data)</h3>
-                <p>Used to send new data to the server.</p>
-<pre><code>[HttpPost]
-public IActionResult CreateProduct(Product product)
-{
-    _db.Products.Add(product);
-    _db.SaveChanges();
-    return CreatedAtAction(nameof(GetAllProducts), product); // Returns 201 Created
-}</code></pre>
-
-                <h3>3. PUT (Update Data)</h3>
-                <p>Used to update an existing record entirely.</p>
-<pre><code>[HttpPut("{id}")]
-public IActionResult UpdateProduct(int id, Product product)
-{
-    if (id != product.Id) return BadRequest(); // Returns 400 Bad Request
     
-    _db.Products.Update(product);
-    _db.SaveChanges();
-    return NoContent(); // Returns 204 No Content
+    // 2. Return the data with a 200 OK status
+    return Ok(products); 
 }</code></pre>
+                    </div>
 
-                <h3>4. DELETE (Remove Data)</h3>
-                <p>Used to delete a record.</p>
-<pre><code>[HttpDelete("{id}")]
-public IActionResult DeleteProduct(int id)
-{
-    var product = _db.Products.Find(id);
-    if (product == null) return NotFound(); // Returns 404 Not Found
-    
-    _db.Products.Remove(product);
-    _db.SaveChanges();
-    return NoContent(); 
-}</code></pre>
-
-                <div class="card bg-info bg-opacity-10 mb-4 mt-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
-                        <p class="card-text">Use <strong>GET</strong> to read, <strong>POST</strong> to create, <strong>PUT</strong> to update, and <strong>DELETE</strong> to remove. Think of them as the CRUD (Create, Read, Update, Delete) operations of the web!</p>
+                    <div class="deep-dive">
+                        <h6><i class="fas fa-lightbulb me-2"></i> Real-World Example</h6>
+                        <p class="mb-0">When you open Instagram and scroll through your feed, the app sends a <code>GET /api/posts</code> request to fetch the latest pictures. It doesn't create a new post; it just reads the data.</p>
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/AspNetCoreRestApis/03-CreatingWebApi" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
-                    <a href="/AspNetCoreRestApis/05-JsonAndSerialization" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                <!-- ================= POST ================= -->
+                <div class="method-card card-post">
+                    <span class="method-badge badge-post"><i class="fas fa-plus-circle me-2"></i> 2. POST (Create Data)</span>
+                    <p class="fs-5"><strong>POST</strong> is used to send new data to the server to create a brand new resource. </p>
+                    <p><strong>Golden Rule:</strong> POST is <strong>NOT idempotent</strong>. If you send the exact same POST request 5 times, you will create 5 new items (e.g., accidentally clicking "Pay Now" 5 times creates 5 orders!).</p>
+                    
+                    <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>[HttpPost]
+public IActionResult CreateProduct(Product product)
+{
+    // 1. Add the new product to the database
+    _db.Products.Add(product);
+    _db.SaveChanges();
+    
+    // 2. Return a 201 Created status and the new product's details
+    return CreatedAtAction(nameof(GetAllProducts), product); 
+}</code></pre>
+                    </div>
+
+                    <div class="deep-dive">
+                        <h6><i class="fas fa-lightbulb me-2"></i> Real-World Example</h6>
+                        <p class="mb-0">When you fill out a sign-up form and click "Register", the website sends a <code>POST /api/users</code> request. It sends your name and password to create a new account in the database.</p>
+                    </div>
+                </div>
+
+                <!-- ================= PUT ================= -->
+                <div class="method-card card-put">
+                    <span class="method-badge badge-put"><i class="fas fa-edit me-2"></i> 3. PUT (Update Data)</span>
+                    <p class="fs-5"><strong>PUT</strong> is used to completely <strong>replace</strong> an existing record with a new version.</p>
+                    <p><strong>The Golden Rule of PUT:</strong> PUT is <strong>idempotent</strong>. If you send a PUT request to update Product #1 100 times with the same data, the product will only be updated once, and the result is always the same.</p>
+                    
+                    <p>Imagine you have a Product with an ID, Name, and Price. If you use PUT, you must send <strong>all</strong> the fields (ID, Name, Price), even if you only want to change the price. If you leave out the name, it might be erased (set to null)!</p>
+
+                    <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>[HttpPut("{id}")]
+public IActionResult UpdateProduct(int id, Product product)
+{
+    // 1. Check if the URL ID matches the body ID
+    if (id != product.Id) 
+        return BadRequest("ID mismatch"); // Returns 400 Bad Request
+    
+    // 2. Update the entire record in the database
+    _db.Products.Update(product);
+    _db.SaveChanges();
+    
+    // 3. Return 204 No Content (Success, but nothing to send back)
+    return NoContent(); 
+}</code></pre>
+                    </div>
+
+                    <div class="deep-dive">
+                        <h6><i class="fas fa-exclamation-triangle text-warning me-2"></i> PUT vs PATCH: What's the difference?</h6>
+                        <p class="mb-0">If a product has a Name and a Price:
+                            <br>• <strong>PUT</strong> (Replace): You must send <em>both</em> the Name and the Price. You are replacing the whole object.
+                            <br>• <strong>PATCH</strong> (Partial Update): You only send the Price. The server only updates the Price and leaves the Name alone.</p>
+                    </div>
+                </div>
+
+                <!-- ================= DELETE ================= -->
+                <div class="method-card card-delete">
+                    <span class="method-badge badge-delete"><i class="fas fa-trash me-2"></i> 4. DELETE (Remove Data)</span>
+                    <p class="fs-5"><strong>DELETE</strong> does exactly what it sounds like: it permanently removes a resource from the server.</p>
+                    <p><strong>Golden Rule:</strong> DELETE is idempotent. Whether you delete an item once or try to delete it again, the end result is the same (the item is gone). If the item doesn't exist, you usually return a <code>404 Not Found</code> or a <code>204 No Content</code>.</p>
+                    
+                    <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>[HttpDelete("{id}")]
+public IActionResult DeleteProduct(int id)
+{
+    // 1. Find the item
+    var product = _db.Products.Find(id);
+    
+    // 2. If it doesn't exist, return 404
+    if (product == null) 
+        return NotFound("Product not found."); 
+    
+    // 3. Remove it and save
+    _db.Products.Remove(product);
+    _db.SaveChanges();
+    
+    // 4. Return 204 Success
+    return NoContent(); 
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-info border-0 shadow-sm mt-4 rounded-4 p-4">
+                    <h5 class="alert-heading fw-bold"><i class="fas fa-key me-2"></i>Key Takeaway (CRUD)</h5>
+                    <p class="mb-0 fs-5">Use <strong>GET</strong> to Read, <strong>POST</strong> to Create, <strong>PUT</strong> to Update, and <strong>DELETE</strong> to Remove. Think of them as the <strong>CRUD</strong> (Create, Read, Update, Delete) operations of the web!</p>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- THE HANDS-ON LAB SECTION -->
+                <!-- ========================================== -->
+                <div class="lab-wrapper">
+                    <span class="lab-badge"><i class="fas fa-flask me-2"></i> Hands-on Practice Lab</span>
+                    
+                    <div class="text-center mb-5 mt-3">
+                        <h2 class="fw-bold text-dark display-6">Build Your Own: Library Manager API</h2>
+                        <p class="text-muted fs-5 mx-auto" style="max-width: 600px;">Let's put all 4 HTTP methods to the test! We will build a complete API in Visual Studio to manage a library. No database needed.</p>
+                    </div>
+
+                    <!-- Lab Step 1 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">1</div>
+                        <h5 class="fw-bold mb-3">Create the Project</h5>
+                        <p class="mb-3">Open <strong>Visual Studio</strong> and create a new project.</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Search for <strong>ASP.NET Core Web API</strong>. Name it <code>LibraryAPI</code>. Keep the default settings and click <strong>Create</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 2 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">2</div>
+                        <h5 class="fw-bold mb-3">Create the Book Model</h5>
+                        <p class="mb-3">We need a C# class to define what a "Book" looks like.</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Right-click the project name → <strong>Add</strong> → <strong>Class...</strong> Name it <code>Book.cs</code>. Paste this inside:
+                        </div>
+                        <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>namespace LibraryAPI
+{
+    public class Book
+    {
+        public int Id { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 3 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">3</div>
+                        <h5 class="fw-bold mb-3">Create the Controller</h5>
+                        <p class="mb-3">This is where we write all 4 HTTP methods. Notice how the URL stays the same (<code>/api/books</code>), but the <strong>HTTP Method</strong> changes!</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Right-click the <strong>Controllers</strong> folder → <strong>Add</strong> → <strong>Controller...</strong> → Select <strong>API Controller - Empty</strong>. Name it <code>BooksController.cs</code>.
+                        </div>
+                        <p>Replace the code with this complete implementation:</p>
+                        <div class="modern-code-box" data-lang="C#">
+<pre class="mb-0"><code>using Microsoft.AspNetCore.Mvc;
+
+namespace LibraryAPI.Controllers
+{
+    [Route("api/[controller]")] 
+    [ApiController]
+    public class BooksController : ControllerBase
+    {
+        // Fake in-memory database
+        private static List&lt;Book&gt; _books = new List&lt;Book&gt;
+        {
+            new Book { Id = 1, Title = "Clean Code", Author = "Robert Martin" },
+            new Book { Id = 2, Title = "The Pragmatic Programmer", Author = "Andrew Hunt" }
+        };
+
+        // 1. GET: api/books (Read all)
+        [HttpGet]
+        public IActionResult GetAllBooks()
+        {
+            return Ok(_books); 
+        }
+
+        // 2. POST: api/books (Create new)
+        [HttpPost]
+        public IActionResult CreateBook(Book newBook)
+        {
+            newBook.Id = _books.Count + 1;
+            _books.Add(newBook);
+            return CreatedAtAction(nameof(GetAllBooks), newBook);
+        }
+
+        // 3. PUT: api/books/1 (Update existing)
+        [HttpPut("{id}")]
+        public IActionResult UpdateBook(int id, Book updatedBook)
+        {
+            var book = _books.FirstOrDefault(b => b.Id == id);
+            if (book == null) return NotFound("Book not found.");
+
+            book.Title = updatedBook.Title;
+            book.Author = updatedBook.Author;
+            
+            return NoContent(); // 204 Success
+        }
+
+        // 4. DELETE: api/books/1 (Remove)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBook(int id)
+        {
+            var book = _books.FirstOrDefault(b => b.Id == id);
+            if (book == null) return NotFound("Book not found.");
+
+            _books.Remove(book);
+            return NoContent(); // 204 Success
+        }
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 4 -->
+                    <div class="timeline-step mb-0">
+                        <div class="timeline-number bg-success text-white"><i class="fas fa-play"></i></div>
+                        <h5 class="fw-bold text-success mb-3">Run and Test All 4 Methods</h5>
+                        <p class="mb-4">Press <strong>F5</strong> to run it. Swagger UI will open. Let's test the CRUD operations!</p>
+
+                        <div class="accordion shadow-sm" id="swaggerAccordion">
+                            <!-- Test GET -->
+                            <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#testGet">
+                                        <i class="fas fa-download text-primary me-2"></i> 1. Test GET (Read Data)
+                                    </button>
+                                </h2>
+                                <div id="testGet" class="accordion-collapse collapse" data-bs-parent="#swaggerAccordion">
+                                    <div class="accordion-body">
+                                        <p>Click on <strong>GET /api/books</strong> → <strong>Try it out</strong> → <strong>Execute</strong>.</p>
+                                        <p class="mb-0 text-muted"><em>Result: You will see the JSON list of the 2 default books!</em></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test POST -->
+                            <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#testPost">
+                                        <i class="fas fa-upload text-success me-2"></i> 2. Test POST (Create Data)
+                                    </button>
+                                </h2>
+                                <div id="testPost" class="accordion-collapse collapse" data-bs-parent="#swaggerAccordion">
+                                    <div class="accordion-body">
+                                        <p>Click on <strong>POST /api/books</strong> → <strong>Try it out</strong>. Paste this JSON:</p>
+                                        <div class="modern-code-box py-3 mb-3" data-lang="JSON">
+<pre class="mb-0"><code>{ "title": "C# in Depth", "author": "Jon Skeet" }</code></pre>
+                                        </div>
+                                        <p>Click <strong>Execute</strong>.</p>
+                                        <p class="mb-0 text-muted"><em>Result: <code>201 Created</code>. The new book is added!</em></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test PUT -->
+                            <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#testPut">
+                                        <i class="fas fa-edit text-warning me-2"></i> 3. Test PUT (Update Data)
+                                    </button>
+                                </h2>
+                                <div id="testPut" class="accordion-collapse collapse" data-bs-parent="#swaggerAccordion">
+                                    <div class="accordion-body">
+                                        <p>Click on <strong>PUT /api/books/1</strong> → <strong>Try it out</strong>. Paste this JSON to fix the author's name:</p>
+                                        <div class="modern-code-box py-3 mb-3" data-lang="JSON">
+<pre class="mb-0"><code>{ "id": 1, "title": "Clean Code", "author": "Robert C. Martin" }</code></pre>
+                                        </div>
+                                        <p>Click <strong>Execute</strong>.</p>
+                                        <p class="mb-0 text-muted"><em>Result: <code>204 No Content</code>. The book was updated successfully!</em></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test DELETE -->
+                            <div class="accordion-item border-0 rounded-3 overflow-hidden">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#testDelete">
+                                        <i class="fas fa-trash-alt text-danger me-2"></i> 4. Test DELETE (Remove Data)
+                                    </button>
+                                </h2>
+                                <div id="testDelete" class="accordion-collapse collapse" data-bs-parent="#swaggerAccordion">
+                                    <div class="accordion-body">
+                                        <p>Click on <strong>DELETE /api/books/2</strong> → <strong>Try it out</strong> → <strong>Execute</strong>.</p>
+                                        <p class="mb-0 text-muted"><em>Result: <code>204 No Content</code>. The book is deleted!</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-success border-0 mt-4 shadow-sm rounded-4 p-4">
+                            <h4 class="alert-heading fw-bold"><i class="fas fa-trophy me-2"></i> Mastered!</h4>
+                            <p class="mb-0 fs-5">You just built and tested a complete CRUD API. You used all 4 HTTP methods to Read, Create, Update, and Delete data from a real API.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF LAB -->
+
+                <div class="mt-5 d-flex justify-content-between align-items-center border-top pt-4">
+                    <a href="/AspNetCoreRestApis/03-CreatingWebApi" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/AspNetCoreRestApis/05-JsonAndSerialization" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -91,4 +566,5 @@ public IActionResult DeleteProduct(int id)
         </div>
     </div>
 </div>
+
 @await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson4")

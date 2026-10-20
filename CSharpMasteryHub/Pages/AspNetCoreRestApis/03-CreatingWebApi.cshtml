@@ -1,10 +1,152 @@
 ﻿@page
 @model CSharpMasteryHub.Pages.AspNetCoreRestApis.CreatingWebApiModel
 @{
-    ViewData["Title"] = "Creating a Web API";
+    ViewData["Title"] = "Creating Your First Web API";
 }
 
-<div class="container">
+<style>
+    /* Modern UI Variables */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        --bg-soft: #f3f4f6;
+        --code-bg: #1e1e2e;
+        --code-text: #cdd6f4;
+    }
+
+    /* Modern Code Blocks */
+    .modern-code-box {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 1.5rem;
+        border-radius: 12px;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 0.95rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+        overflow-x: auto;
+        margin-bottom: 2rem;
+    }
+
+        .modern-code-box::before {
+            content: "C#";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #313244;
+            color: #a6adc8;
+            padding: 0.2rem 1rem;
+            border-bottom-left-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+    /* Explanation Cards */
+    .explain-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .explain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #c7d2fe;
+        }
+
+    .explain-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    /* Lab Section Styling */
+    .lab-wrapper {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        margin-top: 5rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        border-top: 6px solid #10b981;
+        position: relative;
+    }
+
+    .lab-badge {
+        position: absolute;
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--success-gradient);
+        color: white;
+        padding: 0.5rem 2rem;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        white-space: nowrap;
+    }
+
+    /* Timeline Steps */
+    .timeline-step {
+        position: relative;
+        padding-left: 3.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 1.2rem;
+            top: 2rem;
+            bottom: -2.5rem;
+            width: 2px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .timeline-step:last-child::before {
+            display: none;
+        }
+
+    .timeline-number {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--primary-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+        z-index: 2;
+        box-shadow: 0 0 0 4px #fff;
+    }
+
+    .vs-hint {
+        background: #f8fafc;
+        border: 1px dashed #94a3b8;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-weight: 500;
+        color: #334155;
+    }
+</style>
+
+<div class="container py-4">
     <div class="row">
         <div class="col-lg-9">
             <nav aria-label="breadcrumb">
@@ -16,59 +158,209 @@
             </nav>
 
             <div class="lesson-content">
-                <h1 class="display-4 mb-3">Creating Your First Web API</h1>
+                <h1 class="display-4 fw-bold mb-3 text-dark">Creating Your First Web API</h1>
                 <div class="d-flex gap-3 mb-4">
-                    <span class="badge bg-warning text-dark">Intermediate</span>
-                    <span class="badge bg-info text-dark">20 min read</span>
-                    <span class="badge bg-primary">Lesson 3 of 6</span>
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Intermediate</span>
+                    <span class="badge bg-info text-dark px-3 py-2 rounded-pill">25 min read</span>
+                    <span class="badge bg-primary px-3 py-2 rounded-pill">Lesson 3 of 10</span>
                 </div>
 
-                <p>Now that we know what APIs and REST are, let's build one using ASP.NET Core!</p>
+                <p class="fs-5 text-muted mb-5">Now that you understand the theory of API and REST, it's time to open Visual Studio and build a real one using <strong>ASP.NET Core</strong>. Don't worry, Visual Studio does most of the heavy lifting for us!</p>
 
-                <h2>Step 1: Create the Project</h2>
-                <p>Open Visual Studio, click <strong>Create a new project</strong>, and search for <strong>ASP.NET Core Web API</strong>. Name it <code>MyFirstApi</code>.</p>
-                <p>Visual Studio will generate a default project with a Weather Forecast example. This is perfect for understanding how APIs work!</p>
+                <h2 class="fw-bold mt-5 mb-4">Step 1: Create the Project</h2>
+                <div class="explain-card">
+                    <p class="mb-3">Open Visual Studio, click <strong>"Create a new project"</strong>, and search for <strong>ASP.NET Core Web API</strong>. Name it <code>MyFirstApi</code>.</p>
+                    <p class="mb-0 text-muted">Visual Studio will generate a complete, working project for you. It includes a default "Weather Forecast" example. This is a brilliant way to see exactly how an API works before you write your own code.</p>
+                </div>
 
-                <h2>Step 2: Understanding Controllers</h2>
-                <p>In ASP.NET Core Web API, APIs are built using <strong>Controllers</strong>. A Controller is just a C# class that inherits from <code>ControllerBase</code>. It contains methods (called Endpoints) that respond to HTTP requests.</p>
-                <p>Look at the <code>WeatherForecastController.cs</code> file. You will see this:</p>
-                <pre><code>[ApiController]
+                <h2 class="fw-bold mt-5 mb-4">Step 2: Understanding the "Controller"</h2>
+                <p class="fs-5 mb-3">In the world of ASP.NET Core, an API is built using something called a <strong>Controller</strong>.</p>
+                <p>Think of a Controller as the <strong>Waiter</strong> we talked about in Lesson 1. It's just a C# class that listens for requests and responds to them.</p>
+                <p>Open the <code>WeatherForecastController.cs</code> file inside the <code>Controllers</code> folder. You will see this:</p>
+
+                <div class="modern-code-box">
+                    <pre class="mb-0"><code>[ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable&lt;WeatherForecast&gt; Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        // ... code that generates fake weather data ...
     }
 }</code></pre>
-
-                <h3>Breaking down the Code:</h3>
-                <ul>
-                    <li><code>[ApiController]</code>: Tells ASP.NET Core that this class is an API, not a normal webpage. It automatically handles things like validating data and formatting responses to JSON.</li>
-                    <li><code>[Route("[controller]")]</code>: Defines the URL for this API. Because the class is named <code>WeatherForecastController</code>, it strips the word "Controller" and sets the URL to <code>https://localhost:xxxx/WeatherForecast</code>.</li>
-                    <li><code>[HttpGet]</code>: This tells the API to run this method when someone visits the URL using a <strong>GET</strong> request (which means "give me data").</li>
-                </ul>
-
-                <h2>Step 3: Run Your API!</h2>
-                <p>Press <strong>F5</strong> in Visual Studio to run the app. A browser window will open, and you will see a Swagger UI (a tool that automatically documents and tests your API).</p>
-                <p>Expand the <code>GET /WeatherForecast</code> endpoint, click <strong>Try it out</strong>, and click <strong>Execute</strong>. You will see the API return data in JSON format!</p>
-
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle me-2"></i> <strong>Congratulations!</strong> You just created and ran a working REST API using C#. Your browser acted as the "Client" (Waiter), made a request to your API, and the server returned a list of weather data.
                 </div>
 
-                <div class="mt-5 d-flex justify-content-between">
-                    <a href="/AspNetCoreRestApis/02-WhatIsRest" class="btn btn-outline-primary">
+                <h3 class="fw-bold mb-4">Let's translate this into Plain English:</h3>
+
+                <div class="d-flex explain-card">
+                    <div class="explain-icon bg-primary text-white"><i class="fas fa-code"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-1"><code>[ApiController]</code></h5>
+                        <p class="text-muted mb-0">This is a label that tells Visual Studio: <em>"Hey! This class is an API, not a normal website."</em> It automatically turns your C# data into JSON text so other apps can read it.</p>
+                    </div>
+                </div>
+
+                <div class="d-flex explain-card">
+                    <div class="explain-icon bg-success text-white"><i class="fas fa-route"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-1"><code>[Route("[controller]")]</code></h5>
+                        <p class="text-muted mb-0">This sets the URL address for the API. Because your class is named <code>WeatherForecastController</code>, ASP.NET Core is smart enough to drop the word "Controller" and create this URL: <br><code>https://localhost:1234/WeatherForecast</code></p>
+                    </div>
+                </div>
+
+                <div class="d-flex explain-card">
+                    <div class="explain-icon bg-warning text-dark"><i class="fas fa-download"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-1"><code>[HttpGet]</code></h5>
+                        <p class="text-muted mb-0">This is the REST rule in action! It tells the API: <em>"Only run this C# method if the user sends a GET request"</em>. (GET means "give me data").</p>
+                    </div>
+                </div>
+
+                <h2 class="fw-bold mt-5 mb-4">Step 3: Run Your API!</h2>
+                <p>Press <strong>F5</strong> on your keyboard to run the app. A browser window will open with a tool called <strong>Swagger UI</strong>.</p>
+                <p>Swagger is an automatic testing tool. It reads your code and creates a beautiful webpage to test your API without writing any front-end code!</p>
+                <p>Click on <strong>GET /WeatherForecast</strong> → <strong>Try it out</strong> → <strong>Execute</strong>. You will see the JSON data appear right there on the screen.</p>
+
+                <div class="alert alert-success border-0 shadow-sm rounded-4 mt-4 p-4">
+                    <h4 class="alert-heading fw-bold"><i class="fas fa-check-circle me-2"></i>Awesome!</h4>
+                    <p class="mb-0">You just ran a REST API. Your browser was the Client (Waiter), it sent a GET request, and the C# server responded with JSON data.</p>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- THE HANDS-ON LAB SECTION -->
+                <!-- ========================================== -->
+                <div class="lab-wrapper">
+                    <span class="lab-badge"><i class="fas fa-flask me-2"></i> Hands-on Practice Lab</span>
+
+                    <div class="text-center mb-5 mt-3">
+                        <h2 class="fw-bold text-dark display-6">Build Your Own: Student Manager API</h2>
+                        <p class="text-muted fs-5 mx-auto" style="max-width: 600px;">Enough looking at examples. Let's create a brand new API from scratch to manage students. No database needed!</p>
+                    </div>
+
+                    <!-- Lab Step 1 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">1</div>
+                        <h5 class="fw-bold">Create the Project</h5>
+                        <p class="mb-2">Open Visual Studio again and create a new project.</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Search for <strong>ASP.NET Core Web API</strong>. Name it <code>StudentManagerAPI</code>. Keep the default settings and click <strong>Create</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 2 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">2</div>
+                        <h5 class="fw-bold">Create the Student Model</h5>
+                        <p class="mb-2">We need a C# class to define what a "Student" looks like (the data).</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Right-click the project name → <strong>Add</strong> → <strong>Class...</strong> Name it <code>Student.cs</code>. Paste this inside:
+                        </div>
+                        <div class="modern-code-box">
+                            <pre class="mb-0"><code class="language-csharp">namespace StudentManagerAPI
+{
+    public class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public int Age { get; set; }
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 3 -->
+                    <div class="timeline-step">
+                        <div class="timeline-number">3</div>
+                        <h5 class="fw-bold">Create the Controller</h5>
+                        <p class="mb-2">This is where we write the REST endpoints.</p>
+                        <div class="vs-hint">
+                            <i class="fas fa-mouse-pointer text-primary me-2"></i> Right-click the <strong>Controllers</strong> folder → <strong>Add</strong> → <strong>Controller...</strong> → Select <strong>API Controller - Empty</strong>. Name it <code>StudentsController.cs</code>.
+                        </div>
+                        <p>Delete the default code and paste this. Notice the REST rules we learned—the URL is a Noun (<code>students</code>) and we use HTTP Verbs (<code>GET</code>, <code>POST</code>):</p>
+                        <div class="modern-code-box">
+                            <pre class="mb-0"><code class="language-csharp">using Microsoft.AspNetCore.Mvc;
+
+namespace StudentManagerAPI.Controllers
+{
+    [Route("api/[controller]")] // Noun in URL: "students"
+    [ApiController]
+    public class StudentsController : ControllerBase
+    {
+        // A fake in-memory database
+        private static List&lt;Student&gt; _students = new List&lt;Student&gt;
+        {
+            new Student { Id = 1, Name = "Ali", Age = 20 },
+            new Student { Id = 2, Name = "Sarah", Age = 22 }
+        };
+
+        // GET: api/students
+        [HttpGet]
+        public IActionResult GetStudents()
+        {
+            return Ok(_students); // Returns 200 OK + JSON list
+        }
+
+        // POST: api/students
+        [HttpPost]
+        public IActionResult AddStudent(Student newStudent)
+        {
+            newStudent.Id = _students.Count + 1;
+            _students.Add(newStudent);
+            
+            return CreatedAtAction(nameof(GetStudents), newStudent);
+        }
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Lab Step 4 -->
+                    <div class="timeline-step mb-0">
+                        <div class="timeline-number bg-success text-white"><i class="fas fa-play"></i></div>
+                        <h5 class="fw-bold text-success">Run and Test Your API</h5>
+                        <p>Press <strong>F5</strong> to run it. Swagger UI will open.</p>
+
+                        <div class="card border-0 shadow-sm mb-3">
+                            <div class="card-header bg-success bg-opacity-10 text-success fw-bold border-0">
+                                <i class="fas fa-download me-2"></i> Test 1: GET Request
+                            </div>
+                            <div class="card-body">
+                                <p>Click on <strong>GET /api/students</strong> → <strong>Try it out</strong> → <strong>Execute</strong>.</p>
+                                <p class="mb-0 text-muted"><em>Result: You will see Ali and Sarah's data returned as JSON!</em></p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-header bg-primary bg-opacity-10 text-primary fw-bold border-0">
+                                <i class="fas fa-upload me-2"></i> Test 2: POST Request
+                            </div>
+                            <div class="card-body">
+                                <p>Click on <strong>POST /api/students</strong> → <strong>Try it out</strong>.</p>
+                                <p>In the Request Body box, paste this JSON:</p>
+                                <div class="modern-code-box py-3 mb-3">
+                                    <pre class="mb-0"><code class="language-json">{
+  "name": "John",
+  "age": 25
+}</code></pre>
+                                </div>
+                                <p>Click <strong>Execute</strong>.</p>
+                                <p class="mb-0 text-muted"><em>Result: The API will return a <code>201 Created</code> status and show you John's new ID!</em></p>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-success border-0 mt-4 shadow-sm rounded-4">
+                            <i class="fas fa-trophy me-2"></i> <strong>Incredible job!</strong> You just built a real RESTful API. You wrote a C# class, used REST routing, and tested it live in your browser.
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF LAB -->
+
+                <div class="mt-5 d-flex justify-content-between align-items-center border-top pt-4">
+                    <a href="/AspNetCoreRestApis/02-WhatIsRest" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
                         <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </a>
-                    <a href="/AspNetCoreRestApis/04-HttpMethods" class="btn btn-primary-custom">
+                    <a href="/AspNetCoreRestApis/04-HttpMethods" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
                         Next Lesson <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>

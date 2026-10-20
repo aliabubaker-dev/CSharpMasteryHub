@@ -14,8 +14,12 @@ public class CreatingWebApiModel : PageModel
             new() { Title = "2. What is REST?", Url = "/AspNetCoreRestApis/02-WhatIsRest", IsActive = false },
             new() { Title = "3. Creating a Web API", Url = "/AspNetCoreRestApis/03-CreatingWebApi", IsActive = true },
             new() { Title = "4. HTTP Methods", Url = "/AspNetCoreRestApis/04-HttpMethods", IsActive = false },
-            new() { Title = "5. Consuming an API", Url = "/AspNetCoreRestApis/05-ConsumingApi", IsActive = false },
-            new() { Title = "6. JSON & Serialization", Url = "/AspNetCoreRestApis/06-JsonAndSerialization", IsActive = false }
+            new() { Title = "5. JSON & Serialization", Url = "/AspNetCoreRestApis/05-JsonAndSerialization", IsActive = false },
+            new() { Title = "6. Consuming an API", Url = "/AspNetCoreRestApis/06-ConsumingApi", IsActive = false },
+            new() { Title = "7. Routing & Parameters", Url = "/AspNetCoreRestApis/07-RoutingAndParameters", IsActive = false },
+            new() { Title = "8. Status Codes", Url = "/AspNetCoreRestApis/08-StatusCodes", IsActive = false },
+            new() { Title = "9. Dependency Injection", Url = "/AspNetCoreRestApis/09-DependencyInjection", IsActive = false },
+            new() { Title = "10. Securing APIs", Url = "/AspNetCoreRestApis/10-SecuringApis", IsActive = false }
         };
     }
 }

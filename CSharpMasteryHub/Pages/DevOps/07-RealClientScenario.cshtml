@@ -1,0 +1,150 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps._07_RealClientScenarioModel
+@{
+    ViewData["Title"] = "Real Client Scenario";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">Real Client Scenario</li>
+                </ol>
+            </nav>
+
+            <div class="mb-4">
+                <span class="badge bg-success mb-2">Project</span>
+                <h1 class="display-5 fw-bold">🌍 Real Client Scenario</h1>
+                <p class="lead text-muted">
+                    Follow a real project from start to finish. This is exactly
+                    what you would do for a real client.
+                </p>
+            </div>
+
+            <!-- The Client -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📋 The Client</h3>
+                    <p><strong>Name:</strong> Sarah's Bakery</p>
+                    <p><strong>Location:</strong> Toronto, Ontario</p>
+                    <p><strong>Business:</strong> A small bakery that wants to sell cakes and pastries online.</p>
+                    <p><strong>Problem:</strong> They have no website. They take orders by phone and paper. They lose orders and cannot grow.</p>
+                    <p><strong>Goal:</strong> Build an online store that is fast, safe, and always online.</p>
+                </div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-primary">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">Step 1: Build the App</h3>
+                    <p>You build a web app with <strong>ASP.NET Core Razor Pages</strong> and <strong>SQL Server</strong>. It has:</p>
+                    <ul>
+                        <li>Product list with photos and prices</li>
+                        <li>Shopping cart</li>
+                        <li>Checkout with Stripe payment</li>
+                        <li>Admin dashboard to add products</li>
+                    </ul>
+                    <p class="mb-0">You test it on your laptop. It works.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-info">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">Step 2: Put It in Docker</h3>
+                    <p>You write a Dockerfile to package the app. Now it runs the same on your laptop, the test server, and the cloud.</p>
+                    <pre><code>FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+COPY *.csproj ./
+RUN dotnet restore
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app/out .
+ENTRYPOINT ["dotnet", "BakeryApp.dll"]</code></pre>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">Step 3: Set Up CI/CD</h3>
+                    <p>You create a GitHub Actions workflow. Every time you push code:</p>
+                    <ol>
+                        <li>It builds the app.</li>
+                        <li>It runs all tests.</li>
+                        <li>It builds the Docker image.</li>
+                        <li>It deploys to Azure.</li>
+                    </ol>
+                    <p class="mb-0">Now you do not need to deploy by hand. It is automatic.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-success">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">Step 4: Deploy to the Cloud</h3>
+                    <p>You use <strong>Terraform</strong> to create the cloud servers in code. Then you deploy the Docker container to Azure.</p>
+                    <p class="mb-0">The site is now live at <code>www.sarahsbakery.ca</code> with HTTPS and a custom domain.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-danger">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">Step 5: Monitor</h3>
+                    <p>You set up <strong>Prometheus</strong> and <strong>Grafana</strong> to watch the system.</p>
+                    <ul>
+                        <li>You see CPU and memory usage.</li>
+                        <li>You get an alert if the site goes down.</li>
+                        <li>You check how many orders come in each day.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-success bg-opacity-10">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🎉 The Results</h3>
+                    <ul class="mb-0">
+                        <li>Sarah's Bakery now has a real online store.</li>
+                        <li>Orders go up 40% in the first month.</li>
+                        <li>Deployments take 5 minutes instead of 2 days.</li>
+                        <li>The site stays online 99.9% of the time.</li>
+                        <li>Sarah can add products herself without calling a developer.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- What You Learned -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✅ What You Learned</h3>
+                    <ul class="mb-0">
+                        <li>How to build a real app for a real client.</li>
+                        <li>How to use Docker to package it.</li>
+                        <li>How to set up CI/CD to deploy automatically.</li>
+                        <li>How to use Terraform to create cloud servers.</li>
+                        <li>How to monitor the system and fix problems early.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps/06-Monitoring" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous
+                </a>
+                <a href="/DevOps" class="btn btn-primary-custom">
+                    <i class="fas fa-home me-2"></i>Back to Hub
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

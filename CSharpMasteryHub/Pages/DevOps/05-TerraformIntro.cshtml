@@ -1,0 +1,160 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps._05_TerraformIntroModel
+@{
+    ViewData["Title"] = "Terraform Intro";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">Terraform Intro</li>
+                </ol>
+            </nav>
+
+            <div class="mb-4">
+                <span class="badge bg-danger mb-2">Advanced</span>
+                <h1 class="display-5 fw-bold">🏗️ Terraform Intro</h1>
+                <p class="lead text-muted">Write code to create cloud servers. Stop clicking buttons.</p>
+            </div>
+
+            <!-- What is Terraform -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📖 What is Terraform?</h3>
+                    <p>
+                        Terraform is a tool that lets you create cloud servers and
+                        services by writing code instead of clicking buttons in a
+                        web portal. This is called
+                        <strong>Infrastructure as Code (IaC)</strong>.
+                    </p>
+                    <div class="alert alert-primary border-0 bg-primary bg-opacity-10">
+                        <strong>💡 Simple Example:</strong><br />
+                        Instead of calling a builder every time you want a house,
+                        you write a blueprint once. The builder follows the blueprint
+                        every time. Terraform is that blueprint for cloud servers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Use Terraform -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🤔 Why Use Terraform?</h3>
+                    <ul>
+                        <li><strong>Repeatable:</strong> Create the same setup every time.</li>
+                        <li><strong>Version control:</strong> Store your server setup in Git.</li>
+                        <li><strong>Multi-cloud:</strong> Works with AWS, Azure, Google Cloud, and more.</li>
+                        <li><strong>Safe:</strong> Plan changes before applying them.</li>
+                        <li><strong>Team-friendly:</strong> Everyone uses the same setup.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real Client Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🌍 Real Client Example</h3>
+                    <p>
+                        <strong>Client:</strong> A startup that needs a test
+                        environment every week for new features.
+                    </p>
+                    <p>
+                        <strong>Problem:</strong> Every time they create a test
+                        server by hand, they forget a setting. Tests fail. Time is
+                        wasted.
+                    </p>
+                    <p>
+                        <strong>Solution with Terraform:</strong>
+                    </p>
+                    <ol>
+                        <li>Write one Terraform file that describes the test server.</li>
+                        <li>Run <code>terraform apply</code> to create it.</li>
+                        <li>Run <code>terraform destroy</code> to delete it when done.</li>
+                    </ol>
+                    <p class="mb-0">
+                        <strong>Result:</strong> Every test server is exactly the
+                        same. No missed settings. No wasted time.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Simple Terraform File -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✍️ Your First Terraform File</h3>
+                    <p>This file creates a simple Azure resource group:</p>
+                    <pre><code>provider "azurerm" {
+  features {}
+}
+
+resource "azurerm_resource_group" "example" {
+  name     = "my-resource-group"
+  location = "canadacentral"
+
+  tags = {
+    environment = "dev"
+    owner       = "ali"
+  }
+}</code></pre>
+                    <p class="mt-3"><strong>What this does:</strong></p>
+                    <ul>
+                        <li><code>provider</code> — Tells Terraform to use Azure.</li>
+                        <li><code>resource</code> — Defines something to create.</li>
+                        <li><code>name</code> — The name of the resource group.</li>
+                        <li><code>location</code> — The data center region.</li>
+                        <li><code>tags</code> — Extra labels for tracking.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Commands -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">⌨️ Basic Terraform Commands</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr><th>Command</th><th>What It Does</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>terraform init</code></td><td>Downloads the provider plugins.</td></tr>
+                                <tr><td><code>terraform plan</code></td><td>Shows what will change. No changes yet.</td></tr>
+                                <tr><td><code>terraform apply</code></td><td>Creates or updates resources.</td></tr>
+                                <tr><td><code>terraform destroy</code></td><td>Deletes all resources.</td></tr>
+                                <tr><td><code>terraform fmt</code></td><td>Formats your code.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary bg-opacity-10">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✅ What You Learned</h3>
+                    <ul class="mb-0">
+                        <li>Terraform creates cloud servers with code.</li>
+                        <li>It is repeatable, safe, and works with many clouds.</li>
+                        <li>You write <code>.tf</code> files to describe what you want.</li>
+                        <li>You use <code>plan</code>, <code>apply</code>, and <code>destroy</code> to manage resources.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps/04-KubernetesIntro" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous
+                </a>
+                <a href="/DevOps/06-Monitoring" class="btn btn-primary-custom">
+                    Next: Monitoring <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

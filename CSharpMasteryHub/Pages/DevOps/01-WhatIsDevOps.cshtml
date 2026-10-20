@@ -1,0 +1,428 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps.WhatIsDevOpsModel
+@{
+    ViewData["Title"] = "What is DevOps?";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">What is DevOps?</li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <div class="mb-4">
+                <span class="badge bg-success mb-2">Beginner</span>
+                <h1 class="display-5 fw-bold">What is DevOps?</h1>
+                <p class="lead text-muted">
+                    A complete beginner guide. Simple English. Real examples.
+                </p>
+                <p class="text-muted small">
+                    <i class="fas fa-clock me-1"></i> Reading time: 10 minutes
+                </p>
+            </div>
+
+            <!-- Section 1: The Simple Truth -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📖 What is DevOps? (Simple Words)</h3>
+                    <p>
+                        <strong>DevOps</strong> is a way of working. It means
+                        <strong>Dev</strong>elopers (people who write code) and
+                        <strong>Op</strong>erations (people who run servers) work
+                        together as <strong>one team</strong>.
+                    </p>
+                    <p>
+                        In the old way, developers wrote code and then
+                        <em>threw it over a wall</em> to another team. That team
+                        put it on servers. If something broke, both teams blamed
+                        each other.
+                    </p>
+                    <p class="mb-0">
+                        In DevOps, there is no wall. The same team builds the app,
+                        tests it, puts it on servers, and keeps it running.
+                    </p>
+
+                    <div class="alert alert-primary border-0 bg-primary bg-opacity-10 mt-3">
+                        <strong>💡 Think of it like this:</strong><br />
+                        Imagine you bake a cake. In the old way, you bake it and
+                        give it to someone else to deliver. In DevOps, you bake
+                        it, package it, deliver it, and check the customer is
+                        happy. You own the <strong>whole process</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: The Real Problem DevOps Solves -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🤔 Why Does DevOps Exist?</h3>
+                    <p>
+                        Before DevOps, companies had big problems:
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Problem</th>
+                                    <th>What Happened</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Slow releases</strong></td>
+                                    <td>Deploying new code took days or weeks.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bugs found late</strong></td>
+                                    <td>By the time users found bugs, fixing them was very expensive.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blame games</strong></td>
+                                    <td>When things broke, developers blamed operations and vice versa.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Manual work</strong></td>
+                                    <td>People clicked buttons to deploy. They made mistakes.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No monitoring</strong></td>
+                                    <td>Companies did not know their app was slow until users complained.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-3 mb-0">
+                        DevOps fixes all of these problems with
+                        <strong>automation</strong>,
+                        <strong>communication</strong>, and
+                        <strong>shared responsibility</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 3: The 5 Core Ideas of DevOps -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🎯 The 5 Core Ideas of DevOps</h3>
+                    <p>Every DevOps team follows these 5 ideas:</p>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-users text-primary me-2"></i>1. One Team</h6>
+                                <small class="text-muted">
+                                    Developers and operations work together. No walls.
+                                    Everyone is responsible for the whole product.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-robot text-success me-2"></i>2. Automate Everything</h6>
+                                <small class="text-muted">
+                                    Humans make mistakes. Machines do not. We automate
+                                    build, test, and deploy.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-sync text-info me-2"></i>3. Small, Fast Changes</h6>
+                                <small class="text-muted">
+                                    Release small changes often. Small changes are
+                                    easy to test and easy to fix if something goes wrong.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-chart-line text-warning me-2"></i>4. Always Measure</h6>
+                                <small class="text-muted">
+                                    Watch your system all the time. Know your speed,
+                                    errors, and uptime. Fix problems before users notice.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-infinity text-danger me-2"></i>5. Keep Improving</h6>
+                                <small class="text-muted">
+                                    After every release, ask: what can we do better?
+                                    DevOps is a journey, not a destination.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Real Client Example (Detailed) -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🌍 Real Client Example: Sarah's Bakery</h3>
+
+                    <p>
+                        <strong>Client:</strong> Sarah owns a small bakery in Toronto.
+                        She sells cakes and pastries.
+                    </p>
+                    <p>
+                        <strong>Her problem:</strong> She takes orders by phone.
+                        She writes them on paper. She loses orders and cannot grow.
+                    </p>
+                    <p>
+                        <strong>Her goal:</strong> Build an online store where customers
+                        can order cakes 24/7.
+                    </p>
+
+                    <h5 class="fw-bold mt-4 mb-3">🧑‍💻 How We Built It With DevOps</h5>
+
+                    <div class="mb-3 p-3 bg-light rounded-3">
+                        <strong>Step 1: Build the app</strong>
+                        <p class="mb-0 small mt-1">
+                            We built a web app with ASP.NET Core and SQL Server.
+                            It has a product list, shopping cart, and a checkout
+                            with Stripe payment.
+                        </p>
+                    </div>
+
+                    <div class="mb-3 p-3 bg-light rounded-3">
+                        <strong>Step 2: Package with Docker</strong>
+                        <p class="mb-0 small mt-1">
+                            We put the app inside a Docker container. Now it runs
+                            the same on Sarah's laptop, our test server, and the
+                            cloud. No "it works on my machine" problems.
+                        </p>
+                    </div>
+
+                    <div class="mb-3 p-3 bg-light rounded-3">
+                        <strong>Step 3: Automate with CI/CD</strong>
+                        <p class="mb-0 small mt-1">
+                            We set up GitHub Actions. Every time we push code,
+                            it automatically builds, tests, and deploys to Azure.
+                            No manual work.
+                        </p>
+                    </div>
+
+                    <div class="mb-3 p-3 bg-light rounded-3">
+                        <strong>Step 4: Monitor with Prometheus</strong>
+                        <p class="mb-0 small mt-1">
+                            We set up monitoring. If the site is slow or down,
+                            we get an email immediately. We fix the problem
+                            before Sarah even knows.
+                        </p>
+                    </div>
+
+                    <div class="mb-0 p-3 bg-success bg-opacity-10 rounded-3 border border-success">
+                        <strong>🎉 The Result</strong>
+                        <ul class="mb-0 small mt-1">
+                            <li>Sarah's Bakery has a real online store.</li>
+                            <li>Orders went up 40% in the first month.</li>
+                            <li>Deployments take 5 minutes, not 2 days.</li>
+                            <li>The site stays online 99.9% of the time.</li>
+                            <li>Sarah adds products herself. No developer needed.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Key Tools -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🛠️ Key Tools You Will Learn</h3>
+                    <p>
+                        These are the tools every DevOps engineer must know.
+                        You will learn all of them in this course.
+                    </p>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fab fa-docker text-primary me-2"></i>Docker</h6>
+                                <small class="text-muted">
+                                    Packages your app so it runs the same everywhere.
+                                    Stops "it works on my machine" problems.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fab fa-github text-dark me-2"></i>GitHub Actions</h6>
+                                <small class="text-muted">
+                                    Automates build, test, and deploy. Runs your
+                                    pipeline every time you push code.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-dharmachakra text-primary me-2"></i>Kubernetes</h6>
+                                <small class="text-muted">
+                                    Manages many containers at once. Scales up
+                                    when traffic is high. Restarts crashed apps.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-cloud text-info me-2"></i>Terraform</h6>
+                                <small class="text-muted">
+                                    Write code to create cloud servers. No
+                                    clicking buttons. Repeatable and safe.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-chart-line text-success me-2"></i>Prometheus</h6>
+                                <small class="text-muted">
+                                    Collects numbers (CPU, memory, errors) from
+                                    your app so you can see problems early.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-layer-group text-warning me-2"></i>Grafana</h6>
+                                <small class="text-muted">
+                                    Shows your system data in beautiful dashboards.
+                                    Easy to understand at a glance.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: DevOps vs Old Way -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">⚖️ DevOps vs The Old Way</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Old Way</th>
+                                    <th>DevOps Way</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Deploy new code</td>
+                                    <td>2 days (manual)</td>
+                                    <td>5 minutes (automatic)</td>
+                                </tr>
+                                <tr>
+                                    <td>Find bugs</td>
+                                    <td>After users complain</td>
+                                    <td>Before deploy (auto-tests)</td>
+                                </tr>
+                                <tr>
+                                    <td>Who fixes problems?</td>
+                                    <td>"Not my job"</td>
+                                    <td>Everyone together</td>
+                                </tr>
+                                <tr>
+                                    <td>Servers setup</td>
+                                    <td>Click buttons in a portal</td>
+                                    <td>Write code (Terraform)</td>
+                                </tr>
+                                <tr>
+                                    <td>Know if app is slow</td>
+                                    <td>User tells you</td>
+                                    <td>Alerts tell you first</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: A Day in the Life of a DevOps Engineer -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🗓️ A Day in the Life of a DevOps Engineer</h3>
+                    <p>Here is what a typical DevOps engineer does in a day:</p>
+                    <ul>
+                        <li><strong>Morning:</strong> Check dashboards. Look for any overnight problems.</li>
+                        <li><strong>Mid-morning:</strong> Review pull requests. Help teammates fix build issues.</li>
+                        <li><strong>Afternoon:</strong> Improve the CI/CD pipeline. Add a new automated test.</li>
+                        <li><strong>Late afternoon:</strong> Update Terraform files to add a new test server.</li>
+                        <li><strong>End of day:</strong> Deploy a new feature. Watch the metrics to make sure it is safe.</li>
+                    </ul>
+                    <p class="mb-0 text-muted small">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Notice: A DevOps engineer does not just "run servers."
+                        They write code, automate processes, and improve reliability.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 8: Summary -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary bg-opacity-10">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✅ What You Learned</h3>
+                    <ul class="mb-0">
+                        <li>DevOps means developers and operations work as <strong>one team</strong>.</li>
+                        <li>It solves slow releases, late bugs, and blame games.</li>
+                        <li>The 5 core ideas: <strong>One team, automate, small changes, measure, keep improving</strong>.</li>
+                        <li>Key tools: Docker, GitHub Actions, Kubernetes, Terraform, Prometheus, Grafana.</li>
+                        <li>A DevOps engineer writes code, automates pipelines, and monitors systems every day.</li>
+                        <li>DevOps is not a job title — it is a <strong>way of working</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 9: Test Yourself -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-success">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🧠 Test Yourself</h3>
+                    <p>Answer these 5 questions in your head. Then check the answers below.</p>
+
+                    <ol>
+                        <li>What does the word <strong>DevOps</strong> mean?</li>
+                        <li>Why was the "old way" slow and painful?</li>
+                        <li>Name 3 tools a DevOps engineer uses.</li>
+                        <li>In Sarah's Bakery example, how long did deployment take after DevOps?</li>
+                        <li>What are the 5 core ideas of DevOps?</li>
+                    </ol>
+
+                    <button class="btn btn-success btn-sm mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#answersBox">
+                        <i class="fas fa-eye me-1"></i>Show Answers
+                    </button>
+
+                    <div class="collapse mt-3" id="answersBox">
+                        <div class="p-3 bg-success bg-opacity-10 rounded-3">
+                            <ol class="mb-0">
+                                <li><strong>DevOps</strong> = Developers + Operations working as one team.</li>
+                                <li>The old way was slow because teams did not talk, deployments were manual, and bugs were found late.</li>
+                                <li>Any 3 of: <strong>Docker, GitHub Actions, Kubernetes, Terraform, Prometheus, Grafana</strong>.</li>
+                                <li>Deployment took <strong>5 minutes</strong> (instead of 2 days).</li>
+                                <li>The 5 ideas: <strong>One team, automate everything, small fast changes, always measure, keep improving</strong>.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Hub
+                </a>
+                <a href="/DevOps/02-DockerBasics" class="btn btn-primary-custom">
+                    Next: Docker Basics <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

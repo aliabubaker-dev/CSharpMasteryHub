@@ -1,0 +1,819 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps.DockerBasicsModel
+@{
+    ViewData["Title"] = "Docker Basics";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">Docker Basics</li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <div class="mb-4 hero-devops">
+                <span class="badge bg-success mb-2">Beginner</span>
+                <span class="badge bg-warning text-dark mb-2">🔥 30-Minute Deep Dive</span>
+                <h1 class="display-5 fw-bold">🐳 Docker Basics</h1>
+                <p class="lead text-muted">
+                    Package your app so it runs the same everywhere.
+                    A <strong>complete</strong> beginner guide with jokes, install steps, and a real project.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mt-3">
+                    <span class="meta-pill"><i class="fas fa-clock me-1"></i> 30 minutes</span>
+                    <span class="meta-pill"><i class="fas fa-tools me-1"></i> Hands-On Included</span>
+                    <span class="meta-pill"><i class="fas fa-project-diagram me-1"></i> Real Project</span>
+                    <span class="meta-pill"><i class="fas fa-laugh me-1"></i> DevOps Jokes Inside</span>
+                </div>
+            </div>
+
+            <!-- Reading Progress -->
+            <div class="progress-sticky">
+                <div class="progress" style="height: 6px;">
+                    <div class="progress-bar bg-success" id="readingProgress" style="width: 0%;"></div>
+                </div>
+                <small class="text-muted d-block text-center mt-1" id="progressLabel">Start reading to track your progress</small>
+            </div>
+
+            <!-- JOKE 1 -->
+            <div class="joke-card">
+                <div class="joke-emoji">😂</div>
+                <div class="joke-body">
+                    <strong>DevOps Joke #1:</strong>
+                    <p class="mb-0">
+                        Why did the developer quit his job?
+                        Because he didn't get <strong>arrays</strong>.
+                        But then he found Docker and said:
+                        "Now my code works on <em>everyone's</em> machine. Even my grandma's!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 1 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">1</span> 📖 What is Docker? (Simple Words)</h3>
+                    <p>
+                        <strong>Docker</strong> is a tool that puts your app and
+                        everything it needs into a <strong>container</strong>.
+                    </p>
+                    <p>
+                        A container is like a small lunchbox. Inside the box:
+                    </p>
+                    <ul class="styled-list">
+                        <li><i class="fas fa-cube text-primary"></i> Your app</li>
+                        <li><i class="fas fa-cube text-primary"></i> The right version of .NET</li>
+                        <li><i class="fas fa-cube text-primary"></i> All the settings and libraries</li>
+                    </ul>
+                    <p class="mb-0">
+                        Because everything is inside the box, the app works the
+                        same on your laptop, on the test server, and in the cloud.
+                    </p>
+
+                    <div class="alert alert-primary border-0 bg-primary bg-opacity-10 mt-3">
+                        <strong>💡 Think of it like this:</strong><br />
+                        Imagine you move to a new house. Instead of packing
+                        everything separately, you pack one box with everything
+                        you need. Wherever you go, the box works the same.
+                        Docker is that box for your app.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">2</span> ⚖️ Container vs Virtual Machine</h3>
+                    <p>
+                        Many people confuse containers with virtual machines.
+                        They are very different.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Virtual Machine (VM)</th>
+                                    <th>Docker Container</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Size</td><td>Gigabytes (GB)</td><td>Megabytes (MB)</td></tr>
+                                <tr><td>Startup time</td><td>Minutes</td><td>Seconds</td></tr>
+                                <tr><td>Operating System</td><td>Full OS inside</td><td>Shares host OS</td></tr>
+                                <tr><td>Resource use</td><td>Heavy</td><td>Light</td></tr>
+                                <tr><td>Speed</td><td>Slow 🐢</td><td>Fast 🐇</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mb-0">
+                        <strong>Simple rule:</strong> Use Docker for quick and cheap
+                        packaging. Use VMs when you need full separation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- JOKE 2 -->
+            <div class="joke-card">
+                <div class="joke-emoji">😄</div>
+                <div class="joke-body">
+                    <strong>DevOps Joke #2:</strong>
+                    <p class="mb-0">
+                        A developer says: "It works on my machine!"
+                        <br />
+                        A DevOps engineer replies: "Then we'll ship <em>your machine</em> to the customer."
+                        <br />
+                        <strong>Docker:</strong> "Hold my container." 🐳
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">3</span> 🤔 Why Use Docker?</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-globe text-primary me-2"></i>Works Everywhere</h6>
+                                <small>Laptop, server, cloud — same result.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-bug text-danger me-2"></i>No "Works On My Machine"</h6>
+                                <small>Goodbye, version problems.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-bolt text-warning me-2"></i>Fast</h6>
+                                <small>Starts in seconds, not minutes.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-compress text-success me-2"></i>Small</h6>
+                                <small>Less disk, less RAM, more apps per server.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-copy text-info me-2"></i>Easy to Share</h6>
+                                <small>Send a Dockerfile — anyone can run it.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-card h-100">
+                                <h6 class="fw-bold"><i class="fas fa-shield-alt text-success me-2"></i>Isolated</h6>
+                                <small>One crash does not kill the others.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">4</span> 🔑 Key Docker Words</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr><th>Word</th><th>Simple Meaning</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Image</strong></td><td>A recipe. Instructions to create a container.</td></tr>
+                                <tr><td><strong>Container</strong></td><td>A running instance of an image. Like a running app.</td></tr>
+                                <tr><td><strong>Dockerfile</strong></td><td>A text file with instructions to build an image.</td></tr>
+                                <tr><td><strong>Volume</strong></td><td>A folder shared between your PC and the container. Data survives.</td></tr>
+                                <tr><td><strong>Port</strong></td><td>A door. Users reach the app through a port.</td></tr>
+                                <tr><td><strong>Registry</strong></td><td>A place to store images (like Docker Hub).</td></tr>
+                                <tr><td><strong>Docker Hub</strong></td><td>A public registry where people share images.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Real Client Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">5</span> 🌍 Real Client Example: The Restaurant Menu</h3>
+                    <p>
+                        <strong>Client:</strong> A family restaurant in Hamilton, Ontario.
+                        They want an online menu so customers can see dishes and prices.
+                    </p>
+                    <p>
+                        <strong>Problem:</strong> The developer built the app on their
+                        laptop — works perfectly. But on the server, it crashes. Server
+                        has .NET 6, laptop has .NET 8. Same code, different result.
+                        The classic <em>"works on my machine"</em> problem.
+                    </p>
+
+                    <div class="step-box">
+                        <strong>Step 1: Write a Dockerfile</strong>
+                        <p class="mb-0 small mt-1">"Use .NET 8. Copy the app. Build. Run." Now we have a recipe.</p>
+                    </div>
+                    <div class="step-box">
+                        <strong>Step 2: Build the image</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker build -t menu-app .</code></p>
+                    </div>
+                    <div class="step-box">
+                        <strong>Step 3: Run the container</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker run -p 8080:80 menu-app</code> — starts in seconds.</p>
+                    </div>
+
+                    <div class="result-box">
+                        <strong>🎉 The Result</strong>
+                        <ul class="mb-0 small mt-1">
+                            <li>Runs the same on laptop, test server, and cloud.</li>
+                            <li>No more version problems.</li>
+                            <li>Menu updates in seconds.</li>
+                            <li>Deployment: 1 minute (was 1 hour).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Install Docker -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-primary section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">6</span> 💻 How to Install Docker (Step by Step)</h3>
+                    <p>Follow these steps exactly. Do not skip any.</p>
+
+                    <h5 class="mt-4 mb-2">🪟 Windows</h5>
+                    <ol>
+                        <li>Go to <a href="https://www.docker.com/products/docker-desktop" target="_blank">docker.com/products/docker-desktop</a>.</li>
+                        <li>Click <strong>Download for Windows</strong>.</li>
+                        <li>Run the installer (<code>Docker Desktop Installer.exe</code>).</li>
+                        <li>During setup, keep <strong>"Use WSL 2"</strong> checked (recommended).</li>
+                        <li>Click <strong>Ok</strong> and wait for install to finish.</li>
+                        <li>Restart your computer when asked.</li>
+                        <li>Open <strong>Docker Desktop</strong> from the Start Menu.</li>
+                        <li>Accept the terms. Wait for the whale icon 🐳 in the taskbar.</li>
+                        <li>Done. Docker is running.</li>
+                    </ol>
+
+                    <h5 class="mt-4 mb-2">🍎 macOS</h5>
+                    <ol>
+                        <li>Download <strong>Docker Desktop for Mac</strong>.</li>
+                        <li>Choose <em>Apple Silicon</em> or <em>Intel</em> based on your Mac.</li>
+                        <li>Open the <code>.dmg</code> file.</li>
+                        <li>Drag the Docker icon into <strong>Applications</strong>.</li>
+                        <li>Open Docker from Applications.</li>
+                        <li>Accept the terms and give permission.</li>
+                        <li>Wait for the whale icon 🐳 in the menu bar.</li>
+                    </ol>
+
+                    <h5 class="mt-4 mb-2">🐧 Linux (Ubuntu)</h5>
+                    <ol>
+                        <li>Open a terminal.</li>
+                        <li>Run: <code>sudo apt update</code></li>
+                        <li>Run: <code>sudo apt install docker.io -y</code></li>
+                        <li>Run: <code>sudo systemctl start docker</code></li>
+                        <li>Run: <code>sudo systemctl enable docker</code></li>
+                        <li>To run docker without sudo: <code>sudo usermod -aG docker $USER</code></li>
+                        <li>Log out and log back in.</li>
+                    </ol>
+
+                    <div class="alert alert-success border-0 bg-success bg-opacity-10 mt-3">
+                        <strong>✅ Verify the installation:</strong><br />
+                        Open a terminal and run: <code>docker --version</code><br />
+                        You should see something like <code>Docker version 24.0.0</code>.
+                        If you do, you are ready!
+                    </div>
+                </div>
+            </div>
+
+            <!-- JOKE 3 -->
+            <div class="joke-card">
+                <div class="joke-emoji">🤣</div>
+                <div class="joke-body">
+                    <strong>DevOps Joke #3:</strong>
+                    <p class="mb-0">
+                        Docker walked into a bar and asked for a drink.
+                        The bartender said: "We don't serve containers here."
+                        <br />
+                        Docker replied: "That's fine, I'm <em>isolated</em> anyway." 🐳
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 7: Dockerfile -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">7</span> ✍️ Your First Dockerfile (Line by Line)</h3>
+                    <p>A <strong>Dockerfile</strong> is a text file with instructions. Here is one for a .NET app:</p>
+
+                    <pre><code># Use the official .NET SDK image to build the app
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copy the project file and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy the rest of the code and build it
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Use a smaller runtime image for the final container
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app/out .
+
+# Tell Docker what command to run
+ENTRYPOINT ["dotnet", "MyApp.dll"]</code></pre>
+
+                    <h5 class="fw-bold mt-4 mb-3">📘 What Each Line Does</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light"><tr><th>Line</th><th>What It Does</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>FROM ... AS build</code></td><td>Starts from the SDK image. Names this stage "build".</td></tr>
+                                <tr><td><code>WORKDIR /app</code></td><td>Sets the working folder inside the container.</td></tr>
+                                <tr><td><code>COPY *.csproj ./</code></td><td>Copies the project file into the container.</td></tr>
+                                <tr><td><code>RUN dotnet restore</code></td><td>Downloads NuGet packages.</td></tr>
+                                <tr><td><code>COPY . ./</code></td><td>Copies your source code.</td></tr>
+                                <tr><td><code>RUN dotnet publish -c Release -o out</code></td><td>Builds the app in Release mode.</td></tr>
+                                <tr><td><code>FROM ...aspnet:8.0</code></td><td>New, smaller image for runtime.</td></tr>
+                                <tr><td><code>COPY --from=build /app/out .</code></td><td>Copies only the built files.</td></tr>
+                                <tr><td><code>ENTRYPOINT ["dotnet", "MyApp.dll"]</code></td><td>Command to run when the container starts.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-info border-0 bg-info bg-opacity-10 mt-3">
+                        <strong>💡 Why two FROM lines?</strong><br />
+                        "build" is big (~1 GB). "runtime" is small (~200 MB).
+                        This is a <strong>multi-stage build</strong> — smaller, faster, safer.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Commands -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">8</span> ⌨️ Basic Docker Commands</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light"><tr><th>Command</th><th>What It Does</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>docker build -t myapp .</code></td><td>Builds an image named "myapp".</td></tr>
+                                <tr><td><code>docker run -p 8080:80 myapp</code></td><td>Runs and maps port 8080 → 80.</td></tr>
+                                <tr><td><code>docker ps</code></td><td>Shows running containers.</td></tr>
+                                <tr><td><code>docker ps -a</code></td><td>Shows all containers.</td></tr>
+                                <tr><td><code>docker stop &lt;id&gt;</code></td><td>Stops a container.</td></tr>
+                                <tr><td><code>docker rm &lt;id&gt;</code></td><td>Deletes a stopped container.</td></tr>
+                                <tr><td><code>docker images</code></td><td>Lists all images.</td></tr>
+                                <tr><td><code>docker rmi &lt;id&gt;</code></td><td>Deletes an image.</td></tr>
+                                <tr><td><code>docker logs &lt;id&gt;</code></td><td>Shows logs (great for debugging).</td></tr>
+                                <tr><td><code>docker exec -it &lt;id&gt; bash</code></td><td>Opens a terminal inside a container.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Hands-On -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-success section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">9</span> 🛠️ Hands-On Practice (Do This Now)</h3>
+
+                    <div class="step-box"><strong>Step 1: Verify installation</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker --version</code>. Expect <code>Docker version 24.0.0</code> or similar.</p>
+                    </div>
+                    <div class="step-box"><strong>Step 2: Run your first container</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker run hello-world</code>. Docker downloads a tiny image and prints a message.</p>
+                    </div>
+                    <div class="step-box"><strong>Step 3: Run a real web server</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker run -d -p 8080:80 nginx</code>. Open <code>http://localhost:8080</code> in a browser. Stop it with <code>docker stop &lt;id&gt;</code>.</p>
+                    </div>
+                    <div class="step-box"><strong>Step 4: Build your own image</strong>
+                        <p class="mb-0 small mt-1">Create a <code>Dockerfile</code> (from Section 7). Put your .NET project next to it. Run <code>docker build -t my-first-app .</code>.</p>
+                    </div>
+                    <div class="step-box"><strong>Step 5: Run your app</strong>
+                        <p class="mb-0 small mt-1">Run <code>docker run -d -p 8080:80 my-first-app</code>. Open the browser. Your app is live!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JOKE 4 -->
+            <div class="joke-card">
+                <div class="joke-emoji">😆</div>
+                <div class="joke-body">
+                    <strong>DevOps Joke #4:</strong>
+                    <p class="mb-0">
+                        How many DevOps engineers does it take to change a light bulb?
+                        <br />
+                        None. They <em>automate</em> the light bulb replacement and add a monitoring dashboard. 💡📊
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 10: Common Problems -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">10</span> 🔧 Common Problems and Fixes</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light"><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead>
+                            <tbody>
+                                <tr><td>Port is in use</td><td>Another app uses it.</td><td>Change the port: <code>-p 8081:80</code></td></tr>
+                                <tr><td>Container stops instantly</td><td>App crashed on start.</td><td>Check logs: <code>docker logs &lt;id&gt;</code></td></tr>
+                                <tr><td>"docker: command not found"</td><td>Not installed.</td><td>Install Docker Desktop.</td></tr>
+                                <tr><td>Build is slow</td><td>Rebuilding too much.</td><td>Add a <code>.dockerignore</code>.</td></tr>
+                                <tr><td>Data disappears</td><td>Container data is temporary.</td><td>Use a volume: <code>-v</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 11: REAL LIFE BUILD PROJECT -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 real-project-card">
+                <div class="card-body p-4">
+                    <span class="badge bg-danger mb-2">🎓 Final Project</span>
+                    <h3 class="fw-bold mb-3"><span class="section-num">11</span> 🏗️ Build a Real Docker Project (End-to-End)</h3>
+                    <p class="lead text-muted">
+                        Build, containerize, run, and share a real ASP.NET Core app.
+                        Follow this exactly and you will have a working Docker project.
+                    </p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🎯 What You Will Build</h5>
+                    <p>A simple "Hello World" ASP.NET Core web app, packaged in a Docker container, running on your computer.</p>
+
+                    <h5 class="fw-bold mt-4 mb-2">📁 Project Folder</h5>
+                    <p>Create a folder called <code>HelloDocker</code> anywhere on your PC.</p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 1: Create the App</h5>
+                    <p>Open a terminal in that folder and run:</p>
+                    <pre><code>dotnet new web -n HelloDocker
+cd HelloDocker</code></pre>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 2: Change the Program.cs</h5>
+                    <p>Open <code>Program.cs</code>. Replace everything with:</p>
+                    <pre><code>var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/", () => "Hello from Docker! 🐳 My first container is alive!");
+
+app.Run();</code></pre>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 3: Add a Dockerfile</h5>
+                    <p>In the <code>HelloDocker</code> folder, create a new file called <code>Dockerfile</code> (no extension). Paste:</p>
+                    <pre><code>FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+COPY *.csproj ./
+RUN dotnet restore
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app/out .
+ENTRYPOINT ["dotnet", "HelloDocker.dll"]</code></pre>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 4: Add .dockerignore</h5>
+                    <p>Create a file called <code>.dockerignore</code> with:</p>
+                    <pre><code>bin/
+obj/
+*.user
+*.suo</code></pre>
+                    <p class="text-muted small">This keeps the image small and build fast.</p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 5: Build the Image</h5>
+                    <p>In the same folder, run:</p>
+                    <pre><code>docker build -t hello-docker .</code></pre>
+                    <p class="text-muted small">Wait for it to finish. The first time may take 1–2 minutes.</p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 6: Run the Container</h5>
+                    <pre><code>docker run -d -p 8080:80 --name my-hello-app hello-docker</code></pre>
+                    <p>This runs the container in the background.</p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 7: Test It</h5>
+                    <p>Open your browser and go to:</p>
+                    <pre><code>http://localhost:8080</code></pre>
+                    <p>You should see: <strong>"Hello from Docker! 🐳 My first container is alive!"</strong></p>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 8: Manage the Container</h5>
+                    <pre><code>docker ps                # see it running
+docker logs my-hello-app # see logs
+docker stop my-hello-app # stop it
+docker rm my-hello-app   # delete it</code></pre>
+
+                    <h5 class="fw-bold mt-4 mb-2">🛠️ Step 9: Share It (Bonus)</h5>
+                    <p>To share your image with others, push it to Docker Hub:</p>
+                    <pre><code>docker login
+docker tag hello-docker YOUR_DOCKERHUB_USERNAME/hello-docker
+docker push YOUR_DOCKERHUB_USERNAME/hello-docker</code></pre>
+                    <p>Anyone in the world can now run:</p>
+                    <pre><code>docker run -p 8080:80 YOUR_DOCKERHUB_USERNAME/hello-docker</code></pre>
+
+                    <div class="result-box mt-4">
+                        <strong>🎉 Congratulations!</strong>
+                        <p class="mb-0 small mt-1">
+                            You just built a real Docker project. You:
+                        </p>
+                        <ul class="mb-0 small mt-1">
+                            <li>Wrote a Dockerfile</li>
+                            <li>Built a Docker image</li>
+                            <li>Ran the container</li>
+                            <li>Tested it in the browser</li>
+                            <li>Shared it with the world</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 12: Summary -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary bg-opacity-10 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">12</span> ✅ What You Learned</h3>
+                    <ul class="mb-0 styled-list">
+                        <li>Docker puts your app into a container.</li>
+                        <li>Containers run the same everywhere.</li>
+                        <li>Containers are smaller and faster than VMs.</li>
+                        <li>A Dockerfile tells Docker how to build an image.</li>
+                        <li>You use <code>docker build</code>, <code>docker run</code>, <code>docker ps</code>.</li>
+                        <li>Multi-stage builds keep your image small.</li>
+                        <li>Volumes keep data safe.</li>
+                        <li>You built a real Docker project from scratch!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 13: Test -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-success section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><span class="section-num">13</span> 🧠 Test Yourself</h3>
+                    <ol>
+                        <li>What is a Docker container?</li>
+                        <li>How is a container different from a VM?</li>
+                        <li>What does a Dockerfile do?</li>
+                        <li>Difference between an <strong>image</strong> and a <strong>container</strong>?</li>
+                        <li>What does <code>docker ps</code> do?</li>
+                        <li>Why use volumes?</li>
+                    </ol>
+
+                    <button class="btn btn-success btn-sm mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#answersBox">
+                        <i class="fas fa-eye me-1"></i>Show Answers
+                    </button>
+
+                    <div class="collapse mt-3" id="answersBox">
+                        <div class="p-3 bg-success bg-opacity-10 rounded-3">
+                            <ol class="mb-0">
+                                <li>A small box with your app and everything it needs.</li>
+                                <li>Containers are smaller, faster, share the host OS. VMs are bigger, slower, own OS.</li>
+                                <li>A text file with instructions to build an image.</li>
+                                <li>Image = recipe (static). Container = running app (dynamic).</li>
+                                <li>Lists running containers.</li>
+                                <li>Volumes keep data safe after the container stops.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 14: What's Next -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 section-card">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🚀 What's Next?</h3>
+                    <ul class="mb-0 styled-list">
+                        <li><strong>CI/CD Pipelines</strong> — Automate build and deploy.</li>
+                        <li><strong>Kubernetes</strong> — Manage many containers at once.</li>
+                        <li><strong>Docker Compose</strong> — Run an app + database together.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps/01-WhatIsDevOps" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous: What is DevOps?
+                </a>
+                <a href="/DevOps/03-CICDPipelines" class="btn btn-primary-custom">
+                    Next: CI/CD Pipelines <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ===== HERO ===== */
+    .hero-devops {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(13, 110, 253, 0.05));
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(99, 102, 241, 0.15);
+    }
+
+    .meta-pill {
+        display: inline-flex;
+        align-items: center;
+        background: white;
+        border-radius: 50px;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        color: #444;
+    }
+
+    /* ===== READING PROGRESS ===== */
+    .progress-sticky {
+        position: sticky;
+        top: 80px;
+        z-index: 100;
+        background: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+    }
+
+    /* ===== SECTION CARDS ===== */
+    .section-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+    .section-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .section-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #512BD4, #0D6EFD);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-right: 0.5rem;
+    }
+
+    /* ===== BENEFIT CARDS ===== */
+    .benefit-card {
+        background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(81, 43, 212, 0.08);
+        transition: all 0.3s ease;
+    }
+    .benefit-card:hover {
+        transform: translateY(-3px);
+        background: white;
+        box-shadow: 0 8px 25px rgba(81, 43, 212, 0.12);
+    }
+
+    /* ===== STEP / RESULT BOXES ===== */
+    .step-box {
+        background: #f8f9ff;
+        border-left: 4px solid #512BD4;
+        padding: 0.85rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+    }
+
+    .result-box {
+        background: #e8f8e8;
+        border: 1px solid #198754;
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    /* ===== REAL PROJECT CARD ===== */
+    .real-project-card {
+        background: linear-gradient(135deg, #fff8e1, #fff3cd);
+        border: 2px solid #ffc107 !important;
+        box-shadow: 0 10px 40px rgba(255, 193, 7, 0.15) !important;
+    }
+
+    /* ===== JOKE CARDS ===== */
+    .joke-card {
+        display: flex;
+        background: linear-gradient(135deg, #fff7e6, #ffe9b3);
+        border-radius: 16px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+        border-left: 5px solid #ff9800;
+        box-shadow: 0 4px 20px rgba(255, 152, 0, 0.15);
+    }
+    .joke-emoji {
+        font-size: 2.5rem;
+        margin-right: 1rem;
+        line-height: 1;
+    }
+    .joke-body strong {
+        color: #b25f00;
+    }
+
+    /* ===== LISTS ===== */
+    .styled-list {
+        list-style: none;
+        padding-left: 0;
+    }
+    .styled-list li {
+        padding: 0.35rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    /* ===== CODE BLOCKS ===== */
+    pre {
+        background: #1a1a2e;
+        color: #e1e1e1;
+        padding: 1.25rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        border-left: 4px solid #6366F1;
+    }
+    code {
+        font-family: 'Consolas', 'Courier New', monospace;
+        background: rgba(99, 102, 241, 0.1);
+        color: #512BD4;
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+    }
+    pre code {
+        background: transparent;
+        color: #e1e1e1;
+        padding: 0;
+    }
+
+    /* ===== TABLES ===== */
+    .table th {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .table td {
+        font-size: 0.9rem;
+        vertical-align: middle;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 768px) {
+        .hero-devops {
+            padding: 1.25rem;
+        }
+        pre {
+            font-size: 0.72rem;
+            padding: 0.9rem;
+        }
+        .table {
+            font-size: 0.8rem;
+        }
+        .joke-emoji {
+            font-size: 1.8rem;
+        }
+        .progress-sticky {
+            top: 60px;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Reading progress bar
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('readingProgress');
+            const progressLabel = document.getElementById('progressLabel');
+
+            function updateProgress() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const percent = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
+
+                progressBar.style.width = percent + '%';
+
+                if (percent < 5) {
+                    progressLabel.textContent = 'Start reading to track your progress';
+                } else if (percent < 50) {
+                    progressLabel.textContent = 'Keep going! You are ' + Math.round(percent) + '% done';
+                } else if (percent < 99) {
+                    progressLabel.textContent = 'Almost there! ' + Math.round(percent) + '% complete';
+                } else {
+                    progressLabel.textContent = '🎉 You finished the lesson! Great job!';
+                }
+            }
+
+            window.addEventListener('scroll', updateProgress);
+            updateProgress();
+        });
+    </script>
+}

@@ -1,0 +1,189 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps._04_KubernetesIntroModel
+@{
+    ViewData["Title"] = "Kubernetes Intro";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">Kubernetes Intro</li>
+                </ol>
+            </nav>
+
+            <div class="mb-4">
+                <span class="badge bg-danger mb-2">Advanced</span>
+                <h1 class="display-5 fw-bold">☸️ Kubernetes Intro</h1>
+                <p class="lead text-muted">Manage many containers at once. Scale your app automatically.</p>
+            </div>
+
+            <!-- What is Kubernetes -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📖 What is Kubernetes?</h3>
+                    <p>
+                        Kubernetes (often called <strong>K8s</strong>) is a tool that
+                        manages many Docker containers. It decides where each
+                        container runs, restarts them if they crash, and scales
+                        them up or down when traffic changes.
+                    </p>
+                    <div class="alert alert-primary border-0 bg-primary bg-opacity-10">
+                        <strong>💡 Simple Example:</strong><br />
+                        Imagine you have a pizza shop. One chef (Docker container)
+                        can only make so many pizzas. Kubernetes is the manager
+                        who hires more chefs when it gets busy and sends them
+                        home when it is quiet.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Use Kubernetes -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🤔 Why Use Kubernetes?</h3>
+                    <ul>
+                        <li><strong>Self-healing:</strong> If a container crashes, Kubernetes starts a new one.</li>
+                        <li><strong>Scaling:</strong> Add more containers when traffic is high.</li>
+                        <li><strong>Load balancing:</strong> Spread traffic across all containers.</li>
+                        <li><strong>Rolling updates:</strong> Update your app with zero downtime.</li>
+                        <li><strong>Works anywhere:</strong> AWS, Azure, Google Cloud, or your own server.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real Client Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🌍 Real Client Example</h3>
+                    <p>
+                        <strong>Client:</strong> A ticket-selling website for concerts.
+                    </p>
+                    <p>
+                        <strong>Problem:</strong> When a popular concert goes on sale,
+                        100,000 people visit at once. The single server crashes.
+                    </p>
+                    <p>
+                        <strong>Solution with Kubernetes:</strong>
+                    </p>
+                    <ol>
+                        <li>Kubernetes notices the high traffic.</li>
+                        <li>It starts 20 more containers in seconds.</li>
+                        <li>Traffic is spread across all containers.</li>
+                        <li>When the sale ends, it shuts down extra containers.</li>
+                    </ol>
+                    <p class="mb-0">
+                        <strong>Result:</strong> The site stays online. The client
+                        sells all tickets. No crashes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Concepts -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🔑 Key Concepts</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Word</th>
+                                    <th>Simple Meaning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Pod</strong></td><td>The smallest unit. Usually one container.</td></tr>
+                                <tr><td><strong>Node</strong></td><td>A worker machine (physical or virtual).</td></tr>
+                                <tr><td><strong>Cluster</strong></td><td>A group of nodes managed by Kubernetes.</td></tr>
+                                <tr><td><strong>Deployment</strong></td><td>Tells Kubernetes how many pods to run.</td></tr>
+                                <tr><td><strong>Service</strong></td><td>Gives pods a stable address.</td></tr>
+                                <tr><td><strong>Ingress</strong></td><td>Routes outside traffic to services.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple YAML Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✍️ Your First Kubernetes File</h3>
+                    <p>This YAML file tells Kubernetes to run 3 copies of your app:</p>
+                    <pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:latest
+        ports:
+        - containerPort: 80</code></pre>
+                    <p class="mt-3"><strong>What this does:</strong></p>
+                    <ul>
+                        <li><code>replicas: 3</code> — Run 3 copies of the app.</li>
+                        <li><code>image: myapp:latest</code> — Use your Docker image.</li>
+                        <li><code>containerPort: 80</code> — The app listens on port 80.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Commands -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">⌨️ Basic kubectl Commands</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr><th>Command</th><th>What It Does</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>kubectl apply -f app.yaml</code></td><td>Create or update resources.</td></tr>
+                                <tr><td><code>kubectl get pods</code></td><td>List all pods.</td></tr>
+                                <tr><td><code>kubectl get services</code></td><td>List all services.</td></tr>
+                                <tr><td><code>kubectl logs &lt;pod-name&gt;</code></td><td>See logs from a pod.</td></tr>
+                                <tr><td><code>kubectl delete -f app.yaml</code></td><td>Delete resources.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary bg-opacity-10">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✅ What You Learned</h3>
+                    <ul class="mb-0">
+                        <li>Kubernetes manages many Docker containers.</li>
+                        <li>It self-heals, scales, and balances traffic.</li>
+                        <li>Pods, nodes, clusters, deployments, and services are the key words.</li>
+                        <li>You use kubectl to manage Kubernetes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps/03-CICDPipelines" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous
+                </a>
+                <a href="/DevOps/05-TerraformIntro" class="btn btn-primary-custom">
+                    Next: Terraform Intro <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

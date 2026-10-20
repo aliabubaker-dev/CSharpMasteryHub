@@ -1,0 +1,222 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps.IndexModel
+@{
+    ViewData["Title"] = "DevOps Learning Hub - C# Mastery Hub";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <div class="badge bg-primary px-3 py-2 rounded-pill mb-2">
+                    <i class="fas fa-infinity me-1"></i> New Section
+                </div>
+                <h1 class="display-4 fw-bold">🚀 DevOps Learning Hub</h1>
+                <p class="lead text-muted">
+                    Learn DevOps step by step in simple English.
+                    Build real skills for real jobs.
+                </p>
+            </div>
+
+            <!-- What is DevOps (Quick Intro) -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">What is DevOps?</h3>
+                    <p class="text-muted">
+                        DevOps is a way of working where developers and IT operations
+                        work together as one team. Instead of building software and
+                        "throwing it over the wall" to another team, the same team
+                        builds it, tests it, deploys it, and keeps it running.
+                    </p>
+                    <div class="alert alert-info border-0 bg-info bg-opacity-10">
+                        <strong>🍰 Simple Example:</strong>
+                        Imagine you bake a cake. In DevOps, you bake it, package it,
+                        deliver it, and check the store. You are responsible for the
+                        whole process — not just one part.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Path -->
+            <h3 class="fw-bold mb-4">📚 Your Learning Path</h3>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    1
+                                </div>
+                                <h5 class="fw-bold mb-0">What is DevOps?</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Learn the basics. Why DevOps exists, what problems it
+                                solves, and how teams work differently.
+                            </p>
+                            <span class="badge bg-success">Beginner</span>
+                            <a href="/DevOps/01-WhatIsDevOps" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    2
+                                </div>
+                                <h5 class="fw-bold mb-0">Docker Basics</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Learn how to package your app so it runs the same
+                                everywhere. Write your first Dockerfile.
+                            </p>
+                            <span class="badge bg-success">Beginner</span>
+                            <a href="/DevOps/02-DockerBasics" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    3
+                                </div>
+                                <h5 class="fw-bold mb-0">CI/CD Pipelines</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Automate build, test, and deploy. Use GitHub Actions
+                                to ship code without manual work.
+                            </p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <a href="/DevOps/03-CICDPipelines" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    4
+                                </div>
+                                <h5 class="fw-bold mb-0">Kubernetes Intro</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Learn how to manage many containers at once. Scale
+                                your app automatically.
+                            </p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <a href="/DevOps/04-KubernetesIntro" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    5
+                                </div>
+                                <h5 class="fw-bold mb-0">Terraform Intro</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Write code to create servers in the cloud. Stop
+                                clicking buttons — start automating.
+                            </p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <a href="/DevOps/05-TerraformIntro" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    6
+                                </div>
+                                <h5 class="fw-bold mb-0">Monitoring</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Watch your system to catch problems before users
+                                notice. Set up alerts and dashboards.
+                            </p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <a href="/DevOps/06-Monitoring" class="btn btn-primary btn-sm float-end">
+                                Start <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 lesson-card border-start border-4 border-success">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="step-number bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    ★
+                                </div>
+                                <h5 class="fw-bold mb-0">Real Client Scenario</h5>
+                            </div>
+                            <p class="text-muted small">
+                                Follow a real project from start to finish. A small
+                                business needs an online store — you build it, deploy
+                                it, and keep it running with DevOps.
+                            </p>
+                            <span class="badge bg-success">Project</span>
+                            <a href="/DevOps/07-RealClientScenario" class="btn btn-success btn-sm float-end">
+                                View Project <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mt-5 p-4 bg-primary bg-opacity-10 rounded-4">
+                <h4 class="fw-bold">Ready to start?</h4>
+                <p class="text-muted">Begin with the basics and work your way up.</p>
+                <a href="/DevOps/01-WhatIsDevOps" class="btn btn-primary-custom btn-lg">
+                    <i class="fas fa-rocket me-2"></i>Start Learning DevOps
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+    .lesson-card {
+        transition: all 0.3s ease;
+    }
+    .lesson-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    }
+</style>

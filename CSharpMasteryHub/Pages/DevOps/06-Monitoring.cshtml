@@ -1,0 +1,188 @@
+﻿@page
+@model CSharpMasteryHub.Pages.DevOps._06_MonitoringModel
+@{
+    ViewData["Title"] = "Monitoring";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/DevOps">DevOps Hub</a></li>
+                    <li class="breadcrumb-item active">Monitoring</li>
+                </ol>
+            </nav>
+
+            <div class="mb-4">
+                <span class="badge bg-warning text-dark mb-2">Intermediate</span>
+                <h1 class="display-5 fw-bold">📊 Monitoring</h1>
+                <p class="lead text-muted">Watch your system. Catch problems before users notice.</p>
+            </div>
+
+            <!-- What is Monitoring -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📖 What is Monitoring?</h3>
+                    <p>
+                        Monitoring means watching your system all the time. You
+                        collect data about CPU, memory, errors, and speed. If
+                        something goes wrong, you get an alert.
+                    </p>
+                    <div class="alert alert-primary border-0 bg-primary bg-opacity-10">
+                        <strong>💡 Simple Example:</strong><br />
+                        Think of a hospital patient. The heart monitor beeps if
+                        something is wrong. Monitoring is the heart monitor for
+                        your app.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Monitor -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🤔 Why Monitor?</h3>
+                    <ul>
+                        <li><strong>Find problems early</strong> — Before users complain.</li>
+                        <li><strong>Understand performance</strong> — See what is slow and why.</li>
+                        <li><strong>Plan for growth</strong> — Know when to add more servers.</li>
+                        <li><strong>Prove reliability</strong> — Show uptime to clients.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real Client Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 border-start border-4 border-warning">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🌍 Real Client Example</h3>
+                    <p>
+                        <strong>Client:</strong> An online learning platform with
+                        50,000 students.
+                    </p>
+                    <p>
+                        <strong>Problem:</strong> Every Monday morning, the site
+                        becomes very slow. Students complain. The client does not
+                        know why.
+                    </p>
+                    <p>
+                        <strong>Solution with Monitoring:</strong>
+                    </p>
+                    <ol>
+                        <li>Set up Prometheus to collect CPU, memory, and request data.</li>
+                        <li>Set up Grafana dashboards to see the data visually.</li>
+                        <li>Add alerts that send an email if CPU goes above 80%.</li>
+                        <li>Found the problem: a nightly report was running during peak hours.</li>
+                    </ol>
+                    <p class="mb-0">
+                        <strong>Result:</strong> We moved the report to 3 AM. The
+                        site is fast on Monday mornings. Students are happy.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Tools -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">🛠️ Key Monitoring Tools</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-fire text-danger me-2"></i>Prometheus</h6>
+                                <small class="text-muted">Collects numbers (metrics) from your app. Stores them over time.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-chart-line text-success me-2"></i>Grafana</h6>
+                                <small class="text-muted">Shows the numbers in beautiful dashboards.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-search text-primary me-2"></i>ELK Stack</h6>
+                                <small class="text-muted">Collects and searches log files.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <h6 class="fw-bold"><i class="fas fa-bell text-warning me-2"></i>Alertmanager</h6>
+                                <small class="text-muted">Sends alerts by email, Slack, or SMS.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real Metric Example -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">📈 Example: Key Metrics to Watch</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr><th>Metric</th><th>What It Means</th><th>Good Value</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>CPU Usage</td><td>How busy the CPU is</td><td>Below 70%</td></tr>
+                                <tr><td>Memory Usage</td><td>How much RAM is used</td><td>Below 80%</td></tr>
+                                <tr><td>Response Time</td><td>How long a request takes</td><td>Below 500 ms</td></tr>
+                                <tr><td>Error Rate</td><td>Percentage of failed requests</td><td>Below 1%</td></tr>
+                                <tr><td>Uptime</td><td>Time the system is online</td><td>Above 99.9%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Alert Rule -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✍️ Your First Alert Rule</h3>
+                    <p>This Prometheus rule sends an alert if CPU is too high for 5 minutes:</p>
+                    <pre><code>groups:
+- name: example
+  rules:
+  - alert: HighCpuUsage
+    expr: cpu_usage &gt; 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CPU usage is above 80% for 5 minutes"</code></pre>
+                    <p class="mt-3"><strong>What this does:</strong></p>
+                    <ul>
+                        <li><code>expr</code> — The condition (CPU above 80%).</li>
+                        <li><code>for</code> — Must be true for 5 minutes.</li>
+                        <li><code>labels</code> — Mark the alert type.</li>
+                        <li><code>annotations</code> — A message to send.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary bg-opacity-10">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3">✅ What You Learned</h3>
+                    <ul class="mb-0">
+                        <li>Monitoring watches your system all the time.</li>
+                        <li>Prometheus collects numbers. Grafana shows them.</li>
+                        <li>Alerts tell you when something is wrong.</li>
+                        <li>Good to watch: CPU, memory, response time, errors, uptime.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/DevOps/05-TerraformIntro" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Previous
+                </a>
+                <a href="/DevOps/07-RealClientScenario" class="btn btn-primary-custom">
+                    Next: Real Client Scenario <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

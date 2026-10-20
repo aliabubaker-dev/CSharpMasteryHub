@@ -1,0 +1,77 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.WhatIsApiModel
+@{
+    ViewData["Title"] = "What is an API?";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AspNetCoreRestApis">ASP.NET Core & REST APIs</a></li>
+                    <li class="breadcrumb-item active">What is an API?</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">What is an API?</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-success">Beginner</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 1 of 6</span>
+                </div>
+
+                <div class="alert alert-primary">
+                    <i class="fas fa-lightbulb me-2"></i> <strong>Imagine this:</strong> You are sitting at a restaurant. You look at the menu and tell the waiter, "I want a cheeseburger." The waiter writes it down, goes to the kitchen, and brings you the cheeseburger. You don't need to know how the kitchen works, who cooks the food, or where the ingredients come from.
+                    <br><br>
+                    <strong>In the tech world, the Waiter is the API!</strong>
+                </div>
+
+                <h2>So, what is an API?</h2>
+                <p>API stands for <strong>Application Programming Interface</strong>. It is a set of rules that allows two software applications to talk to each other. Just like the waiter communicates your order to the kitchen, an API takes your request, asks the server/database for the information, and brings the result back to you.</p>
+
+                <h3>Connecting API to C#</h3>
+                <p>If you know basic C#, you already know what an API is! Think of a C# method:</p>
+                <pre><code>public string GetUserName(int id)
+{
+    // Go to the database and find user by id
+    return "Ali";
+}</code></pre>
+                <p>This method takes an input (<code>id</code>) and returns an output (<code>string</code>). An API is exactly like this method, but instead of being used inside your own program, it is placed on the internet so <strong>anyone in the world</strong> can call it using a URL.</p>
+
+                <h2>Real-World Examples of APIs</h2>
+                <ul>
+                    <li><strong>Weather Apps:</strong> When you check the weather on your phone, your app doesn't have its own weather station. It calls a Weather API (like OpenWeatherMap) to get the temperature.</li>
+                    <li><strong>Online Payments:</strong> When you buy something, the store's website uses an API (like Stripe or PayPal) to process your credit card securely.</li>
+                    <li><strong>Login with Google:</strong> When you click "Login with Google", the website asks Google's API, "Is this person's password correct?"</li>
+                </ul>
+
+                <h2>Why do we use APIs?</h2>
+                <p>Imagine if every app had to build its own payment system. It would be slow and unsafe. APIs allow developers to reuse existing, secure, and powerful systems built by other companies.</p>
+
+                <div class="card bg-info bg-opacity-10 mb-4 mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">An API is a messenger. It takes a request from the client (you), delivers it to the server, and returns the response back to you. You don't need to know how the server works internally!</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Lessons
+                    </a>
+                    <a href="/AspNetCoreRestApis/02-WhatIsRest" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson1")

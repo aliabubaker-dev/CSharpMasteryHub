@@ -1,0 +1,73 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.DependencyInjectionModel
+@{
+    ViewData["Title"] = "Dependency Injection in APIs";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Dependency Injection</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 9 of 10</span>
+                </div>
+
+                <div class="alert alert-primary">
+                    <i class="fas fa-boxes me-2"></i> <strong>The Restaurant Kitchen Story:</strong> Imagine a chef (Controller) who has to cook a meal. Instead of running to the market to buy vegetables and meat (creating new database connections), the restaurant manager (Dependency Injection) delivers the ingredients directly to the chef's counter. The chef just focuses on cooking!
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>Instead of writing <code>var db = new AppDbContext();</code> inside every single API method (which is messy and hard to test), we let ASP.NET Core "inject" the database context into our class automatically.</p>
+
+                <h2>Step 1: Register the Service (Program.cs)</h2>
+                <p>You tell ASP.NET Core about your service in the <code>Program.cs</code> file:</p>
+<pre><code>// This tells the app: "When someone asks for IUserService, give them UserService"
+builder.Services.AddScoped&lt;IUserService, UserService&gt;();</code></pre>
+
+                <h2>Step 2: Inject it into the Controller</h2>
+                <p>You simply ask for it in the constructor of your Controller:</p>
+<pre><code>[ApiController]
+[Route("api/[controller]")]
+public class UsersController : ControllerBase
+{
+    private readonly IUserService _userService;
+
+    // The magic happens here! ASP.NET Core passes the service automatically.
+    public UsersController(IUserService userService)
+    {
+        _userService = userService;
+    }
+
+    [HttpGet]
+    public IActionResult GetUsers()
+    {
+        // We use the injected service instead of creating new connections
+        var users = _userService.GetAllUsers(); 
+        return Ok(users);
+    }
+}</code></pre>
+
+                <div class="card bg-light mb-4 mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Why do we do this?</h5>
+                        <ul class="mb-0">
+                            <li><strong>Testing:</strong> You can easily swap the real database for a fake one when writing unit tests.</li>
+                            <li><strong>Clean Code:</strong> Your controller doesn't need to know how to connect to the database; it just asks for the data.</li>
+                            <li><strong>Performance:</strong> ASP.NET Core manages the lifecycle of these objects (Scoped, Transient, Singleton) efficiently.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/08-StatusCodes" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/10-SecuringApis" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">@await Html.PartialAsync("_SidebarNav", Model.SidebarNav)</div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson9")

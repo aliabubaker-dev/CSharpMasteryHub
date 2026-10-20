@@ -1,0 +1,83 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.CreatingWebApiModel
+@{
+    ViewData["Title"] = "Creating a Web API";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/AspNetCoreRestApis">ASP.NET Core & REST APIs</a></li>
+                    <li class="breadcrumb-item active">Creating a Web API</li>
+                </ol>
+            </nav>
+
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Creating Your First Web API</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 3 of 6</span>
+                </div>
+
+                <p>Now that we know what APIs and REST are, let's build one using ASP.NET Core!</p>
+
+                <h2>Step 1: Create the Project</h2>
+                <p>Open Visual Studio, click <strong>Create a new project</strong>, and search for <strong>ASP.NET Core Web API</strong>. Name it <code>MyFirstApi</code>.</p>
+                <p>Visual Studio will generate a default project with a Weather Forecast example. This is perfect for understanding how APIs work!</p>
+
+                <h2>Step 2: Understanding Controllers</h2>
+                <p>In ASP.NET Core Web API, APIs are built using <strong>Controllers</strong>. A Controller is just a C# class that inherits from <code>ControllerBase</code>. It contains methods (called Endpoints) that respond to HTTP requests.</p>
+                <p>Look at the <code>WeatherForecastController.cs</code> file. You will see this:</p>
+                <pre><code>[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
+{
+    [HttpGet(Name = "GetWeatherForecast")]
+    public IEnumerable&lt;WeatherForecast&gt; Get()
+    {
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
+    }
+}</code></pre>
+
+                <h3>Breaking down the Code:</h3>
+                <ul>
+                    <li><code>[ApiController]</code>: Tells ASP.NET Core that this class is an API, not a normal webpage. It automatically handles things like validating data and formatting responses to JSON.</li>
+                    <li><code>[Route("[controller]")]</code>: Defines the URL for this API. Because the class is named <code>WeatherForecastController</code>, it strips the word "Controller" and sets the URL to <code>https://localhost:xxxx/WeatherForecast</code>.</li>
+                    <li><code>[HttpGet]</code>: This tells the API to run this method when someone visits the URL using a <strong>GET</strong> request (which means "give me data").</li>
+                </ul>
+
+                <h2>Step 3: Run Your API!</h2>
+                <p>Press <strong>F5</strong> in Visual Studio to run the app. A browser window will open, and you will see a Swagger UI (a tool that automatically documents and tests your API).</p>
+                <p>Expand the <code>GET /WeatherForecast</code> endpoint, click <strong>Try it out</strong>, and click <strong>Execute</strong>. You will see the API return data in JSON format!</p>
+
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i> <strong>Congratulations!</strong> You just created and ran a working REST API using C#. Your browser acted as the "Client" (Waiter), made a request to your API, and the server returned a list of weather data.
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/02-WhatIsRest" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Previous Lesson
+                    </a>
+                    <a href="/AspNetCoreRestApis/04-HttpMethods" class="btn btn-primary-custom">
+                        Next Lesson <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson3")

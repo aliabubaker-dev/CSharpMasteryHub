@@ -1,0 +1,68 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.RoutingAndParametersModel
+@{
+    ViewData["Title"] = "Routing & Parameters";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Routing & Parameters</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 7 of 10</span>
+                </div>
+
+                <div class="alert alert-primary">
+                    <i class="fas fa-map-signs me-2"></i> <strong>The Mail Carrier Story:</strong> A mail carrier needs a specific address to deliver a letter. <code>MyStreet</code> isn't enough; they need <code>MyStreet, House #5</code>. In APIs, the URL is the street, and the Parameters are the house numbers that pinpoint the exact data you want.
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>Think about C# methods. If you want a specific user, you pass an ID to the method:</p>
+<pre><code>public User GetUser(int id) { ... }</code></pre>
+                <p>In a REST API, we do the exact same thing, but the ID comes from the URL!</p>
+
+                <h2>Types of API Parameters</h2>
+
+                <h3>1. Route Parameters (The Address)</h3>
+                <p>Passed directly in the URL path. Best for identifying a specific resource.</p>
+<pre><code>// URL: https://api.myapp.com/users/5
+[HttpGet("{id}")]
+public IActionResult GetUser(int id)
+{
+    // id will be 5
+    return Ok($"You requested user {id}");
+}</code></pre>
+
+                <h3>2. Query Parameters (The Filter)</h3>
+                <p>Added after a question mark <code>?</code>. Best for searching, sorting, or filtering.</p>
+<pre><code>// URL: https://api.myapp.com/products?category=electronics&maxPrice=500
+[HttpGet]
+public IActionResult GetProducts(string category, decimal maxPrice)
+{
+    // category = "electronics", maxPrice = 500
+    return Ok($"Searching {category} under ${maxPrice}");
+}</code></pre>
+
+                <h3>3. Body Parameters (The Package)</h3>
+                <p>Used in POST and PUT requests. The data is hidden inside the HTTP request body, not the URL. Best for sending large, complex C# objects.</p>
+<pre><code>// The client sends a JSON object in the body
+[HttpPost]
+public IActionResult CreateUser([FromBody] User newUser)
+{
+    // ASP.NET Core automatically converts the JSON to a C# User object!
+    return Ok($"User {newUser.Name} created!");
+}</code></pre>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/06-ConsumingApi" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/08-StatusCodes" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">@await Html.PartialAsync("_SidebarNav", Model.SidebarNav)</div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson7")

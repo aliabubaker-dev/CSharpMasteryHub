@@ -1,0 +1,94 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.HttpMethodsModel
+@{
+    ViewData["Title"] = "Mastering HTTP Methods";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Mastering HTTP Methods</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">25 min read</span>
+                    <span class="badge bg-primary">Lesson 4 of 10</span>
+                </div>
+
+                <div class="alert alert-primary">
+                    <i class="fas fa-book me-2"></i> <strong>The Library Story:</strong> Imagine you are in a library. You want to read a book (GET). You find a torn page and want to fix it (PUT). You donate a brand new book (POST). Finally, you throw away a damaged book (DELETE). In REST APIs, these actions correspond to HTTP Methods!
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>If you were writing a C# program for a library, you would create methods like this:</p>
+<pre><code>public Book GetBook(int id) { ... }
+public void AddBook(Book newBook) { ... }
+public void UpdateBook(int id, Book updatedBook) { ... }
+public void DeleteBook(int id) { ... }</code></pre>
+                <p>In the web world, APIs use specific HTTP verbs to represent these methods. Let's look at how they are written in ASP.NET Core.</p>
+
+                <h2>The 4 Main HTTP Methods</h2>
+                
+                <h3>1. GET (Read Data)</h3>
+                <p>Used to retrieve data from the server. It should never change any data.</p>
+<pre><code>[HttpGet]
+public IActionResult GetAllProducts()
+{
+    var products = _db.Products.ToList();
+    return Ok(products); // Returns 200 OK with data
+}</code></pre>
+
+                <h3>2. POST (Create Data)</h3>
+                <p>Used to send new data to the server.</p>
+<pre><code>[HttpPost]
+public IActionResult CreateProduct(Product product)
+{
+    _db.Products.Add(product);
+    _db.SaveChanges();
+    return CreatedAtAction(nameof(GetAllProducts), product); // Returns 201 Created
+}</code></pre>
+
+                <h3>3. PUT (Update Data)</h3>
+                <p>Used to update an existing record entirely.</p>
+<pre><code>[HttpPut("{id}")]
+public IActionResult UpdateProduct(int id, Product product)
+{
+    if (id != product.Id) return BadRequest(); // Returns 400 Bad Request
+    
+    _db.Products.Update(product);
+    _db.SaveChanges();
+    return NoContent(); // Returns 204 No Content
+}</code></pre>
+
+                <h3>4. DELETE (Remove Data)</h3>
+                <p>Used to delete a record.</p>
+<pre><code>[HttpDelete("{id}")]
+public IActionResult DeleteProduct(int id)
+{
+    var product = _db.Products.Find(id);
+    if (product == null) return NotFound(); // Returns 404 Not Found
+    
+    _db.Products.Remove(product);
+    _db.SaveChanges();
+    return NoContent(); 
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4 mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-key me-2"></i>Key Takeaway</h5>
+                        <p class="card-text">Use <strong>GET</strong> to read, <strong>POST</strong> to create, <strong>PUT</strong> to update, and <strong>DELETE</strong> to remove. Think of them as the CRUD (Create, Read, Update, Delete) operations of the web!</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/03-CreatingWebApi" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/05-JsonAndSerialization" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson4")

@@ -1,0 +1,77 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.ConsumingApiModel
+@{
+    ViewData["Title"] = "Consuming an API";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Consuming an API with HttpClient</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 6 of 10</span>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-phone me-2"></i> <strong>The Phone Call Story:</strong> You have built a beautiful API, but how do you call someone else's API? You need a phone! In C#, your phone is the <code>HttpClient</code> class. It allows your app to dial a URL, ask for data, and receive the response.
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>If you want to read a file on your computer, you use <code>File.ReadAllText()</code>. If you want to fetch data from the internet, you use <code>HttpClient</code>.</p>
+
+                <h2>Example 1: Making a GET Request</h2>
+<pre><code>using System.Net.Http;
+using System.Threading.Tasks;
+
+public class ApiConsumer
+{
+    public async Task GetWeatherData()
+    {
+        // 1. Create the phone (HttpClient)
+        using HttpClient client = new HttpClient();
+        
+        // 2. Dial the number (The API URL)
+        string url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true";
+        
+        // 3. Make the call and wait for the answer
+        HttpResponseMessage response = await client.GetAsync(url);
+        
+        // 4. Ensure the call was successful (Status 200)
+        response.EnsureSuccessStatusCode();
+        
+        // 5. Read the JSON text answer
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        
+        Console.WriteLine(jsonResponse);
+    }
+}</code></pre>
+
+                <h2>Example 2: The Modern Way (Deserializing directly)</h2>
+                <p>Instead of reading a raw string, you can immediately convert the JSON into a C# object using <code>ReadFromJsonAsync</code>.</p>
+<pre><code>// Inside an async method:
+var weatherData = await client.GetFromJsonAsync&lt;WeatherForecast&gt;(url);
+
+Console.WriteLine($"Current Temp: {weatherData.CurrentWeather.Temperature}");</code></pre>
+
+                <div class="card bg-light mb-4 mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Best Practice</h5>
+                        <p class="card-text">Always use <code>async</code> and <code>await</code> when making network calls. Fetching data from the internet takes time, and async keeps your application responsive instead of freezing!</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/05-JsonAndSerialization" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/07-RoutingAndParameters" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson6")

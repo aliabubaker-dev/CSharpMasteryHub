@@ -1,0 +1,75 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.SecuringApisModel
+@{
+    ViewData["Title"] = "Securing Your API";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Securing Your API</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">30 min read</span>
+                    <span class="badge bg-primary">Lesson 10 of 10</span>
+                </div>
+
+                <div class="alert alert-danger">
+                    <i class="fas fa-shield-alt me-2"></i> <strong>The VIP Club Story:</strong> Your API is a VIP club. You don't want just anyone walking in! You need a bouncer at the door. In ASP.NET Core, the bouncer is the <code>[Authorize]</code> attribute, and the VIP pass is the user's <strong>Token</strong>.
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>If you have a C# method that deletes a user, you want to ensure only an Admin can call it. You don't write <code>if (user.IsAdmin)</code> inside the method. Instead, you let the framework handle security before the method is even executed.</p>
+
+                <h2>Authentication vs Authorization</h2>
+                <ul>
+                    <li><strong>Authentication (AuthN):</strong> "Who are you?" (Logging in).</li>
+                    <li><strong>Authorization (AuthZ):</strong> "Are you allowed to do this?" (Checking permissions).</li>
+                </ul>
+
+                <h2>Example 1: The Bouncer ([Authorize])</h2>
+                <p>By adding the <code>[Authorize]</code> attribute to your Controller, you block all unauthenticated users from accessing it.</p>
+<pre><code>[Authorize] // <--- The Bouncer
+[ApiController]
+[Route("api/[controller]")]
+public class SecretController : ControllerBase
+{
+    [HttpGet("admin-data")]
+    public IActionResult GetSecretData()
+    {
+        // Only logged-in users can see this
+        return Ok("This is top secret data!");
+    }
+}</code></pre>
+
+                <h2>Example 2: API Keys (A simple approach)</h2>
+                <p>Sometimes you just want to give a password to another developer so their app can talk to yours. You check for an "X-API-KEY" in the request headers.</p>
+<pre><code>[HttpGet]
+public IActionResult GetData([FromHeader(Name = "X-API-KEY")] string apiKey)
+{
+    if (apiKey != "my-super-secret-key-123")
+    {
+        return Unauthorized("Invalid API Key!"); // Returns 401
+    }
+
+    return Ok("Welcome to the API!");
+}</code></pre>
+
+                <div class="card bg-info bg-opacity-10 mb-4 mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-trophy me-2"></i>Mastery Achieved!</h5>
+                        <p class="card-text">You now understand APIs from top to bottom. You know how they work, how to build them with C#, how to secure them, and how to talk to them. Go build something amazing!</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/09-DependencyInjection" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis" class="btn btn-primary-custom">Back to Section <i class="fas fa-check ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">@await Html.PartialAsync("_SidebarNav", Model.SidebarNav)</div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson10")

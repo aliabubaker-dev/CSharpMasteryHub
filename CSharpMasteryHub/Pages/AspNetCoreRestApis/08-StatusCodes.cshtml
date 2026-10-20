@@ -1,0 +1,85 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.StatusCodesModel
+@{
+    ViewData["Title"] = "Status Codes & Error Handling";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">Status Codes & Errors</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-danger">Advanced</span>
+                    <span class="badge bg-info text-dark">20 min read</span>
+                    <span class="badge bg-primary">Lesson 8 of 10</span>
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-traffic-light me-2"></i> <strong>The Traffic Light Story:</strong> When you drive, traffic lights tell you what to do. Green means go (Success). Red means stop (Error). Yellow means caution (Redirect). APIs use <strong>Status Codes</strong> exactly like traffic lights to tell the client what happened!
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>When you write a C# method, it usually returns a value. But what if it fails? You might throw an exception: <code>throw new Exception("Not found");</code></p>
+                <p>In REST APIs, we don't just throw exceptions. We return a specific HTTP Status Code so the client knows exactly what went wrong without crashing.</p>
+
+                <h2>Common Status Codes (Cheat Sheet)</h2>
+                <ul>
+                    <li><strong>200 OK:</strong> The request was successful.</li>
+                    <li><strong>201 Created:</strong> A new resource was successfully created (used after POST).</li>
+                    <li><strong>400 Bad Request:</strong> The client sent invalid data.</li>
+                    <li><strong>401 Unauthorized:</strong> You need to log in.</li>
+                    <li><strong>404 Not Found:</strong> The URL or data doesn't exist.</li>
+                    <li><strong>500 Internal Server Error:</strong> The server crashed (a bug in your C# code).</li>
+                </ul>
+
+                <h2>Example: Returning Status Codes in ASP.NET Core</h2>
+                <p>ASP.NET Core provides built-in helper methods to return these codes:</p>
+<pre><code>[HttpGet("{id}")]
+public IActionResult GetUser(int id)
+{
+    var user = _database.Users.Find(id);
+
+    if (user == null)
+    {
+        // Returns HTTP 404
+        return NotFound("User does not exist"); 
+    }
+
+    if (id < 0)
+    {
+        // Returns HTTP 400
+        return BadRequest("ID cannot be negative"); 
+    }
+
+    // Returns HTTP 200 with the user object
+    return Ok(user); 
+}</code></pre>
+
+                <h2>Handling Server Errors (Try-Catch)</h2>
+<pre><code>[HttpPost]
+public IActionResult CreateUser(User user)
+{
+    try
+    {
+        _database.Users.Add(user);
+        _database.SaveChanges();
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+    }
+    catch (Exception ex)
+    {
+        // Log the error, and return 500
+        return StatusCode(500, "An internal server error occurred.");
+    }
+}</code></pre>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/07-RoutingAndParameters" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/09-DependencyInjection" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">@await Html.PartialAsync("_SidebarNav", Model.SidebarNav)</div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson8")

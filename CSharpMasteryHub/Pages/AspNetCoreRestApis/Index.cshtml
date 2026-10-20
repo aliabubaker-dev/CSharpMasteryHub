@@ -1,0 +1,132 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.IndexModel
+@{
+    ViewData["Title"] = "ASP.NET Core & REST APIs";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-3">ASP.NET Core & REST APIs</h1>
+            <p class="lead mb-4">From zero to hero. Learn what APIs are, how the internet communicates, and how to build your own secure APIs using C# and ASP.NET Core. No prior API knowledge required!</p>
+
+            <div class="row g-4">
+                <!-- Lesson 1 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/01-WhatIsApi">
+                            <h5><span class="card-number">1</span>What is an API?</h5>
+                            <p>Understand the basics of APIs using a simple restaurant story, and see how they relate to C#.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 2 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/02-WhatIsRest">
+                            <h5><span class="card-number">2</span>What is REST?</h5>
+                            <p>Learn the rules of REST APIs and how the internet uses HTTP to communicate.</p>
+                            <span class="badge bg-success">Beginner</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 3 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/03-CreatingWebApi">
+                            <h5><span class="card-number">3</span>Creating Your First Web API</h5>
+                            <p>Set up a Web API project in Visual Studio and write your first API endpoint.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 4 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/04-HttpMethods">
+                            <h5><span class="card-number">4</span>Mastering HTTP Methods</h5>
+                            <p>Deep dive into GET, POST, PUT, and DELETE with real C# examples.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 5 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/05-JsonAndSerialization">
+                            <h5><span class="card-number">5</span>JSON & Serialization</h5>
+                            <p>Understand the language of APIs (JSON) and how to convert C# objects to JSON.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">15 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 6 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/06-ConsumingApi">
+                            <h5><span class="card-number">6</span>Consuming an API</h5>
+                            <p>Learn how to use C# to talk to other APIs using HttpClient.</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 7 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/07-RoutingAndParameters">
+                            <h5><span class="card-number">7</span>Routing & Parameters</h5>
+                            <p>Pass data from the URL directly to your C# methods using [FromRoute] and [FromQuery].</p>
+                            <span class="badge bg-warning text-dark">Intermediate</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 8 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/08-StatusCodes">
+                            <h5><span class="card-number">8</span>Status Codes & Errors</h5>
+                            <p>Master HTTP Status codes (200, 404, 500) and how to handle errors gracefully.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">20 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 9 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/09-DependencyInjection">
+                            <h5><span class="card-number">9</span>Dependency Injection</h5>
+                            <p>Keep your API clean by injecting database services into your controllers.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">25 min</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Lesson 10 -->
+                <div class="col-md-6">
+                    <div class="lesson-card">
+                        <a href="/AspNetCoreRestApis/10-SecuringApis">
+                            <h5><span class="card-number">10</span>Securing Your API</h5>
+                            <p>Learn how to protect your API using API Keys and JWT Authentication.</p>
+                            <span class="badge bg-danger">Advanced</span>
+                            <span class="badge bg-info text-dark">30 min</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis")

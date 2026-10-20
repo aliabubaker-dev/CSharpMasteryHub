@@ -1,0 +1,74 @@
+﻿@page
+@model CSharpMasteryHub.Pages.AspNetCoreRestApis.JsonAndSerializationModel
+@{
+    ViewData["Title"] = "JSON & Serialization";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="lesson-content">
+                <h1 class="display-4 mb-3">JSON & Serialization</h1>
+                <div class="d-flex gap-3 mb-4">
+                    <span class="badge bg-warning text-dark">Intermediate</span>
+                    <span class="badge bg-info text-dark">15 min read</span>
+                    <span class="badge bg-primary">Lesson 5 of 10</span>
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-language me-2"></i> <strong>The Translator Story:</strong> Imagine a French chef (C# Server) trying to talk to a Spanish customer (JavaScript Browser). They don't understand each other! They need a translator. <strong>JSON</strong> is that translator. It is a simple text format that both languages understand perfectly.
+                </div>
+
+                <h2>Connecting to C#</h2>
+                <p>In C#, you work with Objects and Classes. The browser doesn't know what a C# Class is. So, we must convert our C# objects into a string format called <strong>JSON</strong>. This process is called <strong>Serialization</strong>.</p>
+                <p>Converting JSON back into a C# object is called <strong>Deserialization</strong>.</p>
+
+                <h2>What does JSON look like?</h2>
+                <p>It looks exactly like a C# Dictionary or an anonymous object!</p>
+<pre><code>{
+  "id": 1,
+  "name": "Ali",
+  "isDeveloper": true,
+  "skills": ["C#", "SQL", "ASP.NET"]
+}</code></pre>
+
+                <h2>Example 1: Serializing C# to JSON</h2>
+<pre><code>using System.Text.Json;
+
+public class User 
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public bool IsDeveloper { get; set; }
+}
+
+// Inside your code:
+var myUser = new User { Id = 1, Name = "Ali", IsDeveloper = true };
+
+// Convert C# Object to JSON string
+string jsonString = JsonSerializer.Serialize(myUser);
+Console.WriteLine(jsonString); 
+// Output: {"Id":1,"Name":"Ali","IsDeveloper":true}</code></pre>
+
+                <h2>Example 2: Deserializing JSON to C#</h2>
+<pre><code>string incomingJson = "{\"Id\":2,\"Name\":\"Sarah\",\"IsDeveloper\":false}";
+
+// Convert JSON string back to a C# Object
+User newUser = JsonSerializer.Deserialize&lt;User&gt;(incomingJson);
+
+Console.WriteLine(newUser.Name); // Output: Sarah</code></pre>
+
+                <p>In ASP.NET Core APIs, you rarely have to do this manually! When you return an object like `return Ok(myUser)`, ASP.NET Core automatically serializes it to JSON for you.</p>
+
+                <div class="mt-5 d-flex justify-content-between">
+                    <a href="/AspNetCoreRestApis/04-HttpMethods" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Previous</a>
+                    <a href="/AspNetCoreRestApis/06-ConsumingApi" class="btn btn-primary-custom">Next Lesson <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            @await Html.PartialAsync("_SidebarNav", Model.SidebarNav)
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_QuizButton", "AspNetCoreRestApis_Lesson5")

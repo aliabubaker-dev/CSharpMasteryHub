@@ -21,6 +21,8 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+App_Data/subscribers.txt
+
 # Visual Studio cache files
 .vs/
 *.vsix

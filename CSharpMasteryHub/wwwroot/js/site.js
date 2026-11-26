@@ -197,3 +197,70 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+// ===== NEWSLETTER FORM =====
+document.addEventListener('DOMContentLoaded', function () {
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    const newsletterBtn = document.getElementById('newsletterBtn');
+
+    if (!newsletterForm || !newsletterEmail || !newsletterBtn) return;
+
+    const originalText = 'Subscribe';
+
+    function showState(text, bgColor, duration) {
+        newsletterBtn.textContent = text;
+        newsletterBtn.style.background = bgColor;
+        newsletterBtn.disabled = true;
+        setTimeout(function () {
+            newsletterBtn.textContent = originalText;
+            newsletterBtn.style.background = '';
+            newsletterBtn.disabled = false;
+        }, duration);
+    }
+
+    newsletterForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const email = newsletterEmail.value.trim();
+
+        // Client-side email check
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailPattern.test(email)) {
+            showState('Invalid email', '#DC3545', 2000);
+            return;
+        }
+
+        // Loading state
+        newsletterBtn.textContent = 'Subscribing...';
+        newsletterBtn.disabled = true;
+
+        try {
+            const response = await fetch('/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            console.log('[Newsletter] Response:', response.status, data);
+
+            if (response.ok && data.success) {
+                newsletterEmail.value = '';
+                showState('✓ Subscribed!', 'linear-gradient(135deg, #198754, #20c997)', 2500);
+            } else {
+                showState(data.message || 'Error', '#DC3545', 3000);
+            }
+        } catch (err) {
+            console.error('[Newsletter] Network error:', err);
+            showState('Network error', '#DC3545', 3000);
+        }
+    });
+});
+       
